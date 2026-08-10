@@ -10,7 +10,7 @@
         ['label' => 'Contact Us', 'url' => url('/contact-us'), 'pattern' => 'contact-us'],
     ];
 @endphp
-<header class="absolute bg-white w-full ">
+<header class="absolute top-0 left-0 bg-white w-full ">
     <nav aria-label="Main navigation" class="max-w-[1400px] mx-auto px-4 sm:px-6 min-[1161px]:px-8">
         <div class="flex items-center justify-between py-10 relative z-[500] -translate-x-[1.5%]">
 
