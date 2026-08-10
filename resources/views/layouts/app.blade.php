@@ -7,13 +7,14 @@
     <meta name="description" content="@yield('description', 'Laravel Application')">
 
     <title>@yield('title', config('app.name', 'Laravel'))</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @stack('styles')
 </head>
 
-<body class=" text-gray-900 bg-[#f2f2f2] h-[100vh] antialiased">
+<body class=" text-gray-900 bg-[#f2f2f2] antialiased">
 
     {{-- Header --}}
     <x-navbar />
