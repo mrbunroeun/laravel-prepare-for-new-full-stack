@@ -84,22 +84,53 @@
     </section>
 
 
+    @php
+        $services = [
+            [
+                'number' => '01',
+                'title' => 'Property Management',
+                'description' =>
+                    'Professional management for condominium owners, including tenant coordination, maintenance supervision, occupancy management, and rental administration.',
+                'link' => url('/properties'),
+                'linkText' => 'View Details',
+            ],
+            [
+                'number' => '02',
+                'title' => 'Property Leasing',
+                'description' => 'Daily, weekly, monthly, and long-term rental services for residential condominiums.',
+                'link' => url('/properties'),
+                'linkText' => 'View Properties',
+            ],
+            [
+                'number' => '03',
+                'title' => 'Sales Services',
+                'description' => 'Helping buyers and investors discover quality residential properties in Cambodia.',
+                'link' => url('/contact-us'),
+                'linkText' => 'Learn More',
+            ],
+            [
+                'number' => '04',
+                'title' => 'Hospitality Services',
+                'description' =>
+                    'Airport transfers, guest assistance, city tours, housekeeping coordination, and personalized hospitality support.',
+                'link' => url('/contact-us'),
+                'linkText' => 'Explore Services',
+            ],
+        ];
+    @endphp
+
     {{-- our services --}}
-    <section class="relative bg-white overflow-hidden">
+    <section class="relative pl-0 sm:pl-[5rem] bg-none overflow-hidden">
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10 pt-16 pb-0 sm:pt-20">
 
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,36px)] mb-10 sm:mb-14 relative z-[50]">
+            <h2 class="text-[clamp(28px,4vw,36px)] mb-10 sm:mb-1 relative ">
                 <span class="text-[#2f6ba7] font-normal">Our</span>
                 <span class="text-[#2f6ba7] font-bold">Services</span>
             </h2>
 
             {{-- Composition wrapper: image + dark block + cards --}}
             <div class="relative min-h-[420px] sm:min-h-[520px] lg:min-h-[600px]">
-
-                {{-- Dark blue background block (lower-left, behind cards) --}}
-                <div class="hidden lg:block absolute left-0 right-[48%] bottom-0 top-[45%]  z-[10]"></div>
-                <div class="hidden sm:block lg:hidden absolute left-0 right-0 bottom-0 top-[55%] bg-[#2F6190] z-[10]"></div>
 
                 {{-- Property image (right side on desktop, full width on mobile) --}}
                 <div
@@ -112,92 +143,49 @@
                 {{-- Service cards grid --}}
                 <div
                     class="relative lg:absolute lg:left-0 lg:top-[18%] lg:w-[54%] z-[30]
-                        -mt-16 sm:-mt-20 lg:mt-0
-                        grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-2.5
-                        px-4 sm:px-0">
+                    -mt-16 sm:-mt-20 lg:mt-0
+                    grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-2.5
+                    px-4 sm:px-0">
 
-                    {{-- Card 01 --}}
-                    <div
-                        class="bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col justify-between min-h-[150px] lg:min-h-[145px]">
-                        <div class="flex items-start justify-between gap-2">
-                            <h3 class="text-white text-[13px] sm:text-[14px] font-bold leading-snug">
-                                Property Management
-                            </h3>
-                            <span
-                                class="text-white/30 text-[26px] sm:text-[30px] font-light leading-none shrink-0">01</span>
-                        </div>
-                        <p class="text-white/90 text-[10px] sm:text-[11px] leading-relaxed mt-3">
-                            Professional management for condominium owners, including tenant coordination, maintenance
-                            supervision, occupancy management, and rental administration.
-                        </p>
-                        <a href="{{ url('/properties') }}"
-                            class="text-[#F4DEAC] text-[9px] sm:text-[10px] font-medium mt-4 inline-flex items-center gap-1 hover:underline">
-                            View Details <span aria-hidden="true">→</span>
-                        </a>
-                    </div>
+                    @foreach ($services as $service)
+                        <div
+                            class="bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col justify-between min-h-[150px] lg:min-h-[145px]">
+                            <div class="flex items-start justify-between gap-2">
+                                <h3 class="text-[#F4DEAC] text-[16px] sm:text-[18px] font-bold leading-snug">
+                                    {{ $service['title'] }}
+                                </h3>
+                                <span class="text-[#F4DEAC] text-[26px] sm:text-[30px] font-light leading-none shrink-0">
+                                    {{ $service['number'] }}
+                                </span>
+                            </div>
 
-                    {{-- Card 02 --}}
-                    <div
-                        class="bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col justify-between min-h-[150px] lg:min-h-[145px]">
-                        <div class="flex items-start justify-between gap-2">
-                            <h3 class="text-white text-[13px] sm:text-[14px] font-bold leading-snug">
-                                Property Leasing
-                            </h3>
-                            <span
-                                class="text-white/30 text-[26px] sm:text-[30px] font-light leading-none shrink-0">02</span>
-                        </div>
-                        <p class="text-white/90 text-[10px] sm:text-[11px] leading-relaxed mt-3">
-                            Daily, weekly, monthly, and long-term rental services for residential condominiums.
-                        </p>
-                        <a href="{{ url('/properties') }}"
-                            class="text-[#F4DEAC] text-[9px] sm:text-[10px] font-medium mt-4 inline-flex items-center gap-1 hover:underline">
-                            View Properties <span aria-hidden="true">→</span>
-                        </a>
-                    </div>
+                            <p class="text-white/90 text-[12px] sm:text-[13px] leading-relaxed mt-3">
+                                {{ $service['description'] }}
+                            </p>
 
-                    {{-- Card 03 --}}
-                    <div
-                        class="bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col justify-between min-h-[150px] lg:min-h-[145px]">
-                        <div class="flex items-start justify-between gap-2">
-                            <h3 class="text-white text-[13px] sm:text-[14px] font-bold leading-snug">
-                                Sales Services
-                            </h3>
-                            <span
-                                class="text-white/30 text-[26px] sm:text-[30px] font-light leading-none shrink-0">03</span>
+                            <a href="{{ $service['link'] }}"
+                                class="text-[#F4DEAC] text-[11px] sm:text-[13px] font-medium mt-4 inline-flex items-center gap-1 hover:underline">
+                                {{ $service['linkText'] }} <span aria-hidden="true">→</span>
+                            </a>
                         </div>
-                        <p class="text-white/90 text-[10px] sm:text-[11px] leading-relaxed mt-3">
-                            Helping buyers and investors discover quality residential properties in Cambodia.
-                        </p>
-                        <a href="{{ url('/contact-us') }}"
-                            class="text-[#F4DEAC] text-[9px] sm:text-[10px] font-medium mt-4 inline-flex items-center gap-1 hover:underline">
-                            Learn More <span aria-hidden="true">→</span>
-                        </a>
-                    </div>
+                    @endforeach
 
-                    {{-- Card 04 --}}
-                    <div
-                        class="bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col justify-between min-h-[150px] lg:min-h-[145px]">
-                        <div class="flex items-start justify-between gap-2">
-                            <h3 class="text-white text-[13px] sm:text-[14px] font-bold leading-snug">
-                                Hospitality Services
-                            </h3>
-                            <span
-                                class="text-white/30 text-[26px] sm:text-[30px] font-light leading-none shrink-0">04</span>
-                        </div>
-                        <p class="text-white/90 text-[10px] sm:text-[11px] leading-relaxed mt-3">
-                            Airport transfers, guest assistance, city tours, housekeeping coordination, and personalized
-                            hospitality support.
-                        </p>
-                        <a href="{{ url('/contact-us') }}"
-                            class="text-[#F4DEAC] text-[9px] sm:text-[10px] font-medium mt-4 inline-flex items-center gap-1 hover:underline">
-                            Explore Services <span aria-hidden="true">→</span>
-                        </a>
-                    </div>
                 </div>
+
+                {{-- Gold accent bar, sits directly under the whole composition (cards + image) --}}
+                <div
+                    class="lg:absolute lg:left-0 lg:right-0 lg:bottom-0 w-full h-[15px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a] mt-2 lg:mt-0">
+                </div>
+
             </div>
 
-            {{-- Bottom spacer so dark block/cards don't get clipped on mobile --}}
-            <div class="h-8 sm:h-10 lg:h-0"></div>
+            {{-- Bottom spacer --}}
+            <div class="h-8 sm:h-10 lg:h-6"></div>
         </div>
+    </section>
+
+    {{-- Auto move brand section --}}
+    <section class="bg-[#2A5A8A] h-[800px] mt-[-15rem]">
+
     </section>
 @endsection

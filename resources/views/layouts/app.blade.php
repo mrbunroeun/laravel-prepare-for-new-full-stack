@@ -14,7 +14,7 @@
     @stack('styles')
 </head>
 
-<body class=" text-gray-900 bg-[#f2f2f2] antialiased">
+<body class=" text-gray-900 bg-[#FFFFFF] antialiased">
 
     {{-- Header --}}
     <x-navbar />
