@@ -189,58 +189,53 @@
     </section>
 
     {{-- bg blue section --}}
-    <section class="bg-[#2A5A8A] h-[900px] mt-[-15rem]">
-    </section>
+    <section class="bg-[#2A5A8A] h-[450px] sm:h-[500px] md:h-[600px] lg:h-[800px] mt-[-15rem]">
+        {{-- auto-move part --}}
+        <section class="absolute w-full flex mt-[20rem] justify-center ">
 
-    {{-- auto-move part --}}
-    <section class="absolute w-full flex mt-[-35rem] sm:mt-[-35rem] justify-center ">
+            <img src="{{ asset('home/auto_move_logo/auto_move.png') }}" alt="CWD Realty auto-move logo"
+                class="w-full h-auto object-contain">
 
-        <img src="{{ asset('home/auto_move_logo/auto_move.png') }}" alt="CWD Realty auto-move logo"
-            class="w-full h-auto object-contain">
-
-        {{-- Scrolling text overlay --}}
-        <div class="absolute inset-0 flex items-center overflow-hidden pointer-events-none">
-            <div class="cwd-marquee-track flex items-center whitespace-nowrap">
-                @for ($i = 0; $i < 12; $i++)
-                    <span class="text-[#F4DEAC] text-[clamp(14px,2vw,22px)] mx-6 sm:mx-10 shrink-0">
-                        <span class="font-bold">CWD</span> Real Estate Agent &amp; Developer
-                    </span>
-                @endfor
+            {{-- Scrolling text overlay --}}
+            <div class="absolute inset-0 flex items-center overflow-hidden pointer-events-none">
+                <div class="cwd-marquee-track flex items-center whitespace-nowrap">
+                    @for ($i = 0; $i < 12; $i++)
+                        <span class="text-[#F4DEAC] text-[clamp(14px,2vw,22px)] mx-6 sm:mx-10 shrink-0">
+                            <span class="font-bold">CWD</span> Real Estate Agent &amp; Developer
+                        </span>
+                    @endfor
+                </div>
             </div>
-        </div>
 
-    </section>
-    <style>
-        .cwd-marquee-track {
-            width: max-content;
-            animation: cwd-marquee 25s linear infinite;
-        }
-
-        /* Pause on hover, if wanted */
-        .cwd-marquee-track:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes cwd-marquee {
-            from {
-                transform: translateX(0);
+        </section>
+        <style>
+            .cwd-marquee-track {
+                width: max-content;
+                animation: cwd-marquee 25s linear infinite;
             }
 
-            to {
-                transform: translateX(-50%);
+            /* Pause on hover, if wanted */
+            .cwd-marquee-track:hover {
+                animation-play-state: paused;
             }
-        }
-    </style>
 
+            @keyframes cwd-marquee {
+                from {
+                    transform: translateX(0);
+                }
 
-
-    {{-- Image Featured Properties --}}
-    <section class="relative mt-[-25rem] sm:mt-[-20rem] md:mt-[-10rem] lg:mt-[0rem]  w-full overflow-hidden">
-        <img src="{{ asset('home/feature_properties/feature_properties.png') }}" alt="CWD Realty featured properties"
-            class="w-full h-auto min-h-[520px] sm:min-h-[520px] md:min-h-[600px] lg:min-h-[700px] object-cover object-right">
+                to {
+                    transform: translateX(-50%);
+                }
+            }
+        </style>
     </section>
 
-    {{-- Featured Properties --}}
+
+
+
+    {{-- Featured Properties: background image layer + card content layer, cards can extend above image's top edge --}}
+
     @php
         $properties = [
             [
@@ -313,155 +308,185 @@
             ],
         ];
     @endphp
-    <section class="relative">
 
-        {{-- Featured Properties --}}
-        <section class="relative w-full lg:mt-[-58rem] md:mt-[-50rem] sm:mt-[-40rem] mt-[-35rem]  z-10 overflow-hidden">
-            <div class="max-w-[1400px] ml-0 mr-auto lg:-ml-[186px] xl:-ml-[204px] relative">
+    <section class="relative w-full min-h-[620px] sm:min-h-[680px] md:min-h-[760px] lg:min-h-[820px]">
 
-                {{-- Right panel: arrows + heading, sits fixed on the right, overlapping the cards --}}
-                <div
-                    class="hidden lg:flex flex-col items-start justify-between w-[300px] absolute right-0 top-0 bottom-0 px-10 py-16 z-[50]">
-                    <div class="flex items-center gap-3">
-                        <button id="cwd-prop-prev" type="button" aria-label="Previous property"
-                            class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <button id="cwd-prop-next" type="button" aria-label="Next property"
-                            class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
+        {{-- Background image layer: absolute, fills section, behind everything --}}
+        <div class="absolute inset-0 z-0">
+            <img src="{{ asset('home/feature_properties/feature_properties.png') }}" alt="CWD Realty featured properties"
+                class="w-full h-full object-cover object-right">
+        </div>
 
-                    <h2 class="text-white text-[clamp(24px,2.4vw,34px)] leading-tight">
-                        <span class="font-normal block">Featured</span>
-                        <span class="font-bold block">Properties</span>
-                    </h2>
+        {{-- Main content layer: sits above the image --}}
+        <div class="relative z-10 max-w-[1400px] ml-0 mr-auto lg:-ml-[186px] xl:-ml-[204px]">
+
+            {{-- Mobile/tablet heading + arrows: BEHIND the cards (lower z-index), sits on top of the image only --}}
+            <div
+                class="flex lg:hidden items-center justify-between absolute inset-x-0 top-0 px-4 sm:px-6 pt-8 pb-6 sm:pb-10 z-10">
+                <h2 class="text-white text-[clamp(20px,3vw,30px)] leading-tight">
+                    <span class="font-normal block">Featured</span>
+                    <span class="font-bold block">Properties</span>
+                </h2>
+                <div class="flex items-center gap-3">
+                    <button id="cwd-prop-prev-mobile" type="button" aria-label="Previous property"
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button id="cwd-prop-next-mobile" type="button" aria-label="Next property"
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
                 </div>
-
-                {{-- Mobile/tablet heading + arrows (stacked above cards) --}}
-                <div class="flex lg:hidden items-center justify-between px-4 sm:px-6 pt-16 pb-8">
-                    <h2 class="text-white text-[clamp(24px,4vw,30px)] leading-tight">
-                        <span class="font-normal block">Featured</span>
-                        <span class="font-bold block">Properties</span>
-                    </h2>
-                    <div class="flex items-center gap-3">
-                        <button id="cwd-prop-prev-mobile" type="button" aria-label="Previous property"
-                            class="w-10 h-10 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <button id="cwd-prop-next-mobile" type="button" aria-label="Next property"
-                            class="w-10 h-10 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                {{-- Card track: full width, runs behind the right panel on desktop --}}
-                <div class="pb-16 sm:pb-20 lg:pt-16 lg:pb-16">
-                    <div id="cwd-prop-track"
-                        class="flex gap-5 overflow-x-auto scroll-smooth pl-4 sm:pl-6 pr-4 sm:pr-6 lg:pr-[320px] pb-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-
-                        @foreach ($properties as $property)
-                            <article class="cwd-prop-card shrink-0 snap-start w-[260px] sm:w-[280px] bg-white shadow-sm">
-
-                                <div class="h-[170px] w-full overflow-hidden">
-                                    <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
-                                        class="w-full h-full object-cover">
-                                </div>
-
-                                <div class="px-5 py-5">
-                                    <h3 class="text-black text-[15px] font-bold mb-2 leading-snug">
-                                        {{ $property['title'] }}
-                                    </h3>
-                                    <p class="text-black/70 text-[12.5px] leading-relaxed mb-4">
-                                        {{ $property['description'] }}
-                                    </p>
-                                    <a href="{{ $property['link'] }}"
-                                        class="text-[#2A5A8A] text-[12px] font-semibold inline-flex items-center gap-1 hover:underline">
-                                        View Property <span aria-hidden="true">→</span>
-                                    </a>
-                                </div>
-                            </article>
-                        @endforeach
-
-                    </div>
-                </div>
-
             </div>
-        </section>
 
-        <script>
-            (function() {
-                const track = document.getElementById('cwd-prop-track');
-                const prevBtns = [document.getElementById('cwd-prop-prev'), document.getElementById('cwd-prop-prev-mobile')]
-                    .filter(Boolean);
-                const nextBtns = [document.getElementById('cwd-prop-next'), document.getElementById('cwd-prop-next-mobile')]
-                    .filter(Boolean);
+            {{-- Cards layer: pointer-events-none so its empty top padding doesn't block taps on the buttons underneath;
+     pointer-events-auto is re-applied on the track so the cards/links inside stay fully clickable --}}
+            <div
+                class="relative z-20 pt-24 sm:pt-28 lg:pt-[2vw] lg:-translate-y-[clamp(60px,9vw,140px)] pointer-events-none">
+                <div id="cwd-prop-track"
+                    class="cwd-prop-track-fade pointer-events-auto flex gap-5 overflow-x-auto scroll-smooth pl-4 sm:pl-6 pr-4 sm:pr-6 lg:pr-[320px] pb-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
 
-                if (!track || (!prevBtns.length && !nextBtns.length)) return;
+                    @foreach ($properties as $property)
+                        <article class="cwd-prop-card shrink-0 snap-start w-[260px] sm:w-[280px] bg-white shadow-sm">
 
-                function getStep() {
-                    const card = track.querySelector('.cwd-prop-card');
-                    if (!card) return 300;
-                    const style = window.getComputedStyle(track);
-                    const gap = parseFloat(style.columnGap || style.gap || '20');
-                    return card.offsetWidth + gap;
-                }
+                            {{-- overflow-hidden allowed here only, to crop this card's own image --}}
+                            <div class="h-[170px] w-full overflow-hidden">
+                                <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
+                                    class="w-full h-full object-cover">
+                            </div>
 
-                function updateButtons() {
-                    const maxScroll = track.scrollWidth - track.clientWidth - 1;
-                    const atStart = track.scrollLeft <= 0;
-                    const atEnd = track.scrollLeft >= maxScroll;
+                            <div class="px-5 py-5">
+                                <h3 class="text-black text-[15px] font-bold mb-2 leading-snug">
+                                    {{ $property['title'] }}
+                                </h3>
+                                <p class="text-black/70 text-[12.5px] leading-relaxed mb-4">
+                                    {{ $property['description'] }}
+                                </p>
+                                <a href="{{ $property['link'] }}"
+                                    class="text-[#2A5A8A] text-[12px] font-semibold inline-flex items-center gap-1 hover:underline">
+                                    View Property <span aria-hidden="true">→</span>
+                                </a>
+                            </div>
+                        </article>
+                    @endforeach
 
-                    prevBtns.forEach(btn => {
-                        btn.disabled = atStart;
-                        btn.classList.toggle('opacity-40', atStart);
-                        btn.classList.toggle('cursor-not-allowed', atStart);
-                    });
+                </div>
+            </div>
 
-                    nextBtns.forEach(btn => {
-                        btn.disabled = atEnd;
-                        btn.classList.toggle('opacity-40', atEnd);
-                        btn.classList.toggle('cursor-not-allowed', atEnd);
-                    });
-                }
+            {{-- Featured Properties heading + navigation: desktop right panel, above the background image --}}
+            <div
+                class="hidden lg:flex flex-col items-start justify-start gap-10 w-[300px] absolute right-0 top-0 px-10 py-8 z-30">
+                <div class="flex items-center gap-3">
+                    <button id="cwd-prop-prev" type="button" aria-label="Previous property"
+                        class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button id="cwd-prop-next" type="button" aria-label="Next property"
+                        class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
 
-                prevBtns.forEach(btn => btn.addEventListener('click', function() {
-                    track.scrollBy({
-                        left: -getStep(),
-                        behavior: 'smooth'
-                    });
-                }));
+                <h2 class="text-white -z-1 text-[clamp(24px,2.4vw,34px)] leading-tight">
+                    <span class="font-normal block">Featured</span>
+                    <span class="font-bold block">Properties</span>
+                </h2>
+            </div>
 
-                nextBtns.forEach(btn => btn.addEventListener('click', function() {
-                    track.scrollBy({
-                        left: getStep(),
-                        behavior: 'smooth'
-                    });
-                }));
+            <div class="h-10 sm:h-14 lg:h-24"></div>
 
-                track.addEventListener('scroll', updateButtons, {
-                    passive: true
-                });
-                window.addEventListener('resize', updateButtons);
-                updateButtons();
-            })();
-        </script>
+        </div>
+
     </section>
 
+    <style>
+        /* Fade cards at both edges: right edge fades where they scroll under the arrows/heading panel,
+                           left edge fades once the track has been scrolled (so cards appear to disappear off the left too) */
+        @media (min-width: 1024px) {
+            .cwd-prop-track-fade {
+                -webkit-mask-image: linear-gradient(to right,
+                        transparent 0%,
+                        black 40px,
+                        black calc(100% - 320px),
+                        transparent 100%);
+                mask-image: linear-gradient(to right,
+                        transparent 0%,
+                        black 40px,
+                        black calc(100% - 320px),
+                        transparent 100%);
+            }
+        }
+    </style>
+
+    <script>
+        (function() {
+            const track = document.getElementById('cwd-prop-track');
+            const prevBtns = [document.getElementById('cwd-prop-prev'), document.getElementById('cwd-prop-prev-mobile')]
+                .filter(Boolean);
+            const nextBtns = [document.getElementById('cwd-prop-next'), document.getElementById('cwd-prop-next-mobile')]
+                .filter(Boolean);
+
+            if (!track || (!prevBtns.length && !nextBtns.length)) return;
+
+            function getStep() {
+                const card = track.querySelector('.cwd-prop-card');
+                if (!card) return 300;
+                const style = window.getComputedStyle(track);
+                const gap = parseFloat(style.columnGap || style.gap || '20');
+                return card.offsetWidth + gap;
+            }
+
+            function updateButtons() {
+                const maxScroll = track.scrollWidth - track.clientWidth - 1;
+                const atStart = track.scrollLeft <= 0;
+                const atEnd = track.scrollLeft >= maxScroll;
+
+                prevBtns.forEach(btn => {
+                    btn.disabled = atStart;
+                    btn.classList.toggle('opacity-40', atStart);
+                    btn.classList.toggle('cursor-not-allowed', atStart);
+                });
+
+                nextBtns.forEach(btn => {
+                    btn.disabled = atEnd;
+                    btn.classList.toggle('opacity-40', atEnd);
+                    btn.classList.toggle('cursor-not-allowed', atEnd);
+                });
+            }
+
+            prevBtns.forEach(btn => btn.addEventListener('click', function() {
+                track.scrollBy({
+                    left: -getStep(),
+                    behavior: 'smooth'
+                });
+            }));
+
+            nextBtns.forEach(btn => btn.addEventListener('click', function() {
+                track.scrollBy({
+                    left: getStep(),
+                    behavior: 'smooth'
+                });
+            }));
+
+            track.addEventListener('scroll', updateButtons, {
+                passive: true
+            });
+            window.addEventListener('resize', updateButtons);
+            updateButtons();
+        })();
+    </script>
 
 
     @php
@@ -503,12 +528,14 @@
             </h2>
 
             {{-- Cards grid --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="why-choose-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 items-stretch">
                 @foreach ($whyChooseFeatures as $index => $feature)
                     <div @class([
-                        'border border-[#2A5A8A]/40 px-6 py-6',
-                        'lg:col-start-2' => $index === 3,
-                        'lg:col-start-3' => $index === 4,
+                        'why-choose-card h-full flex flex-col border-[2px] border-[#2A5A8A] px-6 py-6',
+                        'lg:col-span-2' => $index < 3,
+                        'lg:col-span-2 lg:col-start-2' => $index === 3,
+                        'sm:col-span-2 sm:max-w-[calc(50%-12px)] sm:mx-auto lg:col-span-2 lg:col-start-4 lg:max-w-none lg:mx-0' =>
+                            $index === 4,
                     ])>
                         <h3 class="text-[#2A5A8A] text-[14px] sm:text-[15px] font-bold mb-3 leading-snug">
                             {{ $feature['title'] }}
@@ -522,4 +549,46 @@
 
         </div>
     </section>
+
+    <script>
+        (function() {
+            const grid = document.getElementById('why-choose-grid');
+            if (!grid) return;
+
+            function equalizeCardHeights() {
+                const cards = Array.from(grid.querySelectorAll('.why-choose-card'));
+                if (!cards.length) return;
+
+                // Reset first, so shrinking the viewport doesn't keep a stale tall height
+                cards.forEach(card => {
+                    card.style.height = 'auto';
+                });
+
+                // Measure natural height of every card, take the tallest
+                let tallest = 0;
+                cards.forEach(card => {
+                    const h = card.getBoundingClientRect().height;
+                    if (h > tallest) tallest = h;
+                });
+
+                // Apply that height to every card, across both grid rows
+                cards.forEach(card => {
+                    card.style.height = tallest + 'px';
+                });
+            }
+
+            // Run once content/layout is ready
+            window.addEventListener('load', equalizeCardHeights);
+
+            // Re-run on resize, since text wrapping (and therefore natural height) changes at different widths
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(equalizeCardHeights, 150);
+            });
+
+            // Run immediately too, in case DOM is already parsed by the time this script executes
+            equalizeCardHeights();
+        })();
+    </script>
 @endsection
