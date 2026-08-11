@@ -190,8 +190,8 @@
 
     {{-- bg blue section --}}
     <section class="bg-[#2A5A8A] h-[450px] sm:h-[500px] md:h-[600px] lg:h-[800px] mt-[-15rem]">
-        {{-- auto-move part --}}
-        <section class="absolute w-full flex mt-[20rem] justify-center ">
+    {{-- auto-move part --}}
+    <section class="absolute w-full flex mt-[20rem] justify-center ">
 
             <img src="{{ asset('home/auto_move_logo/auto_move.png') }}" alt="CWD Realty auto-move logo"
                 class="w-full h-auto object-contain">
@@ -260,14 +260,14 @@
                 'link' => url('/properties/uc88-residence'),
             ],
 
-             [
+            [
                 'image' => asset('home/latest_activities/1img.png'),
                 'title' => 'Wealth Mansion',
                 'description' =>
                     'Premium condominium development offering modern residential units with excellent city access.',
                 'link' => url('/properties/wealth-mansion'),
             ],
-             [
+            [
                 'image' => asset('home/latest_activities/2img.png'),
                 'title' => 'Private Residential Collection',
                 'description' =>
@@ -395,78 +395,96 @@
         }
     </style>
 
-    <script>
-        (function() {
-            const track = document.getElementById('cwd-prop-track');
-            const prevBtns = [document.getElementById('cwd-prop-prev'), document.getElementById('cwd-prop-prev-mobile')]
-                .filter(Boolean);
-            const nextBtns = [document.getElementById('cwd-prop-next'), document.getElementById('cwd-prop-next-mobile')]
-                .filter(Boolean);
+<script>
+    (function() {
+        const track = document.getElementById('cwd-prop-track');
+        const prevBtns = [document.getElementById('cwd-prop-prev'), document.getElementById('cwd-prop-prev-mobile')]
+            .filter(Boolean);
+        const nextBtns = [document.getElementById('cwd-prop-next'), document.getElementById('cwd-prop-next-mobile')]
+            .filter(Boolean);
 
-            if (!track) return;
+        console.log('[carousel] track found:', !!track, 'prevBtns:', prevBtns.length, 'nextBtns:', nextBtns.length);
 
-            function getStep() {
-                const card = track.querySelector('.cwd-prop-card');
-                if (!card) return 300;
-                const style = window.getComputedStyle(track);
-                const gap = parseFloat(style.columnGap || style.gap || '20');
-                return card.offsetWidth + gap;
-            }
+        if (!track) return;
 
-            function updateButtons() {
-                const maxScroll = track.scrollWidth - track.clientWidth - 1;
-                const atStart = track.scrollLeft <= 0;
-                const atEnd = track.scrollLeft >= maxScroll;
+        const cards = Array.from(track.querySelectorAll('.cwd-prop-card'));
+        console.log('[carousel] cards found:', cards.length);
+        if (!cards.length) return;
 
-                prevBtns.forEach(btn => {
-                    btn.disabled = atStart;
-                    btn.classList.toggle('opacity-40', atStart);
-                    btn.classList.toggle('cursor-not-allowed', atStart);
-                });
+        function getMaxScroll() {
+            return Math.max(0, track.scrollWidth - track.clientWidth);
+        }
 
-                nextBtns.forEach(btn => {
-                    btn.disabled = atEnd;
-                    btn.classList.toggle('opacity-40', atEnd);
-                    btn.classList.toggle('cursor-not-allowed', atEnd);
-                });
-            }
-
-            prevBtns.forEach(btn => btn.addEventListener('click', function() {
-                track.scrollBy({
-                    left: -getStep(),
-                    behavior: 'smooth'
-                });
-            }));
-
-            nextBtns.forEach(btn => btn.addEventListener('click', function() {
-                track.scrollBy({
-                    left: getStep(),
-                    behavior: 'smooth'
-                });
-            }));
-
-            track.addEventListener('scroll', updateButtons, {
-                passive: true
+        function getCardPositions() {
+            const trackRect = track.getBoundingClientRect();
+            return cards.map(card => {
+                const cardRect = card.getBoundingClientRect();
+                return (cardRect.left - trackRect.left) + track.scrollLeft;
             });
-            window.addEventListener('resize', updateButtons);
-            updateButtons();
+        }
 
-            track.querySelectorAll('.cwd-prop-card').forEach(function(card) {
-                card.addEventListener('click', function(e) {
-                    if (e.target.closest('a')) return;
-                    const trackRect = track.getBoundingClientRect();
-                    const cardRect = card.getBoundingClientRect();
-                    const cardCenter = (cardRect.left - trackRect.left) + track.scrollLeft + cardRect
-                        .width / 2;
-                    const targetScroll = cardCenter - track.clientWidth / 2;
-                    track.scrollTo({
-                        left: targetScroll,
-                        behavior: 'smooth'
-                    });
-                });
+        function getCurrentIndex() {
+            const positions = getCardPositions();
+            let closest = 0;
+            let closestDiff = Infinity;
+            positions.forEach((pos, i) => {
+                const diff = Math.abs(pos - track.scrollLeft);
+                if (diff < closestDiff) {
+                    closestDiff = diff;
+                    closest = i;
+                }
             });
-        })();
-    </script>
+            return closest;
+        }
+
+        function scrollToIndex(index) {
+            const positions = getCardPositions();
+            const maxScroll = getMaxScroll();
+            const clampedIndex = Math.max(0, Math.min(index, positions.length - 1));
+            const target = Math.max(0, Math.min(positions[clampedIndex], maxScroll));
+            console.log('[carousel] scrollToIndex', index, '-> clamped', clampedIndex, 'target', target, 'currentScrollLeft', track.scrollLeft);
+            track.scrollTo({
+                left: target,
+                behavior: 'smooth'
+            });
+        }
+
+        function updateButtons() {
+            const maxScroll = getMaxScroll();
+            const tolerance = 4;
+            const atStart = track.scrollLeft <= tolerance;
+            const atEnd = track.scrollLeft >= maxScroll - tolerance;
+
+            prevBtns.forEach(btn => btn.classList.toggle('opacity-40', atStart));
+            nextBtns.forEach(btn => btn.classList.toggle('opacity-40', atEnd));
+        }
+
+        prevBtns.forEach(btn => btn.addEventListener('click', function() {
+            console.log('[carousel] PREV clicked');
+            const current = getCurrentIndex();
+            scrollToIndex(current - 1);
+        }));
+
+        nextBtns.forEach(btn => btn.addEventListener('click', function() {
+            console.log('[carousel] NEXT clicked');
+            const current = getCurrentIndex();
+            scrollToIndex(current + 1);
+        }));
+
+        track.addEventListener('scroll', updateButtons, {
+            passive: true
+        });
+        window.addEventListener('resize', updateButtons);
+        updateButtons();
+
+        cards.forEach(function(card, i) {
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('a')) return;
+                scrollToIndex(i);
+            });
+        });
+    })();
+</script>
 
 
     @php
