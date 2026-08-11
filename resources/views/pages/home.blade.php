@@ -260,14 +260,14 @@
                 'link' => url('/properties/uc88-residence'),
             ],
 
-            [
+             [
                 'image' => asset('home/latest_activities/1img.png'),
                 'title' => 'Wealth Mansion',
                 'description' =>
                     'Premium condominium development offering modern residential units with excellent city access.',
                 'link' => url('/properties/wealth-mansion'),
             ],
-            [
+             [
                 'image' => asset('home/latest_activities/2img.png'),
                 'title' => 'Private Residential Collection',
                 'description' =>
@@ -405,60 +405,44 @@
 
             if (!track) return;
 
-            const cards = Array.from(track.querySelectorAll('.cwd-prop-card'));
-            if (!cards.length) return;
-
-            function getMaxScroll() {
-                return track.scrollWidth - track.clientWidth;
-            }
-
-            function getCardPositions() {
-                return cards.map(card => card.offsetLeft);
-            }
-
-            function getCurrentIndex() {
-                const positions = getCardPositions();
-                let closest = 0;
-                let closestDiff = Infinity;
-                positions.forEach((pos, i) => {
-                    const diff = Math.abs(pos - track.scrollLeft);
-                    if (diff < closestDiff) {
-                        closestDiff = diff;
-                        closest = i;
-                    }
-                });
-                return closest;
-            }
-
-            function scrollToIndex(index) {
-                const positions = getCardPositions();
-                const maxScroll = getMaxScroll();
-                const clampedIndex = Math.max(0, Math.min(index, positions.length - 1));
-                const target = Math.max(0, Math.min(positions[clampedIndex], maxScroll));
-                track.scrollTo({
-                    left: target,
-                    behavior: 'smooth'
-                });
+            function getStep() {
+                const card = track.querySelector('.cwd-prop-card');
+                if (!card) return 300;
+                const style = window.getComputedStyle(track);
+                const gap = parseFloat(style.columnGap || style.gap || '20');
+                return card.offsetWidth + gap;
             }
 
             function updateButtons() {
-                const maxScroll = getMaxScroll();
-                const tolerance = 4;
-                const atStart = track.scrollLeft <= tolerance;
-                const atEnd = track.scrollLeft >= maxScroll - tolerance;
+                const maxScroll = track.scrollWidth - track.clientWidth - 1;
+                const atStart = track.scrollLeft <= 0;
+                const atEnd = track.scrollLeft >= maxScroll;
 
-                prevBtns.forEach(btn => btn.classList.toggle('opacity-40', atStart));
-                nextBtns.forEach(btn => btn.classList.toggle('opacity-40', atEnd));
+                prevBtns.forEach(btn => {
+                    btn.disabled = atStart;
+                    btn.classList.toggle('opacity-40', atStart);
+                    btn.classList.toggle('cursor-not-allowed', atStart);
+                });
+
+                nextBtns.forEach(btn => {
+                    btn.disabled = atEnd;
+                    btn.classList.toggle('opacity-40', atEnd);
+                    btn.classList.toggle('cursor-not-allowed', atEnd);
+                });
             }
 
             prevBtns.forEach(btn => btn.addEventListener('click', function() {
-                const current = getCurrentIndex();
-                scrollToIndex(current - 1);
+                track.scrollBy({
+                    left: -getStep(),
+                    behavior: 'smooth'
+                });
             }));
 
             nextBtns.forEach(btn => btn.addEventListener('click', function() {
-                const current = getCurrentIndex();
-                scrollToIndex(current + 1);
+                track.scrollBy({
+                    left: getStep(),
+                    behavior: 'smooth'
+                });
             }));
 
             track.addEventListener('scroll', updateButtons, {
@@ -467,10 +451,18 @@
             window.addEventListener('resize', updateButtons);
             updateButtons();
 
-            cards.forEach(function(card, i) {
+            track.querySelectorAll('.cwd-prop-card').forEach(function(card) {
                 card.addEventListener('click', function(e) {
                     if (e.target.closest('a')) return;
-                    scrollToIndex(i);
+                    const trackRect = track.getBoundingClientRect();
+                    const cardRect = card.getBoundingClientRect();
+                    const cardCenter = (cardRect.left - trackRect.left) + track.scrollLeft + cardRect
+                        .width / 2;
+                    const targetScroll = cardCenter - track.clientWidth / 2;
+                    track.scrollTo({
+                        left: targetScroll,
+                        behavior: 'smooth'
+                    });
                 });
             });
         })();
