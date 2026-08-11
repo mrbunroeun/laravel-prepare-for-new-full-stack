@@ -1,7 +1,7 @@
 {{-- Footer --}}
 <footer class="bg-[#2A5A8A]">
     <div class="max-w-[1400px] mx-auto px-6 sm:px-10 py-14 sm:py-16">
-        <div class="grid grid-cols-1 min-[900px]:grid-cols-[1.8fr_0.8fr_0.8fr] gap-10 min-[900px]:gap-24">
+        <div class="grid grid-cols-1 min-[900px]:grid-cols-[1.8fr_0.5fr_0.8fr] gap-10 min-[900px]:gap-24">
 
             {{-- Left: logo + tagline + description + socials --}}
             <div class="flex flex-col gap-4">
@@ -13,7 +13,7 @@
                     <span class="text-[#DCC597]">Realty &amp; Hospitality</span>
                 </h3>
 
-                <p class="text-white/80 text-[15px] leading-relaxed max-w-[560px]">
+                <p class="text-white/80 text-[18px] leading-relaxed max-w-[560px]">
                     Specializes in condominium management, property leasing, rental management, and hospitality
                     services in Phnom Penh. Whether you're a property owner seeking professional management or a
                     guest looking for comfortable accommodation, we deliver reliable solutions with exceptional
@@ -50,39 +50,39 @@
 
             {{-- Middle: Quick Links --}}
             <div class="flex flex-col gap-2 max-w-[140px]">
-                <h4 class="text-[#DCC597] text-[13px] font-bold mb-1">Quick Links</h4>
-                <a href="{{ url('/') }}" class="text-white/90 text-[13px] hover:text-white transition">Home</a>
-                <a href="{{ url('/about-us') }}" class="text-white/90 text-[13px] hover:text-white transition">About
+                <h4 class="text-[#DCC597] text-[18px] font-bold mb-1">Quick Links</h4>
+                <a href="{{ url('/') }}" class="text-white/90 text-[18px] hover:text-white transition">Home</a>
+                <a href="{{ url('/about-us') }}" class="text-white/90 text-[18px] hover:text-white transition">About
                     Us</a>
                 <a href="{{ url('/services') }}"
-                    class="text-white/90 text-[13px] hover:text-white transition">Services</a>
+                    class="text-white/90 text-[18px] hover:text-white transition">Services</a>
                 <a href="{{ url('/properties') }}"
-                    class="text-white/90 text-[13px] hover:text-white transition">Properties</a>
+                    class="text-white/90 text-[18px] hover:text-white transition">Properties</a>
                 <a href="{{ url('/partners') }}"
-                    class="text-white/90 text-[13px] hover:text-white transition">Partners</a>
+                    class="text-white/90 text-[18px] hover:text-white transition">Partners</a>
                 <a href="{{ url('/insights') }}"
-                    class="text-white/90 text-[13px] hover:text-white transition">Insights</a>
+                    class="text-white/90 text-[18px] hover:text-white transition">Insights</a>
                 <a href="{{ url('/latest-activities') }}"
-                    class="text-white/90 text-[13px] hover:text-white transition">Events</a>
-                <a href="{{ url('/contact-us') }}" class="text-white/90 text-[13px] hover:text-white transition">Contact
+                    class="text-white/90 text-[18px] hover:text-white transition">Events</a>
+                <a href="{{ url('/contact-us') }}" class="text-white/90 text-[18px] hover:text-white transition">Contact
                     Us</a>
             </div>
 
             {{-- Right: Contact Information --}}
             <div class="flex flex-col gap-2">
-                <h4 class="text-[#DCC597] text-[13px] font-bold mb-1">Contact Information</h4>
-                <p class="text-white/90 text-[13px] leading-relaxed">
+                <h4 class="text-[#DCC597] text-[18px] font-bold mb-1">Contact Information</h4>
+                <p class="text-white/90 text-[18px] leading-relaxed">
                     Wealth Mansion, 6F, Room Number 27, Tonle Sap Street, Village 3, Chroy Changva Commune, Chroy
                     Changva District, Phnom Penh
                 </p>
-                <p class="text-white/90 text-[13px]">(+855) 86 7777 05</p>
+                <p class="text-white/90 text-[18px]">(+855) 86 7777 05</p>
                 <a href="mailto:info@cwdrealty.com"
-                    class="text-white/90 text-[13px] hover:text-white transition">info@cwdrealty.com</a>
+                    class="text-white/90 text-[18px] hover:text-white transition">info@cwdrealty.com</a>
                 <a href="https://www.cwdrealty.com" target="_blank"
-                    class="text-white/90 text-[13px] hover:text-white transition">www.cwdrealty.com</a>
+                    class="text-white/90 text-[18px] hover:text-white transition">www.cwdrealty.com</a>
                 <div class="mt-1">
-                    <p class="text-white text-[13px] font-bold">Operating Hours:</p>
-                    <p class="text-white/90 text-[13px]">Monday – Friday | 8:00 AM – 6:00 PM</p>
+                    <p class="text-white text-[18px] font-bold">Operating Hours:</p>
+                    <p class="text-white/90 text-[18px]">Monday – Friday | 8:00 AM – 6:00 PM</p>
                 </div>
             </div>
 
