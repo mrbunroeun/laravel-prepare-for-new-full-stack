@@ -413,7 +413,7 @@
 
     <style>
         /* Fade cards at both edges: right edge fades where they scroll under the arrows/heading panel,
-                           left edge fades once the track has been scrolled (so cards appear to disappear off the left too) */
+                                                                       left edge fades once the track has been scrolled (so cards appear to disappear off the left too) */
         @media (min-width: 1024px) {
             .cwd-prop-track-fade {
                 -webkit-mask-image: linear-gradient(to right,
@@ -591,4 +591,357 @@
             equalizeCardHeights();
         })();
     </script>
+    {{-- Frequently Asked Questions --}}
+    @php
+        $faqLeft = [
+            [
+                'question' => 'Why should I stay at a property managed by CWD Realty & Hospitality?',
+                'answer' =>
+                    'We professionally manage quality condominium properties, offering clean accommodations, responsive support, flexible rental options, and convenient locations suitable for business travelers, expatriates, and tourists.',
+            ],
+            [
+                'question' => 'How much does a room cost?',
+                'answer' =>
+                    'Rates vary depending on property, unit type, and length of stay. Contact our team for current pricing and availability.',
+            ],
+            [
+                'question' => 'Are smoking and non-smoking rooms available?',
+                'answer' =>
+                    'Yes, we offer both smoking and non-smoking units depending on the property. Let us know your preference when booking.',
+            ],
+            [
+                'question' => 'Is breakfast included?',
+                'answer' =>
+                    'Breakfast inclusion depends on the specific property and rental package. Our team can confirm details for your chosen unit.',
+            ],
+        ];
+
+        $faqRight = [
+            [
+                'question' => 'Are pets allowed?',
+                'answer' =>
+                    'Pet policies vary by property. Please contact us before booking to confirm whether your property allows pets.',
+            ],
+            [
+                'question' => 'What facilities are available?',
+                'answer' =>
+                    'Facilities vary by property and may include pools, gyms, parking, and 24-hour security. Ask our team for details on a specific listing.',
+            ],
+            [
+                'question' => 'Do you provide airport transportation?',
+                'answer' =>
+                    'Yes, airport transfer can be arranged as part of our hospitality services. Let us know your flight details in advance.',
+            ],
+            [
+                'question' => 'Are there discounts for weekly or monthly stays?',
+                'answer' =>
+                    'Yes, we offer flexible rental options with better rates for weekly and monthly stays. Contact us for a custom quote.',
+            ],
+        ];
+    @endphp
+
+    {{-- Frequently Asked Questions --}}
+    <section class="relative bg-none">
+        <div class="max-w-[1400px] mx-auto px-6 sm:px-10 py-16 sm:py-20">
+
+            {{-- Heading --}}
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+                <span class="text-[#2A5A8A] font-normal block">Frequently</span>
+                <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
+            </h2>
+
+            {{-- Two-column accordion --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start">
+
+                {{-- Left column --}}
+                <div class="faq-column flex flex-col gap-2">
+                    @foreach ($faqLeft as $index => $faq)
+                        <div class="faq-item bg-[#f3f3f3]">
+                            <button type="button"
+                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
+                                aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
+                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
+                                    {{ $faq['question'] }}
+                                </span>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200 {{ $index === 0 ? 'rotate-90' : '' }}"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M6 4l8 6-8 6V4z" />
+                                </svg>
+                            </button>
+                            <div
+                                class="faq-panel overflow-hidden transition-all duration-300 {{ $index === 0 ? 'max-h-[300px]' : 'max-h-0' }}">
+                                <div class="{{ $index === 0 ? 'bg-[#1479B9]' : 'bg-white' }} px-5 py-4 sm:px-6 sm:py-5">
+                                    <p
+                                        class="{{ $index === 0 ? 'text-white' : 'text-black/70' }} text-[13px] sm:text-[13.5px] leading-relaxed">
+                                        {{ $faq['answer'] }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- Right column --}}
+                <div class="faq-column flex flex-col gap-2">
+                    @foreach ($faqRight as $faq)
+                        <div class="faq-item bg-[#f3f3f3]">
+                            <button type="button"
+                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
+                                aria-expanded="false">
+                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
+                                    {{ $faq['question'] }}
+                                </span>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M6 4l8 6-8 6V4z" />
+                                </svg>
+                            </button>
+                            <div class="faq-panel overflow-hidden transition-all duration-300 max-h-0">
+                                <div class="bg-white px-5 py-4 sm:px-6 sm:py-5">
+                                    <p class="text-black/70 text-[13px] sm:text-[13.5px] leading-relaxed">
+                                        {{ $faq['answer'] }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        (function() {
+            document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const item = btn.closest('.faq-item');
+                    const panel = item.querySelector('.faq-panel');
+                    const answerBox = panel.querySelector('div');
+                    const answerText = answerBox.querySelector('p');
+                    const arrow = btn.querySelector('.faq-arrow');
+                    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+                    if (isOpen) {
+                        // Close this item
+                        panel.style.maxHeight = '0px';
+                        btn.setAttribute('aria-expanded', 'false');
+                        arrow.classList.remove('rotate-90');
+                        answerBox.classList.remove('bg-[#1479B9]');
+                        answerBox.classList.add('bg-white');
+                        answerText.classList.remove('text-white');
+                        answerText.classList.add('text-black/70');
+                    } else {
+                        // Open this item
+                        panel.style.maxHeight = panel.scrollHeight + 'px';
+                        btn.setAttribute('aria-expanded', 'true');
+                        arrow.classList.add('rotate-90');
+                        answerBox.classList.add('bg-[#1479B9]');
+                        answerBox.classList.remove('bg-white');
+                        answerText.classList.add('text-white');
+                        answerText.classList.remove('text-black/70');
+                    }
+                });
+            });
+        })();
+    </script>
+
+
+    @php
+        $latestActivities = [
+            [
+                'image' => asset('home/latest_activities/1img.png'),
+                'title' => 'Wealth Mansion',
+                'description' =>
+                    'Premium condominium development offering modern residential units with excellent city access.',
+            ],
+            [
+                'image' => asset('home/latest_activities/2img.png'),
+                'title' => 'Private Residential Collection',
+                'description' =>
+                    'Professionally managed condominium units including premium residences and penthouses.',
+            ],
+            [
+                'image' => asset('home/latest_activities/3img.png'),
+                'title' => 'Golden Tower 268',
+                'description' => 'Landmark high-rise tower offering premium residences with panoramic city views.',
+            ],
+            [
+                'image' => asset('home/latest_activities/4img.png'),
+                'title' => 'Riverside Tower',
+                'description' =>
+                    'Elegant riverside residences with panoramic views and premium amenities for modern living.',
+            ],
+            [
+                'image' => asset('home/latest_activities/5img.png'),
+                'title' => 'Skyline Residence',
+                'description' => 'High-rise condominium living in the heart of the city, close to shopping and dining.',
+            ],
+            [
+                'image' => asset('home/latest_activities/6img.png'),
+                'title' => 'Harmony Heights',
+                'description' =>
+                    'Modern residential tower with rooftop lounge, gym, and unobstructed city skyline views.',
+            ],
+        ];
+    @endphp
+
+    {{-- Latest Activities --}}
+    <section class="bg-none">
+        <div class="max-w-[1500px] mx-auto px-6 sm:px-10 pt-16 sm:pt-20">
+            {{-- Heading --}}
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+                <span class="text-[#2A5A8A] font-normal block">Latest <strong>Activities</strong></span>
+            </h2>
+        </div>
+
+        <div class="max-w-[1500px] mx-auto">
+            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-0 leading-[0]">
+                @foreach ($latestActivities as $activity)
+                    <div class="relative overflow-hidden group h-[220px] sm:h-[240px] lg:h-[260px]">
+                        <img src="{{ $activity['image'] }}" alt="{{ $activity['title'] }}"
+                            class="block w-full h-full object-cover">
+
+                        {{-- Blue overlay + text, shown on hover --}}
+                        <div
+                            class="absolute inset-0 bg-[#2A5A8A]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end px-6 py-6">
+                            <h3
+                                class="text-white text-[18px] sm:text-[20px] font-bold mb-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                {{ $activity['title'] }}
+                            </h3>
+                            <p
+                                class="text-white/90 text-[13px] sm:text-[14px] leading-relaxed translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                {{ $activity['description'] }}
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="h-16 sm:h-20"></div>
+    </section>
+
+
+    @php
+        $testimonials = [
+            [
+                'name' => 'Lorem Name',
+                'rating' => 4,
+                'text' =>
+                    'CWD Realty & Hospitality manages residential condominium properties while providing flexible rental options for travelers, expatriates, business professionals, and long-term residents. Our experienced multilingual team helps property owners maximize rental income while ensuring guests enjoy a comfortable stay.',
+            ],
+            [
+                'name' => 'Lorem Name',
+                'rating' => 4,
+                'text' =>
+                    'CWD Realty & Hospitality manages residential condominium properties while providing flexible rental options for travelers, expatriates, business professionals, and long-term residents. Our experienced multilingual team helps property owners maximize rental income while ensuring guests enjoy a comfortable stay.',
+            ],
+            [
+                'name' => 'Lorem Name',
+                'rating' => 4,
+                'text' =>
+                    'CWD Realty & Hospitality manages residential condominium properties while providing flexible rental options for travelers, expatriates, business professionals, and long-term residents. Our experienced multilingual team helps property owners maximize rental income while ensuring guests enjoy a comfortable stay.',
+            ],
+        ];
+    @endphp
+
+    {{-- Testimonials --}}
+    <section class="bg-white">
+        <div class="max-w-[1000px] mx-auto px-6 sm:px-10 py-16 sm:py-20">
+            <div class="flex flex-col gap-8">
+                @foreach ($testimonials as $item)
+                    <div>
+                        <div class="flex justify-end mb-2">
+                            <div class="flex items-center gap-1">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        class="w-5 h-5 {{ $i <= $item['rating'] ? 'text-[#fec259]' : 'text-[#d8d3c8]' }}"
+                                        fill="currentColor">
+                                        <path
+                                            d="M12 2.5l2.9 6.06 6.6.72-4.9 4.53 1.28 6.54L12 16.98l-5.88 3.37 1.28-6.54-4.9-4.53 6.6-.72L12 2.5z" />
+                                    </svg>
+                                @endfor
+                            </div>
+                        </div>
+
+                        <div class="bg-[#f5f5f5] px-6 py-6 sm:px-8 sm:py-7">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#d9d9d9] shrink-0"></div>
+                                <div class="flex flex-col gap-2">
+                                    <h3 class="text-black text-[15px] font-bold">{{ $item['name'] }}</h3>
+                                    <p class="text-black/70 text-[13.5px] leading-relaxed">
+                                        {{ $item['text'] }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+
+    {{-- Looking for your next stay --}}
+    <section class="relative max-w-[1600px] mx-auto">
+        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
+            <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
+                class="w-full h-auto min-h-[220px] object-cover">
+
+            <div
+                class="relative max-w-[520px] mt-6 px-6
+                        min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
+                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
+                    <span class="block min-[900px]:hidden">
+                        Looking for Your Next Stay or Property Management Partner?
+                    </span>
+                    <span class="hidden min-[900px]:block">
+                        Looking for<br>
+                        Your Next Stay or<br>
+                        Property Management<br>
+                        Partner?
+                    </span>
+                </h2>
+            </div>
+        </div>
+
+        <div
+            class="max-w-[420px] mt-4 px-6
+        min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
+            <p class="text-black/70 text-[14px]  sm:text-[15px] leading-relaxed">
+                Whether you're searching for accommodation or professional property management services, our team is ready
+                to assist you.
+            </p>
+        </div>
+    </section>
+
+
+    {{-- Professional Property --}}
+    <section class="mt-16 sm:mt-24 md:mt-32 min-[900px]:mt-[12rem]">
+        <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
+            <div
+                class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">
+
+                {{-- Left: accent line + heading --}}
+                <div class="flex items-start gap-4 max-w-[420px]">
+                    <span class="h-[2px] w-20 shrink-0 bg-[#c9a15c] mt-3"></span>
+                    <h2 class="text-[#2A5A8A] text-[16px] sm:text-[18px] font-bold leading-snug">
+                        Professional Property Management, Sales, Leasing & Hospitality Services in Cambodia.
+                    </h2>
+                </div>
+
+                {{-- Right: image --}}
+                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0">
+                    <img src="{{ asset('home/professional_property/professional_property.png') }}"
+                        alt="CWD Realty professional properties"
+                        class="w-full min-[900px]:w-[420px] h-auto min-h-[220px] object-cover">
+                </div>
+
+            </div>
+        </div>
+    </section>
 @endsection

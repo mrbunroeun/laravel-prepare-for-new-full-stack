@@ -16,7 +16,7 @@
 
             {{-- Logo, stuck to the left --}}
             <a href="{{ url('/') }}" class="z-[600] flex-shrink-0">
-                <img src="{{ asset('logo_nav_foot/CWD.svg') }}" alt="Company logo" class="h-8 min-[1161px]:h-10 w-auto">
+                <img src="{{ asset('logo_nav_foot/cwd.svg') }}" alt="Company logo" class="h-8 min-[1161px]:h-10 w-auto">
             </a>
 
             {{-- Desktop nav, absolutely centered on the page regardless of logo width --}}

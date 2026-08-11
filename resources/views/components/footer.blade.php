@@ -1,10 +1,94 @@
-<section class="relative text-[2rem] w-full mt-[40rem] ">
-    <div class="flex flex-wrap justify-center mx-auto gap-10 bg-[#111111] h-[1200px]  text-[#ffffff]">
-        <a href="{{ url('/') }}">Home</a>
-        <a href="{{ url('/about-us') }}">About Us</a>
-        <a href="{{ url('/products') }}">Products</a>
-        <a href="{{ url('insights') }}">Insights</a>
-        <a href="{{ url('/latest-activities') }}">Latest Activities</a>
+{{-- Footer --}}
+<footer class="bg-[#2A5A8A]">
+    <div class="max-w-[1400px] mx-auto px-6 sm:px-10 py-14 sm:py-16">
+        <div class="grid grid-cols-1 min-[900px]:grid-cols-[1.8fr_0.8fr_0.8fr] gap-10 min-[900px]:gap-24">
+
+            {{-- Left: logo + tagline + description + socials --}}
+            <div class="flex flex-col gap-4">
+                <img src="{{ asset('logo_nav_foot/footer_logo.svg') }}" alt="CWD Realty logo"
+                    class="h-16 w-auto self-start">
+
+                <h3 class="text-[20px] sm:text-[22px] font-bold leading-snug">
+                    <span class="text-white">CWD</span>
+                    <span class="text-[#DCC597]">Realty &amp; Hospitality</span>
+                </h3>
+
+                <p class="text-white/80 text-[15px] leading-relaxed max-w-[560px]">
+                    Specializes in condominium management, property leasing, rental management, and hospitality
+                    services in Phnom Penh. Whether you're a property owner seeking professional management or a
+                    guest looking for comfortable accommodation, we deliver reliable solutions with exceptional
+                    customer service.
+                </p>
+
+                <div class="flex items-center gap-3 mt-2">
+                    <a href="#" aria-label="Facebook"
+                        class="w-8 h-8 rounded-full bg-[#1877F2] flex items-center justify-center hover:opacity-90 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 text-white"
+                            fill="currentColor">
+                            <path
+                                d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06c0 5 3.66 9.14 8.44 9.94v-7.03H7.9v-2.91h2.54V9.86c0-2.51 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.8 8.44-4.94 8.44-9.94z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="WhatsApp"
+                        class="w-8 h-8 rounded-full bg-[#25D366] flex items-center justify-center hover:opacity-90 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 text-white"
+                            fill="currentColor">
+                            <path
+                                d="M12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.77.46 3.45 1.28 4.9L2 22l5.25-1.28A9.96 9.96 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm5.85 14.24c-.25.71-1.24 1.3-2.03 1.47-.55.12-1.26.21-3.65-.78-2.99-1.24-4.92-4.26-5.07-4.46-.15-.2-1.2-1.6-1.2-3.05 0-1.45.75-2.16 1.02-2.46.27-.3.58-.37.78-.37.2 0 .39 0 .56.01.18.01.42-.07.65.5.25.6.85 2.07.92 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.3.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.44.29.15.46.13.63-.08.17-.2.71-.83.9-1.11.19-.29.38-.24.63-.15.25.1 1.62.77 1.9.91.28.14.46.21.53.33.08.13.08.72-.17 1.43z" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Telegram"
+                        class="w-8 h-8 rounded-full bg-[#26A5E4] flex items-center justify-center hover:opacity-90 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 text-white"
+                            fill="currentColor">
+                            <path
+                                d="M21.9 4.3c.28-1.17-.42-1.63-1.18-1.35L2.6 10.36c-1.13.45-1.11 1.08-.19 1.36l4.6 1.44 1.79 5.44c.22.6.4.83.8.83.4 0 .58-.18.8-.4l1.9-1.85 4.02 2.96c.72.4 1.24.2 1.42-.68l2.15-15.16zM8.86 13.4l9.3-5.86c.44-.27.84-.13.51.17l-7.9 7.13-.3 3.24-1.61-4.68z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            {{-- Middle: Quick Links --}}
+            <div class="flex flex-col gap-2 max-w-[140px]">
+                <h4 class="text-[#DCC597] text-[13px] font-bold mb-1">Quick Links</h4>
+                <a href="{{ url('/') }}" class="text-white/90 text-[13px] hover:text-white transition">Home</a>
+                <a href="{{ url('/about-us') }}" class="text-white/90 text-[13px] hover:text-white transition">About
+                    Us</a>
+                <a href="{{ url('/services') }}"
+                    class="text-white/90 text-[13px] hover:text-white transition">Services</a>
+                <a href="{{ url('/properties') }}"
+                    class="text-white/90 text-[13px] hover:text-white transition">Properties</a>
+                <a href="{{ url('/partners') }}"
+                    class="text-white/90 text-[13px] hover:text-white transition">Partners</a>
+                <a href="{{ url('/insights') }}"
+                    class="text-white/90 text-[13px] hover:text-white transition">Insights</a>
+                <a href="{{ url('/latest-activities') }}"
+                    class="text-white/90 text-[13px] hover:text-white transition">Events</a>
+                <a href="{{ url('/contact-us') }}" class="text-white/90 text-[13px] hover:text-white transition">Contact
+                    Us</a>
+            </div>
+
+            {{-- Right: Contact Information --}}
+            <div class="flex flex-col gap-2">
+                <h4 class="text-[#DCC597] text-[13px] font-bold mb-1">Contact Information</h4>
+                <p class="text-white/90 text-[13px] leading-relaxed">
+                    Wealth Mansion, 6F, Room Number 27, Tonle Sap Street, Village 3, Chroy Changva Commune, Chroy
+                    Changva District, Phnom Penh
+                </p>
+                <p class="text-white/90 text-[13px]">(+855) 86 7777 05</p>
+                <a href="mailto:info@cwdrealty.com"
+                    class="text-white/90 text-[13px] hover:text-white transition">info@cwdrealty.com</a>
+                <a href="https://www.cwdrealty.com" target="_blank"
+                    class="text-white/90 text-[13px] hover:text-white transition">www.cwdrealty.com</a>
+                <div class="mt-1">
+                    <p class="text-white text-[13px] font-bold">Operating Hours:</p>
+                    <p class="text-white/90 text-[13px]">Monday – Friday | 8:00 AM – 6:00 PM</p>
+                </div>
+            </div>
+
+        </div>
     </div>
 
-</section>
+    {{-- White strip at bottom --}}
+    <div class="h-6 sm:h-8 bg-white"></div>
+</footer>
