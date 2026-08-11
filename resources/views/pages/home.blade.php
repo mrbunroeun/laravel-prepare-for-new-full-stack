@@ -8,7 +8,7 @@
     </section>
 
     {{-- Hero content, sits above the hero image --}}
-    <section class="relative z-[200] text-[#2f6ba7] pointer-events-none">
+    <section class="relative z-[200] lg:mt-[-5rem] lg:mb-[10rem] text-[#2f6ba7] pointer-events-none">
         <div class="pt-[20rem] max-[1240px]:pt-[15rem] max-[940px]:pt-[10rem] max-w-[1400px] mx-auto px-6">
             {{-- Gold accent bar --}}
             <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
@@ -239,72 +239,40 @@
     @php
         $properties = [
             [
-                'image' => asset('home/properties/wealth-mansion.jpg'),
+                'image' => asset('home/latest_activities/1img.png'),
                 'title' => 'Wealth Mansion',
                 'description' =>
                     'Premium condominium development offering modern residential units with excellent city access.',
                 'link' => url('/properties/wealth-mansion'),
             ],
             [
-                'image' => asset('home/properties/private-residential-collection.jpg'),
+                'image' => asset('home/latest_activities/2img.png'),
                 'title' => 'Private Residential Collection',
                 'description' =>
                     'Professionally managed condominium units including premium residences and penthouses.',
                 'link' => url('/properties/private-residential-collection'),
             ],
             [
-                'image' => asset('home/properties/uc88-residence.jpg'),
+                'image' => asset('home/latest_activities/3img.png'),
                 'title' => 'UC88 Residence',
                 'description' =>
                     "Comfortable condominium living with convenient access to Phnom Penh's business districts.",
                 'link' => url('/properties/uc88-residence'),
             ],
+
             [
-                'image' => asset('home/properties/riverside-tower.jpg'),
-                'title' => 'Riverside Tower',
+                'image' => asset('home/latest_activities/1img.png'),
+                'title' => 'Wealth Mansion',
                 'description' =>
-                    'Elegant riverside residences with panoramic views and premium amenities for modern living.',
-                'link' => url('/properties/riverside-tower'),
+                    'Premium condominium development offering modern residential units with excellent city access.',
+                'link' => url('/properties/wealth-mansion'),
             ],
             [
-                'image' => asset('home/properties/skyline-residence.jpg'),
-                'title' => 'Skyline Residence',
-                'description' => 'High-rise condominium living in the heart of the city, close to shopping and dining.',
-                'link' => url('/properties/skyline-residence'),
-            ],
-            [
-                'image' => asset('home/properties/golden-park-condo.jpg'),
-                'title' => 'Golden Park Condo',
+                'image' => asset('home/latest_activities/2img.png'),
+                'title' => 'Private Residential Collection',
                 'description' =>
-                    'Family-friendly community with landscaped gardens, pool access, and 24-hour security.',
-                'link' => url('/properties/golden-park-condo'),
-            ],
-            [
-                'image' => asset('home/properties/diamond-bay-suites.jpg'),
-                'title' => 'Diamond Bay Suites',
-                'description' =>
-                    'Fully furnished suites ideal for expatriates and business professionals on flexible terms.',
-                'link' => url('/properties/diamond-bay-suites'),
-            ],
-            [
-                'image' => asset('home/properties/central-plaza-residence.jpg'),
-                'title' => 'Central Plaza Residence',
-                'description' =>
-                    'Centrally located condominiums offering easy access to offices, schools, and transit.',
-                'link' => url('/properties/central-plaza-residence'),
-            ],
-            [
-                'image' => asset('home/properties/orchid-garden-villas.jpg'),
-                'title' => 'Orchid Garden Villas',
-                'description' => 'Spacious villa-style units surrounded by greenery, offering privacy and comfort.',
-                'link' => url('/properties/orchid-garden-villas'),
-            ],
-            [
-                'image' => asset('home/properties/harmony-heights.jpg'),
-                'title' => 'Harmony Heights',
-                'description' =>
-                    'Modern residential tower with rooftop lounge, gym, and unobstructed city skyline views.',
-                'link' => url('/properties/harmony-heights'),
+                    'Professionally managed condominium units including premium residences and penthouses.',
+                'link' => url('/properties/private-residential-collection'),
             ],
         ];
     @endphp
@@ -320,7 +288,7 @@
         {{-- Main content layer: sits above the image --}}
         <div class="relative z-10 max-w-[1400px] ml-0 mr-auto lg:-ml-[186px] xl:-ml-[204px]">
 
-            {{-- Mobile/tablet heading + arrows: BEHIND the cards (lower z-index), sits on top of the image only --}}
+            {{-- Mobile/tablet heading + arrows --}}
             <div
                 class="flex lg:hidden items-center justify-between absolute inset-x-0 top-0 px-4 sm:px-6 pt-8 pb-6 sm:pb-10 z-10">
                 <h2 class="text-white text-[clamp(20px,3vw,30px)] leading-tight">
@@ -345,17 +313,16 @@
                 </div>
             </div>
 
-            {{-- Cards layer: pointer-events-none so its empty top padding doesn't block taps on the buttons underneath;
-     pointer-events-auto is re-applied on the track so the cards/links inside stay fully clickable --}}
+            {{-- Cards layer --}}
             <div
                 class="relative z-20 pt-24 sm:pt-28 lg:pt-[2vw] lg:-translate-y-[clamp(60px,9vw,140px)] pointer-events-none">
                 <div id="cwd-prop-track"
                     class="cwd-prop-track-fade pointer-events-auto flex gap-5 overflow-x-auto scroll-smooth pl-4 sm:pl-6 pr-4 sm:pr-6 lg:pr-[320px] pb-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
 
                     @foreach ($properties as $property)
-                        <article class="cwd-prop-card shrink-0 snap-start w-[260px] sm:w-[280px] bg-white shadow-sm">
+                        <article
+                            class="cwd-prop-card shrink-0 snap-start w-[260px] sm:w-[280px] bg-white shadow-sm cursor-pointer">
 
-                            {{-- overflow-hidden allowed here only, to crop this card's own image --}}
                             <div class="h-[170px] w-full overflow-hidden">
                                 <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
                                     class="w-full h-full object-cover">
@@ -379,19 +346,19 @@
                 </div>
             </div>
 
-            {{-- Featured Properties heading + navigation: desktop right panel, above the background image --}}
+            {{-- Featured Properties heading + navigation --}}
             <div
                 class="hidden lg:flex flex-col items-start justify-start gap-10 w-[300px] absolute right-0 top-0 px-10 py-8 z-30">
                 <div class="flex items-center gap-3">
                     <button id="cwd-prop-prev" type="button" aria-label="Previous property"
-                        class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
+                        class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center cursor-pointer hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
                     <button id="cwd-prop-next" type="button" aria-label="Next property"
-                        class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
+                        class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center cursor-pointer hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -412,8 +379,6 @@
     </section>
 
     <style>
-        /* Fade cards at both edges: right edge fades where they scroll under the arrows/heading panel,
-                                                                       left edge fades once the track has been scrolled (so cards appear to disappear off the left too) */
         @media (min-width: 1024px) {
             .cwd-prop-track-fade {
                 -webkit-mask-image: linear-gradient(to right,
@@ -438,46 +403,62 @@
             const nextBtns = [document.getElementById('cwd-prop-next'), document.getElementById('cwd-prop-next-mobile')]
                 .filter(Boolean);
 
-            if (!track || (!prevBtns.length && !nextBtns.length)) return;
+            if (!track) return;
 
-            function getStep() {
-                const card = track.querySelector('.cwd-prop-card');
-                if (!card) return 300;
-                const style = window.getComputedStyle(track);
-                const gap = parseFloat(style.columnGap || style.gap || '20');
-                return card.offsetWidth + gap;
+            const cards = Array.from(track.querySelectorAll('.cwd-prop-card'));
+            if (!cards.length) return;
+
+            function getMaxScroll() {
+                return track.scrollWidth - track.clientWidth;
+            }
+
+            function getCardPositions() {
+                return cards.map(card => card.offsetLeft);
+            }
+
+            function getCurrentIndex() {
+                const positions = getCardPositions();
+                let closest = 0;
+                let closestDiff = Infinity;
+                positions.forEach((pos, i) => {
+                    const diff = Math.abs(pos - track.scrollLeft);
+                    if (diff < closestDiff) {
+                        closestDiff = diff;
+                        closest = i;
+                    }
+                });
+                return closest;
+            }
+
+            function scrollToIndex(index) {
+                const positions = getCardPositions();
+                const maxScroll = getMaxScroll();
+                const clampedIndex = Math.max(0, Math.min(index, positions.length - 1));
+                const target = Math.max(0, Math.min(positions[clampedIndex], maxScroll));
+                track.scrollTo({
+                    left: target,
+                    behavior: 'smooth'
+                });
             }
 
             function updateButtons() {
-                const maxScroll = track.scrollWidth - track.clientWidth - 1;
-                const atStart = track.scrollLeft <= 0;
-                const atEnd = track.scrollLeft >= maxScroll;
+                const maxScroll = getMaxScroll();
+                const tolerance = 4;
+                const atStart = track.scrollLeft <= tolerance;
+                const atEnd = track.scrollLeft >= maxScroll - tolerance;
 
-                prevBtns.forEach(btn => {
-                    btn.disabled = atStart;
-                    btn.classList.toggle('opacity-40', atStart);
-                    btn.classList.toggle('cursor-not-allowed', atStart);
-                });
-
-                nextBtns.forEach(btn => {
-                    btn.disabled = atEnd;
-                    btn.classList.toggle('opacity-40', atEnd);
-                    btn.classList.toggle('cursor-not-allowed', atEnd);
-                });
+                prevBtns.forEach(btn => btn.classList.toggle('opacity-40', atStart));
+                nextBtns.forEach(btn => btn.classList.toggle('opacity-40', atEnd));
             }
 
             prevBtns.forEach(btn => btn.addEventListener('click', function() {
-                track.scrollBy({
-                    left: -getStep(),
-                    behavior: 'smooth'
-                });
+                const current = getCurrentIndex();
+                scrollToIndex(current - 1);
             }));
 
             nextBtns.forEach(btn => btn.addEventListener('click', function() {
-                track.scrollBy({
-                    left: getStep(),
-                    behavior: 'smooth'
-                });
+                const current = getCurrentIndex();
+                scrollToIndex(current + 1);
             }));
 
             track.addEventListener('scroll', updateButtons, {
@@ -485,6 +466,13 @@
             });
             window.addEventListener('resize', updateButtons);
             updateButtons();
+
+            cards.forEach(function(card, i) {
+                card.addEventListener('click', function(e) {
+                    if (e.target.closest('a')) return;
+                    scrollToIndex(i);
+                });
+            });
         })();
     </script>
 

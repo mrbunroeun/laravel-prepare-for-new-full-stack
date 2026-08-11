@@ -58,7 +58,7 @@
 {{-- Mobile menu: moved OUTSIDE <header> so its z-index isn't trapped in the header's stacking context --}}
 <div
     id="mobile-menu"
-    class="max-[1160px]:block hidden fixed inset-0 top-0 bg-white opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-[300] overflow-y-auto">
+    class="max-[1160px]:block hidden fixed inset-0 top-0 bg-white opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-[400] overflow-y-auto">
     <div class="flex flex-col items-start gap-1 px-6 pt-24 pb-10 min-h-screen">
         <ul class="flex flex-col items-start gap-1 w-full">
             @foreach ($navItems as $item)
