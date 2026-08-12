@@ -190,8 +190,8 @@
 
     {{-- bg blue section --}}
     <section class="bg-[#2A5A8A] h-[450px] sm:h-[500px] md:h-[600px] lg:h-[800px] mt-[-15rem]">
-    {{-- auto-move part --}}
-    <section class="absolute w-full flex mt-[20rem] justify-center ">
+        {{-- auto-move part --}}
+        <section class="absolute w-full flex mt-[20rem] justify-center ">
 
             <img src="{{ asset('home/auto_move_logo/auto_move.png') }}" alt="CWD Realty auto-move logo"
                 class="w-full h-auto object-contain">
@@ -235,6 +235,7 @@
 
 
     {{-- Featured Properties: background image layer + card content layer, cards can extend above image's top edge --}}
+    <x-properties.featured_properties />
 
     @php
         $properties = [
@@ -395,72 +396,78 @@
         }
     </style>
 
-<script>
-    (function() {
-        const track = document.getElementById("cwd-prop-track");
-        const prevBtn = document.getElementById("cwd-prop-prev");
-        const nextBtn = document.getElementById("cwd-prop-next");
-        const prevBtnMobile = document.getElementById("cwd-prop-prev-mobile");
-        const nextBtnMobile = document.getElementById("cwd-prop-next-mobile");
+    <script>
+        (function() {
+            const track = document.getElementById("cwd-prop-track");
+            const prevBtn = document.getElementById("cwd-prop-prev");
+            const nextBtn = document.getElementById("cwd-prop-next");
+            const prevBtnMobile = document.getElementById("cwd-prop-prev-mobile");
+            const nextBtnMobile = document.getElementById("cwd-prop-next-mobile");
 
-        if (!track) return;
+            if (!track) return;
 
-        const cards = Array.from(track.querySelectorAll(".cwd-prop-card"));
-        if (!cards.length) return;
+            const cards = Array.from(track.querySelectorAll(".cwd-prop-card"));
+            if (!cards.length) return;
 
-        let currentIndex = 0;
-        const totalCards = cards.length;
-        let scrollTimer = null;
+            let currentIndex = 0;
+            const totalCards = cards.length;
+            let scrollTimer = null;
 
-        function goToCard(index) {
-            if (index < 0 || index >= totalCards) return;
-            currentIndex = index;
-            const card = cards[currentIndex];
-            card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-        }
+            function goToCard(index) {
+                if (index < 0 || index >= totalCards) return;
+                currentIndex = index;
+                const card = cards[currentIndex];
+                card.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "start"
+                });
+            }
 
-        function setButtons(atStart, atEnd) {
-            [prevBtn, prevBtnMobile].forEach(btn => {
-                if (!btn) return;
-                btn.style.opacity = atStart ? "0.25" : "1";
-                btn.style.pointerEvents = atStart ? "none" : "auto";
+            function setButtons(atStart, atEnd) {
+                [prevBtn, prevBtnMobile].forEach(btn => {
+                    if (!btn) return;
+                    btn.style.opacity = atStart ? "0.25" : "1";
+                    btn.style.pointerEvents = atStart ? "none" : "auto";
+                });
+                [nextBtn, nextBtnMobile].forEach(btn => {
+                    if (!btn) return;
+                    btn.style.opacity = atEnd ? "0.25" : "1";
+                    btn.style.pointerEvents = atEnd ? "none" : "auto";
+                });
+            }
+
+            function updateButtons() {
+                setButtons(currentIndex <= 0, currentIndex >= totalCards - 1);
+            }
+
+            track.addEventListener("scroll", () => {
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(updateButtons, 150);
+            }, {
+                passive: true
             });
-            [nextBtn, nextBtnMobile].forEach(btn => {
-                if (!btn) return;
-                btn.style.opacity = atEnd ? "0.25" : "1";
-                btn.style.pointerEvents = atEnd ? "none" : "auto";
+
+            if (prevBtn) prevBtn.addEventListener("click", () => goToCard(currentIndex - 1));
+            if (nextBtn) nextBtn.addEventListener("click", () => goToCard(currentIndex + 1));
+            if (prevBtnMobile) prevBtnMobile.addEventListener("click", () => goToCard(currentIndex - 1));
+            if (nextBtnMobile) nextBtnMobile.addEventListener("click", () => goToCard(currentIndex + 1));
+
+            track.addEventListener("click", (e) => {
+                const card = e.target.closest(".cwd-prop-card");
+                if (!card || e.target.closest("a")) return;
+                const idx = cards.indexOf(card);
+                if (idx !== -1) goToCard(idx);
             });
-        }
 
-        function updateButtons() {
-            setButtons(currentIndex <= 0, currentIndex >= totalCards - 1);
-        }
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "ArrowLeft") goToCard(currentIndex - 1);
+                if (e.key === "ArrowRight") goToCard(currentIndex + 1);
+            });
 
-        track.addEventListener("scroll", () => {
-            clearTimeout(scrollTimer);
-            scrollTimer = setTimeout(updateButtons, 150);
-        }, { passive: true });
-
-        if (prevBtn) prevBtn.addEventListener("click", () => goToCard(currentIndex - 1));
-        if (nextBtn) nextBtn.addEventListener("click", () => goToCard(currentIndex + 1));
-        if (prevBtnMobile) prevBtnMobile.addEventListener("click", () => goToCard(currentIndex - 1));
-        if (nextBtnMobile) nextBtnMobile.addEventListener("click", () => goToCard(currentIndex + 1));
-
-        track.addEventListener("click", (e) => {
-            const card = e.target.closest(".cwd-prop-card");
-            if (!card || e.target.closest("a")) return;
-            const idx = cards.indexOf(card);
-            if (idx !== -1) goToCard(idx);
-        });
-
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowLeft") goToCard(currentIndex - 1);
-            if (e.key === "ArrowRight") goToCard(currentIndex + 1);
-        });
-
-        updateButtons();
-    })();
-</script>
+            updateButtons();
+        })();
+    </script>
 
 
     @php

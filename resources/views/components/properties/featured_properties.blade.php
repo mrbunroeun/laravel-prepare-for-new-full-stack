@@ -1,9 +1,3 @@
-@extends('layouts.app')
-@section('content')
-    <section class="text-[3rem] text-[#ac1b1b] mt-[20rem]">
-        <div>This is the about us</div>
-
-        {{-- Featured Properties: background image layer + card content layer, cards can extend above image's top edge --}}
 
         @php
             $properties = [
@@ -262,5 +256,3 @@
                 updateButtons();
             })();
         </script>
-    </section>
-@endsection
