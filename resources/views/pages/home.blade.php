@@ -13,18 +13,18 @@
             {{-- Gold accent bar --}}
             <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
             <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply">
-                <div class="px-10 py-10">
+                <div class="px-0 py-10">
                     <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)]  font-bold mb-6">
-                        <span class="h-[2px] w-10 bg-[#c9a15c]"></span>
+                        <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
                         <span class="text-[#F4DEAC]">CWD</span>
                         <span class="text-[#F4DEAC] font-normal">Real Estate Agent &amp; Developer</span>
                     </h2>
 
-                    <h1 class="text-white text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-10">
+                    <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-10">
                         Your Trusted Property Management &amp; Hospitality Partner in Cambodia
                     </h1>
 
-                    <div class="flex items-center gap-4 pointer-events-auto">
+                    <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
                         <a href="{{ url('/properties') }}"
                             class="border-[2px] border-[#F4DEAC] text-white text-[15px] font-medium px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
                             Browse Properties
@@ -42,12 +42,13 @@
 
 
     {{-- About / Realty & Hospitality section --}}
-    <section class="pl-0 sm:pl-[5rem] relative  z-[300] mt-[1rem] sm:mt-[2rem] md:mt-[2.3rem] lg:mt-[4rem] bg-[#2A5A8A]">
+    <section
+        class="px-0 sm:px-[5rem] md:px-[3rem] relative z-[300] mt-[1rem] sm:mt-[2rem] md:mt-[2.3rem] lg:mt-[4rem] bg-[#2A5A8A]">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
             <div class="max-w-[750px]">
                 <h2 class="text-[clamp(22px,3vw,28px)] font-bold mb-6">
                     <span class="text-[#F4DEAC]">CWD</span>
-                    <span class="text-white font-normal">Realty &amp; Hospitality</span>
+                    <span class="text-[#F4DEAC] font-normal">Realty &amp; Hospitality</span>
                 </h2>
 
                 <p class="text-white text-[15px] leading-relaxed">
@@ -61,9 +62,9 @@
 
 
     {{-- Who We Are section --}}
-    <section class="relative pl-0 sm:pl-[5rem] z-[300] bg-white">
+    <section class="relative px-0 sm:px-[5rem] md:px-[3rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class=" max-w-[750px]">
+            <div class="max-w-[750px]">
                 <h2 class="text-[clamp(28px,4vw,40px)] mb-6">
                     <span class="text-[#2A5A8A] font-normal">Who</span>
                     <span class="text-[#2A5A8A] font-bold">We Are</span>
@@ -83,7 +84,7 @@
         </div>
     </section>
 
-
+    {{-- our services --}}
     @php
         $services = [
             [
@@ -120,7 +121,7 @@
     @endphp
 
     {{-- our services --}}
-    <section class="relative z-[300] pl-0 sm:pl-[5rem] bg-none overflow-hidden">
+    <section class="relative z-[300] px-0 sm:px-[5rem] md:px-[3rem] bg-none ">
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10 pt-16 pb-0 sm:pt-20">
 
             {{-- Heading --}}
@@ -130,35 +131,31 @@
             </h2>
 
             {{-- Composition wrapper: image + dark block + cards --}}
-            <div class="relative min-h-[420px] sm:min-h-[520px] lg:min-h-[600px]">
+            <div
+                class="relative flex flex-col min-[1220px]:flex-row min-[1220px]:items-start min-h-[420px] sm:min-h-[520px]">
 
                 {{-- Property image (right side on desktop, full width on mobile) --}}
-                <div class="flex flex-col items-end w-full lg:absolute lg:right-0 lg:top-0 lg:w-[51%] lg:z-[20]">
+                <div
+                    class="flex flex-col items-end w-full min-[1220px]:w-[850px] min-[1220px]:order-2 min-[1220px]:-mt-[7.5rem]">
 
-                    <div class="w-full h-[260px] sm:h-[340px] lg:h-[600px]">
+                    <div class="w-full h-[460px] sm:h-[640px] overflow-hidden">
                         <img src="{{ asset('home/our_services/our_services.png') }}"
                             alt="CWD Realty modern residential condominium tower in Phnom Penh"
                             class="w-full h-full object-cover">
                     </div>
 
                     {{-- Gold accent bar --}}
-                    <div
-                        class="self-start w-[81%] h-[15px]
-                    bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
+                    <div class="self-start w-[81%] h-[15px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
                     </div>
 
                 </div>
 
                 {{-- Service cards grid --}}
                 <div
-                    class="relative lg:absolute lg:left-0 lg:top-[18%] lg:w-[54%] z-[30]
-                -mt-16 sm:-mt-20 lg:mt-0
-                grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-2.5
-                px-4 sm:px-0">
-
+                    class="relative w-full min-[1220px]:w-[54%] min-[1220px]:order-1 min-[1220px]:z-[30] min-[1220px]:-mr-[80px] min-[1220px]:mt-[68px] -mt-16 sm:-mt-20 min-[1220px]:mt-0 grid grid-cols-1 min-[770px]:grid-cols-2 gap-2 sm:gap-2.5 px-4 sm:px-0">
                     @foreach ($services as $service)
                         <div
-                            class="bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col justify-between min-h-[150px] lg:min-h-[145px]">
+                            class="service-card bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col min-h-[150px] min-[1220px]:min-h-[145px]">
                             <div class="flex items-start justify-between gap-2">
                                 <h3 class="text-[#F4DEAC] text-[16px] sm:text-[18px] font-bold leading-snug">
                                     {{ $service['title'] }}
@@ -168,18 +165,33 @@
                                 </span>
                             </div>
 
-                            <p class="text-white/90 text-[12px] sm:text-[13px] leading-relaxed mt-3">
+                            <p class="text-white/90 text-[15px] sm:text-[16px] leading-relaxed mt-3">
                                 {{ $service['description'] }}
                             </p>
 
                             <a href="{{ $service['link'] }}"
-                                class="text-[#F4DEAC] text-[11px] sm:text-[13px] font-medium mt-4 inline-flex items-center gap-1 hover:underline">
+                                class="text-[#F4DEAC] text-[11px] sm:text-[13px] font-medium mt-4 pt-4 inline-flex items-center gap-1 hover:underline mt-auto">
                                 {{ $service['linkText'] }} <span aria-hidden="true">→</span>
                             </a>
                         </div>
                     @endforeach
-
                 </div>
+
+                <script>
+                    function equalizeCardHeights() {
+                        const cards = document.querySelectorAll('.service-card');
+                        if (!cards.length) return;
+                        cards.forEach(card => card.style.minHeight = '');
+                        let maxHeight = 0;
+                        cards.forEach(card => {
+                            maxHeight = Math.max(maxHeight, card.offsetHeight);
+                        });
+                        cards.forEach(card => card.style.minHeight = `${maxHeight}px`);
+                    }
+
+                    window.addEventListener('load', equalizeCardHeights);
+                    window.addEventListener('resize', equalizeCardHeights);
+                </script>
 
             </div>
 
@@ -211,7 +223,7 @@
         <style>
             .cwd-marquee-track {
                 width: max-content;
-                animation: cwd-marquee 25s linear infinite;
+                animation: cwd-marquee 45s linear infinite;
             }
 
             /* Pause on hover, if wanted */
@@ -221,11 +233,11 @@
 
             @keyframes cwd-marquee {
                 from {
-                    transform: translateX(0);
+                    transform: translateX(-50%);
                 }
 
                 to {
-                    transform: translateX(-50%);
+                    transform: translateX(0);
                 }
             }
         </style>
@@ -237,237 +249,7 @@
     {{-- Featured Properties: background image layer + card content layer, cards can extend above image's top edge --}}
     <x-properties.featured_properties />
 
-    @php
-        $properties = [
-            [
-                'image' => asset('home/latest_activities/1img.png'),
-                'title' => 'Wealth Mansion',
-                'description' =>
-                    'Premium condominium development offering modern residential units with excellent city access.',
-                'link' => url('/properties/wealth-mansion'),
-            ],
-            [
-                'image' => asset('home/latest_activities/2img.png'),
-                'title' => 'Private Residential Collection',
-                'description' =>
-                    'Professionally managed condominium units including premium residences and penthouses.',
-                'link' => url('/properties/private-residential-collection'),
-            ],
-            [
-                'image' => asset('home/latest_activities/3img.png'),
-                'title' => 'UC88 Residence',
-                'description' =>
-                    "Comfortable condominium living with convenient access to Phnom Penh's business districts.",
-                'link' => url('/properties/uc88-residence'),
-            ],
 
-            [
-                'image' => asset('home/latest_activities/1img.png'),
-                'title' => 'Wealth Mansion',
-                'description' =>
-                    'Premium condominium development offering modern residential units with excellent city access.',
-                'link' => url('/properties/wealth-mansion'),
-            ],
-            [
-                'image' => asset('home/latest_activities/2img.png'),
-                'title' => 'Private Residential Collection',
-                'description' =>
-                    'Professionally managed condominium units including premium residences and penthouses.',
-                'link' => url('/properties/private-residential-collection'),
-            ],
-        ];
-    @endphp
-
-    <section class="relative w-full min-h-[620px] sm:min-h-[680px] md:min-h-[760px] lg:min-h-[820px]">
-
-        {{-- Background image layer: absolute, fills section, behind everything --}}
-        <div class="absolute inset-0 z-0">
-            <img src="{{ asset('home/feature_properties/feature_properties.png') }}" alt="CWD Realty featured properties"
-                class="w-full h-full object-cover object-right">
-        </div>
-
-        {{-- Main content layer: sits above the image --}}
-        <div class="relative z-10 max-w-[1400px] ml-0 mr-auto lg:-ml-[186px] xl:-ml-[204px]">
-
-            {{-- Mobile/tablet heading + arrows --}}
-            <div
-                class="flex lg:hidden items-center justify-between absolute inset-x-0 top-0 px-4 sm:px-6 pt-8 pb-6 sm:pb-10 z-10">
-                <h2 class="text-white text-[clamp(20px,3vw,30px)] leading-tight">
-                    <span class="font-normal block">Featured</span>
-                    <span class="font-bold block">Properties</span>
-                </h2>
-                <div class="flex items-center gap-3">
-                    <button id="cwd-prop-prev-mobile" type="button" aria-label="Previous property"
-                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button id="cwd-prop-next-mobile" type="button" aria-label="Next property"
-                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            {{-- Cards layer --}}
-            <div
-                class="relative z-20 pt-24 sm:pt-28 lg:pt-[2vw] lg:-translate-y-[clamp(60px,9vw,140px)] pointer-events-none">
-                <div id="cwd-prop-track"
-                    class="cwd-prop-track-fade pointer-events-auto flex gap-5 overflow-x-auto scroll-smooth pl-4 sm:pl-6 pr-4 sm:pr-6 lg:pr-[320px] pb-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-
-                    @foreach ($properties as $property)
-                        <article
-                            class="cwd-prop-card shrink-0 snap-start w-[260px] sm:w-[280px] bg-white shadow-sm cursor-pointer">
-
-                            <div class="h-[170px] w-full overflow-hidden">
-                                <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
-                                    class="w-full h-full object-cover">
-                            </div>
-
-                            <div class="px-5 py-5">
-                                <h3 class="text-black text-[15px] font-bold mb-2 leading-snug">
-                                    {{ $property['title'] }}
-                                </h3>
-                                <p class="text-black/70 text-[12.5px] leading-relaxed mb-4">
-                                    {{ $property['description'] }}
-                                </p>
-                                <a href="{{ $property['link'] }}"
-                                    class="text-[#2A5A8A] text-[12px] font-semibold inline-flex items-center gap-1 hover:underline">
-                                    View Property <span aria-hidden="true">→</span>
-                                </a>
-                            </div>
-                        </article>
-                    @endforeach
-
-                </div>
-            </div>
-
-            {{-- Featured Properties heading + navigation --}}
-            <div
-                class="hidden lg:flex flex-col items-start justify-start gap-10 w-[300px] absolute right-0 top-0 px-10 py-8 z-30">
-                <div class="flex items-center gap-3">
-                    <button id="cwd-prop-prev" type="button" aria-label="Previous property"
-                        class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center cursor-pointer hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button id="cwd-prop-next" type="button" aria-label="Next property"
-                        class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center cursor-pointer hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-
-                <h2 class="text-white -z-1 text-[clamp(24px,2.4vw,34px)] leading-tight">
-                    <span class="font-normal block">Featured</span>
-                    <span class="font-bold block">Properties</span>
-                </h2>
-            </div>
-
-            <div class="h-10 sm:h-14 lg:h-24"></div>
-
-        </div>
-
-    </section>
-
-    <style>
-        @media (min-width: 1024px) {
-            .cwd-prop-track-fade {
-                -webkit-mask-image: linear-gradient(to right,
-                        transparent 0%,
-                        black 40px,
-                        black calc(100% - 320px),
-                        transparent 100%);
-                mask-image: linear-gradient(to right,
-                        transparent 0%,
-                        black 40px,
-                        black calc(100% - 320px),
-                        transparent 100%);
-            }
-        }
-    </style>
-
-    <script>
-        (function() {
-            const track = document.getElementById("cwd-prop-track");
-            const prevBtn = document.getElementById("cwd-prop-prev");
-            const nextBtn = document.getElementById("cwd-prop-next");
-            const prevBtnMobile = document.getElementById("cwd-prop-prev-mobile");
-            const nextBtnMobile = document.getElementById("cwd-prop-next-mobile");
-
-            if (!track) return;
-
-            const cards = Array.from(track.querySelectorAll(".cwd-prop-card"));
-            if (!cards.length) return;
-
-            let currentIndex = 0;
-            const totalCards = cards.length;
-            let scrollTimer = null;
-
-            function goToCard(index) {
-                if (index < 0 || index >= totalCards) return;
-                currentIndex = index;
-                const card = cards[currentIndex];
-                card.scrollIntoView({
-                    behavior: "smooth",
-                    block: "nearest",
-                    inline: "start"
-                });
-            }
-
-            function setButtons(atStart, atEnd) {
-                [prevBtn, prevBtnMobile].forEach(btn => {
-                    if (!btn) return;
-                    btn.style.opacity = atStart ? "0.25" : "1";
-                    btn.style.pointerEvents = atStart ? "none" : "auto";
-                });
-                [nextBtn, nextBtnMobile].forEach(btn => {
-                    if (!btn) return;
-                    btn.style.opacity = atEnd ? "0.25" : "1";
-                    btn.style.pointerEvents = atEnd ? "none" : "auto";
-                });
-            }
-
-            function updateButtons() {
-                setButtons(currentIndex <= 0, currentIndex >= totalCards - 1);
-            }
-
-            track.addEventListener("scroll", () => {
-                clearTimeout(scrollTimer);
-                scrollTimer = setTimeout(updateButtons, 150);
-            }, {
-                passive: true
-            });
-
-            if (prevBtn) prevBtn.addEventListener("click", () => goToCard(currentIndex - 1));
-            if (nextBtn) nextBtn.addEventListener("click", () => goToCard(currentIndex + 1));
-            if (prevBtnMobile) prevBtnMobile.addEventListener("click", () => goToCard(currentIndex - 1));
-            if (nextBtnMobile) nextBtnMobile.addEventListener("click", () => goToCard(currentIndex + 1));
-
-            track.addEventListener("click", (e) => {
-                const card = e.target.closest(".cwd-prop-card");
-                if (!card || e.target.closest("a")) return;
-                const idx = cards.indexOf(card);
-                if (idx !== -1) goToCard(idx);
-            });
-
-            document.addEventListener("keydown", (e) => {
-                if (e.key === "ArrowLeft") goToCard(currentIndex - 1);
-                if (e.key === "ArrowRight") goToCard(currentIndex + 1);
-            });
-
-            updateButtons();
-        })();
-    </script>
 
 
     @php
@@ -498,9 +280,32 @@
         ];
     @endphp
 
+    {{-- Who We Are section --}}
+    <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
+        <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
+            <div class="max-w-[750px]">
+                <h2 class="text-[clamp(28px,4vw,40px)] mb-6">
+                    <span class="text-[#2A5A8A] font-normal">Who</span>
+                    <span class="text-[#2A5A8A] font-bold">We Are</span>
+                </h2>
+
+                <h3 class="text-black text-[clamp(20px,2.5vw,26px)] font-semibold leading-tight mb-6">
+                    Professional Property &amp; Hospitality Solutions
+                </h3>
+
+                <p class="text-black text-[15px] leading-relaxed">
+                    CWD Realty &amp; Hospitality manages residential condominium properties while providing flexible rental
+                    options for travelers, expatriates, business professionals, and long-term residents. Our experienced
+                    multilingual team helps property owners maximize rental income while ensuring guests enjoy a comfortable
+                    stay.
+                </p>
+            </div>
+        </div>
+    </section>
+
     {{-- Why Choose CWD Realty & Hospitality --}}
-    <section class="relative bg-white">
-        <div class="max-w-[1400px] mx-auto px-6 sm:px-10 py-16 sm:py-20">
+    <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
+        <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
 
             {{-- Heading --}}
             <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
