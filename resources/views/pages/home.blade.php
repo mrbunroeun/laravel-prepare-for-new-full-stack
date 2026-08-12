@@ -397,92 +397,68 @@
 
 <script>
     (function() {
-        const track = document.getElementById('cwd-prop-track');
-        const prevBtns = [document.getElementById('cwd-prop-prev'), document.getElementById('cwd-prop-prev-mobile')]
-            .filter(Boolean);
-        const nextBtns = [document.getElementById('cwd-prop-next'), document.getElementById('cwd-prop-next-mobile')]
-            .filter(Boolean);
-
-        console.log('[carousel] track found:', !!track, 'prevBtns:', prevBtns.length, 'nextBtns:', nextBtns.length);
+        const track = document.getElementById("cwd-prop-track");
+        const prevBtn = document.getElementById("cwd-prop-prev");
+        const nextBtn = document.getElementById("cwd-prop-next");
+        const prevBtnMobile = document.getElementById("cwd-prop-prev-mobile");
+        const nextBtnMobile = document.getElementById("cwd-prop-next-mobile");
 
         if (!track) return;
 
-        const cards = Array.from(track.querySelectorAll('.cwd-prop-card'));
-        console.log('[carousel] cards found:', cards.length);
+        const cards = Array.from(track.querySelectorAll(".cwd-prop-card"));
         if (!cards.length) return;
 
-        function getMaxScroll() {
-            return Math.max(0, track.scrollWidth - track.clientWidth);
+        let currentIndex = 0;
+        const totalCards = cards.length;
+        let scrollTimer = null;
+
+        function goToCard(index) {
+            if (index < 0 || index >= totalCards) return;
+            currentIndex = index;
+            const card = cards[currentIndex];
+            card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
         }
 
-        function getCardPositions() {
-            const trackRect = track.getBoundingClientRect();
-            return cards.map(card => {
-                const cardRect = card.getBoundingClientRect();
-                return (cardRect.left - trackRect.left) + track.scrollLeft;
+        function setButtons(atStart, atEnd) {
+            [prevBtn, prevBtnMobile].forEach(btn => {
+                if (!btn) return;
+                btn.style.opacity = atStart ? "0.25" : "1";
+                btn.style.pointerEvents = atStart ? "none" : "auto";
             });
-        }
-
-        function getCurrentIndex() {
-            const positions = getCardPositions();
-            let closest = 0;
-            let closestDiff = Infinity;
-            positions.forEach((pos, i) => {
-                const diff = Math.abs(pos - track.scrollLeft);
-                if (diff < closestDiff) {
-                    closestDiff = diff;
-                    closest = i;
-                }
-            });
-            return closest;
-        }
-
-        function scrollToIndex(index) {
-            const positions = getCardPositions();
-            const maxScroll = getMaxScroll();
-            const clampedIndex = Math.max(0, Math.min(index, positions.length - 1));
-            const target = Math.max(0, Math.min(positions[clampedIndex], maxScroll));
-            console.log('[carousel] scrollToIndex', index, '-> clamped', clampedIndex, 'target', target, 'currentScrollLeft', track.scrollLeft);
-            track.scrollTo({
-                left: target,
-                behavior: 'smooth'
+            [nextBtn, nextBtnMobile].forEach(btn => {
+                if (!btn) return;
+                btn.style.opacity = atEnd ? "0.25" : "1";
+                btn.style.pointerEvents = atEnd ? "none" : "auto";
             });
         }
 
         function updateButtons() {
-            const maxScroll = getMaxScroll();
-            const tolerance = 4;
-            const atStart = track.scrollLeft <= tolerance;
-            const atEnd = track.scrollLeft >= maxScroll - tolerance;
-
-            prevBtns.forEach(btn => btn.classList.toggle('opacity-40', atStart));
-            nextBtns.forEach(btn => btn.classList.toggle('opacity-40', atEnd));
+            setButtons(currentIndex <= 0, currentIndex >= totalCards - 1);
         }
 
-        prevBtns.forEach(btn => btn.addEventListener('click', function() {
-            console.log('[carousel] PREV clicked');
-            const current = getCurrentIndex();
-            scrollToIndex(current - 1);
-        }));
+        track.addEventListener("scroll", () => {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(updateButtons, 150);
+        }, { passive: true });
 
-        nextBtns.forEach(btn => btn.addEventListener('click', function() {
-            console.log('[carousel] NEXT clicked');
-            const current = getCurrentIndex();
-            scrollToIndex(current + 1);
-        }));
+        if (prevBtn) prevBtn.addEventListener("click", () => goToCard(currentIndex - 1));
+        if (nextBtn) nextBtn.addEventListener("click", () => goToCard(currentIndex + 1));
+        if (prevBtnMobile) prevBtnMobile.addEventListener("click", () => goToCard(currentIndex - 1));
+        if (nextBtnMobile) nextBtnMobile.addEventListener("click", () => goToCard(currentIndex + 1));
 
-        track.addEventListener('scroll', updateButtons, {
-            passive: true
+        track.addEventListener("click", (e) => {
+            const card = e.target.closest(".cwd-prop-card");
+            if (!card || e.target.closest("a")) return;
+            const idx = cards.indexOf(card);
+            if (idx !== -1) goToCard(idx);
         });
-        window.addEventListener('resize', updateButtons);
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft") goToCard(currentIndex - 1);
+            if (e.key === "ArrowRight") goToCard(currentIndex + 1);
+        });
+
         updateButtons();
-
-        cards.forEach(function(card, i) {
-            card.addEventListener('click', function(e) {
-                if (e.target.closest('a')) return;
-                scrollToIndex(i);
-            });
-        });
     })();
 </script>
 
