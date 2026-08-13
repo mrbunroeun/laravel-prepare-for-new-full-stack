@@ -41,7 +41,7 @@
     </section>
 
 
-    {{-- About / Realty & Hospitality section --}}
+    {{-- CWD Realty & Hospitality --}}
     <section
         class="px-0 sm:px-[5rem] md:px-[3rem] relative z-[300] mt-[1rem] sm:mt-[2rem] md:mt-[2.3rem] lg:mt-[4rem] bg-[#2A5A8A]">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
@@ -125,7 +125,7 @@
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10 pt-16 pb-0 sm:pt-20">
 
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,36px)] mb-10 sm:mb-1 relative ">
+            <h2 class="text-[clamp(28px,4vw,36px)] min-[1200px]:mb-[7rem] mb-[2rem] mb-[clamp(2rem,5vw,5rem)] relative">
                 <span class="text-[#2f6ba7] font-normal">Our</span>
                 <span class="text-[#2f6ba7] font-bold">Services</span>
             </h2>
@@ -427,9 +427,8 @@
     @endphp
 
     {{-- Frequently Asked Questions --}}
-    <section class="relative bg-none">
-        <div class="max-w-[1400px] mx-auto px-6 sm:px-10 py-16 sm:py-20">
-
+    <section class="relative px-0 sm:px-[5rem] bg-[#e5e4e4]">
+        <div class="max-w-[1400px] mx-auto px-6 py-16 sm:py-20">
             {{-- Heading --}}
             <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
                 <span class="text-[#2A5A8A] font-normal block">Frequently</span>
@@ -576,10 +575,10 @@
     @endphp
 
     {{-- Latest Activities --}}
-    <section class="bg-none">
+    <section class="bg-none  ">
         <div class="max-w-[1500px] mx-auto px-6 sm:px-10 pt-16 sm:pt-20">
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+            <h2 class="text-[clamp(28px,4vw,40px)] px-0 sm:px-[5rem] leading-tight mb-10 sm:mb-12">
                 <span class="text-[#2A5A8A] font-normal block">Latest <strong>Activities</strong></span>
             </h2>
         </div>
