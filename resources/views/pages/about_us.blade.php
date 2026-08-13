@@ -107,7 +107,8 @@
                     {{-- two stacked blocks with gap --}}
                     <div class="flex flex-col gap-y-3 lg:gap-y-4">
                         <img src="{{ asset('about_us/our_story/top_one.png') }}" class="bg-none w-full max-h-[400px]"></img>
-                        <img src="{{ asset('about_us/our_story/bottom_one.png') }}" class="bg-none w-full max-h-[400px]"></img>
+                        <img src="{{ asset('about_us/our_story/bottom_one.png') }}"
+                            class="bg-none w-full max-h-[400px]"></img>
                     </div>
 
                 </div>
@@ -123,14 +124,14 @@
                         <div class="bg-[#163049]/85 w-full mix-blend-multiply">
                             <div class="py-10">
                                 <h2
-                                    class="flex px-10 sm:px-10 items-center gap-4 text-[clamp(30px,3vw,50px)]  font-bold mb-6">
+                                    class="flex px-3 sm:px-10 items-center gap-4 text-[clamp(30px,3vw,50px)]  font-bold mb-6">
                                     <span class="text-[#F4DEAC] font-normal">Our </span>
                                     <span class="text-[#F4DEAC]">Story</span>
                                 </h2>
-                                <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold  mb-10">
+                                <h1 class="text-white px-3 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold  mb-10">
                                     Building Trust Through Commitment and Personal Relationships
                                 </h1>
-                                <div class="px-10 flex flex-col gap-5 sm:px-10 text-[clamp(15px,3vw,15px)] mb-10">
+                                <div class="px-3 flex flex-col gap-5 sm:px-10 text-[clamp(15px,3vw,15px)] mb-10">
                                     <p class="text-white  ">
                                         CWD Realty & Hospitality was founded with a clear vision—to create a professional
                                         property management and hospitality company built on trust, integrity, and long-term
@@ -219,8 +220,9 @@
     </section>
 
 
-{{-- Vision, Mission and Core Values --}}
-    <section class="relative mt-[5rem] sm:mt-[10rem] w-full min-h-[1093px] bg-cover bg-center"
+    {{-- Vision, Mission and Core Values --}}
+    <section
+        class="relative px-0 sm:px-[5rem] md:px-[3rem] mt-[5rem] sm:mt-[10rem] w-full min-h-[1093px] bg-cover bg-center"
         style="background-image: url('{{ asset('about_us/bg/bg_img_blue.png') }}');">
         <div class="max-w-[1400px] mx-auto px-6 py-16">
 
@@ -239,7 +241,10 @@
                     </p>
 
                     <div class="card-text mb-6">
-                        <p class="card-text-p text-black text-[18px] leading-relaxed pb-1 line-clamp-2">To become one of Cambodia's most trusted property management and hospitality companies by delivering professional services, creating long-term value for property owners, and supporting the sustainable growth of Cambodia's real estate sector.</p>
+                        <p class="card-text-p text-black text-[18px] leading-relaxed pb-1 line-clamp-2">To become one of
+                            Cambodia's most trusted property management and hospitality companies by delivering professional
+                            services, creating long-term value for property owners, and supporting the sustainable growth of
+                            Cambodia's real estate sector.</p>
                     </div>
 
                     <button type="button"
@@ -257,7 +262,9 @@
                     </div>
 
                     <div class="card-text mb-6">
-                        <p class="card-text-p text-black text-[18px] leading-relaxed pb-1 line-clamp-2">Our mission is to provide professional property management, leasing, and hospitality solutions that benefit both property owners and guests.</p>
+                        <p class="card-text-p text-black text-[18px] leading-relaxed pb-1 line-clamp-2">Our mission is to
+                            provide professional property management, leasing, and hospitality solutions that benefit both
+                            property owners and guests.</p>
                     </div>
 
                     <button type="button"
@@ -271,13 +278,15 @@
                 <div class="info-card bg-[#f3f6f8] p-8 flex flex-col min-h-[360px]">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-[#2A5A8A] text-[28px] font-bold">Core Values</h3>
-                        <img src="{{ asset('about_us/icons/core_value.svg') }}" alt="Core Values" class="w-8 h-8 text-[#2A5A8A]">
+                        <img src="{{ asset('about_us/icons/core_value.svg') }}" alt="Core Values"
+                            class="w-8 h-8 text-[#2A5A8A]">
                     </div>
 
                     <p class="text-black text-[18px] font-semibold mb-2">Integrity</p>
 
                     <div class="card-text mb-6">
-                        <p class="card-text-p text-black text-[18px] leading-relaxed pb-1 line-clamp-2">We conduct every business relationship with honesty, transparency, and professionalism.</p>
+                        <p class="card-text-p text-black text-[18px] leading-relaxed pb-1 line-clamp-2">We conduct every
+                            business relationship with honesty, transparency, and professionalism.</p>
                     </div>
 
                     <button type="button"
@@ -349,19 +358,544 @@
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.card-btn').forEach(function (btn) {
-                btn.addEventListener('click', function () {
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.card-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
                     const card = btn.closest('.info-card');
                     const text = card.querySelector('.card-text');
                     const paragraph = card.querySelector('.card-text-p');
                     const isOpen = text.classList.toggle('open');
                     paragraph.classList.toggle('line-clamp-2', !isOpen);
-                    btn.innerHTML = isOpen
-                        ? 'See Less <span aria-hidden="true">&uarr;</span>'
-                        : 'See More <span aria-hidden="true">&rarr;</span>';
+                    btn.innerHTML = isOpen ?
+                        'See Less <span aria-hidden="true">&uarr;</span>' :
+                        'See More <span aria-hidden="true">&rarr;</span>';
                 });
             });
         });
     </script>
+
+
+    @php
+        $whyChooseFeatures = [
+            [
+                'title' => 'Condominium Specialists',
+                'description' => 'We specialize in managing condominium and residential investment properties.',
+            ],
+            [
+                'title' => 'Multilingual Communication',
+                'description' =>
+                    'Our team communicates effectively with local and international clients, ensuring a seamless experience for property owners, tenants, and guests.',
+            ],
+            [
+                'title' => 'Professional Property Management',
+                'description' =>
+                    'We handle the operational details so property owners can enjoy peace of mind and stronger rental performance.',
+            ],
+            [
+                'title' => 'Hospitality-Focused Service',
+                'description' =>
+                    'We combine professional property management with personalized guest services to create memorable experiences.',
+            ],
+            [
+                'title' => 'Trusted Local Expertise',
+                'description' =>
+                    "With knowledge of Cambodia's property market and hospitality industry, we provide practical solutions tailored to each client's needs.",
+            ],
+        ];
+    @endphp
+
+
+    {{-- Why Choose CWD Realty & Hospitality --}}
+    <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
+        <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
+
+            {{-- Heading --}}
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+                <span class="text-[#2A5A8A] font-normal block">Why Choose</span>
+                <span class="text-[#2A5A8A] font-bold block">CWD Realty &amp; Hospitality?</span>
+            </h2>
+
+            {{-- Cards grid --}}
+            <div id="why-choose-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 items-stretch">
+                @foreach ($whyChooseFeatures as $index => $feature)
+                    <div @class([
+                        'why-choose-card h-full flex flex-col border-[2px] border-[#2A5A8A] px-6 py-6',
+                        'lg:col-span-2' => $index < 3,
+                        'lg:col-span-2 lg:col-start-2' => $index === 3,
+                        'sm:col-span-2 sm:max-w-[calc(50%-12px)] sm:mx-auto lg:col-span-2 lg:col-start-4 lg:max-w-none lg:mx-0' =>
+                            $index === 4,
+                    ])>
+                        <h3 class="text-[#2A5A8A] text-[14px] sm:text-[15px] font-bold mb-3 leading-snug">
+                            {{ $feature['title'] }}
+                        </h3>
+                        <p class="text-black text-[13px] sm:text-[13.5px] leading-relaxed">
+                            {{ $feature['description'] }}
+                        </p>
+                    </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+
+
+    {{-- Business License & Credentials --}}
+    <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
+        <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
+
+                {{-- LEFT: text content --}}
+                <div class="flex flex-col justify-center">
+                    <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-8">
+                        <span class="text-[#2A5A8A] font-normal block">Business License &amp;</span>
+                        <span class="text-[#2A5A8A] font-bold block">Credentials</span>
+                    </h2>
+
+                    <h3 class="text-black text-[clamp(20px,2.5vw,26px)] font-bold mb-6">
+                        Licensed. Trusted. Professional.
+                    </h3>
+
+                    <p class="text-black text-[18px] leading-relaxed mb-6">
+                        CWD Realty &amp; Hospitality operates as a legally registered business in Cambodia, conducting our services with professionalism, transparency, and compliance with local regulations.
+                    </p>
+
+                    <p class="text-black text-[18px] leading-relaxed">
+                        Our commitment to ethical business practices provides confidence to property owners, investors, business partners, and guests who choose to work with us.
+                    </p>
+                </div>
+
+                {{-- RIGHT: stats panel --}}
+                <div class="relative bg-[#1479B9] px-8 py-10 sm:px-10 sm:py-12 flex flex-col justify-between min-h-[420px] overflow-hidden">
+
+                    <div class="flex flex-col gap-8">
+
+                        <div>
+                            <p class="text-white text-[18px] max-w-[230px] leading-relaxed">Memberships in professional associations:</p>
+                        </div>
+
+                        <div>
+                            <p class="text-white text-[18px] leading-relaxed">Years of Experience:</p>
+                            <p class="text-white text-[18px] leading-relaxed ">8 Years+ Experience</p>
+                            <p class="text-white text-[18px] leading-relaxed">Number of Managed Properties:</p>
+                        </div>
+
+                        <div>
+                            <p class="text-white text-[18px] leading-relaxed">Occupancy Rate:</p>
+                        </div>
+
+                        <div>
+                            <p class="text-white text-[18px] leading-relaxed">Number of Happy Guests or Clients:</p>
+                        </div>
+
+                    </div>
+
+                    {{-- Placeholder mark for TBD stats --}}
+                    <span class="absolute bottom-4 right-6 text-black text-[80px] sm:text-[100px] font-bold leading-none select-none pointer-events-none">
+                        ?
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+    {{-- Three-column image placeholders --}}
+    <section class="relative bg-white">
+        <div class="max-w-[1400px] mx-auto px-6 py-16">
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
+
+                <div class="bg-[#d9d9d9] w-full aspect-square"></div>
+                <div class="bg-[#d9d9d9] w-full aspect-square"></div>
+                <div class="bg-[#d9d9d9] w-full aspect-square"></div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+    
+    {{-- Frequently Asked Questions --}}
+    @php
+        $faqLeft = [
+            [
+                'question' => 'What services does CWD Realty & Hospitality provide?',
+                'answer' =>
+                    'We provide property management, residential leasing, property sales, daily and long-term rentals, and hospitality services for property owners, investors, and guests.',
+            ],
+            [
+                'question' => 'Who are your typical clients?',
+                'answer' =>
+                    'Rates vary depending on property, unit type, and length of stay. Contact our team for current pricing and availability.',
+            ],
+            
+        ];
+
+        $faqRight = [
+            [
+                'question' => 'Why choose CWD Realty & Hospitality?',
+                'answer' =>
+                    'Pet policies vary by property. Please contact us before booking to confirm whether your property allows pets.',
+            ],
+        ];
+    @endphp
+
+    {{-- Frequently Asked Questions --}}
+    <section class="relative px-0 sm:px-[5rem] bg-[#e5e4e4]">
+        <div class="max-w-[1400px] mx-auto px-6 py-16 sm:py-20">
+            {{-- Heading --}}
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+                <span class="text-[#2A5A8A] font-normal block">Frequently</span>
+                <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
+            </h2>
+
+            {{-- Two-column accordion --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start">
+
+                {{-- Left column --}}
+                <div class="faq-column flex flex-col gap-2">
+                    @foreach ($faqLeft as $index => $faq)
+                        <div class="faq-item bg-[#f3f3f3]">
+                            <button type="button"
+                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
+                                aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
+                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
+                                    {{ $faq['question'] }}
+                                </span>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200 {{ $index === 0 ? 'rotate-90' : '' }}"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M6 4l8 6-8 6V4z" />
+                                </svg>
+                            </button>
+                            <div
+                                class="faq-panel overflow-hidden transition-all duration-300 {{ $index === 0 ? 'max-h-[300px]' : 'max-h-0' }}">
+                                <div class="{{ $index === 0 ? 'bg-[#1479B9]' : 'bg-white' }} px-5 py-4 sm:px-6 sm:py-5">
+                                    <p
+                                        class="{{ $index === 0 ? 'text-white' : 'text-black/70' }} text-[13px] sm:text-[13.5px] leading-relaxed">
+                                        {{ $faq['answer'] }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- Right column --}}
+                <div class="faq-column flex flex-col gap-2">
+                    @foreach ($faqRight as $faq)
+                        <div class="faq-item bg-[#f3f3f3]">
+                            <button type="button"
+                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
+                                aria-expanded="false">
+                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
+                                    {{ $faq['question'] }}
+                                </span>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M6 4l8 6-8 6V4z" />
+                                </svg>
+                            </button>
+                            <div class="faq-panel overflow-hidden transition-all duration-300 max-h-0">
+                                <div class="bg-white px-5 py-4 sm:px-6 sm:py-5">
+                                    <p class="text-black/70 text-[13px] sm:text-[13.5px] leading-relaxed">
+                                        {{ $faq['answer'] }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        (function() {
+            document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const item = btn.closest('.faq-item');
+                    const panel = item.querySelector('.faq-panel');
+                    const answerBox = panel.querySelector('div');
+                    const answerText = answerBox.querySelector('p');
+                    const arrow = btn.querySelector('.faq-arrow');
+                    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+                    if (isOpen) {
+                        // Close this item
+                        panel.style.maxHeight = '0px';
+                        btn.setAttribute('aria-expanded', 'false');
+                        arrow.classList.remove('rotate-90');
+                        answerBox.classList.remove('bg-[#1479B9]');
+                        answerBox.classList.add('bg-white');
+                        answerText.classList.remove('text-white');
+                        answerText.classList.add('text-black/70');
+                    } else {
+                        // Open this item
+                        panel.style.maxHeight = panel.scrollHeight + 'px';
+                        btn.setAttribute('aria-expanded', 'true');
+                        arrow.classList.add('rotate-90');
+                        answerBox.classList.add('bg-[#1479B9]');
+                        answerBox.classList.remove('bg-white');
+                        answerText.classList.add('text-white');
+                        answerText.classList.remove('text-black/70');
+                    }
+                });
+            });
+        })();
+    </script>
+
+
+
+
+      @php
+        $testimonials = [
+            [
+                'name' => 'Lorem Name',
+                'rating' => 4,
+                'text' =>
+                    'CWD Realty & Hospitality manages residential condominium properties while providing flexible rental options for travelers, expatriates, business professionals, and long-term residents. Our experienced multilingual team helps property owners maximize rental income while ensuring guests enjoy a comfortable stay.',
+            ],
+            [
+                'name' => 'Lorem Name',
+                'rating' => 4,
+                'text' =>
+                    'CWD Realty & Hospitality manages residential condominium properties while providing flexible rental options for travelers, expatriates, business professionals, and long-term residents. Our experienced multilingual team helps property owners maximize rental income while ensuring guests enjoy a comfortable stay.',
+            ],
+            [
+                'name' => 'Lorem Name',
+                'rating' => 4,
+                'text' =>
+                    'CWD Realty & Hospitality manages residential condominium properties while providing flexible rental options for travelers, expatriates, business professionals, and long-term residents. Our experienced multilingual team helps property owners maximize rental income while ensuring guests enjoy a comfortable stay.',
+            ],
+        ];
+    @endphp
+
+    {{-- Testimonials --}}
+    <section class="bg-white">
+        <div class="max-w-[1000px] mx-auto px-6 sm:px-10 py-16 sm:py-20">
+            <div class="flex flex-col gap-8">
+
+                {{-- New testimonial input form --}}
+                <div>
+                    <div class="flex justify-end mb-2">
+                        <div id="new-rating" class="flex items-center gap-1" data-selected="0">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <button type="button" class="rating-star cursor-pointer"
+                                    data-value="{{ $i }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        class="w-5 h-5 text-[#d8d3c8] pointer-events-none" fill="currentColor">
+                                        <path
+                                            d="M12 2.5l2.9 6.06 6.6.72-4.9 4.53 1.28 6.54L12 16.98l-5.88 3.37 1.28-6.54-4.9-4.53 6.6-.72L12 2.5z" />
+                                    </svg>
+                                </button>
+                            @endfor
+                        </div>
+                    </div>
+
+                    <div class="bg-[#f5f5f5] px-6 py-6 sm:px-8 sm:py-7">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-[#d9d9d9] shrink-0"></div>
+                            <div class="flex flex-col gap-2 w-full">
+                                <input type="text" id="new-name" placeholder="Your Name"
+                                    class="text-black text-[15px] font-bold bg-transparent outline-none placeholder:text-black placeholder:font-bold w-full">
+                                <textarea id="new-text" rows="2" placeholder="Share your experience with CWD Realty & Hospitality..."
+                                    class="text-black/70 text-[13.5px] leading-relaxed bg-transparent outline-none resize-none w-full placeholder:text-black/40"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end mt-2">
+                            <button type="button" id="submit-testimonial"
+                                class="flex items-center gap-1 text-[#2A5A8A] text-[14px] font-medium cursor-pointer">
+                                Submit
+                                <span aria-hidden="true">&rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Existing testimonials --}}
+                <div id="testimonials-list" class="flex flex-col gap-8">
+                    @foreach ($testimonials as $item)
+                        <div>
+                            <div class="flex justify-end mb-2">
+                                <div class="flex items-center gap-1">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                            class="w-5 h-5 {{ $i <= $item['rating'] ? 'text-[#fec259]' : 'text-[#d8d3c8]' }}"
+                                            fill="currentColor">
+                                            <path
+                                                d="M12 2.5l2.9 6.06 6.6.72-4.9 4.53 1.28 6.54L12 16.98l-5.88 3.37 1.28-6.54-4.9-4.53 6.6-.72L12 2.5z" />
+                                        </svg>
+                                    @endfor
+                                </div>
+                            </div>
+
+                            <div class="bg-[#f5f5f5] px-6 py-6 sm:px-8 sm:py-7">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-[#d9d9d9] shrink-0"></div>
+                                    <div class="flex flex-col gap-2">
+                                        <h3 class="text-black text-[15px] font-bold">{{ $item['name'] }}</h3>
+                                        <p class="text-black/70 text-[13.5px] leading-relaxed">
+                                            {{ $item['text'] }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ratingContainer = document.getElementById('new-rating');
+            const stars = ratingContainer.querySelectorAll('.rating-star svg');
+
+            stars.forEach(function(star, index) {
+                star.parentElement.addEventListener('click', function() {
+                    const value = index + 1;
+                    ratingContainer.dataset.selected = value;
+                    stars.forEach(function(s, i) {
+                        s.classList.toggle('text-[#fec259]', i < value);
+                        s.classList.toggle('text-[#d8d3c8]', i >= value);
+                    });
+                });
+            });
+
+            document.getElementById('submit-testimonial').addEventListener('click', function() {
+                const nameInput = document.getElementById('new-name');
+                const textInput = document.getElementById('new-text');
+                const rating = parseInt(ratingContainer.dataset.selected, 10) || 0;
+
+                const name = nameInput.value.trim() || 'Anonymous';
+                const text = textInput.value.trim();
+
+                if (!text) {
+                    textInput.focus();
+                    return;
+                }
+
+                let starsHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    const colorClass = i <= rating ? 'text-[#fec259]' : 'text-[#d8d3c8]';
+                    starsHtml += `
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 ${colorClass}" fill="currentColor">
+                            <path d="M12 2.5l2.9 6.06 6.6.72-4.9 4.53 1.28 6.54L12 16.98l-5.88 3.37 1.28-6.54-4.9-4.53 6.6-.72L12 2.5z" />
+                        </svg>
+                    `;
+                }
+
+                const cardHtml = `
+                    <div>
+                        <div class="flex justify-end mb-2">
+                            <div class="flex items-center gap-1">
+                                ${starsHtml}
+                            </div>
+                        </div>
+                        <div class="bg-[#f5f5f5] px-6 py-6 sm:px-8 sm:py-7">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-[#d9d9d9] shrink-0"></div>
+                                <div class="flex flex-col gap-2">
+                                    <h3 class="text-black text-[15px] font-bold"></h3>
+                                    <p class="text-black/70 text-[13.5px] leading-relaxed"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = cardHtml.trim();
+                const newCard = wrapper.firstChild;
+
+                newCard.querySelector('h3').textContent = name;
+                newCard.querySelector('p').textContent = text;
+
+                const list = document.getElementById('testimonials-list');
+                list.insertBefore(newCard, list.firstChild);
+
+                nameInput.value = '';
+                textInput.value = '';
+                ratingContainer.dataset.selected = 0;
+                stars.forEach(function(s) {
+                    s.classList.remove('text-[#fec259]');
+                    s.classList.add('text-[#d8d3c8]');
+                });
+            });
+        });
+    </script>
+
+
+    {{-- Looking for your next stay --}}
+    <section class="relative max-w-[1600px] mx-auto">
+        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
+            <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
+                class="w-full h-auto min-h-[220px] object-cover">
+
+            <div
+                class="relative max-w-[520px] mt-6 px-6
+                        min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
+                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
+                    <span class="block min-[900px]:hidden">
+                        Looking for Your Next Stay or Property Management Partner?
+                    </span>
+                    <span class="hidden min-[900px]:block">
+                        Looking for<br>
+                        Your Next Stay or<br>
+                        Property Management<br>
+                        Partner?
+                    </span>
+                </h2>
+            </div>
+        </div>
+
+        <div
+            class="max-w-[420px] mt-4 px-6
+        min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
+            <p class="text-black/70 text-[14px]  sm:text-[15px] leading-relaxed">
+                Whether you're searching for accommodation or professional property management services, our team is ready
+                to assist you.
+            </p>
+        </div>
+    </section>
+
+
+    {{-- Professional Property --}}
+    <section class="mt-16 sm:mt-24 md:mt-32 min-[900px]:mt-[12rem]">
+        <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
+            <div
+                class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">
+
+                {{-- Left: accent line + heading --}}
+                <div class="flex items-start gap-4 max-w-[420px]">
+                    <span class="h-[2px] w-20 shrink-0 bg-[#c9a15c] mt-3"></span>
+                    <h2 class="text-[#2A5A8A] text-[16px] sm:text-[18px] font-bold leading-snug">
+                        Professional Property Management, Sales, Leasing & Hospitality Services in Cambodia.
+                    </h2>
+                </div>
+
+                {{-- Right: image --}}
+                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0">
+                    <img src="{{ asset('home/professional_property/professional_property.png') }}"
+                        alt="CWD Realty professional properties"
+                        class="w-full min-[900px]:w-[420px] h-auto min-h-[220px] object-cover">
+                </div>
+
+            </div>
+        </div>
+    </section>
 @endsection
