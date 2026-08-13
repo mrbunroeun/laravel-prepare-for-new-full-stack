@@ -93,55 +93,80 @@
 
     {{-- Two-column image grid + Hero content --}}
     <section class="relative z-[300] bg-white pointer-events-none">
-        <div class="max-w-[1400px] mx-auto px-6 py-16">
+        <div class="max-w-[1500px] mx-auto px-6 py-16">
 
-            <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-16 lg:gap-8">
+            <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-4 lg:min-h-[800px]">
 
                 {{-- LEFT: black-block grid --}}
-                <div class="grid grid-cols-2 items-start gap-x-6 lg:gap-x-10 w-full lg:w-[600px] shrink-0">
+                <div class="grid grid-cols-2 items-end gap-x-3 lg:gap-x-4 w-full lg:w-2/5 shrink-0 lg:mt-auto">
 
                     {{-- sticky tall single block --}}
-                    <div class="sticky top-10 self-start bg-[#000000] w-full h-[580px]"></div>
+                    <img src="{{ asset('about_us/1.our_story/longest.png') }}"
+                        class="sticky top-10 self-start bg-[#000000] w-full h-[580px]"></img>
 
                     {{-- two stacked blocks with gap --}}
-                    <div class="flex flex-col gap-y-6 lg:gap-y-10">
-                        <div class="bg-[#000000] w-full h-[400px]"></div>
-                        <div class="bg-[#000000] w-full h-[400px]"></div>
+                    <div class="flex flex-col gap-y-3 lg:gap-y-4">
+                        <img src="{{ asset('about_us/1.our_story/top_one.png') }}" class="bg-none w-full h-[400px]"></img>
+                        <img src="{{ asset('about_us/1.our_story/bottom_one.png') }}"
+                            class="bg-none w-full h-[400px]"></img>
                     </div>
 
                 </div>
 
                 {{-- RIGHT: Hero content --}}
-                <div class="relative z-[200] text-[#2f6ba7] pointer-events-none w-full lg:w-[720px] shrink-0">
+                <div class="relative z-[200] text-[#2f6ba7] pointer-events-none w-full lg:w-3/5 shrink-0">
                     <div class="pt-0 lg:pt-[2.5rem]">
                         {{-- Gold accent bar --}}
                         <div
-                            class="h-[15px] w-full max-w-[30rem] ml-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
+                            class="h-[15px] w-full max-w-[30rem] mr-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
                         </div>
 
-                        <div class="bg-[#163049]/85 mix-blend-multiply">
-                            <div class="px-0 py-10">
-                                <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)]  font-bold mb-6">
-                                    <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
-                                    <span class="text-[#F4DEAC]">CWD</span>
-                                    <span class="text-[#F4DEAC] font-normal">Real Estate Agent &amp; Developer</span>
+                        <div class="bg-[#163049]/85 w-full mix-blend-multiply">
+                            <div class="py-10">
+                                <h2
+                                    class="flex px-10 sm:px-10 items-center gap-4 text-[clamp(30px,3vw,50px)]  font-bold mb-6">
+                                    <span class="text-[#F4DEAC] font-normal">Our </span>
+                                    <span class="text-[#F4DEAC]">Story</span>
                                 </h2>
-
-                                <h1
-                                    class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-10">
-                                    Your Trusted Property Management &amp; Hospitality Partner in Cambodia
+                                <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold  mb-10">
+                                    Building Trust Through Commitment and Personal Relationships
                                 </h1>
+                                <div class="px-10 flex flex-col gap-5 sm:px-10 text-[clamp(15px,3vw,15px)] mb-10">
+                                    <p class="text-white  ">
+                                        CWD Realty & Hospitality was founded with a clear vision—to create a professional
+                                        property management and hospitality company built on trust, integrity, and long-term
+                                        partnerships.
+                                    </p>
+                                    <p class="text-white  ">
+                                        Our journey began with founders who were committed to expanding business
+                                        opportunities
+                                        beyond Cambodia. Through frequent international travel, face-to-face meetings,
+                                        business
+                                        presentations, and contract negotiations, they established valuable relationships
+                                        with
+                                        overseas partners and property investors. Their willingness to meet clients
+                                        personally,
+                                        understand their expectations, and deliver on every commitment became the foundation
+                                        of
+                                        the company's reputation.
+                                    </p>
+                                    <p class="text-white  ">
 
-                                <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
-                                    <a href="{{ url('/properties') }}"
-                                        class="border-[2px] border-[#F4DEAC] text-white text-[15px] font-medium px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                                        Browse Properties
-                                    </a>
-                                    <a href="{{ url('/contact-us') }}"
-                                        class="border-[2px] border-[#F4DEAC] text-white text-[15px] font-medium px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                                        Contact Us
-                                    </a>
+                                        Today, that same commitment continues to shape how we serve every property owner,
+                                        tenant, investor, and guest. We believe that lasting business relationships are
+                                        built
+                                        through professionalism, transparency, and consistently delivering value.
+                                    </p>
+                                    <p class="text-white  ">
+                                        As Cambodia's real estate and hospitality industries continue to grow, CWD Realty &
+                                        Hospitality remains dedicated to providing dependable property management, flexible
+                                        leasing solutions, and exceptional hospitality services that create value for both
+                                        property owners and residents.
+                                    </p>
                                 </div>
+
+
+
                             </div>
                         </div>
                     </div>
@@ -151,4 +176,51 @@
 
         </div>
     </section>
+
+
+
+    {{-- auto-move part --}}
+    <section class="relative w-full flex mt-[2rem] sm:mt-[5rem] justify-center ">
+
+        <img src="{{ asset('home/auto_move_logo/auto_move_light_white.png') }}" alt="CWD Realty auto-move logo"
+            class="w-full h-auto object-contain">
+
+        {{-- Scrolling text overlay --}}
+        <div class="absolute inset-0 flex items-center overflow-hidden pointer-events-none">
+            <div class="cwd-marquee-track flex items-center whitespace-nowrap">
+                @for ($i = 0; $i < 12; $i++)
+                    <span class="text-[#2A5A8A] text-[clamp(14px,2vw,22px)] mx-6 sm:mx-10 shrink-0">
+                        <span class="font-bold">CWD</span> Real Estate Agent &amp; Developer
+                    </span>
+                @endfor
+            </div>
+        </div>
+
+        <style>
+            .cwd-marquee-track {
+                width: max-content;
+                animation: cwd-marquee 45s linear infinite;
+            }
+
+            /* Pause on hover, if wanted */
+            .cwd-marquee-track:hover {
+                animation-play-state: paused;
+            }
+
+            @keyframes cwd-marquee {
+                from {
+                    transform: translateX(-50%);
+                }
+
+                to {
+                    transform: translateX(0);
+                }
+            }
+        </style>
+    </section>
+
+
+    {{-- bg --}}
+    <section></section>
+    
 @endsection

@@ -200,7 +200,7 @@
         </div>
     </section>
 
-    {{-- bg blue section --}}
+    {{-- Auto Move section --}}
     <section class="bg-[#2A5A8A] h-[450px] sm:h-[500px] md:h-[600px] lg:h-[800px] mt-[-15rem]">
         {{-- auto-move part --}}
         <section class="absolute w-full flex mt-[20rem] justify-center ">
