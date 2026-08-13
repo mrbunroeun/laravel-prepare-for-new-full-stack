@@ -51,9 +51,11 @@
                 </h2>
 
                 <p class="text-white text-[15px] leading-relaxed">
-                    Specializes in condominium management, property leasing, rental management, and hospitality services in
-                    Phnom Penh. Whether you're a property owner seeking professional management or a guest looking for
-                    comfortable accommodation, we deliver reliable solutions with exceptional customer service.
+
+                    CWD Realty & Hospitality Specializes in property management, residential leasing, real estate services,
+                    and hospitality solutions in Cambodia. We help property owners maximize the value of their investments
+                    while providing comfortable, well-managed accommodation for business travelers, expatriates, tourists,
+                    and long-term residents.
                 </p>
             </div>
         </div>
@@ -621,7 +623,7 @@
             });
         })();
     </script>
-    
+
     {{-- comments section --}}
     <x-comments.comments />
 

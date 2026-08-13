@@ -22,6 +22,6 @@ Route::get('/insights', function () {
     return view('pages.insights');
 });
 
-Route::get('/services', function () {
-    return view('pages.services');
+Route::get('/service', function () {
+    return view('pages.service');
 });

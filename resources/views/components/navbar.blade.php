@@ -2,7 +2,7 @@
     $navItems = [
         ['label' => 'Home', 'url' => url('/'), 'pattern' => '/'],
         ['label' => 'About Us', 'url' => url('/about-us'), 'pattern' => 'about-us'],
-        ['label' => 'Services', 'url' => url('/services'), 'pattern' => 'services'],
+        ['label' => 'Services', 'url' => url('/service'), 'pattern' => 'service'],
         ['label' => 'Properties', 'url' => url('/properties'), 'pattern' => 'properties'],
         ['label' => 'Partners', 'url' => url('/partners'), 'pattern' => 'partners'],
         ['label' => 'Insights', 'url' => url('/insights'), 'pattern' => 'insights'],
