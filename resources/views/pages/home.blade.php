@@ -41,7 +41,7 @@
     </section>
 
 
-    {{-- CWD Realty & Hospitality --}}
+    {{-- CWD Realty & Hospitality--}}
     <section
         class="px-0 sm:px-[5rem] md:px-[3rem] relative z-[300] mt-[1rem] sm:mt-[2rem] md:mt-[2.3rem] lg:mt-[4rem] bg-[#2A5A8A]">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
@@ -51,7 +51,7 @@
                     <span class="text-[#F4DEAC] font-normal">Realty &amp; Hospitality</span>
                 </h2>
 
-                <p class="text-white text-[15px] leading-relaxed">
+                <p class="text-white  text-[15px] leading-relaxed">
                     Specializes in condominium management, property leasing, rental management, and hospitality services in
                     Phnom Penh. Whether you're a property owner seeking professional management or a guest looking for
                     comfortable accommodation, we deliver reliable solutions with exceptional customer service.
@@ -61,7 +61,7 @@
     </section>
 
 
-    {{-- Who We Are section --}}
+    {{-- Who We Are section 1st one --}}
     <section class="relative px-0 sm:px-[5rem] md:px-[3rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
             <div class="max-w-[750px]">
@@ -70,7 +70,7 @@
                     <span class="text-[#2A5A8A] font-bold">We Are</span>
                 </h2>
 
-                <h3 class="text-black text-[clamp(20px,2.5vw,26px)] font-semibold leading-tight mb-6">
+                <h3 class="text-black max-w-[500px] text-[clamp(20px,2.5vw,26px)] font-semibold leading-tight mb-6">
                     Professional Property &amp; Hospitality Solutions
                 </h3>
 
@@ -280,7 +280,7 @@
         ];
     @endphp
 
-    {{-- Who We Are section --}}
+    {{-- Who We Are section 2nd one--}}
     <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
             <div class="max-w-[750px]">
@@ -289,7 +289,7 @@
                     <span class="text-[#2A5A8A] font-bold">We Are</span>
                 </h2>
 
-                <h3 class="text-black text-[clamp(20px,2.5vw,26px)] font-semibold leading-tight mb-6">
+                <h3 class="text-black text-[clamp(20px,2.5vw,26px)]  font-semibold leading-tight mb-6">
                     Professional Property &amp; Hospitality Solutions
                 </h3>
 
