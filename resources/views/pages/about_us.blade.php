@@ -26,11 +26,11 @@
 
                     <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
                         <a href="{{ url('/properties') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[15px] font-medium px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
                             Browse Properties
                         </a>
                         <a href="{{ url('/contact-us') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[15px] font-medium px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
                             Contact Us
                         </a>
                     </div>
@@ -101,14 +101,13 @@
                 <div class="grid grid-cols-2 items-end gap-x-3 lg:gap-x-4 w-full lg:w-2/5 shrink-0 lg:mt-auto">
 
                     {{-- sticky tall single block --}}
-                    <img src="{{ asset('about_us/1.our_story/longest.png') }}"
-                        class="sticky top-10 self-start bg-[#000000] w-full h-[580px]"></img>
+                    <img src="{{ asset('about_us/our_story/longest.png') }}"
+                        class="sticky top-10 self-start bg-[#000000] w-full max-h-[580px]"></img>
 
                     {{-- two stacked blocks with gap --}}
                     <div class="flex flex-col gap-y-3 lg:gap-y-4">
-                        <img src="{{ asset('about_us/1.our_story/top_one.png') }}" class="bg-none w-full h-[400px]"></img>
-                        <img src="{{ asset('about_us/1.our_story/bottom_one.png') }}"
-                            class="bg-none w-full h-[400px]"></img>
+                        <img src="{{ asset('about_us/our_story/top_one.png') }}" class="bg-none w-full max-h-[400px]"></img>
+                        <img src="{{ asset('about_us/our_story/bottom_one.png') }}" class="bg-none w-full max-h-[400px]"></img>
                     </div>
 
                 </div>
@@ -220,7 +219,149 @@
     </section>
 
 
-    {{-- bg --}}
-    <section></section>
-    
+{{-- Vision, Mission and Core Values --}}
+    <section class="relative mt-[5rem] sm:mt-[10rem] w-full min-h-[1093px] bg-cover bg-center"
+        style="background-image: url('{{ asset('about_us/bg/bg_img_blue.png') }}');">
+        <div class="max-w-[1400px] mx-auto px-6 py-16">
+
+            {{-- Vision / Mission / Core Values cards --}}
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-24 items-start">
+
+                {{-- Vision --}}
+                <div class="info-card bg-[#f3f6f8] p-8 flex flex-col min-h-[360px]">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-[#2A5A8A] text-[28px] font-bold">Vision</h3>
+                        <img src="{{ asset('about_us/icons/vision.svg') }}" alt="Vision" class="w-8 h-8 text-[#2A5A8A]">
+                    </div>
+
+                    <p class="text-[#2A5A8A] text-[18px] font-medium mb-4 leading-relaxed">
+                        Contributing to Cambodia's Growing Property &amp; Hospitality Industry
+                    </p>
+
+                    <div class="card-text mb-6">
+                        <p class="card-text-p text-black text-[18px] leading-relaxed pb-1 line-clamp-2">To become one of Cambodia's most trusted property management and hospitality companies by delivering professional services, creating long-term value for property owners, and supporting the sustainable growth of Cambodia's real estate sector.</p>
+                    </div>
+
+                    <button type="button"
+                        class="card-btn flex items-center gap-2 text-[#2A5A8A] text-[18px] font-medium pointer-events-auto cursor-pointer mt-auto">
+                        See More
+                        <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </div>
+
+                {{-- Mission --}}
+                <div class="info-card bg-[#f3f6f8] p-8 flex flex-col min-h-[360px]">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-[#2A5A8A] text-[28px] font-bold">Mission</h3>
+                        <img src="{{ asset('about_us/icons/mission.svg') }}" alt="Mission" class="w-8 h-8 text-[#2A5A8A]">
+                    </div>
+
+                    <div class="card-text mb-6">
+                        <p class="card-text-p text-black text-[18px] leading-relaxed pb-1 line-clamp-2">Our mission is to provide professional property management, leasing, and hospitality solutions that benefit both property owners and guests.</p>
+                    </div>
+
+                    <button type="button"
+                        class="card-btn flex items-center gap-2 text-[#2A5A8A] text-[18px] font-medium pointer-events-auto cursor-pointer mt-auto">
+                        See More
+                        <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </div>
+
+                {{-- Core Values --}}
+                <div class="info-card bg-[#f3f6f8] p-8 flex flex-col min-h-[360px]">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-[#2A5A8A] text-[28px] font-bold">Core Values</h3>
+                        <img src="{{ asset('about_us/icons/core_value.svg') }}" alt="Core Values" class="w-8 h-8 text-[#2A5A8A]">
+                    </div>
+
+                    <p class="text-black text-[18px] font-semibold mb-2">Integrity</p>
+
+                    <div class="card-text mb-6">
+                        <p class="card-text-p text-black text-[18px] leading-relaxed pb-1 line-clamp-2">We conduct every business relationship with honesty, transparency, and professionalism.</p>
+                    </div>
+
+                    <button type="button"
+                        class="card-btn flex items-center gap-2 text-[#2A5A8A] text-[18px] font-medium pointer-events-auto cursor-pointer mt-auto">
+                        See More
+                        <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </div>
+
+            </div>
+
+            {{-- What We Do heading --}}
+            <div class="mb-12">
+                <h2 class="text-white text-[clamp(32px,4vw,44px)] font-normal mb-4">What We Do</h2>
+                <p class="text-white text-[18px] leading-relaxed max-w-[600px]">
+                    CWD Realty &amp; Hospitality offers comprehensive solutions across the property lifecycle.
+                </p>
+            </div>
+
+            {{-- Service boxes --}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <div class="border-[2px] border-white/70 p-6">
+                    <h4 class="text-white text-[18px] font-bold mb-4">Property Management</h4>
+                    <p class="text-white text-[18px] leading-relaxed">
+                        Professional management services that help owners maximize occupancy, maintain property value, and
+                        simplify day-to-day operations.
+                    </p>
+                </div>
+
+                <div class="border-[2px] border-white/70 p-6">
+                    <h4 class="text-white text-[18px] font-bold mb-4">Property Leasing</h4>
+                    <p class="text-white text-[18px] leading-relaxed">
+                        Flexible rental solutions including daily, weekly, monthly, and long-term stays for a wide range of
+                        guests.
+                    </p>
+                </div>
+
+                <div class="border-[2px] border-white/70 p-6">
+                    <h4 class="text-white text-[18px] font-bold mb-4">Property Sales</h4>
+                    <p class="text-white text-[18px] leading-relaxed">
+                        Helping buyers and investors discover quality residential opportunities in Cambodia.
+                    </p>
+                </div>
+
+                <div class="border-[2px] border-white/70 p-6">
+                    <h4 class="text-white text-[18px] font-bold mb-4">Hospitality Services</h4>
+                    <p class="text-white text-[18px] leading-relaxed">
+                        Enhancing every guest's stay with airport transfers, local assistance, concierge support, and
+                        personalized hospitality services.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <style>
+        .card-text {
+            max-height: 3.6rem;
+            overflow: hidden;
+            transition: max-height 0.35s ease-in-out;
+        }
+
+        .card-text.open {
+            max-height: 20rem;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.card-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const card = btn.closest('.info-card');
+                    const text = card.querySelector('.card-text');
+                    const paragraph = card.querySelector('.card-text-p');
+                    const isOpen = text.classList.toggle('open');
+                    paragraph.classList.toggle('line-clamp-2', !isOpen);
+                    btn.innerHTML = isOpen
+                        ? 'See Less <span aria-hidden="true">&uarr;</span>'
+                        : 'See More <span aria-hidden="true">&rarr;</span>';
+                });
+            });
+        });
+    </script>
 @endsection
