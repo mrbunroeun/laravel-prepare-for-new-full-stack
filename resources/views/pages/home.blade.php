@@ -616,8 +616,8 @@
         <div class="h-16 sm:h-20"></div>
     </section>
 
-
-<x-comments.comments/>
+    {{-- comments section --}}
+    <x-comments.comments />
 
 
 
