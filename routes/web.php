@@ -22,6 +22,10 @@ Route::get('/insights', function () {
     return view('pages.insights');
 });
 
-Route::get('/service', function () {
-    return view('pages.service');
+Route::get('/services/property-management', function () {
+    return view('pages.services.property_management');
+});
+
+Route::get('/services/property-sales', function () {
+    return view('pages.services.property_sales');
 });

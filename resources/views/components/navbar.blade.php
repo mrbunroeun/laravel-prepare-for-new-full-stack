@@ -7,10 +7,10 @@
             'url' => url('/service'),
             'pattern' => 'service',
             'submenu' => [
-                ['label' => 'Property Management', 'url' => url('/service/property-management'), 'pattern' => 'service/property-management'],
-                ['label' => 'Property Sales', 'url' => url('/service/property-sales'), 'pattern' => 'service/property-sales'],
-                ['label' => 'Property Leasing', 'url' => url('/service/property-leasing'), 'pattern' => 'service/property-leasing'],
-                ['label' => 'Hospitality Services', 'url' => url('/service/hospitality-services'), 'pattern' => 'service/hospitality-services'],
+                ['label' => 'Property Management', 'url' => url('/services/property-management'), 'pattern' => 'services/property-management'],
+                ['label' => 'Property Sales', 'url' => url('/services/property-sales'), 'pattern' => 'services/property-sales'],
+                ['label' => 'Property Leasing', 'url' => url('/services/property-leasing'), 'pattern' => 'services/property-leasing'],
+                ['label' => 'Hospitality Services', 'url' => url('/services/hospitality-services'), 'pattern' => 'services/hospitality-services'],
             ],
         ],
         ['label' => 'Properties', 'url' => url('/properties'), 'pattern' => 'properties'],
@@ -137,6 +137,21 @@
     </div>
 </div>
 
+{{-- Scroll-to-top button: hidden until the user scrolls past the header --}}
+<button
+    id="scroll-to-top"
+    type="button"
+    aria-label="Scroll back to top"
+    class="fixed bottom-6 cursor-pointer right-6 z-[500] w-12 h-12 rounded-full bg-[#2c4a75] text-white
+        flex items-center justify-center shadow-lg
+        opacity-0 invisible translate-y-3
+        transition-all duration-300 ease-out
+        hover:bg-[#1a3358]">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+    </svg>
+</button>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // ---- Mobile menu (unchanged) ----
@@ -185,6 +200,8 @@
         const header = document.getElementById('site-header');
 
         if (servicesTrigger && dropdown && header) {
+            let hideTimeout;
+
             function positionDropdown() {
                 const headerRect = header.getBoundingClientRect();
                 // Nudge the panel up so it sits tighter under the header.
@@ -194,14 +211,17 @@
             }
 
             function showDropdown() {
+                clearTimeout(hideTimeout);
                 positionDropdown();
                 dropdown.classList.remove('opacity-0', 'invisible', '-translate-y-2');
                 dropdown.classList.add('opacity-100', 'visible', 'translate-y-0');
             }
 
             function hideDropdown() {
-                dropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
-                dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                hideTimeout = setTimeout(() => {
+                    dropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
+                    dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                }, 400);
             }
 
             servicesTrigger.addEventListener('mouseenter', showDropdown);
@@ -211,6 +231,57 @@
 
             window.addEventListener('resize', positionDropdown);
             window.addEventListener('scroll', positionDropdown);
+        }
+
+        // ---- Scroll-to-top button ----
+        const scrollBtn = document.getElementById('scroll-to-top');
+        const headerEl = document.getElementById('site-header');
+
+        if (scrollBtn && headerEl) {
+            function toggleScrollBtn() {
+                const headerBottom = headerEl.getBoundingClientRect().bottom;
+                const pastHeader = headerBottom < 0;
+
+                if (pastHeader) {
+                    scrollBtn.classList.remove('opacity-0', 'invisible', 'translate-y-3');
+                    scrollBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+                } else {
+                    scrollBtn.classList.add('opacity-0', 'invisible', 'translate-y-3');
+                    scrollBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+                }
+            }
+
+            window.addEventListener('scroll', toggleScrollBtn);
+            toggleScrollBtn();
+
+            // Custom scroll animation: starts slow, accelerates toward the end.
+            // easeInCubic gives that "slow -> fast -> fast" feel you asked for.
+            function easeInCubic(t) {
+                return t * t * t;
+            }
+
+            function smoothScrollToTop(duration = 900) {
+                const startY = window.scrollY || window.pageYOffset;
+                if (startY === 0) return;
+
+                const startTime = performance.now();
+
+                function step(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = easeInCubic(progress);
+
+                    window.scrollTo(0, startY - startY * eased);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    }
+                }
+
+                requestAnimationFrame(step);
+            }
+
+            scrollBtn.addEventListener('click', () => smoothScrollToTop());
         }
     });
 </script>
