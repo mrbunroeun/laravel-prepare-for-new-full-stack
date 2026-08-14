@@ -394,17 +394,17 @@
             [
                 'question' => 'How much does a room cost?',
                 'answer' =>
-                    'Rates vary depending on property, unit type, and length of stay. Contact our team for current pricing and availability.',
+                    'ComingSoon',
             ],
             [
                 'question' => 'Are smoking and non-smoking rooms available?',
                 'answer' =>
-                    'Yes, we offer both smoking and non-smoking units depending on the property. Let us know your preference when booking.',
+                    'ComingSoon',
             ],
             [
                 'question' => 'Is breakfast included?',
                 'answer' =>
-                    'Breakfast inclusion depends on the specific property and rental package. Our team can confirm details for your chosen unit.',
+                    'ComingSoon',
             ],
         ];
 
@@ -412,22 +412,22 @@
             [
                 'question' => 'Are pets allowed?',
                 'answer' =>
-                    'Pet policies vary by property. Please contact us before booking to confirm whether your property allows pets.',
+                    'ComingSoon',
             ],
             [
                 'question' => 'What facilities are available?',
                 'answer' =>
-                    'Facilities vary by property and may include pools, gyms, parking, and 24-hour security. Ask our team for details on a specific listing.',
+                    'ComingSoon',
             ],
             [
                 'question' => 'Do you provide airport transportation?',
                 'answer' =>
-                    'Yes, airport transfer can be arranged as part of our hospitality services. Let us know your flight details in advance.',
+                    'ComingSoon',
             ],
             [
                 'question' => 'Are there discounts for weekly or monthly stays?',
                 'answer' =>
-                    'Yes, we offer flexible rental options with better rates for weekly and monthly stays. Contact us for a custom quote.',
+                    'ComingSoon',
             ],
         ];
     @endphp

@@ -465,7 +465,7 @@
 
 
 
-    
+
     {{-- Frequently Asked Questions --}}
     @php
         $faqLeft = [
@@ -476,16 +476,14 @@
             ],
             [
                 'question' => 'Can you manage both daily and long-term rentals?',
-                'answer' =>
-                    'ComingSoon',
+                'answer' => 'ComingSoon',
             ],
         ];
 
         $faqRight = [
             [
                 'question' => 'How do property owners receive rental income?',
-                'answer' =>
-                    'ComingSoon',
+                'answer' => 'ComingSoon',
             ],
         ];
     @endphp
@@ -597,4 +595,58 @@
             });
         })();
     </script>
+
+
+
+
+    {{-- Looking for your next stay --}}
+    <section class="relative max-w-[1600px] mx-auto">
+        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
+            <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
+                class="w-full h-auto min-h-[220px] object-cover">
+
+            <div
+                class="relative max-w-[520px] mt-6 px-6
+                        min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
+                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
+                    <span class="block min-[900px]:hidden">
+                        Looking for Professional
+                        Property Management or
+                        Comfortable Accommodation?
+                    </span>
+                    <span class="hidden min-[900px]:block">
+                        Request Property <br>
+                        Management Consultation
+                    </span>
+                </h2>
+                 <div
+            class="max-w-[420px] mt-4 px-6 min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
+            @php
+                $links = [
+                    ['label' => 'Property Leasing', 'url' => url('/property-leasing'), 'active' => true],
+                    ['label' => 'Hospitality Services', 'url' => url('/hospitality-services'), 'active' => false],
+                    ['label' => 'Property Listings', 'url' => url('/property-listings'), 'active' => false],
+                    ['label' => 'Contact Us', 'url' => url('/contact-us'), 'active' => false],
+                ];
+            @endphp
+
+            <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200">
+                @foreach ($links as $link)
+                    <a href="{{ $link['url'] }}"
+                        class="group flex items-center justify-between px-5 py-3 text-[15px] font-medium transition-colors
+                    {{ $link['active'] ? 'bg-[#2A5A8A] text-[#DCC597]' : 'bg-white text-[#2A5A8A] hover:bg-gray-50' }}">
+                        <span>{{ $link['label'] }}</span>
+                        <span aria-hidden="true"
+                            class="{{ $link['active'] ? 'text-[#DCC597]' : 'text-[#2A5A8A]' }} transition-transform group-hover:translate-x-1">
+                            &rarr;
+                        </span>
+                    </a>
+                @endforeach
+            </nav>
+        </div>
+            </div>
+        </div>
+
+       
+    </section>
 @endsection
