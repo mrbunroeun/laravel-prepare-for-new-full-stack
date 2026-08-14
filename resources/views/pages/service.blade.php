@@ -607,7 +607,7 @@
 
             <div
                 class="relative max-w-[520px] mt-6 px-6
-                        min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
+                    min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
                 <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
                     <span class="block min-[900px]:hidden">
                         Looking for Professional
@@ -619,8 +619,10 @@
                         Management Consultation
                     </span>
                 </h2>
-                 <div
-            class="max-w-[420px] mt-4 px-6 min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
+            </div>
+        </div>
+
+        <div class="max-w-[420px] mt-8 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-6 min-[900px]:px-0">
             @php
                 $links = [
                     ['label' => 'Property Leasing', 'url' => url('/property-leasing'), 'active' => true],
@@ -633,20 +635,17 @@
             <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200">
                 @foreach ($links as $link)
                     <a href="{{ $link['url'] }}"
-                        class="group flex items-center justify-between px-5 py-3 text-[15px] font-medium transition-colors
-                    {{ $link['active'] ? 'bg-[#2A5A8A] text-[#DCC597]' : 'bg-white text-[#2A5A8A] hover:bg-gray-50' }}">
+                        class="group flex items-center justify-between px-5 py-3 text-[15px] font-medium
+                   bg-white text-[#2A5A8A] transition-colors
+                   hover:bg-[#2A5A8A] hover:text-[#DCC597]">
                         <span>{{ $link['label'] }}</span>
                         <span aria-hidden="true"
-                            class="{{ $link['active'] ? 'text-[#DCC597]' : 'text-[#2A5A8A]' }} transition-transform group-hover:translate-x-1">
+                            class="text-[#2A5A8A] transition-all group-hover:text-[#DCC597] group-hover:translate-x-1">
                             &rarr;
                         </span>
                     </a>
                 @endforeach
             </nav>
         </div>
-            </div>
-        </div>
-
-       
     </section>
 @endsection

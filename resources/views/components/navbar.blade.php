@@ -2,16 +2,31 @@
     $navItems = [
         ['label' => 'Home', 'url' => url('/'), 'pattern' => '/'],
         ['label' => 'About Us', 'url' => url('/about-us'), 'pattern' => 'about-us'],
-        ['label' => 'Services', 'url' => url('/service'), 'pattern' => 'service'],
+        [
+            'label' => 'Services',
+            'url' => url('/service'),
+            'pattern' => 'service',
+            'submenu' => [
+                ['label' => 'Property Management', 'url' => url('/service/property-management'), 'pattern' => 'service/property-management'],
+                ['label' => 'Property Sales', 'url' => url('/service/property-sales'), 'pattern' => 'service/property-sales'],
+                ['label' => 'Property Leasing', 'url' => url('/service/property-leasing'), 'pattern' => 'service/property-leasing'],
+                ['label' => 'Hospitality Services', 'url' => url('/service/hospitality-services'), 'pattern' => 'service/hospitality-services'],
+            ],
+        ],
         ['label' => 'Properties', 'url' => url('/properties'), 'pattern' => 'properties'],
         ['label' => 'Partners', 'url' => url('/partners'), 'pattern' => 'partners'],
         ['label' => 'Insights', 'url' => url('/insights'), 'pattern' => 'insights'],
         ['label' => 'Events', 'url' => url('/events'), 'pattern' => 'events'],
         ['label' => 'Contact Us', 'url' => url('/contact-us'), 'pattern' => 'contact-us'],
     ];
+
+    // Find the nav item that has a submenu, so we can render its dropdown
+    // OUTSIDE the transformed flex container (fixes the containing-block bug).
+    $servicesItem = collect($navItems)->firstWhere('label', 'Services');
 @endphp
-<header class="absolute top-0 left-0 bg-white w-full ">
-    <nav aria-label="Main navigation" class="max-w-[1400px] mx-auto px-4 sm:px-6 min-[1161px]:px-8">
+
+<header id="site-header" class="absolute top-0 left-0 bg-white w-full">
+    <nav aria-label="Main navigation" class="max-w-[1400px] mx-auto px-4 sm:px-6 min-[1161px]:px-8 relative">
         <div class="flex items-center justify-between py-10 relative z-[500] -translate-x-[1.5%]">
 
             {{-- Logo, stuck to the left --}}
@@ -24,8 +39,9 @@
                 @foreach ($navItems as $item)
                     @php
                         $isActive = request()->is($item['pattern']);
+                        $hasSubmenu = isset($item['submenu']);
                     @endphp
-                    <li>
+                    <li class="relative {{ $hasSubmenu ? 'nav-has-submenu' : '' }}">
                         <a href="{{ $item['url'] }}"
                             @if ($isActive) aria-current="page" @endif
                             class="relative inline-block pb-1 text-[#2c4a75] text-[15px] xl:text-[16px] font-medium tracking-wide
@@ -53,9 +69,35 @@
             </button>
         </div>
     </nav>
+
+    {{-- Full-width dropdown panel: direct child of <header>, NOT inside the
+         transformed flex div, so `fixed` + `left-0` + `w-screen` measure
+         against the real viewport instead of the shifted container. --}}
+    @if ($servicesItem)
+        <div
+            id="services-dropdown"
+            class="fixed left-0 w-screen bg-[#2c4a75]
+                opacity-0 invisible -translate-y-2
+                transition-all duration-300 ease-out
+                z-[450]">
+            <ul class="flex items-center justify-center gap-10 xl:gap-14 py-4 max-w-[1400px] mx-auto px-4">
+                @foreach ($servicesItem['submenu'] as $sub)
+                    @php $subActive = request()->is($sub['pattern']); @endphp
+                    <li>
+                        <a href="{{ $sub['url'] }}"
+                            @if ($subActive) aria-current="page" @endif
+                            class="text-[15px] xl:text-[16px] font-medium tracking-wide whitespace-nowrap transition-colors duration-200
+                                {{ $subActive ? 'text-[#DCC597]' : 'text-white hover:text-[#DCC597]' }}">
+                            {{ $sub['label'] }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </header>
 
-{{-- Mobile menu: moved OUTSIDE <header> so its z-index isn't trapped in the header's stacking context --}}
+{{-- Mobile menu: outside <header> so its z-index isn't trapped in header's stacking context --}}
 <div
     id="mobile-menu"
     class="max-[1160px]:block hidden fixed inset-0 top-0 bg-white opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-[400] overflow-y-auto">
@@ -64,6 +106,7 @@
             @foreach ($navItems as $item)
                 @php
                     $isActive = request()->is($item['pattern']);
+                    $hasSubmenu = isset($item['submenu']);
                 @endphp
                 <li class="w-full text-left">
                     <a href="{{ $item['url'] }}"
@@ -72,6 +115,22 @@
                             {{ $isActive ? 'border-b-2 border-[#2c4a75]' : '' }}">
                         {{ $item['label'] }}
                     </a>
+
+                    @if ($hasSubmenu)
+                        <ul class="flex flex-col items-start gap-1 pl-4 w-full">
+                            @foreach ($item['submenu'] as $sub)
+                                @php $subActive = request()->is($sub['pattern']); @endphp
+                                <li class="w-full text-left">
+                                    <a href="{{ $sub['url'] }}"
+                                        @if ($subActive) aria-current="page" @endif
+                                        class="mobile-nav-link inline-block py-2 text-[#2c4a75]/80 text-[15px] font-medium
+                                            {{ $subActive ? 'text-[#2c4a75] font-semibold' : '' }}">
+                                        {{ $sub['label'] }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </li>
             @endforeach
         </ul>
@@ -80,6 +139,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // ---- Mobile menu (unchanged) ----
         const toggle = document.getElementById('navbar-toggle');
         const menu = document.getElementById('mobile-menu');
         const bar1 = document.getElementById('bar-1');
@@ -118,5 +178,39 @@
         window.addEventListener('resize', function() {
             if (window.innerWidth >= 1161) closeMenu();
         });
+
+        // ---- Services dropdown (JS-driven, positioned against real header height) ----
+        const servicesTrigger = document.querySelector('.nav-has-submenu');
+        const dropdown = document.getElementById('services-dropdown');
+        const header = document.getElementById('site-header');
+
+        if (servicesTrigger && dropdown && header) {
+            function positionDropdown() {
+                const headerRect = header.getBoundingClientRect();
+                // Nudge the panel up so it sits tighter under the header.
+                // Increase this value to pull it up further.
+                const overlap = 10;
+                dropdown.style.top = (headerRect.bottom - overlap) + 'px';
+            }
+
+            function showDropdown() {
+                positionDropdown();
+                dropdown.classList.remove('opacity-0', 'invisible', '-translate-y-2');
+                dropdown.classList.add('opacity-100', 'visible', 'translate-y-0');
+            }
+
+            function hideDropdown() {
+                dropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
+                dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
+            }
+
+            servicesTrigger.addEventListener('mouseenter', showDropdown);
+            servicesTrigger.addEventListener('mouseleave', hideDropdown);
+            dropdown.addEventListener('mouseenter', showDropdown);
+            dropdown.addEventListener('mouseleave', hideDropdown);
+
+            window.addEventListener('resize', positionDropdown);
+            window.addEventListener('scroll', positionDropdown);
+        }
     });
 </script>
