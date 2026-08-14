@@ -29,3 +29,16 @@ Route::get('/services/property-management', function () {
 Route::get('/services/property-sales', function () {
     return view('pages.services.property_sales');
 });
+
+Route::get('services/properties/wealth-mansion', function () {
+    return view('components.detail_service_featured_project.wealth_mansion');
+});
+// not yet
+
+Route::get('services/properties/uc88', function () {
+    return view('components.detail_service_featured_project.uc88');
+});
+
+Route::get('services/properties/private-residential', function () {
+    return view('components.detail_service_featured_project.private_residential');
+});
