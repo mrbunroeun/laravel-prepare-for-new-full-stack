@@ -62,7 +62,7 @@
 
 
     {{-- Maximize Your Property Investment --}}
-    <section class="relative z-[300] bg-white">
+    <section class="relative z-[300]  bg-white">
         <div class="max-w-[1500px] mx-auto  py-16 max-[940px]:py-12">
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-26 items-start">
@@ -104,20 +104,21 @@
 
 
 
-    {{-- What is Property Management --}}
+    {{-- What is Property Management? --}}
     <section class="relative bg-white">
-        <div class="max-w-[1400px] mx-auto px-6 py-16">
+        <div class="max-w-[1550px] mx-auto px-6 py-16">
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 items-start">
+            <div class="flex flex-col lg:flex-row gap-8 items-start -ml-24">
 
                 {{-- LEFT: black placeholder block --}}
-                <div class="bg-[#000000] w-full h-[280px] lg:h-[300px]"></div>
+                <div class="bg-[#000000] w-full lg:w-[55%] h-[420px] lg:h-[500px]"></div>
 
                 {{-- RIGHT: blue content card --}}
                 <div
-                    class="relative z-[200] text-[#2f6ba7] pointer-events-none w-full lg:w-4/5 lg:ml-[-2rem] lg:mt-[1.5rem]">
+                    class="relative z-[200] text-[#2f6ba7] pointer-events-none w-full lg:w-[35%] lg:mt-[3rem]">
                     {{-- Gold accent bar --}}
-                    <div class="h-[8px] w-[85%] ml-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+                    <div class="h-[8px] w-[85%] ml-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
+                    </div>
 
                     <div class="bg-[#2A5A8A] w-full">
                         <div class="px-6 sm:px-8 py-6 sm:py-8">
@@ -127,9 +128,12 @@
                             </h2>
 
                             <p class="text-white text-[13px] sm:text-[13.5px] leading-relaxed">
-                                Property management is the professional administration of residential properties on behalf
-                                of owners. Our team oversees daily operations, tenant coordination, maintenance scheduling,
-                                rental administration, financial reporting, and hospitality services to ensure your property
+                                Property management is the professional administration of residential properties on
+                                behalf
+                                of owners. Our team oversees daily operations, tenant coordination, maintenance
+                                scheduling,
+                                rental administration, financial reporting, and hospitality services to ensure your
+                                property
                                 performs efficiently and remains well maintained.
                             </p>
                         </div>
@@ -140,4 +144,5 @@
 
         </div>
     </section>
+
 @endsection
