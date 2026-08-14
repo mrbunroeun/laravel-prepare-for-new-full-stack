@@ -43,7 +43,7 @@
 
 
 
-    {{-- About Us --}}
+    {{-- CWD Realty & Hospitality     --}}
     <section
         class="px-0 sm:px-[5rem] md:px-[3rem] relative z-[300] mt-[1rem] sm:mt-[2rem] md:mt-[2.3rem] lg:mt-[4rem] bg-[#2A5A8A]">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
@@ -62,6 +62,7 @@
 
 
     {{-- Maximize Your Property Investment --}}
+
     <section class="relative z-[300]  bg-white">
         <div class="max-w-[1500px] mx-auto  py-16 max-[940px]:py-12">
 
@@ -81,7 +82,7 @@
                     <img src="{{ asset('services/maximmize/maximize.png') }}" alt="Phnom Penh skyline"
                         class="w-full h-[350px] object-cover">
 
-                    <div class="flex flex-col gap-4">
+                    <div class="flex sm:px-[1rem] px-[2rem] flex-col gap-4">
                         <p class="text-black text-[15px] leading-relaxed">
                             Managing a rental property requires time, expertise, and consistent attention to detail. CWD
                             Realty &amp; Hospitality provides comprehensive property management services that help
@@ -105,29 +106,29 @@
 
 
     {{-- What is Property Management? --}}
-    <section class="relative bg-white">
-        <div class="max-w-[1550px] mx-auto px-6 py-16">
 
-            <div class="flex flex-col lg:flex-row gap-8 items-start -ml-24">
-
+    <section class="relative bg-white overflow-hidden">
+        <div class="max-w-[1550px] mx-auto px-4 sm:px-6 py-12 sm:py-16">
+            <div
+                class="flex flex-col items-center gap-6 min-[700px]:flex-row min-[700px]:items-start min-[700px]:gap-8 min-[1024px]:-ml-24">
                 {{-- LEFT: black placeholder block --}}
-                <div class="bg-[#000000] w-full lg:w-[55%] h-[420px] lg:h-[500px]"></div>
-
-                {{-- RIGHT: blue content card --}}
                 <div
-                    class="relative z-[200] text-[#2f6ba7] pointer-events-none w-full lg:w-[35%] lg:mt-[3rem]">
+                    class="bg-[#000000] w-full min-[700px]:w-[35%] h-[380px] sm:h-[460px] min-[700px]:h-[560px] lg:h-[600px]">
+                </div>
+                {{-- RIGHT: blue content card --}}
+                <div class="relative z-[200] mt-[-1rem] text-[#2f6ba7] pointer-events-none w-full min-[700px]:w-[55%]">
                     {{-- Gold accent bar --}}
-                    <div class="h-[8px] w-[85%] ml-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
+                    <div
+                        class="h-[10px] sm:h-[15px] w-[55%] mr-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
                     </div>
-
                     <div class="bg-[#2A5A8A] w-full">
-                        <div class="px-6 sm:px-8 py-6 sm:py-8">
-                            <h2 class="text-[clamp(20px,2.5vw,26px)] leading-tight mb-4">
+                        <div class="px-6 sm:px-10 min-[1024px]:px-24 py-8 sm:py-12 min-[1024px]:py-20">
+                            <h2 class="text-[clamp(22px,3vw,50px)] leading-tight mb-4">
                                 <span class="text-[#F4DEAC] font-normal block">What is</span>
-                                <span class="text-[#F4DEAC] font-bold block">Property Management?</span>
+                                <span class="text-[#F4DEAC] font-bold block">Property </span>
+                                <span class="text-[#F4DEAC] font-bold block">Management?</span>
                             </h2>
-
-                            <p class="text-white text-[13px] sm:text-[13.5px] leading-relaxed">
+                            <p class="text-white text-[clamp(15px,1.2vw,17px)] leading-relaxed">
                                 Property management is the professional administration of residential properties on
                                 behalf
                                 of owners. Our team oversees daily operations, tenant coordination, maintenance
@@ -139,10 +140,192 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+
+    {{-- auto move logo --}}
+    <x-auto_move.auto_move />
+    {{-- Property Management Services --}}
+
+    <section class="relative px-0 sm:px-[2rem] md:px-[3rem] w-full overflow-hidden mt-[5rem] sm:mt-[10rem]">
+
+        {{-- Background Image --}}
+        <img src="{{ asset('services/bg_img/bg_img.png') }}" alt="Property Management Services"
+            class="absolute inset-0 w-full h-full object-cover object-center">
+
+        {{-- Dark/optional overlay if needed --}}
+        {{-- <div class="absolute inset-0 bg-black/10"></div> --}}
+
+        {{-- Main Content --}}
+        <div class="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-16">
+
+            {{-- Heading + Intro --}}
+            <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-16">
+
+                {{-- Heading --}}
+                <h2 class="text-white text-[clamp(32px,4vw,44px)] leading-tight">
+                    <span class="font-normal block">
+                        Property
+                    </span>
+
+                    <span class="font-bold block">
+                        Management Services
+                    </span>
+                </h2>
+
+                {{-- Intro Text --}}
+                <p class="text-white text-[18px] leading-relaxed max-w-[420px] lg:mt-4">
+                    CWD Realty &amp; Hospitality offers comprehensive solutions across the property lifecycle.
+                </p>
+
+            </div>
+
+
+            {{-- Service Grid --}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+
+                {{-- Service 1 --}}
+                <div class="border-2 border-white p-6">
+                    <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
+                        Rental Marketing &amp; Listing
+                    </h4>
+
+                    <p class="text-white text-[18px] leading-relaxed">
+                        We promote your property across multiple marketing channels to attract qualified tenants
+                        and maximize occupancy.
+                    </p>
+                </div>
+
+
+                {{-- Service 2 --}}
+                <div class="border-2 border-white p-6">
+                    <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
+                        Tenant &amp; Guest Management
+                    </h4>
+
+                    <p class="text-white text-[18px] leading-relaxed">
+                        Our team manages inquiries, bookings, check-in, check-out, tenant communication, and
+                        ongoing customer support.
+                    </p>
+                </div>
+
+
+                {{-- Service 3 --}}
+                <div class="border-2 border-white p-6">
+                    <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
+                        Property Inspection
+                    </h4>
+
+                    <p class="text-white text-[18px] leading-relaxed">
+                        Helping buyers and investors discover quality residential opportunities in Cambodia.
+                    </p>
+                </div>
+
+
+                {{-- Service 4 --}}
+                <div class="border-2 border-white p-6">
+                    <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
+                        Maintenance Coordination
+                    </h4>
+
+                    <p class="text-white text-[18px] leading-relaxed">
+                        We coordinate cleaning, repairs, maintenance, and contractor services to keep your
+                        property in excellent condition.
+                    </p>
+                </div>
+
+
+                {{-- Service 5 --}}
+                <div class="border-2 border-white p-6">
+                    <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
+                        Rental Administration
+                    </h4>
+
+                    <p class="text-white text-[18px] leading-relaxed">
+                        We handle booking schedules, rental agreements, payment coordination, and owner
+                        reporting.
+                    </p>
+                </div>
+
+
+                {{-- Service 6 --}}
+                <div class="border-2 border-white p-6">
+                    <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
+                        Hospitality Management
+                    </h4>
+
+                    <p class="text-white text-[18px] leading-relaxed">
+                        Daily rental guests receive professional hospitality services to ensure a comfortable
+                        stay.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    {{-- Our Management Models --}}
+    <section class="relative bg-white">
+        <div class="max-w-[1550px] mx-auto sm:px-[5rem] px-[2rem] py-16 sm:py-24">
+
+            {{-- Heading --}}
+            <div class="mb-12">
+                <h2 class="text-[#2A5A8A] text-[clamp(32px,4vw,44px)] leading-tight">
+                    <span class="font-normal block">Our</span>
+                    <span class="font-normal block">Management</span>
+                    <span class="font-bold block">Models</span>
+                </h2>
+            </div>
+
+            {{-- Model cards --}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                {{-- Revenue Sharing --}}
+                <div class="flex flex-col">
+                    {{-- Image placeholder --}}
+                    <div class="bg-[#1a1a1a] w-full h-[280px] sm:h-[280px]"></div>
+
+                    {{-- Content --}}
+                    <div class="bg-[#2A5A8A] w-full flex-1">
+                        <div class="px-6 sm:px-8 py-8 sm:py-10">
+                            <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-bold mb-4">Revenue Sharing</h3>
+                            <p class="text-white text-[15px] leading-relaxed">
+                                Suitable for short-term rentals.
+                                Property owners receive rental income while CWD Realty &amp; Hospitality manages
+                                daily operations based on an agreed 10% management fee.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Long-Term Leasing Management --}}
+                <div class="flex flex-col">
+                    {{-- Image placeholder --}}
+                    <div class="bg-[#1a1a1a] w-full h-[280px] sm:h-[280px]"></div>
+
+                    {{-- Content --}}
+                    <div class="bg-[#2A5A8A] w-full flex-1">
+                        <div class="px-6 sm:px-8 py-8 sm:py-10">
+                            <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-bold mb-4">Long-Term Leasing
+                                Management</h3>
+                            <p class="text-white text-[15px] leading-relaxed">
+                                For long-term rental properties, we provide exclusive leasing management, tenant
+                                administration, and operational support while owners receive regular $400 monthly
+                                rental income and extra 5% if the daily renting exceed $400 according to the
+                                management agreement.
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
         </div>
     </section>
-
 @endsection

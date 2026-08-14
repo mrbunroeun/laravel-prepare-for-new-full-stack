@@ -371,7 +371,10 @@
 
 
     {{-- Why Choose CWD Realty & Hospitality --}}
-    <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
+
+
+
+    <section class="relative px-0 sm:px-[5rem] md:px-[3rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
 
             {{-- Heading --}}
@@ -390,10 +393,10 @@
                         'sm:col-span-2 sm:max-w-[calc(50%-12px)] sm:mx-auto lg:col-span-2 lg:col-start-4 lg:max-w-none lg:mx-0' =>
                             $index === 4,
                     ])>
-                        <h3 class="text-[#2A5A8A] text-[14px] sm:text-[15px] font-bold mb-3 leading-snug">
+                        <h3 class="text-[#2A5A8A] text-[15px] sm:text-[16px] font-bold mb-3 leading-snug">
                             {{ $feature['title'] }}
                         </h3>
-                        <p class="text-black text-[13px] sm:text-[13.5px] leading-relaxed">
+                        <p class="text-black text-[15px] leading-relaxed">
                             {{ $feature['description'] }}
                         </p>
                     </div>
@@ -405,7 +408,7 @@
 
 
     {{-- Business License & Credentials --}}
-    <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
+    <section class="relative px-0 sm:px-[5rem] md:px-[3rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
@@ -475,10 +478,10 @@
 
 
     {{-- Three-column image placeholders --}}
-    <section class="relative bg-white">
+    <section class="relative px-0 sm:px-[5rem] md:px-[3rem] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16">
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-[1350px] mx-auto">
 
                 <div class="bg-[#d9d9d9] w-full aspect-square"></div>
                 <div class="bg-[#d9d9d9] w-full aspect-square"></div>
