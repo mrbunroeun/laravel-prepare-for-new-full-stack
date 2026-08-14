@@ -481,7 +481,7 @@
     <section class="relative px-0 sm:px-[5rem] md:px-[3rem] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16">
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-[1350px] mx-auto">
+            <div class="grid grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 max-w-[1350px] mx-auto">
 
                 <div class="bg-[#d9d9d9] w-full aspect-square"></div>
                 <div class="bg-[#d9d9d9] w-full aspect-square"></div>
@@ -506,7 +506,7 @@
             [
                 'question' => 'Who are your typical clients?',
                 'answer' =>
-                    'Rates vary depending on property, unit type, and length of stay. Contact our team for current pricing and availability.',
+                    'ComingSoon',
             ],
         ];
 
@@ -514,7 +514,7 @@
             [
                 'question' => 'Why choose CWD Realty & Hospitality?',
                 'answer' =>
-                    'Pet policies vary by property. Please contact us before booking to confirm whether your property allows pets.',
+                    'ComingSoon',
             ],
         ];
     @endphp
