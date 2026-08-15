@@ -70,8 +70,8 @@ $properties = [
       a "Contact Us" link.
 --}}
 <section class="relative w-full bg-white">
-    <div class="w-full px-6 sm:px-8 lg:pl-0 lg:pr-14 py-14">
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-8 ml-auto w-full lg:w-[80%]">
+    <div class="w-full px-4 sm:px-8 lg:pl-0 lg:pr-14 py-10 sm:py-14">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 ml-auto w-full lg:w-[80%]">
 
             @foreach ($properties as $property)
                 <article
@@ -83,46 +83,42 @@ $properties = [
                     data-images="{{ json_encode($detailImages) }}" data-link="{{ $property['link'] }}"
                     tabindex="0" role="link" aria-label="View details for {{ $property['title'] }}">
 
-                    <div style="position:relative; height:190px; width:100%; overflow:hidden; flex-shrink:0;">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden shrink-0">
                         <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
-                            class="cwd-featured-card-img"
-                            style="width:100%; height:100%; object-fit:cover; transition:opacity .5s ease-out, transform .5s ease-out;">
+                            class="cwd-featured-card-img w-full h-full object-cover transition-all duration-500 ease-out">
 
                         {{-- Image position indicator: ● ○ ○, centered at the
                              bottom edge of the image. --}}
-                        <div class="cwd-featured-card-dots"
-                            style="position:absolute; bottom:12px; left:50%; transform:translateX(-50%); z-index:10; display:flex; align-items:center; gap:8px;"
+                        <div class="cwd-featured-card-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2"
                             aria-hidden="true">
                             @foreach ($detailImages as $i => $img)
-                                <span class="cwd-featured-card-dot"
-                                    style="border-radius:9999px; transition:all .3s; height:8px; width:8px; background:{{ $i === 0 ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
+                                <span class="cwd-featured-card-dot rounded-full transition-all duration-300 h-2 w-2"
+                                    style="background:{{ $i === 0 ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
                             @endforeach
                         </div>
                     </div>
 
-                    <div class="px-6 py-6 flex flex-col grow">
-                        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;"
-                            class="mb-3">
-                            <h3 class="text-[#2A5A8A] text-[clamp(18px,1.4vw,19px)] font-bold leading-snug">
+                    <div class="p-5 sm:p-6 flex flex-col grow">
+                        <div class="flex items-start justify-between gap-3 mb-3">
+                            <h3 class="text-[#2A5A8A] text-[18px] sm:text-[19px] font-bold leading-snug">
                                 {{ $property['title'] }}
                             </h3>
 
                             {{-- Prev/next mini-carousel controls: live in the content
                                  row next to the title, not over the photo. --}}
-                            <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
+                            <div class="flex items-center gap-2 shrink-0 pt-0.5">
                                 <button type="button" aria-label="Previous image"
-                                    class="cwd-featured-card-prev"
-                                    style="width:34px; height:34px; border-radius:9999px; background:#fff; border:1.5px solid #2A5A8A; color:#2A5A8A; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;"
+                                    class="cwd-featured-card-prev w-8 h-8 sm:w-[34px] sm:h-[34px] rounded-full bg-white border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-[#2A5A8A] hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5"
                                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                         stroke-width="2.5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M15 19l-7-7 7-7" />
                                     </svg>
                                 </button>
-                                <button type="button" aria-label="Next image" class="cwd-featured-card-next"
-                                    style="width:34px; height:34px; border-radius:9999px; background:#fff; border:1.5px solid #2A5A8A; color:#2A5A8A; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;"
+                                <button type="button" aria-label="Next image"
+                                    class="cwd-featured-card-next w-8 h-8 sm:w-[34px] sm:h-[34px] rounded-full bg-white border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-[#2A5A8A] hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5"
                                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                         stroke-width="2.5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -132,19 +128,19 @@ $properties = [
                             </div>
                         </div>
 
-                        <p class="text-black text-[15px] font-bold leading-snug mb-2">
+                        <p class="text-black text-[14.5px] sm:text-[15px] font-bold leading-snug mb-2">
                             {{ $property['subtitle'] }}
                         </p>
 
-                        <p class="text-black/70 text-[14px] leading-relaxed mb-4">
+                        <p class="text-black/70 text-[13.5px] sm:text-[14px] leading-relaxed mb-4">
                             {{ $property['description'] }}
                         </p>
 
                         <p class="text-black text-[14px] font-bold mb-2">Suitable for:</p>
-                        <ul class="mb-4 space-y-1">
+                        <ul class="mb-4 space-y-1.5">
                             @foreach ($property['suitableFor'] as $item)
-                                <li class="flex items-start gap-2 text-black/80 text-[14px] leading-relaxed">
-                                    <span class="mt-[9px] w-[5px] h-[5px] rounded-full bg-black/60 shrink-0"></span>
+                                <li class="flex items-start gap-2 text-black/80 text-[13.5px] sm:text-[14px] leading-relaxed">
+                                    <span class="mt-[8px] w-1.5 h-1.5 rounded-full bg-black/60 shrink-0"></span>
                                     <span>{{ $item }}</span>
                                 </li>
                             @endforeach

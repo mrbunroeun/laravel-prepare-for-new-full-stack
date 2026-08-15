@@ -16,8 +16,10 @@
 
         {{-- Heading --}}
         <div class="mb-8 lg:mb-10">
-            <p class="text-[#2A5A8A] text-[15px] font-normal mb-1">Discover</p>
-            <h2 class="text-[#2A5A8A] text-[clamp(24px,3vw,32px)] font-bold">Wealth Mansion</h2>
+            <h2 class="text-[#2A5A8A] text-[clamp(22px,3vw,30px)] leading-tight">
+                <span class="font-normal block">Discover</span>
+                <span class="font-bold block">Wealth Mansion</span>
+            </h2>
         </div>
 
         {{-- Mobile/tablet: column layout, arrows on top, single-column
