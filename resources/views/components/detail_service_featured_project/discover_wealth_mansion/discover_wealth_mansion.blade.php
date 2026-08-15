@@ -2,10 +2,10 @@
     // Replace these with your actual existing image paths — keep the
     // same 4 images you already use for this section.
     $discoverImages = [
-        asset('discover/wealth_mansion_1.png'),
-        asset('discover/wealth_mansion_2.png'),
-        asset('discover/wealth_mansion_3.png'),
-        asset('discover/wealth_mansion_4.png'),
+        asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
+        asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
+        asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
+        asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
     ];
 @endphp
 
@@ -20,14 +20,13 @@
             <h2 class="text-[#2A5A8A] text-[clamp(24px,3vw,32px)] font-bold">Wealth Mansion</h2>
         </div>
 
-        {{-- Mobile/tablet: column layout, arrows on top, small centered
-             stack below (drops to 1 column). Desktop (lg+): row layout,
-             track on the left, arrows on the right, top-aligned so growth
-             pushes downward only. --}}
+        {{-- Mobile/tablet: column layout, arrows on top, single-column
+             stack below. Desktop (lg+): row layout, track on the left,
+             arrows on the right, top-aligned so growth pushes downward. --}}
         <div class="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-10">
 
             {{-- Navigation arrows: order-1 puts them above the track on
-                 mobile; lg:order-2 moves them to the right on desktop. --}}
+                 mobile/tablet; lg:order-2 moves them to the right on desktop. --}}
             <div class="flex items-center justify-center gap-3 shrink-0 order-1 lg:order-2">
                 <button id="discover-carousel-prev" type="button" aria-label="Previous image"
                     class="w-11 h-11 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer
@@ -51,28 +50,37 @@
 
             {{-- Height wrapper: JS sets a real pixel height here so anything
                  below the carousel is pushed down/up by actual document
-                 flow when the active image scales. order-2 keeps it below
-                 the arrows on mobile; lg:order-1 puts it on the left on
-                 desktop. --}}
+                 flow when the active image scales. Widths on every item
+                 top out at w-full below lg (and fit exactly within the
+                 track's own width at lg), so nothing can ever overflow
+                 horizontally — overflow-hidden here only clips vertically
+                 in practice. --}}
             <div id="discover-carousel-height-wrapper"
                 class="w-full lg:flex-1 lg:w-[80%] mx-auto overflow-hidden transition-[height] duration-500 ease-in-out order-2 lg:order-1">
 
-                {{-- Image group: small centered stack, single column, on
-                     mobile/tablet; single row of 4 on desktop. Images never
-                     change order — only size. On mobile the resting size is
-                     small, and the active image jumps to a much larger size. --}}
+                {{-- Image group: single column on phone/tablet, single row
+                     of 4 on desktop. Images never change order — only size. --}}
                 <div id="discover-carousel-track"
-                    class="flex flex-col lg:flex-row lg:flex-nowrap items-center lg:items-start justify-center gap-3 sm:gap-4 lg:gap-5 min-w-0">
+                    class="flex flex-col lg:flex-row lg:flex-nowrap items-center lg:items-start justify-center gap-3 sm:gap-4 lg:gap-5 min-w-0 w-full">
                     @foreach ($discoverImages as $index => $image)
+                        {{-- Both size states are written out as literal,
+                             complete Tailwind classes below (via data-base /
+                             data-active attributes) — no arbitrary-variant
+                             stacking, no CSS specificity guesswork. JS swaps
+                             the full class list directly with classList. --}}
                         <button type="button"
-                            class="discover-carousel-item relative shrink-0 overflow-hidden bg-gray-100 rounded-none
+                            data-base="w-full h-[200px] sm:h-[260px] lg:flex-1 lg:h-[246px] min-w-0"
+                            data-active-classes="w-full h-[300px] sm:h-[380px] lg:flex-[2] lg:h-[445px] min-w-0"
+                            class="discover-carousel-item relative overflow-hidden rounded-none
                             transition-all duration-500 ease-in-out
                             focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2
-                            {{ $index === 0 ? 'is-active' : '' }}"
+                            w-full h-[200px] sm:h-[260px] lg:flex-1 lg:h-[246px] min-w-0"
                             data-index="{{ $index }}" aria-label="Show image {{ $index + 1 }} as active"
                             aria-current="{{ $index === 0 ? 'true' : 'false' }}">
+                            {{-- object-contain: the full image always shows
+                                 inside its box, never cropped. --}}
                             <img src="{{ $image }}" alt="Wealth Mansion view {{ $index + 1 }}"
-                                class="w-full h-full object-cover transition-transform duration-500 ease-in-out">
+                                class="w-full h-full object-contain transition-transform duration-500 ease-in-out">
                         </button>
                     @endforeach
                 </div>
@@ -82,37 +90,6 @@
         </div>
     </div>
 </section>
-
-<style>
-    /* --- Mobile / tablet (below lg): small resting thumbnails, single
-       column. Clicking one makes it jump to a much bigger size — a big
-       visible size difference, not a subtle nudge. --}}
-    */
-    .discover-carousel-item {
-        width: clamp(90px, 28vw, 130px);
-        height: clamp(70px, 22vw, 100px);
-    }
-
-    .discover-carousel-item.is-active {
-        width: clamp(220px, 85vw, 320px);
-        height: clamp(180px, 68vw, 260px);
-    }
-
-    /* --- Desktop (lg+): original single-row-of-4 layout, top-aligned,
-       active image growing width+height in place. --}}
-    */
-    @media (min-width: 1024px) {
-        .discover-carousel-item {
-            width: clamp(130px, 16vw, 212px);
-            height: clamp(150px, 18vw, 246px);
-        }
-
-        .discover-carousel-item.is-active {
-            width: clamp(260px, 32vw, 424px);
-            height: clamp(280px, 34vw, 445px);
-        }
-    }
-</style>
 
 <script>
     (function() {
@@ -127,14 +104,23 @@
         const nextBtn = document.getElementById("discover-carousel-next");
         const images = Array.from(track.querySelectorAll("img"));
 
-        let activeIndex = items.findIndex(item => item.classList.contains("is-active"));
-        if (activeIndex === -1) activeIndex = 0;
+        // Read each item's base/active class lists straight from the data
+        // attributes (which contain literal Tailwind classes written in
+        // the Blade markup above), so JS never invents or guesses classes.
+        const itemClassSets = items.map((item) => ({
+            base: item.dataset.base.split(/\s+/).filter(Boolean),
+            active: item.dataset.activeClasses.split(/\s+/).filter(Boolean),
+        }));
+
+        // Every item starts on its base classes; index 0 is active by
+        // convention (matches the original markup's default state).
+        let activeIndex = 0;
 
         // --- Real height-following logic -----------------------------------
 
         // Measures the TRACK's own rendered height (not just the active
         // item) so this works whether images are laid out as a single row
-        // (desktop) or stacked in one column (mobile).
+        // (desktop) or stacked in one column (phone/tablet).
         function setWrapperHeight(instant = false) {
             const height = track.getBoundingClientRect().height;
 
@@ -149,7 +135,7 @@
             }
         }
 
-        // After the active class changes, wait a frame so the browser has
+        // After the active item changes, wait a frame so the browser has
         // applied the new width/height (and started its own transition)
         // before measuring — avoids measuring stale layout.
         function updateWrapperHeightAfterChange() {
@@ -164,8 +150,13 @@
 
         function render() {
             items.forEach((item, index) => {
+                const { base, active } = itemClassSets[index];
                 const isActive = index === activeIndex;
-                item.classList.toggle("is-active", isActive);
+                // Directly swap the literal class lists — no CSS selector
+                // logic involved, so there's nothing that can silently
+                // fail to apply.
+                item.classList.remove(...(isActive ? base : active));
+                item.classList.add(...(isActive ? active : base));
                 item.setAttribute("aria-current", isActive ? "true" : "false");
             });
             updateWrapperHeightAfterChange();
@@ -187,11 +178,8 @@
 
         // --- Initial setup, image load, and resize handling --------------
 
-        items.forEach((item, index) => {
-            const isActive = index === activeIndex;
-            item.classList.toggle("is-active", isActive);
-            item.setAttribute("aria-current", isActive ? "true" : "false");
-        });
+        // Apply the active state to item 0 on load (matches markup default).
+        render();
 
         setWrapperHeight(true);
 
@@ -203,8 +191,8 @@
             }
         });
 
-        // Recalculate on resize — also covers the mobile↔desktop breakpoint
-        // switch, since that changes both column count and active-item sizing.
+        // Recalculate on resize — covers phone↔tablet↔desktop breakpoint
+        // switches, since Tailwind's sm:/lg: classes change sizing there.
         let resizeRaf = null;
         window.addEventListener("resize", () => {
             if (resizeRaf) cancelAnimationFrame(resizeRaf);
