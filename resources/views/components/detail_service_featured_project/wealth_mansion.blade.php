@@ -81,55 +81,48 @@
 
     <section class="relative bg-white overflow-x-clip">
 
-        {{-- Full-bleed wrapper: both the gold bar and the navy block break out
-         to span the entire viewport width, edge-to-edge — same breakout
-         technique used elsewhere (`w-screen` + negative 50vw margins).
-         `overflow-x-clip` on the section stops this from creating a
-         horizontal scrollbar. --}}
         <div class="relative w-screen left-1/2 right-1/2 -mx-[50vw]">
 
-            {{-- Gold accent bar: flush against the left edge, partial width,
-             sits on the white background just above the navy block. --}}
-            <div class="h-[15px] w-full max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+            {{-- Gold accent bar, aligned to the same container as "Modern condominium..." --}}
+            <div class="max-w-[1600px] mx-auto">
+                <div class="h-[15px] w-full max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+            </div>
 
             {{-- Full-width navy block --}}
             <div class="bg-[#2A5A8A]">
-                {{-- Content is pulled in close to the left edge — small
-                 left padding only, not centered — matching the reference
-                 where the text sits almost flush with the gold bar above it. --}}
-                <div class="max-w-[700px] pl-6 sm:pl-8 lg:pl-10 pr-6 py-14 lg:py-20">
+                {{-- Container matches "Modern condominium residences..." above.
+         On mobile/tablet the text stays centered inside this container;
+         from lg breakpoint up, it's pushed ~20% of the container's
+         width to the right. --}}
+                <div class="max-w-[1600px] mx-auto">
+                    <div class="max-w-[700px] mx-auto text-left lg:mx-0 lg:ml-[18%] lg:text-left px-[3rem] py-14 lg:py-20">
 
-                    <h2 class="text-[clamp(28px,4vw,42px)] leading-tight mb-6">
-                        <span class="text-[#F4DEAC] font-normal">About </span><span class="text-[#F4DEAC] font-bold">Wealth
-                            Mansion</span>
-                    </h2>
+                        <h2 class="text-[clamp(28px,4vw,42px)] leading-tight mb-6">
+                            <span class="text-[#F4DEAC] font-normal">About </span><span
+                                class="text-[#F4DEAC] font-bold">Wealth
+                                Mansion</span>
+                        </h2>
 
-                    <p class="text-white text-[15px] leading-relaxed mb-4">
-                        Wealth Mansion is a residential condominium project offering a range of unit layouts designed
-                        for different lifestyles and investment requirements.
-                    </p>
+                        <p class="text-white text-[15px] leading-relaxed mb-4">
+                            Wealth Mansion is a residential condominium project offering a range of unit layouts designed
+                            for different lifestyles and investment requirements.
+                        </p>
 
-                    <p class="text-white text-[15px] leading-relaxed">
-                        CWD Realty &amp; Hospitality provides buyers with information about available unit types, layouts,
-                        pricing, and purchasing procedures to help them make informed property decisions.
-                    </p>
+                        <p class="text-white text-[15px] leading-relaxed">
+                            CWD Realty &amp; Hospitality provides buyers with information about available unit types,
+                            layouts,
+                            pricing, and purchasing procedures to help them make informed property decisions.
+                        </p>
 
+                    </div>
                 </div>
             </div>
-
         </div>
 
     </section>
 
 
-
-
-
-
-
-
-
-
+    <x-detail_service_featured_project.discover_wealth_mansion.discover_wealth_mansion/>
 
 
 
