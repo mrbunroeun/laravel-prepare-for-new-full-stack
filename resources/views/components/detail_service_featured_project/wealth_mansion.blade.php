@@ -154,15 +154,11 @@
     @endphp
 
     <section class="relative w-full bg-white mt-12 sm:mt-20 md:mt-28 py-14 sm:py-20 md:py-28 overflow-hidden">
-        {{-- Background image: ~80% width sticking to the right --}}
+        {{-- Background image: ~80% width sticking to the right (original image, no overlays or blur) --}}
         <div class="absolute top-0 right-0 bottom-0 w-full lg:w-[80%] z-0 pointer-events-none">
             <img src="{{ asset('services/wealth_mansion/compare_wealth_mainsion/for_weatch_mansion.png') }}" 
                  alt="Wealth Mansion Interior" 
                  class="w-full h-full object-cover object-center lg:object-right">
-            
-            {{-- Warm yellow/white gradient on the left edge matching mockup --}}
-            <div class="absolute inset-y-0 left-0 w-full sm:w-1/2 lg:w-2/5 bg-gradient-to-r from-white via-white/80 sm:via-[#f6e6c4]/60 to-transparent"></div>
-            <div class="absolute inset-0 bg-[#edd7a6]/15 mix-blend-multiply"></div>
         </div>
 
         <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
@@ -199,96 +195,76 @@
     </section>
 
     {{-- Why Consider Wealth Mansion? --}}
-    <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white py-16 sm:py-20">
-        <div class="max-w-[1400px] mx-auto px-6">
+    @php
+        $whyConsiderFeatures = [
+            [
+                'number' => '01.',
+                'title' => 'A Property Project with Golden Visa Eligibility',
+                'description' => "Wealth Mansion offers an opportunity for eligible international investors to combine Cambodian property investment with a potential pathway to long-term residence through Cambodia's My 2nd Home (CM2H) program, commonly known as Cambodia's Golden Visa.",
+                'linkText' => 'Property Management Services',
+                'url' => url('/services/property-management'),
+            ],
+            [
+                'number' => '02.',
+                'title' => 'Multiple Unit Choices',
+                'description' => 'Different layouts allow buyers to select a residence based on lifestyle and investment objectives.',
+                'linkText' => 'Property Management Services',
+                'url' => url('/services/property-management'),
+            ],
+            [
+                'number' => '03.',
+                'title' => 'Residential & Investment Potential',
+                'description' => 'The range of unit sizes can accommodate both owner-occupiers and investors looking for rental opportunities.',
+                'linkText' => 'Property Management Services',
+                'url' => url('/services/property-management'),
+            ],
+            [
+                'number' => '04.',
+                'title' => 'Professional Property Support',
+                'description' => 'CWD Realty & Hospitality can assist buyers with property information, viewing arrangements, and transaction coordination.',
+                'linkText' => 'Property Management Services',
+                'url' => url('/services/property-management'),
+            ],
+            [
+                'number' => '05.',
+                'title' => 'Property Management Support',
+                'description' => 'For investors who intend to rent their unit, CWD can potentially provide property management and leasing services after purchase.',
+                'linkText' => 'Property Management Services',
+                'url' => url('/services/property-management'),
+            ],
+        ];
+    @endphp
+
+    <section class="relative px-4 sm:px-8 lg:px-14 z-[300] bg-white py-16 sm:py-24">
+        <div class="max-w-[1400px] mx-auto">
             {{-- Heading --}}
-            <h2 class="text-center text-[clamp(28px,4vw,42px)] leading-tight mb-12 sm:mb-16">
+            <h2 class="text-center text-[clamp(28px,4vw,44px)] leading-tight mb-12 sm:mb-16">
                 <span class="text-[#2A5A8A] font-normal">Why Consider </span>
                 <span class="text-[#2A5A8A] font-bold">Wealth Mansion?</span>
             </h2>
 
-            @php
-                $whyConsiderFeatures = [
-                    [
-                        'number' => '01',
-                        'title' => 'Prime Waterfront Location in Chroy Changvar',
-                        'description' => 'Strategically positioned along the Mekong and Tonle Sap riverfront peninsula, offering panoramic water views and convenient minutes-away connectivity to Phnom Penh’s central business district.',
-                        'linkText' => 'Learn more about the area',
-                        'url' => url('/contact-us'),
-                    ],
-                    [
-                        'number' => '02',
-                        'title' => 'Comprehensive Luxury Lifestyle Facilities',
-                        'description' => 'Equipped with first-class residential amenities including an infinity swimming pool, sky garden lounge, state-of-the-art fitness center, and round-the-clock security and concierge.',
-                        'linkText' => 'Explore lifestyle & amenities',
-                        'url' => url('/contact-us'),
-                    ],
-                    [
-                        'number' => '03',
-                        'title' => 'High Rental Yield & Capital Appreciation',
-                        'description' => 'Exceptional investment potential driven by growing expatriate housing demand, multinational corporate tenants, and dynamic satellite city infrastructure expansions.',
-                        'linkText' => 'View investment highlights',
-                        'url' => url('/contact-us'),
-                    ],
-                    [
-                        'number' => '04',
-                        'title' => 'Iconic Architectural Landmark & River Panoramas',
-                        'description' => '45-storey landmark tower boasting curved architectural aesthetics, abundant natural lighting, private balconies, and maximized ventilation across all residential layouts.',
-                        'linkText' => 'Discover building design',
-                        'url' => url('/contact-us'),
-                    ],
-                    [
-                        'number' => '05',
-                        'title' => 'Professional Management & Hospitality by CWD',
-                        'description' => 'Seamless turnkey asset management including tenant acquisition, lease management, routine maintenance, and transparent monthly investor reporting.',
-                        'linkText' => 'About CWD management',
-                        'url' => url('/services/property-management'),
-                    ],
-                ];
-
-                $whyRowOne = array_slice($whyConsiderFeatures, 0, 3);
-                $whyRowTwo = array_slice($whyConsiderFeatures, 3);
-            @endphp
-
-            {{-- Row 1: 3 columns --}}
-            <div id="why-consider-row-one" class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch mb-6 sm:mb-8">
-                @foreach ($whyRowOne as $feature)
-                    <div class="why-consider-card group h-full w-full flex flex-col justify-between p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] hover:shadow-xl transition-all duration-300">
+            {{-- 
+                Responsive Layout:
+                - Desktop (lg): 3 cards in row 1, 2 cards centered in row 2 (same width).
+                - Tablet (md / sm): 2 columns, with 5th card centered on row 3.
+                - Mobile: 1 column centered.
+            --}}
+            <div class="flex flex-wrap justify-center gap-6 sm:gap-7 items-stretch">
+                @foreach ($whyConsiderFeatures as $feature)
+                    <div class="why-consider-card w-full sm:w-[calc(50%-0.9rem)] lg:w-[calc(33.333%-1.2rem)] flex flex-col justify-between p-6 sm:p-7 md:p-8 bg-white border-[2px] border-[#4A88BE] shadow-sm hover:shadow-md transition-all duration-300">
                         <div>
-                            <span class="text-[36px] sm:text-[42px] font-bold leading-none mb-4 block text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                            <span class="text-[34px] sm:text-[38px] font-bold leading-none mb-2.5 block text-[#2A5A8A]">
                                 {{ $feature['number'] }}
                             </span>
-                            <h3 class="text-[17px] font-bold text-[#2A5A8A] group-hover:text-white mb-3 leading-snug transition-colors duration-200">
+                            <h3 class="text-[15.5px] sm:text-[16.5px] font-bold text-[#2A5A8A] mb-3 leading-snug">
                                 {{ $feature['title'] }}
                             </h3>
-                            <p class="text-[14px] leading-relaxed text-black/75 group-hover:text-white/90 transition-colors duration-200">
+                            <p class="text-[13.5px] sm:text-[14px] leading-relaxed text-black/75">
                                 {{ $feature['description'] }}
                             </p>
                         </div>
-                        <a href="{{ $feature['url'] }}" class="inline-flex items-center gap-1.5 pt-5 text-[13.5px] font-semibold text-[#1479B9] group-hover:text-[#F4DEAC] transition-colors duration-200 mt-auto">
-                            <span>{{ $feature['linkText'] }}</span>
-                            <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">&rarr;</span>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-
-            {{-- Row 2: 2 cards centered --}}
-            <div id="why-consider-row-two" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-[920px] mx-auto items-stretch">
-                @foreach ($whyRowTwo as $feature)
-                    <div class="why-consider-card group h-full w-full flex flex-col justify-between p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] hover:shadow-xl transition-all duration-300">
-                        <div>
-                            <span class="text-[36px] sm:text-[42px] font-bold leading-none mb-4 block text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
-                                {{ $feature['number'] }}
-                            </span>
-                            <h3 class="text-[17px] font-bold text-[#2A5A8A] group-hover:text-white mb-3 leading-snug transition-colors duration-200">
-                                {{ $feature['title'] }}
-                            </h3>
-                            <p class="text-[14px] leading-relaxed text-black/75 group-hover:text-white/90 transition-colors duration-200">
-                                {{ $feature['description'] }}
-                            </p>
-                        </div>
-                        <a href="{{ $feature['url'] }}" class="inline-flex items-center gap-1.5 pt-5 text-[13.5px] font-semibold text-[#1479B9] group-hover:text-[#F4DEAC] transition-colors duration-200 mt-auto">
+                        <a href="{{ $feature['url'] }}"
+                            class="inline-flex items-center gap-2 pt-6 text-[13.5px] sm:text-[14px] font-medium text-[#2C78BA] hover:text-[#163049] group transition-colors duration-200 mt-auto">
                             <span>{{ $feature['linkText'] }}</span>
                             <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">&rarr;</span>
                         </a>
@@ -298,7 +274,7 @@
         </div>
     </section>
 
-    {{-- Exclusive Lifestyle & Amenities --}}
+    {{-- Facilities & Lifestyle --}}
     <section class="relative bg-white overflow-x-clip">
         <div class="relative w-screen left-1/2 right-1/2 -mx-[50vw]">
             {{-- Gold accent bar --}}
@@ -309,74 +285,64 @@
             {{-- Full-width navy block --}}
             <div class="bg-[#2A5A8A] py-16 lg:py-24">
                 <div class="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
                         
-                        {{-- LEFT: 2x3 photo collage grid --}}
-                        <div class="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                        {{-- LEFT: 3x2 photo grid with NO GAP and NO TEXT --}}
+                        <div class="lg:col-span-7 grid grid-cols-3 gap-0 overflow-hidden shadow-2xl">
                             @php
-                                $amenityImages = [
-                                    ['src' => asset('home/latest_activities/1img.png'), 'label' => 'Infinity Swimming Pool'],
-                                    ['src' => asset('home/latest_activities/2img.png'), 'label' => 'Panoramic View Lounge'],
-                                    ['src' => asset('home/latest_activities/3img.png'), 'label' => 'Modern Fitness Center'],
-                                    ['src' => asset('home/latest_activities/4img.png'), 'label' => 'Sky Garden & Terrace'],
-                                    ['src' => asset('home/latest_activities/5img.png'), 'label' => 'Grand Lobby & Reception'],
-                                    ['src' => asset('home/latest_activities/6img.png'), 'label' => 'Dining & Leisure Area'],
+                                $facilityPhotos = [
+                                    asset('home/latest_activities/1img.png'),
+                                    asset('home/latest_activities/2img.png'),
+                                    asset('home/latest_activities/3img.png'),
+                                    asset('home/latest_activities/4img.png'),
+                                    asset('home/latest_activities/5img.png'),
+                                    asset('home/latest_activities/6img.png'),
                                 ];
                             @endphp
-                            @foreach ($amenityImages as $img)
-                                <div class="relative h-[130px] sm:h-[150px] overflow-hidden group bg-[#163049]">
-                                    <img src="{{ $img['src'] }}" alt="{{ $img['label'] }}"
-                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2 sm:p-2.5">
-                                        <span class="text-white text-[11px] sm:text-[12px] font-medium leading-tight drop-shadow">
-                                            {{ $img['label'] }}
-                                        </span>
-                                    </div>
+                            @foreach ($facilityPhotos as $photo)
+                                <div class="relative w-full aspect-square overflow-hidden group bg-[#163049]">
+                                    <img src="{{ $photo }}" alt="Wealth Mansion Facility"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                                 </div>
                             @endforeach
                         </div>
 
-                        {{-- RIGHT: Lifestyle description & checklist --}}
-                        <div class="lg:col-span-6 text-left">
-                            <h2 class="text-[clamp(28px,4vw,42px)] leading-tight mb-4">
-                                <span class="text-[#F4DEAC] font-normal">Exclusive </span>
-                                <span class="text-[#F4DEAC] font-bold">Lifestyle &amp; Amenities</span>
+                        {{-- RIGHT: Facilities & Lifestyle info --}}
+                        <div class="lg:col-span-5 text-left">
+                            <h2 class="text-[#F4DEAC] text-[clamp(32px,4vw,50px)] font-normal leading-[1.15] mb-5">
+                                Facilities &amp;<br>Lifestyle
                             </h2>
 
-                            <p class="text-white/90 text-[15px] leading-relaxed mb-6">
-                                Wealth Mansion delivers a refined urban oasis featuring an extensive collection of lifestyle amenities designed for wellness, relaxation, and everyday hospitality.
+                            <p class="text-white text-[15px] leading-relaxed mb-4">
+                                Use cards for verified facilities<br>such as:
                             </p>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-8">
-                                @php
-                                    $amenityList = [
-                                        'Infinity Edge Swimming Pool',
-                                        'Fully Equipped Fitness Gym',
-                                        'Sky Garden Observation Deck',
-                                        '24/7 Security & CCTV Monitoring',
-                                        'Dedicated Concierge Service',
-                                        'Kids Play & Recreation Zone',
-                                        'Executive Meeting Lounges',
-                                        'Covered Multi-Level Parking',
-                                    ];
-                                @endphp
-                                @foreach ($amenityList as $item)
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-5 h-5 rounded-full bg-[#F4DEAC]/20 border border-[#F4DEAC] flex items-center justify-center shrink-0">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-[#F4DEAC]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                            </svg>
-                                        </div>
-                                        <span class="text-white text-[14px] font-medium">{{ $item }}</span>
-                                    </div>
-                                @endforeach
-                            </div>
-
-                            <a href="{{ url('/contact-us') }}"
-                                class="inline-flex items-center gap-2 border-[2px] border-[#F4DEAC] text-[#F4DEAC] px-6 py-3 text-[14px] font-semibold hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-all duration-200">
-                                <span>Inquire About Amenities</span>
-                                <span aria-hidden="true">&rarr;</span>
-                            </a>
+                            <ul class="space-y-1.5 text-white/95 text-[14.5px] sm:text-[15px]">
+                                <li class="flex items-center gap-2.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
+                                    <span>Swimming Pool</span>
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
+                                    <span>Fitness Facilities</span>
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
+                                    <span>Security</span>
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
+                                    <span>Parking</span>
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
+                                    <span>Common Areas</span>
+                                </li>
+                                <li class="flex items-center gap-2.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
+                                    <span>Building Management</span>
+                                </li>
+                            </ul>
                         </div>
 
                     </div>
@@ -392,63 +358,58 @@
                 
                 {{-- LEFT: Heading & Overview --}}
                 <div class="lg:col-span-5">
-                    <h2 class="text-[#2A5A8A] text-[clamp(30px,4vw,44px)] leading-tight mb-5">
+                    <h2 class="text-[#2A5A8A] text-[clamp(32px,4.5vw,50px)] leading-[1.15] mb-6">
                         <span class="font-normal block">Investment</span>
                         <span class="font-bold block">Opportunity</span>
                     </h2>
-                    <p class="text-black/80 text-[15px] leading-relaxed mb-6">
-                        Wealth Mansion presents an exceptional residential asset combining riverfront prestige, attractive rental yield projections, and sustained long-term capital growth in Phnom Penh’s most promising peninsula.
+                    <h3 class="text-black font-bold text-[14.5px] sm:text-[15px] mb-2 leading-snug">
+                        Buying for Residence or Rental?
+                    </h3>
+                    <p class="text-black/80 text-[13.5px] sm:text-[14px] leading-relaxed">
+                        Wealth Mansion may appeal to<br class="hidden sm:inline"> two major buyer groups:
                     </p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start gap-3 text-black/80 text-[14px]">
-                            <span class="w-2 h-2 rounded-full bg-[#1479B9] mt-2 shrink-0"></span>
-                            <span>Foreign buyers eligible for 100% freehold strata title ownership.</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-black/80 text-[14px]">
-                            <span class="w-2 h-2 rounded-full bg-[#1479B9] mt-2 shrink-0"></span>
-                            <span>Strong occupancy driven by expat executive demand and waterfront appeal.</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-black/80 text-[14px]">
-                            <span class="w-2 h-2 rounded-full bg-[#1479B9] mt-2 shrink-0"></span>
-                            <span>Turnkey rental management &amp; tenant leasing supported directly by CWD.</span>
-                        </li>
-                    </ul>
                 </div>
 
                 {{-- RIGHT: 2 Navy Feature Cards --}}
-                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="bg-[#2A5A8A] p-7 md:p-8 flex flex-col justify-between shadow-lg">
-                        <div>
-                            <h3 class="text-[#F4DEAC] text-[18px] md:text-[20px] font-bold mb-3 leading-snug">
-                                Rental Yield Potential
-                            </h3>
-                            <div class="h-px bg-white/25 mb-4"></div>
-                            <p class="text-white/90 text-[14px] leading-relaxed mb-6">
-                                Projected gross rental returns supported by comprehensive property leasing, hospitality management, and consistent executive tenant placements.
-                            </p>
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
+                    {{-- Card 1: Home Buyers --}}
+                    <div>
+                        <div class="h-[6px] w-[110px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+                        <div class="bg-[#2A5A8A] p-7 md:p-8 flex flex-col justify-between shadow-lg min-h-[220px]">
+                            <div>
+                                <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-normal mb-3 leading-snug">
+                                    Home Buyers
+                                </h3>
+                                <p class="text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed mb-6">
+                                    For buyers looking for a condominium residence suitable for personal living.
+                                </p>
+                            </div>
+                            <a href="{{ url('/services/property-sales') }}"
+                                class="inline-flex items-center gap-1.5 text-white/90 hover:text-[#F4DEAC] text-[13.5px] sm:text-[14px] font-medium transition-colors mt-auto">
+                                <span>Ask About Rental Management</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
                         </div>
-                        <a href="{{ url('/services/property-sales') }}"
-                            class="inline-flex items-center gap-2 text-[#F4DEAC] text-[14px] font-semibold hover:underline mt-auto">
-                            <span>Explore Rental Options</span>
-                            <span aria-hidden="true">&rarr;</span>
-                        </a>
                     </div>
 
-                    <div class="bg-[#2A5A8A] p-7 md:p-8 flex flex-col justify-between shadow-lg">
-                        <div>
-                            <h3 class="text-[#F4DEAC] text-[18px] md:text-[20px] font-bold mb-3 leading-snug">
-                                Property Appreciation
-                            </h3>
-                            <div class="h-px bg-white/25 mb-4"></div>
-                            <p class="text-white/90 text-[14px] leading-relaxed mb-6">
-                                Situated in the high-growth Chroy Changvar infrastructure zone benefiting from newly built bridges, lifestyle centers, and riverfront developments.
-                            </p>
+                    {{-- Card 2: Property Investors --}}
+                    <div>
+                        <div class="h-[6px] w-[110px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+                        <div class="bg-[#2A5A8A] p-7 md:p-8 flex flex-col justify-between shadow-lg min-h-[220px]">
+                            <div>
+                                <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-normal mb-3 leading-snug">
+                                    Property Investors
+                                </h3>
+                                <p class="text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed mb-6">
+                                    For investors seeking residential property that can potentially be placed into CWD's rental management portfolio.
+                                </p>
+                            </div>
+                            <a href="{{ url('/services/property-management') }}"
+                                class="inline-flex items-center gap-1.5 text-white/90 hover:text-[#F4DEAC] text-[13.5px] sm:text-[14px] font-medium transition-colors mt-auto">
+                                <span>Ask About Rental Management</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
                         </div>
-                        <a href="{{ url('/contact-us') }}"
-                            class="inline-flex items-center gap-2 text-[#F4DEAC] text-[14px] font-semibold hover:underline mt-auto">
-                            <span>View Market Insights</span>
-                            <span aria-hidden="true">&rarr;</span>
-                        </a>
                     </div>
                 </div>
 
