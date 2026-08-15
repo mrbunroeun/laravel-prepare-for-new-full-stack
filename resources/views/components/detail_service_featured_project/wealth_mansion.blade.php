@@ -642,20 +642,20 @@
                 <div class="flex items-start gap-4 sm:gap-6 lg:gap-8 max-w-[580px]">
                     <span class="h-[2px] w-20 sm:w-28 lg:w-36 shrink-0 bg-[#c9a15c] mt-3.5"></span>
                     <div class="flex flex-col items-start">
-                        <h2 class="text-[#163049] text-[clamp(20px,2.4vw,28px)] font-bold leading-tight mb-4">
+                        <h2 class="text-[#204a74] text-[clamp(20px,2.4vw,28px)] font-bold leading-tight mb-4">
                             Looking for a home or investment<br class="hidden sm:inline"> property in Phnom Penh?
                         </h2>
-                        <p class="text-[#163049]/80 text-[14px] sm:text-[14.5px] leading-relaxed mb-6">
+                        <p class="text-[#204a74] text-[14px] sm:text-[14.5px] leading-relaxed mb-6">
                             Let CWD Realty &amp; Hospitality help you find the right unit.
                         </p>
-                        <div class="flex flex-col items-start gap-3">
+                        <div class="flex flex-col items-start gap-1.5">
                             <a href="{{ url('/services/properties/wealth-mansion') }}"
-                                class="inline-flex items-center gap-2 bg-[#2A5A8A] text-[#ECCFA0] px-6 py-2.5 text-[14px] font-semibold hover:bg-[#163049] transition-colors shadow-sm">
+                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] font-medium transition-all">
                                 <span>View Available Units</span>
                                 <span aria-hidden="true">&rarr;</span>
                             </a>
                             <a href="{{ url('/contact-us') }}"
-                                class="inline-flex items-center gap-1.5 text-[#2A5A8A] hover:text-[#163049] text-[14px] font-medium transition-colors">
+                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] font-medium transition-all">
                                 <span>Contact Sales Team</span>
                                 <span aria-hidden="true">&rarr;</span>
                             </a>

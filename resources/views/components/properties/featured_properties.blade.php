@@ -36,41 +36,6 @@
                         'Professionally managed condominium units including premium residences and penthouses.',
                     'link' => url('/properties/private-residential-collection'),
                 ],
-                [
-                    'image' => asset('home/latest_activities/2img.png'),
-                    'title' => 'Private Residential Collection',
-                    'description' =>
-                        'Professionally managed condominium units including premium residences and penthouses.',
-                    'link' => url('/properties/private-residential-collection'),
-                ],
-                [
-                    'image' => asset('home/latest_activities/2img.png'),
-                    'title' => 'Private Residential Collection',
-                    'description' =>
-                        'Professionally managed condominium units including premium residences and penthouses.',
-                    'link' => url('/properties/private-residential-collection'),
-                ],
-                [
-                    'image' => asset('home/latest_activities/2img.png'),
-                    'title' => 'Private Residential Collection',
-                    'description' =>
-                        'Professionally managed condominium units including premium residences and penthouses.',
-                    'link' => url('/properties/private-residential-collection'),
-                ],
-                [
-                    'image' => asset('home/latest_activities/2img.png'),
-                    'title' => 'Private Residential Collection',
-                    'description' =>
-                        'Professionally managed condominium units including premium residences and penthouses.',
-                    'link' => url('/properties/private-residential-collection'),
-                ],
-                [
-                    'image' => asset('home/latest_activities/2img.png'),
-                    'title' => 'Private Residential Collection',
-                    'description' =>
-                        'Professionally managed condominium units including premium residences and penthouses.',
-                    'link' => url('/properties/private-residential-collection'),
-                ],
             ];
         @endphp
 
@@ -240,6 +205,11 @@
                     setButtons(atStart, atEnd);
                 }
 
+                function scrollToRightEnd() {
+                    track.scrollLeft = track.scrollWidth - track.clientWidth;
+                    updateButtons();
+                }
+
                 track.addEventListener("scroll", () => {
                     clearTimeout(scrollTimer);
                     scrollTimer = setTimeout(updateButtons, 100);
@@ -252,7 +222,19 @@
                 if (prevBtnMobile) prevBtnMobile.addEventListener("click", () => scrollByStep(-1));
                 if (nextBtnMobile) nextBtnMobile.addEventListener("click", () => scrollByStep(1));
 
-                window.addEventListener("resize", updateButtons);
-                updateButtons();
+                window.addEventListener("resize", () => {
+                    updateButtons();
+                });
+
+                // Scroll to the very right product on initial load / refresh
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', () => {
+                        requestAnimationFrame(scrollToRightEnd);
+                    });
+                } else {
+                    requestAnimationFrame(scrollToRightEnd);
+                }
+                window.addEventListener('load', scrollToRightEnd);
+                setTimeout(scrollToRightEnd, 150);
             })();
         </script>
