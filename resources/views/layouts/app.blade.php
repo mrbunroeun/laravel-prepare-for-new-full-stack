@@ -7,7 +7,7 @@
     <meta name="description" content="@yield('description', 'Laravel Application')">
 
     <title>@yield('title', config('app.name', 'Laravel'))</title>
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
