@@ -61,7 +61,7 @@
                 {{-- Image group: single column on phone/tablet, single row
                      of 4 on desktop. Images never change order — only size. --}}
                 <div id="discover-carousel-track"
-                    class="flex flex-col lg:flex-row lg:flex-nowrap items-center lg:items-start justify-center gap-3 sm:gap-4 lg:gap-5 min-w-0 w-full">
+                    class="flex flex-col lg:flex-row lg:flex-nowrap items-start justify-center gap-3 sm:gap-4 lg:gap-5 min-w-0 w-full">
                     @foreach ($discoverImages as $index => $image)
                         {{-- Both size states are written out as literal,
                              complete Tailwind classes below (via data-base /
@@ -69,18 +69,18 @@
                              stacking, no CSS specificity guesswork. JS swaps
                              the full class list directly with classList. --}}
                         <button type="button"
-                            data-base="w-full h-[200px] sm:h-[260px] lg:flex-1 lg:h-[246px] min-w-0"
-                            data-active-classes="w-full h-[300px] sm:h-[380px] lg:flex-[2] lg:h-[445px] min-w-0"
+                            data-base="w-full h-[200px] sm:h-[260px] lg:flex-1 lg:h-[246px] min-w-0 lg:self-start"
+                            data-active-classes="w-full h-[300px] sm:h-[380px] lg:flex-[2] lg:h-[445px] min-w-0 lg:self-start lg:-mt-6"
                             class="discover-carousel-item relative overflow-hidden rounded-none
                             transition-all duration-500 ease-in-out
                             focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2
-                            w-full h-[200px] sm:h-[260px] lg:flex-1 lg:h-[246px] min-w-0"
+                            w-full h-[200px] sm:h-[260px] lg:flex-1 lg:h-[246px] min-w-0 lg:self-start"
                             data-index="{{ $index }}" aria-label="Show image {{ $index + 1 }} as active"
                             aria-current="{{ $index === 0 ? 'true' : 'false' }}">
                             {{-- object-contain: the full image always shows
                                  inside its box, never cropped. --}}
                             <img src="{{ $image }}" alt="Wealth Mansion view {{ $index + 1 }}"
-                                class="w-full h-full object-contain transition-transform duration-500 ease-in-out">
+                                class="w-full h-full object-contain object-position-top transition-transform duration-500 ease-in-out">
                         </button>
                     @endforeach
                 </div>

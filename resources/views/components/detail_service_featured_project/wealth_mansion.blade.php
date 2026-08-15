@@ -121,70 +121,89 @@
 
     </section>
 
-
+{{-- discover section --}}
     <x-detail_service_featured_project.discover_wealth_mansion.discover_wealth_mansion/>
 
 
+     {{-- below discover section --}}
+    <x-detail_service_featured_project.discover_wealth_mansion.properties_below_discovere/>
 
-    {{--  Whether you're purchasing --}}
-
-    <section
-        class="px-0 sm:px-[5rem] md:px-[3rem] relative z-[300] mt-[0.5rem] sm:mt-[1rem] md:mt-[1.3rem] lg:mt-[2rem] bg-[#2A5A8A]">
-        <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[425px] ml-auto">
-                <p class="text-white text-[15px] leading-relaxed">
-                    Whether you're purchasing your first condominium, expanding your investment portfolio, or selling
-                    residential property, CWD Realty &amp; Hospitality provides professional guidance throughout every stage
-                    of the transaction.
-                </p>
-            </div>
-        </div>
-    </section>
-
-
-    {{-- Maximize Your Property Investment --}}
-
-    <section class="relative z-[300]  bg-white">
-        <div class="max-w-[1500px] mx-auto  py-16 max-[940px]:py-12">
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-26 items-start">
-
-                {{-- LEFT: image + body text --}}
-                <div class="flex flex-col mt-0 lg:mt-[-7rem] gap-8">
-                    <img src="{{ asset('services/maximmize/maximize.png') }}" alt="Phnom Penh skyline"
-                        class="w-full h-[350px] object-cover">
-
-                    <div class="flex sm:px-[1rem] px-[2rem] justify-end gap-4">
-                        <p class="text-black text-[15px] max-w-[420px] leading-relaxed">
-                            Our team understands the Cambodian property market and works closely with buyers, investors, and
-                            property owners to ensure a smooth, transparent, and successful sales process.
-                        </p>
-                    </div>
-                </div>
-
-                {{-- RIGHT: heading + gold line --}}
-                <div class="flex flex-row  ">
-                    <h2
-                        class="text-[#2A5A8A] sm:px-[1rem] px-[2rem] text-[clamp(28px,3.5vw,38px)] font-normal leading-tight">
-                        Professional Property Sales for Buyers, Investors & Owners
-                    </h2>
-
-                    <div class="h-[2px] w-full bg-[#c9a463] ml-[2rem] mt-6"></div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    {{-- feature project  --}}
-
-    <x-feature_project_properties_sale.featured_project />
 
     {{-- auto move logo --}}
-
     <x-auto_move.auto_move />
+
+
+    @php
+    // Comparison table data: each column has a heading + list of rows,
+    // and the row lists are index-aligned across all three columns
+    // (row 0 of "Unit Type" corresponds to row 0 of "Best For" and
+    // "Key Feature", etc.) so they line up visually and semantically.
+$compareColumns = [
+    [
+        'heading' => 'Unit Type',
+        'items' => ['Studio', '1 Bedroom', '2 Bedrooms', '3 Bedrooms'],
+    ],
+    [
+        'heading' => 'Best For',
+        'items' => ['Singles / Investors', 'Couples / Professionals', 'Small families', 'Families'],
+    ],
+    [
+        'heading' => 'Key Feature',
+        'items' => ['Compact living', 'Private bedroom', 'Additional space + balcony', 'Spacious layout'],
+    ],
+];
+@endphp
+
+{{--
+    LAYOUT:
+      Two-column split on desktop (lg+): heading on the left, three
+      stacked-color comparison cards on the right, each column the same
+      width with the same row count so everything lines up in a grid.
+      On mobile/tablet the heading sits above and the three columns stack
+      vertically, full width.
+--}}
+<section class="relative w-full bg-white px-0 sm:px-[5rem] md:px-[3rem]">
+    <div class="max-w-[1400px] mx-auto px-6 py-16 md:py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-10 lg:gap-16 items-center">
+
+            {{-- LEFT: heading --}}
+            <div>
+                <h2 class="text-[#2A5A8A] text-[clamp(30px,4vw,44px)] leading-tight">
+                    <span class="font-normal block">Compare</span>
+                    <span class="font-bold block">Wealth Mansion</span>
+                    <span class="font-bold block">Unit Types</span>
+                </h2>
+            </div>
+
+            {{-- RIGHT: comparison columns --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
+                @foreach ($compareColumns as $column)
+                    <div class="bg-[#2A5A8A] px-6 py-6 md:px-7 md:py-7">
+                        <h3 class="text-[#F4DEAC] text-[17px] md:text-[18px] font-bold mb-3">
+                            {{ $column['heading'] }}
+                        </h3>
+                        <div class="h-px bg-white/30 mb-4"></div>
+                        <ul class="space-y-3">
+                            @foreach ($column['items'] as $item)
+                                <li class="text-white text-[15px] leading-snug">
+                                    {{ $item }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endforeach
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    
+
+   
+
+
+
 
     {{-- Why Choose CWD Realty & Hospitality --}}
     <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white">
