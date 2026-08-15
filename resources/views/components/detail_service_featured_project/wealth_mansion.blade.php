@@ -354,33 +354,33 @@
     {{-- Investment Opportunity --}}
     <section class="relative w-full bg-white py-16 lg:py-24">
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-20 items-center">
                 
                 {{-- LEFT: Heading & Overview --}}
                 <div class="lg:col-span-5">
-                    <h2 class="text-[#2A5A8A] text-[clamp(32px,4.5vw,50px)] leading-[1.15] mb-6">
+                    <h2 class="text-[#2A5A8A] text-[clamp(32px,4.5vw,50px)] leading-[1.1] mb-8">
                         <span class="font-normal block">Investment</span>
                         <span class="font-bold block">Opportunity</span>
                     </h2>
                     <h3 class="text-black font-bold text-[14.5px] sm:text-[15px] mb-2 leading-snug">
                         Buying for Residence or Rental?
                     </h3>
-                    <p class="text-black/80 text-[13.5px] sm:text-[14px] leading-relaxed">
+                    <p class="text-black/80 text-[13.5px] sm:text-[14px] leading-snug">
                         Wealth Mansion may appeal to<br class="hidden sm:inline"> two major buyer groups:
                     </p>
                 </div>
 
                 {{-- RIGHT: 2 Navy Feature Cards --}}
-                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5 items-stretch">
                     {{-- Card 1: Home Buyers --}}
-                    <div>
-                        <div class="h-[6px] w-[110px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
-                        <div class="bg-[#2A5A8A] p-7 md:p-8 flex flex-col justify-between shadow-lg min-h-[220px]">
+                    <div class="flex flex-col h-full">
+                        <div class="h-[8px] sm:h-[10px] w-[140px] sm:w-[150px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a] shrink-0"></div>
+                        <div class="bg-[#2A5A8A] p-7 sm:p-8 md:p-9 flex flex-col justify-between shadow-lg grow">
                             <div>
-                                <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-normal mb-3 leading-snug">
+                                <h3 class="text-[#F4DEAC] text-[22px] sm:text-[25px] font-normal mb-3 leading-snug">
                                     Home Buyers
                                 </h3>
-                                <p class="text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed mb-6">
+                                <p class="text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed mb-8">
                                     For buyers looking for a condominium residence suitable for personal living.
                                 </p>
                             </div>
@@ -393,14 +393,14 @@
                     </div>
 
                     {{-- Card 2: Property Investors --}}
-                    <div>
-                        <div class="h-[6px] w-[110px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
-                        <div class="bg-[#2A5A8A] p-7 md:p-8 flex flex-col justify-between shadow-lg min-h-[220px]">
+                    <div class="flex flex-col h-full">
+                        <div class="h-[8px] sm:h-[10px] w-[140px] sm:w-[150px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a] shrink-0"></div>
+                        <div class="bg-[#2A5A8A] p-7 sm:p-8 md:p-9 flex flex-col justify-between shadow-lg grow">
                             <div>
-                                <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-normal mb-3 leading-snug">
+                                <h3 class="text-[#F4DEAC] text-[22px] sm:text-[25px] font-normal mb-3 leading-snug">
                                     Property Investors
                                 </h3>
-                                <p class="text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed mb-6">
+                                <p class="text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed mb-8">
                                     For investors seeking residential property that can potentially be placed into CWD's rental management portfolio.
                                 </p>
                             </div>
@@ -418,109 +418,108 @@
     </section>
 
     {{-- Property Availability --}}
-    <section class="relative w-full bg-white py-14 lg:py-20 border-t border-gray-100">
+    <section class="relative w-full bg-white py-16 lg:py-24">
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-20 items-center">
                 
-                {{-- LEFT: Media Preview Showcase --}}
-                <div class="lg:col-span-6">
-                    <div class="relative bg-[#163049] overflow-hidden shadow-xl aspect-video sm:aspect-[16/10] flex items-center justify-center group">
+                {{-- LEFT: Property Image with Top-Right Gold Accent Bar --}}
+                <div class="lg:col-span-7">
+                    <div class="h-[8px] sm:h-[10px] w-1/2 ml-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+                    <div class="relative w-full aspect-[16/10] overflow-hidden shadow-xl bg-[#163049]">
                         <img src="{{ asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png') }}" 
-                             alt="Wealth Mansion Building Preview" 
-                             class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center p-6 text-center">
-                            <div class="w-14 h-14 rounded-full bg-[#F4DEAC] text-[#163049] flex items-center justify-center mb-3 shadow-lg group-hover:scale-110 transition-transform">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </div>
-                            <span class="text-white text-[16px] font-bold tracking-wide uppercase">Wealth Mansion Tower</span>
-                            <span class="text-[#F4DEAC] text-[13px] font-medium mt-1">45 Storeys • Waterfront Landmark</span>
-                        </div>
+                             alt="Wealth Mansion Property Availability" 
+                             class="w-full h-full object-cover">
                     </div>
                 </div>
 
-                {{-- RIGHT: Availability Specs & Inquiries --}}
-                <div class="lg:col-span-6">
-                    <h2 class="text-[#2A5A8A] text-[clamp(28px,4vw,40px)] leading-tight mb-2">
+                {{-- RIGHT: Availability Details --}}
+                <div class="lg:col-span-5 text-left">
+                    <h2 class="text-[#2A5A8A] text-[clamp(32px,4.5vw,50px)] leading-[1.1] mb-6">
                         <span class="font-normal block">Property</span>
                         <span class="font-bold block">Availability</span>
                     </h2>
-                    <p class="text-black/70 text-[14.5px] mb-6">
-                        Wealth Mansion Unit Status &amp; Key Specifications Overview
+
+                    <h3 class="text-[#1479B9] font-bold text-[16px] sm:text-[17px] mb-2 leading-snug">
+                        Available Units
+                    </h3>
+
+                    <p class="text-black/80 text-[13.5px] sm:text-[14px] leading-relaxed mb-4">
+                        Approximately 30% Available<br>
+                        Availability can change as units are sold.
                     </p>
 
-                    <div class="divide-y divide-gray-200 border-y border-gray-200 mb-8">
-                        <div class="py-3 flex justify-between items-center text-[14px]">
-                            <span class="text-black/60 font-medium">Total Project Units</span>
-                            <span class="text-[#2A5A8A] font-bold">1,184 Residential Units</span>
-                        </div>
-                        <div class="py-3 flex justify-between items-center text-[14px]">
-                            <span class="text-black/60 font-medium">Building Height</span>
-                            <span class="text-[#2A5A8A] font-bold">45 Storeys</span>
-                        </div>
-                        <div class="py-3 flex justify-between items-center text-[14px]">
-                            <span class="text-black/60 font-medium">Ownership Structure</span>
-                            <span class="text-[#2A5A8A] font-bold">Freehold Strata Title (Foreign 100%)</span>
-                        </div>
-                        <div class="py-3 flex justify-between items-center text-[14px]">
-                            <span class="text-black/60 font-medium">Available Unit Types</span>
-                            <span class="text-[#2A5A8A] font-bold">Studio, 1BR, 2BR, 3BR</span>
-                        </div>
-                        <div class="py-3 flex justify-between items-center text-[14px]">
-                            <span class="text-black/60 font-medium">Handover Status</span>
-                            <span class="text-[#2A5A8A] font-bold">Ready for Move-in &amp; Handover</span>
-                        </div>
-                    </div>
+                    <p class="text-black/80 text-[13.5px] sm:text-[14px] mb-2 font-normal">
+                        For the latest:
+                    </p>
 
-                    <div class="flex flex-wrap items-center gap-4">
-                        <a href="{{ url('/contact-us') }}"
-                            class="inline-flex items-center gap-2 bg-[#2A5A8A] text-white px-7 py-3.5 text-[14.5px] font-semibold hover:bg-[#163049] transition-colors shadow-md">
-                            <span>Request Price List &amp; Inventory</span>
-                            <span aria-hidden="true">&rarr;</span>
-                        </a>
-                        <a href="{{ url('/properties') }}"
-                            class="inline-flex items-center gap-2 border-[2px] border-[#2A5A8A] text-[#2A5A8A] px-6 py-3 text-[14.5px] font-semibold hover:bg-[#2A5A8A] hover:text-white transition-colors">
-                            <span>Browse Units</span>
-                        </a>
-                    </div>
+                    <ul class="space-y-1 text-black/80 text-[13.5px] sm:text-[14px] mb-6">
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-black/70 shrink-0"></span>
+                            <span>Unit availability</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-black/70 shrink-0"></span>
+                            <span>Floor</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-black/70 shrink-0"></span>
+                            <span>Unit size</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-black/70 shrink-0"></span>
+                            <span>Orientation</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-black/70 shrink-0"></span>
+                            <span>Price</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-black/70 shrink-0"></span>
+                            <span>Payment terms</span>
+                        </li>
+                    </ul>
+
+                    <a href="{{ url('/contact-us') }}"
+                        class="inline-flex items-center gap-1.5 text-[#1479B9] hover:text-[#163049] text-[13.5px] sm:text-[14px] font-medium transition-colors">
+                        <span>Contact CWD Realty &amp; Hospitality</span>
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
                 </div>
 
             </div>
-        </div>
     </section>
 
     {{-- Property Viewing Banner --}}
-    <section class="relative w-full overflow-hidden bg-cover bg-right sm:bg-center py-20 lg:py-28"
-        style="background-image: url('{{ asset('hero_section/hero_section.png') }}');">
-        <div class="absolute inset-0 bg-[#0d2235]/40 backdrop-blur-[0.5px]"></div>
+    <section class="relative w-full overflow-hidden min-h-[380px] lg:h-[390px] flex items-center bg-[#0d2235]">
+        {{-- Background Image --}}
+        <img src="{{ asset('services/wealth_mansion/properties_viewing/properties_viewing.png') }}" 
+             alt="Wealth Mansion Property Viewing" 
+             class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none">
 
-        <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
-            <div class="max-w-[620px]">
+        <div class="relative z-10 w-full max-w-[1450px] mx-auto px-6 sm:px-10 lg:px-14 py-8 lg:py-0">
+            <div class="max-w-[550px]">
                 {{-- Gold accent bar --}}
-                <div class="h-[12px] max-w-[20rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+                <div class="h-[7px] sm:h-[8px] w-[220px] sm:w-[250px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
 
-                <div class="bg-[#163049]/90 backdrop-blur-md p-8 sm:p-10 shadow-2xl">
-                    <h2 class="text-[#F4DEAC] text-[clamp(24px,3.5vw,36px)] font-bold leading-tight mb-2">
-                        Property Viewing
+                <div class="bg-[#133352]/90 backdrop-blur-sm p-7 sm:p-8 md:p-9 shadow-2xl">
+                    <h2 class="text-[clamp(28px,3.2vw,42px)] leading-tight mb-2.5">
+                        <span class="text-[#F4DEAC] font-normal">Property </span>
+                        <span class="text-[#F4DEAC] font-bold">Viewing</span>
                     </h2>
-                    <h3 class="text-white text-[17px] sm:text-[19px] font-semibold mb-4">
-                        Schedule a Private Showroom Tour
+
+                    <h3 class="text-white font-bold text-[14px] sm:text-[15px] mb-2.5 leading-snug">
+                        Visit Wealth Mansion
                     </h3>
-                    <p class="text-white/90 text-[14.5px] leading-relaxed mb-8">
-                        Experience Wealth Mansion firsthand. Contact our dedicated property specialists to arrange a personalized unit tour or live video consultation.
+
+                    <p class="text-white/90 text-[13px] sm:text-[13.5px] leading-relaxed mb-6">
+                        Our team can arrange property viewings and provide information about available units.
                     </p>
 
-                    <div class="flex flex-wrap items-center gap-4">
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[14px] sm:text-[15px] font-semibold px-6 py-3 hover:bg-[#F4DEAC] hover:text-[#163049] transition-colors">
-                            Book a Viewing
-                        </a>
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[2px] border-white/70 text-white text-[14px] sm:text-[15px] font-semibold px-6 py-3 hover:bg-white hover:text-[#163049] transition-colors">
-                            Contact Us
-                        </a>
-                    </div>
+                    <a href="{{ url('/contact-us') }}"
+                        class="inline-flex items-center gap-1.5 text-[#F4DEAC] text-[13.5px] sm:text-[14px] font-bold hover:translate-x-1 transition-all group">
+                        <span>Schedule a Property Viewing</span>
+                        <span aria-hidden="true">&rarr;</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -530,55 +529,31 @@
     @php
         $faqLeft = [
             [
-                'question' => 'What types of units are available at Wealth Mansion?',
-                'answer' => 'Wealth Mansion features a selection of modern Studio, 1-Bedroom, 2-Bedroom with Balcony, and 3-Bedroom residences, thoughtfully planned for comfort, privacy, and long-term rental demand.',
+                'question' => 'What unit types are available at Wealth Mansion?',
+                'answer' => 'The project offers studio, 1-bedroom, 2-bedroom with balcony, and 3-bedroom layouts.',
             ],
             [
-                'question' => 'Can foreign nationals purchase units with freehold ownership?',
-                'answer' => 'Yes, foreign buyers can legally own condominium units at Wealth Mansion under 100% freehold Strata Title ownership from the 1st floor upward in accordance with Cambodian property laws.',
-            ],
-            [
-                'question' => 'Can I buy a unit and have CWD manage it for rental leasing?',
-                'answer' => 'Yes. CWD Realty & Hospitality provides complete end-to-end property management including tenant sourcing, leasing contracts, rent collection, routine maintenance, and monthly financial reports.',
-            ],
-            [
-                'question' => 'What lifestyle amenities are provided for residents?',
-                'answer' => 'Residents enjoy an infinity pool with river panoramas, modern fitness center, sky garden lounge, 24/7 security with CCTV, concierge services, and dedicated secure parking.',
-            ],
-            [
-                'question' => 'What is the handover timeline and unit condition?',
-                'answer' => 'Wealth Mansion is completed and ready for immediate handover and occupancy, with selected fully-fitted or furnished units available for immediate move-in or rental leasing.',
+                'question' => 'Is Wealth Mansion suitable for investment?',
+                'answer' => 'CommingSoon',
             ],
         ];
 
         $faqRight = [
             [
-                'question' => 'What is the step-by-step purchasing procedure?',
-                'answer' => 'The purchase procedure includes unit selection & reservation deposit, signing the Sales and Purchase Agreement (SPA), following the payment schedule, and title transfer with CWD legal support.',
+                'question' => 'Can CWD help manage my unit after purchase?',
+                'answer' => 'CommingSoon',
             ],
             [
-                'question' => 'Are flexible payment terms or financing options available?',
-                'answer' => 'Yes, flexible stage payment schedules and bank loan assistance with recognized local and international partner banks are available for eligible buyers.',
-            ],
-            [
-                'question' => 'Can I arrange a private site viewing or virtual video tour?',
-                'answer' => 'Yes, our sales team arranges both on-site showroom walkthroughs and private virtual 360/video consultations for overseas investors and clients.',
-            ],
-            [
-                'question' => 'What are the expected rental yields in Chroy Changvar?',
-                'answer' => 'Chroy Changvar condominiums typically yield between 6% and 9% annually, benefiting from strong expatriate and professional tenant demand in a prime waterfront district.',
-            ],
-            [
-                'question' => 'How can I check the latest unit pricing and availability?',
-                'answer' => 'You can reach out to our property sales consultants via our website contact form, direct phone call, or email to receive the official up-to-date availability and price sheet.',
+                'question' => 'Can I view the property before purchasing?',
+                'answer' => 'CommingSoon',
             ],
         ];
     @endphp
 
-    <section class="relative px-0 sm:px-[5rem] bg-[#e5e4e4] py-16 sm:py-20">
-        <div class="max-w-[1400px] mx-auto px-6">
+    <section class="relative bg-[#f4f4f4] py-16 sm:py-24">
+        <div class="max-w-[1450px] mx-auto px-6 sm:px-10 lg:px-14">
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+            <h2 class="text-[clamp(32px,4.5vw,50px)] leading-[1.1] mb-10 sm:mb-14">
                 <span class="text-[#2A5A8A] font-normal block">Frequently</span>
                 <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
             </h2>
@@ -588,21 +563,21 @@
                 {{-- Left column --}}
                 <div class="faq-column flex flex-col gap-2.5">
                     @foreach ($faqLeft as $index => $faq)
-                        <div class="faq-item bg-[#f3f3f3] shadow-sm">
+                        <div class="faq-item bg-white shadow-sm overflow-hidden">
                             <button type="button"
-                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
+                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-4.5 bg-white cursor-pointer"
                                 aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
-                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-semibold">
+                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[14.5px] font-normal">
                                     {{ $faq['question'] }}
                                 </span>
                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="faq-arrow w-5 h-5 shrink-0 text-[#2A5A8A] transition-transform duration-200 {{ $index === 0 ? 'rotate-90' : '' }}"
+                                    class="faq-arrow w-3.5 h-3.5 shrink-0 text-[#2A5A8A] transition-transform duration-200 {{ $index === 0 ? 'rotate-90' : '' }}"
                                     fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M6 4l8 6-8 6V4z" />
                                 </svg>
                             </button>
                             <div class="faq-panel overflow-hidden transition-all duration-300 {{ $index === 0 ? 'max-h-[300px]' : 'max-h-0' }}">
-                                <div class="{{ $index === 0 ? 'bg-[#1479B9]' : 'bg-white' }} px-5 py-4 sm:px-6 sm:py-5">
+                                <div class="{{ $index === 0 ? 'bg-[#0B6FB8]' : 'bg-white' }} px-5 py-4 sm:px-6 sm:py-5">
                                     <p class="{{ $index === 0 ? 'text-white' : 'text-black/75' }} text-[13.5px] sm:text-[14px] leading-relaxed">
                                         {{ $faq['answer'] }}
                                     </p>
@@ -615,15 +590,15 @@
                 {{-- Right column --}}
                 <div class="faq-column flex flex-col gap-2.5">
                     @foreach ($faqRight as $faq)
-                        <div class="faq-item bg-[#f3f3f3] shadow-sm">
+                        <div class="faq-item bg-white shadow-sm overflow-hidden">
                             <button type="button"
-                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
+                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-4.5 bg-white cursor-pointer"
                                 aria-expanded="false">
-                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-semibold">
+                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[14.5px] font-normal">
                                     {{ $faq['question'] }}
                                 </span>
                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="faq-arrow w-5 h-5 shrink-0 text-[#2A5A8A] transition-transform duration-200"
+                                    class="faq-arrow w-3.5 h-3.5 shrink-0 text-[#2A5A8A] transition-transform duration-200"
                                     fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M6 4l8 6-8 6V4z" />
                                 </svg>
@@ -642,48 +617,60 @@
         </div>
     </section>
 
-    {{-- Looking for your next stay / Find Your Wealth Mansion Residence --}}
-    <section class="relative mt-[2rem] sm:mt-[5rem] max-w-[1600px] mx-auto pb-16">
+    {{-- Find Your Wealth Mansion Residence --}}
+    <section class="relative mt-[4rem] sm:mt-[6rem] lg:mt-[8rem] max-w-[1600px] mx-auto">
         <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty Wealth Mansion residences"
-                class="w-full h-auto min-h-[220px] object-cover">
+                class="w-full h-auto min-h-[260px] object-cover shadow-sm">
 
-            <div class="relative max-w-[540px] mt-6 px-6 min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
-                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight drop-shadow-md">
-                    Find Your Wealth Mansion Residence
+            <div class="relative max-w-[540px] mt-6 px-6 min-[900px]:ml-[-8rem] min-[900px]:mt-[-7.5rem] min-[900px]:px-0">
+                <h2 class="text-[#DCC597] text-[clamp(28px,4.5vw,50px)] font-bold leading-[1.15] drop-shadow-md">
+                    Find Your<br>
+                    Wealth Mansion<br>
+                    Residence
                 </h2>
             </div>
         </div>
+    </section>
 
-        <div class="max-w-[460px] mt-8 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-6 min-[900px]:px-0">
-            <div class="h-[2px] w-24 bg-[#c9a463] mb-4"></div>
-            <h3 class="text-[#2A5A8A] text-[18px] sm:text-[20px] font-bold leading-snug mb-3">
-                Request Property Management &amp; Sales Consultation
-            </h3>
-            <p class="text-black/70 text-[14px] leading-relaxed mb-6">
-                Connect with our specialized real estate team for tailored unit selections, financing guidance, and comprehensive property management services.
-            </p>
+    {{-- Looking for a home or investment property in Phnom Penh? --}}
+    <section class="mt-16 sm:mt-24 md:mt-32 pb-24">
+        <div class="max-w-[1450px] mx-auto px-6 sm:px-10 lg:px-14">
+            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-14">
 
-            @php
-                $links = [
-                    ['label' => 'Property Leasing', 'url' => url('/services/property-sales'), 'active' => true],
-                    ['label' => 'Hospitality Services', 'url' => url('/services/property-management'), 'active' => false],
-                    ['label' => 'Property Listings', 'url' => url('/properties'), 'active' => false],
-                    ['label' => 'Contact Us', 'url' => url('/contact-us'), 'active' => false],
-                ];
-            @endphp
+                {{-- Left: Accent line on the left + Content --}}
+                <div class="flex items-start gap-4 sm:gap-6 lg:gap-8 max-w-[580px]">
+                    <span class="h-[2px] w-20 sm:w-28 lg:w-36 shrink-0 bg-[#c9a15c] mt-3.5"></span>
+                    <div class="flex flex-col items-start">
+                        <h2 class="text-[#163049] text-[clamp(20px,2.4vw,28px)] font-bold leading-tight mb-4">
+                            Looking for a home or investment<br class="hidden sm:inline"> property in Phnom Penh?
+                        </h2>
+                        <p class="text-[#163049]/80 text-[14px] sm:text-[14.5px] leading-relaxed mb-6">
+                            Let CWD Realty &amp; Hospitality help you find the right unit.
+                        </p>
+                        <div class="flex flex-col items-start gap-3">
+                            <a href="{{ url('/services/properties/wealth-mansion') }}"
+                                class="inline-flex items-center gap-2 bg-[#2A5A8A] text-[#ECCFA0] px-6 py-2.5 text-[14px] font-semibold hover:bg-[#163049] transition-colors shadow-sm">
+                                <span>View Available Units</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                            <a href="{{ url('/contact-us') }}"
+                                class="inline-flex items-center gap-1.5 text-[#2A5A8A] hover:text-[#163049] text-[14px] font-medium transition-colors">
+                                <span>Contact Sales Team</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-            <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200 shadow-sm">
-                @foreach ($links as $link)
-                    <a href="{{ $link['url'] }}"
-                        class="group flex items-center justify-between px-5 py-3.5 text-[15px] font-medium bg-white text-[#2A5A8A] transition-colors hover:bg-[#2A5A8A] hover:text-[#DCC597]">
-                        <span>{{ $link['label'] }}</span>
-                        <span aria-hidden="true" class="text-[#2A5A8A] transition-all group-hover:text-[#DCC597] group-hover:translate-x-1">
-                            &rarr;
-                        </span>
-                    </a>
-                @endforeach
-            </nav>
+                {{-- Right: image --}}
+                <div class="w-full lg:w-auto lg:shrink-0">
+                    <img src="{{ asset('home/professional_property/professional_property.png') }}"
+                        alt="CWD Realty professional properties"
+                        class="w-full lg:w-[520px] xl:w-[580px] h-auto object-cover shadow-sm">
+                </div>
+
+            </div>
         </div>
     </section>
 
