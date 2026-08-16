@@ -2,9 +2,9 @@
 @section('content')
     {{-- Hero image & content wrapper --}}
     <div class="relative w-full pt-[112px] min-[1161px]:pt-[120px]">
-        {{-- Hero container with responsive min-h --}}
-        <div class="relative w-full min-h-[440px] sm:min-h-[500px] md:min-h-[560px] lg:min-h-[620px] xl:min-h-[700px] overflow-hidden">
-            <img class="absolute inset-0 w-full h-full object-cover object-center"
+        {{-- Hero container: dynamic responsive height that shrinks on resize and caps max height --}}
+        <div class="relative w-full h-[420px] sm:h-[460px] md:h-[500px] lg:h-[540px] xl:h-[580px] max-h-[600px] overflow-hidden">
+            <img class="w-full h-full object-cover object-center"
                 src="{{ asset('services/private residential/Private Residential.png') }}" 
                 alt="Private Residential">
 
