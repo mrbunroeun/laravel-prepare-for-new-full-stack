@@ -14,14 +14,13 @@
             <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
             <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply">
                 <div class="px-0 py-10">
-                    <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)]  font-bold mb-6">
+                    <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)] font-bold mb-6">
                         <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
-                        <span class="text-[#F4DEAC]">CWD</span>
-                        <span class="text-[#F4DEAC] font-normal">Real Estate Agent &amp; Developer</span>
+                        <span class="text-[#F4DEAC] font-normal">Property <span class="font-bold">Leasing</span></span>
                     </h2>
 
                     <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-10">
-                        Your Trusted Property Management &amp; Hospitality Partner in Cambodia
+                        Flexible Property Leasing for<br>Short &amp; Long Stays
                     </h1>
 
                     <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
@@ -41,347 +40,406 @@
     </section>
 
 
-    {{-- CWD Realty & Hospitality --}}
+    {{-- Comfortable, professionally managed residences --}}
     <section
-        class="px-0 sm:px-[5rem] md:px-[3rem] relative z-[300] mt-[1rem] sm:mt-[2rem] md:mt-[2.3rem] lg:mt-[4rem] bg-[#2A5A8A]">
+        class="px-0 sm:px-[5rem] md:px-[3rem] relative z-[300] mt-[0.5rem] sm:mt-[1rem] md:mt-[1.3rem] lg:mt-[2rem] bg-[#2A5A8A]">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[750px]">
-                <h2 class="text-[clamp(22px,3vw,28px)] font-bold mb-6">
-                    <span class="text-[#F4DEAC]">CWD</span>
-                    <span class="text-[#F4DEAC] font-normal">Realty &amp; Hospitality</span>
-                </h2>
-
-                <p class="text-white  text-[15px] leading-relaxed">
-                    Specializes in condominium management, property leasing, rental management, and hospitality services in
-                    Phnom Penh. Whether you're a property owner seeking professional management or a guest looking for
-                    comfortable accommodation, we deliver reliable solutions with exceptional customer service.
+            <div class="max-w-[425px] ml-auto">
+                <p class="text-white text-[15px] leading-relaxed">
+                    Comfortable, professionally managed residences with flexible daily, weekly, and monthly rental options for business travelers, expatriates, tourists, and long-term residents in Cambodia.
                 </p>
             </div>
         </div>
     </section>
 
+    {{-- Find professionally managed properties in Phnom Penh. --}}
+    <section class="relative z-[300] bg-white">
+        <div class="max-w-[1500px] mx-auto py-16 max-[940px]:py-12">
 
-    {{-- Who We Are section 1st one --}}
-    <section class="relative px-0 sm:px-[5rem] md:px-[3rem] z-[300] bg-white">
-        <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[750px]">
-                <h2 class="text-[clamp(28px,4vw,40px)] mb-6">
-                    <span class="text-[#2A5A8A] font-normal">Who</span>
-                    <span class="text-[#2A5A8A] font-bold">We Are</span>
-                </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-26 items-start">
 
-                <h3 class="text-black max-w-[500px] text-[clamp(20px,2.5vw,26px)] font-semibold leading-tight mb-6">
-                    Professional Property &amp; Hospitality Solutions
-                </h3>
+                {{-- LEFT: image + body text --}}
+                <div class="flex flex-col mt-0 lg:mt-[-7rem] gap-8">
+                    <img src="{{ asset('home/latest_activities/3img.png') }}" alt="Golden Tower 322"
+                        class="w-full h-auto object-cover">
 
-                <p class="text-black text-[15px] leading-relaxed">
-                    CWD Realty &amp; Hospitality manages residential condominium properties while providing flexible rental
-                    options for travelers, expatriates, business professionals, and long-term residents. Our experienced
-                    multilingual team helps property owners maximize rental income while ensuring guests enjoy a comfortable
-                    stay.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    {{-- our services --}}
-    @php
-        $services = [
-            [
-                'number' => '01',
-                'title' => 'Property Management',
-                'description' =>
-                    'Professional management for condominium owners, including tenant coordination, maintenance supervision, occupancy management, and rental administration.',
-                'link' => url('/properties'),
-                'linkText' => 'View Details',
-            ],
-            [
-                'number' => '02',
-                'title' => 'Property Leasing',
-                'description' => 'Daily, weekly, monthly, and long-term rental services for residential condominiums.',
-                'link' => url('/properties'),
-                'linkText' => 'View Properties',
-            ],
-            [
-                'number' => '03',
-                'title' => 'Sales Services',
-                'description' => 'Helping buyers and investors discover quality residential properties in Cambodia.',
-                'link' => url('/contact-us'),
-                'linkText' => 'Learn More',
-            ],
-            [
-                'number' => '04',
-                'title' => 'Hospitality Services',
-                'description' =>
-                    'Airport transfers, guest assistance, city tours, housekeeping coordination, and personalized hospitality support.',
-                'link' => url('/contact-us'),
-                'linkText' => 'Explore Services',
-            ],
-        ];
-    @endphp
-
-    {{-- our services --}}
-    <section class="relative z-[300] px-0 sm:px-[5rem] md:px-[3rem] bg-none ">
-        <div class="max-w-[1400px] mx-auto px-6 sm:px-10 pt-16 pb-0 sm:pt-20">
-
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,36px)] min-[1200px]:mb-[7rem] mb-[2rem] mb-[clamp(2rem,5vw,5rem)] relative">
-                <span class="text-[#2f6ba7] font-normal">Our</span>
-                <span class="text-[#2f6ba7] font-bold">Services</span>
-            </h2>
-
-            {{-- Composition wrapper: image + dark block + cards --}}
-            <div
-                class="relative flex flex-col min-[1220px]:flex-row min-[1220px]:items-start min-h-[420px] sm:min-h-[520px]">
-
-                {{-- Property image (right side on desktop, full width on mobile) --}}
-                <div
-                    class="flex flex-col items-end w-full min-[1220px]:w-[850px] min-[1220px]:order-2 min-[1220px]:-mt-[7.5rem]">
-
-                    <div class="w-full h-[460px] sm:h-[640px] overflow-hidden">
-                        <img src="{{ asset('home/our_services/our_services.png') }}"
-                            alt="CWD Realty modern residential condominium tower in Phnom Penh"
-                            class="w-full h-full object-cover">
+                    <div class="flex sm:px-[1rem] px-[2rem] justify-end gap-4">
+                        <p class="text-black text-[15px] max-w-[420px] leading-relaxed">
+                            Whether you need a place for a few nights, several weeks, or an extended stay, CWD Realty &amp; Hospitality offers flexible rental options designed around your accommodation needs.
+                        </p>
                     </div>
-
-                    {{-- Gold accent bar --}}
-                    <div class="self-start w-[81%] h-[15px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
-                    </div>
-
                 </div>
 
-                {{-- Service cards grid --}}
-                <div
-                    class="relative w-full min-[1220px]:w-[54%] min-[1220px]:order-1 min-[1220px]:z-[30] min-[1220px]:-mr-[80px] min-[1220px]:mt-[68px] -mt-16 sm:-mt-20 min-[1220px]:mt-0 grid grid-cols-1 min-[770px]:grid-cols-2 gap-2 sm:gap-2.5 px-4 sm:px-0">
-                    @foreach ($services as $service)
-                        <div
-                            class="service-card bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col min-h-[150px] min-[1220px]:min-h-[145px]">
-                            <div class="flex items-start justify-between gap-2">
-                                <h3 class="text-[#F4DEAC] text-[16px] sm:text-[18px] font-bold leading-snug">
-                                    {{ $service['title'] }}
-                                </h3>
-                                <span class="text-[#F4DEAC] text-[26px] sm:text-[30px] font-light leading-none shrink-0">
-                                    {{ $service['number'] }}
-                                </span>
-                            </div>
+                {{-- RIGHT: heading + gold line --}}
+                <div class="flex flex-row">
+                    <h2
+                        class="text-[#2A5A8A] sm:px-[1rem] px-[2rem] text-[clamp(28px,3.5vw,38px)] font-normal leading-tight">
+                        Find professionally managed properties in Phnom Penh.
+                    </h2>
 
-                            <p class="text-white/90 text-[15px] sm:text-[16px] leading-relaxed mt-3">
-                                {{ $service['description'] }}
-                            </p>
+                    <div class="h-[2px] w-full bg-[#c9a463] ml-[2rem] mt-6"></div>
+                </div>
 
-                            <a href="{{ $service['link'] }}"
-                                class="text-[#F4DEAC] text-[11px] sm:text-[13px] font-medium mt-4 pt-4 inline-flex items-center gap-1 hover:underline mt-auto">
-                                {{ $service['linkText'] }} <span aria-hidden="true">→</span>
-                            </a>
+            </div>
+
+        </div>
+    </section>
+
+    {{-- Choose the Rental Option That Fits Your Stay --}}
+    <section class="relative w-full overflow-hidden z-[300] my-10 sm:my-16">
+        {{-- Background Image --}}
+        <img src="{{ asset('services/property_sales/find professionally.png') }}" alt="Rental Options Background"
+            class="absolute inset-0 w-full h-full object-cover object-center">
+
+        {{-- Main Content --}}
+        <div class="relative z-10 w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-12 lg:py-16">
+            <div id="rental-options-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 xl:gap-5 items-stretch">
+
+                {{-- Column 1: Heading --}}
+                <div class="flex flex-col justify-start pt-2 pr-2">
+                    <h2 class="text-white text-[clamp(26px,2.5vw,38px)] font-normal leading-[1.18]">
+                        Choose the Rental<br>
+                        <span class="text-[#F4DEAC] font-bold">Option That</span><br>
+                        <span class="text-[#F4DEAC] font-bold">Fits Your Stay</span>
+                    </h2>
+                </div>
+
+                {{-- Column 2 / Card 1: Daily & Weekly Rentals --}}
+                <div class="rental-option-card bg-white p-5 xl:p-6 flex flex-col justify-between h-full shadow-md">
+                    <div>
+                        <h3 class="text-[#2A5A8A] text-[18px] xl:text-[20px] font-bold mb-2">
+                            Daily &amp; Weekly Rentals
+                        </h3>
+                        <p class="text-black/80 text-[12.5px] xl:text-[13px] leading-relaxed mb-3.5">
+                            Our daily and weekly rental options provide flexibility for guests who need comfortable accommodation without committing to a long-term lease.
+                        </p>
+
+                        <h4 class="text-[#2A5A8A] text-[13px] xl:text-[13.5px] font-bold mb-1">
+                            Rates Starting From
+                        </h4>
+                        <div class="text-[#2A5A8A] text-[13px] font-medium leading-snug mb-1">
+                            <p>$35 / day</p>
+                            <p>$45 / day</p>
+                            <p>Up to $150 / day</p>
                         </div>
-                    @endforeach
+                        <p class="text-black/60 text-[11.5px] xl:text-[12px] leading-snug mb-3.5">
+                            Rates vary depending on the selected property, room type, and accommodation.
+                        </p>
+
+                        <h4 class="text-black text-[12.5px] xl:text-[13px] font-bold mb-1.5">
+                            Suitable For
+                        </h4>
+                        <ul class="text-black/80 text-[12px] xl:text-[12.5px] leading-relaxed space-y-0.5 list-disc pl-4 mb-4">
+                            <li>Business Travelers</li>
+                            <li>Tourists</li>
+                            <li>Short-Term Visitors</li>
+                            <li>Couples</li>
+                            <li>Expatriates</li>
+                            <li>Guests attending events or meetings in Phnom Penh</li>
+                        </ul>
+                    </div>
+
+                    <a href="{{ url('/properties') }}"
+                        class="inline-flex items-center gap-1 text-[#2A5A8A] text-[12.5px] xl:text-[13px] font-semibold hover:underline mt-auto pt-2">
+                        View Available Properties <span aria-hidden="true">&rarr;</span>
+                    </a>
                 </div>
 
-                <script>
-                    function equalizeCardHeights() {
-                        const cards = document.querySelectorAll('.service-card');
-                        if (!cards.length) return;
-                        cards.forEach(card => card.style.minHeight = '');
-                        let maxHeight = 0;
-                        cards.forEach(card => {
-                            maxHeight = Math.max(maxHeight, card.offsetHeight);
-                        });
-                        cards.forEach(card => card.style.minHeight = `${maxHeight}px`);
-                    }
+                {{-- Column 3 / Card 2: Monthly Rentals --}}
+                <div class="rental-option-card bg-white p-5 xl:p-6 flex flex-col justify-between h-full shadow-md">
+                    <div>
+                        <h3 class="text-[#2A5A8A] text-[18px] xl:text-[20px] font-bold mb-1">
+                            Monthly Rentals
+                        </h3>
+                        <h4 class="text-black text-[13px] xl:text-[13.5px] font-bold mb-1.5">
+                            Stay Longer, Pay Less Per Day
+                        </h4>
+                        <p class="text-black/80 text-[12.5px] xl:text-[13px] leading-relaxed mb-3.5">
+                            For guests who need accommodation for an extended period, monthly rental options provide a more practical and economical solution.
+                        </p>
 
-                    window.addEventListener('load', equalizeCardHeights);
-                    window.addEventListener('resize', equalizeCardHeights);
-                </script>
+                        <h4 class="text-[#2A5A8A] text-[13px] xl:text-[13.5px] font-bold mb-1">
+                            Monthly Rates
+                        </h4>
+                        <div class="text-[#2A5A8A] text-[13px] font-medium leading-snug mb-1">
+                            <p>$400 / month</p>
+                            <p>$450 / month</p>
+                        </div>
+                        <p class="text-black/60 text-[11.5px] xl:text-[12px] leading-snug mb-3.5">
+                            Monthly rates may vary depending on the property and available accommodation.
+                        </p>
+
+                        <h4 class="text-black text-[12.5px] xl:text-[13px] font-bold mb-1.5">
+                            Suitable For
+                        </h4>
+                        <ul class="text-black/80 text-[12px] xl:text-[12.5px] leading-relaxed space-y-0.5 list-disc pl-4 mb-4">
+                            <li>Expatriates</li>
+                            <li>Long-Term Residents</li>
+                            <li>Business Professionals</li>
+                            <li>Students</li>
+                            <li>Corporate Staff</li>
+                            <li>Guests relocating to Cambodia</li>
+                        </ul>
+                    </div>
+
+                    <a href="{{ url('/contact-us') }}"
+                        class="inline-flex items-center gap-1 text-[#2A5A8A] text-[12.5px] xl:text-[13px] font-semibold hover:underline mt-auto pt-2">
+                        Ask About Monthly Availability <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+
+                {{-- Column 4 / Card 3: Smoking & Non-Smoking Options --}}
+                <div class="rental-option-card bg-white p-5 xl:p-6 flex flex-col justify-between h-full shadow-md">
+                    <div>
+                        <h3 class="text-[#2A5A8A] text-[18px] xl:text-[20px] font-bold mb-2">
+                            Smoking &amp; Non-Smoking Options
+                        </h3>
+                        <p class="text-black/80 text-[12.5px] xl:text-[13px] leading-relaxed mb-3.5">
+                            We offer different accommodation options based on guest preference and property availability.
+                        </p>
+
+                        <div class="mb-3.5">
+                            <h4 class="text-[#2A5A8A] text-[13px] xl:text-[13.5px] font-bold mb-0.5">
+                                Non-Smoking
+                            </h4>
+                            <p class="text-[#2A5A8A] text-[13px] font-medium mb-1">
+                                From $35 / day
+                            </p>
+                            <p class="text-black/80 text-[12px] xl:text-[12.5px] leading-relaxed">
+                                A suitable choice for guests who prefer a clean, smoke-free accommodation environment.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="text-[#2A5A8A] text-[13px] xl:text-[13.5px] font-bold mb-0.5">
+                                Smoking
+                            </h4>
+                            <p class="text-[#2A5A8A] text-[13px] font-medium mb-1">
+                                From $45 / day
+                            </p>
+                            <p class="text-black/80 text-[12px] xl:text-[12.5px] leading-relaxed">
+                                Smoking accommodation is available where designated, subject to property availability.
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-
-            {{-- Bottom spacer --}}
-            <div class="h-8  sm:h-10 lg:h-16"></div>
         </div>
     </section>
 
-    {{-- Auto Move section --}}
-    <section class="bg-[#2A5A8A] h-[450px] sm:h-[500px] md:h-[600px] lg:h-[800px] mt-[-15rem]">
-        {{-- auto-move part --}}
-        <section class="absolute w-full flex mt-[20rem] justify-center ">
-
-            <img src="{{ asset('home/auto_move_logo/auto_move.png') }}" alt="CWD Realty auto-move logo"
-                class="w-full h-auto object-contain">
-
-            {{-- Scrolling text overlay --}}
-            <div class="absolute inset-0 flex items-center overflow-hidden pointer-events-none">
-                <div class="cwd-marquee-track flex items-center whitespace-nowrap">
-                    @for ($i = 0; $i < 12; $i++)
-                        <span class="text-[#F4DEAC] text-[clamp(14px,2vw,22px)] mx-6 sm:mx-10 shrink-0">
-                            <span class="font-bold">CWD</span> Real Estate Agent &amp; Developer
-                        </span>
-                    @endfor
-                </div>
-            </div>
-
-        </section>
-        <style>
-            .cwd-marquee-track {
-                width: max-content;
-                animation: cwd-marquee 45s linear infinite;
-            }
-
-            /* Pause on hover, if wanted */
-            .cwd-marquee-track:hover {
-                animation-play-state: paused;
-            }
-
-            @keyframes cwd-marquee {
-                from {
-                    transform: translateX(-50%);
+    @once
+        <script>
+            (function() {
+                function equalizeRentalCardHeights() {
+                    const cards = document.querySelectorAll('.rental-option-card');
+                    if (!cards.length) return;
+                    cards.forEach(card => card.style.minHeight = '');
+                    let maxH = 0;
+                    cards.forEach(card => {
+                        if (card.offsetHeight > maxH) maxH = card.offsetHeight;
+                    });
+                    cards.forEach(card => card.style.minHeight = maxH + 'px');
                 }
 
-                to {
-                    transform: translateX(0);
+                window.addEventListener('load', equalizeRentalCardHeights);
+                window.addEventListener('resize', equalizeRentalCardHeights);
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(equalizeRentalCardHeights);
                 }
-            }
-        </style>
-    </section>
+            })();
+        </script>
+    @endonce
 
 
-
-
-    {{-- Featured Properties: background image layer + card content layer, cards can extend above image's top edge --}}
-    <x-properties.featured_properties />
-
-
-
-
-
-
-    {{-- Who We Are section 2nd one --}}
-    <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
-        <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[750px]">
-                <h2 class="text-[clamp(28px,4vw,40px)] mb-6">
-                    <span class="text-[#2A5A8A] font-normal">Who</span>
-                    <span class="text-[#2A5A8A] font-bold">We Are</span>
-                </h2>
-
-                <h3 class="text-black text-[clamp(20px,2.5vw,26px)]  font-semibold leading-tight mb-6">
-                    Professional Property &amp; Hospitality Solutions
-                </h3>
-
-                <p class="text-black text-[15px] leading-relaxed">
-                    CWD Realty &amp; Hospitality manages residential condominium properties while providing flexible rental
-                    options for travelers, expatriates, business professionals, and long-term residents. Our experienced
-                    multilingual team helps property owners maximize rental income while ensuring guests enjoy a comfortable
-                    stay.
-                </p>
-            </div>
-        </div>
-    </section>
-
-
-    @php
-        $whyChooseFeatures = [
-            [
-                'title' => 'Condominium Specialists',
-                'description' => 'We focus on professionally managing residential condominium properties.',
-            ],
-            [
-                'title' => 'Multilingual Communication',
-                'description' =>
-                    'Our team provides professional support in multiple languages, making communication easier for both local and international clients.',
-            ],
-            [
-                'title' => 'Flexible Rental Options',
-                'description' => 'Choose daily, weekly, monthly, or long-term accommodation based on your needs.',
-            ],
-            [
-                'title' => 'Professional Property Management',
-                'description' =>
-                    'Helping property owners maximize occupancy while protecting the value of their investments.',
-            ],
-            [
-                'title' => 'Hospitality-Focused Service',
-                'description' =>
-                    'Our team is committed to creating a welcoming and comfortable guest experience from arrival to departure.',
-            ],
-        ];
-    @endphp
+      {{-- auto move logo --}}
+    <x-auto_move.auto_move />
 
 
     {{-- Why Choose CWD Realty & Hospitality --}}
-    <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
+    <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
 
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
-                <span class="text-[#2A5A8A] font-normal block">Why Choose</span>
-                <span class="text-[#2A5A8A] font-bold block">CWD Realty &amp; Hospitality?</span>
+            {{-- Heading centered --}}
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12 text-center">
+                <span class="text-[#2A5A8A] font-normal">Why Choose </span>
+                <span class="text-[#2A5A8A] font-bold">CWD Realty &amp; Hospitality?</span>
             </h2>
 
-            {{-- Cards grid --}}
-            <div id="why-choose-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 items-stretch">
-                @foreach ($whyChooseFeatures as $index => $feature)
-                    <div @class([
-                        'why-choose-card h-full flex flex-col border-[2px] border-[#2A5A8A] px-6 py-6',
-                        'lg:col-span-2' => $index < 3,
-                        'lg:col-span-2 lg:col-start-2' => $index === 3,
-                        'sm:col-span-2 sm:max-w-[calc(50%-12px)] sm:mx-auto lg:col-span-2 lg:col-start-4 lg:max-w-none lg:mx-0' =>
-                            $index === 4,
-                    ])>
-                        <h3 class="text-[#2A5A8A] text-[14px] sm:text-[15px] font-bold mb-3 leading-snug">
-                            {{ $feature['title'] }}
-                        </h3>
-                        <p class="text-black text-[13px] sm:text-[13.5px] leading-relaxed">
-                            {{ $feature['description'] }}
-                        </p>
+            {{-- 4-Column Cards Grid --}}
+            <div id="why-choose-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+
+                {{-- Card 01 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        01
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Professionally Managed Properties
+                    </h3>
+                    <p class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        Our properties are professionally managed to provide guests with a comfortable and convenient accommodation experience.
+                    </p>
+                </div>
+
+                {{-- Card 02 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        02
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Flexible Rental Terms
+                    </h3>
+                    <p class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        Choose from daily, weekly, or monthly rental options depending on the length of your stay.
+                    </p>
+                </div>
+
+                {{-- Card 03 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        03
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Comfortable Facilities
+                    </h3>
+                    <div class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        <p>Selected properties offer facilities such as:</p>
+                        <ul class="list-disc pl-5 my-2 space-y-0.5 text-[13px] sm:text-[13.5px]">
+                            <li>Swimming Pools</li>
+                            <li>Panoramic River Views</li>
+                            <li>Residential Facilities</li>
+                        </ul>
+                        <p>Facilities vary by property.</p>
                     </div>
-                @endforeach
+                </div>
+
+                {{-- Card 04 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        04
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Hospitality Support
+                    </h3>
+                    <p class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        Our team can also arrange additional hospitality services to make your stay more convenient.
+                    </p>
+                </div>
+
             </div>
 
         </div>
     </section>
 
-    <script>
-        (function() {
-            const grid = document.getElementById('why-choose-grid');
-            if (!grid) return;
+    @once
+        <script>
+            (function() {
+                function equalizeWhyChooseCardHeights() {
+                    var cards = document.querySelectorAll('#why-choose-cards-grid .why-choose-card');
+                    if (!cards.length) return;
 
-            function equalizeCardHeights() {
-                const cards = Array.from(grid.querySelectorAll('.why-choose-card'));
-                if (!cards.length) return;
+                    cards.forEach(function(card) {
+                        card.style.minHeight = '';
+                    });
 
-                // Reset first, so shrinking the viewport doesn't keep a stale tall height
-                cards.forEach(card => {
-                    card.style.height = 'auto';
+                    var tallest = 0;
+                    cards.forEach(function(card) {
+                        var cardHeight = card.offsetHeight;
+                        if (cardHeight > tallest) {
+                            tallest = cardHeight;
+                        }
+                    });
+
+                    cards.forEach(function(card) {
+                        card.style.minHeight = tallest + 'px';
+                    });
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', equalizeWhyChooseCardHeights);
+                } else {
+                    equalizeWhyChooseCardHeights();
+                }
+
+                var resizeTimer;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(equalizeWhyChooseCardHeights, 150);
                 });
 
-                // Measure natural height of every card, take the tallest
-                let tallest = 0;
-                cards.forEach(card => {
-                    const h = card.getBoundingClientRect().height;
-                    if (h > tallest) tallest = h;
-                });
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(equalizeWhyChooseCardHeights);
+                }
+            })();
+        </script>
+    @endonce
 
-                // Apply that height to every card, across both grid rows
-                cards.forEach(card => {
-                    card.style.height = tallest + 'px';
-                });
-            }
+    {{-- Additional Hospitality Services --}}
+    <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white pb-16 sm:pb-24">
+        <div class="max-w-[1400px] mx-auto px-6">
 
-            // Run once content/layout is ready
-            window.addEventListener('load', equalizeCardHeights);
+            {{-- Heading --}}
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12 text-left">
+                <span class="text-[#2A5A8A] font-normal block">Additional</span>
+                <span class="text-[#2A5A8A] font-bold block">Hospitality Services</span>
+            </h2>
 
-            // Re-run on resize, since text wrapping (and therefore natural height) changes at different widths
-            let resizeTimer;
-            window.addEventListener('resize', function() {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(equalizeCardHeights, 150);
-            });
+            {{-- 2 Cards Grid --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
 
-            // Run immediately too, in case DOM is already parsed by the time this script executes
-            equalizeCardHeights();
-        })();
-    </script>
+                {{-- Card 1: Airport Pick-Up --}}
+                <div class="flex flex-col bg-[#2A5A8A] shadow-md">
+                    {{-- Gold accent bar on top --}}
+                    <div class="h-[10px] w-full bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
 
+                    <div class="p-8 sm:p-10 flex flex-col flex-1">
+                        {{-- Icon --}}
+                        <div class="mb-6">
+                            <img src="{{ asset('services/property_sales/airplane_map.svg') }}" alt="Airport Pick-Up"
+                                class="w-12 h-12 object-contain">
+                        </div>
+
+                        {{-- Title --}}
+                        <h3 class="text-[#F4DEAC] text-[18px] sm:text-[20px] font-bold mb-3">
+                            Airport Pick-Up
+                        </h3>
+
+                        {{-- Description --}}
+                        <p class="text-white/90 text-[14px] sm:text-[15px] leading-relaxed">
+                            Need transportation when you arrive in Cambodia? CWD can arrange airport pick-up services for an additional charge.
+                        </p>
+                    </div>
+                </div>
+
+                {{-- Card 2: City Tour --}}
+                <div class="flex flex-col bg-[#2A5A8A] shadow-md">
+                    {{-- Gold accent bar on top --}}
+                    <div class="h-[10px] w-full bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+
+                    <div class="p-8 sm:p-10 flex flex-col flex-1">
+                        {{-- Icon --}}
+                        <div class="mb-6">
+                            <img src="{{ asset('services/property_sales/vichincal_map.svg') }}" alt="City Tour"
+                                class="w-12 h-12 object-contain">
+                        </div>
+
+                        {{-- Title --}}
+                        <h3 class="text-[#F4DEAC] text-[18px] sm:text-[20px] font-bold mb-3">
+                            City Tour
+                        </h3>
+
+                        {{-- Description --}}
+                        <p class="text-white/90 text-[14px] sm:text-[15px] leading-relaxed">
+                            Discover Phnom Penh and surrounding destinations with optional city tour arrangements. Additional charges apply.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
 
     {{-- Frequently Asked Questions --}}
     @php
@@ -393,41 +451,34 @@
             ],
             [
                 'question' => 'How much does a room cost?',
-                'answer' =>
-                    'ComingSoon',
+                'answer' => 'ComingSoon',
             ],
             [
                 'question' => 'Are smoking and non-smoking rooms available?',
-                'answer' =>
-                    'ComingSoon',
+                'answer' => 'ComingSoon',
             ],
             [
                 'question' => 'Is breakfast included?',
-                'answer' =>
-                    'ComingSoon',
+                'answer' => 'ComingSoon',
             ],
         ];
 
         $faqRight = [
             [
                 'question' => 'Are pets allowed?',
-                'answer' =>
-                    'ComingSoon',
+                'answer' => 'ComingSoon',
             ],
             [
                 'question' => 'What facilities are available?',
-                'answer' =>
-                    'ComingSoon',
+                'answer' => 'ComingSoon',
             ],
             [
                 'question' => 'Do you provide airport transportation?',
-                'answer' =>
-                    'ComingSoon',
+                'answer' => 'ComingSoon',
             ],
             [
                 'question' => 'Are there discounts for weekly or monthly stays?',
-                'answer' =>
-                    'ComingSoon',
+                'answer' => 'ComingSoon',
             ],
         ];
     @endphp
@@ -540,99 +591,20 @@
         })();
     </script>
 
-
-    @php
-        $latestActivities = [
-            [
-                'image' => asset('home/latest_activities/1img.png'),
-                'title' => 'Wealth Mansion',
-                'description' =>
-                    'Premium condominium development offering modern residential units with excellent city access.',
-            ],
-            [
-                'image' => asset('home/latest_activities/2img.png'),
-                'title' => 'Private Residential Collection',
-                'description' =>
-                    'Professionally managed condominium units including premium residences and penthouses.',
-            ],
-            [
-                'image' => asset('home/latest_activities/3img.png'),
-                'title' => 'Golden Tower 268',
-                'description' => 'Landmark high-rise tower offering premium residences with panoramic city views.',
-            ],
-            [
-                'image' => asset('home/latest_activities/4img.png'),
-                'title' => 'Riverside Tower',
-                'description' =>
-                    'Elegant riverside residences with panoramic views and premium amenities for modern living.',
-            ],
-            [
-                'image' => asset('home/latest_activities/5img.png'),
-                'title' => 'Skyline Residence',
-                'description' => 'High-rise condominium living in the heart of the city, close to shopping and dining.',
-            ],
-            [
-                'image' => asset('home/latest_activities/6img.png'),
-                'title' => 'Harmony Heights',
-                'description' =>
-                    'Modern residential tower with rooftop lounge, gym, and unobstructed city skyline views.',
-            ],
-        ];
-    @endphp
-
-    {{-- Latest Activities --}}
-    <section class="bg-none  ">
-        <div class="max-w-[1500px] mx-auto px-6 sm:px-10 pt-16 sm:pt-20">
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] px-0 sm:px-[5rem] leading-tight mb-10 sm:mb-12">
-                <span class="text-[#2A5A8A] font-normal block">Latest <strong>Activities</strong></span>
-            </h2>
-        </div>
-
-        <div class="max-w-[1500px] mx-auto">
-            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-0 leading-[0]">
-                @foreach ($latestActivities as $activity)
-                    <div class="relative overflow-hidden group h-[220px] sm:h-[240px] lg:h-[260px]">
-                        <img src="{{ $activity['image'] }}" alt="{{ $activity['title'] }}"
-                            class="block w-full h-full object-cover">
-
-                        {{-- Blue overlay + text, shown on hover --}}
-                        <div
-                            class="absolute inset-0 bg-[#2A5A8A]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end px-6 py-6">
-                            <h3
-                                class="text-white text-[18px] sm:text-[20px] font-bold mb-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                {{ $activity['title'] }}
-                            </h3>
-                            <p
-                                class="text-white/90 text-[13px] sm:text-[14px] leading-relaxed translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                {{ $activity['description'] }}
-                            </p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-
-        <div class="h-16 sm:h-20"></div>
-    </section>
-
-    {{-- comments section --}}
-    <x-comments.comments />
-
-
-
     {{-- Looking for your next stay --}}
-    <section class="relative max-w-[1600px] mx-auto">
+    <section class="relative mt-[2rem] sm:mt-[5rem] max-w-[1600px] mx-auto">
         <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
                 class="w-full h-auto min-h-[220px] object-cover">
 
             <div
                 class="relative max-w-[520px] mt-6 px-6
-                        min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
+                    min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
                 <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
                     <span class="block min-[900px]:hidden">
-                        Looking for Your Next Stay or Property Management Partner?
+                        Looking for Professional
+                        Property Management or
+                        Comfortable Accommodation?
                     </span>
                     <span class="hidden min-[900px]:block">
                         Looking for<br>
@@ -644,39 +616,30 @@
             </div>
         </div>
 
-        <div
-            class="max-w-[420px] mt-4 px-6
-        min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
-            <p class="text-black/70 text-[14px]  sm:text-[15px] leading-relaxed">
-                Whether you're searching for accommodation or professional property management services, our team is ready
-                to assist you.
-            </p>
-        </div>
-    </section>
+        <div class="max-w-[420px] mt-8 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-6 min-[900px]:px-0">
+            @php
+                $links = [
+                    ['label' => 'Property Sales', 'url' => url('/services/property-sales'), 'active' => false],
+                    ['label' => 'Property Management', 'url' => url('/services/property-management'), 'active' => false],
+                    ['label' => 'Hospitality Services', 'url' => url('/services/hospitality-services'), 'active' => false],
+                    ['label' => 'Contact Us', 'url' => url('/contact-us'), 'active' => false],
+                ];
+            @endphp
 
-
-    {{-- Professional Property --}}
-    <section class="mt-16 sm:mt-24 md:mt-32 min-[900px]:mt-[12rem]">
-        <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
-            <div
-                class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">
-
-                {{-- Left: accent line + heading --}}
-                <div class="flex items-start gap-4 max-w-[420px]">
-                    <span class="h-[2px] w-20 shrink-0 bg-[#c9a15c] mt-3"></span>
-                    <h2 class="text-[#2A5A8A] text-[16px] sm:text-[18px] font-bold leading-snug">
-                        Professional Property Management, Sales, Leasing & Hospitality Services in Cambodia.
-                    </h2>
-                </div>
-
-                {{-- Right: image --}}
-                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0">
-                    <img src="{{ asset('home/professional_property/professional_property.png') }}"
-                        alt="CWD Realty professional properties"
-                        class="w-full min-[900px]:w-[420px] h-auto min-h-[220px] object-cover">
-                </div>
-
-            </div>
+            <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200">
+                @foreach ($links as $link)
+                    <a href="{{ $link['url'] }}"
+                        class="group flex items-center justify-between px-5 py-3 text-[15px] font-medium
+                   bg-white text-[#2A5A8A] transition-colors
+                   hover:bg-[#2A5A8A] hover:text-[#DCC597]">
+                        <span>{{ $link['label'] }}</span>
+                        <span aria-hidden="true"
+                            class="text-[#2A5A8A] transition-all group-hover:text-[#DCC597] group-hover:translate-x-1">
+                            &rarr;
+                        </span>
+                    </a>
+                @endforeach
+            </nav>
         </div>
     </section>
 @endsection

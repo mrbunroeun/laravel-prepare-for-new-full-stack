@@ -25,32 +25,47 @@
     $servicesItem = collect($navItems)->firstWhere('label', 'Services');
 @endphp
 
-<header id="site-header" class="absolute top-0 left-0 bg-white w-full z-[500]">
-    <nav aria-label="Main navigation" class="max-w-[1400px] mx-auto px-4 sm:px-6 min-[1161px]:px-8 relative">
-        <div class="flex items-center justify-between py-10 relative z-[500] -translate-x-[1.5%]">
+<header id="site-header" class="absolute top-0 left-0 w-full pointer-events-none">
+    {{-- Header background: sits underneath hero image (z-[50]) --}}
+    <div class="absolute inset-0 bg-white z-[50] pointer-events-none"></div>
+
+    {{-- Header navigation content: highest z-index so Logo & Hamburger stay visible even when mobile menu is open --}}
+    <nav aria-label="Main navigation" class="max-w-[1400px] mx-auto px-4 sm:px-6 min-[1161px]:px-8 relative z-[900] pointer-events-auto">
+        <div class="flex items-center justify-between py-10 relative -translate-x-[1.5%]">
 
             {{-- Logo, stuck to the left --}}
-            <a href="{{ url('/') }}" class="z-[600] flex-shrink-0">
+            <a href="{{ url('/') }}" class="relative z-[950] flex-shrink-0 pointer-events-auto">
                 <img src="{{ asset('logo_nav_foot/cwd.svg') }}" alt="Company logo" class="h-8 min-[1161px]:h-10 w-auto">
             </a>
 
             {{-- Desktop nav, absolutely centered on the page regardless of logo width --}}
-            <ul class="hidden min-[1161px]:flex items-center gap-8 xl:gap-10 absolute left-[42%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-max whitespace-nowrap">
+            <ul class="hidden min-[1161px]:flex items-center gap-8 xl:gap-10 absolute left-[42%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-max whitespace-nowrap z-[950] pointer-events-auto">
                 @foreach ($navItems as $item)
                     @php
                         $isActive = request()->is($item['pattern']);
                         $hasSubmenu = isset($item['submenu']);
                     @endphp
                     <li class="relative {{ $hasSubmenu ? 'nav-has-submenu' : '' }}">
-                        <a href="{{ $item['url'] }}"
-                            @if ($isActive) aria-current="page" @endif
-                            class="relative inline-block pb-1 text-[#2c4a75] text-[15px] xl:text-[16px] font-medium tracking-wide
-                                transition-colors duration-200 hover:text-[#1a3358]
-                                after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px]
-                                after:bg-[#2c4a75] after:transition-all after:duration-300
-                                {{ $isActive ? 'after:w-full' : 'after:w-0 hover:after:w-full' }}">
-                            {{ $item['label'] }}
-                        </a>
+                        @if ($hasSubmenu)
+                            <a href="javascript:void(0)"
+                                class="cursor-pointer relative inline-block pb-1 text-[#2c4a75] text-[15px] xl:text-[16px] font-medium tracking-wide
+                                    transition-colors duration-200 hover:text-[#1a3358]
+                                    after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px]
+                                    after:bg-[#2c4a75] after:transition-all after:duration-300
+                                    {{ $isActive ? 'after:w-full' : 'after:w-0 hover:after:w-full' }}">
+                                {{ $item['label'] }}
+                            </a>
+                        @else
+                            <a href="{{ $item['url'] }}"
+                                @if ($isActive) aria-current="page" @endif
+                                class="relative inline-block pb-1 text-[#2c4a75] text-[15px] xl:text-[16px] font-medium tracking-wide
+                                    transition-colors duration-200 hover:text-[#1a3358]
+                                    after:content-[''] after:absolute after:left-0 after:-bottom-[2px] after:h-[2px]
+                                    after:bg-[#2c4a75] after:transition-all after:duration-300
+                                    {{ $isActive ? 'after:w-full' : 'after:w-0 hover:after:w-full' }}">
+                                {{ $item['label'] }}
+                            </a>
+                        @endif
                     </li>
                 @endforeach
             </ul>
@@ -62,45 +77,43 @@
                 aria-label="Toggle navigation menu"
                 aria-expanded="false"
                 aria-controls="mobile-menu"
-                class="max-[1160px]:flex hidden relative cursor-pointer z-[400] flex-col justify-center items-center w-10 h-10 gap-[5px]">
+                class="max-[1160px]:flex hidden relative cursor-pointer z-[950] pointer-events-auto flex-col justify-center items-center w-10 h-10 gap-[5px]">
                 <span class="block w-6 h-[2px] bg-[#2c4a75] transition-transform duration-300" id="bar-1"></span>
                 <span class="block w-6 h-[2px] bg-[#2c4a75] transition-opacity duration-300" id="bar-2"></span>
                 <span class="block w-6 h-[2px] bg-[#2c4a75] transition-transform duration-300" id="bar-3"></span>
             </button>
         </div>
     </nav>
-
-    {{-- Full-width dropdown panel: direct child of <header>, NOT inside the
-         transformed flex div, so `fixed` + `left-0` + `w-screen` measure
-         against the real viewport instead of the shifted container. --}}
-    @if ($servicesItem)
-        <div
-            id="services-dropdown"
-            class="fixed left-0 w-screen bg-[#2c4a75]
-                opacity-0 invisible -translate-y-2
-                transition-all duration-300 ease-out
-                z-[450]">
-            <ul class="flex items-center justify-center gap-10 xl:gap-14 py-4 max-w-[1400px] mx-auto px-4">
-                @foreach ($servicesItem['submenu'] as $sub)
-                    @php $subActive = request()->is($sub['pattern']); @endphp
-                    <li>
-                        <a href="{{ $sub['url'] }}"
-                            @if ($subActive) aria-current="page" @endif
-                            class="text-[15px] xl:text-[16px] font-medium tracking-wide whitespace-nowrap transition-colors duration-200
-                                {{ $subActive ? 'text-[#DCC597]' : 'text-white hover:text-[#DCC597]' }}">
-                            {{ $sub['label'] }}
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 </header>
 
-{{-- Mobile menu: outside <header> so its z-index isn't trapped in header's stacking context --}}
+{{-- Full-width dropdown panel: outside <header> so its z-index floats ON TOP of the hero image --}}
+@if ($servicesItem)
+    <div
+        id="services-dropdown"
+        class="fixed left-0 w-screen bg-[#2c4a75]
+            opacity-0 invisible -translate-y-3
+            transition-all duration-300 ease-out
+            z-[850] pointer-events-auto shadow-lg">
+        <ul class="flex items-center justify-center gap-10 xl:gap-14 py-4 max-w-[1400px] mx-auto px-4">
+            @foreach ($servicesItem['submenu'] as $sub)
+                @php $subActive = request()->is($sub['pattern']); @endphp
+                <li>
+                    <a href="{{ $sub['url'] }}"
+                        @if ($subActive) aria-current="page" @endif
+                        class="text-[15px] xl:text-[16px] font-medium tracking-wide whitespace-nowrap transition-colors duration-200
+                            {{ $subActive ? 'text-[#DCC597]' : 'text-white hover:text-[#DCC597]' }}">
+                        {{ $sub['label'] }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+{{-- Mobile menu: sits at z-[800], behind the z-[950] logo & hamburger button so both stay visible --}}
 <div
     id="mobile-menu"
-    class="max-[1160px]:block hidden fixed inset-0 top-0 bg-white opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-[400] overflow-y-auto">
+    class="max-[1160px]:block hidden fixed inset-0 top-0 bg-white opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out z-[800] overflow-y-auto">
     <div class="flex flex-col items-start gap-1 px-6 pt-24 pb-10 min-h-screen">
         <ul class="flex flex-col items-start gap-1 w-full">
             @foreach ($navItems as $item)
@@ -109,27 +122,39 @@
                     $hasSubmenu = isset($item['submenu']);
                 @endphp
                 <li class="w-full text-left">
-                    <a href="{{ $item['url'] }}"
-                        @if ($isActive) aria-current="page" @endif
-                        class="mobile-nav-link inline-block py-3 text-[#2c4a75] text-[17px] font-medium
-                            {{ $isActive ? 'border-b-2 border-[#2c4a75]' : '' }}">
-                        {{ $item['label'] }}
-                    </a>
-
                     @if ($hasSubmenu)
-                        <ul class="flex flex-col items-start gap-1 pl-4 w-full">
-                            @foreach ($item['submenu'] as $sub)
-                                @php $subActive = request()->is($sub['pattern']); @endphp
-                                <li class="w-full text-left">
-                                    <a href="{{ $sub['url'] }}"
-                                        @if ($subActive) aria-current="page" @endif
-                                        class="mobile-nav-link inline-block py-2 text-[#2c4a75]/80 text-[15px] font-medium
-                                            {{ $subActive ? 'text-[#2c4a75] font-semibold' : '' }}">
-                                        {{ $sub['label'] }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
+                        <button type="button"
+                            class="mobile-submenu-toggle w-full flex items-center justify-between py-3 text-[#2c4a75] text-[17px] font-medium text-left cursor-pointer {{ $isActive ? 'border-b-2 border-[#2c4a75]' : '' }}"
+                            aria-expanded="false">
+                            <span>{{ $item['label'] }}</span>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="mobile-submenu-arrow w-4 h-4 transition-transform duration-300 text-[#2c4a75]"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="mobile-submenu-panel grid grid-rows-[0fr] transition-all duration-300 ease-in-out overflow-hidden">
+                            <ul class="min-h-0 flex flex-col items-start gap-1 pl-4 w-full pt-1 pb-2">
+                                @foreach ($item['submenu'] as $sub)
+                                    @php $subActive = request()->is($sub['pattern']); @endphp
+                                    <li class="w-full text-left">
+                                        <a href="{{ $sub['url'] }}"
+                                            @if ($subActive) aria-current="page" @endif
+                                            class="mobile-nav-link inline-block py-2 text-[#2c4a75]/80 text-[15px] font-medium transition-colors hover:text-[#2c4a75]
+                                                {{ $subActive ? 'text-[#2c4a75] font-semibold' : '' }}">
+                                            {{ $sub['label'] }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @else
+                        <a href="{{ $item['url'] }}"
+                            @if ($isActive) aria-current="page" @endif
+                            class="mobile-nav-link inline-block py-3 text-[#2c4a75] text-[17px] font-medium
+                                {{ $isActive ? 'border-b-2 border-[#2c4a75]' : '' }}">
+                            {{ $item['label'] }}
+                        </a>
                     @endif
                 </li>
             @endforeach
@@ -154,7 +179,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // ---- Mobile menu (unchanged) ----
+        // ---- Mobile menu ----
         const toggle = document.getElementById('navbar-toggle');
         const menu = document.getElementById('mobile-menu');
         const bar1 = document.getElementById('bar-1');
@@ -190,6 +215,28 @@
             link.addEventListener('click', closeMenu);
         });
 
+        // Mobile submenu smooth accordion toggle
+        document.querySelectorAll('.mobile-submenu-toggle').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const panel = this.nextElementSibling;
+                const arrow = this.querySelector('.mobile-submenu-arrow');
+                const isOpen = panel.classList.contains('grid-rows-[1fr]');
+
+                if (isOpen) {
+                    panel.classList.remove('grid-rows-[1fr]');
+                    panel.classList.add('grid-rows-[0fr]');
+                    this.setAttribute('aria-expanded', 'false');
+                    if (arrow) arrow.classList.remove('rotate-180');
+                } else {
+                    panel.classList.remove('grid-rows-[0fr]');
+                    panel.classList.add('grid-rows-[1fr]');
+                    this.setAttribute('aria-expanded', 'true');
+                    if (arrow) arrow.classList.add('rotate-180');
+                }
+            });
+        });
+
         window.addEventListener('resize', function() {
             if (window.innerWidth >= 1161) closeMenu();
         });
@@ -204,8 +251,6 @@
 
             function positionDropdown() {
                 const headerRect = header.getBoundingClientRect();
-                // Nudge the panel up so it sits tighter under the header.
-                // Increase this value to pull it up further.
                 const overlap = 10;
                 dropdown.style.top = (headerRect.bottom - overlap) + 'px';
             }
@@ -213,15 +258,15 @@
             function showDropdown() {
                 clearTimeout(hideTimeout);
                 positionDropdown();
-                dropdown.classList.remove('opacity-0', 'invisible', '-translate-y-2');
+                dropdown.classList.remove('opacity-0', 'invisible', '-translate-y-3');
                 dropdown.classList.add('opacity-100', 'visible', 'translate-y-0');
             }
 
             function hideDropdown() {
                 hideTimeout = setTimeout(() => {
-                    dropdown.classList.add('opacity-0', 'invisible', '-translate-y-2');
+                    dropdown.classList.add('opacity-0', 'invisible', '-translate-y-3');
                     dropdown.classList.remove('opacity-100', 'visible', 'translate-y-0');
-                }, 400);
+                }, 250);
             }
 
             servicesTrigger.addEventListener('mouseenter', showDropdown);

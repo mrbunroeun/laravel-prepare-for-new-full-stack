@@ -2,13 +2,13 @@
 @section('content')
     {{-- Hero image section --}}
     <section
-        class="absolute top-0 left-0 w-full z-[400] h-[2000px] text-[3rem] text-[#2f6ba7] pointer-events-none overflow-hidden">
+        class="absolute top-0 left-0 w-full z-[100] h-[2000px] text-[3rem] text-[#2f6ba7] pointer-events-none overflow-hidden">
         <img class="absolute min-h-[800px]  max-[1240px]:min-h-[650px] max-[940px]:min-h-[520px] max-[940px]:pt-[2rem] w-full object-cover object-right"
             src="{{ asset('hero_section/hero_section.png') }}" alt="">
     </section>
 
     {{-- Hero content, sits above the hero image --}}
-    <section class="relative z-[500] lg:mt-[-5rem] lg:mb-[10rem] text-[#2f6ba7] pointer-events-none">
+    <section class="relative z-[200] lg:mt-[-5rem] lg:mb-[10rem] text-[#2f6ba7] pointer-events-none">
         <div class="pt-[20rem] max-[1240px]:pt-[15rem] max-[940px]:pt-[10rem] max-w-[1400px] mx-auto px-6">
             {{-- Gold accent bar --}}
             <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
