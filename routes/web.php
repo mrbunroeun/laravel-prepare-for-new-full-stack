@@ -30,6 +30,14 @@ Route::get('/services/property-sales', function () {
     return view('pages.services.property_sales');
 });
 
+Route::get('/services/property-leasing', function () {
+    return view('pages.services.property_leasing');
+});
+
+Route::get('/services/hospitality-services', function () {
+    return view('pages.services.hospitality_services');
+});
+
 Route::get('services/properties/wealth-mansion', function () {
     return view('components.detail_service_featured_project.wealth_mansion');
 });
