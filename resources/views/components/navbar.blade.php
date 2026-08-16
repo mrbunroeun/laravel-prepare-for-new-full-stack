@@ -25,7 +25,7 @@
     $servicesItem = collect($navItems)->firstWhere('label', 'Services');
 @endphp
 
-<header id="site-header" class="absolute top-0 left-0 bg-white w-full">
+<header id="site-header" class="absolute top-0 left-0 bg-white w-full z-[500]">
     <nav aria-label="Main navigation" class="max-w-[1400px] mx-auto px-4 sm:px-6 min-[1161px]:px-8 relative">
         <div class="flex items-center justify-between py-10 relative z-[500] -translate-x-[1.5%]">
 
