@@ -11,8 +11,8 @@
     <section class="relative z-[200] lg:mt-[-5rem] lg:mb-[10rem] text-[#2f6ba7] pointer-events-none">
         <div class="pt-[20rem] max-[1240px]:pt-[15rem] max-[940px]:pt-[10rem] max-w-[1400px] mx-auto px-6">
             {{-- Gold accent bar --}}
-            <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
-            <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply">
+            <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
+            <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                 <div class="px-0 py-10">
                     <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)]  font-bold mb-6">
                         <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
@@ -45,7 +45,7 @@
     <section
         class="px-0 sm:px-[5rem] md:px-[3rem] relative z-[300] mt-[1rem] sm:mt-[2rem] md:mt-[2.3rem] lg:mt-[4rem] bg-[#2A5A8A]">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[750px]">
+            <div class="max-w-[750px]" data-scroll-reveal="left">
                 <h2 class="text-[clamp(22px,3vw,28px)] font-bold mb-6">
                     <span class="text-[#F4DEAC]">About Us</span>
                 </h2>
@@ -65,7 +65,7 @@
     {{-- Company Overview --}}
     <section class="relative px-0 sm:px-[5rem] md:px-[3rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[750px]">
+            <div class="max-w-[750px]" data-scroll-reveal="left">
                 <h2 class="text-[clamp(28px,4vw,40px)] mb-6">
                     <span class="text-[#2A5A8A] font-normal">Company </span>
                     <span class="text-[#2A5A8A] font-bold">Overview</span>
@@ -100,7 +100,7 @@
             <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-4 lg:min-h-[800px]">
 
                 {{-- LEFT: black-block grid --}}
-                <div class="grid grid-cols-2 items-end gap-x-3 lg:gap-x-4 w-full lg:w-2/5 shrink-0 lg:mt-auto">
+                <div class="grid grid-cols-2 items-end gap-x-3 lg:gap-x-4 w-full lg:w-2/5 shrink-0 lg:mt-auto" data-scroll-reveal="left">
 
                     {{-- sticky tall single block --}}
                     <img src="{{ asset('about_us/our_story/longest.png') }}"
@@ -116,7 +116,7 @@
                 </div>
 
                 {{-- RIGHT: Hero content --}}
-                <div class="relative z-[200] text-[#2f6ba7] pointer-events-none w-full lg:w-3/5 shrink-0">
+                <div class="relative z-[200] text-[#2f6ba7] pointer-events-none w-full lg:w-3/5 shrink-0" data-scroll-reveal="right">
                     <div class="pt-0 lg:pt-[2.5rem]">
                         {{-- Gold accent bar --}}
                         <div
@@ -195,7 +195,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-24 items-start">
 
                 {{-- Vision --}}
-                <div class="info-card bg-[#f3f6f8] p-8 flex flex-col min-h-[360px]">
+                <div class="info-card bg-[#f3f6f8] p-8 flex flex-col min-h-[360px]" data-scroll-reveal="left">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-[#2A5A8A] text-[28px] font-bold">Vision</h3>
                         <img src="{{ asset('about_us/icons/vision.svg') }}" alt="Vision" class="w-8 h-8 text-[#2A5A8A]">
@@ -220,7 +220,7 @@
                 </div>
 
                 {{-- Mission --}}
-                <div class="info-card bg-[#f3f6f8] p-8 flex flex-col min-h-[360px]">
+                <div class="info-card bg-[#f3f6f8] p-8 flex flex-col min-h-[360px]" data-scroll-reveal="fade-up" data-scroll-delay="100">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-[#2A5A8A] text-[28px] font-bold">Mission</h3>
                         <img src="{{ asset('about_us/icons/mission.svg') }}" alt="Mission" class="w-8 h-8 text-[#2A5A8A]">
@@ -240,7 +240,7 @@
                 </div>
 
                 {{-- Core Values --}}
-                <div class="info-card bg-[#f3f6f8] p-8 flex flex-col min-h-[360px]">
+                <div class="info-card bg-[#f3f6f8] p-8 flex flex-col min-h-[360px]" data-scroll-reveal="right" data-scroll-delay="200">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-[#2A5A8A] text-[28px] font-bold">Core Values</h3>
                         <img src="{{ asset('about_us/icons/core_value.svg') }}" alt="Core Values"
@@ -264,7 +264,7 @@
             </div>
 
             {{-- What We Do heading --}}
-            <div class="mb-12">
+            <div class="mb-12" data-scroll-reveal="left">
                 <h2 class="text-white text-[clamp(32px,4vw,44px)] font-normal mb-4">What We Do</h2>
                 <p class="text-white text-[18px] leading-relaxed max-w-[600px]">
                     CWD Realty &amp; Hospitality offers comprehensive solutions across the property lifecycle.
@@ -274,7 +274,7 @@
             {{-- Service boxes --}}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                <div class="border-[2px] border-white/70 p-6">
+                <div class="border-[2px] border-white/70 p-6" data-scroll-reveal="left" data-scroll-delay="0">
                     <h4 class="text-white text-[18px] font-bold mb-4">Property Management</h4>
                     <p class="text-white text-[18px] leading-relaxed">
                         Professional management services that help owners maximize occupancy, maintain property value, and
@@ -282,7 +282,7 @@
                     </p>
                 </div>
 
-                <div class="border-[2px] border-white/70 p-6">
+                <div class="border-[2px] border-white/70 p-6" data-scroll-reveal="left" data-scroll-delay="100">
                     <h4 class="text-white text-[18px] font-bold mb-4">Property Leasing</h4>
                     <p class="text-white text-[18px] leading-relaxed">
                         Flexible rental solutions including daily, weekly, monthly, and long-term stays for a wide range of
@@ -290,14 +290,14 @@
                     </p>
                 </div>
 
-                <div class="border-[2px] border-white/70 p-6">
+                <div class="border-[2px] border-white/70 p-6" data-scroll-reveal="right" data-scroll-delay="100">
                     <h4 class="text-white text-[18px] font-bold mb-4">Property Sales</h4>
                     <p class="text-white text-[18px] leading-relaxed">
                         Helping buyers and investors discover quality residential opportunities in Cambodia.
                     </p>
                 </div>
 
-                <div class="border-[2px] border-white/70 p-6">
+                <div class="border-[2px] border-white/70 p-6" data-scroll-reveal="right" data-scroll-delay="200">
                     <h4 class="text-white text-[18px] font-bold mb-4">Hospitality Services</h4>
                     <p class="text-white text-[18px] leading-relaxed">
                         Enhancing every guest's stay with airport transfers, local assistance, concierge support, and
@@ -378,7 +378,7 @@
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
 
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12" data-scroll-reveal="left">
                 <span class="text-[#2A5A8A] font-normal block">Why Choose</span>
                 <span class="text-[#2A5A8A] font-bold block">CWD Realty &amp; Hospitality?</span>
             </h2>
@@ -386,7 +386,10 @@
             {{-- Cards grid --}}
             <div id="why-choose-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 items-stretch">
                 @foreach ($whyChooseFeatures as $index => $feature)
-                    <div @class([
+                    @php
+                        $direction = ($index === 0 || $index === 3) ? 'left' : (($index === 2 || $index === 4) ? 'right' : 'fade-up');
+                    @endphp
+                    <div data-scroll-reveal="{{ $direction }}" data-scroll-delay="{{ ($index % 3) * 100 }}" @class([
                         'why-choose-card h-full flex flex-col border-[2px] border-[#2A5A8A] px-6 py-6',
                         'lg:col-span-2' => $index < 3,
                         'lg:col-span-2 lg:col-start-2' => $index === 3,
@@ -414,7 +417,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
 
                 {{-- LEFT: text content --}}
-                <div class="flex flex-col justify-center">
+                <div class="flex flex-col justify-center" data-scroll-reveal="left">
                     <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-8">
                         <span class="text-[#2A5A8A] font-normal block">Business License &amp;</span>
                         <span class="text-[#2A5A8A] font-bold block">Credentials</span>
@@ -437,6 +440,7 @@
 
                 {{-- RIGHT: stats panel --}}
                 <div
+                    data-scroll-reveal="right"
                     class="relative bg-[#1479B9] px-8 py-10 sm:px-10 sm:py-12 flex flex-col justify-between min-h-[420px] overflow-hidden">
 
                     <div class="flex flex-col gap-8">
@@ -483,9 +487,9 @@
 
             <div class="grid grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 max-w-[1350px] mx-auto">
 
-                <div class="bg-[#d9d9d9] w-full aspect-square"></div>
-                <div class="bg-[#d9d9d9] w-full aspect-square"></div>
-                <div class="bg-[#d9d9d9] w-full aspect-square"></div>
+                <div class="bg-[#d9d9d9] w-full aspect-square" data-scroll-reveal="left"></div>
+                <div class="bg-[#d9d9d9] w-full aspect-square" data-scroll-reveal="fade-up" data-scroll-delay="100"></div>
+                <div class="bg-[#d9d9d9] w-full aspect-square" data-scroll-reveal="right" data-scroll-delay="200"></div>
 
             </div>
 
@@ -523,7 +527,7 @@
     <section class="relative px-0 sm:px-[5rem] bg-[#e5e4e4]">
         <div class="max-w-[1400px] mx-auto px-6 py-16 sm:py-20">
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12" data-scroll-reveal="left">
                 <span class="text-[#2A5A8A] font-normal block">Frequently</span>
                 <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
             </h2>
@@ -532,7 +536,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start">
 
                 {{-- Left column --}}
-                <div class="faq-column flex flex-col gap-2">
+                <div class="faq-column flex flex-col gap-2" data-scroll-reveal="left">
                     @foreach ($faqLeft as $index => $faq)
                         <div class="faq-item bg-[#f3f3f3]">
                             <button type="button"
@@ -561,7 +565,7 @@
                 </div>
 
                 {{-- Right column --}}
-                <div class="faq-column flex flex-col gap-2">
+                <div class="faq-column flex flex-col gap-2" data-scroll-reveal="right" data-scroll-delay="100">
                     @foreach ($faqRight as $faq)
                         <div class="faq-item bg-[#f3f3f3]">
                             <button type="button"
@@ -636,7 +640,7 @@
 
     {{-- Looking for your next stay --}}
     <section class="relative max-w-[1600px] mx-auto">
-        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
+        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto" data-scroll-reveal="right">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
                 class="w-full h-auto min-h-[220px] object-cover">
 
@@ -659,6 +663,7 @@
         </div>
 
         <div
+            data-scroll-reveal="left"
             class="max-w-[420px] mt-4 px-6
         min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
             <p class="text-black/70 text-[14px] pb-[4px] sm:text-[15px] leading-relaxed">
@@ -682,7 +687,7 @@
                 class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">
 
                 {{-- Left: accent line + heading --}}
-                <div class="flex items-start gap-4 max-w-[420px]">
+                <div class="flex items-start gap-4 max-w-[420px]" data-scroll-reveal="left">
                     <span class="h-[2px] w-20 shrink-0 bg-[#c9a15c] mt-3"></span>
                     <h2 class="text-[#2A5A8A] text-[16px] sm:text-[18px] font-bold leading-snug">
                         Professional Property Management, Sales, Leasing & Hospitality Services in Cambodia.
@@ -690,7 +695,7 @@
                 </div>
 
                 {{-- Right: image --}}
-                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0">
+                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0" data-scroll-reveal="right">
                     <img src="{{ asset('home/professional_property/professional_property.png') }}"
                         alt="CWD Realty professional properties"
                         class="w-full min-[900px]:w-[420px] h-auto min-h-[220px] object-cover">

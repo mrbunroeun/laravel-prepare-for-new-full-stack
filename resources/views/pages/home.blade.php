@@ -11,8 +11,8 @@
     <section class="relative z-[200] lg:mt-[-5rem] lg:mb-[10rem] text-[#2f6ba7] pointer-events-none">
         <div class="pt-[20rem] max-[1240px]:pt-[15rem] max-[940px]:pt-[10rem] max-w-[1400px] mx-auto px-6">
             {{-- Gold accent bar --}}
-            <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
-            <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply">
+            <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
+            <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                 <div class="px-0 py-10">
                     <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)]  font-bold mb-6">
                         <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
@@ -45,7 +45,7 @@
     <section
         class="px-0 sm:px-[5rem] md:px-[3rem] relative z-[300] mt-[1rem] sm:mt-[2rem] md:mt-[2.3rem] lg:mt-[4rem] bg-[#2A5A8A]">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[750px]">
+            <div class="max-w-[750px]" data-scroll-reveal="left">
                 <h2 class="text-[clamp(22px,3vw,28px)] font-bold mb-6">
                     <span class="text-[#F4DEAC]">CWD</span>
                     <span class="text-[#F4DEAC] font-normal">Realty &amp; Hospitality</span>
@@ -64,7 +64,7 @@
     {{-- Who We Are section 1st one --}}
     <section class="relative px-0 sm:px-[5rem] md:px-[3rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[750px]">
+            <div class="max-w-[750px]" data-scroll-reveal="left">
                 <h2 class="text-[clamp(28px,4vw,40px)] mb-6">
                     <span class="text-[#2A5A8A] font-normal">Who</span>
                     <span class="text-[#2A5A8A] font-bold">We Are</span>
@@ -125,7 +125,7 @@
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10 pt-16 pb-0 sm:pt-20">
 
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,36px)] min-[1200px]:mb-[7rem] mb-[2rem] mb-[clamp(2rem,5vw,5rem)] relative">
+            <h2 class="text-[clamp(28px,4vw,36px)] min-[1200px]:mb-[7rem] mb-[2rem] mb-[clamp(2rem,5vw,5rem)] relative" data-scroll-reveal="left">
                 <span class="text-[#2f6ba7] font-normal">Our</span>
                 <span class="text-[#2f6ba7] font-bold">Services</span>
             </h2>
@@ -136,7 +136,7 @@
 
                 {{-- Property image (right side on desktop, full width on mobile) --}}
                 <div
-                    class="flex flex-col items-end w-full min-[1220px]:w-[850px] min-[1220px]:order-2 min-[1220px]:-mt-[7.5rem]">
+                    class="flex flex-col items-end w-full min-[1220px]:w-[850px] min-[1220px]:order-2 min-[1220px]:-mt-[7.5rem]" data-scroll-reveal="right">
 
                     <div class="w-full h-[460px] sm:h-[640px] overflow-hidden">
                         <img src="{{ asset('home/our_services/our_services.png') }}"
@@ -155,7 +155,7 @@
                     class="relative w-full min-[1220px]:w-[54%] min-[1220px]:order-1 min-[1220px]:z-[30] min-[1220px]:-mr-[80px] min-[1220px]:mt-[68px] -mt-16 sm:-mt-20 min-[1220px]:mt-0 grid grid-cols-1 min-[770px]:grid-cols-2 gap-2 sm:gap-2.5 px-4 sm:px-0">
                     @foreach ($services as $service)
                         <div
-                            class="service-card bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col min-h-[150px] min-[1220px]:min-h-[145px]">
+                            class="service-card bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col min-h-[150px] min-[1220px]:min-h-[145px]" data-scroll-reveal="left" data-scroll-delay="{{ $loop->index * 100 }}">
                             <div class="flex items-start justify-between gap-2">
                                 <h3 class="text-[#F4DEAC] text-[16px] sm:text-[18px] font-bold leading-snug">
                                     {{ $service['title'] }}
@@ -257,7 +257,7 @@
     {{-- Who We Are section 2nd one --}}
     <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[750px]">
+            <div class="max-w-[750px]" data-scroll-reveal="left">
                 <h2 class="text-[clamp(28px,4vw,40px)] mb-6">
                     <span class="text-[#2A5A8A] font-normal">Who</span>
                     <span class="text-[#2A5A8A] font-bold">We Are</span>
@@ -312,7 +312,7 @@
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
 
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12" data-scroll-reveal="left">
                 <span class="text-[#2A5A8A] font-normal block">Why Choose</span>
                 <span class="text-[#2A5A8A] font-bold block">CWD Realty &amp; Hospitality?</span>
             </h2>
@@ -320,7 +320,10 @@
             {{-- Cards grid --}}
             <div id="why-choose-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 items-stretch">
                 @foreach ($whyChooseFeatures as $index => $feature)
-                    <div @class([
+                    @php
+                        $direction = ($index === 0 || $index === 3) ? 'left' : (($index === 2 || $index === 4) ? 'right' : 'fade-up');
+                    @endphp
+                    <div data-scroll-reveal="{{ $direction }}" data-scroll-delay="{{ ($index % 3) * 100 }}" @class([
                         'why-choose-card h-full flex flex-col border-[2px] border-[#2A5A8A] px-6 py-6',
                         'lg:col-span-2' => $index < 3,
                         'lg:col-span-2 lg:col-start-2' => $index === 3,
@@ -436,7 +439,7 @@
     <section class="relative px-0 sm:px-[5rem] bg-[#e5e4e4]">
         <div class="max-w-[1400px] mx-auto px-6 py-16 sm:py-20">
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12" data-scroll-reveal="left">
                 <span class="text-[#2A5A8A] font-normal block">Frequently</span>
                 <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
             </h2>
@@ -445,7 +448,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start">
 
                 {{-- Left column --}}
-                <div class="faq-column flex flex-col gap-2">
+                <div class="faq-column flex flex-col gap-2" data-scroll-reveal="fade-left">
                     @foreach ($faqLeft as $index => $faq)
                         <div class="faq-item bg-[#f3f3f3]">
                             <button type="button"
@@ -474,7 +477,7 @@
                 </div>
 
                 {{-- Right column --}}
-                <div class="faq-column flex flex-col gap-2">
+                <div class="faq-column flex flex-col gap-2" data-scroll-reveal="fade-right" data-scroll-delay="150">
                     @foreach ($faqRight as $faq)
                         <div class="faq-item bg-[#f3f3f3]">
                             <button type="button"
@@ -550,8 +553,8 @@
 
 
     {{-- Looking for your next stay --}}
-    <section class="relative max-w-[1600px] mx-auto">
-        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
+    <section class="relative max-w-[1600px] mx-auto overflow-hidden">
+        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto" data-scroll-reveal="right">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
                 class="w-full h-auto min-h-[220px] object-cover">
 
@@ -573,6 +576,7 @@
         </div>
 
         <div
+            data-scroll-reveal="left"
             class="max-w-[420px] mt-4 px-6
         min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
             <p class="text-black/70 text-[14px]  sm:text-[15px] leading-relaxed">
@@ -590,7 +594,7 @@
                 class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">
 
                 {{-- Left: accent line + heading --}}
-                <div class="flex items-start gap-4 max-w-[420px]">
+                <div class="flex items-start gap-4 max-w-[420px]" data-scroll-reveal="left">
                     <span class="h-[2px] w-20 shrink-0 bg-[#c9a15c] mt-3"></span>
                     <h2 class="text-[#2A5A8A] text-[16px] sm:text-[18px] font-bold leading-snug">
                         Professional Property Management, Sales, Leasing & Hospitality Services in Cambodia.
@@ -598,7 +602,7 @@
                 </div>
 
                 {{-- Right: image --}}
-                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0">
+                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0" data-scroll-reveal="right">
                     <img src="{{ asset('home/professional_property/professional_property.png') }}"
                         alt="CWD Realty professional properties"
                         class="w-full min-[900px]:w-[420px] h-auto min-h-[220px] object-cover">

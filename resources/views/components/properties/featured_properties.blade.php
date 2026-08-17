@@ -77,7 +77,7 @@
 
                 {{-- Cards layer --}}
                 <div
-                    class="relative z-20 pt-24 sm:pt-28 lg:pt-[2vw] lg:-translate-y-[clamp(60px,9vw,140px)] pointer-events-none">
+                    class="relative z-20 pt-24 sm:pt-28 lg:pt-[2vw] lg:-translate-y-[clamp(60px,9vw,140px)] pointer-events-none" data-scroll-reveal="right">
                     <div id="cwd-featured-track"
                         class="cwd-featured-fade pointer-events-auto flex gap-5 overflow-x-auto scroll-smooth pl-4 sm:pl-10 lg:pl-[20rem] pr-4 sm:pr-6 lg:pr-[320px] scroll-pl-4 sm:scroll-pl-10 lg:scroll-pl-[20rem] pb-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
 

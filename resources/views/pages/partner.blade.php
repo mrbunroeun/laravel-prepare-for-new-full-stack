@@ -12,7 +12,7 @@
         <div class="relative pt-[20rem] max-[1240px]:pt-[13rem] max-[1024px]:pt-[10.5rem] max-[740px]:pt-[8rem] max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
 
             {{-- Main Hero Text Box --}}
-            <div class="relative z-[260] max-w-[720px]">
+            <div class="relative z-[260] max-w-[720px]" data-scroll-reveal="left">
                 {{-- Gold accent bar --}}
                 <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
                 <div class="bg-[#163049]/85 mix-blend-multiply py-10">
@@ -44,7 +44,7 @@
         </div>
 
         {{-- Man Partner Image (shifted further left, strict max-w-[336px] and max-h-[504px], locked to bottom) --}}
-        <div class="absolute right-6 sm:right-14 md:right-24 lg:right-[18%] xl:right-[25%] 2xl:right-[30%] bottom-0 z-[270] pointer-events-none flex justify-end">
+        <div class="absolute right-6 sm:right-14 md:right-24 lg:right-[18%] xl:right-[25%] 2xl:right-[30%] bottom-0 z-[270] pointer-events-none flex justify-end" data-scroll-reveal="right">
             <img src="{{ asset('partner/man_partner.png') }}" alt="CWD Real Estate Agent"
                 class="block w-[140px] sm:w-[190px] md:w-[250px] lg:w-[336px] max-w-[336px] max-h-[504px] h-auto object-contain object-bottom drop-shadow-2xl">
         </div>
@@ -197,13 +197,13 @@
             <div class="relative pt-12 lg:pt-24">
 
                 {{-- Girl Image (Desktop: Anchored on far left, overlaps into the 80% blue box) --}}
-                <div class="hidden lg:block absolute left-[-35px] xl:left-[-25px] 2xl:left-[-15px] bottom-0 z-20 pointer-events-none">
+                <div class="hidden lg:block absolute left-[-35px] xl:left-[-25px] 2xl:left-[-15px] bottom-0 z-20 pointer-events-none" data-scroll-reveal="left">
                     <img src="{{ asset('partner/girl_partner.png') }}" alt="CWD Support Partner"
                         class="block w-[420px] xl:w-[480px] 2xl:w-[530px] max-w-[560px] max-h-[640px] xl:max-h-[700px] h-auto object-contain object-bottom drop-shadow-2xl">
                 </div>
 
                 {{-- ~80% Width Blue Box (Aligned to Right) --}}
-                <div class="w-full lg:w-[82%] xl:w-[80%] lg:ml-auto">
+                <div class="w-full lg:w-[82%] xl:w-[80%] lg:ml-auto" data-scroll-reveal="right">
 
                     {{-- Gold Accent Bar (Top Right of Blue Box) --}}
                     <div class="flex justify-end">

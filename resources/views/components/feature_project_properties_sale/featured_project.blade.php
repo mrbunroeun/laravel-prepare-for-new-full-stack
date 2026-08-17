@@ -110,7 +110,7 @@ $activeGrade = 'A';
     <div class="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-14 pt-10 sm:pt-14">
 
         {{-- Top row: top nav arrows (desktop) --}}
-        <div class="hidden lg:flex items-center gap-3 pb-8">
+        <div class="hidden lg:flex items-center gap-3 pb-8" data-scroll-reveal="fade-up">
             <button id="cwd-featured-prev" type="button" aria-label="Previous property"
                 class="w-11 h-11 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer
                     transition-all duration-300 hover:bg-[#2A5A8A] hover:text-white hover:scale-105
@@ -134,7 +134,7 @@ $activeGrade = 'A';
         </div>
 
         {{-- Mobile/tablet heading + arrows --}}
-        <div class="flex lg:hidden items-center justify-between pb-6">
+        <div class="flex lg:hidden items-center justify-between pb-6" data-scroll-reveal="left">
             <h2 class="text-[#F4DEAC] text-[clamp(22px,4vw,30px)] leading-tight">
                 <span class="font-normal block">Featured</span>
                 <span class="font-bold block">Properties</span>
@@ -173,11 +173,8 @@ $activeGrade = 'A';
             class="relative grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 lg:gap-10 items-start
                     pb-14 lg:pb-24 lg:-mt-6">
 
-            {{-- LEFT: sidebar. z-20 — above the background, below the
-                 cards, per the spec's layering. Sits directly on the
-                 photo (no solid panel/background of its own), top-aligned
-                 with the first card so it reads as part of the same row. --}}
-            <div class="relative z-20 hidden lg:flex flex-col gap-8 bg-transparent px-8 pt-20">
+            {{-- LEFT: sidebar --}}
+            <div class="relative z-20 hidden lg:flex flex-col gap-8 bg-transparent px-8 pt-20" data-scroll-reveal="left">
                 <h2 class="text-[#F4DEAC] drop-shadow-md text-[clamp(28px,2.6vw,40px)] leading-tight">
                     <span class="font-normal block">Featured</span>
                     <span class="font-bold block">Properties</span>
@@ -203,11 +200,8 @@ $activeGrade = 'A';
                 </nav>
             </div>
 
-            {{-- RIGHT: card carousel. z-30 — the topmost layer, so the
-                 cards clearly float above everything else. No overflow
-                 hidden on this wrapper (only the track itself scrolls),
-                 so shadows are never clipped. --}}
-            <div class="relative z-30 min-w-0">
+            {{-- RIGHT: card carousel --}}
+            <div class="relative z-30 min-w-0" data-scroll-reveal="right">
                 <div id="cwd-featured-track"
                     class="pointer-events-auto flex gap-5 overflow-x-auto scroll-smooth items-stretch pb-2
                         snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">

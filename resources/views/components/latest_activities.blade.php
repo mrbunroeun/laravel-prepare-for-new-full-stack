@@ -41,15 +41,19 @@
     <section class="bg-none  ">
         <div class="max-w-[1500px] mx-auto px-6 sm:px-10 pt-16 sm:pt-20">
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] px-0 sm:px-[5rem] leading-tight mb-10 sm:mb-12">
+            <h2 class="text-[clamp(28px,4vw,40px)] px-0 sm:px-[5rem] leading-tight mb-10 sm:mb-12" data-scroll-reveal="left">
                 <span class="text-[#2A5A8A] font-normal block">Latest <strong>Activities</strong></span>
             </h2>
         </div>
 
         <div class="max-w-[1500px] mx-auto">
             <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-0 leading-[0]">
-                @foreach ($latestActivities as $activity)
-                    <div class="relative overflow-hidden group h-[220px] sm:h-[240px] lg:h-[260px]">
+                @foreach ($latestActivities as $index => $activity)
+                    @php
+                        $col = $index % 3;
+                        $dir = ($col === 0) ? 'left' : (($col === 2) ? 'right' : 'fade-up');
+                    @endphp
+                    <div class="relative overflow-hidden group h-[220px] sm:h-[240px] lg:h-[260px]" data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ $col * 100 }}">
                         <img src="{{ $activity['image'] }}" alt="{{ $activity['title'] }}"
                             class="block w-full h-full object-cover">
 

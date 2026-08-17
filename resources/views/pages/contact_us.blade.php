@@ -21,7 +21,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-[1.6fr_0.5fr_1.1fr] gap-8 lg:gap-12 text-white">
 
                         {{-- Left Column: Logo + Tagline + Paragraph + Socials --}}
-                        <div class="flex flex-col gap-4">
+                        <div class="flex flex-col gap-4" data-scroll-reveal="left">
                             <img src="{{ asset('logo_nav_foot/footer_logo.svg') }}" alt="CWD Logo" class="h-14 sm:h-16 w-auto self-start">
 
                             <h3 class="flex items-center gap-3 text-[16px] sm:text-[18px] font-bold text-[#F4DEAC] max-md:mt-2">
@@ -56,7 +56,7 @@
                         </div>
 
                         {{-- Middle Column: Quick Links --}}
-                        <div class="flex flex-col gap-1.5 max-md:mt-6">
+                        <div class="flex flex-col gap-1.5 max-md:mt-6" data-scroll-reveal="fade-up" data-scroll-delay="100">
                             <h4 class="text-[#DCC597] text-[15px] sm:text-[16px] font-bold mb-1">Quick Links</h4>
                             <a href="{{ url('/') }}" class="text-white/80 hover:text-white transition text-[13px] sm:text-[14px]">Home</a>
                             <a href="{{ url('/about-us') }}" class="text-white/80 hover:text-white transition text-[13px] sm:text-[14px]">About Us</a>
@@ -70,7 +70,7 @@
                         </div>
 
                         {{-- Right Column: Contact Info & Map --}}
-                        <div class="flex flex-col gap-2 max-md:mt-6">
+                        <div class="flex flex-col gap-2 max-md:mt-6" data-scroll-reveal="right" data-scroll-delay="200">
                             <h4 class="text-[#DCC597] text-[15px] sm:text-[16px] font-bold mb-1">Contact Information</h4>
                             <p class="text-white/80 text-[12.5px] sm:text-[13px] leading-relaxed">
                                 Wealth Mansion, 6F, Room Number 27, Tonle Sap Street, Village 3, Chroy Changva Commune, Chroy Changva District, Phnom Penh

@@ -65,8 +65,8 @@
 
                {{-- Existing testimonials --}}
                <div id="testimonials-list" class="flex flex-col gap-8">
-                   @foreach ($testimonials as $item)
-                       <div>
+                   @foreach ($testimonials as $index => $item)
+                       <div data-scroll-reveal="{{ $index % 2 === 0 ? 'left' : 'right' }}">
                            <div class="flex justify-end mb-2">
                                <div class="flex items-center gap-1">
                                    @for ($i = 1; $i <= 5; $i++)

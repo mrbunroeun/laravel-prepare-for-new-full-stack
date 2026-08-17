@@ -61,7 +61,7 @@
 <section {{ $attributes->merge(['class' => 'relative px-0 sm:px-[5rem] bg-[#e5e4e4]']) }}>
     <div class="max-w-[1400px] mx-auto px-6 py-16 sm:py-20">
         {{-- Heading --}}
-        <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+        <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12" data-scroll-reveal="fade-up">
             <span class="text-[#2A5A8A] font-normal block">{{ $titleNormal }}</span>
             <span class="text-[#2A5A8A] font-bold block">{{ $titleBold }}</span>
         </h2>
@@ -69,8 +69,8 @@
         {{-- Two-column accordion --}}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start">
 
-            {{-- Left column --}}
-            <div class="faq-column flex flex-col gap-2">
+            {{-- Left column (slides from LEFT) --}}
+            <div class="faq-column flex flex-col gap-2" data-scroll-reveal="left">
                 @foreach ($leftItems as $index => $faq)
                     @php
                         $isOpen = $firstOpen && $index === 0;
@@ -101,8 +101,8 @@
                 @endforeach
             </div>
 
-            {{-- Right column --}}
-            <div class="faq-column flex flex-col gap-2">
+            {{-- Right column (slides from RIGHT) --}}
+            <div class="faq-column flex flex-col gap-2" data-scroll-reveal="right" data-scroll-delay="100">
                 @foreach ($rightItems as $faq)
                     <div class="faq-item bg-[#f3f3f3]">
                         <button type="button"

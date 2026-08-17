@@ -12,8 +12,8 @@
             <div class="absolute inset-0 flex items-center z-10 pointer-events-none">
                 <div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 min-[1161px]:px-8">
                     {{-- Gold accent bar --}}
-                    <div class="h-[12px] sm:h-[15px] max-w-[26rem] sm:max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
-                    <div class="max-w-[580px] lg:max-w-[620px] bg-[#163049]/85 mix-blend-multiply">
+                    <div class="h-[12px] sm:h-[15px] max-w-[26rem] sm:max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
+                    <div class="max-w-[580px] lg:max-w-[620px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                         <div class="px-0 py-5 sm:py-7 lg:py-8">
                             <h2 class="flex flex-row items-center gap-3 sm:gap-4 text-[clamp(16px,2.2vw,26px)] font-bold mb-3 sm:mb-4">
                                 <span class="h-[3px] w-10 sm:w-14 bg-[#F4DEAC]"></span>

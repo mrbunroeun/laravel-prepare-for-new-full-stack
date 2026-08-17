@@ -71,12 +71,12 @@
                     <div class="flex flex-col min-[860px]:flex-row gap-6 sm:gap-8 min-[860px]:gap-10 items-start">
 
                         {{-- Event Image Box (max-w 535px, h 240px) --}}
-                        <div class="w-full min-[860px]:w-[535px] min-[860px]:max-w-[535px] h-[240px] shrink-0 overflow-hidden shadow-sm">
+                        <div class="w-full min-[860px]:w-[535px] min-[860px]:max-w-[535px] h-[240px] shrink-0 overflow-hidden shadow-sm" data-scroll-reveal="left">
                             <img src="{{ $event['image'] }}" alt="{{ $event['title'] }}" class="w-full h-full block" style="width: 100%; height: 100%; object-fit: fill;">
                         </div>
 
                         {{-- Event Info Content --}}
-                        <div class="flex-1 flex flex-col justify-between self-stretch py-1">
+                        <div class="flex-1 flex flex-col justify-between self-stretch py-1" data-scroll-reveal="right">
                             <div>
                                 <h3 class="text-[#2A5A8A] text-[17px] sm:text-[18.5px] font-bold leading-snug mb-3">
                                     {{ $event['title'] }}
@@ -129,8 +129,8 @@
 
 
     {{-- Looking for your next stay --}}
-    <section class="relative max-w-[1600px] mx-auto">
-        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
+    <section class="relative max-w-[1600px] mx-auto overflow-hidden">
+        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto" data-scroll-reveal="right">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
                 class="w-full h-auto min-h-[220px] object-cover">
 
@@ -152,6 +152,7 @@
         </div>
 
         <div
+            data-scroll-reveal="left"
             class="max-w-[420px] mt-4 px-6
         min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
             <p class="text-black/70 text-[14px]  sm:text-[15px] leading-relaxed">
@@ -169,7 +170,7 @@
                 class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">
 
                 {{-- Left: accent line + heading --}}
-                <div class="flex items-start gap-4 max-w-[420px]">
+                <div class="flex items-start gap-4 max-w-[420px]" data-scroll-reveal="left">
                     <span class="h-[2px] w-20 shrink-0 bg-[#c9a15c] mt-3"></span>
                     <h2 class="text-[#2A5A8A] text-[16px] sm:text-[18px] font-bold leading-snug">
                         Professional Property Management, Sales, Leasing & Hospitality Services in Cambodia.
@@ -177,7 +178,7 @@
                 </div>
 
                 {{-- Right: image --}}
-                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0">
+                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0" data-scroll-reveal="right">
                     <img src="{{ asset('home/professional_property/professional_property.png') }}"
                         alt="CWD Realty professional properties"
                         class="w-full min-[900px]:w-[420px] h-auto min-h-[220px] object-cover">

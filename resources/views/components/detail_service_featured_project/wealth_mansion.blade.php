@@ -12,8 +12,8 @@
             <div class="absolute inset-0 flex items-center z-10 pointer-events-none">
                 <div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 min-[1161px]:px-8">
                     {{-- Gold accent bar --}}
-                    <div class="h-[12px] sm:h-[15px] max-w-[26rem] sm:max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
-                    <div class="max-w-[580px] lg:max-w-[620px] bg-[#163049]/85 mix-blend-multiply">
+                    <div class="h-[12px] sm:h-[15px] max-w-[26rem] sm:max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
+                    <div class="max-w-[580px] lg:max-w-[620px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                         <div class="px-0 py-5 sm:py-7 lg:py-8">
                             <h2 class="flex flex-row items-center gap-3 sm:gap-4 text-[clamp(16px,2.2vw,26px)] font-bold mb-3 sm:mb-4">
                                 <span class="h-[3px] w-10 sm:w-14 bg-[#F4DEAC]"></span>
@@ -70,7 +70,7 @@
              No `mx-auto` here — it stays flush against the left edge of
              the outer max-w container instead of being centered, so
              there's no extra space on the left at any breakpoint. --}}
-            <div class="w-full lg:w-[60%]">
+            <div class="w-full lg:w-[60%]" data-scroll-reveal="left">
                 <div class="flex flex-row items-start">
                     <div class="h-[2px] w-full bg-[#c9a463] mr-[2rem] mt-6"></div>
 
@@ -94,7 +94,7 @@
         <div class="relative w-screen left-1/2 right-1/2 -mx-[50vw]">
 
             {{-- Gold accent bar, aligned to the same container as "Modern condominium..." --}}
-            <div class="max-w-[1600px] mx-auto">
+            <div class="max-w-[1600px] mx-auto" data-scroll-reveal="left">
                 <div class="h-[15px] w-full max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
             </div>
 
@@ -105,7 +105,7 @@
          from lg breakpoint up, it's pushed ~20% of the container's
          width to the right. --}}
                 <div class="max-w-[1600px] mx-auto">
-                    <div class="max-w-[700px] mx-auto text-left lg:mx-0 lg:ml-[18%] lg:text-left px-[3rem] py-14 lg:py-20">
+                    <div class="max-w-[700px] mx-auto text-left lg:mx-0 lg:ml-[18%] lg:text-left px-[3rem] py-14 lg:py-20" data-scroll-reveal="left">
 
                         <h2 class="text-[clamp(28px,4vw,42px)] leading-tight mb-6">
                             <span class="text-[#F4DEAC] font-normal">About </span><span
@@ -172,7 +172,7 @@
         <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
             <div class="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-10 lg:gap-14 items-center">
                 {{-- LEFT: heading --}}
-                <div>
+                <div data-scroll-reveal="left">
                     <h2 class="text-[#2A5A8A] text-[clamp(32px,4.2vw,48px)] leading-[1.15]">
                         <span class="font-normal block">Compare</span>
                         <span class="font-bold block">Wealth Mansion</span>
@@ -181,7 +181,7 @@
                 </div>
 
                 {{-- RIGHT: comparison columns --}}
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5" data-scroll-reveal="right">
                     @foreach ($compareColumns as $column)
                         <div class="bg-[#2A5A8A] px-6 py-6 md:px-7 md:py-8 shadow-xl">
                             <h3 class="text-[#F4DEAC] text-[17px] md:text-[18px] font-bold mb-3">
@@ -246,7 +246,7 @@
     <section class="relative px-4 sm:px-8 lg:px-14 z-[300] bg-white py-16 sm:py-24">
         <div class="max-w-[1400px] mx-auto">
             {{-- Heading --}}
-            <h2 class="text-center text-[clamp(28px,4vw,44px)] leading-tight mb-12 sm:mb-16">
+            <h2 class="text-center text-[clamp(28px,4vw,44px)] leading-tight mb-12 sm:mb-16" data-scroll-reveal="left">
                 <span class="text-[#2A5A8A] font-normal">Why Consider </span>
                 <span class="text-[#2A5A8A] font-bold">Wealth Mansion?</span>
             </h2>
@@ -258,8 +258,11 @@
                 - Mobile: 1 column centered.
             --}}
             <div class="flex flex-wrap justify-center gap-6 sm:gap-7 items-stretch">
-                @foreach ($whyConsiderFeatures as $feature)
-                    <div class="why-consider-card w-full sm:w-[calc(50%-0.9rem)] lg:w-[calc(33.333%-1.2rem)] flex flex-col justify-between p-6 sm:p-7 md:p-8 bg-white border-[2px] border-[#4A88BE] shadow-sm hover:shadow-md transition-all duration-300">
+                @foreach ($whyConsiderFeatures as $index => $feature)
+                    @php
+                        $dir = ($index % 3 === 0) ? 'left' : (($index % 3 === 1) ? 'fade-up' : 'right');
+                    @endphp
+                    <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ ($index % 3) * 100 }}" class="why-consider-card w-full sm:w-[calc(50%-0.9rem)] lg:w-[calc(33.333%-1.2rem)] flex flex-col justify-between p-6 sm:p-7 md:p-8 bg-white border-[2px] border-[#4A88BE] shadow-sm hover:shadow-md transition-all duration-300">
                         <div>
                             <span class="text-[34px] sm:text-[38px] font-bold leading-none mb-2.5 block text-[#2A5A8A]">
                                 {{ $feature['number'] }}
@@ -296,7 +299,7 @@
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
                         
                         {{-- LEFT: 3x2 photo grid with NO GAP and NO TEXT --}}
-                        <div class="lg:col-span-7 grid grid-cols-3 gap-0 overflow-hidden shadow-2xl">
+                        <div class="lg:col-span-7 grid grid-cols-3 gap-0 overflow-hidden shadow-2xl" data-scroll-reveal="left">
                             @php
                                 $facilityPhotos = [
                                     asset('home/latest_activities/1img.png'),
@@ -316,7 +319,7 @@
                         </div>
 
                         {{-- RIGHT: Facilities & Lifestyle info --}}
-                        <div class="lg:col-span-5 text-left">
+                        <div class="lg:col-span-5 text-left" data-scroll-reveal="right">
                             <h2 class="text-[#F4DEAC] text-[clamp(32px,4vw,50px)] font-normal leading-[1.15] mb-5">
                                 Facilities &amp;<br>Lifestyle
                             </h2>
@@ -365,7 +368,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-20 items-center">
                 
                 {{-- LEFT: Heading & Overview --}}
-                <div class="lg:col-span-5">
+                <div class="lg:col-span-5" data-scroll-reveal="left">
                     <h2 class="text-[#2A5A8A] text-[clamp(32px,4.5vw,50px)] leading-[1.1] mb-8">
                         <span class="font-normal block">Investment</span>
                         <span class="font-bold block">Opportunity</span>
@@ -379,7 +382,7 @@
                 </div>
 
                 {{-- RIGHT: 2 Navy Feature Cards --}}
-                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5 items-stretch">
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5 items-stretch" data-scroll-reveal="right">
                     {{-- Card 1: Home Buyers --}}
                     <div class="flex flex-col h-full">
                         <div class="h-[8px] sm:h-[10px] w-[140px] sm:w-[150px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a] shrink-0"></div>
@@ -431,7 +434,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-20 items-center">
                 
                 {{-- LEFT: Property Image with Top-Right Gold Accent Bar --}}
-                <div class="lg:col-span-7">
+                <div class="lg:col-span-7" data-scroll-reveal="left">
                     <div class="h-[8px] sm:h-[10px] w-1/2 ml-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
                     <div class="relative w-full aspect-[16/10] overflow-hidden shadow-xl bg-[#163049]">
                         <img src="{{ asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png') }}" 
@@ -441,7 +444,7 @@
                 </div>
 
                 {{-- RIGHT: Availability Details --}}
-                <div class="lg:col-span-5 text-left">
+                <div class="lg:col-span-5 text-left" data-scroll-reveal="right">
                     <h2 class="text-[#2A5A8A] text-[clamp(32px,4.5vw,50px)] leading-[1.1] mb-6">
                         <span class="font-normal block">Property</span>
                         <span class="font-bold block">Availability</span>
@@ -505,7 +508,7 @@
              class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none">
 
         <div class="relative z-10 w-full max-w-[1450px] mx-auto px-6 sm:px-10 lg:px-14 py-8 lg:py-0">
-            <div class="max-w-[550px]">
+            <div class="max-w-[550px]" data-scroll-reveal="left">
                 {{-- Gold accent bar --}}
                 <div class="h-[7px] sm:h-[8px] w-[220px] sm:w-[250px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
 
@@ -561,7 +564,7 @@
     <section class="relative bg-[#f4f4f4] py-16 sm:py-24">
         <div class="max-w-[1450px] mx-auto px-6 sm:px-10 lg:px-14">
             {{-- Heading --}}
-            <h2 class="text-[clamp(32px,4.5vw,50px)] leading-[1.1] mb-10 sm:mb-14">
+            <h2 class="text-[clamp(32px,4.5vw,50px)] leading-[1.1] mb-10 sm:mb-14" data-scroll-reveal="left">
                 <span class="text-[#2A5A8A] font-normal block">Frequently</span>
                 <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
             </h2>
@@ -569,7 +572,7 @@
             {{-- Two-column accordion --}}
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start">
                 {{-- Left column --}}
-                <div class="faq-column flex flex-col gap-2.5">
+                <div class="faq-column flex flex-col gap-2.5" data-scroll-reveal="left">
                     @foreach ($faqLeft as $index => $faq)
                         <div class="faq-item bg-white shadow-sm overflow-hidden">
                             <button type="button"
@@ -596,7 +599,7 @@
                 </div>
 
                 {{-- Right column --}}
-                <div class="faq-column flex flex-col gap-2.5">
+                <div class="faq-column flex flex-col gap-2.5" data-scroll-reveal="right" data-scroll-delay="100">
                     @foreach ($faqRight as $faq)
                         <div class="faq-item bg-white shadow-sm overflow-hidden">
                             <button type="button"
@@ -627,7 +630,7 @@
 
     {{-- Find Your Wealth Mansion Residence --}}
     <section class="relative mt-[4rem] sm:mt-[6rem] lg:mt-[8rem] max-w-[1600px] mx-auto">
-        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
+        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto" data-scroll-reveal="right">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty Wealth Mansion residences"
                 class="w-full h-auto min-h-[260px] object-cover shadow-sm">
 
@@ -647,7 +650,7 @@
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-14">
 
                 {{-- Left: Accent line on the left + Content --}}
-                <div class="flex items-start gap-4 sm:gap-6 lg:gap-8 max-w-[580px]">
+                <div class="flex items-start gap-4 sm:gap-6 lg:gap-8 max-w-[580px]" data-scroll-reveal="left">
                     <span class="h-[2px] w-20 sm:w-28 lg:w-36 shrink-0 bg-[#c9a15c] mt-3.5"></span>
                     <div class="flex flex-col items-start">
                         <h2 class="text-[#204a74] text-[clamp(20px,2.4vw,28px)] font-bold leading-tight mb-4">
@@ -672,7 +675,7 @@
                 </div>
 
                 {{-- Right: image --}}
-                <div class="w-full lg:w-auto lg:shrink-0">
+                <div class="w-full lg:w-auto lg:shrink-0" data-scroll-reveal="right">
                     <img src="{{ asset('home/professional_property/professional_property.png') }}"
                         alt="CWD Realty professional properties"
                         class="w-full lg:w-[520px] xl:w-[580px] h-auto object-cover shadow-sm">

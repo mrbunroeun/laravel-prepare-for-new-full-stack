@@ -10,8 +10,8 @@
     <section class="relative z-[200] lg:mt-[-5rem] lg:mb-[10rem] text-[#2f6ba7] pointer-events-none">
         <div class="pt-[20rem] max-[1240px]:pt-[15rem] max-[940px]:pt-[10rem] max-w-[1400px] mx-auto px-6">
             {{-- Gold accent bar --}}
-            <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
-            <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply">
+            <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
+            <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                 <div class="px-0 py-10">
                     <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)]  font-bold mb-6">
                         <span class="h-[3px] w-15 bg-[rgb(244,222,172)]"></span>
@@ -47,7 +47,7 @@
     <section
         class="px-0 sm:px-[5rem] md:px-[3rem] relative z-[300] mt-[1rem] sm:mt-[2rem] md:mt-[2.3rem] lg:mt-[4rem] bg-[#2A5A8A]">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[750px]">
+            <div class="max-w-[750px]" data-scroll-reveal="left">
                 <h2 class="text-[clamp(22px,3vw,28px)] font-bold mb-6">
                     <span class="text-[#F4DEAC]">CWD Realty & Hospitality </span>
                 </h2>
@@ -69,7 +69,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-26 items-start">
 
                 {{-- LEFT: gold line + heading --}}
-                <div class="flex flex-row ">
+                <div class="flex flex-row" data-scroll-reveal="left">
                     <div class="h-[2px] w-full bg-[#c9a463] mr-[2rem] mt-6"></div>
 
                     <h2 class="text-[#2A5A8A] text-[clamp(28px,3.5vw,38px)] font-normal leading-tight">
@@ -78,7 +78,7 @@
                 </div>
 
                 {{-- RIGHT: image + body text --}}
-                <div class="flex flex-col mt-0 lg:mt-[-7rem] gap-8">
+                <div class="flex flex-col mt-0 lg:mt-[-7rem] gap-8" data-scroll-reveal="right">
                     <img src="{{ asset('services/maximmize/maximize.png') }}" alt="Phnom Penh skyline"
                         class="w-full h-[350px] object-cover">
 
@@ -113,10 +113,10 @@
                 class="flex flex-col items-center gap-6 min-[700px]:flex-row min-[700px]:items-start min-[700px]:gap-8 min-[1024px]:-ml-24">
                 {{-- LEFT: black placeholder block --}}
                 <div
-                    class="bg-[#000000] w-full min-[700px]:w-[35%] h-[380px] sm:h-[460px] min-[700px]:h-[560px] lg:h-[600px]">
+                    class="bg-[#000000] w-full min-[700px]:w-[35%] h-[380px] sm:h-[460px] min-[700px]:h-[560px] lg:h-[600px]" data-scroll-reveal="left">
                 </div>
                 {{-- RIGHT: blue content card --}}
-                <div class="relative z-[200] mt-[-1rem] text-[#2f6ba7] pointer-events-none w-full min-[700px]:w-[55%]">
+                <div class="relative z-[200] mt-[-1rem] text-[#2f6ba7] pointer-events-none w-full min-[700px]:w-[55%]" data-scroll-reveal="right">
                     {{-- Gold accent bar --}}
                     <div
                         class="h-[10px] sm:h-[15px] w-[55%] mr-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
@@ -162,7 +162,7 @@
         <div class="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-16">
 
             {{-- Heading + Intro --}}
-            <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-16">
+            <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-16" data-scroll-reveal="left">
 
                 {{-- Heading --}}
                 <h2 class="text-white text-[clamp(32px,4vw,44px)] leading-tight">
@@ -188,7 +188,7 @@
 
 
                 {{-- Service 1 --}}
-                <div class="border-2 border-white p-6">
+                <div class="border-2 border-white p-6" data-scroll-reveal="left" data-scroll-delay="0">
                     <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
                         Rental Marketing &amp; Listing
                     </h4>
@@ -201,7 +201,7 @@
 
 
                 {{-- Service 2 --}}
-                <div class="border-2 border-white p-6">
+                <div class="border-2 border-white p-6" data-scroll-reveal="fade-up" data-scroll-delay="100">
                     <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
                         Tenant &amp; Guest Management
                     </h4>
@@ -214,7 +214,7 @@
 
 
                 {{-- Service 3 --}}
-                <div class="border-2 border-white p-6">
+                <div class="border-2 border-white p-6" data-scroll-reveal="right" data-scroll-delay="200">
                     <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
                         Property Inspection
                     </h4>
@@ -226,7 +226,7 @@
 
 
                 {{-- Service 4 --}}
-                <div class="border-2 border-white p-6">
+                <div class="border-2 border-white p-6" data-scroll-reveal="left" data-scroll-delay="0">
                     <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
                         Maintenance Coordination
                     </h4>
@@ -239,7 +239,7 @@
 
 
                 {{-- Service 5 --}}
-                <div class="border-2 border-white p-6">
+                <div class="border-2 border-white p-6" data-scroll-reveal="fade-up" data-scroll-delay="100">
                     <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
                         Rental Administration
                     </h4>
@@ -252,7 +252,7 @@
 
 
                 {{-- Service 6 --}}
-                <div class="border-2 border-white p-6">
+                <div class="border-2 border-white p-6" data-scroll-reveal="right" data-scroll-delay="200">
                     <h4 class="text-[#F4DEAC] text-[18px] font-bold mb-3">
                         Hospitality Management
                     </h4>
@@ -275,7 +275,7 @@
         <div class="max-w-[1550px] mx-auto sm:px-[5rem] px-[2rem] py-16 sm:py-24">
 
             {{-- Heading --}}
-            <div class="mb-12">
+            <div class="mb-12" data-scroll-reveal="left">
                 <h2 class="text-[#2A5A8A] text-[clamp(32px,4vw,44px)] leading-tight">
                     <span class="font-normal block">Our</span>
                     <span class="font-normal block">Management</span>
@@ -287,7 +287,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
                 {{-- Revenue Sharing --}}
-                <div class="flex flex-col">
+                <div class="flex flex-col" data-scroll-reveal="left">
                     {{-- Image placeholder --}}
                     <div class="bg-[#1a1a1a] w-full h-[280px] sm:h-[280px]"></div>
 
@@ -305,7 +305,7 @@
                 </div>
 
                 {{-- Long-Term Leasing Management --}}
-                <div class="flex flex-col">
+                <div class="flex flex-col" data-scroll-reveal="right" data-scroll-delay="100">
                     {{-- Image placeholder --}}
                     <div class="bg-[#1a1a1a] w-full h-[280px] sm:h-[280px]"></div>
 
@@ -335,7 +335,7 @@
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
 
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12" data-scroll-reveal="left">
                 <span class="text-[#2A5A8A] font-normal">Why Choose </span>
                 <span class="text-[#2A5A8A] font-bold">CWD Realty &amp; Hospitality?</span>
             </h2>
@@ -378,8 +378,11 @@
 
             {{-- Row 1: 4 columns --}}
             <div id="why-choose-row-one" class="grid grid-cols-2 lg:grid-cols-4 gap-6 items-stretch mb-6">
-                @foreach ($whyChooseRowOne as $feature)
-                    <div
+                @foreach ($whyChooseRowOne as $index => $feature)
+                    @php
+                        $dir = $index < 2 ? 'left' : 'right';
+                    @endphp
+                    <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ ($index % 2) * 100 }}"
                         class="why-choose-card group h-full w-full flex flex-col px-6 py-6 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200">
                         <span
                             class="text-[36px] sm:text-[40px] font-bold leading-none mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
@@ -395,8 +398,11 @@
 
             {{-- Row 2: remaining cards, centered --}}
             <div id="why-choose-row-two" class="flex flex-wrap justify-center gap-6">
-                @foreach ($whyChooseRowTwo as $feature)
-                    <div
+                @foreach ($whyChooseRowTwo as $index => $feature)
+                    @php
+                        $dir = $index === 0 ? 'left' : ($index === 1 ? 'fade-up' : 'right');
+                    @endphp
+                    <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ $index * 100 }}"
                         class="why-choose-card group w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)] flex flex-col px-6 py-6 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200">
                         <span
                             class="text-[36px] sm:text-[40px] font-bold leading-none mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
@@ -492,7 +498,7 @@
     <section class="relative px-0 sm:px-[5rem] bg-[#e5e4e4]">
         <div class="max-w-[1400px] mx-auto px-6 py-16 sm:py-20">
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12" data-scroll-reveal="left">
                 <span class="text-[#2A5A8A] font-normal block">Frequently</span>
                 <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
             </h2>
@@ -501,7 +507,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start">
 
                 {{-- Left column --}}
-                <div class="faq-column flex flex-col gap-2">
+                <div class="faq-column flex flex-col gap-2" data-scroll-reveal="left">
                     @foreach ($faqLeft as $index => $faq)
                         <div class="faq-item bg-[#f3f3f3]">
                             <button type="button"
@@ -530,7 +536,7 @@
                 </div>
 
                 {{-- Right column --}}
-                <div class="faq-column flex flex-col gap-2">
+                <div class="faq-column flex flex-col gap-2" data-scroll-reveal="right" data-scroll-delay="100">
                     @foreach ($faqRight as $faq)
                         <div class="faq-item bg-[#f3f3f3]">
                             <button type="button"
@@ -601,7 +607,7 @@
 
     {{-- Looking for your next stay --}}
     <section class="relative max-w-[1600px] mx-auto">
-        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
+        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto" data-scroll-reveal="right">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
                 class="w-full h-auto min-h-[220px] object-cover">
 
@@ -622,7 +628,7 @@
             </div>
         </div>
 
-        <div class="max-w-[420px] mt-8 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-6 min-[900px]:px-0">
+        <div class="max-w-[420px] mt-8 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-6 min-[900px]:px-0" data-scroll-reveal="left">
             @php
                 $links = [
                     ['label' => 'Property Leasing', 'url' => url('/property-leasing'), 'active' => true],

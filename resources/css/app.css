@@ -7,3 +7,104 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* ============================================================
+   Global Scroll Reveal Animation System
+   - Left side elements move in from the LEFT (translateX -60px -> 0)
+   - Right side elements move in from the RIGHT (translateX +60px -> 0)
+   - Center / full-width elements move in with fade-up (translateY 50px -> 0)
+   - Plays ONLY ONCE on scroll, stays permanently visible on scroll back
+   ============================================================ */
+
+/* Prevent horizontal scrollbar flickering while preserving position: sticky */
+html,
+body {
+    overflow-x: clip;
+}
+
+/* Base hidden state before scroll reveal */
+[data-scroll-reveal],
+.reveal-on-scroll,
+.reveal-left,
+.reveal-right,
+.reveal-up,
+.reveal-down,
+.reveal-zoom {
+    opacity: 0;
+    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+/* Left side elements: slide in from the LEFT */
+[data-scroll-reveal="left"],
+[data-scroll-reveal="fade-left"],
+[data-scroll-reveal="from-left"],
+.reveal-left {
+    transform: translateX(-60px);
+}
+
+/* Right side elements: slide in from the RIGHT */
+[data-scroll-reveal="right"],
+[data-scroll-reveal="fade-right"],
+[data-scroll-reveal="from-right"],
+.reveal-right {
+    transform: translateX(60px);
+}
+
+/* Bottom elements: slide in from BOTTOM */
+[data-scroll-reveal="up"],
+[data-scroll-reveal="fade-up"],
+[data-scroll-reveal="from-bottom"],
+.reveal-up {
+    transform: translateY(50px);
+}
+
+/* Top elements: slide in from TOP */
+[data-scroll-reveal="down"],
+[data-scroll-reveal="fade-down"],
+[data-scroll-reveal="from-top"],
+.reveal-down {
+    transform: translateY(-50px);
+}
+
+/* Simple fade in */
+[data-scroll-reveal="fade"],
+[data-scroll-reveal="fade-in"] {
+    transform: none;
+}
+
+/* Zoom in */
+[data-scroll-reveal="zoom"],
+[data-scroll-reveal="zoom-in"],
+.reveal-zoom {
+    transform: scale(0.92);
+}
+
+/* --- REVEALED STATE (Fires once and stays visible permanently) --- */
+[data-scroll-reveal].is-revealed,
+.reveal-on-scroll.is-revealed,
+.reveal-left.is-revealed,
+.reveal-right.is-revealed,
+.reveal-up.is-revealed,
+.reveal-down.is-revealed,
+.reveal-zoom.is-revealed {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    [data-scroll-reveal],
+    .reveal-on-scroll,
+    .reveal-left,
+    .reveal-right,
+    .reveal-up,
+    .reveal-down,
+    .reveal-zoom {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
+
