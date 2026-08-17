@@ -110,18 +110,21 @@
     <section class="relative bg-white overflow-hidden">
         <div class="max-w-[1550px] mx-auto px-4 sm:px-6 py-12 sm:py-16">
             <div
-                class="flex flex-col items-center gap-6 min-[700px]:flex-row min-[700px]:items-start min-[700px]:gap-8 min-[1024px]:-ml-24">
-                {{-- LEFT: black placeholder block --}}
+                class="flex flex-col items-center gap-6 min-[700px]:flex-row min-[700px]:items-stretch min-[700px]:gap-8 min-[1024px]:-ml-24">
+                {{-- LEFT: Property Image --}}
                 <div
-                    class="bg-[#000000] w-full min-[700px]:w-[35%] h-[380px] sm:h-[460px] min-[700px]:h-[560px] lg:h-[600px]" data-scroll-reveal="left">
+                    class="w-full min-[700px]:w-[38%] min-h-[350px] sm:min-h-[420px] overflow-hidden shadow-xl" data-scroll-reveal="left">
+                    <img src="{{ asset('services/bg_img/bg_img.png') }}"
+                        alt="What is Property Management?"
+                        class="w-full h-full object-cover">
                 </div>
                 {{-- RIGHT: blue content card --}}
-                <div class="relative z-[200] mt-[-1rem] text-[#2f6ba7] pointer-events-none w-full min-[700px]:w-[55%]" data-scroll-reveal="right">
+                <div class="relative z-[200] mt-[-1rem] min-[700px]:mt-0 text-[#2f6ba7] pointer-events-none w-full min-[700px]:w-[55%] flex flex-col" data-scroll-reveal="right">
                     {{-- Gold accent bar --}}
                     <div
                         class="h-[10px] sm:h-[15px] w-[55%] mr-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
                     </div>
-                    <div class="bg-[#2A5A8A] w-full">
+                    <div class="bg-[#2A5A8A] w-full flex-1 flex flex-col justify-center">
                         <div class="px-6 sm:px-10 min-[1024px]:px-24 py-8 sm:py-12 min-[1024px]:py-20">
                             <h2 class="text-[clamp(22px,3vw,50px)] leading-tight mb-4">
                                 <span class="text-[#F4DEAC] font-normal block">What is</span>
@@ -284,15 +287,19 @@
             </div>
 
             {{-- Model cards --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch">
 
                 {{-- Revenue Sharing --}}
-                <div class="flex flex-col" data-scroll-reveal="left">
-                    {{-- Image placeholder --}}
-                    <div class="bg-[#1a1a1a] w-full h-[280px] sm:h-[280px]"></div>
+                <div class="flex flex-col shadow-lg overflow-hidden group h-full" data-scroll-reveal="left">
+                    {{-- Image --}}
+                    <div class="w-full h-[260px] sm:h-[300px] overflow-hidden bg-gray-100 shrink-0">
+                        <img src="{{ asset('services/propertis_leasing/bedroom.png') }}"
+                            alt="Revenue Sharing Model"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    </div>
 
                     {{-- Content --}}
-                    <div class="bg-[#2A5A8A] w-full flex-1">
+                    <div class="bg-[#2A5A8A] w-full flex-1 flex flex-col justify-start">
                         <div class="px-6 sm:px-8 py-8 sm:py-10">
                             <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-bold mb-4">Revenue Sharing</h3>
                             <p class="text-white text-[15px] leading-relaxed">
@@ -305,12 +312,16 @@
                 </div>
 
                 {{-- Long-Term Leasing Management --}}
-                <div class="flex flex-col" data-scroll-reveal="right" data-scroll-delay="100">
-                    {{-- Image placeholder --}}
-                    <div class="bg-[#1a1a1a] w-full h-[280px] sm:h-[280px]"></div>
+                <div class="flex flex-col shadow-lg overflow-hidden group h-full" data-scroll-reveal="right" data-scroll-delay="100">
+                    {{-- Image --}}
+                    <div class="w-full h-[260px] sm:h-[300px] overflow-hidden bg-gray-100 shrink-0">
+                        <img src="{{ asset('services/maximmize/maximize.png') }}"
+                            alt="Long-Term Leasing Management Model"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    </div>
 
                     {{-- Content --}}
-                    <div class="bg-[#2A5A8A] w-full flex-1">
+                    <div class="bg-[#2A5A8A] w-full flex-1 flex flex-col justify-start">
                         <div class="px-6 sm:px-8 py-8 sm:py-10">
                             <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-bold mb-4">Long-Term Leasing
                                 Management</h3>

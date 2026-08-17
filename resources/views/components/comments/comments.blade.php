@@ -44,7 +44,7 @@
 
                    <div class="bg-[#f5f5f5] px-6 py-6 sm:px-8 sm:py-7">
                        <div class="flex items-start gap-4">
-                           <div class="w-10 h-10 rounded-full bg-[#d9d9d9] shrink-0"></div>
+                           <img src="{{ asset('face.png') }}" alt="User Avatar" class="w-10 h-10 rounded-full object-cover shrink-0">
                            <div class="flex flex-col gap-2 w-full">
                                <input type="text" id="new-name" placeholder="Your Name"
                                    class="text-black text-[15px] font-bold bg-transparent outline-none placeholder:text-black placeholder:font-bold w-full">
@@ -82,7 +82,7 @@
 
                            <div class="bg-[#f5f5f5] px-6 py-6 sm:px-8 sm:py-7">
                                <div class="flex items-start gap-4">
-                                   <div class="w-10 h-10 rounded-full bg-[#d9d9d9] shrink-0"></div>
+                                   <img src="{{ asset('face.png') }}" alt="User Avatar" class="w-10 h-10 rounded-full object-cover shrink-0">
                                    <div class="flex flex-col gap-2">
                                        <h3 class="text-black text-[15px] font-bold">{{ $item['name'] }}</h3>
                                        <p class="text-black/70 text-[13.5px] leading-relaxed">
@@ -147,7 +147,7 @@
                         </div>
                         <div class="bg-[#f5f5f5] px-6 py-6 sm:px-8 sm:py-7">
                             <div class="flex items-start gap-4">
-                                <div class="w-10 h-10 rounded-full bg-[#d9d9d9] shrink-0"></div>
+                                <img src="{{ asset('face.png') }}" alt="User Avatar" class="w-10 h-10 rounded-full object-cover shrink-0">
                                 <div class="flex flex-col gap-2">
                                     <h3 class="text-black text-[15px] font-bold"></h3>
                                     <p class="text-black/70 text-[13.5px] leading-relaxed"></p>
