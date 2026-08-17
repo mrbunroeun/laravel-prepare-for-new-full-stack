@@ -25,7 +25,9 @@
     </main>
 
     {{-- Footer --}}
-    <x-footer />
+    @if(!View::hasSection('hide_footer'))
+        <x-footer />
+    @endif
 
     @stack('scripts')
 </body>
