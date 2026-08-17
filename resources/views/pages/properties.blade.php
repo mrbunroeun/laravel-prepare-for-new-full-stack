@@ -85,9 +85,9 @@
         ];
     @endphp
 
-    <section class="relative w-full bg-[#2A5A8A] z-[300] mt-0 pt-8 sm:pt-12 pb-16 sm:pb-20">
+    <section class="relative w-full bg-[#2A5A8A] z-[300] mt-0 pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-20">
         {{-- Background Image Offset Down --}}
-        <div class="absolute inset-x-0 bottom-0 top-[130px] sm:top-[160px] lg:top-[180px] z-0 overflow-hidden">
+        <div class="absolute inset-x-0 bottom-0 top-[200px] sm:top-[240px] lg:top-[280px] z-0 overflow-hidden">
             <img src="{{ asset('home/feature_properties/feature_properties.png') }}"
                 alt="Featured Properties Background"
                 class="w-full h-full object-cover object-right">
@@ -98,7 +98,7 @@
             <div class="flex flex-col lg:flex-row items-stretch justify-between gap-4 lg:gap-6">
 
                 {{-- Left: Section Heading sitting on top --}}
-                <div class="relative z-20 shrink-0 max-w-[320px] self-start pt-16 sm:pt-24 lg:pt-52">
+                <div class="relative z-20 shrink-0 max-w-[320px] self-start pt-20 sm:pt-32 lg:pt-60">
                     <h2 class="leading-tight">
                         <span class="text-[#F4DEAC] text-[clamp(26px,3vw,38px)] font-normal block mb-1">Featured</span>
                         <span class="text-[#F4DEAC] text-[clamp(34px,4.5vw,56px)] font-bold block leading-none">Properties</span>
@@ -247,8 +247,8 @@
     <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
 
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+            {{-- Heading Centered --}}
+            <h2 class="text-center text-[clamp(28px,4vw,42px)] leading-tight mb-12 sm:mb-16">
                 <span class="text-[#2A5A8A] font-normal">Why Choose </span>
                 <span class="text-[#2A5A8A] font-bold">CWD Realty &amp; Hospitality?</span>
             </h2>
@@ -383,159 +383,25 @@
     @php
         $faqLeft = [
             [
-                'question' => 'What types of properties does CWD Realty & Hospitality offer for sale?',
+                'question' => 'What types of properties do you manage?',
                 'answer' =>
-                    'CWD focuses on residential properties and condominium projects in Cambodia, including projects such as Wealth Mansion, Private Residential, and UC88, subject to current availability.',
+                    'We specialize in condominiums, serviced apartments, and residential investment properties throughout Phnom Penh.',
             ],
             [
-                'question' => ' What types of units are available at Wealth Mansion?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => ' Can I buy a property and have CWD manage it for rental?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => ' Can I purchase a property for personal residence?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => ' Does CWD provide support during the purchasing process?',
+                'question' => 'Can you manage both daily and long-term rentals?',
                 'answer' => 'ComingSoon',
             ],
         ];
 
         $faqRight = [
             [
-                'question' => 'Can foreigners buy property in Cambodia?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Can I arrange a property viewing before buying?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Can CWD help me choose a property for investment?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'What information should I check before purchasing a property?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'How can I check the latest property prices and availability?',
+                'question' => 'How do property owners receive rental income?',
                 'answer' => 'ComingSoon',
             ],
         ];
     @endphp
 
-    {{-- Frequently Asked Questions --}}
-    <section class="relative px-0 sm:px-[5rem] bg-[#e5e4e4]">
-        <div class="max-w-[1400px] mx-auto px-6 py-16 sm:py-20">
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
-                <span class="text-[#2A5A8A] font-normal block">Frequently</span>
-                <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
-            </h2>
-
-            {{-- Two-column accordion --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start">
-
-                {{-- Left column --}}
-                <div class="faq-column flex flex-col gap-2">
-                    @foreach ($faqLeft as $index => $faq)
-                        <div class="faq-item bg-[#f3f3f3]">
-                            <button type="button"
-                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
-                                aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
-                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
-                                    {{ $faq['question'] }}
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200 {{ $index === 0 ? 'rotate-90' : '' }}"
-                                    fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M6 4l8 6-8 6V4z" />
-                                </svg>
-                            </button>
-                            <div
-                                class="faq-panel overflow-hidden transition-all duration-300 {{ $index === 0 ? 'max-h-[300px]' : 'max-h-0' }}">
-                                <div class="{{ $index === 0 ? 'bg-[#1479B9]' : 'bg-white' }} px-5 py-4 sm:px-6 sm:py-5">
-                                    <p
-                                        class="{{ $index === 0 ? 'text-white' : 'text-black/70' }} text-[13px] sm:text-[13.5px] leading-relaxed">
-                                        {{ $faq['answer'] }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-                {{-- Right column --}}
-                <div class="faq-column flex flex-col gap-2">
-                    @foreach ($faqRight as $faq)
-                        <div class="faq-item bg-[#f3f3f3]">
-                            <button type="button"
-                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
-                                aria-expanded="false">
-                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
-                                    {{ $faq['question'] }}
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200"
-                                    fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M6 4l8 6-8 6V4z" />
-                                </svg>
-                            </button>
-                            <div class="faq-panel overflow-hidden transition-all duration-300 max-h-0">
-                                <div class="bg-white px-5 py-4 sm:px-6 sm:py-5">
-                                    <p class="text-black/70 text-[13px] sm:text-[13.5px] leading-relaxed">
-                                        {{ $faq['answer'] }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <script>
-        (function() {
-            document.querySelectorAll('.faq-toggle').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    const item = btn.closest('.faq-item');
-                    const panel = item.querySelector('.faq-panel');
-                    const answerBox = panel.querySelector('div');
-                    const answerText = answerBox.querySelector('p');
-                    const arrow = btn.querySelector('.faq-arrow');
-                    const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-                    if (isOpen) {
-                        // Close this item
-                        panel.style.maxHeight = '0px';
-                        btn.setAttribute('aria-expanded', 'false');
-                        arrow.classList.remove('rotate-90');
-                        answerBox.classList.remove('bg-[#1479B9]');
-                        answerBox.classList.add('bg-white');
-                        answerText.classList.remove('text-white');
-                        answerText.classList.add('text-black/70');
-                    } else {
-                        // Open this item
-                        panel.style.maxHeight = panel.scrollHeight + 'px';
-                        btn.setAttribute('aria-expanded', 'true');
-                        arrow.classList.add('rotate-90');
-                        answerBox.classList.add('bg-[#1479B9]');
-                        answerBox.classList.remove('bg-white');
-                        answerText.classList.add('text-white');
-                        answerText.classList.remove('text-black/70');
-                    }
-                });
-            });
-        })();
-    </script>
+    <x-faqs :faq-left="$faqLeft" :faq-right="$faqRight" />
 
 
 
