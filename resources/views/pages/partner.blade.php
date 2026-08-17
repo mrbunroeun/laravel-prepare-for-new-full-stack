@@ -370,111 +370,156 @@
                     {{-- Left column --}}
                     <div class="flex flex-col gap-4 sm:gap-6">
                         {{-- Full Name --}}
-                        <div class="form-field-group relative w-full">
-                            <input type="text" name="name" id="partner-fullname" required minlength="2" maxlength="100" autocomplete="name" placeholder=" "
-                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
-                            <label for="partner-fullname"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
-                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-400 peer-[:not(:placeholder-shown)]:font-medium">
-                                Full Name
-                            </label>
+                        <div class="form-field-group w-full">
+                            <div class="relative w-full">
+                                <input type="text" name="name" id="partner-fullname" required minlength="2" maxlength="100" autocomplete="name" placeholder=" "
+                                    class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+                                <label for="partner-fullname"
+                                    class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
+                                           peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
+                                           peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-400 peer-[:not(:placeholder-shown)]:font-medium">
+                                    Full Name
+                                </label>
+                            </div>
+                            <p class="field-error-text text-red-500 text-[12px] mt-1.5 pl-1">Please enter your full name</p>
                         </div>
 
-                        {{-- Experience Level --}}
-                        <div class="form-field-group relative w-full">
-                            <select name="experience_level" id="partner-experience" required
-                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all appearance-none cursor-pointer">
-                                <option value="" disabled selected hidden></option>
-                                <option value="Beginner (No experience)" class="text-black">Beginner (No experience)</option>
-                                <option value="1 - 2 Years" class="text-black">1 - 2 Years</option>
-                                <option value="3 - 5 Years" class="text-black">3 - 5 Years</option>
-                                <option value="5+ Years (Experienced)" class="text-black">5+ Years (Experienced)</option>
-                            </select>
-                            <label for="partner-experience"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
-                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-valid:top-2.5 peer-valid:translate-y-0 peer-valid:text-[11px] peer-valid:text-gray-400 peer-valid:font-medium">
-                                Experience Level
-                            </label>
-                            <div class="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[#888888]">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
+                        {{-- Experience Level (Custom Animated Dropdown) --}}
+                        <div class="form-field-group w-full">
+                            <div class="custom-dropdown relative w-full" data-name="experience_level">
+                                <input type="hidden" name="experience_level" value="">
+                                <button type="button" class="dropdown-trigger w-full h-[54px] sm:h-[58px] px-6 pr-12 pt-5 pb-1.5 bg-[#F5F5F5] text-left text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all cursor-pointer flex items-center">
+                                    <span class="selected-text text-black truncate font-normal"></span>
+                                </button>
+                                <span class="dropdown-label pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left">
+                                    Experience Level
+                                </span>
+                                <span class="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[#888888] dropdown-chevron flex items-center justify-center">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </span>
+                                <div class="dropdown-menu absolute top-[calc(100%+6px)] left-0 w-full z-50 bg-white border border-[#2A5A8A]/20 shadow-2xl overflow-hidden opacity-0 invisible -translate-y-2 scale-[0.98] transition-all duration-200 ease-out">
+                                    <div class="py-1 max-h-[220px] overflow-y-auto">
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="Beginner (No experience)">
+                                            Beginner (No experience)
+                                        </div>
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="1 - 2 Years">
+                                            1 - 2 Years
+                                        </div>
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="3 - 5 Years">
+                                            3 - 5 Years
+                                        </div>
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="5+ Years (Experienced)">
+                                            5+ Years (Experienced)
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <p class="field-error-text text-red-500 text-[12px] mt-1.5 pl-1">Please select your experience level</p>
                         </div>
 
                         {{-- Phone Number --}}
-                        <div class="form-field-group relative w-full">
-                            <input type="tel" name="phone" id="partner-phone" required pattern="[0-9+\s\-()]{7,20}" inputmode="tel" autocomplete="tel" placeholder=" "
-                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
-                            <label for="partner-phone"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
-                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-400 peer-[:not(:placeholder-shown)]:font-medium">
-                                Phone Number
-                            </label>
+                        <div class="form-field-group w-full">
+                            <div class="relative w-full">
+                                <input type="tel" name="phone" id="partner-phone" required pattern="[0-9+\s\-()]{7,20}" inputmode="tel" autocomplete="tel" placeholder=" "
+                                    class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+                                <label for="partner-phone"
+                                    class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
+                                           peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
+                                           peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-400 peer-[:not(:placeholder-shown)]:font-medium">
+                                    Phone Number
+                                </label>
+                            </div>
+                            <p class="field-error-text text-red-500 text-[12px] mt-1.5 pl-1">Please enter a valid phone number (at least 8 digits)</p>
                         </div>
                     </div>
 
                     {{-- Right column --}}
                     <div class="flex flex-col gap-4 sm:gap-6">
-                        {{-- Sex --}}
-                        <div class="form-field-group relative w-full">
-                            <select name="sex" id="partner-sex" required
-                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all appearance-none cursor-pointer">
-                                <option value="" disabled selected hidden></option>
-                                <option value="Male" class="text-black">Male</option>
-                                <option value="Female" class="text-black">Female</option>
-                                <option value="Other" class="text-black">Other</option>
-                            </select>
-                            <label for="partner-sex"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
-                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-valid:top-2.5 peer-valid:translate-y-0 peer-valid:text-[11px] peer-valid:text-gray-400 peer-valid:font-medium">
-                                Sex
-                            </label>
-                            <div class="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[#888888]">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
+                        {{-- Sex (Custom Animated Dropdown) --}}
+                        <div class="form-field-group w-full">
+                            <div class="custom-dropdown relative w-full" data-name="sex">
+                                <input type="hidden" name="sex" value="">
+                                <button type="button" class="dropdown-trigger w-full h-[54px] sm:h-[58px] px-6 pr-12 pt-5 pb-1.5 bg-[#F5F5F5] text-left text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all cursor-pointer flex items-center">
+                                    <span class="selected-text text-black truncate font-normal"></span>
+                                </button>
+                                <span class="dropdown-label pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left">
+                                    Sex
+                                </span>
+                                <span class="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[#888888] dropdown-chevron flex items-center justify-center">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </span>
+                                <div class="dropdown-menu absolute top-[calc(100%+6px)] left-0 w-full z-50 bg-white border border-[#2A5A8A]/20 shadow-2xl overflow-hidden opacity-0 invisible -translate-y-2 scale-[0.98] transition-all duration-200 ease-out">
+                                    <div class="py-1 max-h-[220px] overflow-y-auto">
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="Male">
+                                            Male
+                                        </div>
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="Female">
+                                            Female
+                                        </div>
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="Other">
+                                            Other
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <p class="field-error-text text-red-500 text-[12px] mt-1.5 pl-1">Please select your sex</p>
                         </div>
 
-                        {{-- You are a --}}
-                        <div class="form-field-group relative w-full">
-                            <select name="you_are_a" id="partner-you-are" required
-                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all appearance-none cursor-pointer">
-                                <option value="" disabled selected hidden></option>
-                                <option value="Individual Real Estate Agent" class="text-black">Individual Real Estate Agent</option>
-                                <option value="Agency / Brokerage" class="text-black">Agency / Brokerage</option>
-                                <option value="Freelancer / Introducer" class="text-black">Freelancer / Introducer</option>
-                                <option value="Investor / Business Partner" class="text-black">Investor / Business Partner</option>
-                                <option value="Student / Other" class="text-black">Student / Other</option>
-                            </select>
-                            <label for="partner-you-are"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
-                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-valid:top-2.5 peer-valid:translate-y-0 peer-valid:text-[11px] peer-valid:text-gray-400 peer-valid:font-medium">
-                                You are a
-                            </label>
-                            <div class="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[#888888]">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
+                        {{-- You are a (Custom Animated Dropdown) --}}
+                        <div class="form-field-group w-full">
+                            <div class="custom-dropdown relative w-full" data-name="you_are_a">
+                                <input type="hidden" name="you_are_a" value="">
+                                <button type="button" class="dropdown-trigger w-full h-[54px] sm:h-[58px] px-6 pr-12 pt-5 pb-1.5 bg-[#F5F5F5] text-left text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all cursor-pointer flex items-center">
+                                    <span class="selected-text text-black truncate font-normal"></span>
+                                </button>
+                                <span class="dropdown-label pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left">
+                                    You are a
+                                </span>
+                                <span class="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[#888888] dropdown-chevron flex items-center justify-center">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </span>
+                                <div class="dropdown-menu absolute top-[calc(100%+6px)] left-0 w-full z-50 bg-white border border-[#2A5A8A]/20 shadow-2xl overflow-hidden opacity-0 invisible -translate-y-2 scale-[0.98] transition-all duration-200 ease-out">
+                                    <div class="py-1 max-h-[220px] overflow-y-auto">
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="Individual Real Estate Agent">
+                                            Individual Real Estate Agent
+                                        </div>
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="Agency / Brokerage">
+                                            Agency / Brokerage
+                                        </div>
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="Freelancer / Introducer">
+                                            Freelancer / Introducer
+                                        </div>
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="Investor / Business Partner">
+                                            Investor / Business Partner
+                                        </div>
+                                        <div class="dropdown-option px-6 py-3 text-[14.5px] text-[#222222] hover:bg-[#1479B9] hover:text-white transition-colors cursor-pointer" data-value="Student / Other">
+                                            Student / Other
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <p class="field-error-text text-red-500 text-[12px] mt-1.5 pl-1">Please select who you are</p>
                         </div>
 
                         {{-- Email --}}
-                        <div class="form-field-group relative w-full">
-                            <input type="email" name="email" id="partner-email" required autocomplete="email" placeholder=" "
-                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
-                            <label for="partner-email"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
-                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-400 peer-[:not(:placeholder-shown)]:font-medium">
-                                Email
-                            </label>
+                        <div class="form-field-group w-full">
+                            <div class="relative w-full">
+                                <input type="email" name="email" id="partner-email" required autocomplete="email" placeholder=" "
+                                    class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+                                <label for="partner-email"
+                                    class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
+                                           peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
+                                           peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-400 peer-[:not(:placeholder-shown)]:font-medium">
+                                    Email
+                                </label>
+                            </div>
+                            <p class="field-error-text text-red-500 text-[12px] mt-1.5 pl-1">Please enter a valid email address</p>
                         </div>
                     </div>
 
@@ -493,33 +538,134 @@
     </section>
 
     <style>
-        .form-field-group.has-error input,
-        .form-field-group.has-error select {
+        .form-field-group .field-error-text {
+            display: none;
+        }
+        .form-field-group.has-error .field-error-text {
+            display: block;
+        }
+        .form-field-group.has-error input:not([type="hidden"]),
+        .form-field-group.has-error .dropdown-trigger {
             border-color: #ef4444 !important;
             background-color: #fff5f5 !important;
         }
-        .form-field-group.has-error label {
+        .form-field-group.has-error label,
+        .form-field-group.has-error .dropdown-label {
             color: #ef4444 !important;
+        }
+
+        /* Custom Dropdown Animations & Floating Label */
+        .dropdown-chevron {
+            top: calc(50% + 7px) !important;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease, color 0.2s ease;
+        }
+        .custom-dropdown.is-open .dropdown-menu {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) scale(1) !important;
+        }
+        .custom-dropdown.is-open .dropdown-trigger {
+            border-color: #2A5A8A;
+            background-color: #ffffff;
+        }
+        .custom-dropdown.is-open .dropdown-chevron {
+            transform: translateY(-50%) rotate(180deg) !important;
+            color: #2A5A8A;
+        }
+
+        .custom-dropdown.is-open .dropdown-label,
+        .custom-dropdown.has-value .dropdown-label {
+            top: 11px !important;
+            transform: translateY(0) !important;
+            font-size: 11px !important;
+            font-weight: 600 !important;
+        }
+        .custom-dropdown.is-open .dropdown-label {
+            color: #2A5A8A !important;
+        }
+        .custom-dropdown.has-value:not(.is-open) .dropdown-label {
+            color: #888888 !important;
+            font-weight: 500 !important;
         }
     </style>
 
     @once
         <script>
             (function() {
-                // Clear red error state immediately when user types or changes an input
                 const partnerForm = document.getElementById('partner-application-form');
-                if (partnerForm) {
-                    partnerForm.querySelectorAll('input, select').forEach(function(el) {
-                        ['input', 'change'].forEach(function(evtName) {
-                            el.addEventListener(evtName, function() {
-                                const group = el.closest('.form-field-group');
-                                if (group) {
-                                    group.classList.remove('has-error');
-                                }
-                            });
+                if (!partnerForm) return;
+
+                // Clear red error state immediately on standard inputs
+                partnerForm.querySelectorAll('input:not([type="hidden"])').forEach(function(el) {
+                    ['input', 'change'].forEach(function(evtName) {
+                        el.addEventListener(evtName, function() {
+                            const group = el.closest('.form-field-group');
+                            if (group) {
+                                group.classList.remove('has-error');
+                            }
                         });
                     });
-                }
+                });
+
+                // Custom animated dropdown logic
+                const dropdowns = partnerForm.querySelectorAll('.custom-dropdown');
+
+                dropdowns.forEach(function(dropdown) {
+                    const trigger = dropdown.querySelector('.dropdown-trigger');
+                    const hiddenInput = dropdown.querySelector('input[type="hidden"]');
+                    const selectedText = dropdown.querySelector('.selected-text');
+                    const options = dropdown.querySelectorAll('.dropdown-option');
+
+                    // Toggle dropdown menu
+                    trigger.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const isOpen = dropdown.classList.contains('is-open');
+
+                        // Close all dropdowns first
+                        dropdowns.forEach(function(d) { d.classList.remove('is-open'); });
+
+                        if (!isOpen) {
+                            dropdown.classList.add('is-open');
+                        }
+                    });
+
+                    // Select option
+                    options.forEach(function(opt) {
+                        opt.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const val = opt.getAttribute('data-value');
+                            hiddenInput.value = val;
+                            selectedText.textContent = val;
+
+                            dropdown.classList.add('has-value');
+                            dropdown.classList.remove('is-open');
+
+                            const group = dropdown.closest('.form-field-group');
+                            if (group) {
+                                group.classList.remove('has-error');
+                            }
+                        });
+                    });
+                });
+
+                // Close dropdowns when clicking outside
+                document.addEventListener('click', function(e) {
+                    dropdowns.forEach(function(dropdown) {
+                        if (!dropdown.contains(e.target)) {
+                            dropdown.classList.remove('is-open');
+                        }
+                    });
+                });
+
+                // Close dropdowns on ESC key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        dropdowns.forEach(function(dropdown) {
+                            dropdown.classList.remove('is-open');
+                        });
+                    }
+                });
             })();
 
             function submitPartnerForm(event) {
@@ -549,7 +695,10 @@
                     const group = inputEl ? inputEl.closest('.form-field-group') : null;
                     if (!isValid) {
                         if (group) group.classList.add('has-error');
-                        if (!firstInvalidEl) firstInvalidEl = inputEl;
+                        if (!firstInvalidEl) {
+                            const dropdown = group?.querySelector('.custom-dropdown .dropdown-trigger');
+                            firstInvalidEl = dropdown || inputEl;
+                        }
                         hasError = true;
                     } else {
                         if (group) group.classList.remove('has-error');
@@ -600,408 +749,51 @@ Email: ${email}`;
         </script>
     @endonce
 
-    <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
-        <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[750px]">
-                <h2 class="text-[clamp(28px,4vw,40px)] mb-6">
-                    <span class="text-[#2A5A8A] font-normal">Who</span>
-                    <span class="text-[#2A5A8A] font-bold">We Are</span>
-                </h2>
-
-                <h3 class="text-black text-[clamp(20px,2.5vw,26px)]  font-semibold leading-tight mb-6">
-                    Professional Property &amp; Hospitality Solutions
-                </h3>
-
-                <p class="text-black text-[15px] leading-relaxed">
-                    CWD Realty &amp; Hospitality manages residential condominium properties while providing flexible rental
-                    options for travelers, expatriates, business professionals, and long-term residents. Our experienced
-                    multilingual team helps property owners maximize rental income while ensuring guests enjoy a comfortable
-                    stay.
-                </p>
-            </div>
-        </div>
-    </section>
-
-
-    @php
-        $whyChooseFeatures = [
-            [
-                'title' => 'Condominium Specialists',
-                'description' => 'We focus on professionally managing residential condominium properties.',
-            ],
-            [
-                'title' => 'Multilingual Communication',
-                'description' =>
-                    'Our team provides professional support in multiple languages, making communication easier for both local and international clients.',
-            ],
-            [
-                'title' => 'Flexible Rental Options',
-                'description' => 'Choose daily, weekly, monthly, or long-term accommodation based on your needs.',
-            ],
-            [
-                'title' => 'Professional Property Management',
-                'description' =>
-                    'Helping property owners maximize occupancy while protecting the value of their investments.',
-            ],
-            [
-                'title' => 'Hospitality-Focused Service',
-                'description' =>
-                    'Our team is committed to creating a welcoming and comfortable guest experience from arrival to departure.',
-            ],
-        ];
-    @endphp
-
-
-    {{-- Why Choose CWD Realty & Hospitality --}}
-    <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
-        <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
-                <span class="text-[#2A5A8A] font-normal block">Why Choose</span>
-                <span class="text-[#2A5A8A] font-bold block">CWD Realty &amp; Hospitality?</span>
-            </h2>
-
-            {{-- Cards grid --}}
-            <div id="why-choose-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 items-stretch">
-                @foreach ($whyChooseFeatures as $index => $feature)
-                    <div @class([
-                        'why-choose-card h-full flex flex-col border-[2px] border-[#2A5A8A] px-6 py-6',
-                        'lg:col-span-2' => $index < 3,
-                        'lg:col-span-2 lg:col-start-2' => $index === 3,
-                        'sm:col-span-2 sm:max-w-[calc(50%-12px)] sm:mx-auto lg:col-span-2 lg:col-start-4 lg:max-w-none lg:mx-0' =>
-                            $index === 4,
-                    ])>
-                        <h3 class="text-[#2A5A8A] text-[14px] sm:text-[15px] font-bold mb-3 leading-snug">
-                            {{ $feature['title'] }}
-                        </h3>
-                        <p class="text-black text-[13px] sm:text-[13.5px] leading-relaxed">
-                            {{ $feature['description'] }}
-                        </p>
-                    </div>
-                @endforeach
-            </div>
-
-        </div>
-    </section>
-
-    <script>
-        (function() {
-            const grid = document.getElementById('why-choose-grid');
-            if (!grid) return;
-
-            function equalizeCardHeights() {
-                const cards = Array.from(grid.querySelectorAll('.why-choose-card'));
-                if (!cards.length) return;
-
-                // Reset first, so shrinking the viewport doesn't keep a stale tall height
-                cards.forEach(card => {
-                    card.style.height = 'auto';
-                });
-
-                // Measure natural height of every card, take the tallest
-                let tallest = 0;
-                cards.forEach(card => {
-                    const h = card.getBoundingClientRect().height;
-                    if (h > tallest) tallest = h;
-                });
-
-                // Apply that height to every card, across both grid rows
-                cards.forEach(card => {
-                    card.style.height = tallest + 'px';
-                });
-            }
-
-            // Run once content/layout is ready
-            window.addEventListener('load', equalizeCardHeights);
-
-            // Re-run on resize, since text wrapping (and therefore natural height) changes at different widths
-            let resizeTimer;
-            window.addEventListener('resize', function() {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(equalizeCardHeights, 150);
-            });
-
-            // Run immediately too, in case DOM is already parsed by the time this script executes
-            equalizeCardHeights();
-        })();
-    </script>
-
-
     {{-- Frequently Asked Questions --}}
     @php
-        $faqLeft = [
+        $partnerFaqLeft = [
             [
-                'question' => 'Why should I stay at a property managed by CWD Realty & Hospitality?',
+                'question' => 'What types of properties do you manage?',
                 'answer' =>
-                    'We professionally manage quality condominium properties, offering clean accommodations, responsive support, flexible rental options, and convenient locations suitable for business travelers, expatriates, and tourists.',
+                    'We specialize in condominiums, serviced apartments, and residential investment properties throughout Phnom Penh.',
             ],
             [
-                'question' => 'How much does a room cost?',
-                'answer' =>
-                    'ComingSoon',
-            ],
-            [
-                'question' => 'Are smoking and non-smoking rooms available?',
-                'answer' =>
-                    'ComingSoon',
-            ],
-            [
-                'question' => 'Is breakfast included?',
-                'answer' =>
-                    'ComingSoon',
+                'question' => 'Can you manage both daily and long-term rentals?',
+                'answer' => 'ComingSoon',
             ],
         ];
 
-        $faqRight = [
+        $partnerFaqRight = [
             [
-                'question' => 'Are pets allowed?',
-                'answer' =>
-                    'ComingSoon',
-            ],
-            [
-                'question' => 'What facilities are available?',
-                'answer' =>
-                    'ComingSoon',
-            ],
-            [
-                'question' => 'Do you provide airport transportation?',
-                'answer' =>
-                    'ComingSoon',
-            ],
-            [
-                'question' => 'Are there discounts for weekly or monthly stays?',
-                'answer' =>
-                    'ComingSoon',
+                'question' => 'How do property owners receive rental income?',
+                'answer' => 'ComingSoon',
             ],
         ];
     @endphp
 
-    {{-- Frequently Asked Questions --}}
-    <section class="relative px-0 sm:px-[5rem] bg-[#e5e4e4]">
-        <div class="max-w-[1400px] mx-auto px-6 py-16 sm:py-20">
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
-                <span class="text-[#2A5A8A] font-normal block">Frequently</span>
-                <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
-            </h2>
-
-            {{-- Two-column accordion --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start">
-
-                {{-- Left column --}}
-                <div class="faq-column flex flex-col gap-2">
-                    @foreach ($faqLeft as $index => $faq)
-                        <div class="faq-item bg-[#f3f3f3]">
-                            <button type="button"
-                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
-                                aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
-                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
-                                    {{ $faq['question'] }}
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200 {{ $index === 0 ? 'rotate-90' : '' }}"
-                                    fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M6 4l8 6-8 6V4z" />
-                                </svg>
-                            </button>
-                            <div
-                                class="faq-panel overflow-hidden transition-all duration-300 {{ $index === 0 ? 'max-h-[300px]' : 'max-h-0' }}">
-                                <div class="{{ $index === 0 ? 'bg-[#1479B9]' : 'bg-white' }} px-5 py-4 sm:px-6 sm:py-5">
-                                    <p
-                                        class="{{ $index === 0 ? 'text-white' : 'text-black/70' }} text-[13px] sm:text-[13.5px] leading-relaxed">
-                                        {{ $faq['answer'] }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-                {{-- Right column --}}
-                <div class="faq-column flex flex-col gap-2">
-                    @foreach ($faqRight as $faq)
-                        <div class="faq-item bg-[#f3f3f3]">
-                            <button type="button"
-                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
-                                aria-expanded="false">
-                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
-                                    {{ $faq['question'] }}
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200"
-                                    fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M6 4l8 6-8 6V4z" />
-                                </svg>
-                            </button>
-                            <div class="faq-panel overflow-hidden transition-all duration-300 max-h-0">
-                                <div class="bg-white px-5 py-4 sm:px-6 sm:py-5">
-                                    <p class="text-black/70 text-[13px] sm:text-[13.5px] leading-relaxed">
-                                        {{ $faq['answer'] }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <script>
-        (function() {
-            document.querySelectorAll('.faq-toggle').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    const item = btn.closest('.faq-item');
-                    const panel = item.querySelector('.faq-panel');
-                    const answerBox = panel.querySelector('div');
-                    const answerText = answerBox.querySelector('p');
-                    const arrow = btn.querySelector('.faq-arrow');
-                    const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-                    if (isOpen) {
-                        // Close this item
-                        panel.style.maxHeight = '0px';
-                        btn.setAttribute('aria-expanded', 'false');
-                        arrow.classList.remove('rotate-90');
-                        answerBox.classList.remove('bg-[#1479B9]');
-                        answerBox.classList.add('bg-white');
-                        answerText.classList.remove('text-white');
-                        answerText.classList.add('text-black/70');
-                    } else {
-                        // Open this item
-                        panel.style.maxHeight = panel.scrollHeight + 'px';
-                        btn.setAttribute('aria-expanded', 'true');
-                        arrow.classList.add('rotate-90');
-                        answerBox.classList.add('bg-[#1479B9]');
-                        answerBox.classList.remove('bg-white');
-                        answerText.classList.add('text-white');
-                        answerText.classList.remove('text-black/70');
-                    }
-                });
-            });
-        })();
-    </script>
-
-
-    @php
-        $latestActivities = [
-            [
-                'image' => asset('home/latest_activities/1img.png'),
-                'title' => 'Wealth Mansion',
-                'description' =>
-                    'Premium condominium development offering modern residential units with excellent city access.',
-            ],
-            [
-                'image' => asset('home/latest_activities/2img.png'),
-                'title' => 'Private Residential Collection',
-                'description' =>
-                    'Professionally managed condominium units including premium residences and penthouses.',
-            ],
-            [
-                'image' => asset('home/latest_activities/3img.png'),
-                'title' => 'Golden Tower 268',
-                'description' => 'Landmark high-rise tower offering premium residences with panoramic city views.',
-            ],
-            [
-                'image' => asset('home/latest_activities/4img.png'),
-                'title' => 'Riverside Tower',
-                'description' =>
-                    'Elegant riverside residences with panoramic views and premium amenities for modern living.',
-            ],
-            [
-                'image' => asset('home/latest_activities/5img.png'),
-                'title' => 'Skyline Residence',
-                'description' => 'High-rise condominium living in the heart of the city, close to shopping and dining.',
-            ],
-            [
-                'image' => asset('home/latest_activities/6img.png'),
-                'title' => 'Harmony Heights',
-                'description' =>
-                    'Modern residential tower with rooftop lounge, gym, and unobstructed city skyline views.',
-            ],
-        ];
-    @endphp
-
-    {{-- Latest Activities --}}
-    <section class="bg-none  ">
-        <div class="max-w-[1500px] mx-auto px-6 sm:px-10 pt-16 sm:pt-20">
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] px-0 sm:px-[5rem] leading-tight mb-10 sm:mb-12">
-                <span class="text-[#2A5A8A] font-normal block">Latest <strong>Activities</strong></span>
-            </h2>
-        </div>
-
-        <div class="max-w-[1500px] mx-auto">
-            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-0 leading-[0]">
-                @foreach ($latestActivities as $activity)
-                    <div class="relative overflow-hidden group h-[220px] sm:h-[240px] lg:h-[260px]">
-                        <img src="{{ $activity['image'] }}" alt="{{ $activity['title'] }}"
-                            class="block w-full h-full object-cover">
-
-                        {{-- Blue overlay + text, shown on hover --}}
-                        <div
-                            class="absolute inset-0 bg-[#2A5A8A]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end px-6 py-6">
-                            <h3
-                                class="text-white text-[18px] sm:text-[20px] font-bold mb-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                {{ $activity['title'] }}
-                            </h3>
-                            <p
-                                class="text-white/90 text-[13px] sm:text-[14px] leading-relaxed translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                {{ $activity['description'] }}
-                            </p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-
-        <div class="h-16 sm:h-20"></div>
-    </section>
-
-    {{-- comments section --}}
-    <x-comments.comments />
+    <x-faqs :faqLeft="$partnerFaqLeft" :faqRight="$partnerFaqRight" />
 
 
 
-    {{-- Looking for your next stay --}}
-    <section class="relative max-w-[1600px] mx-auto">
+    {{-- Request Property Management Consultation --}}
+    <section class="relative max-w-[1600px] mx-auto mt-20 sm:mt-28 lg:mt-36">
         <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
-            <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
+            <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="Request Property Management Consultation"
                 class="w-full h-auto min-h-[220px] object-cover">
 
             <div
-                class="relative max-w-[520px] mt-6 px-6
-                        min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
-                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
-                    <span class="block min-[900px]:hidden">
-                        Looking for Your Next Stay or Property Management Partner?
-                    </span>
-                    <span class="hidden min-[900px]:block">
-                        Looking for<br>
-                        Your Next Stay or<br>
-                        Property Management<br>
-                        Partner?
-                    </span>
+                class="relative max-w-[650px] mt-6 px-6
+                        min-[900px]:ml-[-8rem] min-[900px]:mt-[-8.5rem] min-[900px]:px-0 z-20">
+                <h2 class="text-[#DCC597] text-[clamp(24px,4vw,42px)] font-bold leading-[1.15]">
+                    Request Property<br>
+                    Management Consultation
                 </h2>
             </div>
         </div>
-
-        <div
-            class="max-w-[420px] mt-4 px-6
-        min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
-            <p class="text-black/70 text-[14px]  sm:text-[15px] leading-relaxed">
-                Whether you're searching for accommodation or professional property management services, our team is ready
-                to assist you.
-            </p>
-        </div>
     </section>
 
-
-    {{-- Professional Property --}}
-    <section class="mt-16 sm:mt-24 md:mt-32 min-[900px]:mt-[12rem]">
+    {{-- Build Your Career in Real Estate --}}
+    <section class="mt-16 sm:mt-24 md:mt-32 min-[900px]:mt-[12rem] mb-16 sm:mb-24">
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
             <div
                 class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">
@@ -1010,14 +802,14 @@ Email: ${email}`;
                 <div class="flex items-start gap-4 max-w-[420px]">
                     <span class="h-[2px] w-20 shrink-0 bg-[#c9a15c] mt-3"></span>
                     <h2 class="text-[#2A5A8A] text-[16px] sm:text-[18px] font-bold leading-snug">
-                        Professional Property Management, Sales, Leasing & Hospitality Services in Cambodia.
+                        Build Your Career in Real Estate with CWD Real Estate Agent &amp; Developer.
                     </h2>
                 </div>
 
                 {{-- Right: image --}}
                 <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0">
                     <img src="{{ asset('home/professional_property/professional_property.png') }}"
-                        alt="CWD Realty professional properties"
+                        alt="Build Your Career in Real Estate with CWD"
                         class="w-full min-[900px]:w-[420px] h-auto min-h-[220px] object-cover">
                 </div>
 
