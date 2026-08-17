@@ -364,38 +364,54 @@
             </h2>
 
             {{-- Form container --}}
-            <form id="partner-application-form" onsubmit="submitPartnerForm(event)" class="w-full">
+            <form id="partner-application-form" onsubmit="submitPartnerForm(event)" class="w-full" novalidate>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10">
 
                     {{-- Left column --}}
                     <div class="flex flex-col gap-4 sm:gap-6">
-                        <div class="relative w-full">
-                            <input type="text" name="name" id="partner-fullname" required placeholder=" "
+                        {{-- Full Name --}}
+                        <div class="form-field-group relative w-full">
+                            <input type="text" name="name" id="partner-fullname" required minlength="2" maxlength="100" autocomplete="name" placeholder=" "
                                 class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
                             <label for="partner-fullname"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
                                        peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-400 peer-[:not(:placeholder-shown)]:font-medium">
                                 Full Name
                             </label>
                         </div>
-                        <div class="relative w-full">
-                            <input type="text" name="experience_level" id="partner-experience" placeholder=" "
-                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+
+                        {{-- Experience Level --}}
+                        <div class="form-field-group relative w-full">
+                            <select name="experience_level" id="partner-experience" required
+                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all appearance-none cursor-pointer">
+                                <option value="" disabled selected hidden></option>
+                                <option value="Beginner (No experience)" class="text-black">Beginner (No experience)</option>
+                                <option value="1 - 2 Years" class="text-black">1 - 2 Years</option>
+                                <option value="3 - 5 Years" class="text-black">3 - 5 Years</option>
+                                <option value="5+ Years (Experienced)" class="text-black">5+ Years (Experienced)</option>
+                            </select>
                             <label for="partner-experience"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
                                        peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                       peer-valid:top-2.5 peer-valid:translate-y-0 peer-valid:text-[11px] peer-valid:text-gray-400 peer-valid:font-medium">
                                 Experience Level
                             </label>
+                            <div class="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[#888888]">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
                         </div>
-                        <div class="relative w-full">
-                            <input type="tel" name="phone" id="partner-phone" required placeholder=" "
+
+                        {{-- Phone Number --}}
+                        <div class="form-field-group relative w-full">
+                            <input type="tel" name="phone" id="partner-phone" required pattern="[0-9+\s\-()]{7,20}" inputmode="tel" autocomplete="tel" placeholder=" "
                                 class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
                             <label for="partner-phone"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
                                        peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-400 peer-[:not(:placeholder-shown)]:font-medium">
                                 Phone Number
                             </label>
                         </div>
@@ -403,33 +419,60 @@
 
                     {{-- Right column --}}
                     <div class="flex flex-col gap-4 sm:gap-6">
-                        <div class="relative w-full">
-                            <input type="text" name="sex" id="partner-sex" placeholder=" "
-                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+                        {{-- Sex --}}
+                        <div class="form-field-group relative w-full">
+                            <select name="sex" id="partner-sex" required
+                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all appearance-none cursor-pointer">
+                                <option value="" disabled selected hidden></option>
+                                <option value="Male" class="text-black">Male</option>
+                                <option value="Female" class="text-black">Female</option>
+                                <option value="Other" class="text-black">Other</option>
+                            </select>
                             <label for="partner-sex"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
                                        peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                       peer-valid:top-2.5 peer-valid:translate-y-0 peer-valid:text-[11px] peer-valid:text-gray-400 peer-valid:font-medium">
                                 Sex
                             </label>
+                            <div class="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[#888888]">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
                         </div>
-                        <div class="relative w-full">
-                            <input type="text" name="you_are_a" id="partner-you-are" placeholder=" "
-                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+
+                        {{-- You are a --}}
+                        <div class="form-field-group relative w-full">
+                            <select name="you_are_a" id="partner-you-are" required
+                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all appearance-none cursor-pointer">
+                                <option value="" disabled selected hidden></option>
+                                <option value="Individual Real Estate Agent" class="text-black">Individual Real Estate Agent</option>
+                                <option value="Agency / Brokerage" class="text-black">Agency / Brokerage</option>
+                                <option value="Freelancer / Introducer" class="text-black">Freelancer / Introducer</option>
+                                <option value="Investor / Business Partner" class="text-black">Investor / Business Partner</option>
+                                <option value="Student / Other" class="text-black">Student / Other</option>
+                            </select>
                             <label for="partner-you-are"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
                                        peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                       peer-valid:top-2.5 peer-valid:translate-y-0 peer-valid:text-[11px] peer-valid:text-gray-400 peer-valid:font-medium">
                                 You are a
                             </label>
+                            <div class="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-[#888888]">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
                         </div>
-                        <div class="relative w-full">
-                            <input type="email" name="email" id="partner-email" placeholder=" "
+
+                        {{-- Email --}}
+                        <div class="form-field-group relative w-full">
+                            <input type="email" name="email" id="partner-email" required autocomplete="email" placeholder=" "
                                 class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
                             <label for="partner-email"
-                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#888888] transition-all duration-200 origin-left
                                        peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
-                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-400 peer-[:not(:placeholder-shown)]:font-medium">
                                 Email
                             </label>
                         </div>
@@ -449,38 +492,105 @@
         </div>
     </section>
 
+    <style>
+        .form-field-group.has-error input,
+        .form-field-group.has-error select {
+            border-color: #ef4444 !important;
+            background-color: #fff5f5 !important;
+        }
+        .form-field-group.has-error label {
+            color: #ef4444 !important;
+        }
+    </style>
+
     @once
         <script>
+            (function() {
+                // Clear red error state immediately when user types or changes an input
+                const partnerForm = document.getElementById('partner-application-form');
+                if (partnerForm) {
+                    partnerForm.querySelectorAll('input, select').forEach(function(el) {
+                        ['input', 'change'].forEach(function(evtName) {
+                            el.addEventListener(evtName, function() {
+                                const group = el.closest('.form-field-group');
+                                if (group) {
+                                    group.classList.remove('has-error');
+                                }
+                            });
+                        });
+                    });
+                }
+            })();
+
             function submitPartnerForm(event) {
                 if (event) event.preventDefault();
 
                 let form = document.getElementById('partner-application-form');
                 if (!form) return;
 
-                let name = form.querySelector('[name="name"]')?.value?.trim() || '';
-                let sex = form.querySelector('[name="sex"]')?.value?.trim() || '';
-                let experienceLevel = form.querySelector('[name="experience_level"]')?.value?.trim() || '';
-                let youAreA = form.querySelector('[name="you_are_a"]')?.value?.trim() || '';
-                let phone = form.querySelector('[name="phone"]')?.value?.trim() || '';
-                let email = form.querySelector('[name="email"]')?.value?.trim() || '';
+                let nameInput = form.querySelector('[name="name"]');
+                let sexInput = form.querySelector('[name="sex"]');
+                let expInput = form.querySelector('[name="experience_level"]');
+                let youAreInput = form.querySelector('[name="you_are_a"]');
+                let phoneInput = form.querySelector('[name="phone"]');
+                let emailInput = form.querySelector('[name="email"]');
 
-                if (!name) {
-                    alert('Please enter your Full Name');
-                    return;
+                let name = nameInput?.value?.trim() || '';
+                let sex = sexInput?.value?.trim() || '';
+                let experienceLevel = expInput?.value?.trim() || '';
+                let youAreA = youAreInput?.value?.trim() || '';
+                let phone = phoneInput?.value?.trim() || '';
+                let email = emailInput?.value?.trim() || '';
+
+                let hasError = false;
+                let firstInvalidEl = null;
+
+                function validateField(inputEl, isValid) {
+                    const group = inputEl ? inputEl.closest('.form-field-group') : null;
+                    if (!isValid) {
+                        if (group) group.classList.add('has-error');
+                        if (!firstInvalidEl) firstInvalidEl = inputEl;
+                        hasError = true;
+                    } else {
+                        if (group) group.classList.remove('has-error');
+                    }
                 }
-                if (!phone) {
-                    alert('Please enter your Phone Number');
+
+                // Condition 1: Full Name validation
+                validateField(nameInput, name.length >= 2);
+
+                // Condition 2: Experience Level validation
+                validateField(expInput, experienceLevel.length > 0);
+
+                // Condition 3: Phone Number validation
+                let cleanPhone = phone.replace(/[^0-9]/g, '');
+                validateField(phoneInput, cleanPhone.length >= 8);
+
+                // Condition 4: Sex validation
+                validateField(sexInput, sex.length > 0);
+
+                // Condition 5: You are a validation
+                validateField(youAreInput, youAreA.length > 0);
+
+                // Condition 6: Email validation
+                let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                validateField(emailInput, email.length > 0 && emailRegex.test(email));
+
+                if (hasError) {
+                    if (firstInvalidEl) {
+                        firstInvalidEl.focus();
+                    }
                     return;
                 }
 
                 let message = `New Partner Application:
 
 Full Name: ${name}
-Sex: ${sex || 'N/A'}
-Experience Level: ${experienceLevel || 'N/A'}
-You are a: ${youAreA || 'N/A'}
+Sex: ${sex}
+Experience Level: ${experienceLevel}
+You are a: ${youAreA}
 Phone Number: ${phone}
-Email: ${email || 'N/A'}`;
+Email: ${email}`;
 
                 let encoded = encodeURIComponent(message);
                 let telegramUrl = `https://t.me/HasBunRoeun?text=${encoded}`;
