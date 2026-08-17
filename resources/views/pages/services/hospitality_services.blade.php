@@ -24,13 +24,13 @@
                         Personalized Support
                     </h1>
 
-                    <div class="flex flex-wrap items-center px-6 sm:px-10 gap-4 pointer-events-auto">
+                    <div class="grid grid-cols-2 items-stretch px-2 sm:px-6 gap-2 sm:gap-3 pointer-events-auto w-full">
                         <a href="{{ url('/contact-us') }}"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-medium px-4 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors">
+                            class="border-[1.5px] border-[#F4DEAC] text-white text-[11.5px] min-[390px]:text-[12.5px] sm:text-[14.5px] font-medium px-2 sm:px-4 py-2.5 sm:py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors text-center flex items-center justify-center h-full min-h-[50px] leading-tight">
                             Request Hospitality Service
                         </a>
                         <a href="{{ url('/contact-us') }}"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-medium px-6 sm:px-8 py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors">
+                            class="border-[1.5px] border-[#F4DEAC] text-white text-[11.5px] min-[390px]:text-[12.5px] sm:text-[14.5px] font-medium px-2 sm:px-4 py-2.5 sm:py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors text-center flex items-center justify-center h-full min-h-[50px] leading-tight">
                             Contact Us
                         </a>
                     </div>
@@ -753,9 +753,9 @@
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-14">
 
                 {{-- Left: Accent line on the left + Content --}}
-                <div class="flex items-start gap-4 sm:gap-6 lg:gap-8 max-w-[580px]">
-                    <span class="h-[2px] w-20 sm:w-28 lg:w-36 shrink-0 bg-[#c9a15c] mt-3.5"></span>
-                    <div class="flex flex-col items-start">
+                <div class="flex items-start gap-2.5 sm:gap-6 lg:gap-8 max-w-[580px] w-full">
+                    <span class="h-[2px] w-6 min-[390px]:w-10 sm:w-24 lg:w-36 shrink-0 bg-[#c9a15c] mt-3.5"></span>
+                    <div class="flex flex-col items-start flex-1 min-w-0">
                         <h2 class="text-[#204a74] text-[clamp(22px,2.5vw,30px)] font-bold leading-tight mb-4">
                             Planning Your Stay<br>
                             in Cambodia?
@@ -766,16 +766,16 @@
                         <p class="text-[#204a74] text-[14px] sm:text-[14.5px] leading-relaxed mb-6">
                             Whether you need airport pick-up, a city tour, or assistance choosing suitable accommodation, contact our team to discuss your requirements.
                         </p>
-                        <div class="flex flex-col items-start gap-1.5">
+                        <div class="grid grid-cols-2 gap-1 min-[390px]:gap-2 sm:gap-3 w-full">
                             <a href="{{ url('/contact-us') }}"
-                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] font-medium transition-all">
+                                class="inline-flex items-center justify-between gap-1 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-1 min-[390px]:px-2 sm:px-3 py-1.5 sm:py-2 text-[11px] min-[390px]:text-[12px] sm:text-[14px] font-medium transition-all text-left leading-tight">
                                 <span>Request Hospitality Service</span>
-                                <span aria-hidden="true">&rarr;</span>
+                                <span aria-hidden="true" class="shrink-0">&rarr;</span>
                             </a>
                             <a href="{{ url('/contact-us') }}"
-                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] font-medium transition-all">
+                                class="inline-flex items-center justify-between gap-1 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-1 min-[390px]:px-2 sm:px-3 py-1.5 sm:py-2 text-[11px] min-[390px]:text-[12px] sm:text-[14px] font-medium transition-all text-left leading-tight">
                                 <span>Contact Us</span>
-                                <span aria-hidden="true">&rarr;</span>
+                                <span aria-hidden="true" class="shrink-0">&rarr;</span>
                             </a>
                         </div>
                     </div>

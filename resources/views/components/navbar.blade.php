@@ -123,25 +123,30 @@
                 @endphp
                 <li class="w-full text-left">
                     @if ($hasSubmenu)
+                        @php
+                            $isSubActiveAny = collect($item['submenu'])->contains(function($sub) {
+                                return request()->is($sub['pattern']);
+                            });
+                        @endphp
                         <button type="button"
-                            class="mobile-submenu-toggle w-full flex items-center justify-between py-3 text-[#2c4a75] text-[17px] font-medium text-left cursor-pointer {{ $isActive ? 'border-b-2 border-[#2c4a75]' : '' }}"
-                            aria-expanded="false">
+                            class="mobile-submenu-toggle w-full flex items-center justify-between py-3 text-[#2c4a75] text-[17px] font-medium text-left cursor-pointer {{ ($isActive || $isSubActiveAny) ? 'border-b-2 border-[#2c4a75]' : '' }}"
+                            aria-expanded="{{ $isSubActiveAny ? 'true' : 'false' }}">
                             <span>{{ $item['label'] }}</span>
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="mobile-submenu-arrow w-4 h-4 transition-transform duration-300 text-[#2c4a75]"
+                                class="mobile-submenu-arrow w-4 h-4 transition-transform duration-300 text-[#2c4a75] {{ $isSubActiveAny ? 'rotate-180' : '' }}"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
-                        <div class="mobile-submenu-panel grid grid-rows-[0fr] transition-all duration-300 ease-in-out overflow-hidden">
+                        <div class="mobile-submenu-panel grid {{ $isSubActiveAny ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]' }} transition-all duration-300 ease-in-out overflow-hidden">
                             <ul class="min-h-0 flex flex-col items-start gap-1 pl-4 w-full pt-1 pb-2">
                                 @foreach ($item['submenu'] as $sub)
                                     @php $subActive = request()->is($sub['pattern']); @endphp
                                     <li class="w-full text-left">
                                         <a href="{{ $sub['url'] }}"
                                             @if ($subActive) aria-current="page" @endif
-                                            class="mobile-nav-link inline-block py-2 text-[#2c4a75]/80 text-[15px] font-medium transition-colors hover:text-[#2c4a75]
-                                                {{ $subActive ? 'text-[#2c4a75] font-semibold' : '' }}">
+                                            class="mobile-nav-link inline-block py-2 text-[15px] font-medium transition-colors hover:text-[#2c4a75]
+                                                {{ $subActive ? 'text-[#2c4a75] font-semibold border-b-2 border-[#2c4a75]' : 'text-[#2c4a75]/80' }}">
                                             {{ $sub['label'] }}
                                         </a>
                                     </li>

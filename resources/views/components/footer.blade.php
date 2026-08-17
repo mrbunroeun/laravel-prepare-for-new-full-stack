@@ -1,16 +1,20 @@
 {{-- Footer --}}
 <footer class="bg-[#2A5A8A] mt-[10rem]">
     <div class="max-w-[1400px] mx-auto px-6 sm:px-10 py-14 sm:py-16">
-        <div class="grid grid-cols-1 min-[900px]:grid-cols-[1.8fr_0.5fr_0.8fr] gap-10 min-[900px]:gap-24">
+        <div class="grid grid-cols-1 min-[900px]:grid-cols-[1.6fr_0.7fr_0.9fr] gap-10 min-[900px]:gap-16 xl:gap-24">
 
             {{-- Left: logo + tagline + description + socials --}}
             <div class="flex flex-col gap-4">
-                <img src="{{ asset('logo_nav_foot/footer_logo.svg') }}" alt="CWD Realty logo"
-                    class="h-16 w-auto self-start">
+                <a href="{{ url('/') }}" class="self-start inline-block transition-opacity duration-200 hover:opacity-90" aria-label="Go to Home">
+                    <img src="{{ asset('logo_nav_foot/footer_logo.svg') }}" alt="CWD Realty logo"
+                        class="h-16 w-auto">
+                </a>
 
                 <h3 class="text-[20px] sm:text-[22px] font-bold leading-snug">
-                    <span class="text-white">CWD</span>
-                    <span class="text-[#DCC597]">Realty &amp; Hospitality</span>
+                    <a href="{{ url('/') }}" class="hover:opacity-95 transition-opacity">
+                        <span class="text-white">CWD</span>
+                        <span class="text-[#DCC597]">Realty &amp; Hospitality</span>
+                    </a>
                 </h3>
 
                 <p class="text-white/80 text-[18px] leading-relaxed max-w-[560px]">
@@ -49,23 +53,35 @@
             </div>
 
             {{-- Middle: Quick Links --}}
-            <div class="flex flex-col gap-2 max-w-[140px]">
+            <div class="flex flex-col gap-2 max-w-[260px]">
                 <h4 class="text-[#DCC597] text-[18px] font-bold mb-1">Quick Links</h4>
-                <a href="{{ url('/') }}" class="text-white/90 text-[18px] hover:text-white transition">Home</a>
-                <a href="{{ url('/about-us') }}" class="text-white/90 text-[18px] hover:text-white transition">About
-                    Us</a>
-                <a href="{{ url('/services') }}"
-                    class="text-white/90 text-[18px] hover:text-white transition">Services</a>
-                <a href="{{ url('/properties') }}"
-                    class="text-white/90 text-[18px] hover:text-white transition">Properties</a>
-                <a href="{{ url('/partners') }}"
-                    class="text-white/90 text-[18px] hover:text-white transition">Partners</a>
-                <a href="{{ url('/insights') }}"
-                    class="text-white/90 text-[18px] hover:text-white transition">Insights</a>
-                <a href="{{ url('/latest-activities') }}"
-                    class="text-white/90 text-[18px] hover:text-white transition">Events</a>
-                <a href="{{ url('/contact-us') }}" class="text-white/90 text-[18px] hover:text-white transition">Contact
-                    Us</a>
+                <a href="{{ url('/') }}" class="text-white/90 text-[18px] hover:text-[#DCC597] transition-colors duration-200">Home</a>
+                <a href="{{ url('/about-us') }}" class="text-white/90 text-[18px] hover:text-[#DCC597] transition-colors duration-200">About Us</a>
+
+                {{-- Services with Click Dropdown --}}
+                <div class="flex flex-col">
+                    <button type="button" id="footer-services-toggle" aria-expanded="false"
+                        class="flex items-center justify-between text-white/90 text-[18px] hover:text-[#DCC597] transition-colors duration-200 cursor-pointer text-left w-full group py-0.5 outline-none">
+                        <span>Services</span>
+                        <svg id="footer-services-arrow" class="w-4 h-4 text-white/80 transition-all duration-300 transform group-hover:text-[#DCC597]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    
+                    {{-- Submenu links --}}
+                    <div id="footer-services-menu" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out flex flex-col gap-2 pl-3">
+                        <a href="{{ url('/services/property-management') }}" class="text-white/80 text-[15px] hover:text-[#DCC597] transition-colors duration-200 pt-2">Property Management</a>
+                        <a href="{{ url('/services/property-sales') }}" class="text-white/80 text-[15px] hover:text-[#DCC597] transition-colors duration-200">Property Sales</a>
+                        <a href="{{ url('/services/property-leasing') }}" class="text-white/80 text-[15px] hover:text-[#DCC597] transition-colors duration-200">Property Leasing</a>
+                        <a href="{{ url('/services/hospitality-services') }}" class="text-white/80 text-[15px] hover:text-[#DCC597] transition-colors duration-200 pb-1">Hospitality Services</a>
+                    </div>
+                </div>
+
+                <a href="{{ url('/properties') }}" class="text-white/90 text-[18px] hover:text-[#DCC597] transition-colors duration-200">Properties</a>
+                <a href="{{ url('/partners') }}" class="text-white/90 text-[18px] hover:text-[#DCC597] transition-colors duration-200">Partners</a>
+                <a href="{{ url('/insights') }}" class="text-white/90 text-[18px] hover:text-[#DCC597] transition-colors duration-200">Insights</a>
+                <a href="{{ url('/events') }}" class="text-white/90 text-[18px] hover:text-[#DCC597] transition-colors duration-200">Events</a>
+                <a href="{{ url('/contact-us') }}" class="text-white/90 text-[18px] hover:text-[#DCC597] transition-colors duration-200">Contact Us</a>
             </div>
 
             {{-- Right: Contact Information --}}
@@ -77,9 +93,9 @@
                 </p>
                 <p class="text-white/90 text-[18px]">(+855) 86 7777 05</p>
                 <a href="mailto:info@cwdrealty.com"
-                    class="text-white/90 text-[18px] hover:text-white transition">info@cwdrealty.com</a>
+                    class="text-white/90 text-[18px] hover:text-[#DCC597] transition-colors duration-200">info@cwdrealty.com</a>
                 <a href="https://www.cwdrealty.com" target="_blank"
-                    class="text-white/90 text-[18px] hover:text-white transition">www.cwdrealty.com</a>
+                    class="text-white/90 text-[18px] hover:text-[#DCC597] transition-colors duration-200">www.cwdrealty.com</a>
                 <div class="mt-1">
                     <p class="text-white text-[18px] font-bold">Operating Hours:</p>
                     <p class="text-white/90 text-[18px]">Monday – Friday | 8:00 AM – 6:00 PM</p>
@@ -92,3 +108,28 @@
     {{-- White strip at bottom --}}
     <div class="h-6 sm:h-8 bg-white"></div>
 </footer>
+
+<script>
+    (function() {
+        var toggle = document.getElementById('footer-services-toggle');
+        var menu = document.getElementById('footer-services-menu');
+        var arrow = document.getElementById('footer-services-arrow');
+        if (toggle && menu) {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+                if (isExpanded) {
+                    toggle.setAttribute('aria-expanded', 'false');
+                    menu.style.maxHeight = '0px';
+                    menu.style.opacity = '0';
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                } else {
+                    toggle.setAttribute('aria-expanded', 'true');
+                    menu.style.maxHeight = (menu.scrollHeight + 30) + 'px';
+                    menu.style.opacity = '1';
+                    if (arrow) arrow.style.transform = 'rotate(180deg)';
+                }
+            });
+        }
+    })();
+</script>
