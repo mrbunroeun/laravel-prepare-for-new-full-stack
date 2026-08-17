@@ -558,6 +558,115 @@
         </div>
     </section>
 
+    {{-- How to Request Hospitality Services --}}
+    @php
+        $bookingSteps = [
+            [
+                'step' => 'Step 01',
+                'title' => 'Contact Us',
+                'description' => 'Tell us which hospitality service you require.',
+            ],
+            [
+                'step' => 'Step 02',
+                'title' => 'Provide Your Details',
+                'description' => 'For airport pick-up, provide your arrival date, flight information, and passenger details. For city tours, tell us your preferred date, schedule, and destinations.',
+            ],
+            [
+                'step' => 'Step 03',
+                'title' => 'Confirm the Service',
+                'description' => 'Our team will confirm availability and applicable charges.',
+            ],
+            [
+                'step' => 'Step 04',
+                'title' => 'Enjoy Your Stay',
+                'description' => 'Once confirmed, our team coordinates the requested service for you.',
+            ],
+        ];
+    @endphp
+
+    <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white pb-16 sm:pb-24">
+        <div class="max-w-[1400px] mx-auto px-6">
+
+            {{-- Heading --}}
+            <div class="mb-10 sm:mb-14" data-scroll-reveal="left">
+                <h2 class="text-[clamp(28px,3.8vw,44px)] leading-tight mb-2">
+                    <span class="text-[#2A5A8A] font-normal block">How to Request</span>
+                    <span class="text-[#2A5A8A] font-bold block">Hospitality Services</span>
+                </h2>
+                <p class="text-black text-[16px] sm:text-[17.5px] font-normal">
+                    Simple Booking Process
+                </p>
+            </div>
+
+            {{-- 4 Cards Grid with Hover Effect --}}
+            <div id="booking-process-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch">
+                @foreach ($bookingSteps as $index => $step)
+                    @php
+                        $dir = ($index === 0) ? 'left' : (($index === 3) ? 'right' : 'fade-up');
+                    @endphp
+                    <div
+                        data-scroll-reveal="{{ $dir }}"
+                        data-scroll-delay="{{ $index * 100 }}"
+                        class="booking-step-card group flex flex-col justify-start p-6 sm:p-7 bg-white border-[1.8px] border-[#1479B9] hover:bg-[#1479B9] transition-all duration-200 shadow-sm cursor-pointer">
+                        <span class="text-[20px] sm:text-[22px] font-normal mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                            {{ $step['step'] }}
+                        </span>
+                        <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold mb-2.5 transition-colors duration-200">
+                            {{ $step['title'] }}
+                        </h3>
+                        <p class="text-black/80 group-hover:text-white/95 text-[13px] sm:text-[13.5px] leading-relaxed transition-colors duration-200">
+                            {{ $step['description'] }}
+                        </p>
+                    </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+
+    @once
+        <script>
+            (function() {
+                function equalizeBookingStepHeights() {
+                    var cards = document.querySelectorAll('#booking-process-grid .booking-step-card');
+                    if (!cards.length) return;
+
+                    cards.forEach(function(card) {
+                        card.style.minHeight = '';
+                    });
+
+                    var tallest = 0;
+                    cards.forEach(function(card) {
+                        var cardHeight = card.offsetHeight;
+                        if (cardHeight > tallest) {
+                            tallest = cardHeight;
+                        }
+                    });
+
+                    cards.forEach(function(card) {
+                        card.style.minHeight = tallest + 'px';
+                    });
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', equalizeBookingStepHeights);
+                } else {
+                    equalizeBookingStepHeights();
+                }
+
+                var resizeTimer;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(equalizeBookingStepHeights, 150);
+                });
+
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(equalizeBookingStepHeights);
+                }
+            })();
+        </script>
+    @endonce
+
     {{-- Frequently Asked Questions --}}
     @php
         $faqLeft = [
@@ -605,7 +714,7 @@
 
                 {{-- Dark Blue Card --}}
                 <div class="bg-[#122e49]/85 backdrop-blur-[2px] p-8 sm:p-10 lg:p-12 text-white shadow-xl">
-                    <h2 class="text-white text-[clamp(26px,3.2vw,38px)] font-normal leading-tight mb-2">
+                    <h2 class="text-[#F4DEAC] text-[clamp(26px,3.2vw,38px)] font-normal leading-tight mb-2">
                         Explore Our <span class="text-[#F4DEAC] font-bold">Accommodation</span>
                     </h2>
                     <h3 class="text-white text-[16px] sm:text-[17px] font-bold mb-4">

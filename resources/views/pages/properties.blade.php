@@ -106,74 +106,76 @@
                 </div>
 
                 {{-- Right: 3 Featured Project Cards stuck to the right with small gap --}}
-                <div id="featured-properties-grid" class="flex-1 w-full max-w-[1240px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 sm:gap-2.5 items-stretch pr-0">
+                <div id="featured-properties-grid" class="flex-1 w-full max-w-[1240px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 items-stretch pr-0">
                     @foreach ($featuredProjects as $index => $project)
                         @php
                             $dir = ($index === 0) ? 'left' : (($index === 1) ? 'fade-up' : 'right');
                         @endphp
-                        <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ $index * 100 }}" class="featured-prop-card bg-white flex flex-col justify-between shadow-2xl overflow-hidden transition-transform duration-300 hover:-translate-y-1"
-                            data-images="{{ json_encode($detailImages) }}">
+                        <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ $index * 100 }}" class="h-full flex flex-col">
+                            <div class="featured-prop-card group bg-white flex flex-col justify-between shadow-xl hover:shadow-2xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 h-full cursor-pointer"
+                                data-images="{{ json_encode($detailImages) }}">
 
-                            {{-- Card Image with Dots --}}
-                            <div class="relative w-full h-[220px] sm:h-[240px] overflow-hidden shrink-0 bg-gray-100">
-                                <img src="{{ $project['image'] }}" alt="{{ $project['title'] }}"
-                                    class="featured-card-img w-full h-full object-cover transition-opacity duration-300">
+                                {{-- Card Image with Dots --}}
+                                <div class="relative w-full h-[220px] sm:h-[240px] overflow-hidden shrink-0 bg-gray-100">
+                                    <img src="{{ $project['image'] }}" alt="{{ $project['title'] }}"
+                                        class="featured-card-img w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105">
 
-                                <div class="featured-card-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5" aria-hidden="true">
-                                    @foreach ($detailImages as $i => $img)
-                                        <span class="featured-card-dot rounded-full transition-all duration-300 h-2 w-2"
-                                            style="background:{{ $img === $project['image'] ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
-                                    @endforeach
+                                    <div class="featured-card-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5" aria-hidden="true">
+                                        @foreach ($detailImages as $i => $img)
+                                            <span class="featured-card-dot rounded-full transition-all duration-300 h-2 w-2"
+                                                style="background:{{ $img === $project['image'] ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </div>
 
-                            {{-- Card Body --}}
-                            <div class="p-6 sm:p-7 flex flex-col justify-between flex-1">
-                                <div>
-                                    {{-- Title & Mini Arrow Controls --}}
-                                    <div class="flex items-center justify-between gap-2 mb-3">
-                                        <h3 class="text-[#2A5A8A] text-[17px] sm:text-[18px] font-bold">
-                                            {{ $project['title'] }}
-                                        </h3>
-                                        <div class="flex items-center gap-1.5 shrink-0">
-                                            <button type="button" aria-label="Previous image"
-                                                class="card-prev-btn w-8 h-8 rounded-full border border-[#204a74] text-[#204a74] flex items-center justify-center cursor-pointer transition-all hover:bg-[#204a74] hover:text-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                                                </svg>
-                                            </button>
-                                            <button type="button" aria-label="Next image"
-                                                class="card-next-btn w-8 h-8 rounded-full border border-[#204a74] text-[#204a74] flex items-center justify-center cursor-pointer transition-all hover:bg-[#204a74] hover:text-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
+                                {{-- Card Body --}}
+                                <div class="p-6 sm:p-7 flex flex-col justify-between flex-1">
+                                    <div>
+                                        {{-- Title & Mini Arrow Controls --}}
+                                        <div class="flex items-center justify-between gap-2 mb-3">
+                                            <h3 class="text-[#2A5A8A] text-[17px] sm:text-[18px] font-bold transition-colors duration-200 group-hover:text-[#1479B9]">
+                                                {{ $project['title'] }}
+                                            </h3>
+                                            <div class="flex items-center gap-1.5 shrink-0">
+                                                <button type="button" aria-label="Previous image"
+                                                    class="card-prev-btn w-8 h-8 rounded-full border border-[#204a74] text-[#204a74] flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 hover:bg-[#204a74] hover:text-white active:scale-95">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                                                    </svg>
+                                                </button>
+                                                <button type="button" aria-label="Next image"
+                                                    class="card-next-btn w-8 h-8 rounded-full border border-[#204a74] text-[#204a74] flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 hover:bg-[#204a74] hover:text-white active:scale-95">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </div>
+
+                                        {{-- Subtitle --}}
+                                        <h4 class="text-black text-[14.5px] sm:text-[15px] font-bold leading-snug mb-3">
+                                            {{ $project['subtitle'] }}
+                                        </h4>
+
+                                        {{-- Description --}}
+                                        <p class="text-black/80 text-[13px] sm:text-[13.5px] leading-relaxed mb-6">
+                                            {{ $project['description'] }}
+                                        </p>
                                     </div>
 
-                                    {{-- Subtitle --}}
-                                    <h4 class="text-black text-[14.5px] sm:text-[15px] font-bold leading-snug mb-3">
-                                        {{ $project['subtitle'] }}
-                                    </h4>
+                                    <div>
+                                        {{-- Status --}}
+                                        <div class="text-[#2A5A8A] text-[14px] sm:text-[15px] font-bold mb-6">
+                                            {{ $project['status'] }}
+                                        </div>
 
-                                    {{-- Description --}}
-                                    <p class="text-black/80 text-[13px] sm:text-[13.5px] leading-relaxed mb-6">
-                                        {{ $project['description'] }}
-                                    </p>
-                                </div>
-
-                                <div>
-                                    {{-- Status --}}
-                                    <div class="text-[#2A5A8A] text-[14px] sm:text-[15px] font-bold mb-6">
-                                        {{ $project['status'] }}
+                                        {{-- Link --}}
+                                        <a href="{{ $project['link'] }}"
+                                            class="inline-flex items-center gap-1.5 text-[#2A5A8A] group-hover:text-[#c9a463] text-[13px] sm:text-[13.5px] font-medium transition-colors duration-200">
+                                            <span>View Project</span>
+                                            <span class="transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true">&rarr;</span>
+                                        </a>
                                     </div>
-
-                                    {{-- Link --}}
-                                    <a href="{{ $project['link'] }}"
-                                        class="group inline-flex items-center gap-1.5 text-[#2A5A8A] hover:text-[#c9a463] text-[13px] sm:text-[13.5px] font-medium transition-colors">
-                                        <span>View Project</span>
-                                        <span class="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
-                                    </a>
                                 </div>
                             </div>
                         </div>

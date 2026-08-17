@@ -27,7 +27,7 @@
                         Developer
                     </h1>
 
-                    <p class="text-white/90 text-[13px] sm:text-[14.5px] px-6 sm:px-10 mb-8 font-light tracking-wide leading-relaxed">
+                    <p class="text-[#EBD4A4] text-[13px] sm:text-[14.5px] px-6 sm:px-10 mb-8 font-light tracking-wide leading-relaxed">
                         <span class="block lg:inline">• Flexible income • Strong brand</span>
                         <span class="block lg:inline lg:ml-2">• Real projects • Full sales support</span>
                     </p>
