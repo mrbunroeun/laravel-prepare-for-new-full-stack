@@ -22,6 +22,26 @@ Route::get('/insights', function () {
     return view('pages.insights');
 });
 
+Route::get('/events', function () {
+    return view('pages.events');
+});
+
+Route::get('/contact-us', function () {
+    return view('pages.contact_us');
+});
+
+Route::get('/properties', function () {
+    return view('pages.properties');
+});
+
+Route::get('/partners', function () {
+    return view('pages.partner');
+});
+
+Route::get('/partner', function () {
+    return view('pages.partner');
+});
+
 Route::get('/services/property-management', function () {
     return view('pages.services.property_management');
 });

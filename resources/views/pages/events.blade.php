@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <section class="text-[3rem] text-[#a6bb2e]">
-        <div>This is the latest activities</div>
+    <section class="min-h-[50vh] flex items-center justify-center pt-32 pb-16">
+        <h2 class="text-[clamp(28px,4vw,42px)] font-bold text-[#2A5A8A]">Events</h2>
     </section>
 @endsection
