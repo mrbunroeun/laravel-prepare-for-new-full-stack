@@ -481,55 +481,60 @@
 
     <x-faqs :faq-left="$faqLeft" :faq-right="$faqRight" />
 
-    {{-- Looking for your next stay --}}
-    <section class="relative mt-[2rem] sm:mt-[5rem] max-w-[1600px] mx-auto">
+    {{-- Find Your Next Stay --}}
+    <section class="relative mt-[4rem] sm:mt-[6rem] lg:mt-[8rem] max-w-[1600px] mx-auto">
         <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
-            <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
-                class="w-full h-auto min-h-[220px] object-cover">
+            <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="Find Your Next Stay"
+                class="w-full h-auto min-h-[260px] object-cover shadow-sm">
 
-            <div
-                class="relative max-w-[520px] mt-6 px-6
-                    min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
-                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
-                    <span class="block min-[900px]:hidden">
-                        Looking for Professional
-                        Property Management or
-                        Comfortable Accommodation?
-                    </span>
-                    <span class="hidden min-[900px]:block">
-                        Looking for<br>
-                        Your Next Stay or<br>
-                        Property Management<br>
-                        Partner?
-                    </span>
+            <div class="relative max-w-[540px] mt-6 px-6 min-[900px]:ml-[-8rem] min-[900px]:mt-[-7.5rem] min-[900px]:px-0">
+                <h2 class="text-[#DCC597] text-[clamp(28px,4.5vw,50px)] font-bold leading-[1.15] drop-shadow-md">
+                    Find Your Next Stay
                 </h2>
             </div>
         </div>
+    </section>
 
-        <div class="max-w-[420px] mt-8 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-6 min-[900px]:px-0">
-            @php
-                $links = [
-                    ['label' => 'Property Sales', 'url' => url('/services/property-sales'), 'active' => false],
-                    ['label' => 'Property Management', 'url' => url('/services/property-management'), 'active' => false],
-                    ['label' => 'Hospitality Services', 'url' => url('/services/hospitality-services'), 'active' => false],
-                    ['label' => 'Contact Us', 'url' => url('/contact-us'), 'active' => false],
-                ];
-            @endphp
+    {{-- Looking for Flexible Accommodation in Cambodia? --}}
+    <section class="mt-16 sm:mt-24 md:mt-32 pb-24">
+        <div class="max-w-[1450px] mx-auto px-6 sm:px-10 lg:px-14">
+            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-14">
 
-            <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200">
-                @foreach ($links as $link)
-                    <a href="{{ $link['url'] }}"
-                        class="group flex items-center justify-between px-5 py-3 text-[15px] font-medium
-                   bg-white text-[#2A5A8A] transition-colors
-                   hover:bg-[#2A5A8A] hover:text-[#DCC597]">
-                        <span>{{ $link['label'] }}</span>
-                        <span aria-hidden="true"
-                            class="text-[#2A5A8A] transition-all group-hover:text-[#DCC597] group-hover:translate-x-1">
-                            &rarr;
-                        </span>
-                    </a>
-                @endforeach
-            </nav>
+                {{-- Left: Accent line on the left + Content --}}
+                <div class="flex items-start gap-4 sm:gap-6 lg:gap-8 max-w-[580px]">
+                    <span class="h-[2px] w-20 sm:w-28 lg:w-36 shrink-0 bg-[#c9a15c] mt-3.5"></span>
+                    <div class="flex flex-col items-start">
+                        <h2 class="text-[#204a74] text-[clamp(20px,2.4vw,28px)] font-bold leading-tight mb-4">
+                            Looking for Flexible<br>
+                            Accommodation in<br>
+                            Cambodia?
+                        </h2>
+                        <p class="text-[#204a74] text-[14px] sm:text-[14.5px] leading-relaxed mb-6">
+                            Whether you need a residence for a few days, several weeks, or an extended monthly stay, CWD Realty &amp; Hospitality can help you find a suitable professionally managed property.
+                        </p>
+                        <div class="flex flex-col items-start gap-1.5">
+                            <a href="{{ url('/properties') }}"
+                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] font-medium transition-all">
+                                <span>Browse Available Properties</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                            <a href="{{ url('/contact-us') }}"
+                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] font-medium transition-all">
+                                <span>Contact Our Leasing Team</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Right: Image --}}
+                <div class="w-full lg:w-auto lg:shrink-0">
+                    <img src="{{ asset('services/private residential/Private Residential.png') }}"
+                        alt="Looking for Flexible Accommodation in Cambodia"
+                        class="w-full lg:w-[520px] xl:w-[580px] h-auto object-cover shadow-sm">
+                </div>
+
+            </div>
         </div>
     </section>
 @endsection
