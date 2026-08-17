@@ -1,56 +1,61 @@
 @php
-    // Same set of detail images reused for every card's mini image-carousel.
-$detailImages = [
-    asset('home/latest_activities/1img.png'),
-    asset('home/latest_activities/2img.png'),
-    asset('home/latest_activities/3img.png'),
-];
+    $bedroomImg = asset('services/propertis_leasing/bedroom.png');
+    $allPartImg = asset('services/propertis_leasing/all part.png');
 
-// The three unit-type cards.
-$properties = [
-    [
-        'image' => asset('home/latest_activities/1img.png'),
-        'title' => 'Studio Room',
-        'subtitle' => 'Compact & Practical Living',
-        'description' => 'The studio layout is suitable for individuals, couples, business professionals, and investors seeking a compact residential property.',
-        'suitableFor' => [
-            'Individual residents',
-            'Business travelers',
-            'Young professionals',
-            'Rental investment',
+    $bedroomFirst = [$bedroomImg, $allPartImg];
+    $allPartFirst = [$allPartImg, $bedroomImg];
+
+    // The three unit-type cards: both on left use bedroom.png, right one uses all part.png
+    $properties = [
+        [
+            'image' => $bedroomImg,
+            'images' => $bedroomFirst,
+            'title' => 'Studio Room',
+            'subtitle' => 'Compact & Practical Living',
+            'description' =>
+                'The studio layout is suitable for individuals, couples, business professionals, and investors seeking a compact residential property.',
+            'suitableFor' => [
+                'Individual residents',
+                'Business travelers',
+                'Young professionals',
+                'Rental investment',
+            ],
+            'units' => 'XX Units Available',
+            'link' => url('services/properties/wealth-mansion'),
         ],
-        'units' => 'XX Units Available',
-        'link' => url('services/properties/wealth-mansion'),
-    ],
-    [
-        'image' => asset('home/latest_activities/2img.png'),
-        'title' => '1-bedroom',
-        'subtitle' => 'Comfortable One-Bedroom Residence',
-        'description' => 'The 1-bedroom layout provides additional living space and privacy compared with a studio, making it suitable for both personal residence and rental investment.',
-        'suitableFor' => [
-            'Couples',
-            'Professionals',
-            'Long-term residents',
-            'Property investors',
+        [
+            'image' => $bedroomImg,
+            'images' => $bedroomFirst,
+            'title' => '1-bedroom',
+            'subtitle' => 'Comfortable One-Bedroom Residence',
+            'description' =>
+                'The 1-bedroom layout provides additional living space and privacy compared with a studio, making it suitable for both personal residence and rental investment.',
+            'suitableFor' => [
+                'Couples',
+                'Professionals',
+                'Long-term residents',
+                'Property investors',
+            ],
+            'units' => 'XX Units Available',
+            'link' => url('services/properties/private-residential'),
         ],
-        'units' => 'XX Units Available',
-        'link' => url('services/properties/private-residential'),
-    ],
-    [
-        'image' => asset('home/latest_activities/3img.png'),
-        'title' => '2-Bedroom with Balcony',
-        'subtitle' => 'More Space with a Private Balcony',
-        'description' => 'The 2-bedroom residence provides additional space for families or buyers seeking a larger condominium with outdoor balcony space.',
-        'suitableFor' => [
-            'Small families',
-            'Shared living',
-            'Long-term residents',
-            'Investment purposes',
+        [
+            'image' => $allPartImg,
+            'images' => $allPartFirst,
+            'title' => '2-Bedroom with Balcony',
+            'subtitle' => 'More Space with a Private Balcony',
+            'description' =>
+                'The 2-bedroom residence provides additional space for families or buyers seeking a larger condominium with outdoor balcony space.',
+            'suitableFor' => [
+                'Small families',
+                'Shared living',
+                'Long-term residents',
+                'Investment purposes',
+            ],
+            'units' => 'XX Units Available',
+            'link' => url('services/properties/uc88'),
         ],
-        'units' => 'XX Units Available',
-        'link' => url('services/properties/uc88'),
-    ],
-];
+    ];
 @endphp
 
 {{--
@@ -63,11 +68,10 @@ $properties = [
 
     CARD DESIGN (unit-type cards):
       Light-gray card body, top image with a centered dot-indicator strip
-      (same ● ○ ○ pattern as the original carousel cards) tracking which
-      of the 3 detail images is showing, title + prev/next mini carousel
-      controls on one row, subtitle, full (non-clamped) description, a
-      "Suitable for:" bullet list, a bold "XX Units Available" line, and
-      a "Contact Us" link.
+      (same ● ○ pattern) tracking which of the detail images is showing,
+      title + prev/next mini carousel controls on one row, subtitle, full
+      description, a "Suitable for:" bullet list, a bold "XX Units Available"
+      line, and a "Contact Us" link.
 --}}
 <section class="relative w-full bg-white">
     <div class="w-full px-4 sm:px-8 lg:pl-0 lg:pr-14 py-10 sm:py-14">
@@ -80,18 +84,17 @@ $properties = [
                         transition-all duration-300 ease-out
                         hover:-translate-y-1
                         focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2"
-                    data-images="{{ json_encode($detailImages) }}" data-link="{{ $property['link'] }}"
+                    data-images="{{ json_encode($property['images']) }}" data-link="{{ $property['link'] }}"
                     tabindex="0" role="link" aria-label="View details for {{ $property['title'] }}">
 
                     <div class="relative w-full aspect-[16/10] overflow-hidden shrink-0">
                         <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
                             class="cwd-featured-card-img w-full h-full object-cover transition-all duration-500 ease-out">
 
-                        {{-- Image position indicator: ● ○ ○, centered at the
-                             bottom edge of the image. --}}
+                        {{-- Image position indicator --}}
                         <div class="cwd-featured-card-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2"
                             aria-hidden="true">
-                            @foreach ($detailImages as $i => $img)
+                            @foreach ($property['images'] as $i => $img)
                                 <span class="cwd-featured-card-dot rounded-full transition-all duration-300 h-2 w-2"
                                     style="background:{{ $i === 0 ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
                             @endforeach
