@@ -256,10 +256,240 @@
 <!-- auto move -->
     <x-auto_move.auto_move />
 
+    {{-- Commission & Rewards --}}
+    @php
+        $rewards = [
+            [
+                'number' => '01',
+                'line1' => 'Competitive commission',
+                'line2' => 'per unit sold',
+            ],
+            [
+                'number' => '02',
+                'line1' => 'Performance bonuses for',
+                'line2' => 'high achievers',
+            ],
+            [
+                'number' => '03',
+                'line1' => 'Special incentives during',
+                'line2' => 'project launches',
+            ],
+            [
+                'number' => '04',
+                'line1' => 'Transparent tracking &',
+                'line2' => 'fast payment',
+            ],
+        ];
+    @endphp
 
- 
+    <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white py-12 sm:py-16">
+        <div class="max-w-[1200px] mx-auto px-6">
 
-    {{-- Who We Are section 2nd one --}}
+            {{-- Heading Centered --}}
+            <h2 class="text-center text-[clamp(26px,3.2vw,36px)] text-[#2A5A8A] font-medium leading-tight mb-8 sm:mb-12">
+                Commission &amp; Rewards
+            </h2>
+
+            {{-- Cards Grid (4 columns on desktop, 2 on tablet, 1 on mobile) --}}
+            <div id="commission-rewards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch">
+                @foreach ($rewards as $reward)
+                    <div
+                        class="commission-reward-card group h-full w-full flex flex-col justify-start px-6 py-6 sm:px-6 sm:py-6 bg-white border-[1.8px] border-[#1479B9] hover:bg-[#1479B9] transition-all duration-200">
+                        <span
+                            class="text-[30px] sm:text-[34px] font-bold leading-none mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                            {{ $reward['number'] }}
+                        </span>
+                        <p
+                            class="text-[14px] sm:text-[15px] leading-snug text-black group-hover:text-white transition-colors duration-200 font-normal">
+                            <span class="block">{{ $reward['line1'] }}</span>
+                            <span class="block">{{ $reward['line2'] }}</span>
+                        </p>
+                    </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+
+    @once
+        <script>
+            (function() {
+                function equalizeCommissionRewardCardHeights() {
+                    var cards = document.querySelectorAll('#commission-rewards-grid .commission-reward-card');
+                    if (!cards.length) return;
+
+                    cards.forEach(function(card) {
+                        card.style.height = 'auto';
+                    });
+
+                    var tallest = 0;
+                    cards.forEach(function(card) {
+                        var cardHeight = card.getBoundingClientRect().height;
+                        if (cardHeight > tallest) {
+                            tallest = cardHeight;
+                        }
+                    });
+
+                    cards.forEach(function(card) {
+                        card.style.height = tallest + 'px';
+                    });
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', equalizeCommissionRewardCardHeights);
+                } else {
+                    equalizeCommissionRewardCardHeights();
+                }
+
+                var resizeTimer;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(equalizeCommissionRewardCardHeights, 150);
+                });
+
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(equalizeCommissionRewardCardHeights);
+                }
+            })();
+        </script>
+    @endonce
+
+    {{-- Application Form --}}
+    <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white py-12 sm:py-16 lg:py-20">
+        <div class="max-w-[1000px] mx-auto px-6">
+
+            {{-- Heading Centered --}}
+            <h2 class="text-center text-[clamp(28px,3.5vw,40px)] text-[#2A5A8A] font-normal leading-tight mb-10 sm:mb-14">
+                Application Form
+            </h2>
+
+            {{-- Form container --}}
+            <form id="partner-application-form" onsubmit="submitPartnerForm(event)" class="w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10">
+
+                    {{-- Left column --}}
+                    <div class="flex flex-col gap-4 sm:gap-6">
+                        <div class="relative w-full">
+                            <input type="text" name="name" id="partner-fullname" required placeholder=" "
+                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+                            <label for="partner-fullname"
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
+                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                Full Name
+                            </label>
+                        </div>
+                        <div class="relative w-full">
+                            <input type="text" name="experience_level" id="partner-experience" placeholder=" "
+                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+                            <label for="partner-experience"
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
+                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                Experience Level
+                            </label>
+                        </div>
+                        <div class="relative w-full">
+                            <input type="tel" name="phone" id="partner-phone" required placeholder=" "
+                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+                            <label for="partner-phone"
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
+                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                Phone Number
+                            </label>
+                        </div>
+                    </div>
+
+                    {{-- Right column --}}
+                    <div class="flex flex-col gap-4 sm:gap-6">
+                        <div class="relative w-full">
+                            <input type="text" name="sex" id="partner-sex" placeholder=" "
+                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+                            <label for="partner-sex"
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
+                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                Sex
+                            </label>
+                        </div>
+                        <div class="relative w-full">
+                            <input type="text" name="you_are_a" id="partner-you-are" placeholder=" "
+                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+                            <label for="partner-you-are"
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
+                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                You are a
+                            </label>
+                        </div>
+                        <div class="relative w-full">
+                            <input type="email" name="email" id="partner-email" placeholder=" "
+                                class="peer w-full h-[54px] sm:h-[58px] px-6 pt-5 pb-1.5 bg-[#F5F5F5] text-black text-[15px] border border-transparent focus:border-[#2A5A8A] focus:bg-white outline-none transition-all">
+                            <label for="partner-email"
+                                class="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-[14.5px] text-[#333333] transition-all duration-200 origin-left
+                                       peer-focus:top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:text-[#2A5A8A] peer-focus:font-semibold
+                                       peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:translate-y-0 peer-[:not(:placeholder-shown)]:text-[11px] peer-[:not(:placeholder-shown)]:text-gray-500 peer-[:not(:placeholder-shown)]:font-medium">
+                                Email
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                {{-- Submit Button --}}
+                <div class="flex justify-center">
+                    <button type="submit"
+                        class="min-w-[170px] sm:min-w-[200px] py-2 sm:py-2.5 px-8 sm:px-12 bg-white text-[#2A5A8A] border-[1.5px] border-[#C29B62] text-[15px] sm:text-[16px] font-normal hover:bg-[#2A5A8A] hover:text-white hover:border-[#2A5A8A] transition-all duration-200 cursor-pointer text-center">
+                        Submit
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </section>
+
+    @once
+        <script>
+            function submitPartnerForm(event) {
+                if (event) event.preventDefault();
+
+                let form = document.getElementById('partner-application-form');
+                if (!form) return;
+
+                let name = form.querySelector('[name="name"]')?.value?.trim() || '';
+                let sex = form.querySelector('[name="sex"]')?.value?.trim() || '';
+                let experienceLevel = form.querySelector('[name="experience_level"]')?.value?.trim() || '';
+                let youAreA = form.querySelector('[name="you_are_a"]')?.value?.trim() || '';
+                let phone = form.querySelector('[name="phone"]')?.value?.trim() || '';
+                let email = form.querySelector('[name="email"]')?.value?.trim() || '';
+
+                if (!name) {
+                    alert('Please enter your Full Name');
+                    return;
+                }
+                if (!phone) {
+                    alert('Please enter your Phone Number');
+                    return;
+                }
+
+                let message = `New Partner Application:
+
+Full Name: ${name}
+Sex: ${sex || 'N/A'}
+Experience Level: ${experienceLevel || 'N/A'}
+You are a: ${youAreA || 'N/A'}
+Phone Number: ${phone}
+Email: ${email || 'N/A'}`;
+
+                let encoded = encodeURIComponent(message);
+                let telegramUrl = `https://t.me/HasBunRoeun?text=${encoded}`;
+
+                window.open(telegramUrl, '_blank');
+            }
+        </script>
+    @endonce
+
     <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
             <div class="max-w-[750px]">
