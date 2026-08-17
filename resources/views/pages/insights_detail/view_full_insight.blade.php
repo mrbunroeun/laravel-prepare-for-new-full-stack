@@ -1,41 +1,83 @@
 @extends('layouts.app')
 @section('content')
-    {{-- Hero image section --}}
-    <section
-        class="absolute top-0 left-0 w-full z-[100] h-[2000px] text-[3rem] text-[#2f6ba7] pointer-events-none overflow-hidden">
-        <img class="absolute min-h-[850px] max-[1240px]:min-h-[700px] max-[940px]:min-h-[560px] max-[940px]:pt-[2rem] w-full object-cover object-right"
-            src="{{ asset('hero_section/hero_sectionsss.png') }}" alt="Insights Hero">
-    </section>
+    {{-- Hero & Overlapping Cards Section --}}
+    <section class="relative z-[200] pt-[110px] min-[1161px]:pt-[120px] bg-white overflow-hidden pb-12 sm:pb-16">
+        <div class="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
 
-    {{-- Hero content, sits above the hero image --}}
-    <section class="relative z-[200] lg:mt-[-5rem] lg:mb-[10rem] text-[#2f6ba7] pointer-events-none">
-        <div class="pt-[20rem] max-[1240px]:pt-[15rem] max-[940px]:pt-[10rem] max-w-[1400px] mx-auto px-6">
-            <div class="max-w-[700px]">
-                {{-- Gold accent bar (60% width) --}}
-                <div class="h-[12px] sm:h-[15px] w-[60%] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
-                <div class="w-full bg-[#163049]/90 py-8 sm:py-10 px-6 sm:px-10">
-                    <h2 class="flex items-center gap-4 text-[clamp(24px,3.5vw,36px)] font-bold mb-6">
-                        <span class="h-[2.5px] w-12 sm:w-16 bg-[#F4DEAC]"></span>
-                        <span class="text-[#F4DEAC]">Insights</span>
-                    </h2>
-
-                    <h1 class="text-white text-[clamp(20px,2.8vw,32px)] font-medium leading-[1.3] mb-8">
+            {{-- Blue Banner Layer (Offset from left, h-[350px]) --}}
+            <div class="relative w-full">
+                <div class="relative w-full lg:w-[calc(100%-180px)] lg:ml-[180px] h-[350px] bg-[#2A5A8A] flex flex-col justify-start pt-8 sm:pt-10 px-8 sm:px-14 lg:px-16">
+                    <h1 class="text-[#F4DEAC] text-[clamp(22px,3vw,34px)] font-normal leading-[1.35] max-w-[560px]">
                         Your Trusted Property<br>
                         Management &amp; Hospitality<br>
                         Partner in Cambodia
                     </h1>
 
-                    <div class="flex items-center gap-4 sm:gap-6 pointer-events-auto">
-                        <a href="{{ url('/properties') }}"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-normal px-6 sm:px-8 py-2.5 hover:bg-white hover:text-[#163049] transition-colors">
-                            Browse Properties
-                        </a>
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-normal px-6 sm:px-8 py-2.5 hover:bg-white hover:text-[#163049] transition-colors">
-                            Contact Us
-                        </a>
-                    </div>
+                    {{-- Bottom Right Gold Accent Bar --}}
+                    <div class="absolute bottom-0 right-0 h-[10px] sm:h-[12px] w-[50%] sm:w-[35%] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
                 </div>
+
+                {{-- The 2 Overlapping Cards Layer (shifted right, lowered -mt to keep text visible) --}}
+                <div class="relative z-20 -mt-[95px] sm:-mt-[110px] lg:-mt-[120px] lg:ml-[70px] flex flex-col lg:flex-row gap-5 sm:gap-6 items-start">
+
+                    {{-- Left Card (max-w 690px, h 380px) --}}
+                    <div class="w-full lg:w-[690px] lg:max-w-[690px] shrink-0 bg-[#8B2E34] h-[380px] shadow-sm flex flex-col">
+                        {{-- Left Card Content --}}
+                    </div>
+
+                    {{-- Right Card (max-w 410px, h 380px) --}}
+                    <div class="w-full lg:w-[410px] lg:max-w-[410px] shrink-0 bg-[#8B2E34] h-[380px] shadow-sm flex flex-col">
+                        {{-- Right Card Content --}}
+                    </div>
+
+                </div>
+
+                {{-- Text Content Below Boxes (Aligned with the boxes width and left margin) --}}
+                <div class="relative z-20 mt-10 sm:mt-14 lg:ml-[70px] max-w-[1124px] flex flex-col gap-5 text-[#2b2b2b] text-[13.5px] sm:text-[14.5px] leading-relaxed">
+                    <p>
+                        CWD Realty &amp; Hospitality was founded with a clear vision—to create a professional property management and hospitality company built on trust, integrity, and long-term partnerships.
+                    </p>
+                    <p>
+                        Our journey began with founders who were committed to expanding business opportunities beyond Cambodia. Through frequent international travel, face-to-face meetings, business presentations, and contract negotiations, they established valuable relationships with overseas partners and property investors. Their willingness to meet clients personally, understand their expectations, and deliver on every commitment became the foundation of the company's reputation.
+                    </p>
+                    <p>
+                        Today, that same commitment continues to shape how we serve every property owner, tenant, investor, and guest. We believe that lasting business relationships are built through professionalism, transparency, and consistently delivering value.
+                    </p>
+                    <p>
+                        As Cambodia's real estate and hospitality industries continue to grow, CWD Realty &amp; Hospitality remains dedicated to providing dependable property management, flexible leasing solutions, and exceptional hospitality services that create value for both property owners and residents.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    {{-- Feature Detail Section (Image/Box on Left, Text on Right) --}}
+    <section class="relative z-[200] bg-white pt-6 pb-12 sm:pb-16">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:ml-[70px] max-w-[1124px] flex flex-col lg:flex-row gap-8 sm:gap-10 lg:gap-12 items-start">
+
+                {{-- Left Red Box / Image Placeholder --}}
+                <div class="w-full lg:w-[460px] lg:max-w-[460px] h-[360px] sm:h-[400px] lg:h-[420px] bg-[#8B2E34] shrink-0 shadow-sm flex flex-col">
+                    {{-- Content / Image placeholder --}}
+                </div>
+
+                {{-- Right Text Content --}}
+                <div class="flex-1 flex flex-col gap-4 sm:gap-5 text-[#2b2b2b] text-[13px] sm:text-[14px] leading-relaxed">
+                    <p>
+                        CWD Realty &amp; Hospitality was founded with a clear vision—to create a professional property management and hospitality company built on trust, integrity, and long-term partnerships.
+                    </p>
+                    <p>
+                        Our journey began with founders who were committed to expanding business opportunities beyond Cambodia. Through frequent international travel, face-to-face meetings, business presentations, and contract negotiations, they established valuable relationships with overseas partners and property investors. Their willingness to meet clients personally, understand their expectations, and deliver on every commitment became the foundation of the company's reputation.
+                    </p>
+                    <p>
+                        Today, that same commitment continues to shape how we serve every property owner, tenant, investor, and guest. We believe that lasting business relationships are built through professionalism, transparency, and consistently delivering value.
+                    </p>
+                    <p>
+                        As Cambodia's real estate and hospitality industries continue to grow, CWD Realty &amp; Hospitality remains dedicated to providing dependable property management, flexible leasing solutions, and exceptional hospitality services that create value for both property owners and residents.
+                    </p>
+                </div>
+
             </div>
         </div>
     </section>

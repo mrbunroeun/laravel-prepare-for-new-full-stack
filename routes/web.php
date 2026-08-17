@@ -22,6 +22,10 @@ Route::get('/insights', function () {
     return view('pages.insights');
 });
 
+Route::get('/insights/view-full-insight', function () {
+    return view('pages.insights_detail.view_full_insight');
+});
+
 Route::get('/events', function () {
     return view('pages.events');
 });
