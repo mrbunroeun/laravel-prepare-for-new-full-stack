@@ -12,8 +12,8 @@
         <div class="pt-[18rem] max-[1240px]:pt-[14rem] max-[940px]:pt-[11rem] max-[640px]:pt-[9rem] max-w-[1400px] mx-auto px-6">
             <div class="max-w-[700px]">
                 {{-- Gold accent bar (60% width) --}}
-                <div class="h-[12px] sm:h-[15px] w-[60%] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
-                <div class="w-full bg-[#163049]/90 py-8 sm:py-10 px-6 sm:px-10">
+                <div class="h-[12px] sm:h-[15px] w-[60%] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
+                <div class="w-full bg-[#163049]/90 py-8 sm:py-10 px-6 sm:px-10" data-scroll-reveal="left" data-scroll-delay="100">
                     <h2 class="flex items-center gap-4 text-[clamp(24px,3.5vw,36px)] font-bold mb-6">
                         <span class="h-[2.5px] w-12 sm:w-16 bg-[#F4DEAC]"></span>
                         <span class="text-[#F4DEAC]">Events</span>
@@ -129,14 +129,14 @@
 
 
     {{-- Looking for your next stay --}}
-    <section class="relative max-w-[1600px] mx-auto overflow-hidden">
+    <section class="relative max-w-[1600px] mx-auto">
         <div class="max-w-full min-[900px]:max-w-[80%] ml-auto" data-scroll-reveal="right">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
                 class="w-full h-auto min-h-[220px] object-cover">
 
             <div
                 class="relative max-w-[520px] mt-6 px-6
-                        min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
+                        min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0 z-20">
                 <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
                     <span class="block min-[900px]:hidden">
                         Looking for Your Next Stay or Property Management Partner?
@@ -153,9 +153,9 @@
 
         <div
             data-scroll-reveal="left"
-            class="max-w-[420px] mt-4 px-6
-        min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
-            <p class="text-black/70 text-[14px]  sm:text-[15px] leading-relaxed">
+            class="relative z-20 max-w-[420px] mt-6 px-6
+        min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2.5rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
+            <p class="text-black/70 text-[14px] sm:text-[15px] leading-relaxed">
                 Whether you're searching for accommodation or professional property management services, our team is ready
                 to assist you.
             </p>
@@ -164,7 +164,7 @@
 
 
     {{-- Professional Property --}}
-    <section class="mt-16 sm:mt-24 md:mt-32 min-[900px]:mt-[12rem]">
+    <section class="mt-20 sm:mt-28 md:mt-36 min-[900px]:mt-[16rem]">
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
             <div
                 class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">

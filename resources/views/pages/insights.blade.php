@@ -12,8 +12,8 @@
         <div class="pt-[20rem] max-[1240px]:pt-[15rem] max-[940px]:pt-[10rem] max-w-[1400px] mx-auto px-6">
             <div class="max-w-[700px]">
                 {{-- Gold accent bar (60% width) --}}
-                <div class="h-[12px] sm:h-[15px] w-[60%] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
-                <div class="w-full bg-[#163049]/90 py-8 sm:py-10 px-6 sm:px-10">
+                <div class="h-[12px] sm:h-[15px] w-[60%] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
+                <div class="w-full bg-[#163049]/90 py-8 sm:py-10 px-6 sm:px-10" data-scroll-reveal="left" data-scroll-delay="100">
                     <h2 class="flex items-center gap-4 text-[clamp(24px,3.5vw,36px)] font-bold mb-6">
                         <span class="h-[2.5px] w-12 sm:w-16 bg-[#F4DEAC]"></span>
                         <span class="text-[#F4DEAC]">Insights</span>
@@ -94,7 +94,7 @@
                 </button>
 
                 {{-- Carousel Track Container --}}
-                <div class="overflow-hidden flex-1 py-2">
+                <div class="overflow-hidden flex-1 py-2" data-scroll-reveal="fade-up">
                     <div id="insights-track" class="flex gap-4 sm:gap-5 transition-transform duration-500 ease-out">
                         @foreach ($insightsCards as $card)
                             <div class="insight-slide flex-shrink-0 w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.3333%-14px)] flex flex-col bg-[#2A5A8A] overflow-hidden">
@@ -223,7 +223,7 @@
         <div class="max-w-[1200px] mx-auto">
 
             {{-- Heading --}}
-            <div class="text-center mb-12 sm:mb-16">
+            <div class="text-center mb-12 sm:mb-16" data-scroll-reveal="left">
                 <h2 class="text-[clamp(28px,3.8vw,44px)] leading-tight">
                     <span class="text-[#2A5A8A] font-normal block">Why Choose</span>
                     <span class="text-[#2A5A8A] font-bold block">CWD Realty &amp; Hospitality?</span>
@@ -237,7 +237,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
 
                     {{-- Card 1 --}}
-                    <div class="border-[1.5px] border-[#4A7BB0]/60 bg-white p-6 sm:p-7 flex flex-col justify-start min-h-[150px]">
+                    <div data-scroll-reveal="left" class="border-[1.5px] border-[#4A7BB0]/60 bg-white p-6 sm:p-7 flex flex-col justify-start min-h-[150px]">
                         <h3 class="text-[#2A5A8A] text-[15px] sm:text-[16px] font-bold mb-3">
                             Condominium Specialists
                         </h3>
@@ -247,7 +247,7 @@
                     </div>
 
                     {{-- Card 2 --}}
-                    <div class="border-[1.5px] border-[#4A7BB0]/60 bg-white p-6 sm:p-7 flex flex-col justify-start min-h-[150px]">
+                    <div data-scroll-reveal="fade-up" class="border-[1.5px] border-[#4A7BB0]/60 bg-white p-6 sm:p-7 flex flex-col justify-start min-h-[150px]">
                         <h3 class="text-[#2A5A8A] text-[15px] sm:text-[16px] font-bold mb-3">
                             Multilingual Communication
                         </h3>
@@ -257,7 +257,7 @@
                     </div>
 
                     {{-- Card 3 --}}
-                    <div class="border-[1.5px] border-[#4A7BB0]/60 bg-white p-6 sm:p-7 flex flex-col justify-start min-h-[150px] sm:col-span-2 lg:col-span-1">
+                    <div data-scroll-reveal="right" class="border-[1.5px] border-[#4A7BB0]/60 bg-white p-6 sm:p-7 flex flex-col justify-start min-h-[150px] sm:col-span-2 lg:col-span-1">
                         <h3 class="text-[#2A5A8A] text-[15px] sm:text-[16px] font-bold mb-3">
                             Flexible Rental Options
                         </h3>
@@ -272,7 +272,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 lg:w-[calc(66.6666%-8px)] mx-auto w-full">
 
                     {{-- Card 4 --}}
-                    <div class="border-[1.5px] border-[#4A7BB0]/60 bg-white p-6 sm:p-7 flex flex-col justify-start min-h-[150px]">
+                    <div data-scroll-reveal="left" class="border-[1.5px] border-[#4A7BB0]/60 bg-white p-6 sm:p-7 flex flex-col justify-start min-h-[150px]">
                         <h3 class="text-[#2A5A8A] text-[15px] sm:text-[16px] font-bold mb-3">
                             Professional Property Management
                         </h3>
@@ -282,7 +282,7 @@
                     </div>
 
                     {{-- Card 5 --}}
-                    <div class="border-[1.5px] border-[#4A7BB0]/60 bg-white p-6 sm:p-7 flex flex-col justify-start min-h-[150px]">
+                    <div data-scroll-reveal="right" class="border-[1.5px] border-[#4A7BB0]/60 bg-white p-6 sm:p-7 flex flex-col justify-start min-h-[150px]">
                         <h3 class="text-[#2A5A8A] text-[15px] sm:text-[16px] font-bold mb-3">
                             Hospitality-Focused Service
                         </h3>
@@ -310,13 +310,13 @@
 
     {{-- Looking for your next stay --}}
     <section class="relative max-w-[1600px] mx-auto">
-        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
+        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto" data-scroll-reveal="right">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
                 class="w-full h-auto min-h-[220px] object-cover">
 
             <div
                 class="relative max-w-[520px] mt-6 px-6
-                        min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
+                        min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0 z-20">
                 <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
                     <span class="block min-[900px]:hidden">
                         Looking for Your Next Stay or Property Management Partner?
@@ -332,9 +332,10 @@
         </div>
 
         <div
-            class="max-w-[420px] mt-4 px-6
-        min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
-            <p class="text-black/70 text-[14px]  sm:text-[15px] leading-relaxed">
+            data-scroll-reveal="left"
+            class="relative z-20 max-w-[420px] mt-6 px-6
+        min-[900px]:absolute min-[900px]:left-1/2 min-[900px]:ml-[-40px] min-[900px]:bottom-[-2.5rem] min-[900px]:mt-0 min-[900px]:px-0 min-[900px]:w-[420px] min-[900px]:text-left">
+            <p class="text-black/70 text-[14px] sm:text-[15px] leading-relaxed">
                 Whether you're searching for accommodation or professional property management services, our team is ready
                 to assist you.
             </p>
@@ -343,13 +344,13 @@
 
 
     {{-- Professional Property --}}
-    <section class="mt-16 sm:mt-24 md:mt-32 min-[900px]:mt-[12rem]">
+    <section class="mt-20 sm:mt-28 md:mt-36 min-[900px]:mt-[16rem]">
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
             <div
                 class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">
 
                 {{-- Left: accent line + heading --}}
-                <div class="flex items-start gap-4 max-w-[420px]">
+                <div class="flex items-start gap-4 max-w-[420px]" data-scroll-reveal="left">
                     <span class="h-[2px] w-20 shrink-0 bg-[#c9a15c] mt-3"></span>
                     <h2 class="text-[#2A5A8A] text-[16px] sm:text-[18px] font-bold leading-snug">
                         Professional Property Management, Sales, Leasing & Hospitality Services in Cambodia.
@@ -357,7 +358,7 @@
                 </div>
 
                 {{-- Right: image --}}
-                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0">
+                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0" data-scroll-reveal="right">
                     <img src="{{ asset('home/professional_property/professional_property.png') }}"
                         alt="CWD Realty professional properties"
                         class="w-full min-[900px]:w-[420px] h-auto min-h-[220px] object-cover">

@@ -443,6 +443,121 @@
 
 
 
+    {{-- Hospitality & Property Leasing --}}
+    <section class="relative w-full overflow-hidden z-[300] mt-12 sm:mt-16 lg:mt-20 mb-0">
+        {{-- Background Image --}}
+        <img src="{{ asset('services/property_sales/find professionally.png') }}" alt="Hospitality & Property Leasing"
+            class="absolute inset-0 w-full h-full object-cover object-right md:object-center">
+
+        {{-- Dark gradient overlay for optimal readability --}}
+        <div class="absolute inset-0 bg-gradient-to-r from-[#163049]/60 via-[#163049]/30 to-transparent"></div>
+
+        {{-- Main Content --}}
+        <div class="relative z-10 w-full max-w-[1500px] mx-auto px-6 sm:px-10 lg:px-12 py-14 sm:py-18 lg:py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
+
+                {{-- Left Column: Title, Subtitle, Text, and CTA Button --}}
+                <div class="lg:col-span-6 flex flex-col justify-start" data-scroll-reveal="left">
+                    <h2 class="text-[#F4DEAC] text-[clamp(32px,3.8vw,52px)] font-bold leading-[1.1] mb-4 sm:mb-6">
+                        Hospitality<br>
+                        &amp; Property Leasing
+                    </h2>
+
+                    <h3 class="text-white text-[clamp(20px,2.2vw,30px)] font-bold leading-snug mb-3 sm:mb-4">
+                        More Than a Place to Stay
+                    </h3>
+
+                    <p class="text-white text-[14.5px] sm:text-[15px] leading-relaxed max-w-[500px] mb-6 sm:mb-8 font-normal">
+                        CWD Realty &amp; Hospitality combines professionally managed accommodation with optional hospitality services.
+                    </p>
+
+                    <div>
+                        <a href="{{ url('/services/property-leasing') }}"
+                            class="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 bg-white text-[#204a74] text-[14px] sm:text-[15px] font-bold shadow-lg hover:bg-[#F4DEAC] hover:text-[#163049] transition-all duration-200">
+                            View Property Leasing <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+
+                {{-- Right Column: 2 White Cards --}}
+                <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 items-stretch" data-scroll-reveal="right">
+
+                    {{-- Card 1: Guests can choose from --}}
+                    <div class="bg-white p-6 sm:p-7 xl:p-8 flex flex-col justify-start shadow-xl h-full">
+                        <h4 class="text-[#204a74] text-[15px] sm:text-[16px] font-bold leading-snug mb-4">
+                            Guests can choose from:
+                        </h4>
+                        <h5 class="text-black text-[14px] sm:text-[15px] font-bold mb-3">
+                            Exclusive Residential Development
+                        </h5>
+                        <ul class="text-black/85 text-[13px] sm:text-[14px] leading-relaxed space-y-1.5 list-disc pl-5">
+                            <li>Daily Rentals</li>
+                            <li>Weekly Rentals</li>
+                            <li>Monthly Rentals</li>
+                        </ul>
+                    </div>
+
+                    {{-- Card 2: Selected properties offer --}}
+                    <div class="bg-white p-6 sm:p-7 xl:p-8 flex flex-col justify-start shadow-xl h-full">
+                        <h4 class="text-[#204a74] text-[15px] sm:text-[16px] font-bold leading-snug mb-4">
+                            Selected properties offer different unit types, including:
+                        </h4>
+                        <h5 class="text-black text-[14px] sm:text-[15px] font-bold mb-3">
+                            Residential Property Project
+                        </h5>
+                        <ul class="text-black/85 text-[13px] sm:text-[14px] leading-relaxed space-y-1.5 list-disc pl-5">
+                            <li>Studio</li>
+                            <li>1-Bedroom</li>
+                            <li>2-Bedroom</li>
+                            <li>3-Bedroom</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    {{-- Additional Charges (Blue Bar with Overlapping Left Image Formula) --}}
+    <section class="relative z-[300] bg-[#2A5A8A] mt-0 mb-28 sm:mb-36 lg:mb-44">
+        <div class="max-w-[1500px] mx-auto px-6 sm:px-10 lg:px-12 py-10 sm:py-14 lg:py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
+
+                {{-- Left: Golden Tower 322 Image (Shifted further to the bottom) --}}
+                <div class="lg:col-span-6 flex justify-center lg:justify-start" data-scroll-reveal="left">
+                    <div class="relative w-full max-w-[560px] mt-0 lg:mt-[-3rem] lg:mb-[-13rem] shadow-2xl z-20 overflow-hidden">
+                        <img src="{{ asset('home/latest_activities/3img.png') }}"
+                            alt="Golden Tower 322 - Additional Charges"
+                            class="w-full h-auto object-cover">
+                    </div>
+                </div>
+
+                {{-- Right: Content inside Blue Bar --}}
+                <div class="lg:col-span-6 flex flex-col justify-start py-4 lg:py-0" data-scroll-reveal="right">
+                    <h2 class="text-[#F4DEAC] text-[clamp(30px,3.8vw,48px)] font-normal leading-tight mb-5 sm:mb-6">
+                        Additional <span class="text-[#F4DEAC] font-bold">Charges</span>
+                    </h2>
+
+                    <div class="flex flex-col gap-4 text-white text-[14.5px] sm:text-[15px] leading-relaxed font-normal max-w-[540px]">
+                        <p>
+                            Airport pick-up and city tour services are additional services and are not included in the standard accommodation rental rate.
+                        </p>
+
+                        <p>
+                            The applicable charge depends on the requested service and arrangement.
+                        </p>
+
+                        <p>
+                            For the latest pricing and availability, please contact our team before your arrival.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     {{-- Frequently Asked Questions --}}
     @php
         $faqLeft = [

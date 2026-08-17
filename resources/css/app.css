@@ -31,41 +31,42 @@ body {
 .reveal-down,
 .reveal-zoom {
     opacity: 0;
-    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
+    backface-visibility: hidden;
 }
 
-/* Left side elements: slide in from the LEFT */
+/* Left side elements: slide in smoothly from the LEFT */
 [data-scroll-reveal="left"],
 [data-scroll-reveal="fade-left"],
 [data-scroll-reveal="from-left"],
 .reveal-left {
-    transform: translateX(-60px);
+    transform: translate3d(-50px, 0, 0);
 }
 
-/* Right side elements: slide in from the RIGHT */
+/* Right side elements: slide in smoothly from the RIGHT */
 [data-scroll-reveal="right"],
 [data-scroll-reveal="fade-right"],
 [data-scroll-reveal="from-right"],
 .reveal-right {
-    transform: translateX(60px);
+    transform: translate3d(50px, 0, 0);
 }
 
-/* Bottom elements: slide in from BOTTOM */
+/* Bottom elements: slide in smoothly from BOTTOM */
 [data-scroll-reveal="up"],
 [data-scroll-reveal="fade-up"],
 [data-scroll-reveal="from-bottom"],
 .reveal-up {
-    transform: translateY(50px);
+    transform: translate3d(0, 45px, 0);
 }
 
-/* Top elements: slide in from TOP */
+/* Top elements: slide in smoothly from TOP */
 [data-scroll-reveal="down"],
 [data-scroll-reveal="fade-down"],
 [data-scroll-reveal="from-top"],
 .reveal-down {
-    transform: translateY(-50px);
+    transform: translate3d(0, -45px, 0);
 }
 
 /* Simple fade in */
@@ -78,7 +79,7 @@ body {
 [data-scroll-reveal="zoom"],
 [data-scroll-reveal="zoom-in"],
 .reveal-zoom {
-    transform: scale(0.92);
+    transform: scale(0.94);
 }
 
 /* --- REVEALED STATE (Fires once and stays visible permanently) --- */

@@ -380,7 +380,7 @@
         <div class="max-w-[1400px] mx-auto px-6">
 
             {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12 text-left">
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12 text-left" data-scroll-reveal="left">
                 <span class="text-[#2A5A8A] font-normal block">Additional</span>
                 <span class="text-[#2A5A8A] font-bold block">Hospitality Services</span>
             </h2>
@@ -389,11 +389,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
 
                 {{-- Card 1: Airport Pick-Up --}}
-                <div class="flex flex-col bg-[#2A5A8A] shadow-md">
-                    {{-- Gold accent bar on top --}}
-                    <div class="h-[10px] w-full bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+                <div class="flex flex-col" data-scroll-reveal="left">
+                    {{-- Gold accent bar on top (outside) --}}
+                    <div class="h-[10px] w-[300px] max-w-full bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
 
-                    <div class="p-8 sm:p-10 flex flex-col flex-1">
+                    <div class="bg-[#2A5A8A] shadow-md p-8 sm:p-10 flex flex-col flex-1">
                         {{-- Icon --}}
                         <div class="mb-6">
                             <img src="{{ asset('services/property_sales/airplane_map.svg') }}" alt="Airport Pick-Up"
@@ -413,11 +413,11 @@
                 </div>
 
                 {{-- Card 2: City Tour --}}
-                <div class="flex flex-col bg-[#2A5A8A] shadow-md">
-                    {{-- Gold accent bar on top --}}
-                    <div class="h-[10px] w-full bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+                <div class="flex flex-col" data-scroll-reveal="right" data-scroll-delay="100">
+                    {{-- Gold accent bar on top (outside) --}}
+                    <div class="h-[10px] w-[300px] max-w-full bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
 
-                    <div class="p-8 sm:p-10 flex flex-col flex-1">
+                    <div class="bg-[#2A5A8A] shadow-md p-8 sm:p-10 flex flex-col flex-1">
                         {{-- Icon --}}
                         <div class="mb-6">
                             <img src="{{ asset('services/property_sales/vichincal_map.svg') }}" alt="City Tour"
@@ -438,6 +438,85 @@
 
             </div>
 
+        </div>
+    </section>
+
+    {{-- Who Is Our Property Leasing Service For? --}}
+    @php
+        $targetAudiences = [
+            [
+                'icon' => asset('services/propertis_leasing/who_is_our_property/business travelers.svg'),
+                'title' => 'Business Travelers',
+                'description' => 'Flexible accommodation for short business trips, meetings, and assignments.',
+            ],
+            [
+                'icon' => asset('services/propertis_leasing/who_is_our_property/expatriates.svg'),
+                'title' => 'Expatriates',
+                'description' => 'Comfortable weekly and monthly accommodation for professionals living or working in Cambodia.',
+            ],
+            [
+                'icon' => asset('services/propertis_leasing/who_is_our_property/tourists.svg'),
+                'title' => 'Tourists',
+                'description' => 'Convenient residential accommodation for visitors looking for more than a traditional hotel stay.',
+            ],
+            [
+                'icon' => asset('services/propertis_leasing/who_is_our_property/long-term residents.svg'),
+                'title' => 'Long-Term Residents',
+                'description' => 'Monthly rental options for people who need a comfortable home while living in Phnom Penh.',
+            ],
+        ];
+    @endphp
+
+    <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white pb-16 sm:pb-24 overflow-x-clip">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="flex flex-col">
+
+                {{-- Blue box: Full width on mobile/tablet, stretching to the right edge on desktop --}}
+                <div class="relative bg-[#2A5A8A] shadow-2xl w-full lg:w-[100vw]">
+                    {{-- Inner Content Container with responsive padding --}}
+                    <div class="w-full lg:max-w-[1400px] px-6 sm:px-10 md:px-14 lg:px-16 xl:px-20 py-10 sm:py-14 md:py-16 lg:py-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 xl:gap-18 items-center">
+
+                            {{-- Left: Heading --}}
+                            <div class="lg:col-span-5" data-scroll-reveal="left">
+                                <h2 class="text-[#F4DEAC] text-[clamp(26px,3.5vw,44px)] font-normal leading-[1.2]">
+                                    <span class="block">Who Is Our</span>
+                                    <span class="block">Property Leasing</span>
+                                    <span class="block">Service For?</span>
+                                </h2>
+                            </div>
+
+                            {{-- Right: 4 Audience Items in Vertical List --}}
+                            <div class="lg:col-span-7 flex flex-col gap-6 sm:gap-7" data-scroll-reveal="right">
+                                @foreach ($targetAudiences as $item)
+                                    <div class="flex items-start gap-4 sm:gap-5">
+                                        {{-- Icon Container --}}
+                                        <div class="w-9 h-9 sm:w-11 sm:h-11 shrink-0 flex items-center justify-center pt-0.5">
+                                            <img src="{{ $item['icon'] }}" alt="{{ $item['title'] }}"
+                                                class="max-w-full max-h-full object-contain">
+                                        </div>
+
+                                        {{-- Text --}}
+                                        <div class="flex-1 min-w-0">
+                                            <h3 class="text-[#F4DEAC] text-[15.5px] sm:text-[17px] font-bold leading-snug mb-1">
+                                                {{ $item['title'] }}
+                                            </h3>
+                                            <p class="text-white/90 text-[13px] sm:text-[14px] leading-relaxed font-light break-words">
+                                                {{ $item['description'] }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Gold Accent Bar underneath the blue box (outside, aligned to left edge, 650px width) --}}
+                <div class="h-[12px] sm:h-[13px] md:h-[14px] w-[650px] max-w-full bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
+
+            </div>
         </div>
     </section>
 
@@ -915,7 +994,7 @@
                     <h2 class="text-[#204a74] text-[clamp(30px,3.8vw,46px)] font-bold leading-[1.15] mb-4">
                         Rental Options
                     </h2>
-                    <p class="text-[#204a74] text-[14px] sm:text-[15px] leading-relaxed">
+                    <p class="text-[#000000] text-[14px] sm:text-[15px] leading-relaxed">
                         Wealth Mansion units are available for different rental periods, depending on unit availability.
                     </p>
                 </div>
@@ -925,7 +1004,7 @@
                     
                     {{-- Card 1: Daily Rental --}}
                     <div class="bg-[#2A5A8A] p-6 sm:p-7 flex flex-col justify-start text-white shadow-xl">
-                        <h3 class="text-white text-[18px] sm:text-[19px] font-bold mb-3">
+                        <h3 class="text-[#DCC597] text-[18px] sm:text-[19px] font-bold mb-3">
                             Daily Rental
                         </h3>
                         <p class="text-white text-[14px] sm:text-[15px] font-medium mb-3">
@@ -938,7 +1017,7 @@
 
                     {{-- Card 2: Monthly Rentals --}}
                     <div class="bg-[#2A5A8A] p-6 sm:p-7 flex flex-col justify-start text-white shadow-xl">
-                        <h3 class="text-white text-[18px] sm:text-[19px] font-bold mb-3">
+                        <h3 class="text-[#DCC597] text-[18px] sm:text-[19px] font-bold mb-3">
                             Monthly Rentals
                         </h3>
                         <p class="text-white/90 text-[13px] sm:text-[13.5px] leading-relaxed">
@@ -948,7 +1027,7 @@
 
                     {{-- Card 3: Monthly Rental --}}
                     <div class="bg-[#2A5A8A] p-6 sm:p-7 flex flex-col justify-start text-white shadow-xl">
-                        <h3 class="text-white text-[18px] sm:text-[19px] font-bold mb-3">
+                        <h3 class="text-[#DCC597] text-[18px] sm:text-[19px] font-bold mb-3">
                             Monthly Rental
                         </h3>
                         <p class="text-white text-[14px] sm:text-[15px] font-medium mb-3">

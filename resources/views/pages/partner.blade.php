@@ -91,15 +91,20 @@
         <div class="max-w-[1080px] mx-auto px-6">
 
             {{-- Heading Centered (2 rows) --}}
-            <h2 class="text-center text-[clamp(26px,3.2vw,36px)] leading-tight mb-8 sm:mb-12">
+            <h2 class="text-center text-[clamp(26px,3.2vw,36px)] leading-tight mb-8 sm:mb-12" data-scroll-reveal="left">
                 <span class="text-[#2A5A8A] font-normal block">Your Role as a</span>
                 <span class="text-[#2A5A8A] font-bold block">Sales Partner</span>
             </h2>
 
             {{-- Cards Grid (3 columns on desktop, 2 on tablet, 1 on mobile) --}}
             <div id="sales-partner-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
-                @foreach ($roles as $role)
+                @foreach ($roles as $index => $role)
+                    @php
+                        $dir = ($index % 3 === 0) ? 'left' : (($index % 3 === 1) ? 'fade-up' : 'right');
+                    @endphp
                     <div
+                        data-scroll-reveal="{{ $dir }}"
+                        data-scroll-delay="{{ ($index % 3) * 100 }}"
                         class="sales-partner-card group h-full w-full flex flex-col justify-start px-6 py-6 sm:px-7 sm:py-6 bg-white border-[1.8px] border-[#1479B9] hover:bg-[#1479B9] transition-all duration-200">
                         <span
                             class="text-[30px] sm:text-[34px] font-bold leading-none mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
@@ -286,14 +291,19 @@
         <div class="max-w-[1200px] mx-auto px-6">
 
             {{-- Heading Centered --}}
-            <h2 class="text-center text-[clamp(26px,3.2vw,36px)] text-[#2A5A8A] font-medium leading-tight mb-8 sm:mb-12">
+            <h2 class="text-center text-[clamp(26px,3.2vw,36px)] text-[#2A5A8A] font-medium leading-tight mb-8 sm:mb-12" data-scroll-reveal="left">
                 Commission &amp; Rewards
             </h2>
 
             {{-- Cards Grid (4 columns on desktop, 2 on tablet, 1 on mobile) --}}
             <div id="commission-rewards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch">
-                @foreach ($rewards as $reward)
+                @foreach ($rewards as $index => $reward)
+                    @php
+                        $dir = $index < 2 ? 'left' : 'right';
+                    @endphp
                     <div
+                        data-scroll-reveal="{{ $dir }}"
+                        data-scroll-delay="{{ ($index % 2) * 100 }}"
                         class="commission-reward-card group h-full w-full flex flex-col justify-start px-6 py-6 sm:px-6 sm:py-6 bg-white border-[1.8px] border-[#1479B9] hover:bg-[#1479B9] transition-all duration-200">
                         <span
                             class="text-[30px] sm:text-[34px] font-bold leading-none mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
@@ -359,12 +369,12 @@
         <div class="max-w-[1000px] mx-auto px-6">
 
             {{-- Heading Centered --}}
-            <h2 class="text-center text-[clamp(28px,3.5vw,40px)] text-[#2A5A8A] font-normal leading-tight mb-10 sm:mb-14">
+            <h2 class="text-center text-[clamp(28px,3.5vw,40px)] text-[#2A5A8A] font-normal leading-tight mb-10 sm:mb-14" data-scroll-reveal="left">
                 Application Form
             </h2>
 
             {{-- Form container --}}
-            <form id="partner-application-form" onsubmit="submitPartnerForm(event)" class="w-full" novalidate>
+            <form id="partner-application-form" onsubmit="submitPartnerForm(event)" class="w-full" novalidate data-scroll-reveal="fade-up">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10">
 
                     {{-- Left column --}}
@@ -777,7 +787,7 @@ Email: ${email}`;
 
     {{-- Request Property Management Consultation --}}
     <section class="relative max-w-[1600px] mx-auto mt-20 sm:mt-28 lg:mt-36">
-        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
+        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto" data-scroll-reveal="right">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="Request Property Management Consultation"
                 class="w-full h-auto min-h-[220px] object-cover">
 
@@ -799,7 +809,7 @@ Email: ${email}`;
                 class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">
 
                 {{-- Left: accent line + heading --}}
-                <div class="flex items-start gap-4 max-w-[420px]">
+                <div class="flex items-start gap-4 max-w-[420px]" data-scroll-reveal="left">
                     <span class="h-[2px] w-20 shrink-0 bg-[#c9a15c] mt-3"></span>
                     <h2 class="text-[#2A5A8A] text-[16px] sm:text-[18px] font-bold leading-snug">
                         Build Your Career in Real Estate with CWD Real Estate Agent &amp; Developer.
@@ -807,7 +817,7 @@ Email: ${email}`;
                 </div>
 
                 {{-- Right: image --}}
-                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0">
+                <div class="w-full min-[900px]:w-auto min-[900px]:shrink-0" data-scroll-reveal="right">
                     <img src="{{ asset('home/professional_property/professional_property.png') }}"
                         alt="Build Your Career in Real Estate with CWD"
                         class="w-full min-[900px]:w-[420px] h-auto min-h-[220px] object-cover">
