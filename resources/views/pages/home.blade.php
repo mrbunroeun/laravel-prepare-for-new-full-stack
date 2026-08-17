@@ -249,35 +249,6 @@
     {{-- Featured Properties: background image layer + card content layer, cards can extend above image's top edge --}}
     <x-properties.featured_properties />
 
-
-
-
-
-
-    {{-- Who We Are section 2nd one --}}
-    <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
-        <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
-            <div class="max-w-[750px]" data-scroll-reveal="left">
-                <h2 class="text-[clamp(28px,4vw,40px)] mb-6">
-                    <span class="text-[#2A5A8A] font-normal">Who</span>
-                    <span class="text-[#2A5A8A] font-bold">We Are</span>
-                </h2>
-
-                <h3 class="text-black text-[clamp(20px,2.5vw,26px)]  font-semibold leading-tight mb-6">
-                    Professional Property &amp; Hospitality Solutions
-                </h3>
-
-                <p class="text-black text-[15px] leading-relaxed">
-                    CWD Realty &amp; Hospitality manages residential condominium properties while providing flexible rental
-                    options for travelers, expatriates, business professionals, and long-term residents. Our experienced
-                    multilingual team helps property owners maximize rental income while ensuring guests enjoy a comfortable
-                    stay.
-                </p>
-            </div>
-        </div>
-    </section>
-
-
     @php
         $whyChooseFeatures = [
             [
@@ -475,7 +446,7 @@
 
 
     {{-- Professional Property --}}
-    <section class="mt-20 sm:mt-28 md:mt-36 min-[900px]:mt-[16rem]">
+    <section class="mt-20 sm:mt-24 md:mt-28 min-[900px]:mt-[17.5rem] lg:mt-[18rem] pb-8 sm:pb-12">
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
             <div
                 class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">

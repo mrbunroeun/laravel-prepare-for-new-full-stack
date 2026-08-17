@@ -94,39 +94,39 @@
 
 
     {{-- Two-column image grid + Hero content --}}
-    <section class="relative z-[300] bg-white pointer-events-none">
+    <section class="relative z-[300] bg-white">
         <div class="max-w-[1500px] mx-auto px-6 py-16">
 
             <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-4 lg:min-h-[800px]">
 
-                {{-- LEFT: black-block grid --}}
+                {{-- LEFT: image grid --}}
                 <div class="grid grid-cols-2 items-end gap-x-3 lg:gap-x-4 w-full lg:w-2/5 shrink-0 lg:mt-auto" data-scroll-reveal="left">
 
                     {{-- sticky tall single block --}}
                     <img src="{{ asset('about_us/our_story/longest.png') }}"
-                        class="sticky top-10 self-start bg-[#000000] w-full max-h-[580px]"></img>
+                        class="sticky top-10 self-start w-full max-h-[580px] object-cover"></img>
 
                     {{-- two stacked blocks with gap --}}
                     <div class="flex flex-col gap-y-3 lg:gap-y-4">
-                        <img src="{{ asset('about_us/our_story/top_one.png') }}" class="bg-none w-full max-h-[400px]"></img>
+                        <img src="{{ asset('about_us/our_story/top_one.png') }}" class="w-full max-h-[400px] object-cover"></img>
                         <img src="{{ asset('about_us/our_story/bottom_one.png') }}"
-                            class="bg-none w-full max-h-[400px]"></img>
+                            class="w-full max-h-[400px] object-cover"></img>
                     </div>
 
                 </div>
 
                 {{-- RIGHT: Hero content --}}
-                <div class="relative z-[200] text-[#2f6ba7] pointer-events-none w-full lg:w-3/5 shrink-0" data-scroll-reveal="right">
+                <div class="relative z-[200] w-full lg:w-3/5 shrink-0" data-scroll-reveal="right">
                     <div class="pt-0 lg:pt-[2.5rem]">
                         {{-- Gold accent bar --}}
                         <div
                             class="h-[15px] w-full max-w-[30rem] mr-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
                         </div>
 
-                        <div class="bg-[#163049]/85 w-full mix-blend-multiply">
+                        <div class="bg-[#2A5A8A] w-full shadow-lg">
                             <div class="py-10">
                                 <h2
-                                    class="flex px-3 sm:px-10 items-center gap-4 text-[clamp(30px,3vw,50px)]  font-bold mb-6">
+                                    class="flex px-3 sm:px-10 items-center gap-4 text-[clamp(30px,3vw,50px)] font-bold mb-6">
                                     <span class="text-[#F4DEAC] font-normal">Our </span>
                                     <span class="text-[#F4DEAC]">Story</span>
                                 </h2>
@@ -584,7 +584,7 @@
 
 
     {{-- Professional Property --}}
-    <section class="mt-16 sm:mt-24 md:mt-32 min-[900px]:mt-[12rem]">
+    <section class="mt-16 sm:mt-24 md:mt-30 min-[900px]:mt-[15.5rem] lg:mt-[16.5rem] pb-8 sm:pb-12">
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
             <div
                 class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">

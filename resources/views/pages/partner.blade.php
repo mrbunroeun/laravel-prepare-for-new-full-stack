@@ -43,8 +43,8 @@
 
         </div>
 
-        {{-- Man Partner Image (shifted further left, strict max-w-[336px] and max-h-[504px], locked to bottom) --}}
-        <div class="absolute right-6 sm:right-14 md:right-24 lg:right-[18%] xl:right-[25%] 2xl:right-[30%] bottom-0 z-[270] pointer-events-none flex justify-end" data-scroll-reveal="right">
+        {{-- Man Partner Image (strict max-w-[336px] and max-h-[504px], locked to bottom) --}}
+        <div class="absolute right-6 sm:right-14 md:right-24 lg:right-[21%] xl:right-[28%] 2xl:right-[33%] bottom-0 z-[270] pointer-events-none flex justify-end" data-scroll-reveal="right">
             <img src="{{ asset('partner/man_partner.png') }}" alt="CWD Real Estate Agent"
                 class="block w-[140px] sm:w-[190px] md:w-[250px] lg:w-[336px] max-w-[336px] max-h-[504px] h-auto object-contain object-bottom drop-shadow-2xl">
         </div>

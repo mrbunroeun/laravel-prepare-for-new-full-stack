@@ -22,11 +22,15 @@
 
                         {{-- Left Column: Logo + Tagline + Paragraph + Socials --}}
                         <div class="flex flex-col gap-4" data-scroll-reveal="left">
-                            <img src="{{ asset('logo_nav_foot/footer_logo.svg') }}" alt="CWD Logo" class="h-14 sm:h-16 w-auto self-start">
+                            <a href="{{ url('/') }}" class="self-start inline-block transition-opacity duration-200 hover:opacity-90" aria-label="Go to Home">
+                                <img src="{{ asset('logo_nav_foot/footer_logo.svg') }}" alt="CWD Logo" class="h-14 sm:h-16 w-auto">
+                            </a>
 
                             <h3 class="flex items-center gap-3 text-[16px] sm:text-[18px] font-bold text-[#F4DEAC] max-md:mt-2">
                                 <span class="h-[2px] w-8 sm:w-10 bg-[#F4DEAC]"></span>
-                                <span><strong class="text-[#F4DEAC] font-bold">CWD</strong> Real Estate Agent &amp; Developer</span>
+                                <a href="{{ url('/') }}" class="hover:opacity-95 transition-opacity">
+                                    <span><strong class="text-[#F4DEAC] font-bold">CWD</strong> Real Estate Agent &amp; Developer</span>
+                                </a>
                             </h3>
 
                             <p class="text-white/80 text-[13px] sm:text-[14px] leading-relaxed max-w-[480px]">
@@ -56,17 +60,35 @@
                         </div>
 
                         {{-- Middle Column: Quick Links --}}
-                        <div class="flex flex-col gap-1.5 max-md:mt-6" data-scroll-reveal="fade-up" data-scroll-delay="100">
+                        <div class="flex flex-col gap-1.5 max-md:mt-6 max-w-[260px]" data-scroll-reveal="fade-up" data-scroll-delay="100">
                             <h4 class="text-[#DCC597] text-[15px] sm:text-[16px] font-bold mb-1">Quick Links</h4>
-                            <a href="{{ url('/') }}" class="text-white/80 hover:text-white transition text-[13px] sm:text-[14px]">Home</a>
-                            <a href="{{ url('/about-us') }}" class="text-white/80 hover:text-white transition text-[13px] sm:text-[14px]">About Us</a>
-                            <a href="{{ url('/services') }}" class="text-white/80 hover:text-white transition text-[13px] sm:text-[14px]">Services</a>
-                            <a href="{{ url('/properties') }}" class="text-white/80 hover:text-white transition text-[13px] sm:text-[14px]">Properties</a>
-                            <a href="{{ url('/partners') }}" class="text-white/80 hover:text-white transition text-[13px] sm:text-[14px]">Partners</a>
-                            <a href="{{ url('/insights') }}" class="text-white/80 hover:text-white transition text-[13px] sm:text-[14px]">Insights</a>
-                            <a href="{{ url('/events') }}" class="text-white/80 hover:text-white transition text-[13px] sm:text-[14px]">Events</a>
-                            <a href="{{ url('/contact-us') }}" class="text-white/80 hover:text-white transition text-[13px] sm:text-[14px]">Contact Us</a>
-                            <a href="#map" class="text-white/80 hover:text-white transition text-[13px] sm:text-[14px]">Map</a>
+                            <a href="{{ url('/') }}" class="text-white/90 text-[13px] sm:text-[14px] hover:text-[#DCC597] transition-colors duration-200">Home</a>
+                            <a href="{{ url('/about-us') }}" class="text-white/90 text-[13px] sm:text-[14px] hover:text-[#DCC597] transition-colors duration-200">About Us</a>
+
+                            {{-- Services with Click Dropdown --}}
+                            <div class="flex flex-col">
+                                <button type="button" id="contact-services-toggle" aria-expanded="false"
+                                    class="flex items-center justify-between text-white/90 text-[13px] sm:text-[14px] hover:text-[#DCC597] transition-colors duration-200 cursor-pointer text-left w-full group py-0.5 outline-none">
+                                    <span>Services</span>
+                                    <svg id="contact-services-arrow" class="w-3.5 h-3.5 text-white/80 transition-all duration-300 transform group-hover:text-[#DCC597]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                
+                                {{-- Submenu links --}}
+                                <div id="contact-services-menu" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out flex flex-col gap-1.5 pl-2.5">
+                                    <a href="{{ url('/services/property-management') }}" class="text-white/80 text-[12px] sm:text-[12.5px] hover:text-[#DCC597] transition-colors duration-200 pt-1.5">Property Management</a>
+                                    <a href="{{ url('/services/property-sales') }}" class="text-white/80 text-[12px] sm:text-[12.5px] hover:text-[#DCC597] transition-colors duration-200">Property Sales</a>
+                                    <a href="{{ url('/services/property-leasing') }}" class="text-white/80 text-[12px] sm:text-[12.5px] hover:text-[#DCC597] transition-colors duration-200">Property Leasing</a>
+                                    <a href="{{ url('/services/hospitality-services') }}" class="text-white/80 text-[12px] sm:text-[12.5px] hover:text-[#DCC597] transition-colors duration-200 pb-0.5">Hospitality Services</a>
+                                </div>
+                            </div>
+
+                            <a href="{{ url('/properties') }}" class="text-white/90 text-[13px] sm:text-[14px] hover:text-[#DCC597] transition-colors duration-200">Properties</a>
+                            <a href="{{ url('/partners') }}" class="text-white/90 text-[13px] sm:text-[14px] hover:text-[#DCC597] transition-colors duration-200">Partners</a>
+                            <a href="{{ url('/insights') }}" class="text-white/90 text-[13px] sm:text-[14px] hover:text-[#DCC597] transition-colors duration-200">Insights</a>
+                            <a href="{{ url('/events') }}" class="text-white/90 text-[13px] sm:text-[14px] hover:text-[#DCC597] transition-colors duration-200">Events</a>
+                            <a href="{{ url('/contact-us') }}" class="text-white/90 text-[13px] sm:text-[14px] hover:text-[#DCC597] transition-colors duration-200">Contact Us</a>
                         </div>
 
                         {{-- Right Column: Contact Info & Map --}}
@@ -76,8 +98,8 @@
                                 Wealth Mansion, 6F, Room Number 27, Tonle Sap Street, Village 3, Chroy Changva Commune, Chroy Changva District, Phnom Penh
                             </p>
                             <p class="text-white/80 text-[12.5px] sm:text-[13px]">(+855) 86 7777 05</p>
-                            <a href="mailto:info@cwdrealty.com" class="text-white/80 hover:text-white transition text-[12.5px] sm:text-[13px]">info@cwdrealty.com</a>
-                            <a href="https://www.cwdrealty.com" target="_blank" class="text-white/80 hover:text-white transition text-[12.5px] sm:text-[13px]">www.cwdrealty.com</a>
+                            <a href="mailto:info@cwdrealty.com" class="text-white/80 hover:text-[#DCC597] transition-colors duration-200 text-[12.5px] sm:text-[13px]">info@cwdrealty.com</a>
+                            <a href="https://www.cwdrealty.com" target="_blank" class="text-white/80 hover:text-[#DCC597] transition-colors duration-200 text-[12.5px] sm:text-[13px]">www.cwdrealty.com</a>
 
                             <div class="mt-0.5">
                                 <p class="text-white text-[12.5px] sm:text-[13px] font-semibold">Operating Hours:</p>
@@ -103,4 +125,29 @@
 
         </div>
     </section>
+
+    <script>
+        (function() {
+            var toggle = document.getElementById('contact-services-toggle');
+            var menu = document.getElementById('contact-services-menu');
+            var arrow = document.getElementById('contact-services-arrow');
+            if (toggle && menu) {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+                    if (isExpanded) {
+                        toggle.setAttribute('aria-expanded', 'false');
+                        menu.style.maxHeight = '0px';
+                        menu.style.opacity = '0';
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        toggle.setAttribute('aria-expanded', 'true');
+                        menu.style.maxHeight = (menu.scrollHeight + 30) + 'px';
+                        menu.style.opacity = '1';
+                        if (arrow) arrow.style.transform = 'rotate(180deg)';
+                    }
+                });
+            }
+        })();
+    </script>
 @endsection

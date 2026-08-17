@@ -110,21 +110,21 @@
     <section class="relative bg-white overflow-hidden">
         <div class="max-w-[1550px] mx-auto px-4 sm:px-6 py-12 sm:py-16">
             <div
-                class="flex flex-col items-center gap-6 min-[700px]:flex-row min-[700px]:items-stretch min-[700px]:gap-8 min-[1024px]:-ml-24">
+                class="flex flex-col items-center gap-6 min-[700px]:flex-row min-[700px]:items-start min-[700px]:gap-8 min-[1024px]:-ml-24">
                 {{-- LEFT: Property Image --}}
                 <div
-                    class="w-full min-[700px]:w-[38%] min-h-[350px] sm:min-h-[420px] overflow-hidden shadow-xl" data-scroll-reveal="left">
+                    class="w-full min-[700px]:w-[35%] h-[380px] sm:h-[460px] min-[700px]:h-[560px] lg:h-[600px] overflow-hidden" data-scroll-reveal="left">
                     <img src="{{ asset('services/bg_img/bg_img.png') }}"
                         alt="What is Property Management?"
                         class="w-full h-full object-cover">
                 </div>
                 {{-- RIGHT: blue content card --}}
-                <div class="relative z-[200] mt-[-1rem] min-[700px]:mt-0 text-[#2f6ba7] pointer-events-none w-full min-[700px]:w-[55%] flex flex-col" data-scroll-reveal="right">
+                <div class="relative z-[200] mt-[-1rem] text-[#2f6ba7] pointer-events-none w-full min-[700px]:w-[55%]" data-scroll-reveal="right">
                     {{-- Gold accent bar --}}
                     <div
                         class="h-[10px] sm:h-[15px] w-[55%] mr-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
                     </div>
-                    <div class="bg-[#2A5A8A] w-full flex-1 flex flex-col justify-center">
+                    <div class="bg-[#2A5A8A] w-full">
                         <div class="px-6 sm:px-10 min-[1024px]:px-24 py-8 sm:py-12 min-[1024px]:py-20">
                             <h2 class="text-[clamp(22px,3vw,50px)] leading-tight mb-4">
                                 <span class="text-[#F4DEAC] font-normal block">What is</span>
@@ -623,9 +623,9 @@
                 class="w-full h-auto min-h-[220px] object-cover">
 
             <div
-                class="relative max-w-[520px] mt-6 px-6
-                    min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
-                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
+                class="relative max-w-[520px] mt-4 px-6
+                    min-[900px]:ml-[-8rem] min-[900px]:mt-[-8.5rem] min-[900px]:px-0 z-20">
+                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight drop-shadow-sm">
                     <span class="block min-[900px]:hidden">
                         Looking for Professional
                         Property Management or
@@ -639,17 +639,17 @@
             </div>
         </div>
 
-        <div class="max-w-[420px] mt-8 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-6 min-[900px]:px-0" data-scroll-reveal="left">
+        <div class="max-w-[420px] mt-10 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-14 lg:mt-16 min-[900px]:px-0 mb-12 sm:mb-16" data-scroll-reveal="left">
             @php
                 $links = [
-                    ['label' => 'Property Leasing', 'url' => url('/property-leasing'), 'active' => true],
-                    ['label' => 'Hospitality Services', 'url' => url('/hospitality-services'), 'active' => false],
-                    ['label' => 'Property Listings', 'url' => url('/property-listings'), 'active' => false],
+                    ['label' => 'Property Leasing', 'url' => url('/services/property-leasing'), 'active' => true],
+                    ['label' => 'Hospitality Services', 'url' => url('/services/hospitality-services'), 'active' => false],
+                    ['label' => 'Property Listings', 'url' => url('/properties'), 'active' => false],
                     ['label' => 'Contact Us', 'url' => url('/contact-us'), 'active' => false],
                 ];
             @endphp
 
-            <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200">
+            <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200 shadow-sm">
                 @foreach ($links as $link)
                     <a href="{{ $link['url'] }}"
                         class="group flex items-center justify-between px-5 py-3 text-[15px] font-medium

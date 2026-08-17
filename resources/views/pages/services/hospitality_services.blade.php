@@ -24,13 +24,13 @@
                         Personalized Support
                     </h1>
 
-                    <div class="grid grid-cols-2 items-stretch px-2 sm:px-6 gap-2 sm:gap-3 pointer-events-auto w-full">
+                    <div class="grid grid-cols-2 sm:flex sm:flex-row sm:items-center px-2 sm:px-10 gap-2 sm:gap-4 pointer-events-auto w-full sm:w-auto">
                         <a href="{{ url('/contact-us') }}"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[11.5px] min-[390px]:text-[12.5px] sm:text-[14.5px] font-medium px-2 sm:px-4 py-2.5 sm:py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors text-center flex items-center justify-center h-full min-h-[50px] leading-tight">
+                            class="border-[1.5px] sm:border-[2px] border-[#F4DEAC] text-white text-[11.5px] min-[390px]:text-[12.5px] sm:text-[15px] font-medium px-2 min-[390px]:px-3 sm:px-6 py-2.5 sm:py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors text-center flex items-center justify-center h-full sm:h-auto min-h-[48px] sm:min-h-0 sm:w-auto leading-tight">
                             Request Hospitality Service
                         </a>
                         <a href="{{ url('/contact-us') }}"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[11.5px] min-[390px]:text-[12.5px] sm:text-[14.5px] font-medium px-2 sm:px-4 py-2.5 sm:py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors text-center flex items-center justify-center h-full min-h-[50px] leading-tight">
+                            class="border-[1.5px] sm:border-[2px] border-[#F4DEAC] text-white text-[11.5px] min-[390px]:text-[12.5px] sm:text-[15px] font-medium px-2 min-[390px]:px-3 sm:px-6 py-2.5 sm:py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors text-center flex items-center justify-center h-full sm:h-auto min-h-[48px] sm:min-h-0 sm:w-auto leading-tight">
                             Contact Us
                         </a>
                     </div>
@@ -766,14 +766,14 @@
                         <p class="text-[#204a74] text-[14px] sm:text-[14.5px] leading-relaxed mb-6">
                             Whether you need airport pick-up, a city tour, or assistance choosing suitable accommodation, contact our team to discuss your requirements.
                         </p>
-                        <div class="grid grid-cols-2 gap-1 min-[390px]:gap-2 sm:gap-3 w-full">
+                        <div class="grid grid-cols-2 gap-1 min-[390px]:gap-2 sm:gap-6 sm:flex sm:flex-row sm:items-center w-full">
                             <a href="{{ url('/contact-us') }}"
-                                class="inline-flex items-center justify-between gap-1 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-1 min-[390px]:px-2 sm:px-3 py-1.5 sm:py-2 text-[11px] min-[390px]:text-[12px] sm:text-[14px] font-medium transition-all text-left leading-tight">
+                                class="inline-flex items-center justify-between sm:justify-start gap-1.5 text-[#204a74] hover:text-[#c9a463] px-1 min-[390px]:px-2 sm:px-0 py-1.5 sm:py-0 text-[11px] min-[390px]:text-[12px] sm:text-[15px] font-bold transition-all text-left leading-tight">
                                 <span>Request Hospitality Service</span>
                                 <span aria-hidden="true" class="shrink-0">&rarr;</span>
                             </a>
                             <a href="{{ url('/contact-us') }}"
-                                class="inline-flex items-center justify-between gap-1 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-1 min-[390px]:px-2 sm:px-3 py-1.5 sm:py-2 text-[11px] min-[390px]:text-[12px] sm:text-[14px] font-medium transition-all text-left leading-tight">
+                                class="inline-flex items-center justify-between sm:justify-start gap-1.5 text-[#204a74] hover:text-[#c9a463] px-1 min-[390px]:px-2 sm:px-0 py-1.5 sm:py-0 text-[11px] min-[390px]:text-[12px] sm:text-[15px] font-bold transition-all text-left leading-tight">
                                 <span>Contact Us</span>
                                 <span aria-hidden="true" class="shrink-0">&rarr;</span>
                             </a>

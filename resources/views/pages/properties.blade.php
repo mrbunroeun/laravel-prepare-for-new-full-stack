@@ -424,9 +424,9 @@
                 class="w-full h-auto min-h-[220px] object-cover">
 
             <div
-                class="relative max-w-[520px] mt-6 px-6
-                    min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
-                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
+                class="relative max-w-[520px] mt-4 px-6
+                    min-[900px]:ml-[-8rem] min-[900px]:mt-[-8.5rem] min-[900px]:px-0 z-20">
+                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight drop-shadow-sm">
                     <span class="block min-[900px]:hidden">
                         Looking for Professional
                         Property Management or
@@ -440,17 +440,17 @@
             </div>
         </div>
 
-        <div class="max-w-[420px] mt-8 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-6 min-[900px]:px-0" data-scroll-reveal="left">
+        <div class="max-w-[420px] mt-10 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-14 lg:mt-16 min-[900px]:px-0 mb-12 sm:mb-16" data-scroll-reveal="left">
             @php
                 $links = [
-                    ['label' => 'Property Leasing', 'url' => url('/property-leasing'), 'active' => true],
-                    ['label' => 'Hospitality Services', 'url' => url('/hospitality-services'), 'active' => false],
-                    ['label' => 'Property Listings', 'url' => url('/property-listings'), 'active' => false],
+                    ['label' => 'Property Leasing', 'url' => url('/services/property-leasing'), 'active' => true],
+                    ['label' => 'Hospitality Services', 'url' => url('/services/hospitality-services'), 'active' => false],
+                    ['label' => 'Property Listings', 'url' => url('/properties'), 'active' => false],
                     ['label' => 'Contact Us', 'url' => url('/contact-us'), 'active' => false],
                 ];
             @endphp
 
-            <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200">
+            <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200 shadow-sm">
                 @foreach ($links as $link)
                     <a href="{{ $link['url'] }}"
                         class="group flex items-center justify-between px-5 py-3 text-[15px] font-medium

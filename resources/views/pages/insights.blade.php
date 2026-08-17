@@ -94,10 +94,15 @@
                 </button>
 
                 {{-- Carousel Track Container --}}
-                <div class="overflow-hidden flex-1 py-2" data-scroll-reveal="fade-up">
+                <div class="overflow-hidden flex-1 py-2">
                     <div id="insights-track" class="flex gap-4 sm:gap-5 transition-transform duration-500 ease-out">
-                        @foreach ($insightsCards as $card)
-                            <div class="insight-slide flex-shrink-0 w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.3333%-14px)] flex flex-col bg-[#2A5A8A] overflow-hidden">
+                        @foreach ($insightsCards as $index => $card)
+                            <div
+                                @if ($index < 3)
+                                    data-scroll-reveal="fade-up"
+                                    data-scroll-delay="{{ $index * 150 }}"
+                                @endif
+                                class="insight-slide flex-shrink-0 w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.3333%-14px)] flex flex-col bg-[#2A5A8A] overflow-hidden shadow-lg">
                                 {{-- Card Image with Single Bottom Gold Accent Bar --}}
                                 <div class="relative w-full h-[190px] sm:h-[210px] lg:h-[230px] overflow-hidden">
                                     <img src="{{ $card['image'] }}" alt="{{ $card['title'] }}"

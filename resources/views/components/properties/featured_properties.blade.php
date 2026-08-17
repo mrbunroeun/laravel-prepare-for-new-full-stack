@@ -39,7 +39,7 @@
             ];
         @endphp
 
-        <section class="relative w-full min-h-[620px] sm:min-h-[680px] md:min-h-[760px] lg:min-h-[820px]">
+        <section class="relative w-full min-h-[500px] sm:min-h-[550px] md:min-h-[600px] lg:min-h-[660px]">
 
             {{-- Background image layer: absolute, fills section, behind everything --}}
             <div class="absolute inset-0 z-0">
@@ -53,7 +53,7 @@
                 {{-- Mobile/tablet heading + arrows --}}
                 <div
                     class="flex lg:hidden items-center justify-between absolute inset-x-0 top-0 px-4 sm:px-6 pt-8 pb-6 sm:pb-10 z-10">
-                    <h2 class="text-white text-[clamp(20px,3vw,30px)] leading-tight">
+                    <h2 class="text-[#F4DEAC] text-[clamp(20px,3vw,30px)] leading-tight">
                         <span class="font-normal block">Featured</span>
                         <span class="font-bold block">Properties</span>
                     </h2>
@@ -128,13 +128,13 @@
                         </button>
                     </div>
 
-                    <h2 class="text-white -z-1 text-[clamp(24px,2.4vw,34px)] leading-tight">
+                    <h2 class="text-[#F4DEAC] -z-1 text-[clamp(24px,2.4vw,34px)] leading-tight">
                         <span class="font-normal block">Featured</span>
                         <span class="font-bold block">Properties</span>
                     </h2>
                 </div>
 
-                <div class="h-10 sm:h-14 lg:h-24"></div>
+                <div class="h-6 sm:h-8 lg:h-12"></div>
 
             </div>
 
