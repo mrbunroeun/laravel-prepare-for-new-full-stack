@@ -5,7 +5,7 @@
         [
             'label' => 'Services',
             'url' => url('/service'),
-            'pattern' => 'service',
+            'pattern' => 'service*',
             'submenu' => [
                 ['label' => 'Property Management', 'url' => url('/services/property-management'), 'pattern' => 'services/property-management'],
                 ['label' => 'Property Sales', 'url' => url('/services/property-sales'), 'pattern' => 'services/property-sales'],
