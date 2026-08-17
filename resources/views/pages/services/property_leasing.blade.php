@@ -529,7 +529,7 @@
 
                 {{-- Right: Image --}}
                 <div class="w-full lg:w-auto lg:shrink-0">
-                    <img src="{{ asset('services/private residential/Private Residential.png') }}"
+                    <img src="{{ asset('home/professional_property/professional_property.png') }}"
                         alt="Looking for Flexible Accommodation in Cambodia"
                         class="w-full lg:w-[520px] xl:w-[580px] h-auto object-cover shadow-sm">
                 </div>

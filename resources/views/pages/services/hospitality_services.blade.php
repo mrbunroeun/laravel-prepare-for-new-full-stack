@@ -158,9 +158,9 @@
                     </ul>
 
                     <a href="{{ url('/contact-us') }}"
-                        class="inline-flex items-center gap-2 text-[#2A5A8A] hover:text-[#c9a463] text-[14.5px] sm:text-[15px] font-bold transition-colors w-max">
+                        class="group inline-flex items-center gap-2 text-[#2A5A8A] hover:text-[#c9a463] text-[14.5px] sm:text-[15px] font-bold transition-colors w-max">
                         <span>Request Airport Pick-Up</span>
-                        <span aria-hidden="true">&rarr;</span>
+                        <span class="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
                     </a>
                 </div>
 
@@ -237,9 +237,9 @@
                         </p>
 
                         <a href="{{ url('/contact-us') }}"
-                            class="inline-flex items-center gap-2 text-white hover:text-[#F4DEAC] text-[14.5px] sm:text-[15px] font-bold transition-colors w-max">
+                            class="group inline-flex items-center gap-2 text-white hover:text-[#F4DEAC] text-[14.5px] sm:text-[15px] font-bold transition-colors w-max">
                             <span>Ask About City Tours</span>
-                            <span aria-hidden="true">&rarr;</span>
+                            <span class="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
                         </a>
                     </div>
 
@@ -326,84 +326,71 @@
     </section>
 
 
-    {{-- Why Choose CWD Realty & Hospitality --}}
+    {{-- Why Choose CWD Hospitality Services --}}
     <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
 
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
+            {{-- Heading centered --}}
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12 text-center">
                 <span class="text-[#2A5A8A] font-normal">Why Choose </span>
-                <span class="text-[#2A5A8A] font-bold">CWD Realty &amp; Hospitality?</span>
+                <span class="text-[#2A5A8A] font-bold">CWD Hospitality Services?</span>
             </h2>
 
-            @php
-                $whyChooseFeatures = [
-                    [
-                        'number' => '01',
-                        'title' => 'Condominium management specialists',
-                    ],
-                    [
-                        'number' => '02',
-                        'title' => 'Professional multilingual communication',
-                    ],
-                    [
-                        'number' => '03',
-                        'title' => 'Strong rental marketing experience',
-                    ],
-                    [
-                        'number' => '04',
-                        'title' => 'Transparent owner reporting',
-                    ],
-                    [
-                        'number' => '05',
-                        'title' => 'Reliable maintenance coordination',
-                    ],
-                    [
-                        'number' => '06',
-                        'title' => 'Hospitality-focused management',
-                    ],
-                    [
-                        'number' => '07',
-                        'title' => 'Personalized owner support',
-                    ],
-                ];
+            {{-- 4-Column Cards Grid --}}
+            <div id="why-choose-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
 
-                $whyChooseRowOne = array_slice($whyChooseFeatures, 0, 4);
-                $whyChooseRowTwo = array_slice($whyChooseFeatures, 4);
-            @endphp
+                {{-- Card 01 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        01
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Convenient
+                    </h3>
+                    <p class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        Arrange additional services through one hospitality team while staying at a CWD-managed property.
+                    </p>
+                </div>
 
-            {{-- Row 1: 4 columns --}}
-            <div id="why-choose-row-one" class="grid grid-cols-2 lg:grid-cols-4 gap-6 items-stretch mb-6">
-                @foreach ($whyChooseRowOne as $feature)
-                    <div
-                        class="why-choose-card group h-full w-full flex flex-col px-6 py-6 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200">
-                        <span
-                            class="text-[36px] sm:text-[40px] font-bold leading-none mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
-                            {{ $feature['number'] }}
-                        </span>
-                        <p
-                            class="text-[15px] leading-relaxed text-black group-hover:text-white transition-colors duration-200">
-                            {{ $feature['title'] }}
-                        </p>
-                    </div>
-                @endforeach
-            </div>
+                {{-- Card 02 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        02
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Flexible
+                    </h3>
+                    <p class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        Services are arranged according to your travel requirements and availability.
+                    </p>
+                </div>
 
-            {{-- Row 2: remaining cards, centered --}}
-            <div id="why-choose-row-two" class="flex flex-wrap justify-center gap-6">
-                @foreach ($whyChooseRowTwo as $feature)
-                    <div
-                        class="why-choose-card group w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)] flex flex-col px-6 py-6 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200">
-                        <span
-                            class="text-[36px] sm:text-[40px] font-bold leading-none mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
-                            {{ $feature['number'] }}
-                        </span>
-                        <p
-                            class="text-[15px] leading-relaxed text-black group-hover:text-white transition-colors duration-200">
-                            {{ $feature['title'] }}
-                        </p>
-                    </div>
-                @endforeach
+                {{-- Card 03 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        03
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Local Support
+                    </h3>
+                    <p class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        Our team can assist guests with practical arrangements during their stay in Cambodia.
+                    </p>
+                </div>
+
+                {{-- Card 04 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        04
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Connected to Your Accommodation
+                    </h3>
+                    <p class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        Hospitality services can be coordinated alongside your CWD property rental.
+                    </p>
+                </div>
+
             </div>
 
         </div>
@@ -413,48 +400,42 @@
         <script>
             (function() {
                 function equalizeWhyChooseCardHeights() {
-                    var cards = document.querySelectorAll(
-                        '#why-choose-row-one .why-choose-card, #why-choose-row-two .why-choose-card');
+                    var cards = document.querySelectorAll('#why-choose-cards-grid .why-choose-card');
                     if (!cards.length) return;
 
-                    // Reset heights first so we measure natural content height, not a previously-set tall value
                     cards.forEach(function(card) {
-                        card.style.height = 'auto';
+                        card.style.minHeight = '';
                     });
 
                     var tallest = 0;
                     cards.forEach(function(card) {
-                        var cardHeight = card.getBoundingClientRect().height;
+                        var cardHeight = card.offsetHeight;
                         if (cardHeight > tallest) {
                             tallest = cardHeight;
                         }
                     });
 
                     cards.forEach(function(card) {
-                        card.style.height = tallest + 'px';
+                        card.style.minHeight = tallest + 'px';
                     });
                 }
 
-                // Run once DOM is ready
                 if (document.readyState === 'loading') {
                     document.addEventListener('DOMContentLoaded', equalizeWhyChooseCardHeights);
                 } else {
                     equalizeWhyChooseCardHeights();
                 }
 
-                // Re-run on resize (debounced) since column count / text wrapping changes at breakpoints
                 var resizeTimer;
                 window.addEventListener('resize', function() {
                     clearTimeout(resizeTimer);
                     resizeTimer = setTimeout(equalizeWhyChooseCardHeights, 150);
                 });
 
-                // Re-run once web fonts finish loading, since font swaps can change text height after initial measurement
                 if (document.fonts && document.fonts.ready) {
                     document.fonts.ready.then(equalizeWhyChooseCardHeights);
                 }
-            })
-            ();
+            })();
         </script>
     @endonce
 
@@ -466,182 +447,124 @@
     @php
         $faqLeft = [
             [
-                'question' => 'What types of properties do you manage?',
+                'question' => 'Is airport pick-up included in the rental price?',
                 'answer' =>
-                    'We specialize in condominiums, serviced apartments, and residential investment properties throughout Phnom Penh.',
+                    'Contact CWD Realty & Hospitality before your arrival and provide your flight and arrival information. Our team will confirm availability and the applicable charge.',
             ],
             [
-                'question' => 'Can you manage both daily and long-term rentals?',
+                'question' => 'Do you provide city tours?',
+                'answer' => 'ComingSoon',
+            ],
+            [
+                'question' => 'Are airport pick-up and city tours included in monthly rental rates?',
                 'answer' => 'ComingSoon',
             ],
         ];
 
         $faqRight = [
             [
-                'question' => 'How do property owners receive rental income?',
+                'question' => 'Can I request a city tour after I have already checked in?',
+                'answer' => 'ComingSoon',
+            ],
+            [
+                'question' => 'Are hospitality services available for monthly rental guests?',
                 'answer' => 'ComingSoon',
             ],
         ];
     @endphp
 
-    {{-- Frequently Asked Questions --}}
-    <section class="relative px-0 sm:px-[5rem] bg-[#e5e4e4]">
-        <div class="max-w-[1400px] mx-auto px-6 py-16 sm:py-20">
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12">
-                <span class="text-[#2A5A8A] font-normal block">Frequently</span>
-                <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
-            </h2>
+    <x-faqs :faq-left="$faqLeft" :faq-right="$faqRight" />
 
-            {{-- Two-column accordion --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start">
+    {{-- Explore Our Accommodation --}}
+    <section class="relative w-full overflow-hidden my-12 sm:my-16 md:my-20">
+        {{-- Background Image --}}
+        <img src="{{ asset('services/hospitality_services/explore_our_acommodation.png') }}"
+            alt="Explore Our Accommodation"
+            class="absolute inset-0 w-full h-full object-cover object-center">
 
-                {{-- Left column --}}
-                <div class="faq-column flex flex-col gap-2">
-                    @foreach ($faqLeft as $index => $faq)
-                        <div class="faq-item bg-[#f3f3f3]">
-                            <button type="button"
-                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
-                                aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
-                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
-                                    {{ $faq['question'] }}
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200 {{ $index === 0 ? 'rotate-90' : '' }}"
-                                    fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M6 4l8 6-8 6V4z" />
-                                </svg>
-                            </button>
-                            <div
-                                class="faq-panel overflow-hidden transition-all duration-300 {{ $index === 0 ? 'max-h-[300px]' : 'max-h-0' }}">
-                                <div class="{{ $index === 0 ? 'bg-[#1479B9]' : 'bg-white' }} px-5 py-4 sm:px-6 sm:py-5">
-                                    <p
-                                        class="{{ $index === 0 ? 'text-white' : 'text-black/70' }} text-[13px] sm:text-[13.5px] leading-relaxed">
-                                        {{ $faq['answer'] }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+        {{-- Content Overlay --}}
+        <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14 py-16 sm:py-24 lg:py-28">
+            <div class="max-w-[620px]">
+                {{-- Gold accent bar on top left --}}
+                <div class="h-[10px] sm:h-[12px] w-[60%] max-w-[320px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+
+                {{-- Dark Blue Card --}}
+                <div class="bg-[#122e49]/85 backdrop-blur-[2px] p-8 sm:p-10 lg:p-12 text-white shadow-xl">
+                    <h2 class="text-white text-[clamp(26px,3.2vw,38px)] font-normal leading-tight mb-2">
+                        Explore Our <span class="text-[#F4DEAC] font-bold">Accommodation</span>
+                    </h2>
+                    <h3 class="text-white text-[16px] sm:text-[17px] font-bold mb-4">
+                        Find a Place to Stay in Cambodia
+                    </h3>
+                    <p class="text-white/95 text-[14px] sm:text-[15px] leading-relaxed mb-6">
+                        Choose from flexible daily, weekly, and monthly rental options at CWD-managed properties.
+                    </p>
+                    <a href="{{ url('/properties') }}"
+                        class="group inline-flex items-center gap-2 text-white hover:text-[#F4DEAC] text-[15px] sm:text-[16px] font-bold transition-colors w-max">
+                        <span>View Properties for Rent</span>
+                        <span class="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+                    </a>
                 </div>
-
-                {{-- Right column --}}
-                <div class="faq-column flex flex-col gap-2">
-                    @foreach ($faqRight as $faq)
-                        <div class="faq-item bg-[#f3f3f3]">
-                            <button type="button"
-                                class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
-                                aria-expanded="false">
-                                <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
-                                    {{ $faq['question'] }}
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200"
-                                    fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M6 4l8 6-8 6V4z" />
-                                </svg>
-                            </button>
-                            <div class="faq-panel overflow-hidden transition-all duration-300 max-h-0">
-                                <div class="bg-white px-5 py-4 sm:px-6 sm:py-5">
-                                    <p class="text-black/70 text-[13px] sm:text-[13.5px] leading-relaxed">
-                                        {{ $faq['answer'] }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
             </div>
-
         </div>
     </section>
-
-    <script>
-        (function() {
-            document.querySelectorAll('.faq-toggle').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    const item = btn.closest('.faq-item');
-                    const panel = item.querySelector('.faq-panel');
-                    const answerBox = panel.querySelector('div');
-                    const answerText = answerBox.querySelector('p');
-                    const arrow = btn.querySelector('.faq-arrow');
-                    const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-                    if (isOpen) {
-                        // Close this item
-                        panel.style.maxHeight = '0px';
-                        btn.setAttribute('aria-expanded', 'false');
-                        arrow.classList.remove('rotate-90');
-                        answerBox.classList.remove('bg-[#1479B9]');
-                        answerBox.classList.add('bg-white');
-                        answerText.classList.remove('text-white');
-                        answerText.classList.add('text-black/70');
-                    } else {
-                        // Open this item
-                        panel.style.maxHeight = panel.scrollHeight + 'px';
-                        btn.setAttribute('aria-expanded', 'true');
-                        arrow.classList.add('rotate-90');
-                        answerBox.classList.add('bg-[#1479B9]');
-                        answerBox.classList.remove('bg-white');
-                        answerText.classList.add('text-white');
-                        answerText.classList.remove('text-black/70');
-                    }
-                });
-            });
-        })();
-    </script>
-
-
-
-
-    {{-- Looking for your next stay --}}
-    <section class="relative max-w-[1600px] mx-auto">
+    {{-- Contact Our Hospitality Team --}}
+    <section class="relative mt-[4rem] sm:mt-[6rem] lg:mt-[8rem] max-w-[1600px] mx-auto">
         <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
-            <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
-                class="w-full h-auto min-h-[220px] object-cover">
+            <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="Contact Our Hospitality Team"
+                class="w-full h-auto min-h-[260px] object-cover shadow-sm">
 
-            <div
-                class="relative max-w-[520px] mt-6 px-6
-                    min-[900px]:ml-[-8rem] min-[900px]:mt-[-6.5rem] min-[900px]:px-0">
-                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight">
-                    <span class="block min-[900px]:hidden">
-                        Looking for Professional
-                        Property Management or
-                        Comfortable Accommodation?
-                    </span>
-                    <span class="hidden min-[900px]:block">
-                        Request Property <br>
-                        Management Consultation
-                    </span>
+            <div class="relative max-w-[580px] mt-6 px-6 min-[900px]:ml-[-8rem] min-[900px]:mt-[-7.5rem] min-[900px]:px-0">
+                <h2 class="text-[#DCC597] text-[clamp(28px,4.5vw,52px)] font-bold leading-[1.12] drop-shadow-md">
+                    Contact<br>
+                    Our Hospitality Team
                 </h2>
             </div>
         </div>
+    </section>
 
-        <div class="max-w-[420px] mt-8 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-6 min-[900px]:px-0">
-            @php
-                $links = [
-                    ['label' => 'Property Leasing', 'url' => url('/property-leasing'), 'active' => true],
-                    ['label' => 'Hospitality Services', 'url' => url('/hospitality-services'), 'active' => false],
-                    ['label' => 'Property Listings', 'url' => url('/property-listings'), 'active' => false],
-                    ['label' => 'Contact Us', 'url' => url('/contact-us'), 'active' => false],
-                ];
-            @endphp
+    {{-- Planning Your Stay in Cambodia? --}}
+    <section class="mt-16 sm:mt-24 md:mt-32 pb-24">
+        <div class="max-w-[1450px] mx-auto px-6 sm:px-10 lg:px-14">
+            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-14">
 
-            <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200">
-                @foreach ($links as $link)
-                    <a href="{{ $link['url'] }}"
-                        class="group flex items-center justify-between px-5 py-3 text-[15px] font-medium
-                   bg-white text-[#2A5A8A] transition-colors
-                   hover:bg-[#2A5A8A] hover:text-[#DCC597]">
-                        <span>{{ $link['label'] }}</span>
-                        <span aria-hidden="true"
-                            class="text-[#2A5A8A] transition-all group-hover:text-[#DCC597] group-hover:translate-x-1">
-                            &rarr;
-                        </span>
-                    </a>
-                @endforeach
-            </nav>
+                {{-- Left: Accent line on the left + Content --}}
+                <div class="flex items-start gap-4 sm:gap-6 lg:gap-8 max-w-[580px]">
+                    <span class="h-[2px] w-20 sm:w-28 lg:w-36 shrink-0 bg-[#c9a15c] mt-3.5"></span>
+                    <div class="flex flex-col items-start">
+                        <h2 class="text-[#204a74] text-[clamp(22px,2.5vw,30px)] font-bold leading-tight mb-4">
+                            Planning Your Stay<br>
+                            in Cambodia?
+                        </h2>
+                        <p class="text-[#204a74] text-[14px] sm:text-[14.5px] leading-relaxed mb-3">
+                            Let CWD Realty &amp; Hospitality help make your arrival and stay more convenient.
+                        </p>
+                        <p class="text-[#204a74] text-[14px] sm:text-[14.5px] leading-relaxed mb-6">
+                            Whether you need airport pick-up, a city tour, or assistance choosing suitable accommodation, contact our team to discuss your requirements.
+                        </p>
+                        <div class="flex flex-col items-start gap-1.5">
+                            <a href="{{ url('/contact-us') }}"
+                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] font-medium transition-all">
+                                <span>Request Hospitality Service</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                            <a href="{{ url('/contact-us') }}"
+                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] font-medium transition-all">
+                                <span>Contact Us</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Right: Image --}}
+                <div class="w-full lg:w-auto lg:shrink-0">
+                    <img src="{{ asset('home/professional_property/professional_property.png') }}"
+                        alt="Planning Your Stay in Cambodia"
+                        class="w-full lg:w-[520px] xl:w-[580px] h-auto object-cover shadow-sm">
+                </div>
+
+            </div>
         </div>
     </section>
 @endsection
