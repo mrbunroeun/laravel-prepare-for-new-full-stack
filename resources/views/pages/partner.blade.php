@@ -160,175 +160,104 @@
         </script>
     @endonce
 
-    {{-- our services --}}
+    {{-- We Support You With ... --}}
     @php
-        $services = [
+        $supportItems = [
             [
-                'number' => '01',
-                'title' => 'Property Management',
-                'description' =>
-                    'Professional management for condominium owners, including tenant coordination, maintenance supervision, occupancy management, and rental administration.',
-                'link' => url('/properties'),
-                'linkText' => 'View Details',
+                'icon' => 'partner/we support you/project brochures.svg',
+                'title' => 'Project brochures & price lists',
             ],
             [
-                'number' => '02',
-                'title' => 'Property Leasing',
-                'description' => 'Daily, weekly, monthly, and long-term rental services for residential condominiums.',
-                'link' => url('/properties'),
-                'linkText' => 'View Properties',
+                'icon' => 'partner/we support you/legal ownership.svg',
+                'title' => 'Legal ownership information',
             ],
             [
-                'number' => '03',
-                'title' => 'Sales Services',
-                'description' => 'Helping buyers and investors discover quality residential properties in Cambodia.',
-                'link' => url('/contact-us'),
-                'linkText' => 'Learn More',
+                'icon' => 'partner/we support you/on-site sales.svg',
+                'title' => 'On-site sales team assistance',
             ],
             [
-                'number' => '04',
-                'title' => 'Hospitality Services',
-                'description' =>
-                    'Airport transfers, guest assistance, city tours, housekeeping coordination, and personalized hospitality support.',
-                'link' => url('/contact-us'),
-                'linkText' => 'Explore Services',
+                'icon' => 'partner/we support you/sales scripts.svg',
+                'title' => 'Sales scripts & training',
+            ],
+            [
+                'icon' => 'partner/we support you/marketing photos.svg',
+                'title' => 'Marketing photos & videos',
+            ],
+            [
+                'icon' => 'partner/we support you/customer service.svg',
+                'title' => 'Customer service & document handling',
             ],
         ];
     @endphp
 
-    {{-- our services --}}
-    <section class="relative z-[300] px-0 sm:px-[5rem] md:px-[3rem] bg-none ">
-        <div class="max-w-[1400px] mx-auto px-6 sm:px-10 pt-16 pb-0 sm:pt-20">
+    <section class="relative z-[300] bg-white py-12 sm:py-16 lg:py-20 overflow-visible">
+        <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,36px)] min-[1200px]:mb-[7rem] mb-[2rem] mb-[clamp(2rem,5vw,5rem)] relative">
-                <span class="text-[#2f6ba7] font-normal">Our</span>
-                <span class="text-[#2f6ba7] font-bold">Services</span>
-            </h2>
+            {{-- Container with overlapping girl image --}}
+            <div class="relative pt-12 lg:pt-24">
 
-            {{-- Composition wrapper: image + dark block + cards --}}
-            <div
-                class="relative flex flex-col min-[1220px]:flex-row min-[1220px]:items-start min-h-[420px] sm:min-h-[520px]">
-
-                {{-- Property image (right side on desktop, full width on mobile) --}}
-                <div
-                    class="flex flex-col items-end w-full min-[1220px]:w-[850px] min-[1220px]:order-2 min-[1220px]:-mt-[7.5rem]">
-
-                    <div class="w-full h-[460px] sm:h-[640px] overflow-hidden">
-                        <img src="{{ asset('home/our_services/our_services.png') }}"
-                            alt="CWD Realty modern residential condominium tower in Phnom Penh"
-                            class="w-full h-full object-cover">
-                    </div>
-
-                    {{-- Gold accent bar --}}
-                    <div class="self-start w-[81%] h-[15px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]">
-                    </div>
-
+                {{-- Girl Image (Desktop: Anchored on far left, overlaps into the 80% blue box) --}}
+                <div class="hidden lg:block absolute left-[-35px] xl:left-[-25px] 2xl:left-[-15px] bottom-0 z-20 pointer-events-none">
+                    <img src="{{ asset('partner/girl_partner.png') }}" alt="CWD Support Partner"
+                        class="block w-[420px] xl:w-[480px] 2xl:w-[530px] max-w-[560px] max-h-[640px] xl:max-h-[700px] h-auto object-contain object-bottom drop-shadow-2xl">
                 </div>
 
-                {{-- Service cards grid --}}
-                <div
-                    class="relative w-full min-[1220px]:w-[54%] min-[1220px]:order-1 min-[1220px]:z-[30] min-[1220px]:-mr-[80px] min-[1220px]:mt-[68px] -mt-16 sm:-mt-20 min-[1220px]:mt-0 grid grid-cols-1 min-[770px]:grid-cols-2 gap-2 sm:gap-2.5 px-4 sm:px-0">
-                    @foreach ($services as $service)
-                        <div
-                            class="service-card bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col min-h-[150px] min-[1220px]:min-h-[145px]">
-                            <div class="flex items-start justify-between gap-2">
-                                <h3 class="text-[#F4DEAC] text-[16px] sm:text-[18px] font-bold leading-snug">
-                                    {{ $service['title'] }}
-                                </h3>
-                                <span class="text-[#F4DEAC] text-[26px] sm:text-[30px] font-light leading-none shrink-0">
-                                    {{ $service['number'] }}
-                                </span>
+                {{-- ~80% Width Blue Box (Aligned to Right) --}}
+                <div class="w-full lg:w-[82%] xl:w-[80%] lg:ml-auto">
+
+                    {{-- Gold Accent Bar (Top Right of Blue Box) --}}
+                    <div class="flex justify-end">
+                        <div class="h-[12px] sm:h-[15px] w-full max-w-[500px] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+                    </div>
+
+                    {{-- Dark Blue Card --}}
+                    <div class="relative bg-[#2A5A8A] px-6 py-10 sm:px-10 sm:py-12 lg:py-14 lg:pr-8 xl:pr-12 lg:pl-[210px] xl:pl-[260px]">
+
+                        {{-- Content Area --}}
+                        <div class="relative z-10">
+
+                            {{-- Mobile / Tablet Girl Image (visible on < lg) --}}
+                            <div class="block lg:hidden mb-8 flex justify-center">
+                                <img src="{{ asset('partner/girl_partner.png') }}" alt="CWD Support Partner"
+                                    class="w-[190px] sm:w-[230px] max-w-[500px] max-h-[500px] object-contain object-bottom drop-shadow-xl">
                             </div>
 
-                            <p class="text-white/90 text-[15px] sm:text-[16px] leading-relaxed mt-3">
-                                {{ $service['description'] }}
-                            </p>
+                            {{-- Section Title --}}
+                            <h2 class="text-[#F4DEAC] text-[clamp(24px,3.2vw,34px)] font-normal leading-tight mb-8 sm:mb-10 text-center lg:text-left">
+                                We Support You<br>
+                                <span class="font-light text-[#F4DEAC]">With ...</span>
+                            </h2>
 
-                            <a href="{{ $service['link'] }}"
-                                class="text-[#F4DEAC] text-[11px] sm:text-[13px] font-medium mt-4 pt-4 inline-flex items-center gap-1 hover:underline mt-auto">
-                                {{ $service['linkText'] }} <span aria-hidden="true">→</span>
-                            </a>
+                            {{-- 3-Column Grid of Support Items --}}
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8 sm:gap-x-8 sm:gap-y-10">
+                                @foreach ($supportItems as $item)
+                                    <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
+                                        <div class="h-9 w-9 sm:h-10 sm:w-10 mb-3 flex items-center justify-center lg:justify-start">
+                                            <img src="{{ asset($item['icon']) }}" alt="{{ $item['title'] }}"
+                                                class="max-h-full max-w-full object-contain">
+                                        </div>
+                                        <p class="text-white text-[13px] sm:text-[14px] leading-snug font-light max-w-[160px]">
+                                            {{ $item['title'] }}
+                                        </p>
+                                    </div>
+                                @endforeach
+                            </div>
+
                         </div>
-                    @endforeach
+
+                    </div>
+
                 </div>
-
-                <script>
-                    function equalizeCardHeights() {
-                        const cards = document.querySelectorAll('.service-card');
-                        if (!cards.length) return;
-                        cards.forEach(card => card.style.minHeight = '');
-                        let maxHeight = 0;
-                        cards.forEach(card => {
-                            maxHeight = Math.max(maxHeight, card.offsetHeight);
-                        });
-                        cards.forEach(card => card.style.minHeight = `${maxHeight}px`);
-                    }
-
-                    window.addEventListener('load', equalizeCardHeights);
-                    window.addEventListener('resize', equalizeCardHeights);
-                </script>
 
             </div>
 
-            {{-- Bottom spacer --}}
-            <div class="h-8  sm:h-10 lg:h-16"></div>
         </div>
     </section>
-
-    {{-- Auto Move section --}}
-    <section class="bg-[#2A5A8A] h-[450px] sm:h-[500px] md:h-[600px] lg:h-[800px] mt-[-15rem]">
-        {{-- auto-move part --}}
-        <section class="absolute w-full flex mt-[20rem] justify-center ">
-
-            <img src="{{ asset('home/auto_move_logo/auto_move.png') }}" alt="CWD Realty auto-move logo"
-                class="w-full h-auto object-contain">
-
-            {{-- Scrolling text overlay --}}
-            <div class="absolute inset-0 flex items-center overflow-hidden pointer-events-none">
-                <div class="cwd-marquee-track flex items-center whitespace-nowrap">
-                    @for ($i = 0; $i < 12; $i++)
-                        <span class="text-[#F4DEAC] text-[clamp(14px,2vw,22px)] mx-6 sm:mx-10 shrink-0">
-                            <span class="font-bold">CWD</span> Real Estate Agent &amp; Developer
-                        </span>
-                    @endfor
-                </div>
-            </div>
-
-        </section>
-        <style>
-            .cwd-marquee-track {
-                width: max-content;
-                animation: cwd-marquee 45s linear infinite;
-            }
-
-            /* Pause on hover, if wanted */
-            .cwd-marquee-track:hover {
-                animation-play-state: paused;
-            }
-
-            @keyframes cwd-marquee {
-                from {
-                    transform: translateX(-50%);
-                }
-
-                to {
-                    transform: translateX(0);
-                }
-            }
-        </style>
-    </section>
+<!-- auto move -->
+    <x-auto_move.auto_move />
 
 
-
-
-    {{-- Featured Properties: background image layer + card content layer, cards can extend above image's top edge --}}
-    <x-properties.featured_properties />
-
-
-
-
-
+ 
 
     {{-- Who We Are section 2nd one --}}
     <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
