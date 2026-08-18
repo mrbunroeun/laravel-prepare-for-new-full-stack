@@ -138,11 +138,11 @@
         <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-black/15 to-transparent pointer-events-none"></div>
 
         {{-- Main Content --}}
-        <div class="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-            <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr] gap-8 xl:gap-10 items-start">
+        <div class="relative z-10 w-full max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+            <div class="flex flex-col lg:flex-row items-start gap-8 xl:gap-10">
 
                 {{-- Left: Heading & Nav Arrows --}}
-                <div class="flex flex-col justify-between pt-2 lg:min-h-[300px]" data-scroll-reveal="left">
+                <div class="flex flex-col justify-between pt-2 shrink-0 w-full lg:w-[240px] xl:w-[270px] lg:min-h-[300px]" data-scroll-reveal="left">
                     <div>
                         <h2 class="text-[#F4DEAC] text-[clamp(28px,2.8vw,42px)] font-normal leading-[1.18] mb-6">
                             Daily &amp; Weekly<br>
@@ -175,46 +175,46 @@
                     </div>
                 </div>
 
-                {{-- Right: Horizontal Card Slider Track --}}
-                <div class="relative min-w-0" data-scroll-reveal="right">
+                {{-- Right: Horizontal Card Slider Track (Bleeds smoothly right, revealing 4th card slightly) --}}
+                <div class="relative min-w-0 flex-1 w-full -mr-4 sm:-mr-6 lg:-mr-8 xl:-mr-12 overflow-hidden" data-scroll-reveal="right">
                     <div id="rental-options-track"
-                        class="pointer-events-auto flex gap-5 overflow-x-auto scroll-smooth items-stretch pb-2
-                            snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                        class="rental-fade-mask pointer-events-auto flex gap-5 overflow-x-auto scroll-smooth items-stretch pb-4
+                            snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pr-6 sm:pr-10 lg:pr-[120px]">
 
                         @foreach ($rentalProperties as $property)
                             <article
                                 class="rental-option-card group shrink-0 snap-start flex flex-col
-                                    w-[82vw] max-w-[320px] sm:w-[300px] lg:w-[310px] xl:w-[320px]
+                                    w-[82vw] max-w-[310px] sm:w-[280px] lg:w-[285px] xl:w-[300px]
                                     bg-white rounded-none overflow-hidden cursor-pointer shadow-md
                                     transition-all duration-300 ease-out hover:-translate-y-1
                                     focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2"
                                 data-link="{{ $property['link'] }}"
                                 tabindex="0" role="link" aria-label="View details for {{ $property['title'] }}">
 
-                                <div class="relative h-[190px] sm:h-[200px] w-full overflow-hidden shrink-0">
+                                <div class="relative h-[180px] sm:h-[190px] w-full overflow-hidden shrink-0">
                                     <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
                                         class="rental-card-img w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
                                 </div>
 
-                                <div class="px-6 py-6 flex flex-col grow">
-                                    <h3 class="text-[#2A5A8A] text-[18px] xl:text-[19px] font-bold leading-snug mb-1.5">
+                                <div class="px-5 py-5 sm:px-6 sm:py-6 flex flex-col grow">
+                                    <h3 class="text-[#2A5A8A] text-[17px] xl:text-[18px] font-bold leading-snug mb-1.5">
                                         {{ $property['title'] }}
                                     </h3>
 
-                                    <h4 class="text-black text-[14.5px] xl:text-[15px] font-bold leading-snug mb-2.5">
+                                    <h4 class="text-black text-[14px] xl:text-[14.5px] font-bold leading-snug mb-2.5">
                                         {{ $property['subtitle'] }}
                                     </h4>
 
-                                    <p class="text-black/70 text-[13px] xl:text-[13.5px] leading-relaxed mb-4 line-clamp-3">
+                                    <p class="text-black/70 text-[12.5px] xl:text-[13px] leading-relaxed mb-4 line-clamp-3">
                                         {{ $property['description'] }}
                                     </p>
 
-                                    <p class="text-[#2A5A8A] text-[14px] font-bold mb-5">
+                                    <p class="text-[#2A5A8A] text-[13.5px] font-bold mb-5">
                                         {{ $property['status'] }}
                                     </p>
 
                                     <a href="{{ $property['link'] }}"
-                                        class="rental-card-link relative z-10 mt-auto text-[#2A5A8A] text-[13.5px] xl:text-[14px] font-semibold
+                                        class="rental-card-link relative z-10 mt-auto text-[#2A5A8A] text-[13px] xl:text-[13.5px] font-semibold
                                             inline-flex items-center gap-1.5 w-max
                                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2">
                                         <span class="border-b border-transparent group-hover:border-[#2A5A8A] transition-colors duration-300">View Project</span>
@@ -225,10 +225,6 @@
                         @endforeach
 
                     </div>
-
-                    {{-- Scroll-edge blur cues --}}
-                    <div id="rental-options-edge-left" class="rental-options-edge rental-options-edge-left" aria-hidden="true"></div>
-                    <div id="rental-options-edge-right" class="rental-options-edge rental-options-edge-right" aria-hidden="true"></div>
                 </div>
 
             </div>
@@ -243,42 +239,17 @@
             overflow: hidden;
         }
 
-        .rental-options-edge {
-            position: absolute;
-            top: 0;
-            bottom: 8px;
-            width: 100px;
-            z-index: 40;
-            pointer-events: none;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.25s ease;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-        }
-
-        .rental-options-edge.is-visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .rental-options-edge-left {
-            left: 0;
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to right, black 0%, transparent 100%);
-            mask-image: linear-gradient(to right, black 0%, transparent 100%);
-        }
-
-        .rental-options-edge-right {
-            right: 0;
-            background: linear-gradient(to left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to left, black 0%, transparent 100%);
-            mask-image: linear-gradient(to left, black 0%, transparent 100%);
-        }
-
-        @media (max-width: 640px) {
-            .rental-options-edge {
-                width: 50px;
+        @media (min-width: 1024px) {
+            .rental-fade-mask {
+                -webkit-mask-image: linear-gradient(to right,
+                        black 0%,
+                        black calc(100% - 100px),
+                        transparent 100%);
+                mask-image: linear-gradient(to right,
+                        black 0%,
+                        black calc(100% - 100px),
+                        transparent 100%);
+                transition: -webkit-mask-image 0.2s ease, mask-image 0.2s ease;
             }
         }
     </style>
@@ -289,22 +260,37 @@
                 const track = document.getElementById("rental-options-track");
                 const prevBtn = document.getElementById("rental-options-prev");
                 const nextBtn = document.getElementById("rental-options-next");
-                const edgeLeft = document.getElementById("rental-options-edge-left");
-                const edgeRight = document.getElementById("rental-options-edge-right");
 
                 if (!track) return;
 
-                const GAP = 20; // matches gap-5
+                const cards = Array.from(track.querySelectorAll(".rental-option-card"));
                 let scrollTimer = null;
 
-                function getStep() {
-                    const firstCard = track.querySelector(".rental-option-card");
-                    return firstCard ? firstCard.getBoundingClientRect().width + GAP : 320;
+                function getCardOffset(idx) {
+                    if (!cards[idx]) return 0;
+                    return cards[idx].offsetLeft - track.offsetLeft;
                 }
 
-                function scrollByStep(direction) {
-                    track.scrollBy({
-                        left: direction * getStep(),
+                function getCurrentIndex() {
+                    const currentScroll = track.scrollLeft;
+                    let closestIdx = 0;
+                    let minDiff = Infinity;
+                    cards.forEach((card, idx) => {
+                        const offset = card.offsetLeft - track.offsetLeft;
+                        const diff = Math.abs(offset - currentScroll);
+                        if (diff < minDiff) {
+                            minDiff = diff;
+                            closestIdx = idx;
+                        }
+                    });
+                    return closestIdx;
+                }
+
+                function scrollToCard(idx) {
+                    if (idx < 0) idx = 0;
+                    if (idx >= cards.length) idx = cards.length - 1;
+                    track.scrollTo({
+                        left: getCardOffset(idx),
                         behavior: "smooth"
                     });
                 }
@@ -321,48 +307,61 @@
                         nextBtn.style.pointerEvents = atEnd ? "none" : "auto";
                     }
 
-                    const canScroll = track.scrollWidth > track.clientWidth + 1;
-                    if (edgeLeft) edgeLeft.classList.toggle("is-visible", canScroll && !atStart);
-                    if (edgeRight) edgeRight.classList.toggle("is-visible", canScroll && !atEnd);
+                    // Update left and right edge fade masks dynamically
+                    if (window.innerWidth >= 1024) {
+                        const leftFade = atStart ? "black 0%" : "transparent 0%, black 50px";
+                        const rightFade = atEnd ? "black 100%" : "black calc(100% - 100px), transparent 100%";
+                        const mask = `linear-gradient(to right, ${leftFade}, ${rightFade})`;
+                        track.style.webkitMaskImage = mask;
+                        track.style.maskImage = mask;
+                    } else {
+                        track.style.webkitMaskImage = "none";
+                        track.style.maskImage = "none";
+                    }
                 }
 
                 function updateButtons() {
-                    const atStart = track.scrollLeft <= 2;
-                    const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+                    const atStart = track.scrollLeft <= 4;
+                    const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
                     setButtons(atStart, atEnd);
                 }
 
-                if (prevBtn) prevBtn.addEventListener("click", () => scrollByStep(-1));
-                if (nextBtn) nextBtn.addEventListener("click", () => scrollByStep(1));
+                if (prevBtn) {
+                    prevBtn.addEventListener("click", () => {
+                        const cur = getCurrentIndex();
+                        scrollToCard(Math.max(0, cur - 1));
+                    });
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener("click", () => {
+                        const cur = getCurrentIndex();
+                        scrollToCard(Math.min(cards.length - 1, cur + 1));
+                    });
+                }
 
                 track.addEventListener("scroll", () => {
                     clearTimeout(scrollTimer);
-                    scrollTimer = setTimeout(updateButtons, 80);
+                    scrollTimer = setTimeout(updateButtons, 40);
                 }, { passive: true });
 
-                window.addEventListener("resize", updateButtons);
-
-                // Whole card navigation
-                const cards = track.querySelectorAll(".rental-option-card");
-                cards.forEach(card => {
-                    const link = card.dataset.link;
-                    if (!link) return;
-
+                cards.forEach((card) => {
                     card.addEventListener("click", (e) => {
-                        if (e.target.closest("a") || e.target.closest("button")) return;
-                        window.location.href = link;
+                        if (e.target.closest("a")) return;
+                        const link = card.dataset.link;
+                        if (link) window.location.href = link;
                     });
 
                     card.addEventListener("keydown", (e) => {
                         if (e.key === "Enter" || e.key === " ") {
-                            if (e.target.closest("a") || e.target.closest("button")) return;
+                            if (e.target.closest("a")) return;
                             e.preventDefault();
-                            window.location.href = link;
+                            const link = card.dataset.link;
+                            if (link) window.location.href = link;
                         }
                     });
                 });
 
-                // Equalize card heights
                 function equalizeCardHeights() {
                     if (!cards.length) return;
                     cards.forEach(c => c.style.height = "auto");

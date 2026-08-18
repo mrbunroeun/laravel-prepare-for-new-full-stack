@@ -99,7 +99,7 @@
                         'desc' => 'All-inclusive monthly living package with premium residential facilities.',
                     ],
                 ],
-                'link' => url('/services/property-leasing/daily-weekly-rentals/1-bedroom'),
+                'link' => url('/services/property-leasing/daily-weekly-rentals/studio-room'),
                 'image' => $cardImage,
             ],
             [
@@ -125,7 +125,7 @@
                         'desc' => 'Premium corner residences with panoramic city views and dedicated management.',
                     ],
                 ],
-                'link' => url('/services/property-leasing/daily-weekly-rentals/2-bedroom-with-balcony'),
+                'link' => url('/services/property-leasing/daily-weekly-rentals/studio-room'),
                 'image' => $cardImage,
             ],
             [
@@ -139,19 +139,19 @@
                 ],
                 'pricing' => [
                     'daily' => [
-                        'price' => 'From $95/day',
-                        'desc' => 'Generous 3-bedroom suite with full premium amenities and daily housekeeping.',
+                        'price' => 'From $110/day',
+                        'desc' => 'Luxurious three-bedroom living designed for executive relocations and families.',
                     ],
                     'weekly' => [
-                        'price' => 'From $570/week',
-                        'desc' => 'Spacious high-floor living for families and groups with weekly servicing.',
+                        'price' => 'From $660/week',
+                        'desc' => 'Spacious suite accommodations with comprehensive housekeeping and concierge service.',
                     ],
                     'monthly' => [
-                        'price' => 'From $1,800/month',
-                        'desc' => 'Exclusive expansive penthouse-style living with VIP management services.',
+                        'price' => 'From $2,100/month',
+                        'desc' => 'Expansive residences with VIP hospitality support and priority facility access.',
                     ],
                 ],
-                'link' => url('/services/property-leasing/daily-weekly-rentals/3-bedroom'),
+                'link' => url('/services/property-leasing/daily-weekly-rentals/studio-room'),
                 'image' => $cardImage,
             ],
         ];
