@@ -5,7 +5,7 @@
         {{-- Hero container: dynamic responsive height that shrinks on resize and caps max height --}}
         <div class="relative w-full h-[420px] sm:h-[460px] md:h-[500px] lg:h-[540px] xl:h-[580px] max-h-[600px] overflow-hidden">
             <img class="w-full h-full object-cover object-center"
-                src="{{ asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png') }}" 
+                src="{{ asset('services/propertis_leasing/available rental units/detail_img/hero_section.png') }}" 
                 alt="3-Bedroom - Wealth Mansion">
 
             {{-- Floating Hero Card Overlay --}}

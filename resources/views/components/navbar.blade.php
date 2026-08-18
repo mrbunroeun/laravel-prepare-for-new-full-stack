@@ -1,23 +1,23 @@
 @php
     $navItems = [
         ['label' => 'Home', 'url' => url('/'), 'pattern' => '/'],
-        ['label' => 'About Us', 'url' => url('/about-us'), 'pattern' => 'about-us'],
+        ['label' => 'About Us', 'url' => url('/about-us'), 'pattern' => 'about-us*'],
         [
             'label' => 'Services',
             'url' => url('/service'),
-            'pattern' => 'service*',
+            'pattern' => ['service*', 'services*'],
             'submenu' => [
-                ['label' => 'Property Management', 'url' => url('/services/property-management'), 'pattern' => 'services/property-management'],
-                ['label' => 'Property Sales', 'url' => url('/services/property-sales'), 'pattern' => 'services/property-sales'],
-                ['label' => 'Property Leasing', 'url' => url('/services/property-leasing'), 'pattern' => 'services/property-leasing'],
-                ['label' => 'Hospitality Services', 'url' => url('/services/hospitality-services'), 'pattern' => 'services/hospitality-services'],
+                ['label' => 'Property Management', 'url' => url('/services/property-management'), 'pattern' => 'services/property-management*'],
+                ['label' => 'Property Sales', 'url' => url('/services/property-sales'), 'pattern' => 'services/property-sales*'],
+                ['label' => 'Property Leasing', 'url' => url('/services/property-leasing'), 'pattern' => ['services/property-leasing*', 'services/properties-leasing-list*']],
+                ['label' => 'Hospitality Services', 'url' => url('/services/hospitality-services'), 'pattern' => 'services/hospitality-services*'],
             ],
         ],
-        ['label' => 'Properties', 'url' => url('/properties'), 'pattern' => 'properties'],
-        ['label' => 'Partners', 'url' => url('/partners'), 'pattern' => 'partners'],
-        ['label' => 'Insights', 'url' => url('/insights'), 'pattern' => 'insights'],
-        ['label' => 'Events', 'url' => url('/events'), 'pattern' => 'events'],
-        ['label' => 'Contact Us', 'url' => url('/contact-us'), 'pattern' => 'contact-us'],
+        ['label' => 'Properties', 'url' => url('/properties'), 'pattern' => 'properties*'],
+        ['label' => 'Partners', 'url' => url('/partners'), 'pattern' => 'partners*'],
+        ['label' => 'Insights', 'url' => url('/insights'), 'pattern' => 'insights*'],
+        ['label' => 'Events', 'url' => url('/events'), 'pattern' => 'events*'],
+        ['label' => 'Contact Us', 'url' => url('/contact-us'), 'pattern' => 'contact-us*'],
     ];
 
     // Find the nav item that has a submenu, so we can render its dropdown
@@ -42,8 +42,15 @@
             <ul class="hidden min-[1161px]:flex items-center gap-8 xl:gap-10 absolute left-[42%] top-1/2 -translate-x-1/2 -translate-y-1/2 w-max whitespace-nowrap z-[950] pointer-events-auto">
                 @foreach ($navItems as $item)
                     @php
-                        $isActive = request()->is($item['pattern']);
+                        $pattern = is_array($item['pattern']) ? $item['pattern'] : [$item['pattern']];
+                        $isActive = request()->is(...$pattern);
                         $hasSubmenu = isset($item['submenu']);
+                        if ($hasSubmenu && !$isActive) {
+                            $isActive = collect($item['submenu'])->contains(function($sub) {
+                                $subPattern = is_array($sub['pattern']) ? $sub['pattern'] : [$sub['pattern']];
+                                return request()->is(...$subPattern);
+                            });
+                        }
                     @endphp
                     <li class="relative {{ $hasSubmenu ? 'nav-has-submenu' : '' }}">
                         @if ($hasSubmenu)
@@ -96,7 +103,10 @@
             z-[850] pointer-events-auto shadow-lg">
         <ul class="flex items-center justify-center gap-10 xl:gap-14 py-4 max-w-[1400px] mx-auto px-4">
             @foreach ($servicesItem['submenu'] as $sub)
-                @php $subActive = request()->is($sub['pattern']); @endphp
+                @php
+                    $subPattern = is_array($sub['pattern']) ? $sub['pattern'] : [$sub['pattern']];
+                    $subActive = request()->is(...$subPattern);
+                @endphp
                 <li>
                     <a href="{{ $sub['url'] }}"
                         @if ($subActive) aria-current="page" @endif
@@ -118,14 +128,16 @@
         <ul class="flex flex-col items-start gap-1 w-full">
             @foreach ($navItems as $item)
                 @php
-                    $isActive = request()->is($item['pattern']);
+                    $pattern = is_array($item['pattern']) ? $item['pattern'] : [$item['pattern']];
+                    $isActive = request()->is(...$pattern);
                     $hasSubmenu = isset($item['submenu']);
                 @endphp
                 <li class="w-full text-left">
                     @if ($hasSubmenu)
                         @php
                             $isSubActiveAny = collect($item['submenu'])->contains(function($sub) {
-                                return request()->is($sub['pattern']);
+                                $subPattern = is_array($sub['pattern']) ? $sub['pattern'] : [$sub['pattern']];
+                                return request()->is(...$subPattern);
                             });
                         @endphp
                         <button type="button"
@@ -141,7 +153,10 @@
                         <div class="mobile-submenu-panel grid {{ $isSubActiveAny ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]' }} transition-all duration-300 ease-in-out overflow-hidden">
                             <ul class="min-h-0 flex flex-col items-start gap-1 pl-4 w-full pt-1 pb-2">
                                 @foreach ($item['submenu'] as $sub)
-                                    @php $subActive = request()->is($sub['pattern']); @endphp
+                                    @php
+                                        $subPattern = is_array($sub['pattern']) ? $sub['pattern'] : [$sub['pattern']];
+                                        $subActive = request()->is(...$subPattern);
+                                    @endphp
                                     <li class="w-full text-left">
                                         <a href="{{ $sub['url'] }}"
                                             @if ($subActive) aria-current="page" @endif
