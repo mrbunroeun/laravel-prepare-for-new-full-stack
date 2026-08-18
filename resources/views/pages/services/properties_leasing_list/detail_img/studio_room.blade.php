@@ -56,28 +56,30 @@
         <div class="max-w-[1400px] mx-auto">
 
             {{-- Top Row on Desktop: Carousel Track on the Left, Nav Arrows on the Right --}}
-            <div class="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-6 lg:gap-10">
+            <div class="flex flex-col lg:flex-row items-start justify-between gap-6 lg:gap-10 h-auto lg:h-[470px]">
 
-                {{-- Image Carousel Wrapper --}}
+                {{-- Image Carousel Wrapper (Fixed height so scaling never pushes bottom content) --}}
                 <div id="studio-carousel-height-wrapper"
                     data-scroll-reveal="right"
-                    class="w-full lg:flex-1 lg:max-w-[75%] overflow-hidden transition-[height] duration-500 ease-in-out order-2 lg:order-1">
+                    class="w-full lg:flex-1 lg:max-w-[75%] overflow-visible h-[340px] sm:h-[420px] lg:h-[470px] order-2 lg:order-1">
 
-                    {{-- Image Track: scrollable with hidden scrollbars, showing 4 items in view --}}
+                    {{-- Image Track: scrollable with hidden scrollbars, aligned to top so hover scales down and pushes neighbors smoothly --}}
                     <div id="studio-carousel-track"
-                        class="flex flex-row flex-nowrap items-start justify-start gap-3 sm:gap-4 lg:gap-5 min-w-0 w-full overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pb-4">
+                        class="flex flex-row flex-nowrap items-start justify-start gap-4 sm:gap-5 lg:gap-6 min-w-0 w-full h-full overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pt-2 pb-4">
                         @foreach ($discoverImages as $index => $image)
                             <button type="button"
-                                data-base="w-[200px] sm:w-[220px] lg:w-[200px] xl:w-[210px] h-[200px] sm:h-[240px] lg:h-[250px] shrink-0 min-w-0 lg:self-start bg-[#d9d9d9]"
-                                data-active-classes="w-[300px] sm:w-[360px] lg:w-[380px] xl:w-[400px] h-[320px] sm:h-[400px] lg:h-[450px] shrink-0 min-w-0 lg:self-start lg:-mt-4 bg-[#d9d9d9]"
-                                class="studio-carousel-item relative overflow-hidden rounded-none shadow-md
-                                transition-all duration-500 ease-in-out cursor-pointer
+                                data-base="w-[200px] sm:w-[220px] lg:w-[200px] xl:w-[210px] h-[200px] sm:h-[240px] lg:h-[250px] shrink-0 min-w-0 self-start bg-[#d9d9d9]"
+                                data-active-classes="w-[300px] sm:w-[360px] lg:w-[380px] xl:w-[400px] h-[320px] sm:h-[400px] lg:h-[450px] shrink-0 min-w-0 self-start bg-[#d9d9d9] shadow-2xl z-10"
+                                class="studio-carousel-item relative overflow-hidden rounded-none shadow-md transform-gpu
+                                transition-[width,height,transform,box-shadow] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer
                                 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2
-                                {{ $index === 0 ? 'w-[300px] sm:w-[360px] lg:w-[380px] xl:w-[400px] h-[320px] sm:h-[400px] lg:h-[450px] shrink-0 min-w-0 lg:self-start lg:-mt-4 bg-[#d9d9d9]' : 'w-[200px] sm:w-[220px] lg:w-[200px] xl:w-[210px] h-[200px] sm:h-[240px] lg:h-[250px] shrink-0 min-w-0 lg:self-start bg-[#d9d9d9]' }}"
-                                data-index="{{ $index }}" aria-label="Show image {{ $index + 1 }} as active"
-                                aria-current="{{ $index === 0 ? 'true' : 'false' }}">
+                                w-[200px] sm:w-[220px] lg:w-[200px] xl:w-[210px] h-[200px] sm:h-[240px] lg:h-[250px] shrink-0 min-w-0 self-start bg-[#d9d9d9]"
+                                data-index="{{ $index }}"
+                                data-src="{{ $image }}"
+                                aria-label="View image {{ $index + 1 }}"
+                                aria-current="false">
                                 <img src="{{ $image }}" alt="Wealth Mansion Studio view {{ $index + 1 }}"
-                                    class="w-full h-full object-cover object-center transition-transform duration-500 ease-in-out">
+                                    class="w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] transform-gpu">
                             </button>
                         @endforeach
                     </div>
@@ -91,7 +93,8 @@
                         <button id="studio-carousel-prev" type="button" aria-label="Previous image"
                             class="w-11 h-11 sm:w-12 sm:h-12 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] bg-white flex items-center justify-center cursor-pointer
                             transition-all duration-300 hover:bg-[#2A5A8A] hover:text-white hover:scale-105 shadow-sm
-                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2">
+                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2
+                            disabled:cursor-not-allowed">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
@@ -100,7 +103,8 @@
                         <button id="studio-carousel-next" type="button" aria-label="Next image"
                             class="w-11 h-11 sm:w-12 sm:h-12 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] bg-white flex items-center justify-center cursor-pointer
                             transition-all duration-300 hover:bg-[#2A5A8A] hover:text-white hover:scale-105 shadow-sm
-                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2">
+                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2
+                            disabled:cursor-not-allowed">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -133,102 +137,330 @@
         </div>
     </section>
 
+    {{-- Fullscreen Image Lightbox Modal with side preview images --}}
+    <div id="studio-lightbox-modal"
+        class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/92 backdrop-blur-md opacity-0 transition-opacity duration-300 ease-in-out p-2 sm:p-4 lg:p-8"
+        role="dialog" aria-modal="true" aria-label="Image Preview">
+        
+        {{-- Close Button --}}
+        <button id="studio-lightbox-close" type="button" aria-label="Close preview"
+            class="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-105 border border-white/20">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+        {{-- Previous Button --}}
+        <button id="studio-lightbox-prev" type="button" aria-label="Previous image"
+            class="absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#2A5A8A] text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 border border-white/20 shadow-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+
+        {{-- Next Button --}}
+        <button id="studio-lightbox-next" type="button" aria-label="Next image"
+            class="absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#2A5A8A] text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 border border-white/20 shadow-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+
+        {{-- Gallery Stage (Left Preview + Center Focused Image + Right Preview) --}}
+        <div class="relative flex items-center justify-center gap-3 sm:gap-6 lg:gap-8 w-full max-w-[96vw] max-h-[85vh] select-none" id="studio-lightbox-content">
+            
+            {{-- Left Preview Image (Smaller + Light Opacity) --}}
+            <div id="studio-lightbox-prev-card"
+                class="hidden md:flex flex-col items-center justify-center shrink-0 w-[14vw] lg:w-[16vw] max-h-[50vh] opacity-35 hover:opacity-80 transition-all duration-300 transform scale-80 cursor-pointer pointer-events-auto group">
+                <img id="studio-lightbox-prev-img" src="" alt="Previous View Preview"
+                    class="w-full max-h-[45vh] object-contain rounded shadow-lg transition-all duration-300 group-hover:scale-105 filter brightness-90">
+            </div>
+
+            {{-- Main Focused Center Image --}}
+            <div class="relative flex flex-col items-center justify-center shrink-0 max-w-[88vw] md:max-w-[62vw] lg:max-w-[58vw] max-h-[82vh] z-20">
+                <img id="studio-lightbox-img" src="" alt="Wealth Mansion Studio Full View"
+                    class="max-w-full max-h-[72vh] sm:max-h-[75vh] w-auto h-auto object-contain rounded shadow-2xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+                
+                {{-- Caption / Counter --}}
+                <div class="mt-4 flex items-center justify-between w-full px-2 text-white/90 text-sm font-medium">
+                    <span id="studio-lightbox-title">Wealth Mansion Studio</span>
+                    <span id="studio-lightbox-counter" class="bg-white/15 px-3 py-1 rounded-full text-xs font-semibold text-white"></span>
+                </div>
+            </div>
+
+            {{-- Right Preview Image (Smaller + Light Opacity) --}}
+            <div id="studio-lightbox-next-card"
+                class="hidden md:flex flex-col items-center justify-center shrink-0 w-[14vw] lg:w-[16vw] max-h-[50vh] opacity-35 hover:opacity-80 transition-all duration-300 transform scale-80 cursor-pointer pointer-events-auto group">
+                <img id="studio-lightbox-next-img" src="" alt="Next View Preview"
+                    class="w-full max-h-[45vh] object-contain rounded shadow-lg transition-all duration-300 group-hover:scale-105 filter brightness-90">
+            </div>
+
+        </div>
+    </div>
+
     @once
         <script>
             (function() {
                 function initStudioCarousel() {
-                    const wrapper = document.getElementById("studio-carousel-height-wrapper");
                     const track = document.getElementById("studio-carousel-track");
-                    if (!wrapper || !track) return;
+                    if (!track) return;
 
                     const items = Array.from(track.querySelectorAll(".studio-carousel-item"));
                     if (!items.length) return;
 
                     const prevBtn = document.getElementById("studio-carousel-prev");
                     const nextBtn = document.getElementById("studio-carousel-next");
-                    const images = Array.from(track.querySelectorAll("img"));
 
                     const itemClassSets = items.map((item) => ({
                         base: item.dataset.base.split(/\s+/).filter(Boolean),
                         active: item.dataset.activeClasses.split(/\s+/).filter(Boolean),
                     }));
 
-                    let activeIndex = 0; // Default active to the 1st left image
+                    // Lightbox Elements
+                    const lightbox = document.getElementById("studio-lightbox-modal");
+                    const lightboxImg = document.getElementById("studio-lightbox-img");
+                    const lightboxPrevImg = document.getElementById("studio-lightbox-prev-img");
+                    const lightboxNextImg = document.getElementById("studio-lightbox-next-img");
+                    const lightboxPrevCard = document.getElementById("studio-lightbox-prev-card");
+                    const lightboxNextCard = document.getElementById("studio-lightbox-next-card");
+                    const lightboxCounter = document.getElementById("studio-lightbox-counter");
+                    const lightboxTitle = document.getElementById("studio-lightbox-title");
+                    const lightboxClose = document.getElementById("studio-lightbox-close");
+                    const lightboxPrev = document.getElementById("studio-lightbox-prev");
+                    const lightboxNext = document.getElementById("studio-lightbox-next");
+                    const lightboxContent = document.getElementById("studio-lightbox-content");
 
-                    function setWrapperHeight(instant = false) {
-                        const height = track.getBoundingClientRect().height;
-                        if (instant) {
-                            const prevTransition = wrapper.style.transition;
-                            wrapper.style.transition = "none";
-                            wrapper.style.height = height + "px";
-                            void wrapper.offsetHeight;
-                            wrapper.style.transition = prevTransition;
-                        } else {
-                            wrapper.style.height = height + "px";
-                        }
-                    }
+                    const imageUrls = items.map((item) => item.dataset.src);
+                    let currentLightboxIndex = 0;
 
-                    function scrollActiveIntoView() {
-                        const activeItem = items[activeIndex];
-                        if (activeItem && track) {
-                            const trackWidth = track.clientWidth;
-                            const itemLeft = activeItem.offsetLeft - track.offsetLeft;
-                            const itemWidth = activeItem.offsetWidth;
-                            let targetScroll = itemLeft - (trackWidth - itemWidth) / 4;
-                            if (targetScroll < 0) targetScroll = 0;
-                            if (targetScroll > track.scrollWidth - trackWidth) targetScroll = track.scrollWidth - trackWidth;
-                            track.scrollTo({ left: targetScroll, behavior: "smooth" });
-                        }
-                    }
+                    // Hover scale & mouseleave reset with rAF synchronization
+                    let currentRaf = null;
 
-                    function updateWrapperHeightAfterChange() {
-                        requestAnimationFrame(() => {
-                            requestAnimationFrame(() => {
-                                setWrapperHeight(false);
-                                scrollActiveIntoView();
+                    function resetAllToBase() {
+                        if (currentRaf) cancelAnimationFrame(currentRaf);
+                        currentRaf = requestAnimationFrame(() => {
+                            items.forEach((item, index) => {
+                                const { base, active } = itemClassSets[index];
+                                item.classList.remove(...active);
+                                item.classList.add(...base);
+                                item.setAttribute("aria-current", "false");
                             });
                         });
                     }
 
-                    function render() {
-                        items.forEach((item, index) => {
-                            const { base, active } = itemClassSets[index];
-                            const isActive = index === activeIndex;
-                            item.classList.remove(...(isActive ? base : active));
-                            item.classList.add(...(isActive ? active : base));
-                            item.setAttribute("aria-current", isActive ? "true" : "false");
+                    function scaleCard(targetIndex) {
+                        if (currentRaf) cancelAnimationFrame(currentRaf);
+                        currentRaf = requestAnimationFrame(() => {
+                            items.forEach((item, index) => {
+                                const { base, active } = itemClassSets[index];
+                                const isHovered = index === targetIndex;
+                                item.classList.remove(...(isHovered ? base : active));
+                                item.classList.add(...(isHovered ? active : base));
+                                item.setAttribute("aria-current", isHovered ? "true" : "false");
+                            });
                         });
-                        updateWrapperHeightAfterChange();
                     }
 
-                    function goTo(index) {
-                        const total = items.length;
-                        activeIndex = (index + total) % total; // Loops continuously in both directions
-                        render();
-                    }
-
-                    prevBtn && prevBtn.addEventListener("click", () => goTo(activeIndex - 1));
-                    nextBtn && nextBtn.addEventListener("click", () => goTo(activeIndex + 1));
-
+                    let hoverTimer = null;
                     items.forEach((item, index) => {
-                        item.addEventListener("click", () => goTo(index));
+                        // When hovered: scale card to active size
+                        item.addEventListener("mouseenter", () => {
+                            clearTimeout(hoverTimer);
+                            hoverTimer = setTimeout(() => {
+                                scaleCard(index);
+                            }, 16);
+                        });
+
+                        // When mouse leaves card: reset back to original size
+                        item.addEventListener("mouseleave", () => {
+                            clearTimeout(hoverTimer);
+                            hoverTimer = setTimeout(() => {
+                                resetAllToBase();
+                            }, 30);
+                        });
+
+                        // When clicked: open fullscreen lightbox modal
+                        item.addEventListener("click", () => {
+                            clearTimeout(hoverTimer);
+                            openLightbox(index);
+                        });
                     });
 
-                    render();
-                    setWrapperHeight(true);
+                    // If mouse leaves the track completely: reset to original size
+                    track.addEventListener("mouseleave", () => {
+                        clearTimeout(hoverTimer);
+                        resetAllToBase();
+                    });
 
-                    images.forEach((img) => {
-                        if (img.complete) {
-                            setWrapperHeight(true);
-                        } else {
-                            img.addEventListener("load", () => setWrapperHeight(true));
+                    // Carousel Scroll Movement
+                    function getStep() {
+                        const firstItem = items[0];
+                        const gap = 24; // corresponds to gap-6
+                        return firstItem ? firstItem.getBoundingClientRect().width + gap : 300;
+                    }
+
+                    function scrollTrack(direction) {
+                        const step = getStep();
+                        track.scrollBy({
+                            left: direction * step,
+                            behavior: "smooth"
+                        });
+                    }
+
+                    function updateButtons() {
+                        const atStart = track.scrollLeft <= 5;
+                        const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 5;
+
+                        if (prevBtn) {
+                            prevBtn.disabled = atStart;
+                            prevBtn.style.opacity = atStart ? "0.35" : "1";
+                            prevBtn.style.pointerEvents = atStart ? "none" : "auto";
                         }
+                        if (nextBtn) {
+                            nextBtn.disabled = atEnd;
+                            nextBtn.style.opacity = atEnd ? "0.35" : "1";
+                            nextBtn.style.pointerEvents = atEnd ? "none" : "auto";
+                        }
+                    }
+
+                    if (prevBtn) prevBtn.addEventListener("click", () => scrollTrack(-1));
+                    if (nextBtn) nextBtn.addEventListener("click", () => scrollTrack(1));
+
+                    track.addEventListener("scroll", updateButtons, { passive: true });
+                    window.addEventListener("resize", updateButtons);
+                    updateButtons();
+
+                    // Lightbox Modal Functions with Side Previews (No Loop)
+                    function updateLightboxImage(index) {
+                        const total = imageUrls.length;
+                        // Boundary clamp (No looping)
+                        if (index < 0) index = 0;
+                        if (index >= total) index = total - 1;
+                        currentLightboxIndex = index;
+
+                        const hasPrev = currentLightboxIndex > 0;
+                        const hasNext = currentLightboxIndex < total - 1;
+                        
+                        // Center Focused Image
+                        if (lightboxImg) {
+                            lightboxImg.style.opacity = "0";
+                            lightboxImg.style.transform = "scale(0.96)";
+                            
+                            setTimeout(() => {
+                                lightboxImg.src = imageUrls[currentLightboxIndex];
+                                lightboxImg.onload = () => {
+                                    lightboxImg.style.opacity = "1";
+                                    lightboxImg.style.transform = "scale(1)";
+                                };
+                            }, 100);
+                        }
+
+                        // Left Preview Image & Left Nav Button
+                        if (lightboxPrevCard) {
+                            if (hasPrev) {
+                                lightboxPrevCard.style.opacity = "0.35";
+                                lightboxPrevCard.style.pointerEvents = "auto";
+                                lightboxPrevCard.style.visibility = "visible";
+                                if (lightboxPrevImg) lightboxPrevImg.src = imageUrls[currentLightboxIndex - 1];
+                            } else {
+                                lightboxPrevCard.style.opacity = "0";
+                                lightboxPrevCard.style.pointerEvents = "none";
+                                lightboxPrevCard.style.visibility = "hidden";
+                            }
+                        }
+                        if (lightboxPrev) {
+                            lightboxPrev.disabled = !hasPrev;
+                            lightboxPrev.style.opacity = hasPrev ? "1" : "0.2";
+                            lightboxPrev.style.pointerEvents = hasPrev ? "auto" : "none";
+                        }
+
+                        // Right Preview Image & Right Nav Button
+                        if (lightboxNextCard) {
+                            if (hasNext) {
+                                lightboxNextCard.style.opacity = "0.35";
+                                lightboxNextCard.style.pointerEvents = "auto";
+                                lightboxNextCard.style.visibility = "visible";
+                                if (lightboxNextImg) lightboxNextImg.src = imageUrls[currentLightboxIndex + 1];
+                            } else {
+                                lightboxNextCard.style.opacity = "0";
+                                lightboxNextCard.style.pointerEvents = "none";
+                                lightboxNextCard.style.visibility = "hidden";
+                            }
+                        }
+                        if (lightboxNext) {
+                            lightboxNext.disabled = !hasNext;
+                            lightboxNext.style.opacity = hasNext ? "1" : "0.2";
+                            lightboxNext.style.pointerEvents = hasNext ? "auto" : "none";
+                        }
+
+                        if (lightboxCounter) {
+                            lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${total}`;
+                        }
+                    }
+
+                    function openLightbox(index) {
+                        if (!lightbox) return;
+                        updateLightboxImage(index);
+                        lightbox.classList.remove("hidden");
+                        lightbox.classList.add("flex");
+                        document.body.style.overflow = "hidden";
+                        
+                        requestAnimationFrame(() => {
+                            lightbox.style.opacity = "1";
+                        });
+                    }
+
+                    function closeLightbox() {
+                        if (!lightbox) return;
+                        lightbox.style.opacity = "0";
+                        document.body.style.overflow = "";
+                        
+                        setTimeout(() => {
+                            lightbox.classList.remove("flex");
+                            lightbox.classList.add("hidden");
+                        }, 300);
+                    }
+
+                    // Lightbox Nav Controls & Preview Clicks
+                    if (lightboxPrev) lightboxPrev.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        if (currentLightboxIndex > 0) updateLightboxImage(currentLightboxIndex - 1);
                     });
 
-                    let resizeRaf = null;
-                    window.addEventListener("resize", () => {
-                        if (resizeRaf) cancelAnimationFrame(resizeRaf);
-                        resizeRaf = requestAnimationFrame(() => setWrapperHeight(true));
+                    if (lightboxNext) lightboxNext.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        if (currentLightboxIndex < imageUrls.length - 1) updateLightboxImage(currentLightboxIndex + 1);
+                    });
+
+                    if (lightboxPrevCard) lightboxPrevCard.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        if (currentLightboxIndex > 0) updateLightboxImage(currentLightboxIndex - 1);
+                    });
+
+                    if (lightboxNextCard) lightboxNextCard.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        if (currentLightboxIndex < imageUrls.length - 1) updateLightboxImage(currentLightboxIndex + 1);
+                    });
+
+                    if (lightboxClose) lightboxClose.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        closeLightbox();
+                    });
+
+                    if (lightbox) {
+                        lightbox.addEventListener("click", (e) => {
+                            if (!lightboxContent.contains(e.target) && !e.target.closest("button")) {
+                                closeLightbox();
+                            }
+                        });
+                    }
+
+                    // Keyboard shortcuts for Lightbox
+                    window.addEventListener("keydown", (e) => {
+                        if (!lightbox || lightbox.classList.contains("hidden")) return;
+                        if (e.key === "Escape") closeLightbox();
+                        if (e.key === "ArrowLeft" && currentLightboxIndex > 0) updateLightboxImage(currentLightboxIndex - 1);
+                        if (e.key === "ArrowRight" && currentLightboxIndex < imageUrls.length - 1) updateLightboxImage(currentLightboxIndex + 1);
                     });
                 }
 
