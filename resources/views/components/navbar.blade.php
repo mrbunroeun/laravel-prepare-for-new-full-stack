@@ -90,7 +90,7 @@
 @if ($servicesItem)
     <div
         id="services-dropdown"
-        class="fixed left-0 w-screen bg-[#2c4a75]
+        class="fixed left-0 w-screen bg-[#2c4a75]/60 backdrop-blur-sm
             opacity-0 invisible -translate-y-3
             transition-all duration-300 ease-out
             z-[850] pointer-events-auto shadow-lg">

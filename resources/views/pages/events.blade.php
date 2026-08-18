@@ -164,7 +164,7 @@
 
 
     {{-- Professional Property --}}
-    <section class="mt-20 sm:mt-28 md:mt-36 min-[900px]:mt-[16rem]">
+    <section class="mt-20 sm:mt-24 md:mt-28 min-[900px]:mt-[17.5rem] lg:mt-[18rem] pb-8 sm:pb-12">
         <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
             <div
                 class="flex flex-col min-[900px]:flex-row items-center min-[900px]:items-start justify-center gap-10 min-[900px]:gap-16">

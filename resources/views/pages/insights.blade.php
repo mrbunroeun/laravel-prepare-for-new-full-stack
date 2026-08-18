@@ -102,11 +102,12 @@
                                     data-scroll-reveal="fade-up"
                                     data-scroll-delay="{{ $index * 150 }}"
                                 @endif
-                                class="insight-slide flex-shrink-0 w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.3333%-14px)] flex flex-col bg-[#2A5A8A] overflow-hidden shadow-lg">
+                                onclick="window.location='{{ $card['link'] }}'"
+                                class="insight-slide flex-shrink-0 w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.3333%-14px)] flex flex-col bg-[#2A5A8A] overflow-hidden cursor-pointer group">
                                 {{-- Card Image with Single Bottom Gold Accent Bar --}}
                                 <div class="relative w-full h-[190px] sm:h-[210px] lg:h-[230px] overflow-hidden">
                                     <img src="{{ $card['image'] }}" alt="{{ $card['title'] }}"
-                                        class="w-full h-full object-cover">
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                                     {{-- Gold Accent Bar (Bottom Left 60% width) --}}
                                     <div class="absolute bottom-0 left-0 h-[5px] w-[60%] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a] z-10"></div>
                                 </div>

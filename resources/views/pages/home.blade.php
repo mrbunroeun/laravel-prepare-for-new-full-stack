@@ -92,21 +92,21 @@
                 'title' => 'Property Management',
                 'description' =>
                     'Professional management for condominium owners, including tenant coordination, maintenance supervision, occupancy management, and rental administration.',
-                'link' => url('/properties'),
+                'link' => url('/services/property-management'),
                 'linkText' => 'View Details',
             ],
             [
                 'number' => '02',
                 'title' => 'Property Leasing',
                 'description' => 'Daily, weekly, monthly, and long-term rental services for residential condominiums.',
-                'link' => url('/properties'),
+                'link' => url('/services/property-leasing'),
                 'linkText' => 'View Properties',
             ],
             [
                 'number' => '03',
                 'title' => 'Sales Services',
                 'description' => 'Helping buyers and investors discover quality residential properties in Cambodia.',
-                'link' => url('/contact-us'),
+                'link' => url('/insights'),
                 'linkText' => 'Learn More',
             ],
             [
@@ -114,7 +114,7 @@
                 'title' => 'Hospitality Services',
                 'description' =>
                     'Airport transfers, guest assistance, city tours, housekeeping coordination, and personalized hospitality support.',
-                'link' => url('/contact-us'),
+                'link' => url('/services/hospitality-services'),
                 'linkText' => 'Explore Services',
             ],
         ];

@@ -33,8 +33,9 @@
                     </p>
 
                     <div class="flex items-center px-6 sm:px-10 gap-4 pointer-events-auto">
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-medium px-6 sm:px-8 py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors">
+                        <a href="#application-form-section"
+                            onclick="event.preventDefault(); document.getElementById('application-form-section')?.scrollIntoView({behavior: 'smooth'});"
+                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-medium px-6 sm:px-8 py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors cursor-pointer">
                             Apply As Sale Agent
                         </a>
                     </div>
@@ -365,7 +366,7 @@
     @endonce
 
     {{-- Application Form --}}
-    <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white py-12 sm:py-16 lg:py-20">
+    <section id="application-form-section" class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white py-12 sm:py-16 lg:py-20 scroll-mt-8">
         <div class="max-w-[1000px] mx-auto px-6">
 
             {{-- Heading Centered --}}

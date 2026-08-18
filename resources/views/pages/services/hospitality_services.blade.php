@@ -753,39 +753,39 @@
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-14">
 
                 {{-- Left: Accent line on the left + Content --}}
-                <div class="flex items-start gap-2.5 sm:gap-6 lg:gap-8 max-w-[580px] w-full">
-                    <span class="h-[2px] w-6 min-[390px]:w-10 sm:w-24 lg:w-36 shrink-0 bg-[#c9a15c] mt-3.5"></span>
+                <div class="flex items-start gap-4 sm:gap-6 lg:gap-8 max-w-[580px] w-full" data-scroll-reveal="left">
+                    <span class="h-[2px] w-16 sm:w-28 lg:w-36 shrink-0 bg-[#c9a15c] mt-3.5"></span>
                     <div class="flex flex-col items-start flex-1 min-w-0">
                         <h2 class="text-[#204a74] text-[clamp(22px,2.5vw,30px)] font-bold leading-tight mb-4">
                             Planning Your Stay<br>
                             in Cambodia?
                         </h2>
-                        <p class="text-[#204a74] text-[14px] sm:text-[14.5px] leading-relaxed mb-3">
+                        <p class="text-[#204a74] text-[14px] sm:text-[14.5px] leading-relaxed mb-4">
                             Let CWD Realty &amp; Hospitality help make your arrival and stay more convenient.
                         </p>
                         <p class="text-[#204a74] text-[14px] sm:text-[14.5px] leading-relaxed mb-6">
                             Whether you need airport pick-up, a city tour, or assistance choosing suitable accommodation, contact our team to discuss your requirements.
                         </p>
-                        <div class="grid grid-cols-2 gap-1 min-[390px]:gap-2 sm:gap-6 sm:flex sm:flex-row sm:items-center w-full">
+                        <div class="flex flex-col items-start gap-1.5 w-full">
                             <a href="{{ url('/contact-us') }}"
-                                class="inline-flex items-center justify-between sm:justify-start gap-1.5 text-[#204a74] hover:text-[#c9a463] px-1 min-[390px]:px-2 sm:px-0 py-1.5 sm:py-0 text-[11px] min-[390px]:text-[12px] sm:text-[15px] font-bold transition-all text-left leading-tight">
+                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] sm:text-[14.5px] font-medium transition-all w-max">
                                 <span>Request Hospitality Service</span>
-                                <span aria-hidden="true" class="shrink-0">&rarr;</span>
+                                <span aria-hidden="true">&rarr;</span>
                             </a>
                             <a href="{{ url('/contact-us') }}"
-                                class="inline-flex items-center justify-between sm:justify-start gap-1.5 text-[#204a74] hover:text-[#c9a463] px-1 min-[390px]:px-2 sm:px-0 py-1.5 sm:py-0 text-[11px] min-[390px]:text-[12px] sm:text-[15px] font-bold transition-all text-left leading-tight">
+                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] sm:text-[14.5px] font-medium transition-all w-max">
                                 <span>Contact Us</span>
-                                <span aria-hidden="true" class="shrink-0">&rarr;</span>
+                                <span aria-hidden="true">&rarr;</span>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 {{-- Right: Image --}}
-                <div class="w-full lg:w-auto lg:shrink-0">
+                <div class="w-full lg:w-auto lg:shrink-0" data-scroll-reveal="right">
                     <img src="{{ asset('home/professional_property/professional_property.png') }}"
                         alt="Planning Your Stay in Cambodia"
-                        class="w-full lg:w-[520px] xl:w-[580px] h-auto object-cover shadow-sm">
+                        class="w-full lg:w-[520px] xl:w-[580px] h-auto object-cover">
                 </div>
 
             </div>

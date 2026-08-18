@@ -86,167 +86,303 @@
     </section>
 
     {{-- Choose the Rental Option That Fits Your Stay --}}
-    <section class="relative w-full overflow-hidden z-[300] my-10 sm:my-16">
+    @php
+        $rentalProperties = [
+            [
+                'image' => asset('home/latest_activities/1img.png'),
+                'title' => 'Wealth Mansion',
+                'subtitle' => 'Premium Condominium Residences',
+                'description' => 'Our daily and weekly rental options provide flexibility for guests who need comfortable accommodation without committing to a long-term lease..',
+                'status' => '30% Available',
+                'link' => url('/services/property-leasing/daily-weekly-rentals'),
+            ],
+            [
+                'image' => asset('home/latest_activities/2img.png'),
+                'title' => 'Condo Name 2',
+                'subtitle' => 'Exclusive Residential Development',
+                'description' => 'A private residential project featuring approximately 100 units, including penthouse residences.',
+                'status' => 'Coming Soon',
+                'link' => url('/services/property-leasing/daily-weekly-rentals'),
+            ],
+            [
+                'image' => asset('home/latest_activities/3img.png'),
+                'title' => 'Condo Name 3',
+                'subtitle' => 'Residential Property Project',
+                'description' => 'Explore the UC88 project and available residential opportunities through CWD Realty & Hospitality.',
+                'status' => '30% Available',
+                'link' => url('/services/property-leasing/daily-weekly-rentals'),
+            ],
+            [
+                'image' => asset('home/latest_activities/4img.png'),
+                'title' => 'Condo Name 4',
+                'subtitle' => 'Modern Urban Living',
+                'description' => 'Comfortable, fully serviced apartment residences designed for short-term visits and extended monthly stays.',
+                'status' => '30% Available',
+                'link' => url('/services/property-leasing/daily-weekly-rentals'),
+            ],
+            [
+                'image' => asset('home/latest_activities/5img.png'),
+                'title' => 'Condo Name 5',
+                'subtitle' => 'Luxury Riverside Suites',
+                'description' => 'Spacious units offering panoramic river views, premier amenities, and dedicated hospitality management.',
+                'status' => 'Coming Soon',
+                'link' => url('/services/property-leasing/daily-weekly-rentals'),
+            ],
+        ];
+    @endphp
+
+    <section class="relative w-full overflow-hidden z-[300] my-10 sm:my-16 py-12 lg:py-20">
         {{-- Background Image --}}
         <img src="{{ asset('services/property_sales/find professionally.png') }}" alt="Rental Options Background"
-            class="absolute inset-0 w-full h-full object-cover object-center">
+            class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-black/15 to-transparent pointer-events-none"></div>
 
         {{-- Main Content --}}
-        <div class="relative z-10 w-full max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-12 lg:py-16">
-            <div id="rental-options-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 xl:gap-5 items-stretch">
+        <div class="relative z-10 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr] gap-8 xl:gap-10 items-start">
 
-                {{-- Column 1: Heading --}}
-                <div class="flex flex-col justify-start pt-2 pr-2">
-                    <h2 class="text-white text-[clamp(26px,2.5vw,38px)] font-normal leading-[1.18]">
-                        Choose the Rental<br>
-                        <span class="text-[#F4DEAC] font-bold">Option That</span><br>
-                        <span class="text-[#F4DEAC] font-bold">Fits Your Stay</span>
-                    </h2>
-                </div>
-
-                {{-- Column 2 / Card 1: Daily & Weekly Rentals --}}
-                <div class="rental-option-card bg-white p-5 xl:p-6 flex flex-col justify-between h-full shadow-md">
+                {{-- Left: Heading & Nav Arrows --}}
+                <div class="flex flex-col justify-between pt-2 lg:min-h-[300px]" data-scroll-reveal="left">
                     <div>
-                        <h3 class="text-[#2A5A8A] text-[18px] xl:text-[20px] font-bold mb-2">
-                            Daily &amp; Weekly Rentals
-                        </h3>
-                        <p class="text-black/80 text-[12.5px] xl:text-[13px] leading-relaxed mb-3.5">
-                            Our daily and weekly rental options provide flexibility for guests who need comfortable accommodation without committing to a long-term lease.
-                        </p>
-
-                        <h4 class="text-[#2A5A8A] text-[13px] xl:text-[13.5px] font-bold mb-1">
-                            Rates Starting From
-                        </h4>
-                        <div class="text-[#2A5A8A] text-[13px] font-medium leading-snug mb-1">
-                            <p>$35 / day</p>
-                            <p>$45 / day</p>
-                            <p>Up to $150 / day</p>
-                        </div>
-                        <p class="text-black/60 text-[11.5px] xl:text-[12px] leading-snug mb-3.5">
-                            Rates vary depending on the selected property, room type, and accommodation.
-                        </p>
-
-                        <h4 class="text-black text-[12.5px] xl:text-[13px] font-bold mb-1.5">
-                            Suitable For
-                        </h4>
-                        <ul class="text-black/80 text-[12px] xl:text-[12.5px] leading-relaxed space-y-0.5 list-disc pl-4 mb-4">
-                            <li>Business Travelers</li>
-                            <li>Tourists</li>
-                            <li>Short-Term Visitors</li>
-                            <li>Couples</li>
-                            <li>Expatriates</li>
-                            <li>Guests attending events or meetings in Phnom Penh</li>
-                        </ul>
+                        <h2 class="text-[#F4DEAC] text-[clamp(28px,2.8vw,42px)] font-normal leading-[1.18] mb-6">
+                            Daily &amp; Weekly<br>
+                            <span class="font-bold">Rentals</span>
+                        </h2>
                     </div>
 
-                    <a href="{{ url('/properties') }}"
-                        class="inline-flex items-center gap-1 text-[#2A5A8A] text-[12.5px] xl:text-[13px] font-semibold hover:underline mt-auto pt-2">
-                        View Available Properties <span aria-hidden="true">&rarr;</span>
-                    </a>
+                    {{-- Navigation Arrows --}}
+                    <div class="flex items-center gap-3 pt-2 lg:pt-8">
+                        <button id="rental-options-prev" type="button" aria-label="Previous property"
+                            class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] bg-white/5 sm:bg-transparent flex items-center justify-center cursor-pointer
+                                transition-all duration-300 hover:bg-[#F4DEAC] hover:text-[#163049] hover:scale-105
+                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F4DEAC] focus-visible:ring-offset-2
+                                disabled:cursor-not-allowed">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button id="rental-options-next" type="button" aria-label="Next property"
+                            class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] bg-white/5 sm:bg-transparent flex items-center justify-center cursor-pointer
+                                transition-all duration-300 hover:bg-[#F4DEAC] hover:text-[#163049] hover:scale-105
+                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F4DEAC] focus-visible:ring-offset-2
+                                disabled:cursor-not-allowed">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
-                {{-- Column 3 / Card 2: Monthly Rentals --}}
-                <div class="rental-option-card bg-white p-5 xl:p-6 flex flex-col justify-between h-full shadow-md">
-                    <div>
-                        <h3 class="text-[#2A5A8A] text-[18px] xl:text-[20px] font-bold mb-1">
-                            Monthly Rentals
-                        </h3>
-                        <h4 class="text-black text-[13px] xl:text-[13.5px] font-bold mb-1.5">
-                            Stay Longer, Pay Less Per Day
-                        </h4>
-                        <p class="text-black/80 text-[12.5px] xl:text-[13px] leading-relaxed mb-3.5">
-                            For guests who need accommodation for an extended period, monthly rental options provide a more practical and economical solution.
-                        </p>
+                {{-- Right: Horizontal Card Slider Track --}}
+                <div class="relative min-w-0" data-scroll-reveal="right">
+                    <div id="rental-options-track"
+                        class="pointer-events-auto flex gap-5 overflow-x-auto scroll-smooth items-stretch pb-2
+                            snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
 
-                        <h4 class="text-[#2A5A8A] text-[13px] xl:text-[13.5px] font-bold mb-1">
-                            Monthly Rates
-                        </h4>
-                        <div class="text-[#2A5A8A] text-[13px] font-medium leading-snug mb-1">
-                            <p>$400 / month</p>
-                            <p>$450 / month</p>
-                        </div>
-                        <p class="text-black/60 text-[11.5px] xl:text-[12px] leading-snug mb-3.5">
-                            Monthly rates may vary depending on the property and available accommodation.
-                        </p>
+                        @foreach ($rentalProperties as $property)
+                            <article
+                                class="rental-option-card group shrink-0 snap-start flex flex-col
+                                    w-[82vw] max-w-[320px] sm:w-[300px] lg:w-[310px] xl:w-[320px]
+                                    bg-white rounded-none overflow-hidden cursor-pointer shadow-md
+                                    transition-all duration-300 ease-out hover:-translate-y-1
+                                    focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2"
+                                data-link="{{ $property['link'] }}"
+                                tabindex="0" role="link" aria-label="View details for {{ $property['title'] }}">
 
-                        <h4 class="text-black text-[12.5px] xl:text-[13px] font-bold mb-1.5">
-                            Suitable For
-                        </h4>
-                        <ul class="text-black/80 text-[12px] xl:text-[12.5px] leading-relaxed space-y-0.5 list-disc pl-4 mb-4">
-                            <li>Expatriates</li>
-                            <li>Long-Term Residents</li>
-                            <li>Business Professionals</li>
-                            <li>Students</li>
-                            <li>Corporate Staff</li>
-                            <li>Guests relocating to Cambodia</li>
-                        </ul>
+                                <div class="relative h-[190px] sm:h-[200px] w-full overflow-hidden shrink-0">
+                                    <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
+                                        class="rental-card-img w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105">
+                                </div>
+
+                                <div class="px-6 py-6 flex flex-col grow">
+                                    <h3 class="text-[#2A5A8A] text-[18px] xl:text-[19px] font-bold leading-snug mb-1.5">
+                                        {{ $property['title'] }}
+                                    </h3>
+
+                                    <h4 class="text-black text-[14.5px] xl:text-[15px] font-bold leading-snug mb-2.5">
+                                        {{ $property['subtitle'] }}
+                                    </h4>
+
+                                    <p class="text-black/70 text-[13px] xl:text-[13.5px] leading-relaxed mb-4 line-clamp-3">
+                                        {{ $property['description'] }}
+                                    </p>
+
+                                    <p class="text-[#2A5A8A] text-[14px] font-bold mb-5">
+                                        {{ $property['status'] }}
+                                    </p>
+
+                                    <a href="{{ $property['link'] }}"
+                                        class="rental-card-link relative z-10 mt-auto text-[#2A5A8A] text-[13.5px] xl:text-[14px] font-semibold
+                                            inline-flex items-center gap-1.5 w-max
+                                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2">
+                                        <span class="border-b border-transparent group-hover:border-[#2A5A8A] transition-colors duration-300">View Project</span>
+                                        <span aria-hidden="true" class="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                                    </a>
+                                </div>
+                            </article>
+                        @endforeach
+
                     </div>
 
-                    <a href="{{ url('/contact-us') }}"
-                        class="inline-flex items-center gap-1 text-[#2A5A8A] text-[12.5px] xl:text-[13px] font-semibold hover:underline mt-auto pt-2">
-                        Ask About Monthly Availability <span aria-hidden="true">&rarr;</span>
-                    </a>
-                </div>
-
-                {{-- Column 4 / Card 3: Smoking & Non-Smoking Options --}}
-                <div class="rental-option-card bg-white p-5 xl:p-6 flex flex-col justify-between h-full shadow-md">
-                    <div>
-                        <h3 class="text-[#2A5A8A] text-[18px] xl:text-[20px] font-bold mb-2">
-                            Smoking &amp; Non-Smoking Options
-                        </h3>
-                        <p class="text-black/80 text-[12.5px] xl:text-[13px] leading-relaxed mb-3.5">
-                            We offer different accommodation options based on guest preference and property availability.
-                        </p>
-
-                        <div class="mb-3.5">
-                            <h4 class="text-[#2A5A8A] text-[13px] xl:text-[13.5px] font-bold mb-0.5">
-                                Non-Smoking
-                            </h4>
-                            <p class="text-[#2A5A8A] text-[13px] font-medium mb-1">
-                                From $35 / day
-                            </p>
-                            <p class="text-black/80 text-[12px] xl:text-[12.5px] leading-relaxed">
-                                A suitable choice for guests who prefer a clean, smoke-free accommodation environment.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h4 class="text-[#2A5A8A] text-[13px] xl:text-[13.5px] font-bold mb-0.5">
-                                Smoking
-                            </h4>
-                            <p class="text-[#2A5A8A] text-[13px] font-medium mb-1">
-                                From $45 / day
-                            </p>
-                            <p class="text-black/80 text-[12px] xl:text-[12.5px] leading-relaxed">
-                                Smoking accommodation is available where designated, subject to property availability.
-                            </p>
-                        </div>
-                    </div>
+                    {{-- Scroll-edge blur cues --}}
+                    <div id="rental-options-edge-left" class="rental-options-edge rental-options-edge-left" aria-hidden="true"></div>
+                    <div id="rental-options-edge-right" class="rental-options-edge rental-options-edge-right" aria-hidden="true"></div>
                 </div>
 
             </div>
         </div>
     </section>
 
+    <style>
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .rental-options-edge {
+            position: absolute;
+            top: 0;
+            bottom: 8px;
+            width: 100px;
+            z-index: 40;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .rental-options-edge.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .rental-options-edge-left {
+            left: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, black 0%, transparent 100%);
+            mask-image: linear-gradient(to right, black 0%, transparent 100%);
+        }
+
+        .rental-options-edge-right {
+            right: 0;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to left, black 0%, transparent 100%);
+            mask-image: linear-gradient(to left, black 0%, transparent 100%);
+        }
+
+        @media (max-width: 640px) {
+            .rental-options-edge {
+                width: 50px;
+            }
+        }
+    </style>
+
     @once
         <script>
             (function() {
-                function equalizeRentalCardHeights() {
-                    const cards = document.querySelectorAll('.rental-option-card');
-                    if (!cards.length) return;
-                    cards.forEach(card => card.style.minHeight = '');
-                    let maxH = 0;
-                    cards.forEach(card => {
-                        if (card.offsetHeight > maxH) maxH = card.offsetHeight;
-                    });
-                    cards.forEach(card => card.style.minHeight = maxH + 'px');
+                const track = document.getElementById("rental-options-track");
+                const prevBtn = document.getElementById("rental-options-prev");
+                const nextBtn = document.getElementById("rental-options-next");
+                const edgeLeft = document.getElementById("rental-options-edge-left");
+                const edgeRight = document.getElementById("rental-options-edge-right");
+
+                if (!track) return;
+
+                const GAP = 20; // matches gap-5
+                let scrollTimer = null;
+
+                function getStep() {
+                    const firstCard = track.querySelector(".rental-option-card");
+                    return firstCard ? firstCard.getBoundingClientRect().width + GAP : 320;
                 }
 
-                window.addEventListener('load', equalizeRentalCardHeights);
-                window.addEventListener('resize', equalizeRentalCardHeights);
-                if (document.fonts && document.fonts.ready) {
-                    document.fonts.ready.then(equalizeRentalCardHeights);
+                function scrollByStep(direction) {
+                    track.scrollBy({
+                        left: direction * getStep(),
+                        behavior: "smooth"
+                    });
                 }
+
+                function setButtons(atStart, atEnd) {
+                    if (prevBtn) {
+                        prevBtn.disabled = atStart;
+                        prevBtn.style.opacity = atStart ? "0.35" : "1";
+                        prevBtn.style.pointerEvents = atStart ? "none" : "auto";
+                    }
+                    if (nextBtn) {
+                        nextBtn.disabled = atEnd;
+                        nextBtn.style.opacity = atEnd ? "0.35" : "1";
+                        nextBtn.style.pointerEvents = atEnd ? "none" : "auto";
+                    }
+
+                    const canScroll = track.scrollWidth > track.clientWidth + 1;
+                    if (edgeLeft) edgeLeft.classList.toggle("is-visible", canScroll && !atStart);
+                    if (edgeRight) edgeRight.classList.toggle("is-visible", canScroll && !atEnd);
+                }
+
+                function updateButtons() {
+                    const atStart = track.scrollLeft <= 2;
+                    const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+                    setButtons(atStart, atEnd);
+                }
+
+                if (prevBtn) prevBtn.addEventListener("click", () => scrollByStep(-1));
+                if (nextBtn) nextBtn.addEventListener("click", () => scrollByStep(1));
+
+                track.addEventListener("scroll", () => {
+                    clearTimeout(scrollTimer);
+                    scrollTimer = setTimeout(updateButtons, 80);
+                }, { passive: true });
+
+                window.addEventListener("resize", updateButtons);
+
+                // Whole card navigation
+                const cards = track.querySelectorAll(".rental-option-card");
+                cards.forEach(card => {
+                    const link = card.dataset.link;
+                    if (!link) return;
+
+                    card.addEventListener("click", (e) => {
+                        if (e.target.closest("a") || e.target.closest("button")) return;
+                        window.location.href = link;
+                    });
+
+                    card.addEventListener("keydown", (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            if (e.target.closest("a") || e.target.closest("button")) return;
+                            e.preventDefault();
+                            window.location.href = link;
+                        }
+                    });
+                });
+
+                // Equalize card heights
+                function equalizeCardHeights() {
+                    if (!cards.length) return;
+                    cards.forEach(c => c.style.height = "auto");
+                    let maxH = 0;
+                    cards.forEach(c => {
+                        const h = c.getBoundingClientRect().height;
+                        if (h > maxH) maxH = h;
+                    });
+                    if (maxH > 0) {
+                        cards.forEach(c => c.style.height = maxH + "px");
+                    }
+                    updateButtons();
+                }
+
+                window.addEventListener("load", equalizeCardHeights);
+                window.addEventListener("resize", equalizeCardHeights);
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(equalizeCardHeights);
+                }
+                equalizeCardHeights();
             })();
         </script>
     @endonce
@@ -617,539 +753,4 @@
         </div>
     </section>
 
-    {{-- Under Daily & Weekly Rentals --}}
-    @php
-        $allPartImg = asset('services/propertis_leasing/all part.png');
-        $bedroomImg = asset('services/propertis_leasing/bedroom.png');
-
-        $allPartImages = [$allPartImg, $bedroomImg];
-        $bedroomImages = [$bedroomImg, $allPartImg];
-    @endphp
-
-    <section class="relative w-full bg-white py-14 lg:py-20 overflow-hidden">
-        <div class="w-full pl-6 sm:pl-10 lg:pl-12 xl:pl-16 pr-0">
-            
-            {{-- Section Heading --}}
-            <div class="mb-8 lg:mb-10 max-w-[1650px]">
-                <h2 class="text-[#2A5A8A] text-[clamp(28px,3.5vw,42px)] leading-[1.15]">
-                    <span class="font-normal block">Under Daily &amp; Weekly</span>
-                    <span class="font-bold block">Rentals</span>
-                </h2>
-            </div>
-
-            {{-- Content Row: Left Navigation Buttons + Right Scrolling Track with Blur/Fade --}}
-            <div class="flex flex-col lg:flex-row items-start gap-6 lg:gap-8 xl:gap-10">
-
-                {{-- Left circular navigation arrows aligned with top of images --}}
-                <div class="flex items-center gap-3 shrink-0 pt-0 lg:pt-1">
-                    <button id="rentals-prev-btn" type="button" aria-label="Previous card"
-                        class="w-11 h-11 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-[#2A5A8A] hover:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button id="rentals-next-btn" type="button" aria-label="Next card"
-                        class="w-11 h-11 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-[#2A5A8A] hover:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-
-                {{-- Right Column: Scrolling Card Track with clean white edge blur --}}
-                <div class="relative flex-1 min-w-0 w-full overflow-hidden">
-                    <div id="rentals-track"
-                        class="flex gap-6 lg:gap-7 overflow-x-auto scroll-smooth pb-4 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pr-12 sm:pr-20 lg:pr-28">
-
-                        {{-- Card 1: Wealth Mansion Rentals --}}
-                        <article class="cwd-rental-card shrink-0 snap-start w-[300px] sm:w-[340px] lg:w-[360px] xl:w-[380px] flex flex-col bg-[#F3F3F1] overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-sm"
-                            data-images="{{ json_encode($allPartImages) }}">
-                            
-                            {{-- Card Image with dots --}}
-                            <div class="relative w-full aspect-[16/10] overflow-hidden shrink-0">
-                                <img src="{{ $allPartImg }}" alt="Wealth Mansion Rentals"
-                                    class="cwd-rental-card-img w-full h-full object-cover transition-all duration-500">
-                                
-                                <div class="cwd-rental-card-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5" aria-hidden="true">
-                                    @foreach ($allPartImages as $i => $img)
-                                        <span class="cwd-rental-card-dot rounded-full transition-all duration-300 h-2 w-2"
-                                            style="background:{{ $i === 0 ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            {{-- Card Body --}}
-                            <div class="p-5 sm:p-6 flex flex-col grow justify-between">
-                                <div>
-                                    {{-- Title & Mini Arrows --}}
-                                    <div class="flex items-center justify-between gap-3 mb-4">
-                                        <h3 class="text-[#2A5A8A] text-[16px] sm:text-[17px] font-bold">
-                                            Wealth Mansion Rentals
-                                        </h3>
-                                        <div class="flex items-center gap-1.5 shrink-0">
-                                            <button type="button" aria-label="Previous image"
-                                                class="cwd-rental-prev w-7 h-7 rounded-full bg-white border border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all hover:bg-[#2A5A8A] hover:text-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                                                </svg>
-                                            </button>
-                                            <button type="button" aria-label="Next image"
-                                                class="cwd-rental-next w-7 h-7 rounded-full bg-white border border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all hover:bg-[#2A5A8A] hover:text-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <h4 class="text-black text-[13.5px] sm:text-[14px] font-bold leading-snug mb-3">
-                                        Flexible Condominium Rentals at Wealth Mansion
-                                    </h4>
-
-                                    <p class="text-black/75 text-[12.5px] sm:text-[13px] leading-relaxed mb-3">
-                                        CWD Realty &amp; Hospitality offers professionally managed rental units at Wealth Mansion, with a range of layouts to suit short stays, business trips, family accommodation, and longer-term living.
-                                    </p>
-
-                                    <p class="text-black/75 text-[12.5px] sm:text-[13px] leading-relaxed mb-4">
-                                        Whether you are looking for a compact studio or a spacious three-bedroom residence, guests can choose from different unit types based on their space requirements and length of stay.
-                                    </p>
-
-                                    <h5 class="text-black text-[13px] sm:text-[13.5px] font-bold mb-2">
-                                        Available Rental Units
-                                    </h5>
-
-                                    <h6 class="text-[#2A5A8A] text-[13px] sm:text-[13.5px] font-bold mb-1.5">
-                                        Studio
-                                    </h6>
-
-                                    <p class="text-black/75 text-[12.5px] sm:text-[13px] leading-relaxed mb-2">
-                                        A practical choice for individuals and short-term stays.
-                                    </p>
-
-                                    <p class="text-black text-[12.5px] sm:text-[13px] font-bold mb-1">Ideal for:</p>
-                                    <ul class="text-black/80 text-[12px] sm:text-[12.5px] leading-relaxed space-y-0.5 list-disc pl-4 mb-4">
-                                        <li>Business travelers</li>
-                                        <li>Solo travelers</li>
-                                        <li>Couples</li>
-                                        <li>Short-term residents</li>
-                                    </ul>
-                                </div>
-
-                                <a href="{{ url('/properties') }}"
-                                    class="inline-flex items-center gap-1.5 text-[#2A5A8A] text-[13px] sm:text-[13.5px] font-semibold hover:underline mt-auto pt-4">
-                                    <span>View Available Studio Units</span>
-                                    <span aria-hidden="true">&rarr;</span>
-                                </a>
-                            </div>
-                        </article>
-
-                        {{-- Card 2: 1-bedroom --}}
-                        <article class="cwd-rental-card shrink-0 snap-start w-[300px] sm:w-[340px] lg:w-[360px] xl:w-[380px] flex flex-col bg-[#F3F3F1] overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-sm"
-                            data-images="{{ json_encode($bedroomImages) }}">
-                            
-                            {{-- Card Image with dots --}}
-                            <div class="relative w-full aspect-[16/10] overflow-hidden shrink-0">
-                                <img src="{{ $bedroomImg }}" alt="1-bedroom"
-                                    class="cwd-rental-card-img w-full h-full object-cover transition-all duration-500">
-                                
-                                <div class="cwd-rental-card-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5" aria-hidden="true">
-                                    @foreach ($bedroomImages as $i => $img)
-                                        <span class="cwd-rental-card-dot rounded-full transition-all duration-300 h-2 w-2"
-                                            style="background:{{ $i === 0 ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            {{-- Card Body --}}
-                            <div class="p-5 sm:p-6 flex flex-col grow justify-between">
-                                <div>
-                                    {{-- Title & Mini Arrows --}}
-                                    <div class="flex items-center justify-between gap-3 mb-4">
-                                        <h3 class="text-[#2A5A8A] text-[16px] sm:text-[17px] font-bold">
-                                            1-bedroom
-                                        </h3>
-                                        <div class="flex items-center gap-1.5 shrink-0">
-                                            <button type="button" aria-label="Previous image"
-                                                class="cwd-rental-prev w-7 h-7 rounded-full bg-white border border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all hover:bg-[#2A5A8A] hover:text-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                                                </svg>
-                                            </button>
-                                            <button type="button" aria-label="Next image"
-                                                class="cwd-rental-next w-7 h-7 rounded-full bg-white border border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all hover:bg-[#2A5A8A] hover:text-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <h4 class="text-black text-[13.5px] sm:text-[14px] font-bold leading-snug mb-3">
-                                        Comfortable private living for individuals and couples.
-                                    </h4>
-
-                                    <p class="text-black text-[12.5px] sm:text-[13px] font-bold mb-1">Ideal for:</p>
-                                    <ul class="text-black/80 text-[12px] sm:text-[12.5px] leading-relaxed space-y-0.5 list-disc pl-4 mb-4">
-                                        <li>Business professionals</li>
-                                        <li>Couples</li>
-                                        <li>Expatriates</li>
-                                        <li>Longer stays</li>
-                                    </ul>
-                                </div>
-
-                                <a href="{{ url('/properties') }}"
-                                    class="inline-flex items-center gap-1.5 text-[#2A5A8A] text-[13px] sm:text-[13.5px] font-semibold hover:underline mt-auto pt-4">
-                                    <span>View Available Studio Units</span>
-                                    <span aria-hidden="true">&rarr;</span>
-                                </a>
-                            </div>
-                        </article>
-
-                        {{-- Card 3: 2-Bedroom with Balcony --}}
-                        <article class="cwd-rental-card shrink-0 snap-start w-[300px] sm:w-[340px] lg:w-[360px] xl:w-[380px] flex flex-col bg-[#F3F3F1] overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-sm"
-                            data-images="{{ json_encode($bedroomImages) }}">
-                            
-                            {{-- Card Image with dots --}}
-                            <div class="relative w-full aspect-[16/10] overflow-hidden shrink-0">
-                                <img src="{{ $bedroomImg }}" alt="2-Bedroom with Balcony"
-                                    class="cwd-rental-card-img w-full h-full object-cover transition-all duration-500">
-                                
-                                <div class="cwd-rental-card-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5" aria-hidden="true">
-                                    @foreach ($bedroomImages as $i => $img)
-                                        <span class="cwd-rental-card-dot rounded-full transition-all duration-300 h-2 w-2"
-                                            style="background:{{ $i === 0 ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            {{-- Card Body --}}
-                            <div class="p-5 sm:p-6 flex flex-col grow justify-between">
-                                <div>
-                                    {{-- Title & Mini Arrows --}}
-                                    <div class="flex items-center justify-between gap-3 mb-4">
-                                        <h3 class="text-[#2A5A8A] text-[16px] sm:text-[17px] font-bold">
-                                            2-Bedroom with Balcony
-                                        </h3>
-                                        <div class="flex items-center gap-1.5 shrink-0">
-                                            <button type="button" aria-label="Previous image"
-                                                class="cwd-rental-prev w-7 h-7 rounded-full bg-white border border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all hover:bg-[#2A5A8A] hover:text-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                                                </svg>
-                                            </button>
-                                            <button type="button" aria-label="Next image"
-                                                class="cwd-rental-next w-7 h-7 rounded-full bg-white border border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all hover:bg-[#2A5A8A] hover:text-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <h4 class="text-black text-[13.5px] sm:text-[14px] font-bold leading-snug mb-3">
-                                        More space for families, colleagues, or guests requiring an additional bedroom.
-                                    </h4>
-
-                                    <p class="text-black text-[12.5px] sm:text-[13px] font-bold mb-1">Ideal for:</p>
-                                    <ul class="text-black/80 text-[12px] sm:text-[12.5px] leading-relaxed space-y-0.5 list-disc pl-4 mb-4">
-                                        <li>Small families</li>
-                                        <li>Business colleagues</li>
-                                        <li>Long-term residents</li>
-                                        <li>Guests seeking additional living space</li>
-                                    </ul>
-                                </div>
-
-                                <a href="{{ url('/properties') }}"
-                                    class="inline-flex items-center gap-1.5 text-[#2A5A8A] text-[13px] sm:text-[13.5px] font-semibold hover:underline mt-auto pt-4">
-                                    <span>View Available Studio Units</span>
-                                    <span aria-hidden="true">&rarr;</span>
-                                </a>
-                            </div>
-                        </article>
-
-                        {{-- Card 4: 3-Bedroom --}}
-                        <article class="cwd-rental-card shrink-0 snap-start w-[300px] sm:w-[340px] lg:w-[360px] xl:w-[380px] flex flex-col bg-[#F3F3F1] overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-sm"
-                            data-images="{{ json_encode($bedroomImages) }}">
-                            
-                            {{-- Card Image with dots --}}
-                            <div class="relative w-full aspect-[16/10] overflow-hidden shrink-0">
-                                <img src="{{ $bedroomImg }}" alt="3-Bedroom"
-                                    class="cwd-rental-card-img w-full h-full object-cover transition-all duration-500">
-                                
-                                <div class="cwd-rental-card-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5" aria-hidden="true">
-                                    @foreach ($bedroomImages as $i => $img)
-                                        <span class="cwd-rental-card-dot rounded-full transition-all duration-300 h-2 w-2"
-                                            style="background:{{ $i === 0 ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            {{-- Card Body --}}
-                            <div class="p-5 sm:p-6 flex flex-col grow justify-between">
-                                <div>
-                                    {{-- Title & Mini Arrows --}}
-                                    <div class="flex items-center justify-between gap-3 mb-4">
-                                        <h3 class="text-[#2A5A8A] text-[16px] sm:text-[17px] font-bold">
-                                            3-Bedroom
-                                        </h3>
-                                        <div class="flex items-center gap-1.5 shrink-0">
-                                            <button type="button" aria-label="Previous image"
-                                                class="cwd-rental-prev w-7 h-7 rounded-full bg-white border border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all hover:bg-[#2A5A8A] hover:text-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                                                </svg>
-                                            </button>
-                                            <button type="button" aria-label="Next image"
-                                                class="cwd-rental-next w-7 h-7 rounded-full bg-white border border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all hover:bg-[#2A5A8A] hover:text-white">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <h4 class="text-black text-[13.5px] sm:text-[14px] font-bold leading-snug mb-3">
-                                        Spacious accommodation for families and longer stays.
-                                    </h4>
-
-                                    <p class="text-black text-[12.5px] sm:text-[13px] font-bold mb-1">Ideal for:</p>
-                                    <ul class="text-black/80 text-[12px] sm:text-[12.5px] leading-relaxed space-y-0.5 list-disc pl-4 mb-4">
-                                        <li>Families</li>
-                                        <li>Larger groups</li>
-                                        <li>Long-term residents</li>
-                                        <li>Guests who require multiple bedrooms</li>
-                                    </ul>
-                                </div>
-
-                                <a href="{{ url('/properties') }}"
-                                    class="inline-flex items-center gap-1.5 text-[#2A5A8A] text-[13px] sm:text-[13.5px] font-semibold hover:underline mt-auto pt-4">
-                                    <span>View Available Studio Units</span>
-                                    <span aria-hidden="true">&rarr;</span>
-                                </a>
-                            </div>
-                        </article>
-
-                    </div>
-
-                    {{-- Left & Right soft white blur edge indicators --}}
-                    <div id="rentals-edge-left" class="cwd-rentals-edge cwd-rentals-edge-left" aria-hidden="true"></div>
-                    <div id="rentals-edge-right" class="cwd-rentals-edge cwd-rentals-edge-right is-visible" aria-hidden="true"></div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <style>
-        .cwd-rentals-edge {
-            position: absolute;
-            top: 0;
-            bottom: 16px;
-            width: 100px;
-            z-index: 25;
-            pointer-events: none;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        .cwd-rentals-edge.is-visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .cwd-rentals-edge-left {
-            left: 0;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.6) 40%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to right, black 0%, black 40%, transparent 100%);
-            mask-image: linear-gradient(to right, black 0%, black 40%, transparent 100%);
-        }
-
-        .cwd-rentals-edge-right {
-            right: 0;
-            background: linear-gradient(to left, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.6) 40%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to left, black 0%, black 40%, transparent 100%);
-            mask-image: linear-gradient(to left, black 0%, black 40%, transparent 100%);
-        }
-    </style>
-
-    {{-- Rental Options --}}
-    <section class="relative w-full bg-white mt-12 sm:mt-16 md:mt-20 py-14 sm:py-20 md:py-28 overflow-hidden">
-        {{-- Background image --}}
-        <div class="absolute inset-0 z-0 pointer-events-none">
-            <img src="{{ asset('services/propertis_leasing/bg_rental_option.png') }}" 
-                 alt="Wealth Mansion Rental Options" 
-                 class="w-full h-full object-cover object-center">
-        </div>
-
-        {{-- Left side warm gradient overlay matching screenshot --}}
-        <div class="absolute inset-y-0 left-0 w-full sm:w-[60%] lg:w-[48%] bg-gradient-to-r from-[#e8cf99]/85 via-[#ecdaa8]/65 to-transparent pointer-events-none z-[1]"></div>
-
-        <div class="relative z-10 max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14">
-            <div class="grid grid-cols-1 xl:grid-cols-[340px_1fr] 2xl:grid-cols-[380px_1fr] gap-8 xl:gap-14 items-center">
-                {{-- LEFT: heading and subtitle --}}
-                <div class="max-w-[420px] xl:max-w-[360px]">
-                    <h2 class="text-[#204a74] text-[clamp(30px,3.8vw,46px)] font-bold leading-[1.15] mb-4">
-                        Rental Options
-                    </h2>
-                    <p class="text-[#000000] text-[14px] sm:text-[15px] leading-relaxed">
-                        Wealth Mansion units are available for different rental periods, depending on unit availability.
-                    </p>
-                </div>
-
-                {{-- RIGHT: 3 Rental Option Cards (drops to 1 column below xl) --}}
-                <div class="grid grid-cols-1 xl:grid-cols-3 gap-5 items-stretch">
-                    
-                    {{-- Card 1: Daily Rental --}}
-                    <div class="bg-[#2A5A8A] p-6 sm:p-7 flex flex-col justify-start text-white shadow-xl">
-                        <h3 class="text-[#DCC597] text-[18px] sm:text-[19px] font-bold mb-3">
-                            Daily Rental
-                        </h3>
-                        <p class="text-white text-[14px] sm:text-[15px] font-medium mb-3">
-                            From $35/day
-                        </p>
-                        <p class="text-white/90 text-[13px] sm:text-[13.5px] leading-relaxed">
-                            Suitable for short-term stays, business trips, and visitors to Phnom Penh.
-                        </p>
-                    </div>
-
-                    {{-- Card 2: Monthly Rentals --}}
-                    <div class="bg-[#2A5A8A] p-6 sm:p-7 flex flex-col justify-start text-white shadow-xl">
-                        <h3 class="text-[#DCC597] text-[18px] sm:text-[19px] font-bold mb-3">
-                            Monthly Rentals
-                        </h3>
-                        <p class="text-white/90 text-[13px] sm:text-[13.5px] leading-relaxed">
-                            Flexible accommodation for guests staying several days or weeks.
-                        </p>
-                    </div>
-
-                    {{-- Card 3: Monthly Rental --}}
-                    <div class="bg-[#2A5A8A] p-6 sm:p-7 flex flex-col justify-start text-white shadow-xl">
-                        <h3 class="text-[#DCC597] text-[18px] sm:text-[19px] font-bold mb-3">
-                            Monthly Rental
-                        </h3>
-                        <p class="text-white text-[14px] sm:text-[15px] font-medium mb-3">
-                            Approximately $400–$450/month
-                        </p>
-                        <p class="text-white/90 text-[13px] sm:text-[13.5px] leading-relaxed mb-4">
-                            A more economical option for expatriates, professionals, and long-term residents.
-                        </p>
-                        <p class="text-white/80 text-[12px] sm:text-[12.5px] leading-relaxed">
-                            Rental rates vary according to unit type, smoking preference, rental period, and availability. Contact CWD for the latest rate and available units.
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    @once
-        <script>
-            (function() {
-                // Per-card mini image carousel
-                function initRentalCardCarousel(card) {
-                    const imgEl = card.querySelector(".cwd-rental-card-img");
-                    const prevBtn = card.querySelector(".cwd-rental-prev");
-                    const nextBtn = card.querySelector(".cwd-rental-next");
-                    const dots = Array.from(card.querySelectorAll(".cwd-rental-card-dot"));
-                    if (!imgEl || !prevBtn || !nextBtn) return;
-
-                    let images = [];
-                    try {
-                        images = JSON.parse(card.dataset.images || "[]");
-                    } catch (err) {
-                        images = [];
-                    }
-                    if (images.length < 2) return;
-
-                    let index = Math.max(0, images.indexOf(imgEl.getAttribute("src")));
-
-                    function updateDots() {
-                        dots.forEach((dot, i) => {
-                            dot.style.background = (i === index) ? "#fff" : "rgba(255,255,255,0.55)";
-                        });
-                    }
-
-                    function showImage(newIndex) {
-                        index = (newIndex + images.length) % images.length;
-                        imgEl.style.opacity = "0";
-                        setTimeout(() => {
-                            imgEl.setAttribute("src", images[index]);
-                            imgEl.style.opacity = "1";
-                        }, 250);
-                        updateDots();
-                    }
-
-                    prevBtn.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        showImage(index - 1);
-                    });
-
-                    nextBtn.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        showImage(index + 1);
-                    });
-                }
-
-                document.querySelectorAll(".cwd-rental-card").forEach(card => {
-                    initRentalCardCarousel(card);
-                });
-
-                // Track scroll by step + dynamic white edge blur & button state
-                const track = document.getElementById("rentals-track");
-                const prevBtn = document.getElementById("rentals-prev-btn");
-                const nextBtn = document.getElementById("rentals-next-btn");
-                const edgeLeft = document.getElementById("rentals-edge-left");
-                const edgeRight = document.getElementById("rentals-edge-right");
-                if (!track) return;
-
-                const cards = Array.from(track.querySelectorAll(".cwd-rental-card"));
-                if (!cards.length) return;
-
-                function step() {
-                    const firstCard = cards[0];
-                    const gap = 24; // gap-6
-                    return (firstCard ? firstCard.getBoundingClientRect().width : 360) + gap;
-                }
-
-                function updateEdgesAndButtons() {
-                    const atStart = track.scrollLeft <= 5;
-                    const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 10;
-
-                    if (prevBtn) {
-                        prevBtn.style.opacity = atStart ? "0.3" : "1";
-                        prevBtn.style.pointerEvents = atStart ? "none" : "auto";
-                    }
-                    if (nextBtn) {
-                        nextBtn.style.opacity = atEnd ? "0.3" : "1";
-                        nextBtn.style.pointerEvents = atEnd ? "none" : "auto";
-                    }
-                    if (edgeLeft) {
-                        edgeLeft.classList.toggle("is-visible", !atStart);
-                    }
-                    if (edgeRight) {
-                        edgeRight.classList.toggle("is-visible", !atEnd);
-                    }
-                }
-
-                if (prevBtn && nextBtn) {
-                    prevBtn.addEventListener("click", () => {
-                        track.scrollBy({ left: -step(), behavior: "smooth" });
-                    });
-                    nextBtn.addEventListener("click", () => {
-                        track.scrollBy({ left: step(), behavior: "smooth" });
-                    });
-                }
-
-                track.addEventListener("scroll", updateEdgesAndButtons, { passive: true });
-                window.addEventListener("resize", updateEdgesAndButtons);
-                updateEdgesAndButtons();
-            })();
-        </script>
-    @endonce
 @endsection

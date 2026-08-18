@@ -27,8 +27,9 @@
                     </h1>
 
                     <div class="flex items-center px-6 sm:px-10 gap-4 pointer-events-auto">
-                        <a href="{{ url('/properties') }}"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-medium px-4 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors">
+                        <a href="#featured-properties-section"
+                            onclick="event.preventDefault(); document.getElementById('featured-properties-section')?.scrollIntoView({behavior: 'smooth'});"
+                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-medium px-4 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors cursor-pointer">
                             Browse Properties
                         </a>
                         <a href="{{ url('/contact-us') }}"
@@ -85,7 +86,7 @@
         ];
     @endphp
 
-    <section class="relative w-full bg-[#2A5A8A] z-[300] mt-0 pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-20">
+    <section id="featured-properties-section" class="relative w-full bg-[#2A5A8A] z-[300] mt-0 pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-20 scroll-mt-6">
         {{-- Background Image Offset Down --}}
         <div class="absolute inset-x-0 bottom-0 top-[200px] sm:top-[240px] lg:top-[280px] z-0 overflow-hidden">
             <img src="{{ asset('home/feature_properties/feature_properties.png') }}"
@@ -113,7 +114,8 @@
                         @endphp
                         <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ $index * 100 }}" class="h-full flex flex-col">
                             <div class="featured-prop-card group bg-white flex flex-col justify-between shadow-xl hover:shadow-2xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 h-full cursor-pointer"
-                                data-images="{{ json_encode($detailImages) }}">
+                                data-images="{{ json_encode($detailImages) }}"
+                                onclick="window.location='{{ $project['link'] }}'">
 
                                 {{-- Card Image with Dots --}}
                                 <div class="relative w-full h-[220px] sm:h-[240px] overflow-hidden shrink-0 bg-gray-100">
@@ -136,7 +138,7 @@
                                             <h3 class="text-[#2A5A8A] text-[17px] sm:text-[18px] font-bold transition-colors duration-200 group-hover:text-[#1479B9]">
                                                 {{ $project['title'] }}
                                             </h3>
-                                            <div class="flex items-center gap-1.5 shrink-0">
+                                            <div class="flex items-center gap-1.5 shrink-0" onclick="event.stopPropagation();">
                                                 <button type="button" aria-label="Previous image"
                                                     class="card-prev-btn w-8 h-8 rounded-full border border-[#204a74] text-[#204a74] flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 hover:bg-[#204a74] hover:text-white active:scale-95">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
@@ -225,11 +227,13 @@
 
                         prevBtn.addEventListener('click', function(e) {
                             e.preventDefault();
+                            e.stopPropagation();
                             changeImage(currentIndex - 1);
                         });
 
                         nextBtn.addEventListener('click', function(e) {
                             e.preventDefault();
+                            e.stopPropagation();
                             changeImage(currentIndex + 1);
                         });
                     });

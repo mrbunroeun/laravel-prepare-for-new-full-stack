@@ -62,15 +62,37 @@ Route::get('/services/hospitality-services', function () {
     return view('pages.services.hospitality_services');
 });
 
-Route::get('services/properties/wealth-mansion', function () {
+Route::get('/services/properties/wealth-mansion', function () {
     return view('components.detail_service_featured_project.wealth_mansion');
 });
-// not yet
+Route::get('/properties/wealth-mansion', function () {
+    return view('components.detail_service_featured_project.wealth_mansion');
+});
 
-Route::get('services/properties/uc88', function () {
+Route::get('/services/properties/uc88', function () {
+    return view('components.detail_service_featured_project.uc88');
+});
+Route::get('/properties/uc88', function () {
+    return view('components.detail_service_featured_project.uc88');
+});
+Route::get('/properties/uc88-residence', function () {
     return view('components.detail_service_featured_project.uc88');
 });
 
-Route::get('services/properties/private-residential', function () {
+Route::get('/services/properties/private-residential', function () {
     return view('components.detail_service_featured_project.private_residential');
 });
+Route::get('/properties/private-residential', function () {
+    return view('components.detail_service_featured_project.private_residential');
+});
+Route::get('/properties/private-residential-collection', function () {
+    return view('components.detail_service_featured_project.private_residential');
+});
+
+Route::get('/services/property-leasing/daily-weekly-rentals', function () {
+    return view('pages.services.properties_leasing_list.daily_&_weekly_rentals');
+});
+Route::get('/services/properties-leasing-list/daily-weekly-rentals', function () {
+    return view('pages.services.properties_leasing_list.daily_&_weekly_rentals');
+});
+

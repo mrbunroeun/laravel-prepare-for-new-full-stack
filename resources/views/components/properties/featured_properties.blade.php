@@ -3,7 +3,7 @@
             $properties = [
                 [
                     'image' => asset('home/latest_activities/1img.png'),
-                    'title' => 'Wealth Mansion Ohio Oajldflkd',
+                    'title' => 'Wealth Mansion',
                     'description' =>
                         'Premium condominium development offering modern residential units with excellent city access.',
                     'link' => url('/properties/wealth-mansion'),
@@ -82,27 +82,27 @@
                         class="cwd-featured-fade pointer-events-auto flex gap-5 overflow-x-auto scroll-smooth pl-4 sm:pl-10 lg:pl-[20rem] pr-4 sm:pr-6 lg:pr-[320px] scroll-pl-4 sm:scroll-pl-10 lg:scroll-pl-[20rem] pb-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
 
                         @foreach ($properties as $property)
-                            <article
-                                class="cwd-featured-card shrink-0 snap-start w-[260px] sm:w-[280px] bg-white shadow-sm cursor-pointer">
+                            <a href="{{ $property['link'] }}"
+                                class="cwd-featured-card block shrink-0 snap-start w-[260px] sm:w-[280px] bg-white shadow-sm cursor-pointer group transition-transform duration-300 hover:shadow-md">
 
-                                <div class="h-[170px] w-full overflow-hidden">
+                                <div class="h-[170px] w-full overflow-hidden bg-gray-100">
                                     <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
-                                        class="w-full h-full object-cover">
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                                 </div>
 
                                 <div class="px-5 py-5">
-                                    <h3 class="text-black text-[15px] font-bold mb-2 leading-snug">
+                                    <h3 class="text-black text-[15px] font-bold mb-2 leading-snug group-hover:text-[#2A5A8A] transition-colors">
                                         {{ $property['title'] }}
                                     </h3>
                                     <p class="text-black/70 text-[12.5px] leading-relaxed mb-4">
                                         {{ $property['description'] }}
                                     </p>
-                                    <a href="{{ $property['link'] }}"
-                                        class="text-[#2A5A8A] text-[12px] font-semibold inline-flex items-center gap-1 hover:underline">
-                                        View Property <span aria-hidden="true">→</span>
-                                    </a>
+                                    <span
+                                        class="text-[#2A5A8A] text-[12px] font-semibold inline-flex items-center gap-1 group-hover:underline">
+                                        View Property <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+                                    </span>
                                 </div>
-                            </article>
+                            </a>
                         @endforeach
 
                     </div>
