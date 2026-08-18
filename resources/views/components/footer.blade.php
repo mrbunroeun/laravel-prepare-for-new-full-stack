@@ -1,5 +1,5 @@
 {{-- Footer --}}
-<footer class="bg-[#2A5A8A] mt-[10rem]">
+<footer class="bg-[#2A5A8A] mt-10 sm:mt-20 lg:mt-[10rem]">
     <div class="max-w-[1400px] mx-auto px-6 sm:px-10 py-14 sm:py-16">
         <div class="grid grid-cols-1 min-[900px]:grid-cols-[1.6fr_0.7fr_0.9fr] gap-10 min-[900px]:gap-16 xl:gap-24">
 

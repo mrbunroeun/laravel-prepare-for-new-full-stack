@@ -748,7 +748,7 @@
     </section>
 
     {{-- Planning Your Stay in Cambodia? --}}
-    <section class="mt-16 sm:mt-24 md:mt-32 pb-24">
+    <section class="mt-8 sm:mt-16 md:mt-24 pb-12 sm:pb-24">
         <div class="max-w-[1450px] mx-auto px-6 sm:px-10 lg:px-14">
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-14">
 

@@ -150,24 +150,24 @@
             </svg>
         </button>
 
-        {{-- Previous Button --}}
+        {{-- Previous Button (Desktop / Tablet floating on side, Mobile positioned cleanly) --}}
         <button id="studio-lightbox-prev" type="button" aria-label="Previous image"
-            class="absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#2A5A8A] text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 border border-white/20 shadow-xl disabled:cursor-not-allowed">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            class="absolute left-1.5 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-50 w-9 h-9 sm:w-11 sm:h-11 lg:w-13 lg:h-13 rounded-full bg-black/70 hover:bg-[#2A5A8A] text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 border border-white/20 shadow-xl disabled:cursor-not-allowed">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
         </button>
 
-        {{-- Next Button --}}
+        {{-- Next Button (Desktop / Tablet floating on side, Mobile positioned cleanly) --}}
         <button id="studio-lightbox-next" type="button" aria-label="Next image"
-            class="absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#2A5A8A] text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 border border-white/20 shadow-xl disabled:cursor-not-allowed">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            class="absolute right-1.5 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-50 w-9 h-9 sm:w-11 sm:h-11 lg:w-13 lg:h-13 rounded-full bg-black/70 hover:bg-[#2A5A8A] text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 border border-white/20 shadow-xl disabled:cursor-not-allowed">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
             </svg>
         </button>
 
         {{-- Gallery Stage (Left Preview + Center Focused Image + Right Preview) --}}
-        <div class="relative flex items-center justify-center gap-3 sm:gap-6 lg:gap-8 w-full max-w-[96vw] max-h-[85vh] select-none" id="studio-lightbox-content">
+        <div class="relative flex items-center justify-center gap-3 sm:gap-6 lg:gap-8 w-full max-w-[96vw] max-h-[85vh] px-9 sm:px-14 md:px-0 select-none" id="studio-lightbox-content">
             
             {{-- Left Preview Image (Smaller + Light Opacity) --}}
             <div id="studio-lightbox-prev-card"
@@ -177,9 +177,9 @@
             </div>
 
             {{-- Main Focused Center Image Container --}}
-            <div class="relative flex flex-col items-center justify-center shrink-0 max-w-[88vw] md:max-w-[62vw] lg:max-w-[58vw] max-h-[82vh] z-20 overflow-hidden">
+            <div class="relative flex flex-col items-center justify-center shrink-0 w-full max-w-full md:max-w-[62vw] lg:max-w-[58vw] max-h-[82vh] z-20">
                 <img id="studio-lightbox-img" src="" alt="Wealth Mansion Studio Full View"
-                    class="max-w-full max-h-[72vh] sm:max-h-[75vh] w-auto h-auto object-contain rounded shadow-2xl transition-all duration-350 ease-out transform scale-100 opacity-100 will-change-transform">
+                    class="max-w-full max-h-[65vh] sm:max-h-[72vh] lg:max-h-[75vh] w-auto h-auto object-contain rounded shadow-2xl transition-all duration-350 ease-out transform scale-100 opacity-100 will-change-transform">
                 
                 {{-- Caption / Counter --}}
                 <div class="mt-4 flex items-center justify-between w-full px-2 text-white/90 text-sm font-medium">
@@ -390,7 +390,7 @@
                         }
                         if (lightboxPrev) {
                             lightboxPrev.disabled = !hasPrev;
-                            lightboxPrev.style.opacity = hasPrev ? "1" : "0.2";
+                            lightboxPrev.style.opacity = hasPrev ? "1" : "0";
                             lightboxPrev.style.pointerEvents = hasPrev ? "auto" : "none";
                         }
 
@@ -408,7 +408,7 @@
                         }
                         if (lightboxNext) {
                             lightboxNext.disabled = !hasNext;
-                            lightboxNext.style.opacity = hasNext ? "1" : "0.2";
+                            lightboxNext.style.opacity = hasNext ? "1" : "0";
                             lightboxNext.style.pointerEvents = hasNext ? "auto" : "none";
                         }
 
@@ -528,7 +528,7 @@
     </section>
 
     {{-- Looking for Flexible Accommodation in Cambodia? --}}
-    <section class="mt-16 sm:mt-24 md:mt-32 pb-24">
+    <section class="mt-8 sm:mt-16 md:mt-24 pb-12 sm:pb-24">
         <div class="max-w-[1450px] mx-auto px-6 sm:px-10 lg:px-14">
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-14">
 
