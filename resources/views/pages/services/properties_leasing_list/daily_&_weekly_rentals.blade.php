@@ -73,7 +73,7 @@
                         'desc' => 'Best value for professionals and expatriates with flexible lease terms.',
                     ],
                 ],
-                'link' => url('/properties'),
+                'link' => url('/services/property-leasing/daily-weekly-rentals/studio-room'),
                 'image' => $cardImage,
             ],
             [
@@ -99,7 +99,7 @@
                         'desc' => 'All-inclusive monthly living package with premium residential facilities.',
                     ],
                 ],
-                'link' => url('/properties'),
+                'link' => url('/services/property-leasing/daily-weekly-rentals/1-bedroom'),
                 'image' => $cardImage,
             ],
             [
@@ -125,7 +125,33 @@
                         'desc' => 'Premium corner residences with panoramic city views and dedicated management.',
                     ],
                 ],
-                'link' => url('/properties'),
+                'link' => url('/services/property-leasing/daily-weekly-rentals/2-bedroom-with-balcony'),
+                'image' => $cardImage,
+            ],
+            [
+                'title' => '3-Bedroom',
+                'description' => 'Expansive living spaces designed for large families, executive relocations, and luxury comfort.',
+                'ideal_for' => [
+                    'Large families',
+                    'Executive relocations',
+                    'Corporate leaders',
+                    'Long-term luxury stays',
+                ],
+                'pricing' => [
+                    'daily' => [
+                        'price' => 'From $95/day',
+                        'desc' => 'Generous 3-bedroom suite with full premium amenities and daily housekeeping.',
+                    ],
+                    'weekly' => [
+                        'price' => 'From $570/week',
+                        'desc' => 'Spacious high-floor living for families and groups with weekly servicing.',
+                    ],
+                    'monthly' => [
+                        'price' => 'From $1,800/month',
+                        'desc' => 'Exclusive expansive penthouse-style living with VIP management services.',
+                    ],
+                ],
+                'link' => url('/services/property-leasing/daily-weekly-rentals/3-bedroom'),
                 'image' => $cardImage,
             ],
         ];
@@ -150,166 +176,269 @@
 
         {{-- Main Content Container (Sticks to the right side and floats above bg) --}}
         <div class="relative z-10 w-full pl-6 sm:pl-10 lg:pl-16 xl:pl-24 pr-0">
-            <div class="flex flex-col lg:flex-row items-stretch justify-between gap-4 lg:gap-6">
+            <div class="flex flex-col lg:flex-row items-stretch justify-between gap-6 lg:gap-8">
 
-                {{-- Left: Section Heading sitting on top --}}
-                <div class="relative z-20 shrink-0 max-w-[320px] self-start pt-6 sm:pt-10 lg:pt-14" data-scroll-reveal="left">
-                    <h2 class="leading-tight">
-                        <span class="text-[#F4DEAC] text-[clamp(26px,3vw,38px)] font-normal block mb-1">Featured</span>
-                        <span class="text-[#F4DEAC] text-[clamp(34px,4.5vw,56px)] font-bold block leading-none">Properties</span>
-                    </h2>
+                {{-- Left: Heading, Description & Nav Arrows --}}
+                <div class="relative z-20 shrink-0 max-w-[320px] self-start pt-16 sm:pt-20 lg:pt-20 xl:pt-24 flex flex-col justify-between" data-scroll-reveal="left">
+                    <div>
+                        <h2 class="text-[#2A5A8A] text-[clamp(28px,3vw,42px)] font-normal leading-[1.15] mb-3">
+                            Available<br>
+                            <span class="font-bold">Rental Units</span>
+                        </h2>
+                        <p class="text-black/80 text-[14px] sm:text-[15px] leading-relaxed mb-6">
+                            Wealth Mansion units are available for different rental periods, depending on unit availability.
+                        </p>
+                    </div>
+
+                    {{-- Navigation Arrows --}}
+                    <div class="flex items-center gap-3 pt-2">
+                        <button id="featured-prop-prev" type="button" aria-label="Previous property"
+                            class="w-12 h-12 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] bg-transparent flex items-center justify-center cursor-pointer
+                                transition-all duration-300 hover:bg-[#2A5A8A] hover:text-white hover:scale-105
+                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2
+                                disabled:cursor-not-allowed">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button id="featured-prop-next" type="button" aria-label="Next property"
+                            class="w-12 h-12 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] bg-transparent flex items-center justify-center cursor-pointer
+                                transition-all duration-300 hover:bg-[#2A5A8A] hover:text-white hover:scale-105
+                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2
+                                disabled:cursor-not-allowed">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
-                {{-- Right: 3 Featured Project Cards stuck to the right with small gap --}}
-                <div id="featured-properties-grid" class="flex-1 w-full max-w-[1240px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 items-stretch pr-0">
-                    @foreach ($featuredProjects as $index => $project)
-                        @php
-                            $dir = ($index === 0) ? 'left' : (($index === 1) ? 'fade-up' : 'right');
-                        @endphp
-                        <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ $index * 100 }}" class="h-full flex flex-col">
-                            <div class="featured-prop-card group bg-white flex flex-col justify-between shadow-xl hover:shadow-2xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 h-full cursor-pointer"
-                                onclick="window.location='{{ $project['link'] }}'">
+                {{-- Right: Horizontal Card Slider Track --}}
+                <div class="relative min-w-0 flex-1 w-full max-w-[1240px]" data-scroll-reveal="right">
+                    <div id="featured-properties-track"
+                        class="pointer-events-auto flex gap-4 overflow-x-auto scroll-smooth items-start pb-4
+                            snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pr-6 sm:pr-10 lg:pr-16">
+                        @foreach ($featuredProjects as $index => $project)
+                            @php
+                                $dir = ($index === 0) ? 'left' : (($index === 1) ? 'fade-up' : 'right');
+                            @endphp
+                            <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ $index * 100 }}" class="featured-card-wrapper shrink-0 snap-start w-[85vw] max-w-[340px] sm:w-[330px] lg:w-[340px] xl:w-[360px] flex flex-col">
+                                <div class="featured-prop-card group bg-white flex flex-col justify-between shadow-none overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 cursor-pointer w-full"
+                                    onclick="window.location='{{ $project['link'] }}'">
 
-                                {{-- Card Image --}}
-                                <div class="relative w-full h-[220px] sm:h-[240px] overflow-hidden shrink-0 bg-gray-100">
-                                    <img src="{{ $project['image'] }}" alt="{{ $project['title'] }}"
-                                        class="featured-card-img w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105">
-                                </div>
-
-                                {{-- Card Body --}}
-                                <div class="p-6 sm:p-7 flex flex-col justify-between flex-1">
-                                    <div>
-                                        {{-- Title --}}
-                                        <div class="mb-3">
-                                            <h3 class="text-[#2A5A8A] text-[18px] sm:text-[20px] font-bold transition-colors duration-200 group-hover:text-[#1479B9]">
-                                                {{ $project['title'] }}
-                                            </h3>
-                                        </div>
-
-                                        {{-- Description --}}
-                                        <p class="text-black/80 text-[13.5px] sm:text-[14px] leading-relaxed mb-4">
-                                            {{ $project['description'] }}
-                                        </p>
-
-                                        {{-- Ideal For List --}}
-                                        <div class="mb-4">
-                                            <p class="text-black text-[13px] sm:text-[13.5px] font-bold mb-1.5">Ideal for:</p>
-                                            <ul class="text-black/80 text-[12.5px] sm:text-[13px] leading-relaxed space-y-1 list-disc pl-5">
-                                                @foreach ($project['ideal_for'] as $item)
-                                                    <li>{{ $item }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
+                                    {{-- Card Image --}}
+                                    <div class="relative w-full h-[220px] sm:h-[240px] overflow-hidden shrink-0 bg-gray-100">
+                                        <img src="{{ $project['image'] }}" alt="{{ $project['title'] }}"
+                                            class="featured-card-img w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105">
                                     </div>
 
-                                    <div class="mt-4 pt-3 border-t border-gray-100/80" onclick="event.stopPropagation();">
-                                        {{-- Initial "See Price" Button (visible only when collapsed) --}}
-                                        <button type="button"
-                                            class="price-toggle-btn text-[#2A5A8A] text-[15px] sm:text-[16px] font-bold mb-2 inline-flex items-center gap-1 hover:underline cursor-pointer focus:outline-none transition-all duration-200">
-                                            <span>See Price</span>
-                                        </button>
+                                    {{-- Card Body --}}
+                                    <div class="featured-card-body p-6 sm:p-7 flex flex-col justify-between flex-1">
+                                        <div>
+                                            {{-- Title --}}
+                                            <div class="mb-3">
+                                                <h3 class="text-[#2A5A8A] text-[18px] sm:text-[20px] font-bold transition-colors duration-200 group-hover:text-[#1479B9]">
+                                                    {{ $project['title'] }}
+                                                </h3>
+                                            </div>
 
-                                        {{-- Expandable Dropdown Container with Smooth CSS Grid Animation --}}
-                                        <div class="price-panel grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-out overflow-hidden" aria-hidden="true">
-                                            <div class="overflow-hidden min-h-0">
-                                                <div class="pb-3 pt-0.5">
-                                                    {{-- Tabs: Daily | Weekly | Monthly --}}
-                                                    <div class="flex items-center gap-4 sm:gap-5 mb-2.5 text-[14px] sm:text-[15px]">
-                                                        <button type="button" data-tab="daily"
-                                                            class="price-tab font-bold text-[#2A5A8A] border-b-2 border-[#2A5A8A] pb-0.5 cursor-pointer focus:outline-none transition-colors">
-                                                            Daily
-                                                        </button>
-                                                        <button type="button" data-tab="weekly"
-                                                            class="price-tab font-medium text-gray-400 hover:text-gray-600 border-b-2 border-transparent pb-0.5 cursor-pointer focus:outline-none transition-colors">
-                                                            Weekly
-                                                        </button>
-                                                        <button type="button" data-tab="monthly"
-                                                            class="price-tab font-medium text-gray-400 hover:text-gray-600 border-b-2 border-transparent pb-0.5 cursor-pointer focus:outline-none transition-colors">
-                                                            Monthly
-                                                        </button>
-                                                    </div>
+                                            {{-- Description --}}
+                                            <p class="text-black/80 text-[13.5px] sm:text-[14px] leading-relaxed mb-4">
+                                                {{ $project['description'] }}
+                                            </p>
 
-                                                    {{-- Pricing Details for Each Tab --}}
-                                                    @foreach (['daily', 'weekly', 'monthly'] as $tabKey)
-                                                        <div class="price-content price-content-{{ $tabKey }} transition-all duration-200 {{ $tabKey === 'daily' ? 'block opacity-100' : 'hidden opacity-0' }}">
-                                                            <div class="text-black text-[15px] sm:text-[16px] font-bold mb-1.5">
-                                                                {{ $project['pricing'][$tabKey]['price'] }}
-                                                            </div>
-                                                            <p class="text-black/75 text-[12.5px] sm:text-[13px] leading-relaxed mb-2.5">
-                                                                {{ $project['pricing'][$tabKey]['desc'] }}
-                                                            </p>
-                                                        </div>
+                                            {{-- Ideal For List --}}
+                                            <div class="mb-4">
+                                                <p class="text-black text-[13px] sm:text-[13.5px] font-bold mb-1.5">Ideal for:</p>
+                                                <ul class="text-black/80 text-[12.5px] sm:text-[13px] leading-relaxed space-y-1 list-disc pl-5">
+                                                    @foreach ($project['ideal_for'] as $item)
+                                                        <li>{{ $item }}</li>
                                                     @endforeach
-
-                                                    {{-- See Less Button (visible only when expanded) --}}
-                                                    <button type="button"
-                                                        class="price-see-less-btn text-[#2A5A8A] text-[14px] sm:text-[14.5px] font-bold hover:underline cursor-pointer focus:outline-none mt-1">
-                                                        See Less
-                                                    </button>
-                                                </div>
+                                                </ul>
                                             </div>
                                         </div>
 
-                                        {{-- View Photos Link --}}
-                                        <div class="mt-1">
-                                            <a href="{{ $project['link'] }}"
-                                                class="inline-flex items-center gap-1.5 text-[#2A5A8A] group-hover:text-[#c9a463] text-[13.5px] sm:text-[14px] font-medium transition-colors duration-200">
-                                                <span>View Photos</span>
-                                                <span class="transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true">&rarr;</span>
-                                            </a>
+                                        <div class="mt-4 pt-3 border-t border-gray-100/80" onclick="event.stopPropagation();">
+                                            {{-- Toggle Button with Smooth Text Fade Transition --}}
+                                            <button type="button"
+                                                class="price-toggle-btn text-[#2A5A8A] text-[15px] sm:text-[16px] font-bold mb-2.5 inline-flex items-center gap-1 hover:underline cursor-pointer focus:outline-none"
+                                                aria-expanded="false">
+                                                <span class="price-btn-label transition-opacity duration-200 ease-out inline-block">See Price</span>
+                                            </button>
+
+                                            {{-- Expandable Dropdown Container with Smooth CSS Grid Animation --}}
+                                            <div class="price-panel grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-out overflow-hidden" aria-hidden="true">
+                                                <div class="overflow-hidden min-h-0">
+                                                    <div class="pb-2.5 pt-0.5">
+                                                        {{-- Tabs: Daily | Weekly | Monthly --}}
+                                                        <div class="flex items-center gap-4 sm:gap-5 mb-2.5 text-[14px] sm:text-[15px]">
+                                                            <button type="button" data-tab="daily"
+                                                                class="price-tab font-bold text-[#2A5A8A] border-b-2 border-[#2A5A8A] pb-0.5 cursor-pointer focus:outline-none transition-colors">
+                                                                Daily
+                                                            </button>
+                                                            <button type="button" data-tab="weekly"
+                                                                class="price-tab font-medium text-gray-400 hover:text-gray-600 border-b-2 border-transparent pb-0.5 cursor-pointer focus:outline-none transition-colors">
+                                                                Weekly
+                                                            </button>
+                                                            <button type="button" data-tab="monthly"
+                                                                class="price-tab font-medium text-gray-400 hover:text-gray-600 border-b-2 border-transparent pb-0.5 cursor-pointer focus:outline-none transition-colors">
+                                                                Monthly
+                                                            </button>
+                                                        </div>
+
+                                                        {{-- Pricing Details for Each Tab --}}
+                                                        @foreach (['daily', 'weekly', 'monthly'] as $tabKey)
+                                                            <div class="price-content price-content-{{ $tabKey }} transition-all duration-200 {{ $tabKey === 'daily' ? 'block opacity-100' : 'hidden opacity-0' }}">
+                                                                <div class="text-black text-[15px] sm:text-[16px] font-bold mb-1.5">
+                                                                    {{ $project['pricing'][$tabKey]['price'] }}
+                                                                </div>
+                                                                <p class="text-black/75 text-[12.5px] sm:text-[13px] leading-relaxed mb-1">
+                                                                    {{ $project['pricing'][$tabKey]['desc'] }}
+                                                                </p>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {{-- View Photos Link --}}
+                                            <div class="mt-1">
+                                                <a href="{{ $project['link'] }}"
+                                                    class="inline-flex items-center gap-1.5 text-[#2A5A8A] group-hover:text-[#c9a463] text-[13.5px] sm:text-[14px] font-medium transition-colors duration-200">
+                                                    <span>View Photos</span>
+                                                    <span class="transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true">&rarr;</span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+
+                    {{-- Scroll-edge blur cues --}}
+                    <div id="featured-prop-edge-left" class="featured-prop-edge featured-prop-edge-left" aria-hidden="true"></div>
+                    <div id="featured-prop-edge-right" class="featured-prop-edge featured-prop-edge-right" aria-hidden="true"></div>
                 </div>
 
             </div>
         </div>
     </section>
 
+    <style>
+        .featured-prop-edge {
+            position: absolute;
+            top: 0;
+            bottom: 16px;
+            width: 80px;
+            z-index: 30;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+
+        .featured-prop-edge.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .featured-prop-edge-left {
+            left: 0;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.7) 0%, transparent 100%);
+        }
+
+        .featured-prop-edge-right {
+            right: 0;
+            background: linear-gradient(to left, rgba(255, 255, 255, 0.7) 0%, transparent 100%);
+        }
+    </style>
+
     @once
         <script>
             (function() {
                 function initPriceDropdowns() {
-                    document.querySelectorAll('.featured-prop-card').forEach(function(card) {
+                    var cards = Array.from(document.querySelectorAll('.featured-prop-card'));
+                    var track = document.getElementById('featured-properties-track');
+                    var prevBtn = document.getElementById('featured-prop-prev');
+                    var nextBtn = document.getElementById('featured-prop-next');
+                    var edgeLeft = document.getElementById('featured-prop-edge-left');
+                    var edgeRight = document.getElementById('featured-prop-edge-right');
+                    if (!cards.length) return;
+
+                    // Equalize initial collapsed heights across all cards based on the tallest one
+                    function equalizeBaseHeights() {
+                        cards.forEach(function(card) {
+                            var body = card.querySelector('.featured-card-body');
+                            if (body) body.style.minHeight = '';
+                        });
+
+                        var maxBodyHeight = 0;
+                        cards.forEach(function(card) {
+                            var body = card.querySelector('.featured-card-body');
+                            if (body) {
+                                var h = body.offsetHeight;
+                                if (h > maxBodyHeight) maxBodyHeight = h;
+                            }
+                        });
+
+                        if (maxBodyHeight > 0) {
+                            cards.forEach(function(card) {
+                                var body = card.querySelector('.featured-card-body');
+                                if (body) body.style.minHeight = maxBodyHeight + 'px';
+                            });
+                        }
+                    }
+
+                    equalizeBaseHeights();
+                    window.addEventListener('resize', equalizeBaseHeights);
+
+                    // Accordion logic for each card
+                    cards.forEach(function(card) {
                         var toggleBtn = card.querySelector('.price-toggle-btn');
                         var panel = card.querySelector('.price-panel');
-                        var seeLessBtn = card.querySelector('.price-see-less-btn');
+                        var label = toggleBtn ? toggleBtn.querySelector('.price-btn-label') : null;
                         var tabs = card.querySelectorAll('.price-tab');
                         var contents = card.querySelectorAll('.price-content');
                         if (!toggleBtn || !panel) return;
 
-                        function openPrice() {
-                            toggleBtn.classList.add('hidden');
-                            panel.classList.remove('grid-rows-[0fr]', 'opacity-0');
-                            panel.classList.add('grid-rows-[1fr]', 'opacity-100');
-                            panel.setAttribute('aria-hidden', 'false');
-                        }
+                        function toggleDropdown() {
+                            var isOpen = panel.classList.contains('grid-rows-[1fr]');
 
-                        function closePrice() {
-                            panel.classList.remove('grid-rows-[1fr]', 'opacity-100');
-                            panel.classList.add('grid-rows-[0fr]', 'opacity-0');
-                            panel.setAttribute('aria-hidden', 'true');
-                            setTimeout(function() {
-                                toggleBtn.classList.remove('hidden');
-                            }, 220);
+                            if (!isOpen) {
+                                if (label) {
+                                    label.style.opacity = '0';
+                                    setTimeout(function() {
+                                        label.textContent = 'See Less';
+                                        label.style.opacity = '1';
+                                    }, 120);
+                                }
+                                panel.classList.remove('grid-rows-[0fr]', 'opacity-0');
+                                panel.classList.add('grid-rows-[1fr]', 'opacity-100');
+                                panel.setAttribute('aria-hidden', 'false');
+                                toggleBtn.setAttribute('aria-expanded', 'true');
+                            } else {
+                                if (label) {
+                                    label.style.opacity = '0';
+                                    setTimeout(function() {
+                                        label.textContent = 'See Price';
+                                        label.style.opacity = '1';
+                                    }, 120);
+                                }
+                                panel.classList.remove('grid-rows-[1fr]', 'opacity-100');
+                                panel.classList.add('grid-rows-[0fr]', 'opacity-0');
+                                panel.setAttribute('aria-hidden', 'true');
+                                toggleBtn.setAttribute('aria-expanded', 'false');
+                            }
                         }
 
                         toggleBtn.addEventListener('click', function(e) {
                             e.preventDefault();
                             e.stopPropagation();
-                            openPrice();
+                            toggleDropdown();
                         });
-
-                        if (seeLessBtn) {
-                            seeLessBtn.addEventListener('click', function(e) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                closePrice();
-                            });
-                        }
 
                         tabs.forEach(function(tab) {
                             tab.addEventListener('click', function(e) {
@@ -343,6 +472,88 @@
                             });
                         });
                     });
+
+                    // Slider track navigation & button state management (move one by one per click)
+                    if (track) {
+                        var scrollTimer = null;
+                        var cardWrappers = Array.from(track.querySelectorAll('.featured-card-wrapper'));
+
+                        function getCardOffset(idx) {
+                            if (!cardWrappers[idx]) return 0;
+                            return cardWrappers[idx].offsetLeft - track.offsetLeft;
+                        }
+
+                        function getCurrentIndex() {
+                            var currentScroll = track.scrollLeft;
+                            var closestIdx = 0;
+                            var minDiff = Infinity;
+                            cardWrappers.forEach(function(card, idx) {
+                                var offset = card.offsetLeft - track.offsetLeft;
+                                var diff = Math.abs(offset - currentScroll);
+                                if (diff < minDiff) {
+                                    minDiff = diff;
+                                    closestIdx = idx;
+                                }
+                            });
+                            return closestIdx;
+                        }
+
+                        function scrollToCard(idx) {
+                            if (idx < 0) idx = 0;
+                            if (idx >= cardWrappers.length) idx = cardWrappers.length - 1;
+                            var targetScroll = getCardOffset(idx);
+                            track.scrollTo({ left: targetScroll, behavior: 'smooth' });
+                        }
+
+                        function setButtons(atStart, atEnd) {
+                            if (prevBtn) {
+                                prevBtn.disabled = atStart;
+                                prevBtn.style.opacity = atStart ? '0.35' : '1';
+                                prevBtn.style.pointerEvents = atStart ? 'none' : 'auto';
+                            }
+                            if (nextBtn) {
+                                nextBtn.disabled = atEnd;
+                                nextBtn.style.opacity = atEnd ? '0.35' : '1';
+                                nextBtn.style.pointerEvents = atEnd ? 'none' : 'auto';
+                            }
+
+                            var canScroll = track.scrollWidth > track.clientWidth + 1;
+                            if (edgeLeft) edgeLeft.classList.toggle('is-visible', canScroll && !atStart);
+                            if (edgeRight) edgeRight.classList.toggle('is-visible', canScroll && !atEnd);
+                        }
+
+                        function updateButtons() {
+                            var atStart = track.scrollLeft <= 4;
+                            var atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+                            setButtons(atStart, atEnd);
+                        }
+
+                        if (prevBtn) {
+                            prevBtn.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                var cur = getCurrentIndex();
+                                var target = Math.max(0, cur - 1);
+                                scrollToCard(target);
+                            });
+                        }
+
+                        if (nextBtn) {
+                            nextBtn.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                var cur = getCurrentIndex();
+                                var target = Math.min(cardWrappers.length - 1, cur + 1);
+                                scrollToCard(target);
+                            });
+                        }
+
+                        track.addEventListener('scroll', function() {
+                            clearTimeout(scrollTimer);
+                            scrollTimer = setTimeout(updateButtons, 60);
+                        }, { passive: true });
+
+                        window.addEventListener('resize', updateButtons);
+                        updateButtons();
+                    }
                 }
 
                 if (document.readyState === 'loading') {
@@ -353,102 +564,82 @@
             })();
         </script>
     @endonce
-                    document.addEventListener('DOMContentLoaded', initPriceDropdowns);
-                } else {
-                    initPriceDropdowns();
-                }
-            })();
-        </script>
-    @endonce
 
-    {{-- auto move logo --}}
-
+      {{-- auto move logo --}}
     <x-auto_move.auto_move />
+
 
     {{-- Why Choose CWD Realty & Hospitality --}}
     <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
 
-            {{-- Heading Centered --}}
-            <h2 class="text-center text-[clamp(28px,4vw,42px)] leading-tight mb-12 sm:mb-16" data-scroll-reveal="left">
+            {{-- Heading centered --}}
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12 text-center">
                 <span class="text-[#2A5A8A] font-normal">Why Choose </span>
                 <span class="text-[#2A5A8A] font-bold">CWD Realty &amp; Hospitality?</span>
             </h2>
 
-            @php
-                $whyChooseFeatures = [
-                    [
-                        'number' => '01',
-                        'title' => 'Condominium management specialists',
-                    ],
-                    [
-                        'number' => '02',
-                        'title' => 'Professional multilingual communication',
-                    ],
-                    [
-                        'number' => '03',
-                        'title' => 'Strong rental marketing experience',
-                    ],
-                    [
-                        'number' => '04',
-                        'title' => 'Transparent owner reporting',
-                    ],
-                    [
-                        'number' => '05',
-                        'title' => 'Reliable maintenance coordination',
-                    ],
-                    [
-                        'number' => '06',
-                        'title' => 'Hospitality-focused management',
-                    ],
-                    [
-                        'number' => '07',
-                        'title' => 'Personalized owner support',
-                    ],
-                ];
+            {{-- 4-Column Cards Grid --}}
+            <div id="why-choose-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
 
-                $whyChooseRowOne = array_slice($whyChooseFeatures, 0, 4);
-                $whyChooseRowTwo = array_slice($whyChooseFeatures, 4);
-            @endphp
+                {{-- Card 01 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        01
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Professionally Managed Properties
+                    </h3>
+                    <p class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        Our properties are professionally managed to provide guests with a comfortable and convenient accommodation experience.
+                    </p>
+                </div>
 
-            {{-- Row 1: 4 columns --}}
-            <div id="why-choose-row-one" class="grid grid-cols-2 lg:grid-cols-4 gap-6 items-stretch mb-6">
-                @foreach ($whyChooseRowOne as $index => $feature)
-                    @php
-                        $dir = $index < 2 ? 'left' : 'right';
-                    @endphp
-                    <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ ($index % 2) * 100 }}"
-                        class="why-choose-card group h-full w-full flex flex-col px-6 py-6 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200">
-                        <span
-                            class="text-[36px] sm:text-[40px] font-bold leading-none mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
-                            {{ $feature['number'] }}
-                        </span>
-                        <p
-                            class="text-[15px] leading-relaxed text-black group-hover:text-white transition-colors duration-200">
-                            {{ $feature['title'] }}
-                        </p>
+                {{-- Card 02 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        02
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Flexible Rental Terms
+                    </h3>
+                    <p class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        Choose from daily, weekly, or monthly rental options depending on the length of your stay.
+                    </p>
+                </div>
+
+                {{-- Card 03 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        03
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Comfortable Facilities
+                    </h3>
+                    <div class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        <p>Selected properties offer facilities such as:</p>
+                        <ul class="list-disc pl-5 my-2 space-y-0.5 text-[13px] sm:text-[13.5px]">
+                            <li>Swimming Pools</li>
+                            <li>Panoramic River Views</li>
+                            <li>Residential Facilities</li>
+                        </ul>
+                        <p>Facilities vary by property.</p>
                     </div>
-                @endforeach
-            </div>
+                </div>
 
-            {{-- Row 2: remaining cards, centered --}}
-            <div id="why-choose-row-two" class="flex flex-wrap justify-center gap-6">
-                @foreach ($whyChooseRowTwo as $index => $feature)
-                    @php
-                        $dir = $index === 0 ? 'left' : ($index === 1 ? 'fade-up' : 'right');
-                    @endphp
-                    <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ $index * 100 }}"
-                        class="why-choose-card group w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)] flex flex-col px-6 py-6 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200">
-                        <span
-                            class="text-[36px] sm:text-[40px] font-bold leading-none mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
-                            {{ $feature['number'] }}
-                        </span>
-                        <p
-                            class="text-[15px] leading-relaxed text-black group-hover:text-white transition-colors duration-200">
-                            {{ $feature['title'] }}
-                        </p>
-                    </div>
-                @endforeach
+                {{-- Card 04 --}}
+                <div class="why-choose-card group flex flex-col p-6 sm:p-7 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200 shadow-sm">
+                    <span class="text-[32px] sm:text-[36px] font-bold leading-none mb-4 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
+                        04
+                    </span>
+                    <h3 class="text-[#2A5A8A] group-hover:text-white text-[16px] sm:text-[17px] font-bold leading-snug mb-3 transition-colors duration-200">
+                        Hospitality Support
+                    </h3>
+                    <p class="text-black/80 group-hover:text-white/90 text-[13.5px] sm:text-[14px] leading-relaxed transition-colors duration-200">
+                        Our team can also arrange additional hospitality services to make your stay more convenient.
+                    </p>
+                </div>
+
             </div>
 
         </div>
@@ -458,72 +649,223 @@
         <script>
             (function() {
                 function equalizeWhyChooseCardHeights() {
-                    var cards = document.querySelectorAll(
-                        '#why-choose-row-one .why-choose-card, #why-choose-row-two .why-choose-card');
+                    var cards = document.querySelectorAll('#why-choose-cards-grid .why-choose-card');
                     if (!cards.length) return;
 
-                    // Reset heights first so we measure natural content height, not a previously-set tall value
                     cards.forEach(function(card) {
-                        card.style.height = 'auto';
+                        card.style.minHeight = '';
                     });
 
                     var tallest = 0;
                     cards.forEach(function(card) {
-                        var cardHeight = card.getBoundingClientRect().height;
+                        var cardHeight = card.offsetHeight;
                         if (cardHeight > tallest) {
                             tallest = cardHeight;
                         }
                     });
 
                     cards.forEach(function(card) {
-                        card.style.height = tallest + 'px';
+                        card.style.minHeight = tallest + 'px';
                     });
                 }
 
-                // Run once DOM is ready
                 if (document.readyState === 'loading') {
                     document.addEventListener('DOMContentLoaded', equalizeWhyChooseCardHeights);
                 } else {
                     equalizeWhyChooseCardHeights();
                 }
 
-                // Re-run on resize (debounced) since column count / text wrapping changes at breakpoints
                 var resizeTimer;
                 window.addEventListener('resize', function() {
                     clearTimeout(resizeTimer);
                     resizeTimer = setTimeout(equalizeWhyChooseCardHeights, 150);
                 });
 
-                // Re-run once web fonts finish loading, since font swaps can change text height after initial measurement
                 if (document.fonts && document.fonts.ready) {
                     document.fonts.ready.then(equalizeWhyChooseCardHeights);
                 }
-            })
-            ();
+            })();
         </script>
     @endonce
 
+    {{-- Additional Hospitality Services --}}
+    <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white pb-16 sm:pb-24">
+        <div class="max-w-[1400px] mx-auto px-6">
 
+            {{-- Heading --}}
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12 text-left" data-scroll-reveal="left">
+                <span class="text-[#2A5A8A] font-normal block">Additional</span>
+                <span class="text-[#2A5A8A] font-bold block">Hospitality Services</span>
+            </h2>
 
+            {{-- 2 Cards Grid --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
 
+                {{-- Card 1: Airport Pick-Up --}}
+                <div class="flex flex-col" data-scroll-reveal="left">
+                    {{-- Gold accent bar on top (outside) --}}
+                    <div class="h-[10px] w-[300px] max-w-full bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+
+                    <div class="bg-[#2A5A8A] shadow-md p-8 sm:p-10 flex flex-col flex-1">
+                        {{-- Icon --}}
+                        <div class="mb-6">
+                            <img src="{{ asset('services/property_sales/airplane_map.svg') }}" alt="Airport Pick-Up"
+                                class="w-12 h-12 object-contain">
+                        </div>
+
+                        {{-- Title --}}
+                        <h3 class="text-[#F4DEAC] text-[18px] sm:text-[20px] font-bold mb-3">
+                            Airport Pick-Up
+                        </h3>
+
+                        {{-- Description --}}
+                        <p class="text-white/90 text-[14px] sm:text-[15px] leading-relaxed">
+                            Need transportation when you arrive in Cambodia? CWD can arrange airport pick-up services for an additional charge.
+                        </p>
+                    </div>
+                </div>
+
+                {{-- Card 2: City Tour --}}
+                <div class="flex flex-col" data-scroll-reveal="right" data-scroll-delay="100">
+                    {{-- Gold accent bar on top (outside) --}}
+                    <div class="h-[10px] w-[300px] max-w-full bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
+
+                    <div class="bg-[#2A5A8A] shadow-md p-8 sm:p-10 flex flex-col flex-1">
+                        {{-- Icon --}}
+                        <div class="mb-6">
+                            <img src="{{ asset('services/property_sales/vichincal_map.svg') }}" alt="City Tour"
+                                class="w-12 h-12 object-contain">
+                        </div>
+
+                        {{-- Title --}}
+                        <h3 class="text-[#F4DEAC] text-[18px] sm:text-[20px] font-bold mb-3">
+                            City Tour
+                        </h3>
+
+                        {{-- Description --}}
+                        <p class="text-white/90 text-[14px] sm:text-[15px] leading-relaxed">
+                            Discover Phnom Penh and surrounding destinations with optional city tour arrangements. Additional charges apply.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    {{-- Who Is Our Property Leasing Service For? --}}
+    @php
+        $targetAudiences = [
+            [
+                'icon' => asset('services/propertis_leasing/who_is_our_property/business travelers.svg'),
+                'title' => 'Business Travelers',
+                'description' => 'Flexible accommodation for short business trips, meetings, and assignments.',
+            ],
+            [
+                'icon' => asset('services/propertis_leasing/who_is_our_property/expatriates.svg'),
+                'title' => 'Expatriates',
+                'description' => 'Comfortable weekly and monthly accommodation for professionals living or working in Cambodia.',
+            ],
+            [
+                'icon' => asset('services/propertis_leasing/who_is_our_property/tourists.svg'),
+                'title' => 'Tourists',
+                'description' => 'Convenient residential accommodation for visitors looking for more than a traditional hotel stay.',
+            ],
+            [
+                'icon' => asset('services/propertis_leasing/who_is_our_property/long-term residents.svg'),
+                'title' => 'Long-Term Residents',
+                'description' => 'Monthly rental options for people who need a comfortable home while living in Phnom Penh.',
+            ],
+        ];
+    @endphp
+
+    <section class="relative px-0 sm:px-[2rem] md:px-[3rem] z-[300] bg-white pb-16 sm:pb-24 overflow-x-clip">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="flex flex-col">
+
+                {{-- Blue box: Full width on mobile/tablet, stretching to the right edge on desktop --}}
+                <div class="relative bg-[#2A5A8A] shadow-2xl w-full lg:w-[100vw]">
+                    {{-- Inner Content Container with responsive padding --}}
+                    <div class="w-full lg:max-w-[1400px] px-6 sm:px-10 md:px-14 lg:px-16 xl:px-20 py-10 sm:py-14 md:py-16 lg:py-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 xl:gap-18 items-center">
+
+                            {{-- Left: Heading --}}
+                            <div class="lg:col-span-5" data-scroll-reveal="left">
+                                <h2 class="text-[#F4DEAC] text-[clamp(26px,3.5vw,44px)] font-normal leading-[1.2]">
+                                    <span class="block">Who Is Our</span>
+                                    <span class="block">Property Leasing</span>
+                                    <span class="block">Service For?</span>
+                                </h2>
+                            </div>
+
+                            {{-- Right: 4 Audience Items in Vertical List --}}
+                            <div class="lg:col-span-7 flex flex-col gap-6 sm:gap-7" data-scroll-reveal="right">
+                                @foreach ($targetAudiences as $item)
+                                    <div class="flex items-start gap-4 sm:gap-5">
+                                        {{-- Icon Container --}}
+                                        <div class="w-9 h-9 sm:w-11 sm:h-11 shrink-0 flex items-center justify-center pt-0.5">
+                                            <img src="{{ $item['icon'] }}" alt="{{ $item['title'] }}"
+                                                class="max-w-full max-h-full object-contain">
+                                        </div>
+
+                                        {{-- Text --}}
+                                        <div class="flex-1 min-w-0">
+                                            <h3 class="text-[#F4DEAC] text-[15.5px] sm:text-[17px] font-bold leading-snug mb-1">
+                                                {{ $item['title'] }}
+                                            </h3>
+                                            <p class="text-white/90 text-[13px] sm:text-[14px] leading-relaxed font-light break-words">
+                                                {{ $item['description'] }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Gold Accent Bar underneath the blue box (outside, aligned to left edge, 650px width) --}}
+                <div class="h-[12px] sm:h-[13px] md:h-[14px] w-[650px] max-w-full bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
+
+            </div>
+        </div>
+    </section>
 
     {{-- Frequently Asked Questions --}}
     @php
         $faqLeft = [
             [
-                'question' => 'What types of properties do you manage?',
+                'question' => 'Why should I choose a CWD-managed property to stay?',
                 'answer' =>
-                    'We specialize in condominiums, serviced apartments, and residential investment properties throughout Phnom Penh.',
+                    'CWD Realty & Hospitality provides professionally managed residential accommodation with flexible rental options and guest support. Selected properties offer facilities such as swimming pools and panoramic river views, while additional services such as airport pick-up and city tours can be arranged upon request.',
             ],
             [
-                'question' => 'Can you manage both daily and long-term rentals?',
+                'question' => 'What is the difference between smoking and non-smoking accommodation?',
+                'answer' => 'ComingSoon',
+            ],
+            [
+                'question' => 'What facilities are available?',
+                'answer' => 'ComingSoon',
+            ],
+            [
+                'question' => 'Do you provide airport pick-up and city tours?',
                 'answer' => 'ComingSoon',
             ],
         ];
 
         $faqRight = [
             [
-                'question' => 'How do property owners receive rental income?',
+                'question' => 'How much does it cost to rent a property?',
+                'answer' => 'ComingSoon',
+            ],
+            [
+                'question' => 'Is breakfast included?',
+                'answer' => 'ComingSoon',
+            ],
+            [
+                'question' => 'Are pets allowed?',
                 'answer' => 'ComingSoon',
             ],
         ];
@@ -531,56 +873,60 @@
 
     <x-faqs :faq-left="$faqLeft" :faq-right="$faqRight" />
 
+    {{-- Find Your Next Stay --}}
+    <section class="relative mt-[4rem] sm:mt-[6rem] lg:mt-[8rem] max-w-[1600px] mx-auto">
+        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
+            <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="Find Your Next Stay"
+                class="w-full h-auto min-h-[260px] object-cover shadow-sm">
 
-
-
-    {{-- Looking for your next stay --}}
-    <section class="relative mt-[2rem] sm:mt-[5rem] max-w-[1600px] mx-auto">
-        <div class="max-w-full min-[900px]:max-w-[80%] ml-auto" data-scroll-reveal="right">
-            <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
-                class="w-full h-auto min-h-[220px] object-cover">
-
-            <div
-                class="relative max-w-[520px] mt-4 px-6
-                    min-[900px]:ml-[-8rem] min-[900px]:mt-[-8.5rem] min-[900px]:px-0 z-20">
-                <h2 class="text-[#DCC597] text-[clamp(22px,5vw,40px)] font-bold leading-tight drop-shadow-sm">
-                    <span class="block min-[900px]:hidden">
-                        Looking for Professional
-                        Property Management or
-                        Comfortable Accommodation?
-                    </span>
-                    <span class="hidden min-[900px]:block">
-                        Request Property <br>
-                        Management Consultation
-                    </span>
+            <div class="relative max-w-[540px] mt-6 px-6 min-[900px]:ml-[-8rem] min-[900px]:mt-[-7.5rem] min-[900px]:px-0">
+                <h2 class="text-[#DCC597] text-[clamp(28px,4.5vw,50px)] font-bold leading-[1.15] drop-shadow-md">
+                    Find Your Next Stay
                 </h2>
             </div>
         </div>
+    </section>
 
-        <div class="max-w-[420px] mt-10 px-6 min-[900px]:ml-[calc(20%+2rem)] min-[900px]:mt-14 lg:mt-16 min-[900px]:px-0 mb-12 sm:mb-16" data-scroll-reveal="left">
-            @php
-                $links = [
-                    ['label' => 'Property Leasing', 'url' => url('/services/property-leasing'), 'active' => true],
-                    ['label' => 'Hospitality Services', 'url' => url('/services/hospitality-services'), 'active' => false],
-                    ['label' => 'Property Listings', 'url' => url('/properties'), 'active' => false],
-                    ['label' => 'Contact Us', 'url' => url('/contact-us'), 'active' => false],
-                ];
-            @endphp
+    {{-- Looking for Flexible Accommodation in Cambodia? --}}
+    <section class="mt-16 sm:mt-24 md:mt-32 pb-24">
+        <div class="max-w-[1450px] mx-auto px-6 sm:px-10 lg:px-14">
+            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-14">
 
-            <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200 shadow-sm">
-                @foreach ($links as $link)
-                    <a href="{{ $link['url'] }}"
-                        class="group flex items-center justify-between px-5 py-3 text-[15px] font-medium
-                   bg-white text-[#2A5A8A] transition-colors
-                   hover:bg-[#2A5A8A] hover:text-[#DCC597]">
-                        <span>{{ $link['label'] }}</span>
-                        <span aria-hidden="true"
-                            class="text-[#2A5A8A] transition-all group-hover:text-[#DCC597] group-hover:translate-x-1">
-                            &rarr;
-                        </span>
-                    </a>
-                @endforeach
-            </nav>
+                {{-- Left: Accent line on the left + Content --}}
+                <div class="flex items-start gap-4 sm:gap-6 lg:gap-8 max-w-[580px]">
+                    <span class="h-[2px] w-20 sm:w-28 lg:w-36 shrink-0 bg-[#c9a15c] mt-3.5"></span>
+                    <div class="flex flex-col items-start">
+                        <h2 class="text-[#204a74] text-[clamp(20px,2.4vw,28px)] font-bold leading-tight mb-4">
+                            Looking for Flexible<br>
+                            Accommodation in<br>
+                            Cambodia?
+                        </h2>
+                        <p class="text-[#204a74] text-[14px] sm:text-[14.5px] leading-relaxed mb-6">
+                            Whether you need a residence for a few days, several weeks, or an extended monthly stay, CWD Realty &amp; Hospitality can help you find a suitable professionally managed property.
+                        </p>
+                        <div class="flex flex-col items-start gap-1.5">
+                            <a href="{{ url('/properties') }}"
+                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] font-medium transition-all">
+                                <span>Browse Available Properties</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                            <a href="{{ url('/contact-us') }}"
+                                class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] font-medium transition-all">
+                                <span>Contact Our Leasing Team</span>
+                                <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Right: Image --}}
+                <div class="w-full lg:w-auto lg:shrink-0">
+                    <img src="{{ asset('home/professional_property/professional_property.png') }}"
+                        alt="Looking for Flexible Accommodation in Cambodia"
+                        class="w-full lg:w-[520px] xl:w-[580px] h-auto object-cover shadow-sm">
+                </div>
+
+            </div>
         </div>
     </section>
 @endsection
