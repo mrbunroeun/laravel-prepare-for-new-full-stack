@@ -36,7 +36,7 @@
     </div>
 
     {{-- Blue Banner Section --}}
-    <section class="relative w-full bg-[#2A5A8A] z-[10] h-[200px] sm:h-[240px] lg:h-[280px]">
+    <section class="relative w-full bg-[#2A5A8A] z-[10] h-[130px] sm:h-[180px] md:h-[230px] lg:h-[280px]">
     </section>
 
     @php
@@ -52,16 +52,16 @@
     @endphp
 
     {{-- Flexible Condominium Rentals at Wealth Mansion Section --}}
-    <section class="relative z-[30] bg-transparent px-6 sm:px-10 lg:px-14 pb-16 lg:pb-24 -mt-[140px] sm:-mt-[170px] lg:-mt-[200px] overflow-x-clip">
+    <section class="relative z-[30] bg-transparent px-6 sm:px-10 lg:px-14 pb-16 lg:pb-24 -mt-[90px] sm:-mt-[130px] lg:-mt-[200px] overflow-x-clip">
         <div class="max-w-[1400px] mx-auto">
 
             {{-- Top Row on Desktop: Carousel Track on the Left, Nav Arrows on the Right --}}
-            <div class="flex flex-col lg:flex-row items-start justify-between gap-6 lg:gap-10 h-auto lg:h-[470px]">
+            <div class="flex flex-col lg:flex-row items-start justify-between gap-6 lg:gap-10 h-auto lg:h-[600px]">
 
                 {{-- Image Carousel Wrapper (Fixed height so scaling never pushes bottom content) --}}
                 <div id="studio-carousel-height-wrapper"
                     data-scroll-reveal="right"
-                    class="w-full lg:flex-1 lg:max-w-[75%] overflow-visible h-[340px] sm:h-[420px] lg:h-[470px] order-2 lg:order-1">
+                    class="w-full lg:flex-1 lg:max-w-[75%] overflow-visible h-[340px] sm:h-[420px] lg:h-[600px] lg:pt-24 xl:pt-28 order-2 lg:order-1">
 
                     {{-- Image Track: scrollable with hidden scrollbars, aligned to top so hover scales down and pushes neighbors smoothly --}}
                     <div id="studio-carousel-track"
@@ -87,9 +87,9 @@
                 </div>
 
                 {{-- Right Navigation Arrows & Title Area --}}
-                <div class="flex flex-col items-end lg:items-start shrink-0 w-full lg:w-auto lg:max-w-[280px] xl:max-w-[340px] order-1 lg:order-2 pt-[150px] sm:pt-[185px] lg:pt-[220px] xl:pt-[230px]" data-scroll-reveal="left">
+                <div class="flex flex-col items-end lg:items-start shrink-0 w-full lg:w-auto lg:max-w-[280px] xl:max-w-[340px] order-1 lg:order-2 pt-[110px] sm:pt-[140px] lg:pt-[220px] xl:pt-[230px]" data-scroll-reveal="left">
                     {{-- Nav Buttons --}}
-                    <div class="flex items-center gap-3 mb-6 sm:mb-8 lg:mb-10 self-end lg:self-start">
+                    <div class="flex items-center gap-3 mt-4 sm:mt-6 lg:mt-0 mb-6 sm:mb-8 lg:mb-10 self-end lg:self-start">
                         <button id="studio-carousel-prev" type="button" aria-label="Previous image"
                             class="w-11 h-11 sm:w-12 sm:h-12 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] bg-white flex items-center justify-center cursor-pointer
                             transition-all duration-300 hover:bg-[#2A5A8A] hover:text-white hover:scale-105 shadow-sm
@@ -137,9 +137,9 @@
         </div>
     </section>
 
-    {{-- Fullscreen Image Lightbox Modal with side preview images --}}
+    {{-- Fullscreen Image Lightbox Modal with sliding side previews --}}
     <div id="studio-lightbox-modal"
-        class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/92 backdrop-blur-md opacity-0 transition-opacity duration-300 ease-in-out p-2 sm:p-4 lg:p-8"
+        class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/92 backdrop-blur-md opacity-0 transition-opacity duration-300 ease-in-out p-2 sm:p-4 lg:p-8 select-none"
         role="dialog" aria-modal="true" aria-label="Image Preview">
         
         {{-- Close Button --}}
@@ -152,7 +152,7 @@
 
         {{-- Previous Button --}}
         <button id="studio-lightbox-prev" type="button" aria-label="Previous image"
-            class="absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#2A5A8A] text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 border border-white/20 shadow-xl">
+            class="absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#2A5A8A] text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 border border-white/20 shadow-xl disabled:cursor-not-allowed">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
@@ -160,7 +160,7 @@
 
         {{-- Next Button --}}
         <button id="studio-lightbox-next" type="button" aria-label="Next image"
-            class="absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#2A5A8A] text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 border border-white/20 shadow-xl">
+            class="absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#2A5A8A] text-white flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 border border-white/20 shadow-xl disabled:cursor-not-allowed">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
             </svg>
@@ -176,10 +176,10 @@
                     class="w-full max-h-[45vh] object-contain rounded shadow-lg transition-all duration-300 group-hover:scale-105 filter brightness-90">
             </div>
 
-            {{-- Main Focused Center Image --}}
-            <div class="relative flex flex-col items-center justify-center shrink-0 max-w-[88vw] md:max-w-[62vw] lg:max-w-[58vw] max-h-[82vh] z-20">
+            {{-- Main Focused Center Image Container --}}
+            <div class="relative flex flex-col items-center justify-center shrink-0 max-w-[88vw] md:max-w-[62vw] lg:max-w-[58vw] max-h-[82vh] z-20 overflow-hidden">
                 <img id="studio-lightbox-img" src="" alt="Wealth Mansion Studio Full View"
-                    class="max-w-full max-h-[72vh] sm:max-h-[75vh] w-auto h-auto object-contain rounded shadow-2xl transition-all duration-300 ease-out transform scale-95 opacity-0">
+                    class="max-w-full max-h-[72vh] sm:max-h-[75vh] w-auto h-auto object-contain rounded shadow-2xl transition-all duration-350 ease-out transform scale-100 opacity-100 will-change-transform">
                 
                 {{-- Caption / Counter --}}
                 <div class="mt-4 flex items-center justify-between w-full px-2 text-white/90 text-sm font-medium">
@@ -232,6 +232,7 @@
 
                     const imageUrls = items.map((item) => item.dataset.src);
                     let currentLightboxIndex = 0;
+                    let isLightboxAnimating = false;
 
                     // Hover scale & mouseleave reset with rAF synchronization
                     let currentRaf = null;
@@ -330,42 +331,61 @@
                     window.addEventListener("resize", updateButtons);
                     updateButtons();
 
-                    // Lightbox Modal Functions with Side Previews (No Loop)
-                    function updateLightboxImage(index) {
+                    // Lightbox Modal Functions with Directional Slide Transitions
+                    function updateLightboxImage(index, direction = 0) {
                         const total = imageUrls.length;
-                        // Boundary clamp (No looping)
                         if (index < 0) index = 0;
                         if (index >= total) index = total - 1;
-                        currentLightboxIndex = index;
+                        if (index === currentLightboxIndex && direction !== 0) return;
 
+                        currentLightboxIndex = index;
                         const hasPrev = currentLightboxIndex > 0;
                         const hasNext = currentLightboxIndex < total - 1;
-                        
-                        // Center Focused Image
-                        if (lightboxImg) {
-                            lightboxImg.style.opacity = "0";
-                            lightboxImg.style.transform = "scale(0.96)";
-                            
+
+                        if (direction !== 0 && lightboxImg) {
+                            // direction > 0 means Right button clicked -> slide image left (-70px)
+                            // direction < 0 means Left button clicked -> slide image right (+70px)
+                            const exitX = direction > 0 ? "-70px" : "70px";
+                            const enterX = direction > 0 ? "70px" : "-70px";
+
+                            isLightboxAnimating = true;
+                            lightboxImg.style.transition = "transform 220ms cubic-bezier(0.25, 1, 0.5, 1), opacity 220ms ease-in";
+                            lightboxImg.style.transform = `translateX(${exitX}) scale(0.95)`;
+                            lightboxImg.style.opacity = "0.2";
+
                             setTimeout(() => {
+                                lightboxImg.style.transition = "none";
                                 lightboxImg.src = imageUrls[currentLightboxIndex];
-                                lightboxImg.onload = () => {
-                                    lightboxImg.style.opacity = "1";
-                                    lightboxImg.style.transform = "scale(1)";
-                                };
-                            }, 100);
+                                lightboxImg.style.transform = `translateX(${enterX}) scale(0.95)`;
+                                lightboxImg.style.opacity = "0.2";
+                                void lightboxImg.offsetWidth; // Force DOM reflow
+
+                                lightboxImg.style.transition = "transform 320ms cubic-bezier(0.25, 1, 0.5, 1), opacity 320ms ease-out";
+                                lightboxImg.style.transform = "translateX(0px) scale(1)";
+                                lightboxImg.style.opacity = "1";
+
+                                setTimeout(() => {
+                                    isLightboxAnimating = false;
+                                }, 320);
+                            }, 180);
+                        } else if (lightboxImg) {
+                            // Instant initial setup on open
+                            lightboxImg.style.transition = "none";
+                            lightboxImg.src = imageUrls[currentLightboxIndex];
+                            lightboxImg.style.transform = "translateX(0px) scale(1)";
+                            lightboxImg.style.opacity = "1";
                         }
 
-                        // Left Preview Image & Left Nav Button
+                        // Left Preview Image & Button
                         if (lightboxPrevCard) {
                             if (hasPrev) {
+                                lightboxPrevCard.style.display = "flex";
                                 lightboxPrevCard.style.opacity = "0.35";
                                 lightboxPrevCard.style.pointerEvents = "auto";
-                                lightboxPrevCard.style.visibility = "visible";
                                 if (lightboxPrevImg) lightboxPrevImg.src = imageUrls[currentLightboxIndex - 1];
                             } else {
-                                lightboxPrevCard.style.opacity = "0";
+                                lightboxPrevCard.style.display = "none";
                                 lightboxPrevCard.style.pointerEvents = "none";
-                                lightboxPrevCard.style.visibility = "hidden";
                             }
                         }
                         if (lightboxPrev) {
@@ -374,17 +394,16 @@
                             lightboxPrev.style.pointerEvents = hasPrev ? "auto" : "none";
                         }
 
-                        // Right Preview Image & Right Nav Button
+                        // Right Preview Image & Button
                         if (lightboxNextCard) {
                             if (hasNext) {
+                                lightboxNextCard.style.display = "flex";
                                 lightboxNextCard.style.opacity = "0.35";
                                 lightboxNextCard.style.pointerEvents = "auto";
-                                lightboxNextCard.style.visibility = "visible";
                                 if (lightboxNextImg) lightboxNextImg.src = imageUrls[currentLightboxIndex + 1];
                             } else {
-                                lightboxNextCard.style.opacity = "0";
+                                lightboxNextCard.style.display = "none";
                                 lightboxNextCard.style.pointerEvents = "none";
-                                lightboxNextCard.style.visibility = "hidden";
                             }
                         }
                         if (lightboxNext) {
@@ -400,7 +419,7 @@
 
                     function openLightbox(index) {
                         if (!lightbox) return;
-                        updateLightboxImage(index);
+                        updateLightboxImage(index, 0);
                         lightbox.classList.remove("hidden");
                         lightbox.classList.add("flex");
                         document.body.style.overflow = "hidden";
@@ -424,22 +443,30 @@
                     // Lightbox Nav Controls & Preview Clicks
                     if (lightboxPrev) lightboxPrev.addEventListener("click", (e) => {
                         e.stopPropagation();
-                        if (currentLightboxIndex > 0) updateLightboxImage(currentLightboxIndex - 1);
+                        if (currentLightboxIndex > 0 && !isLightboxAnimating) {
+                            updateLightboxImage(currentLightboxIndex - 1, -1);
+                        }
                     });
 
                     if (lightboxNext) lightboxNext.addEventListener("click", (e) => {
                         e.stopPropagation();
-                        if (currentLightboxIndex < imageUrls.length - 1) updateLightboxImage(currentLightboxIndex + 1);
+                        if (currentLightboxIndex < imageUrls.length - 1 && !isLightboxAnimating) {
+                            updateLightboxImage(currentLightboxIndex + 1, 1);
+                        }
                     });
 
                     if (lightboxPrevCard) lightboxPrevCard.addEventListener("click", (e) => {
                         e.stopPropagation();
-                        if (currentLightboxIndex > 0) updateLightboxImage(currentLightboxIndex - 1);
+                        if (currentLightboxIndex > 0 && !isLightboxAnimating) {
+                            updateLightboxImage(currentLightboxIndex - 1, -1);
+                        }
                     });
 
                     if (lightboxNextCard) lightboxNextCard.addEventListener("click", (e) => {
                         e.stopPropagation();
-                        if (currentLightboxIndex < imageUrls.length - 1) updateLightboxImage(currentLightboxIndex + 1);
+                        if (currentLightboxIndex < imageUrls.length - 1 && !isLightboxAnimating) {
+                            updateLightboxImage(currentLightboxIndex + 1, 1);
+                        }
                     });
 
                     if (lightboxClose) lightboxClose.addEventListener("click", (e) => {
@@ -459,8 +486,12 @@
                     window.addEventListener("keydown", (e) => {
                         if (!lightbox || lightbox.classList.contains("hidden")) return;
                         if (e.key === "Escape") closeLightbox();
-                        if (e.key === "ArrowLeft" && currentLightboxIndex > 0) updateLightboxImage(currentLightboxIndex - 1);
-                        if (e.key === "ArrowRight" && currentLightboxIndex < imageUrls.length - 1) updateLightboxImage(currentLightboxIndex + 1);
+                        if (e.key === "ArrowLeft" && currentLightboxIndex > 0 && !isLightboxAnimating) {
+                            updateLightboxImage(currentLightboxIndex - 1, -1);
+                        }
+                        if (e.key === "ArrowRight" && currentLightboxIndex < imageUrls.length - 1 && !isLightboxAnimating) {
+                            updateLightboxImage(currentLightboxIndex + 1, 1);
+                        }
                     });
                 }
 
@@ -540,5 +571,3 @@
     </section>
 
 @endsection
-
-

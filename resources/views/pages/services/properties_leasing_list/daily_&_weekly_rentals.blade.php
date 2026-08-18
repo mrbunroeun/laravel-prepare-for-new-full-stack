@@ -99,7 +99,7 @@
                         'desc' => 'All-inclusive monthly living package with premium residential facilities.',
                     ],
                 ],
-                'link' => url('/services/property-leasing/daily-weekly-rentals/studio-room'),
+                'link' => url('/services/property-leasing/daily-weekly-rentals/1-bedroom'),
                 'image' => $cardImage,
             ],
             [
@@ -125,7 +125,7 @@
                         'desc' => 'Premium corner residences with panoramic city views and dedicated management.',
                     ],
                 ],
-                'link' => url('/services/property-leasing/daily-weekly-rentals/studio-room'),
+                'link' => url('/services/property-leasing/daily-weekly-rentals/2-bedroom-with-balcony'),
                 'image' => $cardImage,
             ],
             [
@@ -151,7 +151,7 @@
                         'desc' => 'Expansive residences with VIP hospitality support and priority facility access.',
                     ],
                 ],
-                'link' => url('/services/property-leasing/daily-weekly-rentals/studio-room'),
+                'link' => url('/services/property-leasing/daily-weekly-rentals/3-bedroom'),
                 'image' => $cardImage,
             ],
         ];
@@ -260,57 +260,60 @@
                                             </div>
                                         </div>
 
-                                        <div class="mt-4 pt-3 border-t border-gray-100/80" onclick="event.stopPropagation();">
+                                        <div class="mt-4 pt-3 border-t border-gray-100/80">
                                             {{-- Toggle Button with Smooth Text Fade Transition --}}
                                             <button type="button"
-                                                class="price-toggle-btn text-[#2A5A8A] text-[15px] sm:text-[16px] font-bold mb-2.5 inline-flex items-center gap-1 hover:underline cursor-pointer focus:outline-none"
-                                                aria-expanded="false">
-                                                <span class="price-btn-label transition-opacity duration-200 ease-out inline-block">See Price</span>
-                                            </button>
+                                                 class="price-toggle-btn text-[#2A5A8A] text-[15px] sm:text-[16px] font-bold mb-2.5 inline-flex items-center gap-1 hover:underline cursor-pointer focus:outline-none"
+                                                 aria-expanded="false"
+                                                 onclick="event.stopPropagation();">
+                                                 <span class="price-btn-label transition-opacity duration-200 ease-out inline-block">See Price</span>
+                                             </button>
 
-                                            {{-- Expandable Dropdown Container with Smooth CSS Grid Animation --}}
-                                            <div class="price-panel grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-out overflow-hidden" aria-hidden="true">
-                                                <div class="overflow-hidden min-h-0">
-                                                    <div class="pb-2.5 pt-0.5">
-                                                        {{-- Tabs: Daily | Weekly | Monthly --}}
-                                                        <div class="flex items-center gap-4 sm:gap-5 mb-2.5 text-[14px] sm:text-[15px]">
-                                                            <button type="button" data-tab="daily"
-                                                                class="price-tab font-bold text-[#2A5A8A] border-b-2 border-[#2A5A8A] pb-0.5 cursor-pointer focus:outline-none transition-colors">
+                                             {{-- Expandable Dropdown Container with Smooth CSS Grid Animation --}}
+                                             <div class="price-panel grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-out overflow-hidden"
+                                                 aria-hidden="true"
+                                                 onclick="event.stopPropagation();">
+                                                 <div class="overflow-hidden min-h-0">
+                                                     <div class="pb-2.5 pt-0.5">
+                                                         {{-- Tabs: Daily | Weekly | Monthly --}}
+                                                         <div class="flex items-center gap-4 sm:gap-5 mb-2.5 text-[14px] sm:text-[15px]">
+                                                             <button type="button" data-tab="daily"
+                                                                 class="price-tab font-bold text-[#2A5A8A] border-b-2 border-[#2A5A8A] pb-0.5 cursor-pointer focus:outline-none transition-colors">
                                                                 Daily
-                                                            </button>
-                                                            <button type="button" data-tab="weekly"
-                                                                class="price-tab font-medium text-gray-400 hover:text-gray-600 border-b-2 border-transparent pb-0.5 cursor-pointer focus:outline-none transition-colors">
+                                                             </button>
+                                                             <button type="button" data-tab="weekly"
+                                                                 class="price-tab font-medium text-gray-400 hover:text-gray-600 border-b-2 border-transparent pb-0.5 cursor-pointer focus:outline-none transition-colors">
                                                                 Weekly
-                                                            </button>
-                                                            <button type="button" data-tab="monthly"
+                                                             </button>
+                                                             <button type="button" data-tab="monthly"
                                                                 class="price-tab font-medium text-gray-400 hover:text-gray-600 border-b-2 border-transparent pb-0.5 cursor-pointer focus:outline-none transition-colors">
                                                                 Monthly
-                                                            </button>
-                                                        </div>
+                                                             </button>
+                                                         </div>
 
-                                                        {{-- Pricing Details for Each Tab --}}
-                                                        @foreach (['daily', 'weekly', 'monthly'] as $tabKey)
-                                                            <div class="price-content price-content-{{ $tabKey }} transition-all duration-200 {{ $tabKey === 'daily' ? 'block opacity-100' : 'hidden opacity-0' }}">
+                                                         {{-- Pricing Details for Each Tab --}}
+                                                         @foreach (['daily', 'weekly', 'monthly'] as $tabKey)
+                                                             <div class="price-content price-content-{{ $tabKey }} transition-all duration-200 {{ $tabKey === 'daily' ? 'block opacity-100' : 'hidden opacity-0' }}">
                                                                 <div class="text-black text-[15px] sm:text-[16px] font-bold mb-1.5">
                                                                     {{ $project['pricing'][$tabKey]['price'] }}
                                                                 </div>
                                                                 <p class="text-black/75 text-[12.5px] sm:text-[13px] leading-relaxed mb-1">
                                                                     {{ $project['pricing'][$tabKey]['desc'] }}
                                                                 </p>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                             </div>
+                                                         @endforeach
+                                                     </div>
+                                                 </div>
+                                             </div>
 
-                                            {{-- View Photos Link --}}
-                                            <div class="mt-1">
+                                             {{-- View Photos Link --}}
+                                             <div class="mt-1">
                                                 <a href="{{ $project['link'] }}"
                                                     class="inline-flex items-center gap-1.5 text-[#2A5A8A] group-hover:text-[#c9a463] text-[13.5px] sm:text-[14px] font-medium transition-colors duration-200">
                                                     <span>View Photos</span>
                                                     <span class="transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true">&rarr;</span>
                                                 </a>
-                                            </div>
+                                             </div>
                                         </div>
                                     </div>
                                 </div>
