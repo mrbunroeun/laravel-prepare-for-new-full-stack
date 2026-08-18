@@ -157,7 +157,7 @@
         ];
     @endphp
 
-    <section id="featured-properties-section" class="relative w-full bg-[#2A5A8A] z-[300] mt-0 pt-20 sm:pt-24 lg:pt-32 pb-16 sm:pb-20 scroll-mt-6">
+    <section id="featured-properties-section" class="relative w-full bg-[#2A5A8A] z-[300] mt-0 pt-20 sm:pt-24 lg:pt-32 pb-16 sm:pb-20 scroll-mt-6 overflow-x-clip">
         {{-- Background Image Offset Down --}}
         <div class="absolute inset-x-0 bottom-0 top-[260px] sm:top-[300px] lg:top-[340px] z-0 overflow-hidden">
             <img src="{{ asset('services/propertis_leasing/available rental units/daily & weekly rentals_rental unit.png') }}"
@@ -216,9 +216,9 @@
                 </div>
 
                 {{-- Right: Horizontal Card Slider Track --}}
-                <div class="relative min-w-0 flex-1 w-full max-w-[1240px]" data-scroll-reveal="right">
+                <div class="relative min-w-0 flex-1 w-full max-w-[1240px] overflow-hidden" data-scroll-reveal="right">
                     <div id="featured-properties-track"
-                        class="pointer-events-auto flex gap-4 overflow-x-auto scroll-smooth items-start pb-4
+                        class="pointer-events-auto flex gap-4 overflow-x-auto overflow-y-hidden touch-pan-x scroll-smooth items-start pb-4
                             snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pr-6 sm:pr-10 lg:pr-16">
                         @foreach ($featuredProjects as $index => $project)
                             @php
