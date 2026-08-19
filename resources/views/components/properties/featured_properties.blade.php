@@ -1,42 +1,38 @@
-
         @php
-            $properties = [
-                [
-                    'image' => asset('home/latest_activities/1img.png'),
-                    'title' => 'Wealth Mansion',
-                    'description' =>
-                        'Premium condominium development offering modern residential units with excellent city access.',
-                    'link' => url('/properties/wealth-mansion'),
-                ],
-                [
-                    'image' => asset('home/latest_activities/2img.png'),
-                    'title' => 'Private Residential Collection',
-                    'description' =>
-                        'Professionally managed condominium units including premium residences and penthouses.',
-                    'link' => url('/properties/private-residential-collection'),
-                ],
-                [
-                    'image' => asset('home/latest_activities/3img.png'),
-                    'title' => 'UC88 Residence',
-                    'description' =>
-                        "Comfortable condominium living with convenient access to Phnom Penh's business districts.",
-                    'link' => url('/properties/uc88-residence'),
-                ],
-                [
-                    'image' => asset('home/latest_activities/1img.png'),
-                    'title' => 'Wealth Mansion',
-                    'description' =>
-                        'Premium condominium development offering modern residential units with excellent city access.',
-                    'link' => url('/properties/wealth-mansion'),
-                ],
-                [
-                    'image' => asset('home/latest_activities/2img.png'),
-                    'title' => 'Private Residential Collection',
-                    'description' =>
-                        'Professionally managed condominium units including premium residences and penthouses.',
-                    'link' => url('/properties/private-residential-collection'),
-                ],
-            ];
+            $properties = \App\Models\FeaturedProperty::where('status', 'published')
+                ->orderBy('sort_order', 'asc')
+                ->orderBy('id', 'asc')
+                ->get()
+                ->toArray();
+
+            if (empty($properties)) {
+                $properties = [
+                    [
+                        'image' => asset('home/latest_activities/1img.png'),
+                        'title' => 'Wealth Mansion',
+                        'description' =>
+                            'Premium condominium development offering modern residential units with excellent city access.',
+                        'link' => url('/properties/wealth-mansion'),
+                        'link_text' => 'View Property',
+                    ],
+                    [
+                        'image' => asset('home/latest_activities/2img.png'),
+                        'title' => 'Private Residential Collection',
+                        'description' =>
+                            'Professionally managed condominium units including premium residences and penthouses.',
+                        'link' => url('/properties/private-residential-collection'),
+                        'link_text' => 'View Property',
+                    ],
+                    [
+                        'image' => asset('home/latest_activities/3img.png'),
+                        'title' => 'UC88 Residence',
+                        'description' =>
+                            "Comfortable condominium living with convenient access to Phnom Penh's business districts.",
+                        'link' => url('/properties/uc88-residence'),
+                        'link_text' => 'View Property',
+                    ],
+                ];
+            }
         @endphp
 
         <section class="relative w-full min-h-[500px] sm:min-h-[550px] md:min-h-[600px] lg:min-h-[660px]">
@@ -82,11 +78,17 @@
                         class="cwd-featured-fade pointer-events-auto flex gap-5 overflow-x-auto scroll-smooth pl-4 sm:pl-10 lg:pl-[20rem] pr-4 sm:pr-6 lg:pr-[320px] scroll-pl-4 sm:scroll-pl-10 lg:scroll-pl-[20rem] pb-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
 
                         @foreach ($properties as $property)
-                            <a href="{{ $property['link'] }}"
+                            @php
+                                $img = $property['image'] ?? 'home/latest_activities/1img.png';
+                                if (!str_starts_with($img, 'http') && !str_starts_with($img, '/')) {
+                                    $img = asset($img);
+                                }
+                            @endphp
+                            <a href="{{ url($property['link'] ?? '#') }}"
                                 class="cwd-featured-card block shrink-0 snap-start w-[260px] sm:w-[280px] bg-white shadow-sm cursor-pointer group transition-transform duration-300 hover:shadow-md">
 
                                 <div class="h-[170px] w-full overflow-hidden bg-gray-100">
-                                    <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
+                                    <img src="{{ $img }}" alt="{{ $property['title'] }}"
                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                                 </div>
 
@@ -99,7 +101,7 @@
                                     </p>
                                     <span
                                         class="text-[#2A5A8A] text-[12px] font-semibold inline-flex items-center gap-1 group-hover:underline">
-                                        View Property <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+                                        {{ $property['link_text'] ?? 'View Property' }} <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
                                     </span>
                                 </div>
                             </a>
@@ -110,7 +112,7 @@
 
                 {{-- Featured Properties heading + navigation --}}
                 <div
-                    class="hidden lg:flex flex-col items-start justify-start gap-10 w-[300px] absolute right-0 top-0 px-10 py-8 z-30">
+                    class="hidden lg:flex flex-col items-start justify-start gap-10 w-[300px] absolute right-0 top-0 px-10 py-8 z-30 pointer-events-auto">
                     <div class="flex items-center gap-3">
                         <button id="cwd-featured-prev" type="button" aria-label="Previous property"
                             class="w-11 h-11 rounded-full border-[1.5px] border-[#F4DEAC] text-[#F4DEAC] flex items-center justify-center cursor-pointer hover:bg-[#F4DEAC] hover:text-[#2A5A8A] transition-colors">
@@ -128,7 +130,7 @@
                         </button>
                     </div>
 
-                    <h2 class="text-[#F4DEAC] -z-1 text-[clamp(24px,2.4vw,34px)] leading-tight">
+                    <h2 class="text-[#F4DEAC] text-[clamp(24px,2.4vw,34px)] leading-tight select-none">
                         <span class="font-normal block">Featured</span>
                         <span class="font-bold block">Properties</span>
                     </h2>

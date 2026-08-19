@@ -8,31 +8,64 @@
     </section>
 
     {{-- Hero content, sits above the hero image --}}
+    @php
+        $heroShowTagline = $heroSection->show_tagline ?? true;
+        $heroTaglineHtml = $heroSection->tagline_html ?? '<b>CWD</b> Real Estate Agent & Developer';
+        $heroHeadline = $heroSection->headline ?? 'Your Trusted Property Management & Hospitality Partner in Cambodia';
+        $heroShowBullets = $heroSection->show_bullets ?? false;
+        $heroBullets = $heroSection->bullets ?? ['Flexible income', 'Strong brand', 'Real projects', 'Full sales support'];
+        $heroButtons = $heroSection->buttons ?? [
+            ['text' => 'Browse Properties', 'url' => '/properties'],
+            ['text' => 'Contact Us', 'url' => '/contact-us']
+        ];
+
+        // Format <b> tags into gold bold spans, and non-bold into gold normal
+        $formattedTagline = str_replace(
+            ['<b>', '</b>', '<B>', '</B>'],
+            ['<span class="font-bold text-[#F4DEAC]">', '</span>', '<span class="font-bold text-[#F4DEAC]">', '</span>'],
+            $heroTaglineHtml
+        );
+    @endphp
     <section class="relative z-[200] lg:mt-[-5rem] lg:mb-[10rem] text-[#2f6ba7] pointer-events-none">
         <div class="pt-[20rem] max-[1240px]:pt-[15rem] max-[940px]:pt-[10rem] max-w-[1400px] mx-auto px-6">
             {{-- Gold accent bar --}}
             <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
             <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                 <div class="px-0 py-10">
-                    <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)]  font-bold mb-6">
-                        <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
-                        <span class="text-[#F4DEAC]">CWD</span>
-                        <span class="text-[#F4DEAC] font-normal">Real Estate Agent &amp; Developer</span>
-                    </h2>
+                    {{-- Dynamic Tagline --}}
+                    @if($heroShowTagline && !empty($heroTaglineHtml))
+                        <h2 class="flex items-center gap-3 text-[clamp(20px,3vw,30px)] mb-6 text-[#F4DEAC] font-normal">
+                            <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
+                            <span class="text-[#F4DEAC] font-normal leading-tight">
+                                {!! $formattedTagline !!}
+                            </span>
+                        </h2>
+                    @endif
 
-                    <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-10">
-                        Your Trusted Property Management &amp; Hospitality Partner in Cambodia
+                    {{-- Dynamic Headline --}}
+                    <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-6">
+                        {{ $heroHeadline }}
                     </h1>
 
-                    <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
-                        <a href="{{ url('/properties') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                            Browse Properties
-                        </a>
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                            Contact Us
-                        </a>
+                    {{-- Dynamic Bullets List --}}
+                    @if($heroShowBullets && !empty($heroBullets))
+                        <p class="text-[#EBD4A4] text-[13px] sm:text-[14.5px] px-10 sm:px-10 mb-8 font-light tracking-wide leading-relaxed">
+                            @foreach($heroBullets as $bullet)
+                                <span class="inline-block mr-2">• {{ $bullet }}</span>
+                            @endforeach
+                        </p>
+                    @else
+                        <div class="mb-4"></div>
+                    @endif
+
+                    {{-- Dynamic Buttons (Max 3) --}}
+                    <div class="flex flex-wrap items-center px-10 sm:px-10 gap-4 pointer-events-auto">
+                        @foreach($heroButtons as $btn)
+                            <a href="{{ url($btn['url']) }}"
+                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                {{ $btn['text'] }}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -86,12 +119,11 @@
 
     {{-- our services --}}
     @php
-        $services = [
+        $servicesList = $servicesSection->cards ?? [
             [
                 'number' => '01',
                 'title' => 'Property Management',
-                'description' =>
-                    'Professional management for condominium owners, including tenant coordination, maintenance supervision, occupancy management, and rental administration.',
+                'description' => 'Professional management for condominium owners, including tenant coordination, maintenance supervision, occupancy management, and rental administration.',
                 'link' => url('/services/property-management'),
                 'linkText' => 'View Details',
             ],
@@ -112,12 +144,16 @@
             [
                 'number' => '04',
                 'title' => 'Hospitality Services',
-                'description' =>
-                    'Airport transfers, guest assistance, city tours, housekeeping coordination, and personalized hospitality support.',
+                'description' => 'Airport transfers, guest assistance, city tours, housekeeping coordination, and personalized hospitality support.',
                 'link' => url('/services/hospitality-services'),
                 'linkText' => 'Explore Services',
             ],
         ];
+
+        $servicesImageUrl = $servicesSection->image_url ?? 'home/our_services/our_services.png';
+        if (!str_starts_with($servicesImageUrl, 'http') && !str_starts_with($servicesImageUrl, '/')) {
+            $servicesImageUrl = asset($servicesImageUrl);
+        }
     @endphp
 
     {{-- our services --}}
@@ -138,10 +174,11 @@
                 <div
                     class="flex flex-col items-end w-full min-[1220px]:w-[850px] min-[1220px]:order-2 min-[1220px]:-mt-[7.5rem]" data-scroll-reveal="right">
 
-                    <div class="w-full h-[460px] sm:h-[640px] overflow-hidden">
-                        <img src="{{ asset('home/our_services/our_services.png') }}"
-                            alt="CWD Realty modern residential condominium tower in Phnom Penh"
-                            class="w-full h-full object-cover">
+                    {{-- Exact fixed container dimensions so any image stretches to fill perfectly --}}
+                    <div class="w-full h-[460px] sm:h-[640px] overflow-hidden bg-slate-900">
+                        <img src="{{ $servicesImageUrl }}"
+                            alt="CWD Realty Services"
+                            class="w-full h-full object-cover object-center block">
                     </div>
 
                     {{-- Gold accent bar --}}
@@ -153,7 +190,7 @@
                 {{-- Service cards grid --}}
                 <div
                     class="relative w-full min-[1220px]:w-[54%] min-[1220px]:order-1 min-[1220px]:z-[30] min-[1220px]:-mr-[80px] min-[1220px]:mt-[68px] -mt-16 sm:-mt-20 min-[1220px]:mt-0 grid grid-cols-1 min-[770px]:grid-cols-2 gap-2 sm:gap-2.5 px-4 sm:px-0">
-                    @foreach ($services as $service)
+                    @foreach ($servicesList as $service)
                         <div
                             class="service-card bg-[#1479B9] px-5 py-5 sm:px-6 sm:py-6 flex flex-col min-h-[150px] min-[1220px]:min-h-[145px]" data-scroll-reveal="left" data-scroll-delay="{{ $loop->index * 100 }}">
                             <div class="flex items-start justify-between gap-2">
@@ -169,9 +206,9 @@
                                 {{ $service['description'] }}
                             </p>
 
-                            <a href="{{ $service['link'] }}"
+                            <a href="{{ url($service['link'] ?? '#') }}"
                                 class="text-[#F4DEAC] text-[11px] sm:text-[13px] font-medium mt-4 pt-4 inline-flex items-center gap-1 hover:underline mt-auto">
-                                {{ $service['linkText'] }} <span aria-hidden="true">→</span>
+                                {{ $service['linkText'] ?? 'Learn More' }} <span aria-hidden="true">→</span>
                             </a>
                         </div>
                     @endforeach
@@ -250,7 +287,10 @@
     <x-properties.featured_properties />
 
     @php
-        $whyChooseFeatures = [
+        $whyHeading1 = $whyChooseUsSection->heading_line_1 ?? 'Why Choose';
+        $whyHeading2 = $whyChooseUsSection->heading_line_2 ?? 'CWD Realty & Hospitality?';
+        $whyAlign = $whyChooseUsSection->text_align ?? 'left';
+        $whyItems = $whyChooseUsSection->items ?? [
             [
                 'title' => 'Condominium Specialists',
                 'description' => 'We focus on professionally managing residential condominium properties.',
@@ -282,15 +322,15 @@
     <section class="relative px-0 sm:px-[5rem] z-[300] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16 max-[940px]:py-12">
 
-            {{-- Heading --}}
-            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12" data-scroll-reveal="left">
-                <span class="text-[#2A5A8A] font-normal block">Why Choose</span>
-                <span class="text-[#2A5A8A] font-bold block">CWD Realty &amp; Hospitality?</span>
+            {{-- Heading with dynamic Alignment (Left or Center) --}}
+            <h2 class="text-[clamp(28px,4vw,40px)] leading-tight mb-10 sm:mb-12 {{ $whyAlign === 'center' ? 'text-center' : 'text-left' }}" data-scroll-reveal="{{ $whyAlign === 'center' ? 'fade-up' : 'left' }}">
+                <span class="text-[#2A5A8A] font-normal block">{{ $whyHeading1 }}</span>
+                <span class="text-[#2A5A8A] font-bold block">{{ $whyHeading2 }}</span>
             </h2>
 
             {{-- Cards grid --}}
             <div id="why-choose-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 items-stretch">
-                @foreach ($whyChooseFeatures as $index => $feature)
+                @foreach ($whyItems as $index => $feature)
                     @php
                         $direction = ($index === 0 || $index === 3) ? 'left' : (($index === 2 || $index === 4) ? 'right' : 'fade-up');
                     @endphp
@@ -359,7 +399,7 @@
 
     {{-- Frequently Asked Questions --}}
     @php
-        $faqLeft = [
+        $defaultFaqLeft = [
             [
                 'question' => 'Why should I stay at a property managed by CWD Realty & Hospitality?',
                 'answer' =>
@@ -379,7 +419,7 @@
             ],
         ];
 
-        $faqRight = [
+        $defaultFaqRight = [
             [
                 'question' => 'Are pets allowed?',
                 'answer' => 'ComingSoon',
@@ -397,9 +437,12 @@
                 'answer' => 'ComingSoon',
             ],
         ];
+
+        $faqLeftItems = (isset($faqLeft) && count($faqLeft) > 0) ? $faqLeft : $defaultFaqLeft;
+        $faqRightItems = (isset($faqRight) && count($faqRight) > 0) ? $faqRight : $defaultFaqRight;
     @endphp
 
-    <x-faqs :faq-left="$faqLeft" :faq-right="$faqRight" />
+    <x-faqs :faq-left="$faqLeftItems" :faq-right="$faqRightItems" />
 
 
     <!-- Latest activities -->

@@ -21,7 +21,7 @@
                 'Rental investment',
             ],
             'units' => 'XX Units Available',
-            'link' => url('services/properties/wealth-mansion'),
+            'link' => url('services/property-leasing/daily-weekly-rentals/studio-room'),
         ],
         [
             'image' => $bedroomImg,
@@ -37,7 +37,7 @@
                 'Property investors',
             ],
             'units' => 'XX Units Available',
-            'link' => url('services/properties/private-residential'),
+            'link' => url('services/property-leasing/daily-weekly-rentals/studio-room'),
         ],
         [
             'image' => $allPartImg,
@@ -53,7 +53,7 @@
                 'Investment purposes',
             ],
             'units' => 'XX Units Available',
-            'link' => url('services/properties/uc88'),
+            'link' => url('services/property-leasing/daily-weekly-rentals/studio-room'),
         ],
     ];
 @endphp
@@ -160,7 +160,7 @@
 
                         {{-- mt-auto keeps the CTA pinned to the bottom so cards
                              with shorter/longer content still align. --}}
-                        <a href="{{ $property['link'] }}"
+                        <a href="{{ url('/contact-us') }}"
                             class="cwd-featured-card-link relative z-10 mt-auto text-[#2A5A8A] text-[14px] font-semibold
                                 inline-flex items-center gap-1 w-max
                                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2 rounded-sm">

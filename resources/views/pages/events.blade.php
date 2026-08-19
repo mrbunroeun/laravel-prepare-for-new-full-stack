@@ -84,7 +84,7 @@
                                 <p class="text-gray-600 text-[13px] sm:text-[14px] leading-relaxed mb-4">
                                     {{ $event['description'] }}
                                 </p>
-                                <a href="{{ $event['link'] }}" class="text-[#2A5A8A] text-[14px] hover:underline inline-block mb-5 font-normal">
+                                <a href="{{ url('/insights/view-full-insight') }}" onclick="event.preventDefault();" class="text-[#2A5A8A] text-[14px] hover:underline inline-block mb-5 font-normal cursor-pointer">
                                     Link
                                 </a>
                             </div>

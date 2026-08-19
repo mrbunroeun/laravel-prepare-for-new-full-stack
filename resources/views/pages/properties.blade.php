@@ -457,9 +457,12 @@
             <nav class="flex flex-col divide-y divide-gray-200 border border-gray-200 shadow-sm">
                 @foreach ($links as $link)
                     <a href="{{ $link['url'] }}"
+                        @if ($link['label'] === 'Property Listings')
+                            onclick="event.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'}); history.pushState(null, '', '{{ $link['url'] }}');"
+                        @endif
                         class="group flex items-center justify-between px-5 py-3 text-[15px] font-medium
                    bg-white text-[#2A5A8A] transition-colors
-                   hover:bg-[#2A5A8A] hover:text-[#DCC597]">
+                   hover:bg-[#2A5A8A] hover:text-[#DCC597] cursor-pointer">
                         <span>{{ $link['label'] }}</span>
                         <span aria-hidden="true"
                             class="text-[#2A5A8A] transition-all group-hover:text-[#DCC597] group-hover:translate-x-1">

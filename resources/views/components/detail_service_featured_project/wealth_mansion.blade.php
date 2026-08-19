@@ -395,7 +395,7 @@
                                     For buyers looking for a condominium residence suitable for personal living.
                                 </p>
                             </div>
-                            <a href="{{ url('/services/property-sales') }}"
+                            <a href="{{ url('/contact-us') }}"
                                 class="inline-flex items-center gap-1.5 text-white/90 hover:text-[#F4DEAC] text-[13.5px] sm:text-[14px] font-medium transition-colors mt-auto">
                                 <span>Ask About Rental Management</span>
                                 <span aria-hidden="true">&rarr;</span>
@@ -415,7 +415,7 @@
                                     For investors seeking residential property that can potentially be placed into CWD's rental management portfolio.
                                 </p>
                             </div>
-                            <a href="{{ url('/services/property-management') }}"
+                            <a href="{{ url('/contact-us') }}"
                                 class="inline-flex items-center gap-1.5 text-white/90 hover:text-[#F4DEAC] text-[13.5px] sm:text-[14px] font-medium transition-colors mt-auto">
                                 <span>Ask About Rental Management</span>
                                 <span aria-hidden="true">&rarr;</span>
@@ -660,7 +660,7 @@
                             Let CWD Realty &amp; Hospitality help you find the right unit.
                         </p>
                         <div class="flex flex-col items-start gap-1.5">
-                            <a href="{{ url('/services/properties/wealth-mansion') }}"
+                            <a href="{{ url('/properties') }}"
                                 class="inline-flex items-center gap-2 text-[#204a74] hover:bg-[#204a74] hover:text-[#ECCFA0] px-4 py-2 text-[14px] font-medium transition-all">
                                 <span>View Available Units</span>
                                 <span aria-hidden="true">&rarr;</span>
