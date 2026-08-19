@@ -101,7 +101,24 @@ Route::get('/', function () {
 });
 
 Route::get('/about-us', function () {
-    return view('pages.about_us');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'about-us'],
+        [
+            'tagline_box1' => 'CWD',
+            'tagline_box1_style' => 'bold-gold',
+            'tagline_box2' => 'Real Estate Agent & Developer',
+            'tagline_box2_style' => 'light-gold',
+            'headline' => 'Your Trusted Property Management & Hospitality Partner in Cambodia',
+            'show_bullets' => false,
+            'bullets' => ['Flexible income', 'Strong brand', 'Real projects', 'Full sales support'],
+            'buttons' => [
+                ['text' => 'Browse Properties', 'url' => '/properties'],
+                ['text' => 'Contact Us', 'url' => '/contact-us']
+            ]
+        ]
+    );
+
+    return view('pages.about_us', compact('heroSection'));
 });
 
 Route::get('/latest-activities', function () {
@@ -256,6 +273,12 @@ Route::post('/api/comments/{comment}/approve', [\App\Http\Controllers\CommentCon
 Route::post('/api/comments/{comment}/reject', [\App\Http\Controllers\CommentController::class, 'reject']);
 Route::delete('/api/comments/{comment}', [\App\Http\Controllers\CommentController::class, 'destroy']);
 
+Route::get('/dashboard/pages/about-us', function () {
+    return view('dashboard.pages.about_us', [
+        'pageTitle' => 'About Us Page',
+        'pageSlug' => 'about-us'
+    ]);
+});
 Route::get('/dashboard/pages/{slug}', function ($slug) {
     $titles = [
         'about-us' => 'About Us Page',

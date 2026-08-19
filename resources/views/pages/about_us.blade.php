@@ -14,26 +14,51 @@
             <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
             <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                 <div class="px-0 py-10">
-                    <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)]  font-bold mb-6">
-                        <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
-                        <span class="text-[#F4DEAC]">CWD</span>
-                        <span class="text-[#F4DEAC] font-normal">Real Estate Agent &amp; Developer</span>
-                    </h2>
+                    @if(!empty($heroSection->show_tagline ?? true))
+                        <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)] font-bold mb-6">
+                            <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
+                            @if(!empty($heroSection->tagline_html))
+                                {!! $heroSection->tagline_html !!}
+                            @else
+                                <span class="text-[#F4DEAC]">{{ $heroSection->tagline_box1 ?? 'CWD' }}</span>
+                                <span class="text-[#F4DEAC] font-normal">{{ $heroSection->tagline_box2 ?? 'Real Estate Agent & Developer' }}</span>
+                            @endif
+                        </h2>
+                    @endif
 
-                    <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-10">
-                        Your Trusted Property Management &amp; Hospitality Partner in Cambodia
+                    <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-6">
+                        {{ $heroSection->headline ?? 'Your Trusted Property Management & Hospitality Partner in Cambodia' }}
                     </h1>
 
-                    <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
-                        <a href="{{ url('/properties') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                            Browse Properties
-                        </a>
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                            Contact Us
-                        </a>
-                    </div>
+                    @if(!empty($heroSection->show_bullets) && !empty($heroSection->bullets))
+                        <div class="px-10 text-[#EBD4A4] text-[13px] sm:text-[14px] mb-6 flex flex-wrap items-center gap-x-3 gap-y-1">
+                            @foreach($heroSection->bullets as $bullet)
+                                <span>• {{ $bullet }}</span>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if(!empty($heroSection->buttons))
+                        <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto flex-wrap">
+                            @foreach($heroSection->buttons as $button)
+                                <a href="{{ url($button['url'] ?? '#') }}"
+                                    class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                    {{ $button['text'] ?? $button['label'] ?? 'Learn More' }}
+                                </a>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
+                            <a href="{{ url('/properties') }}"
+                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                Browse Properties
+                            </a>
+                            <a href="{{ url('/contact-us') }}"
+                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                Contact Us
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
 
