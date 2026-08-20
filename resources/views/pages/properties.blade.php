@@ -17,25 +17,32 @@
                 <div class="px-0 py-10">
                     <h2 class="flex items-center gap-4 text-[clamp(20px,2.5vw,28px)] font-normal mb-6">
                         <span class="h-[2px] w-12 sm:w-16 bg-[#F4DEAC]"></span>
-                        <span class="text-[#F4DEAC] text-[clamp(22px,2.8vw,32px)] font-normal">Properties</span>
+                        <span class="text-[#F4DEAC] text-[clamp(22px,2.8vw,32px)] font-normal">{{ $heroSection->tagline_box1 ?? 'Properties' }}</span>
                     </h2>
 
                     <h1 class="text-white px-6 sm:px-10 text-[clamp(22px,3.2vw,36px)] font-medium leading-snug mb-10">
-                        Your Trusted Property<br>
-                        Management &amp; Hospitality<br>
-                        Partner in Cambodia
+                        {!! nl2br(e($heroSection->headline ?? "Your Trusted Property\nManagement & Hospitality\nPartner in Cambodia")) !!}
                     </h1>
 
-                    <div class="flex items-center px-6 sm:px-10 gap-4 pointer-events-auto">
-                        <a href="#featured-properties-section"
-                            onclick="event.preventDefault(); document.getElementById('featured-properties-section')?.scrollIntoView({behavior: 'smooth'});"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-medium px-4 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors cursor-pointer">
-                            Browse Properties
-                        </a>
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-medium px-6 sm:px-8 py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors">
-                            Contact Us
-                        </a>
+                    @php
+                        $heroBtns = (!empty($heroSection->buttons) && is_array($heroSection->buttons)) ? $heroSection->buttons : [
+                            ['text' => 'Browse Properties', 'url' => '#featured-properties-section'],
+                            ['text' => 'Contact Us', 'url' => '/contact-us']
+                        ];
+                    @endphp
+
+                    <div class="flex items-center px-6 sm:px-10 gap-4 pointer-events-auto flex-wrap">
+                        @foreach($heroBtns as $btn)
+                            @php
+                                $btnUrl = $btn['url'] ?? '#';
+                                $isAnchor = str_starts_with($btnUrl, '#');
+                            @endphp
+                            <a href="{{ $btnUrl }}"
+                                @if($isAnchor) onclick="event.preventDefault(); document.querySelector('{{ $btnUrl }}')?.scrollIntoView({behavior: 'smooth'});" @endif
+                                class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-medium px-4 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors cursor-pointer">
+                                {{ $btn['text'] ?? 'Learn More' }}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -43,47 +50,81 @@
         </div>
     </section>
 
-
-
-
-
     {{-- Featured Properties (Inline directly matching screenshot) --}}
     @php
-        $detailImages = [
+        $defaultDetailImages = [
             asset('home/latest_activities/1img.png'),
             asset('home/latest_activities/2img.png'),
             asset('home/latest_activities/3img.png'),
         ];
 
-        $featuredProjects = [
-            [
-                'title' => 'Wealth Mansion',
-                'subtitle' => 'Premium Condominium Residences',
-                'description' =>
-                    'Studio, 1-bedroom, 2-bedroom, and 3-bedroom residences with selected units available.',
-                'status' => '30% Available',
-                'link' => url('services/properties/wealth-mansion'),
-                'image' => $detailImages[0],
-            ],
-            [
-                'title' => 'Private Residential',
-                'subtitle' => 'Exclusive Residential Development',
-                'description' =>
-                    'A private residential project featuring approximately 100 units, including penthouse residences.',
-                'status' => 'Coming Soon',
-                'link' => url('services/properties/private-residential'),
-                'image' => $detailImages[1],
-            ],
-            [
-                'title' => 'UC88',
-                'subtitle' => 'Residential Property Project',
-                'description' =>
-                    'Explore the UC88 project and available residential opportunities through CWD Realty & Hospitality.',
-                'status' => '30% Available',
-                'link' => url('services/properties/uc88'),
-                'image' => $detailImages[2],
-            ],
-        ];
+        if (isset($featuredProperties) && $featuredProperties->count() > 0) {
+            $featuredProjects = $featuredProperties->map(function($p) use ($defaultDetailImages) {
+                $img = $p->image ?? 'home/latest_activities/1img.png';
+                $imgSrc = (str_starts_with($img, 'http') || str_starts_with($img, 'storage/')) ? asset($img) : asset($img);
+
+                $details = $p->detail_images;
+                if (is_string($details)) {
+                    $details = json_decode($details, true);
+                }
+                if (empty($details) || !is_array($details)) {
+                    $details = [$imgSrc, $defaultDetailImages[1], $defaultDetailImages[2]];
+                } else {
+                    $details = array_map(function($di) {
+                        return (str_starts_with($di, 'http') || str_starts_with($di, 'storage/')) ? asset($di) : asset($di);
+                    }, $details);
+                }
+
+                $linkUrl = $p->link ?? '/properties/wealth-mansion';
+                if (!str_starts_with($linkUrl, 'http') && !str_starts_with($linkUrl, '/')) {
+                    $linkUrl = '/' . $linkUrl;
+                }
+
+                return [
+                    'title' => $p->title,
+                    'subtitle' => $p->subtitle ?? '',
+                    'description' => $p->description ?? '',
+                    'status' => $p->status ?? '30% Available',
+                    'link' => url($linkUrl),
+                    'link_text' => $p->link_text ?? 'View Property',
+                    'image' => $imgSrc,
+                    'detail_images' => $details
+                ];
+            })->toArray();
+        } else {
+            $featuredProjects = [
+                [
+                    'title' => 'Wealth Mansion',
+                    'subtitle' => 'Premium Condominium Residences',
+                    'description' => 'Premium condominium development offering modern residential units with excellent city access.',
+                    'status' => '30% Available',
+                    'link' => url('properties/wealth-mansion'),
+                    'link_text' => 'View Property',
+                    'image' => $defaultDetailImages[0],
+                    'detail_images' => $defaultDetailImages
+                ],
+                [
+                    'title' => 'Private Residential Collection',
+                    'subtitle' => 'Exclusive Residential Development',
+                    'description' => 'Professionally managed condominium units including premium residences and penthouses.',
+                    'status' => 'Coming Soon',
+                    'link' => url('properties/private-residential-collection'),
+                    'link_text' => 'View Property',
+                    'image' => $defaultDetailImages[1],
+                    'detail_images' => $defaultDetailImages
+                ],
+                [
+                    'title' => 'UC88 Residence',
+                    'subtitle' => 'Residential Property Project',
+                    'description' => "Comfortable condominium living with convenient access to Phnom Penh's business districts.",
+                    'status' => '30% Available',
+                    'link' => url('properties/uc88-residence'),
+                    'link_text' => 'View Property',
+                    'image' => $defaultDetailImages[2],
+                    'detail_images' => $defaultDetailImages
+                ],
+            ];
+        }
     @endphp
 
     <section id="featured-properties-section" class="relative w-full bg-[#2A5A8A] z-[300] mt-0 pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-20 scroll-mt-6">
@@ -111,10 +152,11 @@
                     @foreach ($featuredProjects as $index => $project)
                         @php
                             $dir = ($index === 0) ? 'left' : (($index === 1) ? 'fade-up' : 'right');
+                            $cardImages = $project['detail_images'] ?? [$project['image']];
                         @endphp
                         <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ $index * 100 }}" class="h-full flex flex-col">
                             <div class="featured-prop-card group bg-white flex flex-col justify-between shadow-xl hover:shadow-2xl overflow-hidden transition-all duration-300 ease-out hover:-translate-y-2 h-full cursor-pointer"
-                                data-images="{{ json_encode($detailImages) }}"
+                                data-images="{{ json_encode($cardImages) }}"
                                 onclick="window.location='{{ $project['link'] }}'">
 
                                 {{-- Card Image with Dots --}}
@@ -123,7 +165,7 @@
                                         class="featured-card-img w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105">
 
                                     <div class="featured-card-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5" aria-hidden="true">
-                                        @foreach ($detailImages as $i => $img)
+                                        @foreach ($cardImages as $i => $img)
                                             <span class="featured-card-dot rounded-full transition-all duration-300 h-2 w-2"
                                                 style="background:{{ $img === $project['image'] ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
                                         @endforeach
@@ -174,7 +216,7 @@
                                         {{-- Link --}}
                                         <a href="{{ $project['link'] }}"
                                             class="inline-flex items-center gap-1.5 text-[#2A5A8A] group-hover:text-[#c9a463] text-[13px] sm:text-[13.5px] font-medium transition-colors duration-200">
-                                            <span>View Project</span>
+                                            <span>{{ $project['link_text'] ?? 'View Property' }}</span>
                                             <span class="transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true">&rarr;</span>
                                         </a>
                                     </div>

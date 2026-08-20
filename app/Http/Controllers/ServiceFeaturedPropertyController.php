@@ -144,6 +144,58 @@ class ServiceFeaturedPropertyController extends Controller
      */
     private function seedDefaults(string $page)
     {
+        if ($page === 'properties') {
+            $defaults = [
+                [
+                    'page' => 'properties',
+                    'grade' => 'A',
+                    'title' => 'Wealth Mansion',
+                    'subtitle' => 'Premium Condominium Residences',
+                    'description' => 'Premium condominium development offering modern residential units with excellent city access.',
+                    'status' => '30% Available',
+                    'image' => 'home/latest_activities/1img.png',
+                    'link' => '/properties/wealth-mansion',
+                    'link_text' => 'View Property',
+                    'sort_order' => 1,
+                ],
+                [
+                    'page' => 'properties',
+                    'grade' => 'A',
+                    'title' => 'Private Residential Collection',
+                    'subtitle' => 'Exclusive Residential Development',
+                    'description' => 'Professionally managed condominium units including premium residences and penthouses.',
+                    'status' => 'Coming Soon',
+                    'image' => 'home/latest_activities/2img.png',
+                    'link' => '/properties/private-residential-collection',
+                    'link_text' => 'View Property',
+                    'sort_order' => 2,
+                ],
+                [
+                    'page' => 'properties',
+                    'grade' => 'A',
+                    'title' => 'UC88 Residence',
+                    'subtitle' => 'Residential Property Project',
+                    'description' => "Comfortable condominium living with convenient access to Phnom Penh's business districts.",
+                    'status' => '30% Available',
+                    'image' => 'home/latest_activities/3img.png',
+                    'link' => '/properties/uc88-residence',
+                    'link_text' => 'View Property',
+                    'sort_order' => 3,
+                ],
+            ];
+
+            foreach ($defaults as $item) {
+                $item['detail_images'] = [
+                    $item['image'],
+                    'home/latest_activities/2img.png',
+                    'home/latest_activities/3img.png',
+                ];
+                $item['publish_status'] = 'published';
+                ServiceFeaturedProperty::create($item);
+            }
+            return;
+        }
+
         $defaults = [
             // Grade A
             [

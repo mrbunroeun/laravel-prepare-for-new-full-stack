@@ -23,19 +23,6 @@
     {{-- Navigation Links --}}
     <div class="flex-1 overflow-y-auto px-4 py-6 space-y-6">
         <div>
-            <div class="px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-[#F4DEAC]/70">Core Management</div>
-            <nav class="space-y-1">
-                <a href="{{ url('/dashboard') }}" 
-                   class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group {{ request()->is('dashboard') ? 'bg-[#2A5A8A] text-white shadow-sm' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
-                    <svg class="w-5 h-5 {{ request()->is('dashboard') ? 'text-[#F4DEAC]' : 'text-slate-400 group-hover:text-[#F4DEAC]' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                    </svg>
-                    <span>Overview</span>
-                </a>
-            </nav>
-        </div>
-
-        <div>
             <div class="px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-[#F4DEAC]/70">Pages Content</div>
             <nav class="space-y-1">
                 {{-- Home Page --}}
@@ -115,42 +102,91 @@
                     </div>
                 </div>
 
+                {{-- Properties Page --}}
+                <a href="{{ url('/dashboard/pages/properties') }}" 
+                   class="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group {{ request()->is('dashboard/pages/properties') ? 'bg-[#1479B9] text-white shadow-md' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
+                        </svg>
+                        <span class="font-semibold">Properties</span>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold bg-[#F4DEAC] text-[#163049] px-2 py-0.5 rounded">Active</span>
+                </a>
+
                 {{-- Other Pages List --}}
                 @php
                     $navPages = [
-                        ['title' => 'Properties', 'slug' => 'properties', 'icon' => 'M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z'],
-                        ['title' => 'Insights & News', 'slug' => 'insights', 'icon' => 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z'],
-                        ['title' => 'Events', 'slug' => 'events', 'icon' => 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'],
-                        ['title' => 'Partners', 'slug' => 'partners', 'icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'],
-                        ['title' => 'Contact Inquiries', 'slug' => 'contact', 'icon' => 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'],
+                        ['title' => 'Insights & News', 'slug' => 'insights', 'active' => false, 'icon' => 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z'],
+                        ['title' => 'Events', 'slug' => 'events', 'active' => false, 'icon' => 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'],
+                        ['title' => 'Partners', 'slug' => 'partners', 'active' => false, 'icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'],
+                        ['title' => 'Contact Inquiries', 'slug' => 'contact', 'active' => false, 'icon' => 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'],
                     ];
                 @endphp
 
                 @foreach($navPages as $page)
                     <a href="{{ url('/dashboard/pages/' . $page['slug']) }}" 
-                       class="flex items-center justify-between px-3.5 py-2 rounded-lg text-sm font-medium transition-all group {{ request()->is('dashboard/pages/' . $page['slug']) ? 'bg-[#2A5A8A] text-white' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                       class="flex items-center justify-between px-3.5 py-2 rounded-lg text-sm font-medium transition-all group {{ request()->is('dashboard/pages/' . $page['slug']) ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
                         <div class="flex items-center gap-3">
-                            <svg class="w-4 h-4 text-slate-400 group-hover:text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 {{ request()->is('dashboard/pages/' . $page['slug']) ? 'text-[#F4DEAC]' : 'text-slate-400 group-hover:text-[#F4DEAC]' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $page['icon'] }}"></path>
                             </svg>
                             <span>{{ $page['title'] }}</span>
                         </div>
-                        <span class="text-[10px] text-slate-400 group-hover:text-white">UI</span>
+                        @if(!empty($page['active']))
+                            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[#F4DEAC] text-[#163049]">ACTIVE</span>
+                        @else
+                            <span class="text-[10px] text-slate-400 group-hover:text-white">UI</span>
+                        @endif
                     </a>
                 @endforeach
-            </nav>
-        </div>
 
-        <div>
-            <div class="px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-[#F4DEAC]/70">System & Tools</div>
-            <nav class="space-y-1">
-                <a href="{{ url('/dashboard/settings') }}" class="flex items-center gap-3 px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white transition-all">
-                    <svg class="w-4 h-4 text-slate-400 group-hover:text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
-                    <span>General Settings</span>
-                </a>
+                {{-- Featured Properties Dropdown (Positioned at bottom with mt & divider) --}}
+                @php
+                    $isFeaturedPropsActive = request()->is('dashboard/pages/properties/*') || request()->is('dashboard/pages/properties-wealth-mansion*') || request()->is('dashboard/pages/properties-private-residential*') || request()->is('dashboard/pages/properties-uc88*');
+                @endphp
+                <div class="mt-4 pt-3 border-t border-[#2A5A8A]/40 space-y-1">
+                    <div class="px-3 mb-1 text-[10px] font-bold uppercase tracking-wider text-[#F4DEAC]/60">Projects Content</div>
+                    <button type="button" onclick="toggleSidebarFeaturedPropsDropdown()" 
+                        class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group {{ $isFeaturedPropsActive ? 'bg-[#2A5A8A] text-white shadow-sm' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }} cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                            <span class="font-semibold">Featured Properties</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[10px] font-bold bg-[#F4DEAC]/20 text-[#F4DEAC] px-1.5 py-0.5 rounded">3</span>
+                            <svg id="featured-props-dropdown-chevron" class="w-3.5 h-3.5 text-slate-300 transition-transform duration-200 {{ $isFeaturedPropsActive ? 'rotate-180 text-white' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </button>
+
+                    {{-- Dropdown Sub-Items --}}
+                    <div id="featured-props-dropdown-menu" class="pl-4 space-y-1 transition-all duration-200 {{ $isFeaturedPropsActive ? '' : 'hidden' }}">
+                        {{-- 1. Wealth Mansion --}}
+                        <a href="{{ url('/dashboard/pages/properties/wealth-mansion') }}" 
+                            class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/properties/wealth-mansion*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
+                            <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/properties/wealth-mansion*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                            <span>Wealth Mansion</span>
+                        </a>
+
+                        {{-- 2. Private Residential --}}
+                        <a href="{{ url('/dashboard/pages/properties/private-residential') }}" 
+                            class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/properties/private-residential*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
+                            <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/properties/private-residential*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                            <span>Private Residential</span>
+                        </a>
+
+                        {{-- 3. UC88 --}}
+                        <a href="{{ url('/dashboard/pages/properties/uc88') }}" 
+                            class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/properties/uc88*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
+                            <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/properties/uc88*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                            <span>UC88</span>
+                        </a>
+                    </div>
+                </div>
             </nav>
         </div>
     </div>
@@ -173,6 +209,17 @@
     function toggleSidebarServicesDropdown() {
         const menu = document.getElementById('services-dropdown-menu');
         const chevron = document.getElementById('services-dropdown-chevron');
+        if (menu) {
+            menu.classList.toggle('hidden');
+        }
+        if (chevron) {
+            chevron.classList.toggle('rotate-180');
+        }
+    }
+
+    function toggleSidebarFeaturedPropsDropdown() {
+        const menu = document.getElementById('featured-props-dropdown-menu');
+        const chevron = document.getElementById('featured-props-dropdown-chevron');
         if (menu) {
             menu.classList.toggle('hidden');
         }

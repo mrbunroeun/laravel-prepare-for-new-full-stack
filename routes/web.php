@@ -215,7 +215,36 @@ Route::get('/contact-us', function () {
 });
 
 Route::get('/properties', function () {
-    return view('pages.properties');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'properties'],
+        [
+            'tagline_box1' => 'Properties',
+            'tagline_box1_style' => 'light-gold',
+            'tagline_box2' => '',
+            'tagline_box2_style' => 'bold-gold',
+            'headline' => "Your Trusted Property Management & Hospitality Partner in Cambodia",
+            'show_bullets' => false,
+            'buttons' => [
+                ['text' => 'Browse Properties', 'url' => '#featured-properties-section'],
+                ['text' => 'Contact Us', 'url' => '/contact-us']
+            ]
+        ]
+    );
+    $featuredProperties = \App\Models\ServiceFeaturedProperty::where('page', 'properties')
+        ->where('publish_status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    if ($featuredProperties->count() === 0) {
+        $controller = new \App\Http\Controllers\ServiceFeaturedPropertyController();
+        $controller->index(request(), 'properties');
+        $featuredProperties = \App\Models\ServiceFeaturedProperty::where('page', 'properties')
+            ->where('publish_status', 'published')
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('id', 'asc')
+            ->get();
+    }
+    return view('pages.properties', compact('heroSection', 'featuredProperties'));
 });
 
 Route::get('/partners', function () {
@@ -568,6 +597,39 @@ Route::get('/dashboard/pages/services/hospitality-services', function () {
         'frontendUrl' => '/services/hospitality-services'
     ]);
 });
+
+Route::get('/dashboard/pages/properties', function () {
+    return view('dashboard.pages.properties', [
+        'pageSlug' => 'properties',
+        'pageTitle' => 'Properties & Listings',
+        'frontendUrl' => '/properties'
+    ]);
+});
+
+Route::get('/dashboard/pages/properties/wealth-mansion', function () {
+    return view('dashboard.pages.generic', [
+        'pageTitle' => 'Wealth Mansion Project',
+        'pageSlug' => 'properties-wealth-mansion',
+        'frontendUrl' => '/properties/wealth-mansion'
+    ]);
+});
+
+Route::get('/dashboard/pages/properties/private-residential', function () {
+    return view('dashboard.pages.generic', [
+        'pageTitle' => 'Private Residential Collection',
+        'pageSlug' => 'properties-private-residential',
+        'frontendUrl' => '/properties/private-residential'
+    ]);
+});
+
+Route::get('/dashboard/pages/properties/uc88', function () {
+    return view('dashboard.pages.generic', [
+        'pageTitle' => 'UC88 Residence Project',
+        'pageSlug' => 'properties-uc88',
+        'frontendUrl' => '/properties/uc88'
+    ]);
+});
+
 Route::get('/dashboard/pages/{slug}', function ($slug) {
     $titles = [
         'about-us' => 'About Us Page',
