@@ -14,25 +14,54 @@
             <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
             <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                 <div class="px-0 py-10">
-                    <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)]  font-bold mb-6">
+                    @if(!isset($heroSection) || $heroSection->show_tagline !== false)
+                    <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)] font-bold mb-6">
                         <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
-                        <span class="text-[#F4DEAC]">CWD</span>
-                        <span class="text-[#F4DEAC] font-normal">Real Estate Agent &amp; Developer</span>
+                        @if(!empty($heroSection->tagline_html))
+                            <span class="text-[#F4DEAC] font-normal">{!! $heroSection->tagline_html !!}</span>
+                        @else
+                            <span class="text-[#F4DEAC]">
+                                @if(($heroSection->tagline_box1_style ?? 'bold-gold') !== 'hidden' && !empty($heroSection->tagline_box1 ?? 'CWD'))
+                                    <span class="{{ ($heroSection->tagline_box1_style ?? 'bold-gold') === 'light-gold' ? 'font-normal' : 'font-bold' }}">{{ $heroSection->tagline_box1 ?? 'CWD' }}</span>
+                                @endif
+                                @if(($heroSection->tagline_box2_style ?? 'light-gold') !== 'hidden' && !empty($heroSection->tagline_box2 ?? 'Real Estate Agent & Developer'))
+                                    <span class="{{ ($heroSection->tagline_box2_style ?? 'light-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }} ml-1">{{ $heroSection->tagline_box2 ?? 'Real Estate Agent & Developer' }}</span>
+                                @endif
+                            </span>
+                        @endif
                     </h2>
+                    @endif
 
                     <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-10">
-                        Your Trusted Property Management &amp; Hospitality Partner in Cambodia
+                        {{ $heroSection->headline ?? 'Your Trusted Property Management & Hospitality Partner in Cambodia' }}
                     </h1>
 
-                    <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
-                        <a href="{{ url('/properties') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                            Browse Properties
-                        </a>
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                            Contact Us
-                        </a>
+                    @if(!empty($heroSection->show_bullets) && !empty($heroSection->bullets) && is_array($heroSection->bullets))
+                    <div class="px-10 sm:px-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/80 font-medium mb-6">
+                        @foreach($heroSection->bullets as $bullet)
+                            <span>• {{ $bullet }}</span>
+                        @endforeach
+                    </div>
+                    @endif
+
+                    <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto flex-wrap">
+                        @if(isset($heroSection->buttons) && is_array($heroSection->buttons) && count($heroSection->buttons) > 0)
+                            @foreach($heroSection->buttons as $btn)
+                                <a href="{{ url($btn['url'] ?? '#') }}"
+                                    class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                    {{ $btn['text'] ?? $btn['label'] ?? 'Learn More' }}
+                                </a>
+                            @endforeach
+                        @else
+                            <a href="{{ url('/properties') }}"
+                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                Browse Properties
+                            </a>
+                            <a href="{{ url('/contact-us') }}"
+                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                Contact Us
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -18,11 +18,17 @@
                     @if(!isset($heroSection) || $heroSection->show_tagline !== false)
                     <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)] font-bold mb-6">
                         <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
-                        @if(($heroSection->tagline_box1_style ?? 'light-gold') !== 'hidden' && !empty($heroSection->tagline_box1 ?? 'Property'))
-                            <span class="text-[#F4DEAC] {{ ($heroSection->tagline_box1_style ?? 'light-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }}">{{ $heroSection->tagline_box1 ?? 'Property' }}</span>
-                        @endif
-                        @if(($heroSection->tagline_box2_style ?? 'bold-gold') !== 'hidden' && !empty($heroSection->tagline_box2 ?? 'Sales'))
-                            <span class="text-[#F4DEAC] {{ ($heroSection->tagline_box2_style ?? 'bold-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }}">{{ $heroSection->tagline_box2 ?? 'Sales' }}</span>
+                        @if(!empty($heroSection->tagline_html))
+                            <span class="text-[#F4DEAC] font-normal">{!! $heroSection->tagline_html !!}</span>
+                        @else
+                            <span class="text-[#F4DEAC]">
+                                @if(($heroSection->tagline_box1_style ?? 'light-gold') !== 'hidden' && !empty($heroSection->tagline_box1 ?? 'Property'))
+                                    <span class="{{ ($heroSection->tagline_box1_style ?? 'light-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }}">{{ $heroSection->tagline_box1 ?? 'Property' }}</span>
+                                @endif
+                                @if(($heroSection->tagline_box2_style ?? 'bold-gold') !== 'hidden' && !empty($heroSection->tagline_box2 ?? 'Sales'))
+                                    <span class="{{ ($heroSection->tagline_box2_style ?? 'bold-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }} ml-1">{{ $heroSection->tagline_box2 ?? 'Sales' }}</span>
+                                @endif
+                            </span>
                         @endif
                     </h2>
                     @endif
@@ -31,12 +37,20 @@
                         {{ $heroSection->headline ?? 'Prime Real Estate Investments & Condominium Sales in Cambodia' }}
                     </h1>
 
+                    @if(!empty($heroSection->show_bullets) && !empty($heroSection->bullets) && is_array($heroSection->bullets))
+                    <div class="px-10 sm:px-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/80 font-medium mb-6">
+                        @foreach($heroSection->bullets as $bullet)
+                            <span>• {{ $bullet }}</span>
+                        @endforeach
+                    </div>
+                    @endif
+
                     <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto flex-wrap">
                         @if(isset($heroSection->buttons) && is_array($heroSection->buttons) && count($heroSection->buttons) > 0)
                             @foreach($heroSection->buttons as $btn)
                                 <a href="{{ url($btn['url'] ?? '#') }}"
                                     class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                                    {{ $btn['text'] ?? 'Learn More' }}
+                                    {{ $btn['text'] ?? $btn['label'] ?? 'Learn More' }}
                                 </a>
                             @endforeach
                         @else

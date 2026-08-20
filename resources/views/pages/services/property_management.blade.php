@@ -16,11 +16,17 @@
                     @if(!isset($heroSection) || $heroSection->show_tagline !== false)
                     <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)] font-bold mb-6">
                         <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
-                        @if(($heroSection->tagline_box1_style ?? 'light-gold') !== 'hidden' && !empty($heroSection->tagline_box1 ?? 'Property'))
-                            <span class="text-[#F4DEAC] {{ ($heroSection->tagline_box1_style ?? 'light-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }}">{{ $heroSection->tagline_box1 ?? 'Property' }}</span>
-                        @endif
-                        @if(($heroSection->tagline_box2_style ?? 'bold-gold') !== 'hidden' && !empty($heroSection->tagline_box2 ?? 'Management'))
-                            <span class="text-[#F4DEAC] {{ ($heroSection->tagline_box2_style ?? 'bold-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }}">{{ $heroSection->tagline_box2 ?? 'Management' }}</span>
+                        @if(!empty($heroSection->tagline_html))
+                            <span class="text-[#F4DEAC] font-normal">{!! $heroSection->tagline_html !!}</span>
+                        @else
+                            <span class="text-[#F4DEAC]">
+                                @if(($heroSection->tagline_box1_style ?? 'light-gold') !== 'hidden' && !empty($heroSection->tagline_box1 ?? 'Property'))
+                                    <span class="{{ ($heroSection->tagline_box1_style ?? 'light-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }}">{{ $heroSection->tagline_box1 ?? 'Property' }}</span>
+                                @endif
+                                @if(($heroSection->tagline_box2_style ?? 'bold-gold') !== 'hidden' && !empty($heroSection->tagline_box2 ?? 'Management'))
+                                    <span class="{{ ($heroSection->tagline_box2_style ?? 'bold-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }} ml-1">{{ $heroSection->tagline_box2 ?? 'Management' }}</span>
+                                @endif
+                            </span>
                         @endif
                     </h2>
                     @endif
@@ -29,12 +35,20 @@
                         {{ $heroSection->headline ?? 'Professional Property Management Services in Cambodia' }}
                     </h1>
 
+                    @if(!empty($heroSection->show_bullets) && !empty($heroSection->bullets) && is_array($heroSection->bullets))
+                    <div class="px-10 sm:px-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/80 font-medium mb-6">
+                        @foreach($heroSection->bullets as $bullet)
+                            <span>• {{ $bullet }}</span>
+                        @endforeach
+                    </div>
+                    @endif
+
                     <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto flex-wrap">
                         @if(isset($heroSection->buttons) && is_array($heroSection->buttons) && count($heroSection->buttons) > 0)
                             @foreach($heroSection->buttons as $btn)
                                 <a href="{{ url($btn['url'] ?? '#') }}"
                                     class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                                    {{ $btn['text'] ?? 'Learn More' }}
+                                    {{ $btn['text'] ?? $btn['label'] ?? 'Learn More' }}
                                 </a>
                             @endforeach
                         @else
@@ -75,9 +89,8 @@
 
 
     {{-- Maximize Your Property Investment --}}
-
-    <section class="relative z-[300]  bg-white">
-        <div class="max-w-[1500px] mx-auto  py-16 max-[940px]:py-12">
+    <section class="relative z-[300] bg-white">
+        <div class="max-w-[1500px] mx-auto py-16 max-[940px]:py-12">
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-26 items-start">
 
@@ -86,28 +99,40 @@
                     <div class="h-[2px] w-full bg-[#c9a463] mr-[2rem] mt-6"></div>
 
                     <h2 class="text-[#2A5A8A] text-[clamp(28px,3.5vw,38px)] font-normal leading-tight">
-                        Maximize Your Property Investment with Professional Management
+                        {{ $propertyMaximize->title ?? 'Maximize Your Property Investment with Professional Management' }}
                     </h2>
                 </div>
 
                 {{-- RIGHT: image + body text --}}
                 <div class="flex flex-col mt-0 lg:mt-[-7rem] gap-8" data-scroll-reveal="right">
-                    <img src="{{ asset('services/maximmize/maximize.png') }}" alt="Phnom Penh skyline"
+                    @php
+                        $maxImg = $propertyMaximize->image ?? 'services/maximmize/maximize.png';
+                        $imgSrc = (str_starts_with($maxImg, 'http') || str_starts_with($maxImg, 'storage/')) ? asset($maxImg) : asset($maxImg);
+                    @endphp
+                    <img src="{{ $imgSrc }}" alt="{{ $propertyMaximize->alt_text ?? 'Phnom Penh skyline' }}"
                         class="w-full h-[350px] object-cover">
 
                     <div class="flex sm:px-[1rem] px-[2rem] flex-col gap-4">
-                        <p class="text-black text-[15px] leading-relaxed">
-                            Managing a rental property requires time, expertise, and consistent attention to detail. CWD
-                            Realty &amp; Hospitality provides comprehensive property management services that help
-                            condominium owners protect their investments, increase occupancy, and deliver exceptional
-                            experiences for tenants and guests.
-                        </p>
+                        @if(!empty($propertyMaximize->paragraphs) && is_array($propertyMaximize->paragraphs))
+                            @foreach($propertyMaximize->paragraphs as $paragraph)
+                                <p class="text-black text-[15px] leading-relaxed">
+                                    {{ $paragraph }}
+                                </p>
+                            @endforeach
+                        @else
+                            <p class="text-black text-[15px] leading-relaxed">
+                                Managing a rental property requires time, expertise, and consistent attention to detail. CWD
+                                Realty &amp; Hospitality provides comprehensive property management services that help
+                                condominium owners protect their investments, increase occupancy, and deliver exceptional
+                                experiences for tenants and guests.
+                            </p>
 
-                        <p class="text-black text-[15px] leading-relaxed">
-                            Whether your property is intended for daily, weekly, monthly, or long-term rentals, our
-                            experienced team manages every aspect of the operation so you can enjoy peace of mind and
-                            reliable returns.
-                        </p>
+                            <p class="text-black text-[15px] leading-relaxed">
+                                Whether your property is intended for daily, weekly, monthly, or long-term rentals, our
+                                experienced team manages every aspect of the operation so you can enjoy peace of mind and
+                                reliable returns.
+                            </p>
+                        @endif
                     </div>
                 </div>
 
@@ -119,7 +144,6 @@
 
 
     {{-- What is Property Management? --}}
-
     <section class="relative bg-white overflow-hidden">
         <div class="max-w-[1550px] mx-auto px-4 sm:px-6 py-12 sm:py-16">
             <div
@@ -127,9 +151,13 @@
                 {{-- LEFT: Property Image --}}
                 <div
                     class="w-full min-[700px]:w-[35%] h-[380px] sm:h-[460px] min-[700px]:h-[560px] lg:h-[600px] overflow-hidden" data-scroll-reveal="left">
-                    <img src="{{ asset('services/bg_img/bg_img.png') }}"
-                        alt="What is Property Management?"
-                        class="w-full h-full object-cover">
+                    @php
+                        $ovImg = $propertyOverview->image ?? 'services/bg_img/bg_img.png';
+                        $ovImgSrc = (str_starts_with($ovImg, 'http') || str_starts_with($ovImg, 'storage/')) ? asset($ovImg) : asset($ovImg);
+                    @endphp
+                    <img src="{{ $ovImgSrc }}"
+                        alt="{{ $propertyOverview->alt_text ?? 'What is Property Management?' }}"
+                        class="w-full h-full object-fill">
                 </div>
                 {{-- RIGHT: blue content card --}}
                 <div class="relative z-[200] mt-[-1rem] text-[#2f6ba7] pointer-events-none w-full min-[700px]:w-[55%]" data-scroll-reveal="right">
@@ -140,18 +168,12 @@
                     <div class="bg-[#2A5A8A] w-full">
                         <div class="px-6 sm:px-10 min-[1024px]:px-24 py-8 sm:py-12 min-[1024px]:py-20">
                             <h2 class="text-[clamp(22px,3vw,50px)] leading-tight mb-4">
-                                <span class="text-[#F4DEAC] font-normal block">What is</span>
-                                <span class="text-[#F4DEAC] font-bold block">Property </span>
-                                <span class="text-[#F4DEAC] font-bold block">Management?</span>
+                                <span class="text-[#F4DEAC] font-normal block">{{ $propertyOverview->title_line1 ?? 'What is' }}</span>
+                                <span class="text-[#F4DEAC] font-bold block">{{ $propertyOverview->title_line2 ?? 'Property' }}</span>
+                                <span class="text-[#F4DEAC] font-bold block">{{ $propertyOverview->title_line3 ?? 'Management?' }}</span>
                             </h2>
                             <p class="text-white text-[clamp(15px,1.2vw,17px)] leading-relaxed">
-                                Property management is the professional administration of residential properties on
-                                behalf
-                                of owners. Our team oversees daily operations, tenant coordination, maintenance
-                                scheduling,
-                                rental administration, financial reporting, and hospitality services to ensure your
-                                property
-                                performs efficiently and remains well maintained.
+                                {{ $propertyOverview->description ?? 'Property management is the professional administration of residential properties on behalf of owners. Our team oversees daily operations, tenant coordination, maintenance scheduling, rental administration, financial reporting, and hospitality services to ensure your property performs efficiently and remains well maintained.' }}
                             </p>
                         </div>
                     </div>
@@ -293,61 +315,78 @@
             {{-- Heading --}}
             <div class="mb-12" data-scroll-reveal="left">
                 <h2 class="text-[#2A5A8A] text-[clamp(32px,4vw,44px)] leading-tight">
-                    <span class="font-normal block">Our</span>
-                    <span class="font-normal block">Management</span>
-                    <span class="font-bold block">Models</span>
+                    <span class="font-normal block">{{ $managementModels->title_line1 ?? 'Our' }}</span>
+                    <span class="font-normal block">{{ $managementModels->title_line2 ?? 'Management' }}</span>
+                    <span class="font-bold block">{{ $managementModels->title_line3 ?? 'Models' }}</span>
                 </h2>
             </div>
 
             {{-- Model cards --}}
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch">
+                @if(!empty($managementModels->models) && is_array($managementModels->models))
+                    @foreach($managementModels->models as $idx => $model)
+                        @php
+                            $mImg = $model['image'] ?? 'services/propertis_leasing/bedroom.png';
+                            $mImgSrc = (str_starts_with($mImg, 'http') || str_starts_with($mImg, 'storage/')) ? asset($mImg) : asset($mImg);
+                            $revDir = ($idx % 2 === 0) ? 'left' : 'right';
+                        @endphp
+                        <div class="flex flex-col shadow-lg overflow-hidden group h-full" data-scroll-reveal="{{ $revDir }}" data-scroll-delay="{{ $idx * 100 }}">
+                            {{-- Image with stretch/shrink to fill container rule --}}
+                            <div class="w-full h-[260px] sm:h-[300px] overflow-hidden bg-gray-100 shrink-0">
+                                <img src="{{ $mImgSrc }}"
+                                    alt="{{ $model['alt_text'] ?? $model['title'] ?? 'Management Model' }}"
+                                    class="w-full h-full object-fill transition-transform duration-500 group-hover:scale-105">
+                            </div>
 
-                {{-- Revenue Sharing --}}
-                <div class="flex flex-col shadow-lg overflow-hidden group h-full" data-scroll-reveal="left">
-                    {{-- Image --}}
-                    <div class="w-full h-[260px] sm:h-[300px] overflow-hidden bg-gray-100 shrink-0">
-                        <img src="{{ asset('services/propertis_leasing/bedroom.png') }}"
-                            alt="Revenue Sharing Model"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                    </div>
-
-                    {{-- Content --}}
-                    <div class="bg-[#2A5A8A] w-full flex-1 flex flex-col justify-start">
-                        <div class="px-6 sm:px-8 py-8 sm:py-10">
-                            <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-bold mb-4">Revenue Sharing</h3>
-                            <p class="text-white text-[15px] leading-relaxed">
-                                Suitable for short-term rentals.
-                                Property owners receive rental income while CWD Realty &amp; Hospitality manages
-                                daily operations based on an agreed 10% management fee.
-                            </p>
+                            {{-- Content --}}
+                            <div class="bg-[#2A5A8A] w-full flex-1 flex flex-col justify-start">
+                                <div class="px-6 sm:px-8 py-8 sm:py-10">
+                                    <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-bold mb-4">{{ $model['title'] ?? '' }}</h3>
+                                    <p class="text-white text-[15px] leading-relaxed">
+                                        {{ $model['description'] ?? '' }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    {{-- Default fallback --}}
+                    <div class="flex flex-col shadow-lg overflow-hidden group h-full" data-scroll-reveal="left">
+                        <div class="w-full h-[260px] sm:h-[300px] overflow-hidden bg-gray-100 shrink-0">
+                            <img src="{{ asset('services/propertis_leasing/bedroom.png') }}"
+                                alt="Revenue Sharing Model"
+                                class="w-full h-full object-fill transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="bg-[#2A5A8A] w-full flex-1 flex flex-col justify-start">
+                            <div class="px-6 sm:px-8 py-8 sm:py-10">
+                                <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-bold mb-4">Revenue Sharing</h3>
+                                <p class="text-white text-[15px] leading-relaxed">
+                                    Suitable for short-term rentals.
+                                    Property owners receive rental income while CWD Realty &amp; Hospitality manages
+                                    daily operations based on an agreed 10% management fee.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                {{-- Long-Term Leasing Management --}}
-                <div class="flex flex-col shadow-lg overflow-hidden group h-full" data-scroll-reveal="right" data-scroll-delay="100">
-                    {{-- Image --}}
-                    <div class="w-full h-[260px] sm:h-[300px] overflow-hidden bg-gray-100 shrink-0">
-                        <img src="{{ asset('services/maximmize/maximize.png') }}"
-                            alt="Long-Term Leasing Management Model"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                    </div>
-
-                    {{-- Content --}}
-                    <div class="bg-[#2A5A8A] w-full flex-1 flex flex-col justify-start">
-                        <div class="px-6 sm:px-8 py-8 sm:py-10">
-                            <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-bold mb-4">Long-Term Leasing
-                                Management</h3>
-                            <p class="text-white text-[15px] leading-relaxed">
-                                For long-term rental properties, we provide exclusive leasing management, tenant
-                                administration, and operational support while owners receive regular $400 monthly
-                                rental income and extra 5% if the daily renting exceed $400 according to the
-                                management agreement.
-                            </p>
+                    <div class="flex flex-col shadow-lg overflow-hidden group h-full" data-scroll-reveal="right" data-scroll-delay="100">
+                        <div class="w-full h-[260px] sm:h-[300px] overflow-hidden bg-gray-100 shrink-0">
+                            <img src="{{ asset('services/maximmize/maximize.png') }}"
+                                alt="Long-Term Leasing Management Model"
+                                class="w-full h-full object-fill transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="bg-[#2A5A8A] w-full flex-1 flex flex-col justify-start">
+                            <div class="px-6 sm:px-8 py-8 sm:py-10">
+                                <h3 class="text-[#F4DEAC] text-[22px] sm:text-[24px] font-bold mb-4">Long-Term Leasing Management</h3>
+                                <p class="text-white text-[15px] leading-relaxed">
+                                    For long-term rental properties, we provide exclusive leasing management, tenant
+                                    administration, and operational support while owners receive regular $400 monthly
+                                    rental income and extra 5% if the daily renting exceed $400 according to the
+                                    management agreement.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
+                @endif
             </div>
 
         </div>
@@ -498,24 +537,26 @@
 
     {{-- Frequently Asked Questions --}}
     @php
-        $faqLeft = [
-            [
-                'question' => 'What types of properties do you manage?',
-                'answer' =>
-                    'We specialize in condominiums, serviced apartments, and residential investment properties throughout Phnom Penh.',
-            ],
-            [
-                'question' => 'Can you manage both daily and long-term rentals?',
-                'answer' => 'ComingSoon',
-            ],
-        ];
-
-        $faqRight = [
-            [
-                'question' => 'How do property owners receive rental income?',
-                'answer' => 'ComingSoon',
-            ],
-        ];
+        $faqLeft = isset($faqs) ? $faqs->where('column', 'left') : collect();
+        $faqRight = isset($faqs) ? $faqs->where('column', 'right') : collect();
+        if ($faqLeft->isEmpty() && $faqRight->isEmpty()) {
+            $faqLeft = collect([
+                (object)[
+                    'question' => 'What types of properties do you manage?',
+                    'answer' => 'We specialize in condominiums, serviced apartments, and residential investment properties throughout Phnom Penh.',
+                ],
+                (object)[
+                    'question' => 'Can you manage both daily and long-term rentals?',
+                    'answer' => 'Yes, we provide flexible management solutions tailored to both daily/short-term rentals and long-term lease agreements.',
+                ],
+            ]);
+            $faqRight = collect([
+                (object)[
+                    'question' => 'How do property owners receive rental income?',
+                    'answer' => 'Rental income is securely disbursed on a monthly basis along with a transparent itemized financial performance statement.',
+                ],
+            ]);
+        }
     @endphp
 
     {{-- Frequently Asked Questions --}}
@@ -533,12 +574,16 @@
                 {{-- Left column --}}
                 <div class="faq-column flex flex-col gap-2" data-scroll-reveal="left">
                     @foreach ($faqLeft as $index => $faq)
+                        @php
+                            $q = is_array($faq) ? $faq['question'] : $faq->question;
+                            $a = is_array($faq) ? $faq['answer'] : $faq->answer;
+                        @endphp
                         <div class="faq-item bg-[#f3f3f3]">
                             <button type="button"
                                 class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
                                 aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
                                 <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
-                                    {{ $faq['question'] }}
+                                    {{ $q }}
                                 </span>
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200 {{ $index === 0 ? 'rotate-90' : '' }}"
@@ -551,7 +596,7 @@
                                 <div class="{{ $index === 0 ? 'bg-[#1479B9]' : 'bg-white' }} px-5 py-4 sm:px-6 sm:py-5">
                                     <p
                                         class="{{ $index === 0 ? 'text-white' : 'text-black/70' }} text-[13px] sm:text-[13.5px] leading-relaxed">
-                                        {{ $faq['answer'] }}
+                                        {{ $a }}
                                     </p>
                                 </div>
                             </div>
@@ -562,12 +607,16 @@
                 {{-- Right column --}}
                 <div class="faq-column flex flex-col gap-2" data-scroll-reveal="right" data-scroll-delay="100">
                     @foreach ($faqRight as $faq)
+                        @php
+                            $q = is_array($faq) ? $faq['question'] : $faq->question;
+                            $a = is_array($faq) ? $faq['answer'] : $faq->answer;
+                        @endphp
                         <div class="faq-item bg-[#f3f3f3]">
                             <button type="button"
                                 class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer"
                                 aria-expanded="false">
                                 <span class="faq-question text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium">
-                                    {{ $faq['question'] }}
+                                    {{ $q }}
                                 </span>
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="faq-arrow w-6.5 h-6.5 shrink-0 text-[#2A5A8A] transition-transform duration-200"
@@ -578,7 +627,7 @@
                             <div class="faq-panel overflow-hidden transition-all duration-300 max-h-0">
                                 <div class="bg-white px-5 py-4 sm:px-6 sm:py-5">
                                     <p class="text-black/70 text-[13px] sm:text-[13.5px] leading-relaxed">
-                                        {{ $faq['answer'] }}
+                                        {{ $a }}
                                     </p>
                                 </div>
                             </div>
@@ -626,14 +675,11 @@
         })();
     </script>
 
-
-
-
     {{-- Looking for your next stay --}}
     <section class="relative max-w-[1600px] mx-auto">
         <div class="max-w-full min-[900px]:max-w-[80%] ml-auto" data-scroll-reveal="right">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
-                class="w-full h-auto min-h-[220px] object-cover">
+                class="w-full h-auto min-h-[220px] object-fill">
 
             <div
                 class="relative max-w-[520px] mt-4 px-6

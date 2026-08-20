@@ -242,7 +242,57 @@ Route::get('/services/property-management', function () {
             ]
         ]
     );
-    return view('pages.services.property_management', compact('heroSection'));
+    $propertyMaximize = \App\Models\ServiceMaximizeSection::firstOrCreate(
+        ['page' => 'property-management'],
+        [
+            'title' => 'Maximize Your Property Investment with Professional Management',
+            'image' => 'services/maximmize/maximize.png',
+            'alt_text' => 'Phnom Penh skyline',
+            'paragraphs' => [
+                'Managing a rental property requires time, expertise, and consistent attention to detail. CWD Realty & Hospitality provides comprehensive property management services that help condominium owners protect their investments, increase occupancy, and deliver exceptional experiences for tenants and guests.',
+                'Whether your property is intended for daily, weekly, monthly, or long-term rentals, our experienced team manages every aspect of the operation so you can enjoy peace of mind and reliable returns.'
+            ]
+        ]
+    );
+    $propertyOverview = \App\Models\ServiceOverviewSection::firstOrCreate(
+        ['page' => 'property-management'],
+        [
+            'image' => 'services/bg_img/bg_img.png',
+            'alt_text' => 'What is Property Management?',
+            'title_line1' => 'What is',
+            'title_line2' => 'Property',
+            'title_line3' => 'Management?',
+            'description' => 'Property management is the professional administration of residential properties on behalf of owners. Our team oversees daily operations, tenant coordination, maintenance scheduling, rental administration, financial reporting, and hospitality services to ensure your property performs efficiently and remains well maintained.'
+        ]
+    );
+    $managementModels = \App\Models\ServiceManagementModel::firstOrCreate(
+        ['page' => 'property-management'],
+        [
+            'title_line1' => 'Our',
+            'title_line2' => 'Management',
+            'title_line3' => 'Models',
+            'models' => [
+                [
+                    'title' => 'Revenue Sharing',
+                    'image' => 'services/propertis_leasing/bedroom.png',
+                    'alt_text' => 'Revenue Sharing Model',
+                    'description' => 'Suitable for short-term rentals. Property owners receive rental income while CWD Realty & Hospitality manages daily operations based on an agreed 10% management fee.'
+                ],
+                [
+                    'title' => 'Long-Term Leasing Management',
+                    'image' => 'services/maximmize/maximize.png',
+                    'alt_text' => 'Long-Term Leasing Management Model',
+                    'description' => 'For long-term rental properties, we provide exclusive leasing management, tenant administration, and operational support while owners receive regular $400 monthly rental income and extra 5% if the daily renting exceed $400 according to the management agreement.'
+                ]
+            ]
+        ]
+    );
+    $faqs = \App\Models\Faq::where('page', 'property-management')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    return view('pages.services.property_management', compact('heroSection', 'propertyMaximize', 'propertyOverview', 'managementModels', 'faqs'));
 });
 
 Route::get('/services/property-sales', function () {
@@ -383,6 +433,20 @@ Route::get('/api/about-story/{page?}', [\App\Http\Controllers\AboutStorySectionC
 Route::post('/api/about-story/{page?}', [\App\Http\Controllers\AboutStorySectionController::class, 'update']);
 Route::get('/api/hero-section/{page?}', [\App\Http\Controllers\HeroSectionController::class, 'show']);
 Route::post('/api/hero-section/{page?}', [\App\Http\Controllers\HeroSectionController::class, 'update']);
+
+Route::get('/api/service-maximize/{page?}', [\App\Http\Controllers\ServiceMaximizeSectionController::class, 'show']);
+Route::post('/api/service-maximize/{page?}', [\App\Http\Controllers\ServiceMaximizeSectionController::class, 'update']);
+
+Route::get('/api/service-overview/{page?}', [\App\Http\Controllers\ServiceOverviewSectionController::class, 'show']);
+Route::post('/api/service-overview/{page?}', [\App\Http\Controllers\ServiceOverviewSectionController::class, 'update']);
+
+Route::get('/api/service-management-models/{page?}', [\App\Http\Controllers\ServiceManagementModelController::class, 'show']);
+Route::post('/api/service-management-models/{page?}', [\App\Http\Controllers\ServiceManagementModelController::class, 'update']);
+
+Route::get('/api/faqs', [\App\Http\Controllers\FaqController::class, 'index']);
+Route::post('/api/faqs', [\App\Http\Controllers\FaqController::class, 'store']);
+Route::post('/api/faqs/{faq}', [\App\Http\Controllers\FaqController::class, 'update']);
+Route::delete('/api/faqs/{faq}', [\App\Http\Controllers\FaqController::class, 'destroy']);
 
 Route::get('/api/services-section/{page?}', [\App\Http\Controllers\ServicesSectionController::class, 'show']);
 Route::post('/api/services-section/{page?}', [\App\Http\Controllers\ServicesSectionController::class, 'update']);
