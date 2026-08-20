@@ -88,23 +88,35 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-26 items-start">
 
                 {{-- LEFT: gold line + heading --}}
-                <div class="flex flex-row">
+                <div class="flex flex-row" data-scroll-reveal="left">
                     <div class="h-[2px] w-full bg-[#c9a463] mr-[2rem] mt-6"></div>
 
                     <h2 class="text-[#2A5A8A] text-[clamp(28px,3.5vw,38px)] font-normal leading-tight">
-                        Comfortable Stays, Convenient Services, Personalized Support
+                        {{ $propertyMaximize->title ?? 'Comfortable Stays, Convenient Services, Personalized Support' }}
                     </h2>
                 </div>
 
                 {{-- RIGHT: image + body text --}}
-                <div class="flex flex-col mt-0 lg:mt-[-7rem] gap-8">
-                    <img src="{{ asset('home/latest_activities/3img.png') }}" alt="Golden Tower 322"
-                        class="w-full h-auto object-cover">
+                <div class="flex flex-col mt-0 lg:mt-[-7rem] gap-8" data-scroll-reveal="right">
+                    @php
+                        $hospImg = $propertyMaximize->image ?? 'home/latest_activities/3img.png';
+                        $hospImgSrc = (str_starts_with($hospImg, 'http') || str_starts_with($hospImg, 'storage/')) ? asset($hospImg) : asset($hospImg);
+                    @endphp
+                    <img src="{{ $hospImgSrc }}" alt="{{ $propertyMaximize->alt_text ?? 'Golden Tower 322' }}"
+                        class="w-full h-[350px] object-fill">
 
                     <div class="flex sm:px-[1rem] px-[2rem] flex-col gap-4">
-                        <p class="text-black text-[15px] leading-relaxed">
-                            Whether you are visiting Cambodia for business, leisure, or an extended stay, our team can arrange additional services based on your needs.
-                        </p>
+                        @if(isset($propertyMaximize->paragraphs) && is_array($propertyMaximize->paragraphs) && count($propertyMaximize->paragraphs) > 0)
+                            @foreach($propertyMaximize->paragraphs as $paragraph)
+                                <p class="text-black text-[15px] leading-relaxed">
+                                    {{ $paragraph }}
+                                </p>
+                            @endforeach
+                        @else
+                            <p class="text-black text-[15px] leading-relaxed">
+                                Whether you are visiting Cambodia for business, leisure, or an extended stay, our team can arrange additional services based on your needs.
+                            </p>
+                        @endif
                     </div>
                 </div>
 
@@ -698,32 +710,38 @@
 
     {{-- Frequently Asked Questions --}}
     @php
-        $faqLeft = [
-            [
-                'question' => 'Is airport pick-up included in the rental price?',
-                'answer' =>
-                    'Contact CWD Realty & Hospitality before your arrival and provide your flight and arrival information. Our team will confirm availability and the applicable charge.',
-            ],
-            [
-                'question' => 'Do you provide city tours?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Are airport pick-up and city tours included in monthly rental rates?',
-                'answer' => 'ComingSoon',
-            ],
-        ];
+        $dbFaqs = isset($faqs) ? $faqs : collect();
+        if ($dbFaqs->count() > 0) {
+            $faqLeft = $dbFaqs->where('column', 'left')->values()->toArray();
+            $faqRight = $dbFaqs->where('column', 'right')->values()->toArray();
+        } else {
+            $faqLeft = [
+                [
+                    'question' => 'Is airport pick-up included in the rental price?',
+                    'answer' =>
+                        'Contact CWD Realty & Hospitality before your arrival and provide your flight and arrival information. Our team will confirm availability and the applicable charge.',
+                ],
+                [
+                    'question' => 'Do you provide city tours?',
+                    'answer' => 'Yes, our team can arrange scheduled sightseeing and property inspection tours throughout Phnom Penh.',
+                ],
+                [
+                    'question' => 'Are airport pick-up and city tours included in monthly rental rates?',
+                    'answer' => 'Hospitality concierge packages can be added to standard monthly leases based on tenant preference.',
+                ]
+            ];
 
-        $faqRight = [
-            [
-                'question' => 'Can I request a city tour after I have already checked in?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Are hospitality services available for monthly rental guests?',
-                'answer' => 'ComingSoon',
-            ],
-        ];
+            $faqRight = [
+                [
+                    'question' => 'Can I request a city tour after I have already checked in?',
+                    'answer' => 'Yes, our on-site management team is available daily to assist with transport and city excursions.',
+                ],
+                [
+                    'question' => 'Are hospitality services available for monthly rental guests?',
+                    'answer' => 'Yes, housekeeping, linen change, and laundry services can be arranged on a flexible schedule.',
+                ]
+            ];
+        }
     @endphp
 
     <x-faqs :faq-left="$faqLeft" :faq-right="$faqRight" />
@@ -733,7 +751,7 @@
         {{-- Background Image --}}
         <img src="{{ asset('services/hospitality_services/explore_our_acommodation.png') }}"
             alt="Explore Our Accommodation"
-            class="absolute inset-0 w-full h-full object-cover object-center">
+            class="absolute inset-0 w-full h-full object-fill object-center">
 
         {{-- Content Overlay --}}
         <div class="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14 py-16 sm:py-24 lg:py-28">
@@ -765,7 +783,7 @@
     <section class="relative mt-[4rem] sm:mt-[6rem] lg:mt-[8rem] max-w-[1600px] mx-auto">
         <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="Contact Our Hospitality Team"
-                class="w-full h-auto min-h-[260px] object-cover shadow-sm">
+                class="w-full h-auto min-h-[260px] object-fill shadow-sm">
 
             <div class="relative max-w-[580px] mt-6 px-6 min-[900px]:ml-[-8rem] min-[900px]:mt-[-7.5rem] min-[900px]:px-0">
                 <h2 class="text-[#DCC597] text-[clamp(28px,4.5vw,52px)] font-bold leading-[1.12] drop-shadow-md">

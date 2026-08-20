@@ -92,18 +92,18 @@
                             <span>Property Management</span>
                         </a>
 
-                        {{-- 2. Property Leasing --}}
-                        <a href="{{ url('/dashboard/pages/services/property-leasing') }}" 
-                            class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/services/property-leasing*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
-                            <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/services/property-leasing*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
-                            <span>Property Leasing</span>
-                        </a>
-
-                        {{-- 3. Property Sales --}}
+                        {{-- 2. Property Sales --}}
                         <a href="{{ url('/dashboard/pages/services/property-sales') }}" 
                             class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/services/property-sales*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
                             <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/services/property-sales*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
                             <span>Property Sales</span>
+                        </a>
+
+                        {{-- 3. Property Leasing --}}
+                        <a href="{{ url('/dashboard/pages/services/property-leasing') }}" 
+                            class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/services/property-leasing*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
+                            <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/services/property-leasing*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                            <span>Property Leasing</span>
                         </a>
 
                         {{-- 4. Hospitality Services --}}

@@ -89,22 +89,36 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-26 items-start">
 
                 {{-- LEFT: image + body text --}}
-                <div class="flex flex-col mt-0 lg:mt-[-7rem] gap-8">
-                    <img src="{{ asset('home/latest_activities/3img.png') }}" alt="Golden Tower 322"
-                        class="w-full h-auto object-cover">
+                <div class="flex flex-col mt-0 lg:mt-[-7rem] gap-8" data-scroll-reveal="left">
+                    @php
+                        $leasingImg = $propertyMaximize->image ?? 'home/latest_activities/3img.png';
+                        $leasingImgSrc = (str_starts_with($leasingImg, 'http') || str_starts_with($leasingImg, 'storage/')) ? asset($leasingImg) : asset($leasingImg);
+                    @endphp
+                    <img src="{{ $leasingImgSrc }}" alt="{{ $propertyMaximize->alt_text ?? 'Golden Tower 322' }}"
+                        class="w-full h-[350px] object-fill">
 
                     <div class="flex sm:px-[1rem] px-[2rem] justify-end gap-4">
-                        <p class="text-black text-[15px] max-w-[420px] leading-relaxed">
-                            Whether you need a place for a few nights, several weeks, or an extended stay, CWD Realty &amp; Hospitality offers flexible rental options designed around your accommodation needs.
-                        </p>
+                        <div class="flex flex-col gap-3 max-w-[420px]">
+                            @if(isset($propertyMaximize->paragraphs) && is_array($propertyMaximize->paragraphs) && count($propertyMaximize->paragraphs) > 0)
+                                @foreach($propertyMaximize->paragraphs as $paragraph)
+                                    <p class="text-black text-[15px] leading-relaxed">
+                                        {{ $paragraph }}
+                                    </p>
+                                @endforeach
+                            @else
+                                <p class="text-black text-[15px] leading-relaxed">
+                                    Whether you need a place for a few nights, several weeks, or an extended stay, CWD Realty &amp; Hospitality offers flexible rental options designed around your accommodation needs.
+                                </p>
+                            @endif
+                        </div>
                     </div>
                 </div>
 
                 {{-- RIGHT: heading + gold line --}}
-                <div class="flex flex-row">
+                <div class="flex flex-row" data-scroll-reveal="right">
                     <h2
                         class="text-[#2A5A8A] sm:px-[1rem] px-[2rem] text-[clamp(28px,3.5vw,38px)] font-normal leading-tight">
-                        Find professionally managed properties in Phnom Penh.
+                        {{ $propertyMaximize->title ?? 'Find professionally managed properties in Phnom Penh.' }}
                     </h2>
 
                     <div class="h-[2px] w-full bg-[#c9a463] ml-[2rem] mt-6"></div>
@@ -687,40 +701,38 @@
 
     {{-- Frequently Asked Questions --}}
     @php
-        $faqLeft = [
-            [
-                'question' => 'Why should I choose a CWD-managed property to stay?',
-                'answer' =>
-                    'CWD Realty & Hospitality provides professionally managed residential accommodation with flexible rental options and guest support. Selected properties offer facilities such as swimming pools and panoramic river views, while additional services such as airport pick-up and city tours can be arranged upon request.',
-            ],
-            [
-                'question' => 'What is the difference between smoking and non-smoking accommodation?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'What facilities are available?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Do you provide airport pick-up and city tours?',
-                'answer' => 'ComingSoon',
-            ],
-        ];
+        $dbFaqs = isset($faqs) ? $faqs : collect();
+        if ($dbFaqs->count() > 0) {
+            $faqLeft = $dbFaqs->where('column', 'left')->values()->toArray();
+            $faqRight = $dbFaqs->where('column', 'right')->values()->toArray();
+        } else {
+            $faqLeft = [
+                [
+                    'question' => 'Why should I choose a CWD-managed property to stay?',
+                    'answer' =>
+                        'CWD Realty & Hospitality provides professionally managed residential accommodation with flexible rental options and guest support. Selected properties offer facilities such as swimming pools and panoramic river views, while additional services such as airport pick-up and city tours can be arranged upon request.',
+                ],
+                [
+                    'question' => 'What is the difference between smoking and non-smoking accommodation?',
+                    'answer' => 'We offer dedicated non-smoking and smoking units to ensure maximum comfort for all residents and guests.',
+                ],
+                [
+                    'question' => 'What facilities are available?',
+                    'answer' => 'Selected properties offer premium amenities including swimming pools, modern fitness gyms, sky lounges, and 24/7 security.',
+                ]
+            ];
 
-        $faqRight = [
-            [
-                'question' => 'How much does it cost to rent a property?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Is breakfast included?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Are pets allowed?',
-                'answer' => 'ComingSoon',
-            ],
-        ];
+            $faqRight = [
+                [
+                    'question' => 'How much does it cost to rent a property?',
+                    'answer' => 'Rental rates vary depending on unit size, floor level, and lease duration. Contact our leasing consultants for custom packages.',
+                ],
+                [
+                    'question' => 'Do you provide airport pick-up and city tours?',
+                    'answer' => 'Yes, our dedicated hospitality team can coordinate airport transfers and private city transport upon request.',
+                ]
+            ];
+        }
     @endphp
 
     <x-faqs :faq-left="$faqLeft" :faq-right="$faqRight" />
@@ -729,7 +741,7 @@
     <section class="relative mt-[4rem] sm:mt-[6rem] lg:mt-[8rem] max-w-[1600px] mx-auto">
         <div class="max-w-full min-[900px]:max-w-[80%] ml-auto">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="Find Your Next Stay"
-                class="w-full h-auto min-h-[260px] object-cover shadow-sm">
+                class="w-full h-auto min-h-[260px] object-fill shadow-sm">
 
             <div class="relative max-w-[540px] mt-6 px-6 min-[900px]:ml-[-8rem] min-[900px]:mt-[-7.5rem] min-[900px]:px-0">
                 <h2 class="text-[#DCC597] text-[clamp(28px,4.5vw,50px)] font-bold leading-[1.15] drop-shadow-md">

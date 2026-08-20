@@ -311,7 +311,28 @@ Route::get('/services/property-sales', function () {
             ]
         ]
     );
-    return view('pages.services.property_sales', compact('heroSection'));
+    $propertyMaximize = \App\Models\ServiceMaximizeSection::firstOrCreate(
+        ['page' => 'property-sales'],
+        [
+            'title' => 'Professional Property Sales for Buyers, Investors & Owners',
+            'image' => 'services/maximmize/maximize.png',
+            'alt_text' => 'Phnom Penh skyline',
+            'paragraphs' => [
+                'Our team understands the Cambodian property market and works closely with buyers, investors, and property owners to ensure a smooth, transparent, and successful sales process.'
+            ]
+        ]
+    );
+    $faqs = \App\Models\Faq::where('page', 'property-sales')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    $featuredProperties = \App\Models\ServiceFeaturedProperty::where('page', 'property-sales')
+        ->where('publish_status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    return view('pages.services.property_sales', compact('heroSection', 'propertyMaximize', 'faqs', 'featuredProperties'));
 });
 
 Route::get('/services/property-leasing', function () {
@@ -330,7 +351,23 @@ Route::get('/services/property-leasing', function () {
             ]
         ]
     );
-    return view('pages.services.property_leasing', compact('heroSection'));
+    $propertyMaximize = \App\Models\ServiceMaximizeSection::firstOrCreate(
+        ['page' => 'property-leasing'],
+        [
+            'title' => 'Find professionally managed properties in Phnom Penh.',
+            'image' => 'home/latest_activities/3img.png',
+            'alt_text' => 'Golden Tower 322',
+            'paragraphs' => [
+                'Whether you need a place for a few nights, several weeks, or an extended stay, CWD Realty & Hospitality offers flexible rental options designed around your accommodation needs.'
+            ]
+        ]
+    );
+    $faqs = \App\Models\Faq::where('page', 'property-leasing')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    return view('pages.services.property_leasing', compact('heroSection', 'propertyMaximize', 'faqs'));
 });
 
 Route::get('/services/hospitality-services', function () {
@@ -349,7 +386,23 @@ Route::get('/services/hospitality-services', function () {
             ]
         ]
     );
-    return view('pages.services.hospitality_services', compact('heroSection'));
+    $propertyMaximize = \App\Models\ServiceMaximizeSection::firstOrCreate(
+        ['page' => 'hospitality-services'],
+        [
+            'title' => 'Comfortable Stays, Convenient Services, Personalized Support',
+            'image' => 'home/latest_activities/3img.png',
+            'alt_text' => 'Golden Tower 322',
+            'paragraphs' => [
+                'Whether you are visiting Cambodia for business, leisure, or an extended stay, our team can arrange additional services based on your needs.'
+            ]
+        ]
+    );
+    $faqs = \App\Models\Faq::where('page', 'hospitality-services')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    return view('pages.services.hospitality_services', compact('heroSection', 'propertyMaximize', 'faqs'));
 });
 
 Route::get('/services/properties/wealth-mansion', function () {
@@ -455,6 +508,11 @@ Route::get('/api/featured-properties', [\App\Http\Controllers\FeaturedPropertyCo
 Route::post('/api/featured-properties', [\App\Http\Controllers\FeaturedPropertyController::class, 'store']);
 Route::post('/api/featured-properties/{featuredProperty}', [\App\Http\Controllers\FeaturedPropertyController::class, 'update']);
 Route::delete('/api/featured-properties/{featuredProperty}', [\App\Http\Controllers\FeaturedPropertyController::class, 'destroy']);
+
+Route::get('/api/service-featured-properties/{page?}', [\App\Http\Controllers\ServiceFeaturedPropertyController::class, 'index']);
+Route::post('/api/service-featured-properties/{page?}', [\App\Http\Controllers\ServiceFeaturedPropertyController::class, 'store']);
+Route::post('/api/service-featured-properties/update/{id}', [\App\Http\Controllers\ServiceFeaturedPropertyController::class, 'update']);
+Route::delete('/api/service-featured-properties/{id}', [\App\Http\Controllers\ServiceFeaturedPropertyController::class, 'destroy']);
 
 Route::get('/api/why-choose-us/{page?}', [\App\Http\Controllers\WhyChooseUsSectionController::class, 'show']);
 Route::post('/api/why-choose-us/{page?}', [\App\Http\Controllers\WhyChooseUsSectionController::class, 'update']);

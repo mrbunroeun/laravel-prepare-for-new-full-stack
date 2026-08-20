@@ -20,7 +20,6 @@
     </div>
 
     {{-- Tabs Navigation with Left/Right Arrow Scroll Buttons --}}
-    @if($pageSlug === 'property-management')
     <div class="relative flex items-center border-b border-slate-200 group py-1">
         {{-- Left Scroll Button --}}
         <button type="button" onclick="scrollServiceTabsBar(-1)" id="service-tabs-scroll-prev" aria-label="Scroll tabs left" class="shrink-0 w-8 h-8 rounded-full bg-white border border-slate-300 shadow-sm text-[#2A5A8A] hover:bg-[#2A5A8A] hover:text-white hover:border-[#2A5A8A] flex items-center justify-center transition-all mr-2 cursor-pointer z-10">
@@ -42,9 +41,22 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                 </svg>
-                <span class="whitespace-nowrap">Maximize Your Property</span>
+                <span class="whitespace-nowrap">
+                    @if($pageSlug === 'property-management')
+                        Maximize Your Property
+                    @elseif($pageSlug === 'property-sales')
+                        Professional Property Sales
+                    @elseif($pageSlug === 'property-leasing')
+                        Find Professionally Managed
+                    @elseif($pageSlug === 'hospitality-services')
+                        Comfortable Stays Showcase
+                    @else
+                        Showcase Section
+                    @endif
+                </span>
             </button>
 
+            @if($pageSlug === 'property-management')
             <button type="button" onclick="switchServiceTab('overview', event)" id="service-tab-btn-overview" class="service-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -58,6 +70,17 @@
                 </svg>
                 <span class="whitespace-nowrap">Our Management Models</span>
             </button>
+            @endif
+
+            @if($pageSlug === 'property-sales')
+            <button type="button" onclick="switchServiceTab('properties', event)" id="service-tab-btn-properties" class="service-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+                <span class="whitespace-nowrap">Featured Properties</span>
+                <span class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full" id="tab-badge-properties-count">...</span>
+            </button>
+            @endif
 
             <button type="button" onclick="switchServiceTab('faqs', event)" id="service-tab-btn-faqs" class="service-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,7 +98,6 @@
             </svg>
         </button>
     </div>
-    @endif
 
     {{-- ========================================================================= --}}
     {{-- TAB 1: HERO SECTION --}}
@@ -211,14 +233,25 @@
     </div>
 
     {{-- ========================================================================= --}}
-    {{-- TAB 2: MAXIMIZE YOUR PROPERTY INVESTMENT (FOR PROPERTY MANAGEMENT) --}}
+    {{-- TAB 2: SHOWCASE / MAXIMIZE SECTION                                        --}}
     {{-- ========================================================================= --}}
-    @if($pageSlug === 'property-management')
     <div id="service-tab-content-maximize" class="service-tab-content space-y-6 hidden">
         <form onsubmit="handleMaximizeSubmit(event)" class="space-y-6" id="maximize-form">
             <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
                 <div class="border-b border-slate-200 pb-4">
-                    <h2 class="text-lg font-bold text-[#163049]">Maximize Your Property Section</h2>
+                    <h2 class="text-lg font-bold text-[#163049]">
+                        @if($pageSlug === 'property-management')
+                            Maximize Your Property Section
+                        @elseif($pageSlug === 'property-sales')
+                            Professional Property Sales Section
+                        @elseif($pageSlug === 'property-leasing')
+                            Find Professionally Managed Section
+                        @elseif($pageSlug === 'hospitality-services')
+                            Comfortable Stays Showcase Section
+                        @else
+                            Showcase Section
+                        @endif
+                    </h2>
                     <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Customize the heading title, section showcase image, and body paragraphs.</p>
                 </div>
 
@@ -323,6 +356,7 @@
         </div>
     </div>
 
+    @if($pageSlug === 'property-management')
     {{-- ========================================================================= --}}
     {{-- TAB 3: WHAT IS PROPERTY MANAGEMENT? --}}
     {{-- ========================================================================= --}}
@@ -524,6 +558,103 @@
             </div>
         </div>
     </div>
+    @endif
+
+    @if($pageSlug === 'property-sales')
+    {{-- ========================================================================= --}}
+    {{-- TAB: FEATURED PROPERTIES (GRADE A, B, C MANAGEMENT)                       --}}
+    {{-- ========================================================================= --}}
+    <div id="service-tab-content-properties" class="service-tab-content hidden space-y-6">
+        {{-- Database Properties Table --}}
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+                <div>
+                    <h2 class="text-lg font-bold text-[#163049] flex items-center gap-2">
+                        <span>Featured Properties</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#1479B9]/10 text-[#1479B9] font-semibold">Grade A, B, C Management</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Manage property cards for each Grade. If all properties in a grade are deleted, frontend automatically displays a clean <strong>"Coming Soon"</strong> box.</p>
+                </div>
+                <button onclick="openServicePropertyModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white text-xs sm:text-sm font-bold shadow-sm transition-all cursor-pointer">
+                    <svg class="w-4 h-4 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    <span>Add New Property</span>
+                </button>
+            </div>
+
+            {{-- Grade Sub-Filter Tabs --}}
+            <div class="flex items-center gap-2 my-4 border-b border-slate-100 pb-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400 mr-2">Filter Grade:</span>
+                <button type="button" onclick="setServicePropertyGrade('A')" id="btn-prop-grade-A" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer bg-[#2A5A8A] text-white shadow-xs">
+                    Grade A <span id="count-badge-grade-A" class="ml-1 px-1.5 py-0.2 rounded-full bg-white/20 text-white text-[10px]">0</span>
+                </button>
+                <button type="button" onclick="setServicePropertyGrade('B')" id="btn-prop-grade-B" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    Grade B <span id="count-badge-grade-B" class="ml-1 px-1.5 py-0.2 rounded-full bg-slate-200 text-slate-700 text-[10px]">0</span>
+                </button>
+                <button type="button" onclick="setServicePropertyGrade('C')" id="btn-prop-grade-C" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200">
+                    Grade C <span id="count-badge-grade-C" class="ml-1 px-1.5 py-0.2 rounded-full bg-slate-200 text-slate-700 text-[10px]">0</span>
+                </button>
+            </div>
+
+            {{-- Table --}}
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-slate-600">
+                    <thead class="bg-slate-50 text-[11px] uppercase tracking-wider text-[#2A5A8A] font-bold border-b border-slate-200">
+                        <tr>
+                            <th class="py-3.5 px-4 w-12 text-center">#</th>
+                            <th class="py-3.5 px-4 w-20 text-center">Image</th>
+                            <th class="py-3.5 px-4">Title & Subtitle</th>
+                            <th class="py-3.5 px-4">Description</th>
+                            <th class="py-3.5 px-4 text-center">Grade</th>
+                            <th class="py-3.5 px-4 text-center">Status</th>
+                            <th class="py-3.5 px-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="service-property-table-body" class="divide-y divide-slate-100">
+                        {{-- Populated by JS --}}
+                    </tbody>
+                </table>
+
+                <div id="service-property-empty-state" class="hidden py-12 text-center">
+                    <div class="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-sm font-semibold text-slate-700">No properties found in this grade</p>
+                    <p class="text-xs text-slate-400 mt-1">Frontend will display the <strong>"Coming Soon"</strong> badge for this grade.</p>
+                </div>
+            </div>
+        </div>
+
+        {{-- Live Featured Properties Carousel Preview --}}
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-[#8a6a3a]"></span>
+                    <h3 class="text-sm font-bold text-[#163049] uppercase tracking-wider">Live Section Preview (<span id="preview-active-grade-label">Grade A</span>)</h3>
+                </div>
+                <span class="text-xs text-slate-500">Live preview matching exact frontend slider layout</span>
+            </div>
+
+            <div class="relative bg-slate-900 rounded-xl overflow-hidden p-6 sm:p-10 border border-slate-800">
+                <div class="absolute inset-0 bg-cover bg-right opacity-30" style="background-image: url('{{ asset('home/feature_properties/feature_properties.png') }}');"></div>
+                <div class="relative z-10">
+                    <h2 class="text-[#F4DEAC] text-xl sm:text-2xl font-bold mb-6">
+                        <span class="font-normal block">Featured</span>
+                        <span class="block">Properties (<span id="preview-active-grade-title">Grade A</span>)</span>
+                    </h2>
+
+                    {{-- Horizontal scroll container --}}
+                    <div id="service-live-property-track" class="flex gap-4 overflow-x-auto pb-4 pt-1 [scrollbar-width:thin]">
+                        {{-- Rendered dynamically via JS --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 
     {{-- ========================================================================= --}}
     {{-- TAB 5: FREQUENTLY ASKED QUESTIONS (100% HOMEPAGE UX/UI FORMULA)          --}}
@@ -610,7 +741,6 @@
             </div>
         </div>
     </div>
-    @endif
 </div>
 
 {{-- MODAL: CREATE / EDIT FAQ --}}
@@ -693,6 +823,121 @@
         </div>
     </div>
 </div>
+
+{{-- MODAL: CREATE / EDIT SERVICE PROPERTY --}}
+<div id="service-property-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#163049]/60 backdrop-blur-xs p-4 hidden opacity-0 transition-opacity duration-200">
+    <div class="bg-white border border-slate-200 w-full max-w-lg rounded-xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-200" id="service-property-modal-card">
+        <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-[#163049] text-white">
+            <h3 class="text-base font-bold text-white flex items-center gap-2" id="service-property-modal-title">
+                <span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span>
+                Add New Property
+            </h3>
+            <button onclick="closeServicePropertyModal()" class="text-white/70 hover:text-white p-1 rounded hover:bg-white/10 transition-colors cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <form id="service-property-form" onsubmit="handleServicePropertySubmit(event)" class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+            <input type="hidden" id="sprop-id" value="">
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Target Grade <span class="text-rose-500">*</span></label>
+                    <select id="sprop-grade" required class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 font-bold focus:outline-none focus:border-[#2A5A8A]">
+                        <option value="A">Grade A</option>
+                        <option value="B">Grade B</option>
+                        <option value="C">Grade C</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Status Badge <span class="text-rose-500">*</span></label>
+                    <input type="text" id="sprop-status" required placeholder="e.g. 30% Available or Coming Soon" value="30% Available" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Property Title <span class="text-rose-500">*</span></label>
+                <input type="text" id="sprop-title" required placeholder="e.g. Wealth Mansion" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 font-bold focus:outline-none focus:border-[#2A5A8A]">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Subtitle / Development Type</label>
+                <input type="text" id="sprop-subtitle" placeholder="e.g. Premium Condominium Residences" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Description <span class="text-rose-500">*</span></label>
+                <textarea id="sprop-description" required rows="3" placeholder="Enter concise property highlights..." class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Property Image</label>
+                <input type="file" id="sprop-image-file" accept="image/*" class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                <input type="hidden" id="sprop-image-url" value="home/latest_activities/1img.png">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Page Link URL <span class="text-rose-500">*</span></label>
+                    <input type="text" id="sprop-link" required value="/services/properties/wealth-mansion" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Button Text</label>
+                    <input type="text" id="sprop-link-text" value="View Project" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Publish Status</label>
+                    <select id="sprop-publish-status" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Sort Order</label>
+                    <input type="number" id="sprop-sort-order" value="1" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
+                <button type="button" onclick="closeServicePropertyModal()" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer">
+                    Cancel
+                </button>
+                <button type="submit" id="sprop-submit-btn" class="px-5 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
+                    Save Property
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{-- MODAL: DELETE SERVICE PROPERTY CONFIRMATION --}}
+<div id="delete-service-property-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#163049]/60 backdrop-blur-xs p-4 hidden opacity-0 transition-opacity duration-200">
+    <div class="bg-white border border-slate-200 w-full max-w-sm rounded-xl shadow-2xl p-6 text-center transform scale-95 transition-transform duration-200" id="delete-service-property-modal-card">
+        <div class="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+        </div>
+        <h3 class="text-base font-bold text-[#163049] mb-1">Delete Property?</h3>
+        <p class="text-xs text-slate-500 mb-6">Are you sure you want to delete this property from the Grade set?</p>
+
+        <input type="hidden" id="delete-service-property-id">
+
+        <div class="flex items-center justify-center gap-3">
+            <button type="button" onclick="closeDeleteServicePropertyModal()" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer">
+                Cancel
+            </button>
+            <button type="button" onclick="confirmDeleteServiceProperty()" class="px-5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer">
+                Yes, Delete
+            </button>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
@@ -758,13 +1003,20 @@
     // FAQ section state
     let faqsData = [];
 
+    // Service Featured Properties state
+    let servicePropertiesData = [];
+    let activePropertyGrade = 'A';
+
     document.addEventListener('DOMContentLoaded', () => {
         fetchHeroSection();
+        fetchMaximizeSection();
+        fetchFaqs();
         if (pageSlug === 'property-management') {
-            fetchMaximizeSection();
             fetchOverviewSection();
             fetchManagementModels();
-            fetchFaqs();
+        }
+        if (pageSlug === 'property-sales') {
+            fetchServiceProperties();
         }
     });
 
@@ -1823,6 +2075,345 @@
         } catch (err) {
             console.error('Error deleting FAQ:', err);
             if (typeof showToast === 'function') showToast('Server error deleting FAQ', 'error');
+        }
+    }
+
+    // =========================================================================
+    // FEATURED PROPERTIES (GRADE A, B, C) LOGIC FOR PROPERTY SALES
+    // =========================================================================
+    async function fetchServiceProperties() {
+        try {
+            const res = await fetch(`/api/service-featured-properties/${pageSlug}`);
+            const json = await res.json();
+            if (json.success && Array.isArray(json.data)) {
+                servicePropertiesData = json.data;
+                renderServicePropertiesTable();
+                renderServicePropertiesPreview();
+                updateServicePropertyBadges();
+            }
+        } catch (err) {
+            console.error('Error fetching service properties:', err);
+        }
+    }
+
+    function updateServicePropertyBadges() {
+        const countA = servicePropertiesData.filter(p => p.grade === 'A').length;
+        const countB = servicePropertiesData.filter(p => p.grade === 'B').length;
+        const countC = servicePropertiesData.filter(p => p.grade === 'C').length;
+        const total = servicePropertiesData.length;
+
+        const badgeA = document.getElementById('count-badge-grade-A');
+        const badgeB = document.getElementById('count-badge-grade-B');
+        const badgeC = document.getElementById('count-badge-grade-C');
+        const badgeTotal = document.getElementById('tab-badge-properties-count');
+
+        if (badgeA) badgeA.innerText = countA;
+        if (badgeB) badgeB.innerText = countB;
+        if (badgeC) badgeC.innerText = countC;
+        if (badgeTotal) badgeTotal.innerText = total;
+    }
+
+    function setServicePropertyGrade(grade) {
+        activePropertyGrade = grade;
+
+        ['A', 'B', 'C'].forEach(g => {
+            const btn = document.getElementById(`btn-prop-grade-${g}`);
+            if (btn) {
+                if (g === grade) {
+                    btn.classList.remove('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+                    btn.classList.add('bg-[#2A5A8A]', 'text-white', 'shadow-xs');
+                } else {
+                    btn.classList.remove('bg-[#2A5A8A]', 'text-white', 'shadow-xs');
+                    btn.classList.add('bg-slate-100', 'text-slate-600', 'hover:bg-slate-200');
+                }
+            }
+        });
+
+        const labelEl = document.getElementById('preview-active-grade-label');
+        const titleEl = document.getElementById('preview-active-grade-title');
+        const gradeText = `Grade ${grade}`;
+        if (labelEl) labelEl.innerText = gradeText;
+        if (titleEl) titleEl.innerText = gradeText;
+
+        renderServicePropertiesTable();
+        renderServicePropertiesPreview();
+    }
+
+    function renderServicePropertiesTable() {
+        const tbody = document.getElementById('service-property-table-body');
+        const emptyState = document.getElementById('service-property-empty-state');
+        if (!tbody) return;
+
+        let filtered = servicePropertiesData;
+        if (activePropertyGrade !== 'all') {
+            filtered = servicePropertiesData.filter(p => p.grade === activePropertyGrade);
+        }
+
+        if (filtered.length === 0) {
+            tbody.innerHTML = '';
+            if (emptyState) emptyState.classList.remove('hidden');
+            return;
+        }
+
+        if (emptyState) emptyState.classList.add('hidden');
+
+        tbody.innerHTML = filtered.map((item, index) => {
+            let imgSrc = item.image || 'home/latest_activities/1img.png';
+            if (!imgSrc.startsWith('http') && !imgSrc.startsWith('/')) {
+                imgSrc = '/' + imgSrc;
+            }
+            const isPublished = (item.publish_status || 'published') === 'published';
+
+            return `
+                <tr class="hover:bg-slate-50/80 transition-colors">
+                    <td class="py-3 px-4 text-center font-bold text-xs text-slate-400">${index + 1}</td>
+                    <td class="py-3 px-4 text-center">
+                        <div class="w-14 h-10 rounded overflow-hidden bg-slate-800 mx-auto border border-slate-200">
+                            <img src="${escapeHtml(imgSrc)}" class="w-full h-full object-cover">
+                        </div>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="font-bold text-slate-900 text-sm block">${escapeHtml(item.title)}</span>
+                        <span class="text-xs text-slate-500 block">${escapeHtml(item.subtitle || '')}</span>
+                    </td>
+                    <td class="py-3 px-4 text-xs text-slate-600 max-w-[280px]">
+                        <p class="line-clamp-2">${escapeHtml(item.description || '')}</p>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold ${item.grade === 'A' ? 'bg-amber-100 text-amber-800' : (item.grade === 'B' ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800')}">
+                            Grade ${escapeHtml(item.grade)}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${isPublished ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-600'}">
+                            ${isPublished ? 'Published' : 'Draft'}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-right">
+                        <div class="flex items-center justify-end gap-1.5">
+                            <button onclick="editServiceProperty(${item.id})" class="p-1.5 rounded-lg text-slate-500 hover:text-[#2A5A8A] hover:bg-slate-100 transition-colors" title="Edit Property">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                </svg>
+                            </button>
+                            <button onclick="promptDeleteServiceProperty(${item.id})" class="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-colors" title="Delete Property">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    function renderServicePropertiesPreview() {
+        const track = document.getElementById('service-live-property-track');
+        if (!track) return;
+
+        let filtered = servicePropertiesData;
+        if (activePropertyGrade !== 'all') {
+            filtered = servicePropertiesData.filter(p => p.grade === activePropertyGrade);
+        }
+
+        if (filtered.length === 0) {
+            track.innerHTML = `
+                <div class="w-full py-10 text-center flex flex-col items-center justify-center min-h-[220px] bg-slate-950/60 border border-white/10 rounded-lg p-6">
+                    <div class="w-12 h-12 rounded-full bg-white/10 text-[#F4DEAC] flex items-center justify-center mb-3 border border-[#F4DEAC]/30">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-[#F4DEAC] text-xl font-bold mb-1">Coming Soon</h3>
+                    <p class="text-white/70 text-xs max-w-sm">No properties in this grade. The live frontend will show this clean Coming Soon state.</p>
+                </div>
+            `;
+            return;
+        }
+
+        track.innerHTML = filtered.map(item => {
+            let imgSrc = item.image || 'home/latest_activities/1img.png';
+            if (!imgSrc.startsWith('http') && !imgSrc.startsWith('/')) {
+                imgSrc = '/' + imgSrc;
+            }
+            return `
+                <div class="w-[280px] shrink-0 bg-white rounded-none overflow-hidden shadow-lg flex flex-col">
+                    <div class="h-[150px] w-full bg-slate-800 relative overflow-hidden">
+                        <img src="${escapeHtml(imgSrc)}" class="w-full h-full object-fill">
+                    </div>
+                    <div class="p-4 flex flex-col grow">
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                            <h4 class="text-[#2A5A8A] font-bold text-sm leading-snug truncate">${escapeHtml(item.title)}</h4>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-[#2A5A8A] shrink-0">Grade ${escapeHtml(item.grade)}</span>
+                        </div>
+                        <p class="text-slate-700 text-xs font-semibold mb-1 truncate">${escapeHtml(item.subtitle || '')}</p>
+                        <p class="text-slate-500 text-[11px] leading-relaxed line-clamp-2 mb-3">${escapeHtml(item.description || '')}</p>
+                        <div class="mt-auto pt-2 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-[11px] font-bold text-[#2A5A8A]">${escapeHtml(item.status || '30% Available')}</span>
+                            <span class="text-[11px] font-semibold text-[#2A5A8A] flex items-center gap-1">${escapeHtml(item.link_text || 'View Project')} &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function openServicePropertyModal(property = null) {
+        const modal = document.getElementById('service-property-modal');
+        const card = document.getElementById('service-property-modal-card');
+        const form = document.getElementById('service-property-form');
+        form.reset();
+
+        if (property) {
+            document.getElementById('service-property-modal-title').innerHTML = '<span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span> Edit Featured Property';
+            document.getElementById('sprop-id').value = property.id;
+            document.getElementById('sprop-grade').value = property.grade || 'A';
+            document.getElementById('sprop-status').value = property.status || '30% Available';
+            document.getElementById('sprop-title').value = property.title || '';
+            document.getElementById('sprop-subtitle').value = property.subtitle || '';
+            document.getElementById('sprop-description').value = property.description || '';
+            document.getElementById('sprop-image-url').value = property.image || 'home/latest_activities/1img.png';
+            document.getElementById('sprop-link').value = property.link || '/services/properties/wealth-mansion';
+            document.getElementById('sprop-link-text').value = property.link_text || 'View Project';
+            document.getElementById('sprop-publish-status').value = property.publish_status || 'published';
+            document.getElementById('sprop-sort-order').value = property.sort_order || 1;
+        } else {
+            document.getElementById('service-property-modal-title').innerHTML = '<span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span> Add New Property';
+            document.getElementById('sprop-id').value = '';
+            document.getElementById('sprop-grade').value = (activePropertyGrade !== 'all' ? activePropertyGrade : 'A');
+            document.getElementById('sprop-status').value = '30% Available';
+            document.getElementById('sprop-title').value = '';
+            document.getElementById('sprop-subtitle').value = 'Premium Condominium Residences';
+            document.getElementById('sprop-description').value = '';
+            document.getElementById('sprop-image-url').value = 'home/latest_activities/1img.png';
+            document.getElementById('sprop-link').value = '/services/properties/wealth-mansion';
+            document.getElementById('sprop-link-text').value = 'View Project';
+            document.getElementById('sprop-publish-status').value = 'published';
+            document.getElementById('sprop-sort-order').value = (servicePropertiesData.length + 1);
+        }
+
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            card.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function closeServicePropertyModal() {
+        const modal = document.getElementById('service-property-modal');
+        const card = document.getElementById('service-property-modal-card');
+        modal.classList.add('opacity-0');
+        card.classList.add('scale-95');
+        setTimeout(() => modal.classList.add('hidden'), 200);
+    }
+
+    function editServiceProperty(id) {
+        const property = servicePropertiesData.find(p => p.id === id);
+        if (property) {
+            openServicePropertyModal(property);
+        }
+    }
+
+    async function handleServicePropertySubmit(event) {
+        event.preventDefault();
+        const submitBtn = document.getElementById('sprop-submit-btn');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Saving Property...';
+        }
+
+        const id = document.getElementById('sprop-id').value;
+        const formData = new FormData();
+        formData.append('grade', document.getElementById('sprop-grade').value);
+        formData.append('status', document.getElementById('sprop-status').value);
+        formData.append('title', document.getElementById('sprop-title').value);
+        formData.append('subtitle', document.getElementById('sprop-subtitle').value);
+        formData.append('description', document.getElementById('sprop-description').value);
+        formData.append('image', document.getElementById('sprop-image-url').value);
+        formData.append('link', document.getElementById('sprop-link').value);
+        formData.append('link_text', document.getElementById('sprop-link-text').value);
+        formData.append('publish_status', document.getElementById('sprop-publish-status').value);
+        formData.append('sort_order', document.getElementById('sprop-sort-order').value);
+
+        const fileInput = document.getElementById('sprop-image-file');
+        if (fileInput && fileInput.files.length > 0) {
+            formData.append('image_file', fileInput.files[0]);
+        }
+
+        const url = id ? `/api/service-featured-properties/update/${id}` : `/api/service-featured-properties/${pageSlug}`;
+
+        try {
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
+                },
+                body: formData
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+                if (typeof showToast === 'function') showToast(id ? 'Property updated successfully!' : 'Property added successfully!');
+                closeServicePropertyModal();
+                fetchServiceProperties();
+            } else {
+                if (typeof showToast === 'function') showToast(data.message || 'Error saving property', 'error');
+            }
+        } catch (err) {
+            console.error('Error saving property:', err);
+            if (typeof showToast === 'function') showToast('Server error saving property', 'error');
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Save Property';
+            }
+        }
+    }
+
+    function promptDeleteServiceProperty(id) {
+        document.getElementById('delete-service-property-id').value = id;
+        const modal = document.getElementById('delete-service-property-modal');
+        const card = document.getElementById('delete-service-property-modal-card');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            card.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function closeDeleteServicePropertyModal() {
+        const modal = document.getElementById('delete-service-property-modal');
+        const card = document.getElementById('delete-service-property-modal-card');
+        modal.classList.add('opacity-0');
+        card.classList.add('scale-95');
+        setTimeout(() => modal.classList.add('hidden'), 200);
+    }
+
+    async function confirmDeleteServiceProperty() {
+        const id = document.getElementById('delete-service-property-id').value;
+        if (!id) return;
+
+        try {
+            const res = await fetch(`/api/service-featured-properties/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
+                }
+            });
+            const data = await res.json();
+            if (res.ok && data.success) {
+                if (typeof showToast === 'function') showToast('Property deleted successfully!');
+                closeDeleteServicePropertyModal();
+                fetchServiceProperties();
+            } else {
+                if (typeof showToast === 'function') showToast(data.message || 'Error deleting property', 'error');
+            }
+        } catch (err) {
+            console.error('Error deleting property:', err);
+            if (typeof showToast === 'function') showToast('Server error deleting property', 'error');
         }
     }
 

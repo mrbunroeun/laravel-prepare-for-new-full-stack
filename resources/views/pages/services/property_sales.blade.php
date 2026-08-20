@@ -90,23 +90,36 @@
     </section>
 
 
-    {{-- Maximize Your Property Investment --}}
-
-    <section class="relative z-[300]  bg-white">
-        <div class="max-w-[1500px] mx-auto  py-16 max-[940px]:py-12">
+    {{-- Maximize / Professional Property Sales Section --}}
+    <section class="relative z-[300] bg-white">
+        <div class="max-w-[1500px] mx-auto py-16 max-[940px]:py-12">
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-26 items-start">
 
                 {{-- LEFT: image + body text --}}
                 <div class="flex flex-col mt-0 lg:mt-[-7rem] gap-8" data-scroll-reveal="left">
-                    <img src="{{ asset('services/maximmize/maximize.png') }}" alt="Phnom Penh skyline"
-                        class="w-full h-[350px] object-cover">
+                    @php
+                        $salesImg = $propertyMaximize->image ?? 'services/maximmize/maximize.png';
+                        $salesImgSrc = (str_starts_with($salesImg, 'http') || str_starts_with($salesImg, 'storage/')) ? asset($salesImg) : asset($salesImg);
+                    @endphp
+                    <img src="{{ $salesImgSrc }}" alt="{{ $propertyMaximize->alt_text ?? 'Phnom Penh skyline' }}"
+                        class="w-full h-[350px] object-fill">
 
                     <div class="flex sm:px-[1rem] px-[2rem] justify-end gap-4">
-                        <p class="text-black text-[15px] max-w-[420px] leading-relaxed">
-                            Our team understands the Cambodian property market and works closely with buyers, investors, and
-                            property owners to ensure a smooth, transparent, and successful sales process.
-                        </p>
+                        <div class="flex flex-col gap-3 max-w-[420px]">
+                            @if(isset($propertyMaximize->paragraphs) && is_array($propertyMaximize->paragraphs) && count($propertyMaximize->paragraphs) > 0)
+                                @foreach($propertyMaximize->paragraphs as $paragraph)
+                                    <p class="text-black text-[15px] leading-relaxed">
+                                        {{ $paragraph }}
+                                    </p>
+                                @endforeach
+                            @else
+                                <p class="text-black text-[15px] leading-relaxed">
+                                    Our team understands the Cambodian property market and works closely with buyers, investors, and
+                                    property owners to ensure a smooth, transparent, and successful sales process.
+                                </p>
+                            @endif
+                        </div>
                     </div>
                 </div>
 
@@ -114,7 +127,7 @@
                 <div class="flex flex-row" data-scroll-reveal="right">
                     <h2
                         class="text-[#2A5A8A] sm:px-[1rem] px-[2rem] text-[clamp(28px,3.5vw,38px)] font-normal leading-tight">
-                        Professional Property Sales for Buyers, Investors & Owners
+                        {{ $propertyMaximize->title ?? 'Professional Property Sales for Buyers, Investors & Owners' }}
                     </h2>
 
                     <div class="h-[2px] w-full bg-[#c9a463] ml-[2rem] mt-6"></div>
@@ -128,7 +141,7 @@
 
     {{-- feature project  --}}
 
-    <x-feature_project_properties_sale.featured_project />
+    <x-feature_project_properties_sale.featured_project :featured-properties="$featuredProperties ?? null" />
 
     {{-- auto move logo --}}
 
@@ -180,44 +193,36 @@
                 $whyChooseRowTwo = array_slice($whyChooseFeatures, 4);
             @endphp
 
-            {{-- Row 1: 4 columns --}}
-            <div id="why-choose-row-one" class="grid grid-cols-2 lg:grid-cols-4 gap-6 items-stretch mb-6">
-                @foreach ($whyChooseRowOne as $index => $feature)
-                    @php
-                        $dir = $index < 2 ? 'left' : 'right';
-                    @endphp
-                    <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ ($index % 2) * 100 }}"
-                        class="why-choose-card group h-full w-full flex flex-col px-6 py-6 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200">
-                        <span
-                            class="text-[36px] sm:text-[40px] font-bold leading-none mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
-                            {{ $feature['number'] }}
-                        </span>
-                        <p
-                            class="text-[15px] leading-relaxed text-black group-hover:text-white transition-colors duration-200">
-                            {{ $feature['title'] }}
-                        </p>
-                    </div>
-                @endforeach
-            </div>
+            <div class="space-y-6">
+                {{-- Row 1: 4 columns --}}
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                    @foreach ($whyChooseRowOne as $feature)
+                        <div class="why-choose-card relative border-[2px] border-[#2A5A8A] bg-white p-6 sm:p-8 flex flex-col justify-start"
+                            data-scroll-reveal="fade">
+                            <span class="text-[20px] sm:text-[22px] font-bold text-[#2A5A8A] mb-3 leading-none">
+                                {{ $feature['number'] }}
+                            </span>
+                            <p class="text-[13.5px] sm:text-[14px] text-gray-700 font-medium leading-relaxed">
+                                {{ $feature['title'] }}
+                            </p>
+                        </div>
+                    @endforeach
+                </div>
 
-            {{-- Row 2: remaining cards, centered --}}
-            <div id="why-choose-row-two" class="flex flex-wrap justify-center gap-6">
-                @foreach ($whyChooseRowTwo as $index => $feature)
-                    @php
-                        $dir = $index === 0 ? 'left' : ($index === 1 ? 'fade-up' : 'right');
-                    @endphp
-                    <div data-scroll-reveal="{{ $dir }}" data-scroll-delay="{{ $index * 100 }}"
-                        class="why-choose-card group w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)] flex flex-col px-6 py-6 bg-white border-[2px] border-[#1479B9] hover:bg-[#1479B9] transition-colors duration-200">
-                        <span
-                            class="text-[36px] sm:text-[40px] font-bold leading-none mb-3 text-[#2A5A8A] group-hover:text-[#F4DEAC] transition-colors duration-200">
-                            {{ $feature['number'] }}
-                        </span>
-                        <p
-                            class="text-[15px] leading-relaxed text-black group-hover:text-white transition-colors duration-200">
-                            {{ $feature['title'] }}
-                        </p>
-                    </div>
-                @endforeach
+                {{-- Row 2: 3 columns --}}
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    @foreach ($whyChooseRowTwo as $feature)
+                        <div class="why-choose-card relative border-[2px] border-[#2A5A8A] bg-white p-6 sm:p-8 flex flex-col justify-start"
+                            data-scroll-reveal="fade">
+                            <span class="text-[20px] sm:text-[22px] font-bold text-[#2A5A8A] mb-3 leading-none">
+                                {{ $feature['number'] }}
+                            </span>
+                            <p class="text-[13.5px] sm:text-[14px] text-gray-700 font-medium leading-relaxed">
+                                {{ $feature['title'] }}
+                            </p>
+                        </div>
+                    @endforeach
+                </div>
             </div>
 
         </div>
@@ -227,26 +232,29 @@
         <script>
             (function() {
                 function equalizeWhyChooseCardHeights() {
-                    var cards = document.querySelectorAll(
-                        '#why-choose-row-one .why-choose-card, #why-choose-row-two .why-choose-card');
+                    var cards = document.querySelectorAll('.why-choose-card');
                     if (!cards.length) return;
 
-                    // Reset heights first so we measure natural content height, not a previously-set tall value
+                    // Reset heights so scrollHeight reflects natural wrapped content
                     cards.forEach(function(card) {
                         card.style.height = 'auto';
+                        card.style.minHeight = '0px';
                     });
 
-                    var tallest = 0;
+                    // Measure the tallest natural height
+                    var maxHeight = 0;
                     cards.forEach(function(card) {
-                        var cardHeight = card.getBoundingClientRect().height;
-                        if (cardHeight > tallest) {
-                            tallest = cardHeight;
+                        if (card.offsetHeight > maxHeight) {
+                            maxHeight = card.offsetHeight;
                         }
                     });
 
-                    cards.forEach(function(card) {
-                        card.style.height = tallest + 'px';
-                    });
+                    // Apply unified height across all cards
+                    if (maxHeight > 0) {
+                        cards.forEach(function(card) {
+                            card.style.height = maxHeight + 'px';
+                        });
+                    }
                 }
 
                 // Run once DOM is ready
@@ -278,52 +286,37 @@
 
     {{-- Frequently Asked Questions --}}
     @php
-        $faqLeft = [
-            [
-                'question' => 'What types of properties does CWD Realty & Hospitality offer for sale?',
-                'answer' =>
-                    'CWD focuses on residential properties and condominium projects in Cambodia, including projects such as Wealth Mansion, Private Residential, and UC88, subject to current availability.',
-            ],
-            [
-                'question' => ' What types of units are available at Wealth Mansion?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => ' Can I buy a property and have CWD manage it for rental?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => ' Can I purchase a property for personal residence?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => ' Does CWD provide support during the purchasing process?',
-                'answer' => 'ComingSoon',
-            ],
-        ];
+        $dbFaqs = isset($faqs) ? $faqs : collect();
+        if ($dbFaqs->count() > 0) {
+            $faqLeft = $dbFaqs->where('column', 'left')->values()->toArray();
+            $faqRight = $dbFaqs->where('column', 'right')->values()->toArray();
+        } else {
+            $faqLeft = [
+                [
+                    'question' => 'What types of properties does CWD Realty & Hospitality offer for sale?',
+                    'answer' => 'CWD focuses on residential properties and condominium projects in Cambodia, including projects such as Wealth Mansion, Private Residential, and UC88, subject to current availability.',
+                ],
+                [
+                    'question' => 'What types of units are available at Wealth Mansion?',
+                    'answer' => 'A variety of unit layouts including 1-bedroom, 2-bedroom, and penthouse residences designed for modern urban living.',
+                ],
+                [
+                    'question' => 'Can I buy a property and have CWD manage it for rental?',
+                    'answer' => 'Yes, CWD provides comprehensive rental and property management solutions to help owners maximize occupancy and returns.',
+                ]
+            ];
 
-        $faqRight = [
-            [
-                'question' => 'Can foreigners buy property in Cambodia?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Can I arrange a property viewing before buying?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Can CWD help me choose a property for investment?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'What information should I check before purchasing a property?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'How can I check the latest property prices and availability?',
-                'answer' => 'ComingSoon',
-            ],
-        ];
+            $faqRight = [
+                [
+                    'question' => 'Can foreigners buy property in Cambodia?',
+                    'answer' => 'Foreign investors can legally own freehold strata titles for condominium properties from the first floor and above in Cambodia.',
+                ],
+                [
+                    'question' => 'Can I arrange a property viewing before buying?',
+                    'answer' => 'Yes, our team can arrange scheduled in-person property tours and consultations tailored to your requirements.',
+                ]
+            ];
+        }
     @endphp
 
     {{-- Frequently Asked Questions --}}
@@ -333,7 +326,7 @@
     <section class="relative mt-[2rem] sm:mt-[5rem] max-w-[1600px] mx-auto">
         <div class="max-w-full min-[900px]:max-w-[80%] ml-auto" data-scroll-reveal="right">
             <img src="{{ asset('home/looking_for_your_next/looking_for.png') }}" alt="CWD Realty residential towers"
-                class="w-full h-auto min-h-[220px] object-cover">
+                class="w-full h-auto min-h-[220px] object-fill">
 
             <div
                 class="relative max-w-[520px] mt-4 px-6
