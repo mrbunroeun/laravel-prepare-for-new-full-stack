@@ -44,6 +44,15 @@
                 <span class="whitespace-nowrap">Vision, Mission & Core Values</span>
                 <span class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">3 Cards</span>
             </button>
+
+            {{-- Tab 4: Showcase Images (3 Columns) --}}
+            <button type="button" onclick="switchAboutTab('showcase', event)" id="tab-btn-showcase" class="about-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span class="whitespace-nowrap">Showcase Images</span>
+                <span class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">3 Columns</span>
+            </button>
         </div>
     </div>
 
@@ -507,6 +516,105 @@
                             <span id="live-val-btn-2">See More</span>
                             <span>&rarr;</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- ========================================================================= --}}
+    {{-- TAB 4: SHOWCASE IMAGES (3 COLUMNS) --}}
+    {{-- ========================================================================= --}}
+    <div id="tab-content-showcase" class="about-tab-content hidden space-y-6">
+        <form onsubmit="handleShowcaseSubmit(event)" class="space-y-6">
+            <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
+                <div class="border-b border-slate-200 pb-4">
+                    <h2 class="text-lg font-bold text-[#163049]">Showcase Images Configuration</h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Upload and manage the 3-column images displayed above the FAQ section.</p>
+                </div>
+
+                {{-- 3 Showcase Image Cards --}}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {{-- Image 1 Card --}}
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Image 1 (Left)</span>
+                            <span class="text-[11px] text-slate-400 font-medium">3:4 Aspect</span>
+                        </div>
+                        <div class="w-full aspect-[3/4] bg-slate-900 rounded-lg overflow-hidden relative border border-slate-200 shadow-inner">
+                            <img id="showcase-preview-1" src="{{ asset('home/latest_activities/1img.png') }}" class="w-full h-full object-fill">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1.5">Upload New Image</label>
+                            <input type="file" id="showcase-file-1" accept="image/*" onchange="previewShowcaseLocalImage(1, this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">Alt / Description</label>
+                            <input type="text" id="showcase-alt-1" value="CWD Realty Story" oninput="syncShowcaseLivePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs text-slate-800">
+                        </div>
+                    </div>
+
+                    {{-- Image 2 Card --}}
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Image 2 (Center)</span>
+                            <span class="text-[11px] text-slate-400 font-medium">3:4 Aspect</span>
+                        </div>
+                        <div class="w-full aspect-[3/4] bg-slate-900 rounded-lg overflow-hidden relative border border-slate-200 shadow-inner">
+                            <img id="showcase-preview-2" src="{{ asset('about_us/our_story/longest.png') }}" class="w-full h-full object-fill">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1.5">Upload New Image</label>
+                            <input type="file" id="showcase-file-2" accept="image/*" onchange="previewShowcaseLocalImage(2, this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">Alt / Description</label>
+                            <input type="text" id="showcase-alt-2" value="CWD Realty Development" oninput="syncShowcaseLivePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs text-slate-800">
+                        </div>
+                    </div>
+
+                    {{-- Image 3 Card --}}
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Image 3 (Right)</span>
+                            <span class="text-[11px] text-slate-400 font-medium">3:4 Aspect</span>
+                        </div>
+                        <div class="w-full aspect-[3/4] bg-slate-900 rounded-lg overflow-hidden relative border border-slate-200 shadow-inner">
+                            <img id="showcase-preview-3" src="{{ asset('about_us/our_story/bottom_one.png') }}" class="w-full h-full object-fill">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1.5">Upload New Image</label>
+                            <input type="file" id="showcase-file-3" accept="image/*" onchange="previewShowcaseLocalImage(3, this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">Alt / Description</label>
+                            <input type="text" id="showcase-alt-3" value="CWD Realty Properties" oninput="syncShowcaseLivePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs text-slate-800">
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Submit Button --}}
+                <div class="pt-4 border-t border-slate-200 flex justify-end">
+                    <button type="submit" id="save-showcase-btn" class="bg-[#2A5A8A] hover:bg-[#163049] text-white px-6 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-2 shadow-sm transition-all cursor-pointer">
+                        <span>Save Showcase Images</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        {{-- Live Preview Simulation --}}
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Live Showcase Preview (Frontend Simulation)</h3>
+            <div class="bg-slate-100 p-6 rounded-xl border border-slate-200">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[900px] mx-auto items-stretch">
+                    <div class="w-full aspect-[3/4] overflow-hidden shadow-lg bg-gray-200 relative">
+                        <img id="live-showcase-1" src="{{ asset('home/latest_activities/1img.png') }}" class="w-full h-full object-fill">
+                    </div>
+                    <div class="w-full aspect-[3/4] overflow-hidden shadow-lg bg-gray-200 relative">
+                        <img id="live-showcase-2" src="{{ asset('about_us/our_story/longest.png') }}" class="w-full h-full object-fill">
+                    </div>
+                    <div class="w-full aspect-[3/4] overflow-hidden shadow-lg bg-gray-200 relative">
+                        <img id="live-showcase-3" src="{{ asset('about_us/our_story/bottom_one.png') }}" class="w-full h-full object-fill">
                     </div>
                 </div>
             </div>
