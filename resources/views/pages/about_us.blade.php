@@ -481,24 +481,32 @@
 
 
 
-            {{-- Three-column images --}}
+                {{-- Three-column images --}}
+    @php
+        $img1 = !empty($aboutShowcase->image_1) ? asset($aboutShowcase->image_1) : asset('home/latest_activities/1img.png');
+        $img2 = !empty($aboutShowcase->image_2) ? asset($aboutShowcase->image_2) : asset('about_us/our_story/longest.png');
+        $img3 = !empty($aboutShowcase->image_3) ? asset($aboutShowcase->image_3) : asset('about_us/our_story/bottom_one.png');
+        $alt1 = $aboutShowcase->alt_1 ?? 'CWD Realty Story';
+        $alt2 = $aboutShowcase->alt_2 ?? 'CWD Realty Development';
+        $alt3 = $aboutShowcase->alt_3 ?? 'CWD Realty Properties';
+    @endphp
     <section class="relative px-0 sm:px-[5rem] md:px-[3rem] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16">
 
             <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 max-w-[1350px] mx-auto items-stretch">
 
                 <div class="w-full aspect-[3/4] overflow-hidden shadow-lg group bg-gray-100 relative" data-scroll-reveal="left">
-                    <img src="{{ asset('home/latest_activities/1img.png') }}" alt="CWD Realty Story"
+                    <img src="{{ $img1 }}" alt="{{ $alt1 }}"
                         class="w-full h-full object-fill block transition-transform duration-500 ease-out group-hover:scale-105">
                 </div>
 
                 <div class="w-full aspect-[3/4] overflow-hidden shadow-lg group bg-gray-100 relative" data-scroll-reveal="fade-up" data-scroll-delay="100">
-                    <img src="{{ asset('about_us/our_story/longest.png') }}" alt="CWD Realty Development"
+                    <img src="{{ $img2 }}" alt="{{ $alt2 }}"
                         class="w-full h-full object-fill block transition-transform duration-500 ease-out group-hover:scale-105">
                 </div>
 
                 <div class="w-full aspect-[3/4] overflow-hidden shadow-lg group bg-gray-100 relative" data-scroll-reveal="right" data-scroll-delay="200">
-                    <img src="{{ asset('about_us/our_story/bottom_one.png') }}" alt="CWD Realty Properties"
+                    <img src="{{ $img3 }}" alt="{{ $alt3 }}"
                         class="w-full h-full object-fill block transition-transform duration-500 ease-out group-hover:scale-105">
                 </div>
 

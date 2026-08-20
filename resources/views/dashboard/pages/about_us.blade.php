@@ -1178,6 +1178,7 @@
             if (res.ok && data.success) {
                 showToast('Vision, Mission & Core Values saved successfully!');
                 fetchValuesSection();
+        fetchShowcaseSection();
             } else {
                 showToast(data.message || 'Error saving Values section', 'error');
             }
@@ -1195,6 +1196,7 @@
         fetchHeroSection();
         fetchOurStorySection();
         fetchValuesSection();
+        fetchShowcaseSection();
     });
 
     function escapeHtml(text) {
@@ -1205,6 +1207,110 @@
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
+    }
+
+    // ==========================================
+    // SHOWCASE SECTION JS (3-COLUMN IMAGES)
+    // ==========================================
+    let showcaseData = null;
+    const showcaseFiles = { 1: null, 2: null, 3: null };
+
+    async function fetchShowcaseSection() {
+        try {
+            const res = await fetch('/api/about-showcase/about-us');
+            const data = await res.json();
+            if (data.success && data.data) {
+                showcaseData = data.data;
+                for (let i = 1; i <= 3; i++) {
+                    const imgUrl = showcaseData['image_' + i];
+                    const altText = showcaseData['alt_' + i];
+
+                    if (imgUrl) {
+                        const previewEl = document.getElementById('showcase-preview-' + i);
+                        const liveEl = document.getElementById('live-showcase-' + i);
+                        const finalSrc = imgUrl.startsWith('http') || imgUrl.startsWith('/') ? imgUrl : ('/' + imgUrl);
+                        if (previewEl) previewEl.src = finalSrc;
+                        if (liveEl) liveEl.src = finalSrc;
+                    }
+                    const altEl = document.getElementById('showcase-alt-' + i);
+                    if (altEl && altText) altEl.value = altText;
+                }
+            }
+        } catch (e) {
+            console.error('Failed to fetch showcase section:', e);
+        }
+    }
+
+    function previewShowcaseLocalImage(num, input) {
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            showcaseFiles[num] = file;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const previewEl = document.getElementById('showcase-preview-' + num);
+                const liveEl = document.getElementById('live-showcase-' + num);
+                if (previewEl) previewEl.src = e.target.result;
+                if (liveEl) liveEl.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function syncShowcaseLivePreview() {
+        // live preview syncs alt text or any changes
+    }
+
+    async function handleShowcaseSubmit(e) {
+        e.preventDefault();
+        const btn = document.getElementById('save-showcase-btn');
+        const origText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<span>Saving...</span>`;
+
+        try {
+            const formData = new FormData();
+            formData.append('alt_1', document.getElementById('showcase-alt-1').value);
+            formData.append('alt_2', document.getElementById('showcase-alt-2').value);
+            formData.append('alt_3', document.getElementById('showcase-alt-3').value);
+
+            if (showcaseFiles[1]) formData.append('image_1', showcaseFiles[1]);
+            if (showcaseFiles[2]) formData.append('image_2', showcaseFiles[2]);
+            if (showcaseFiles[3]) formData.append('image_3', showcaseFiles[3]);
+
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+            const res = await fetch('/api/about-showcase/about-us', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken || '',
+                    'Accept': 'application/json'
+                },
+                body: formData
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                if (typeof showToast === 'function') {
+                    showToast(data.message || 'Showcase section updated successfully!');
+                }
+                showcaseFiles[1] = null;
+                showcaseFiles[2] = null;
+                showcaseFiles[3] = null;
+                fetchShowcaseSection();
+            } else {
+                if (typeof showToast === 'function') {
+                    showToast(data.message || 'Failed to update showcase section', 'error');
+                }
+            }
+        } catch (err) {
+            console.error(err);
+            if (typeof showToast === 'function') {
+                showToast('An error occurred while saving showcase images.', 'error');
+            }
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = origText;
+        }
     }
 </script>
 @endpush

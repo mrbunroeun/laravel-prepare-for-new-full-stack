@@ -161,7 +161,19 @@ Route::get('/about-us', function () {
             ]
         ]);
 
-    return view('pages.about_us', compact('heroSection', 'aboutStory', 'aboutValues'));
+        $aboutShowcase = \App\Models\AboutShowcaseSection::firstOrCreate(
+        ['page' => 'about-us'],
+        [
+            'image_1' => 'home/latest_activities/1img.png',
+            'image_2' => 'about_us/our_story/longest.png',
+            'image_3' => 'about_us/our_story/bottom_one.png',
+            'alt_1' => 'CWD Realty Story',
+            'alt_2' => 'CWD Realty Development',
+            'alt_3' => 'CWD Realty Properties',
+        ]
+    );
+
+    return view('pages.about_us', compact('heroSection', 'aboutStory', 'aboutValues', 'aboutShowcase'));
 });
 
 Route::get('/latest-activities', function () {
@@ -291,6 +303,8 @@ Route::delete('/api/faqs/{faq}', [\App\Http\Controllers\FaqController::class, 'd
 
 Route::get('/api/about-values/{page?}', [\App\Http\Controllers\AboutValuesSectionController::class, 'show']);
 Route::post('/api/about-values/{page?}', [\App\Http\Controllers\AboutValuesSectionController::class, 'update']);
+Route::get('/api/about-showcase/{page?}', [\App\Http\Controllers\AboutShowcaseSectionController::class, 'get']);
+Route::post('/api/about-showcase/{page?}', [\App\Http\Controllers\AboutShowcaseSectionController::class, 'update']);
 Route::get('/api/about-story/{page?}', [\App\Http\Controllers\AboutStorySectionController::class, 'show']);
 Route::post('/api/about-story/{page?}', [\App\Http\Controllers\AboutStorySectionController::class, 'update']);
 Route::get('/api/hero-section/{page?}', [\App\Http\Controllers\HeroSectionController::class, 'show']);
