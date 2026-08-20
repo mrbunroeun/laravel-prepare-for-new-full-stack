@@ -17,8 +17,15 @@
         </div>
     </div>
 
-    {{-- Tabs Navigation --}}
+    {{-- Tabs Navigation with Left/Right Arrow Scroll Buttons --}}
     <div class="relative flex items-center border-b border-slate-200 group">
+        {{-- Left Scroll Button --}}
+        <button type="button" onclick="scrollTabsBar(-1)" id="tabs-scroll-prev" aria-label="Scroll tabs left" class="shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-[#163049] hover:bg-slate-100 transition-colors mr-1 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+
         <div id="tabs-nav-track" class="flex-1 flex items-center gap-2 overflow-x-auto pb-px scroll-smooth scrollbar-none whitespace-nowrap">
             {{-- Tab 1: Hero & Banner --}}
             <button type="button" onclick="switchAboutTab('hero', event)" id="tab-btn-hero" class="about-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-bold border-b-2 border-[#2A5A8A] text-[#2A5A8A] flex items-center gap-2 transition-all cursor-pointer">
@@ -63,6 +70,13 @@
                 <span id="tab-badge-faq-count" class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">0</span>
             </button>
         </div>
+
+        {{-- Right Scroll Button --}}
+        <button type="button" onclick="scrollTabsBar(1)" id="tabs-scroll-next" aria-label="Scroll tabs right" class="shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-[#163049] hover:bg-slate-100 transition-colors ml-1 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </button>
     </div>
 
     {{-- ========================================================================= --}}
@@ -794,6 +808,15 @@
     // ==========================================
     // TAB SWITCHING (Hero vs Story vs Values)
     // ==========================================
+    function scrollTabsBar(direction) {
+        const track = document.getElementById('tabs-nav-track');
+        if (!track) return;
+        track.scrollBy({
+            left: direction * 220,
+            behavior: 'smooth'
+        });
+    }
+
     function switchAboutTab(tabKey, e) {
         if (e && e.preventDefault) e.preventDefault();
         const currentScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
