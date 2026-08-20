@@ -15,14 +15,16 @@
             <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                 <div class="px-0 py-10">
                     @if(!empty($heroSection->show_tagline ?? true))
-                        <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)] font-bold mb-6">
+                        <h2 class="flex items-center gap-3 text-[clamp(20px,3vw,30px)] mb-6 text-[#F4DEAC] font-normal">
                             <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
-                            @if(!empty($heroSection->tagline_html))
-                                {!! $heroSection->tagline_html !!}
-                            @else
-                                <span class="text-[#F4DEAC]">{{ $heroSection->tagline_box1 ?? 'CWD' }}</span>
-                                <span class="text-[#F4DEAC] font-normal">{{ $heroSection->tagline_box2 ?? 'Real Estate Agent & Developer' }}</span>
-                            @endif
+                            <span class="text-[#F4DEAC] font-normal leading-tight">
+                                @if(!empty($heroSection->tagline_html))
+                                    {!! $heroSection->tagline_html !!}
+                                @else
+                                    <span class="font-bold text-[#F4DEAC]">{{ $heroSection->tagline_box1 ?? 'CWD' }}</span>
+                                    <span class="text-[#F4DEAC] font-normal">{{ $heroSection->tagline_box2 ?? 'Real Estate Agent & Developer' }}</span>
+                                @endif
+                            </span>
                         </h2>
                     @endif
 
@@ -128,13 +130,13 @@
                 <div class="grid grid-cols-2 items-end gap-x-3 lg:gap-x-4 w-full lg:w-2/5 shrink-0 lg:mt-auto" data-scroll-reveal="left">
 
                     {{-- sticky tall single block --}}
-                    <img src="{{ asset('about_us/our_story/longest.png') }}"
+                    <img src="{{ asset($aboutStory->image_left ?? 'about_us/our_story/longest.png') }}"
                         class="sticky top-10 self-start w-full max-h-[580px] object-cover"></img>
 
                     {{-- two stacked blocks with gap --}}
                     <div class="flex flex-col gap-y-3 lg:gap-y-4">
-                        <img src="{{ asset('about_us/our_story/top_one.png') }}" class="w-full max-h-[400px] object-cover"></img>
-                        <img src="{{ asset('about_us/our_story/bottom_one.png') }}"
+                        <img src="{{ asset($aboutStory->image_top_right ?? 'about_us/our_story/top_one.png') }}" class="w-full max-h-[400px] object-cover"></img>
+                        <img src="{{ asset($aboutStory->image_bottom_right ?? 'about_us/our_story/bottom_one.png') }}"
                             class="w-full max-h-[400px] object-cover"></img>
                     </div>
 

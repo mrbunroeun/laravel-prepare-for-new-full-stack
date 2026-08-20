@@ -271,18 +271,18 @@
                     <div class="flex items-center justify-between">
                         <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Tagline Text</label>
                         <div class="flex items-center gap-1.5">
-                            <button type="button" onmousedown="event.preventDefault(); document.execCommand('bold', false, null); updateHeroPreview();" class="px-3 py-1 bg-white border border-slate-300 hover:bg-[#2A5A8A] hover:text-white text-slate-800 rounded font-bold text-xs shadow-xs transition-colors flex items-center gap-1 cursor-pointer" title="Select text and click Bold">
+                            <button type="button" onmousedown="event.preventDefault(); formatHeroTagline('bold');" class="px-3 py-1 bg-white border border-slate-300 hover:bg-[#2A5A8A] hover:text-white text-slate-800 rounded font-bold text-xs shadow-xs transition-colors flex items-center gap-1 cursor-pointer" title="Select text and click Bold">
                                 <span class="font-black text-sm">B</span>
                                 <span class="text-xs">Bold</span>
                             </button>
-                            <button type="button" onmousedown="event.preventDefault(); document.execCommand('removeFormat', false, null); updateHeroPreview();" class="px-2.5 py-1 bg-white border border-slate-300 hover:bg-slate-100 text-slate-500 rounded text-xs transition-colors cursor-pointer" title="Remove Bold">
+                            <button type="button" onmousedown="event.preventDefault(); formatHeroTagline('normal');" class="px-2.5 py-1 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 rounded text-xs font-medium transition-colors cursor-pointer" title="Remove Bold formatting">
                                 Normal
                             </button>
                         </div>
                     </div>
 
                     {{-- Visual Rich Text Contenteditable Box --}}
-                    <div id="hero-tagline-editor" contenteditable="true" oninput="updateHeroPreview()" onblur="updateHeroPreview()" class="w-full min-h-[44px] px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A] focus:ring-1 focus:ring-[#2A5A8A] transition-all"><b>CWD</b> Real Estate Agent & Developer</div>
+                    <div id="hero-tagline-editor" contenteditable="true" oninput="updateHeroPreview()" onblur="updateHeroPreview()" class="w-full min-h-[44px] px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A] focus:ring-1 focus:ring-[#2A5A8A] transition-all !text-slate-900 [&&_*]:!text-slate-900" style="color: #0f172a !important;"><b>CWD</b> Real Estate Agent & Developer</div>
                 </div>
 
                 {{-- SECTION 2: MAIN HEADLINE --}}
@@ -1530,6 +1530,32 @@
     // ==========================================
     // HERO SECTION STATE & INTERACTIVITY
     // ==========================================
+    function formatHeroTagline(type) {
+        const editor = document.getElementById('hero-tagline-editor');
+        if (!editor) return;
+        editor.focus();
+        const sel = window.getSelection();
+        if (sel && sel.rangeCount > 0 && !sel.isCollapsed) {
+            if (type === 'bold') {
+                document.execCommand('bold', false, null);
+            } else if (type === 'normal') {
+                document.execCommand('removeFormat', false, null);
+                const range = sel.getRangeAt(0);
+                const parent = range.commonAncestorContainer.parentElement;
+                if (parent && (parent.tagName === 'B' || parent.tagName === 'STRONG')) {
+                    parent.outerHTML = parent.innerHTML;
+                }
+            }
+        } else {
+            if (type === 'normal') {
+                editor.innerHTML = editor.innerText;
+            } else if (type === 'bold') {
+                editor.innerHTML = '<b>' + editor.innerText + '</b>';
+            }
+        }
+        updateHeroPreview();
+    }
+
     const availableRoutes = [
         { label: 'Browse Properties (/properties)', url: '/properties' },
         { label: 'Contact Us (/contact-us)', url: '/contact-us' },
@@ -1738,7 +1764,8 @@
                 const editor = document.getElementById('hero-tagline-editor');
                 if (editor) {
                     if (data.tagline_html) {
-                        editor.innerHTML = data.tagline_html;
+                        let cleanText = data.tagline_html.replace(/text-\[#F4DEAC\]/g, "").replace(/style="[^"]*"/g, "");
+                        editor.innerHTML = cleanText;
                     } else if (data.tagline_box1 || data.tagline_box2) {
                         let combined = '';
                         if (data.tagline_box1_style !== 'hidden' && data.tagline_box1) {

@@ -111,17 +111,31 @@
             }
         }
 
-        function showToast(message) {
+                function showToast(message, type = 'auto') {
             const toast = document.getElementById('toast-notification');
             const msgEl = document.getElementById('toast-message');
+            const iconEl = toast ? toast.querySelector('svg') : null;
             if (!toast) return;
             if (message) msgEl.innerText = message;
+
+            const isError = type === 'error' || type === 'danger' || type === 'warning' || 
+                (type === 'auto' && /error|fail|invalid|must be|required|wrong|denied/i.test(message));
+
+            if (isError) {
+                toast.classList.remove('bg-[#2A5A8A]', 'border-[#F4DEAC]/40');
+                toast.classList.add('bg-rose-600', 'border-rose-300');
+            } else {
+                toast.classList.remove('bg-rose-600', 'border-rose-300');
+                toast.classList.add('bg-[#2A5A8A]', 'border-[#F4DEAC]/40');
+            }
+
             toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
             toast.classList.add('translate-y-0', 'opacity-100');
+
             setTimeout(() => {
                 toast.classList.remove('translate-y-0', 'opacity-100');
                 toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-            }, 3000);
+            }, 3500);
         }
 
         // ===============================================

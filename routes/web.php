@@ -118,7 +118,24 @@ Route::get('/about-us', function () {
         ]
     );
 
-    return view('pages.about_us', compact('heroSection'));
+    $aboutStory = \App\Models\AboutStorySection::firstOrCreate(
+        ['page' => 'about-us'],
+        [
+            'tagline' => 'Our Story',
+            'headline' => 'Building Trust Through Commitment and Personal Relationships',
+            'paragraphs' => [
+                'CWD Realty & Hospitality was founded with a clear vision—to create a professional property management and hospitality company built on trust, integrity, and long-term partnerships.',
+                'Our journey began with founders who were committed to expanding business opportunities beyond Cambodia. Through frequent international travel, face-to-face meetings, business presentations, and contract negotiations, they established valuable relationships with overseas partners and property investors. Their willingness to meet clients personally, understand their expectations, and deliver on every commitment became the foundation of the company\'s reputation.',
+                'Today, that same commitment continues to shape how we serve every property owner, tenant, investor, and guest. We believe that lasting business relationships are built through professionalism, transparency, and consistently delivering value.',
+                'As Cambodia\'s real estate and hospitality industries continue to grow, CWD Realty & Hospitality remains dedicated to providing dependable property management, flexible leasing solutions, and exceptional hospitality services that create value for both property owners and residents.'
+            ],
+            'image_left' => 'about_us/our_story/longest.png',
+            'image_top_right' => 'about_us/our_story/top_one.png',
+            'image_bottom_right' => 'about_us/our_story/bottom_one.png',
+        ]
+    );
+
+    return view('pages.about_us', compact('heroSection', 'aboutStory'));
 });
 
 Route::get('/latest-activities', function () {
@@ -246,6 +263,8 @@ Route::post('/api/faqs', [\App\Http\Controllers\FaqController::class, 'store']);
 Route::put('/api/faqs/{faq}', [\App\Http\Controllers\FaqController::class, 'update']);
 Route::delete('/api/faqs/{faq}', [\App\Http\Controllers\FaqController::class, 'destroy']);
 
+Route::get('/api/about-story/{page?}', [\App\Http\Controllers\AboutStorySectionController::class, 'show']);
+Route::post('/api/about-story/{page?}', [\App\Http\Controllers\AboutStorySectionController::class, 'update']);
 Route::get('/api/hero-section/{page?}', [\App\Http\Controllers\HeroSectionController::class, 'show']);
 Route::post('/api/hero-section/{page?}', [\App\Http\Controllers\HeroSectionController::class, 'update']);
 
