@@ -135,7 +135,33 @@ Route::get('/about-us', function () {
         ]
     );
 
-    return view('pages.about_us', compact('heroSection', 'aboutStory'));
+    $aboutValues = \App\Models\AboutValuesSection::firstOrCreate(['page' => 'about-us'], [
+            'cards' => [
+                [
+                    'title' => 'Vision',
+                    'icon' => 'about_us/icons/vision.svg',
+                    'subtitle' => 'Contributing to Cambodia\'s Growing Property & Hospitality Industry',
+                    'description' => 'To become one of Cambodia\'s most trusted property management and hospitality companies by delivering professional services, creating long-term value for property owners, and supporting the sustainable growth of Cambodia\'s real estate sector.',
+                    'button_text' => 'See More'
+                ],
+                [
+                    'title' => 'Mission',
+                    'icon' => 'about_us/icons/mission.svg',
+                    'subtitle' => '',
+                    'description' => 'Our mission is to provide professional property management, leasing, and hospitality solutions that benefit both property owners and guests.',
+                    'button_text' => 'See More'
+                ],
+                [
+                    'title' => 'Core Values',
+                    'icon' => 'about_us/icons/core_value.svg',
+                    'subtitle' => 'Integrity',
+                    'description' => 'We conduct every business relationship with honesty, transparency, and professionalism.',
+                    'button_text' => 'See More'
+                ]
+            ]
+        ]);
+
+    return view('pages.about_us', compact('heroSection', 'aboutStory', 'aboutValues'));
 });
 
 Route::get('/latest-activities', function () {
@@ -263,6 +289,8 @@ Route::post('/api/faqs', [\App\Http\Controllers\FaqController::class, 'store']);
 Route::put('/api/faqs/{faq}', [\App\Http\Controllers\FaqController::class, 'update']);
 Route::delete('/api/faqs/{faq}', [\App\Http\Controllers\FaqController::class, 'destroy']);
 
+Route::get('/api/about-values/{page?}', [\App\Http\Controllers\AboutValuesSectionController::class, 'show']);
+Route::post('/api/about-values/{page?}', [\App\Http\Controllers\AboutValuesSectionController::class, 'update']);
 Route::get('/api/about-story/{page?}', [\App\Http\Controllers\AboutStorySectionController::class, 'show']);
 Route::post('/api/about-story/{page?}', [\App\Http\Controllers\AboutStorySectionController::class, 'update']);
 Route::get('/api/hero-section/{page?}', [\App\Http\Controllers\HeroSectionController::class, 'show']);

@@ -14,53 +14,26 @@
             <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
             <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                 <div class="px-0 py-10">
-                    @if(!empty($heroSection->show_tagline ?? true))
-                        <h2 class="flex items-center gap-3 text-[clamp(20px,3vw,30px)] mb-6 text-[#F4DEAC] font-normal">
-                            <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
-                            <span class="text-[#F4DEAC] font-normal leading-tight">
-                                @if(!empty($heroSection->tagline_html))
-                                    {!! $heroSection->tagline_html !!}
-                                @else
-                                    <span class="font-bold text-[#F4DEAC]">{{ $heroSection->tagline_box1 ?? 'CWD' }}</span>
-                                    <span class="text-[#F4DEAC] font-normal">{{ $heroSection->tagline_box2 ?? 'Real Estate Agent & Developer' }}</span>
-                                @endif
-                            </span>
-                        </h2>
-                    @endif
+                    <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)]  font-bold mb-6">
+                        <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
+                        <span class="text-[#F4DEAC]">CWD</span>
+                        <span class="text-[#F4DEAC] font-normal">Real Estate Agent &amp; Developer</span>
+                    </h2>
 
-                    <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-6">
-                        {{ $heroSection->headline ?? 'Your Trusted Property Management & Hospitality Partner in Cambodia' }}
+                    <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-10">
+                        Your Trusted Property Management &amp; Hospitality Partner in Cambodia
                     </h1>
 
-                    @if(!empty($heroSection->show_bullets) && !empty($heroSection->bullets))
-                        <div class="px-10 text-[#EBD4A4] text-[13px] sm:text-[14px] mb-6 flex flex-wrap items-center gap-x-3 gap-y-1">
-                            @foreach($heroSection->bullets as $bullet)
-                                <span>• {{ $bullet }}</span>
-                            @endforeach
-                        </div>
-                    @endif
-
-                    @if(!empty($heroSection->buttons))
-                        <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto flex-wrap">
-                            @foreach($heroSection->buttons as $button)
-                                <a href="{{ url($button['url'] ?? '#') }}"
-                                    class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                                    {{ $button['text'] ?? $button['label'] ?? 'Learn More' }}
-                                </a>
-                            @endforeach
-                        </div>
-                    @else
-                        <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
-                            <a href="{{ url('/properties') }}"
-                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                                Browse Properties
-                            </a>
-                            <a href="{{ url('/contact-us') }}"
-                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                                Contact Us
-                            </a>
-                        </div>
-                    @endif
+                    <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
+                        <a href="{{ url('/properties') }}"
+                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                            Browse Properties
+                        </a>
+                        <a href="{{ url('/contact-us') }}"
+                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                            Contact Us
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -130,13 +103,13 @@
                 <div class="grid grid-cols-2 items-end gap-x-3 lg:gap-x-4 w-full lg:w-2/5 shrink-0 lg:mt-auto" data-scroll-reveal="left">
 
                     {{-- sticky tall single block --}}
-                    <img src="{{ asset($aboutStory->image_left ?? 'about_us/our_story/longest.png') }}"
-                        class="sticky top-10 self-start w-full h-[580px] object-cover"></img>
+                    <img src="{{ asset('about_us/our_story/longest.png') }}"
+                        class="sticky top-10 self-start w-full max-h-[580px] object-cover"></img>
 
                     {{-- two stacked blocks with gap --}}
                     <div class="flex flex-col gap-y-3 lg:gap-y-4">
-                        <img src="{{ asset($aboutStory->image_top_right ?? 'about_us/our_story/top_one.png') }}" class="w-full max-h-[400px] object-cover"></img>
-                        <img src="{{ asset($aboutStory->image_bottom_right ?? 'about_us/our_story/bottom_one.png') }}"
+                        <img src="{{ asset('about_us/our_story/top_one.png') }}" class="w-full max-h-[400px] object-cover"></img>
+                        <img src="{{ asset('about_us/our_story/bottom_one.png') }}"
                             class="w-full max-h-[400px] object-cover"></img>
                     </div>
 
@@ -274,7 +247,7 @@
                             class="w-8 h-8 text-[#2A5A8A]">
                     </div>
 
-                    <p class="text-black text-[18px] font-semibold mb-2">Integrity</p>
+                    <p class="text-[#2A5A8A] text-[18px] font-medium mb-4 leading-relaxed">Integrity</p>
 
                     <div class="card-text mb-6">
                         <p class="card-text-p text-black text-[18px] leading-relaxed pb-1 line-clamp-2">We conduct every
@@ -508,25 +481,25 @@
 
 
 
-    {{-- Three-column images --}}
+            {{-- Three-column images --}}
     <section class="relative px-0 sm:px-[5rem] md:px-[3rem] bg-white">
         <div class="max-w-[1400px] mx-auto px-6 py-16">
 
             <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 max-w-[1350px] mx-auto items-stretch">
 
-                <div class="w-full aspect-[3/4] overflow-hidden shadow-lg group bg-gray-100" data-scroll-reveal="left">
+                <div class="w-full aspect-[3/4] overflow-hidden shadow-lg group bg-gray-100 relative" data-scroll-reveal="left">
                     <img src="{{ asset('home/latest_activities/1img.png') }}" alt="CWD Realty Story"
-                        class="w-full h-full object-cover block transition-transform duration-500 ease-out group-hover:scale-105">
+                        class="w-full h-full object-fill block transition-transform duration-500 ease-out group-hover:scale-105">
                 </div>
 
-                <div class="w-full aspect-[3/4] overflow-hidden shadow-lg group bg-gray-100" data-scroll-reveal="fade-up" data-scroll-delay="100">
+                <div class="w-full aspect-[3/4] overflow-hidden shadow-lg group bg-gray-100 relative" data-scroll-reveal="fade-up" data-scroll-delay="100">
                     <img src="{{ asset('about_us/our_story/longest.png') }}" alt="CWD Realty Development"
-                        class="w-full h-full object-cover block transition-transform duration-500 ease-out group-hover:scale-105">
+                        class="w-full h-full object-fill block transition-transform duration-500 ease-out group-hover:scale-105">
                 </div>
 
-                <div class="w-full aspect-[3/4] overflow-hidden shadow-lg group bg-gray-100" data-scroll-reveal="right" data-scroll-delay="200">
+                <div class="w-full aspect-[3/4] overflow-hidden shadow-lg group bg-gray-100 relative" data-scroll-reveal="right" data-scroll-delay="200">
                     <img src="{{ asset('about_us/our_story/bottom_one.png') }}" alt="CWD Realty Properties"
-                        class="w-full h-full object-cover block transition-transform duration-500 ease-out group-hover:scale-105">
+                        class="w-full h-full object-fill block transition-transform duration-500 ease-out group-hover:scale-105">
                 </div>
 
             </div>

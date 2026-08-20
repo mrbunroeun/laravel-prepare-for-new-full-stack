@@ -13,11 +13,11 @@
                 <span class="text-[#1479B9]">About Us</span>
             </div>
             <h1 class="text-2xl sm:text-3xl font-extrabold text-[#163049] tracking-tight">About Us Page Content</h1>
-            <p class="text-sm text-slate-500 mt-1">Manage hero banner, Our Story 3-image layout, paragraphs, and media assets for About Us.</p>
+            <p class="text-sm text-slate-500 mt-1">Manage hero banner, Our Story images & paragraphs, and Vision, Mission & Values.</p>
         </div>
     </div>
 
-    {{-- Tabs Navigation (Matching Home Page Tabs Formula) --}}
+    {{-- Tabs Navigation --}}
     <div class="relative flex items-center border-b border-slate-200 group">
         <div id="tabs-nav-track" class="flex-1 flex items-center gap-2 overflow-x-auto pb-px scroll-smooth scrollbar-none whitespace-nowrap">
             {{-- Tab 1: Hero & Banner --}}
@@ -33,8 +33,16 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                 </svg>
-                <span class="whitespace-nowrap">Our Story (3 Images & Text)</span>
-                <span class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">3 Images</span>
+                <span class="whitespace-nowrap">Our Story (3 Images & Story)</span>
+            </button>
+
+            {{-- Tab 3: Vision, Mission & Values --}}
+            <button type="button" onclick="switchAboutTab('values', event)" id="tab-btn-values" class="about-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+                <span class="whitespace-nowrap">Vision, Mission & Core Values</span>
+                <span class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">3 Cards</span>
             </button>
         </div>
     </div>
@@ -46,10 +54,7 @@
         <form onsubmit="handleHeroSubmit(event)" class="space-y-6">
             <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
                 <div class="border-b border-slate-200 pb-4">
-                    <h2 class="text-lg font-bold text-[#163049] flex items-center gap-2">
-                        <span>Hero Section Configuration</span>
-                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#8a6a3a]/10 text-[#8a6a3a] font-semibold">About Us Hero</span>
-                    </h2>
+                    <h2 class="text-lg font-bold text-[#163049]">Hero Section Configuration</h2>
                     <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Customize tagline color schemes, headline text, bullet highlights, and action buttons.</p>
                 </div>
 
@@ -183,79 +188,60 @@
     </div>
 
     {{-- ========================================================================= --}}
-    {{-- TAB 2: OUR STORY SECTION (3 IMAGES + PARAGRAPHS) --}}
+    {{-- TAB 2: OUR STORY SECTION (CLEAN 3 IMAGES & REORDERABLE STORY) --}}
     {{-- ========================================================================= --}}
     <div id="tab-content-story" class="about-tab-content hidden space-y-6">
         <form onsubmit="handleStorySubmit(event)" class="space-y-6">
             <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
                 <div class="border-b border-slate-200 pb-4">
-                    <h2 class="text-lg font-bold text-[#163049] flex items-center gap-2">
-                        <span>Our Story Section Configuration</span>
-                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#1479B9]/10 text-[#1479B9] font-semibold">3 Stretched Images & Dynamic Story</span>
-                    </h2>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Upload and customize each of the 3 story images (auto-stretch to fill container), heading, and story paragraphs.</p>
+                    <h2 class="text-lg font-bold text-[#163049]">Our Story Section Configuration</h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Upload images, edit heading, and manage story paragraphs.</p>
                 </div>
 
-                {{-- 1. Three Images Manager --}}
+                {{-- 1. Three Story Images (Visual 2-Column Layout Matching Frontend) --}}
                 <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">1. Three Story Images (Auto-Stretch to Fit Containers)</h3>
-                    <p class="text-xs text-slate-500">Each image automatically stretches and scales using <code>object-cover</code> to fill its container perfectly without distortion.</p>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">1. Story Images Layout</h3>
+                        <span class="text-xs text-slate-500">Layout directly mirrors frontend position</span>
+                    </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                        {{-- Image 1: Left Tall Column --}}
-                        <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-3">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs font-bold text-[#163049]">Image 1: Left Tall Block</span>
-                                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">Tall (Original max-580px)</span>
-                            </div>
-                            <div class="w-full h-48 bg-slate-900 rounded-lg overflow-hidden relative border border-slate-200">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-1 max-w-[850px]">
+                        {{-- Left Column: Tall Image Card --}}
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between">
+                            <div class="w-full h-[360px] bg-slate-900 rounded-lg overflow-hidden relative border border-slate-200 mb-3 group">
                                 <img id="story-preview-img-left" src="{{ asset('about_us/our_story/longest.png') }}" class="w-full h-full object-cover object-center">
+                                <span class="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded">Tall Image</span>
                             </div>
                             <div>
-                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Upload New Image</label>
-                                <input type="file" id="story-file-left" accept="image/*" onchange="previewStoryLocalImage('left', this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Or Image Path / URL</label>
-                                <input type="text" id="story-input-img-left" value="about_us/our_story/longest.png" oninput="syncStoryLivePreview()" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-300 rounded text-xs">
+                                <label class="block text-[11px] font-semibold text-slate-600 mb-1.5">Upload New Image</label>
+                                <input type="file" id="story-file-left" accept="image/*" onchange="previewStoryLocalImage('left', this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
                             </div>
                         </div>
 
-                        {{-- Image 2: Top Right Column --}}
-                        <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-3">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs font-bold text-[#163049]">Image 2: Top Right Block</span>
-                                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">Upper (Original max-400px)</span>
+                        {{-- Right Column: 2 Stacked Image Cards --}}
+                        <div class="flex flex-col gap-4">
+                            {{-- Top Image Card --}}
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs">
+                                <div class="w-full h-[155px] bg-slate-900 rounded-lg overflow-hidden relative border border-slate-200 mb-2.5 group">
+                                    <img id="story-preview-img-top" src="{{ asset('about_us/our_story/top_one.png') }}" class="w-full h-full object-cover object-center">
+                                    <span class="absolute top-2 left-2 bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded">Top Image</span>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-slate-600 mb-1">Upload New Image</label>
+                                    <input type="file" id="story-file-top" accept="image/*" onchange="previewStoryLocalImage('top', this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                                </div>
                             </div>
-                            <div class="w-full h-48 bg-slate-900 rounded-lg overflow-hidden relative border border-slate-200">
-                                <img id="story-preview-img-top" src="{{ asset('about_us/our_story/top_one.png') }}" class="w-full h-full object-cover object-center">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Upload New Image</label>
-                                <input type="file" id="story-file-top" accept="image/*" onchange="previewStoryLocalImage('top', this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Or Image Path / URL</label>
-                                <input type="text" id="story-input-img-top" value="about_us/our_story/top_one.png" oninput="syncStoryLivePreview()" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-300 rounded text-xs">
-                            </div>
-                        </div>
 
-                        {{-- Image 3: Bottom Right Column --}}
-                        <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-3">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs font-bold text-[#163049]">Image 3: Bottom Right Block</span>
-                                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">Lower (Original max-400px)</span>
-                            </div>
-                            <div class="w-full h-48 bg-slate-900 rounded-lg overflow-hidden relative border border-slate-200">
-                                <img id="story-preview-img-bottom" src="{{ asset('about_us/our_story/bottom_one.png') }}" class="w-full h-full object-cover object-center">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Upload New Image</label>
-                                <input type="file" id="story-file-bottom" accept="image/*" onchange="previewStoryLocalImage('bottom', this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Or Image Path / URL</label>
-                                <input type="text" id="story-input-img-bottom" value="about_us/our_story/bottom_one.png" oninput="syncStoryLivePreview()" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-300 rounded text-xs">
+                            {{-- Bottom Image Card --}}
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs">
+                                <div class="w-full h-[155px] bg-slate-900 rounded-lg overflow-hidden relative border border-slate-200 mb-2.5 group">
+                                    <img id="story-preview-img-bottom" src="{{ asset('about_us/our_story/bottom_one.png') }}" class="w-full h-full object-cover object-center">
+                                    <span class="absolute top-2 left-2 bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded">Bottom Image</span>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-slate-600 mb-1">Upload New Image</label>
+                                    <input type="file" id="story-file-bottom" accept="image/*" onchange="previewStoryLocalImage('bottom', this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -276,12 +262,12 @@
                     </div>
                 </div>
 
-                {{-- 3. Dynamic Story Paragraphs --}}
+                {{-- 3. Dynamic Story Paragraphs with Reordering --}}
                 <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
                     <div class="flex items-center justify-between">
                         <div>
                             <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">3. Story Paragraphs (Dynamic Content)</h3>
-                            <p class="text-xs text-slate-500">Add or edit as many paragraphs as you need. They will format cleanly on the frontend.</p>
+                            <p class="text-xs text-slate-500">Add, edit, delete, or use arrows to change paragraph order.</p>
                         </div>
                         <button type="button" onclick="addStoryParagraph()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2A5A8A] text-white text-xs font-semibold hover:bg-[#163049] transition-colors cursor-pointer">
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -291,9 +277,7 @@
                         </button>
                     </div>
 
-                    <div id="story-paragraphs-container" class="space-y-4">
-                        {{-- Populated via JavaScript --}}
-                    </div>
+                    <div id="story-paragraphs-container" class="space-y-4"></div>
                 </div>
 
                 {{-- Single Save Button at Bottom --}}
@@ -312,7 +296,7 @@
                     <span class="w-3 h-3 rounded-full bg-[#1479B9]"></span>
                     <h3 class="text-sm font-bold text-[#163049] uppercase tracking-wider">Live Our Story Section Preview</h3>
                 </div>
-                <span class="text-xs text-slate-500">Real-time simulation matching the public About Us page</span>
+                <span class="text-xs text-slate-500">Real-time simulation matching public page</span>
             </div>
 
             <div class="bg-slate-100 p-4 sm:p-8 rounded-xl border border-slate-200">
@@ -338,9 +322,190 @@
                         <div class="bg-[#2A5A8A] p-6 sm:p-8 shadow-xl">
                             <h2 class="text-[#F4DEAC] text-2xl font-bold mb-3" id="live-story-tagline">Our Story</h2>
                             <h1 class="text-white text-lg sm:text-xl font-semibold mb-6 leading-tight" id="live-story-headline">Building Trust Through Commitment and Personal Relationships</h1>
-                            <div class="space-y-4 text-white text-xs sm:text-sm leading-relaxed" id="live-story-paragraphs">
-                                {{-- Populated via JS --}}
+                            <div class="space-y-4 text-white text-xs sm:text-sm leading-relaxed" id="live-story-paragraphs"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- ========================================================================= --}}
+    {{-- TAB 3: VISION, MISSION & CORE VALUES --}}
+    {{-- ========================================================================= --}}
+    <div id="tab-content-values" class="about-tab-content hidden space-y-6">
+        <form onsubmit="handleValuesSubmit(event)" class="space-y-6">
+            <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
+                <div class="border-b border-slate-200 pb-4">
+                    <h2 class="text-lg font-bold text-[#163049]">Vision, Mission & Core Values Configuration</h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Customize the 3 cards (titles, subtitles, descriptions, icons, and button labels).</p>
+                </div>
+
+                {{-- 3 Value Cards --}}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="values-cards-container">
+                    {{-- Card 1: Vision --}}
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Card 1: Vision</span>
+                            <img id="val-icon-preview-0" src="{{ asset('about_us/icons/vision.svg') }}" class="w-7 h-7 object-contain bg-white p-1 rounded border border-slate-200">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">Card Title</label>
+                            <input type="text" id="val-title-0" value="Vision" oninput="syncValuesLivePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs font-bold text-[#163049]">
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600">Highlight Subtitle</label>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="val-show-sub-0" checked onchange="toggleValSubtitle(0)" class="sr-only peer">
+                                    <div class="w-8 h-4.5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-[#2A5A8A]"></div>
+                                    <span class="ml-1.5 text-[10px] font-semibold text-slate-600" id="val-sub-label-0">Show</span>
+                                </label>
                             </div>
+                            <textarea rows="2" id="val-subtitle-0" oninput="syncValuesLivePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs text-slate-800">Contributing to Cambodia's Growing Property & Hospitality Industry</textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">Card Description</label>
+                            <textarea rows="4" id="val-desc-0" oninput="syncValuesLivePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs text-slate-800 leading-relaxed">To become one of Cambodia's most trusted property management and hospitality companies by delivering professional services, creating long-term value for property owners, and supporting the sustainable growth of Cambodia's real estate sector.</textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Upload Card Icon</label>
+                            <input type="file" id="val-file-0" accept="image/*" onchange="previewValIcon(0, this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                        </div>
+                    </div>
+
+                    {{-- Card 2: Mission --}}
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Card 2: Mission</span>
+                            <img id="val-icon-preview-1" src="{{ asset('about_us/icons/mission.svg') }}" class="w-7 h-7 object-contain bg-white p-1 rounded border border-slate-200">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">Card Title</label>
+                            <input type="text" id="val-title-1" value="Mission" oninput="syncValuesLivePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs font-bold text-[#163049]">
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600">Highlight Subtitle</label>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="val-show-sub-1" checked onchange="toggleValSubtitle(1)" class="sr-only peer">
+                                    <div class="w-8 h-4.5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-[#2A5A8A]"></div>
+                                    <span class="ml-1.5 text-[10px] font-semibold text-slate-600" id="val-sub-label-1">Show</span>
+                                </label>
+                            </div>
+                            <textarea rows="2" id="val-subtitle-1" oninput="syncValuesLivePreview()" placeholder="Leave blank if none" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs text-slate-800"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">Card Description</label>
+                            <textarea rows="4" id="val-desc-1" oninput="syncValuesLivePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs text-slate-800 leading-relaxed">Our mission is to provide professional property management, leasing, and hospitality solutions that benefit both property owners and guests.</textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Upload Card Icon</label>
+                            <input type="file" id="val-file-1" accept="image/*" onchange="previewValIcon(1, this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                        </div>
+                    </div>
+
+                    {{-- Card 3: Core Values --}}
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Card 3: Core Values</span>
+                            <img id="val-icon-preview-2" src="{{ asset('about_us/icons/core_value.svg') }}" class="w-7 h-7 object-contain bg-white p-1 rounded border border-slate-200">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">Card Title</label>
+                            <input type="text" id="val-title-2" value="Core Values" oninput="syncValuesLivePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs font-bold text-[#163049]">
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600">Highlight Subtitle</label>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" id="val-show-sub-2" checked onchange="toggleValSubtitle(2)" class="sr-only peer">
+                                    <div class="w-8 h-4.5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-[#2A5A8A]"></div>
+                                    <span class="ml-1.5 text-[10px] font-semibold text-slate-600" id="val-sub-label-2">Show</span>
+                                </label>
+                            </div>
+                            <textarea rows="2" id="val-subtitle-2" oninput="syncValuesLivePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs text-slate-800">Integrity</textarea>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-1">Card Description</label>
+                            <textarea rows="4" id="val-desc-2" oninput="syncValuesLivePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded text-xs text-slate-800 leading-relaxed">We conduct every business relationship with honesty, transparency, and professionalism.</textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Upload Card Icon</label>
+                            <input type="file" id="val-file-2" accept="image/*" onchange="previewValIcon(2, this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Single Save Button at Bottom --}}
+                <div class="pt-4 border-t border-slate-200 flex justify-end gap-3">
+                    <button type="submit" id="values-submit-btn" class="px-6 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
+                        Save Vision, Mission & Values
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        {{-- Live Vision, Mission & Values Simulation Preview --}}
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-[#2A5A8A]"></span>
+                    <h3 class="text-sm font-bold text-[#163049] uppercase tracking-wider">Live Vision, Mission & Values Preview</h3>
+                </div>
+                <span class="text-xs text-slate-500">Real-time simulation matching the public About Us page</span>
+            </div>
+
+            <div class="relative bg-cover bg-center rounded-xl p-6 sm:p-10 shadow-xl overflow-hidden" style="background-image: url('{{ asset('about_us/bg/bg_img_blue.png') }}');">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+                    {{-- Card 1 Preview --}}
+                    <div class="bg-[#f3f6f8] p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-[#2A5A8A] text-xl font-bold" id="live-val-title-0">Vision</h3>
+                                <img id="live-val-icon-0" src="{{ asset('about_us/icons/vision.svg') }}" class="w-7 h-7 object-contain">
+                            </div>
+                            <p class="text-[#2A5A8A] text-sm font-medium mb-3 leading-relaxed" id="live-val-subtitle-0">Contributing to Cambodia's Growing Property & Hospitality Industry</p>
+                            <p class="text-black text-xs leading-relaxed line-clamp-3 mb-4" id="live-val-desc-0">To become one of Cambodia's most trusted property management and hospitality companies by delivering professional services, creating long-term value for property owners, and supporting the sustainable growth of Cambodia's real estate sector.</p>
+                        </div>
+                        <div class="text-[#2A5A8A] text-xs font-semibold flex items-center gap-1 mt-auto pt-2 border-t border-slate-200/60">
+                            <span id="live-val-btn-0">See More</span>
+                            <span>&rarr;</span>
+                        </div>
+                    </div>
+
+                    {{-- Card 2 Preview --}}
+                    <div class="bg-[#f3f6f8] p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-[#2A5A8A] text-xl font-bold" id="live-val-title-1">Mission</h3>
+                                <img id="live-val-icon-1" src="{{ asset('about_us/icons/mission.svg') }}" class="w-7 h-7 object-contain">
+                            </div>
+                            <p class="text-[#2A5A8A] text-sm font-medium mb-3 leading-relaxed hidden" id="live-val-subtitle-1"></p>
+                            <p class="text-black text-xs leading-relaxed line-clamp-3 mb-4" id="live-val-desc-1">Our mission is to provide professional property management, leasing, and hospitality solutions that benefit both property owners and guests.</p>
+                        </div>
+                        <div class="text-[#2A5A8A] text-xs font-semibold flex items-center gap-1 mt-auto pt-2 border-t border-slate-200/60">
+                            <span id="live-val-btn-1">See More</span>
+                            <span>&rarr;</span>
+                        </div>
+                    </div>
+
+                    {{-- Card 3 Preview --}}
+                    <div class="bg-[#f3f6f8] p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-[#2A5A8A] text-xl font-bold" id="live-val-title-2">Core Values</h3>
+                                <img id="live-val-icon-2" src="{{ asset('about_us/icons/core_value.svg') }}" class="w-7 h-7 object-contain">
+                            </div>
+                            <p class="text-[#2A5A8A] text-sm font-medium mb-3 leading-relaxed" id="live-val-subtitle-2">Integrity</p>
+                            <p class="text-black text-xs leading-relaxed line-clamp-3 mb-4" id="live-val-desc-2">We conduct every business relationship with honesty, transparency, and professionalism.</p>
+                        </div>
+                        <div class="text-[#2A5A8A] text-xs font-semibold flex items-center gap-1 mt-auto pt-2 border-t border-slate-200/60">
+                            <span id="live-val-btn-2">See More</span>
+                            <span>&rarr;</span>
                         </div>
                     </div>
                 </div>
@@ -355,7 +520,7 @@
     const csrfToken = '{{ csrf_token() }}';
 
     // ==========================================
-    // TAB SWITCHING (Hero vs Story)
+    // TAB SWITCHING (Hero vs Story vs Values)
     // ==========================================
     function switchAboutTab(tabKey, e) {
         if (e && e.preventDefault) e.preventDefault();
@@ -384,7 +549,6 @@
     // ==========================================
     // HERO & BANNER SCRIPTS
     // ==========================================
-    
     const availableRoutes = [
         { label: 'Browse Properties (/properties)', url: '/properties' },
         { label: 'Contact Us (/contact-us)', url: '/contact-us' },
@@ -403,14 +567,12 @@
         const editor = document.getElementById('hero-tagline-editor');
         if (!editor) return;
         editor.focus();
-
         const sel = window.getSelection();
         if (sel && sel.rangeCount > 0 && !sel.isCollapsed) {
             if (type === 'bold') {
                 document.execCommand('bold', false, null);
             } else if (type === 'normal') {
                 document.execCommand('removeFormat', false, null);
-                // Also unwrap <b> or <strong> around selection
                 const range = sel.getRangeAt(0);
                 const parent = range.commonAncestorContainer.parentElement;
                 if (parent && (parent.tagName === 'B' || parent.tagName === 'STRONG')) {
@@ -419,10 +581,8 @@
             }
         } else {
             if (type === 'normal') {
-                // If no selection, convert whole editor content to normal text (remove bold tags)
                 editor.innerHTML = editor.innerText;
             } else if (type === 'bold') {
-                // Bold whole text if no selection
                 editor.innerHTML = '<b>' + editor.innerText + '</b>';
             }
         }
@@ -521,10 +681,7 @@
             showToast('Maximum 3 buttons allowed');
             return;
         }
-        heroButtonsData.push({
-            text: 'Learn More',
-            url: '/about-us'
-        });
+        heroButtonsData.push({ text: 'Learn More', url: '/about-us' });
         renderHeroButtonsInputs();
     }
 
@@ -637,7 +794,7 @@
                 showToast('About Us Hero Section saved live!');
                 updateHeroPreview();
             } else {
-                showToast(data.message || 'Error saving hero section');
+                showToast(data.message || 'Error saving hero section', 'error');
             }
         } catch (err) {
             showToast('Failed to save to database', 'error');
@@ -650,7 +807,7 @@
     }
 
     // ==========================================
-    // OUR STORY SECTION (3 IMAGES & PARAGRAPHS)
+    // OUR STORY SECTION (WITH PARAGRAPH REORDERING)
     // ==========================================
     let storyParagraphsData = [
         'CWD Realty & Hospitality was founded with a clear vision—to create a professional property management and hospitality company built on trust, integrity, and long-term partnerships.',
@@ -658,6 +815,12 @@
         'Today, that same commitment continues to shape how we serve every property owner, tenant, investor, and guest. We believe that lasting business relationships are built through professionalism, transparency, and consistently delivering value.',
         'As Cambodia\'s real estate and hospitality industries continue to grow, CWD Realty & Hospitality remains dedicated to providing dependable property management, flexible leasing solutions, and exceptional hospitality services that create value for both property owners and residents.'
     ];
+
+    let currentStoryData = {
+        image_left: 'about_us/our_story/longest.png',
+        image_top_right: 'about_us/our_story/top_one.png',
+        image_bottom_right: 'about_us/our_story/bottom_one.png'
+    };
 
     function renderStoryParagraphsInputs() {
         const container = document.getElementById('story-paragraphs-container');
@@ -669,12 +832,30 @@
             div.className = 'p-4 bg-white border border-slate-200 rounded-lg space-y-2';
             div.innerHTML = `
                 <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-[#2A5A8A]">Paragraph ${index + 1}</span>
-                    <button type="button" onclick="removeStoryParagraph(${index})" class="text-slate-400 hover:text-red-500 p-1 transition-colors" title="Delete paragraph">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                        </svg>
-                    </button>
+                    <div class="flex items-center gap-2">
+                        <span class="w-5 h-5 rounded-full bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold text-xs flex items-center justify-center">${index + 1}</span>
+                        <span class="text-xs font-bold text-[#2A5A8A]">Paragraph ${index + 1}</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        {{-- Move Up Button --}}
+                        <button type="button" onclick="moveStoryParagraph(${index}, -1)" ${index === 0 ? 'disabled class="opacity-30 p-1 text-slate-400 cursor-not-allowed"' : 'class="p-1 text-slate-600 hover:text-[#2A5A8A] hover:bg-slate-100 rounded transition-colors cursor-pointer"'} title="Move Up">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                            </svg>
+                        </button>
+                        {{-- Move Down Button --}}
+                        <button type="button" onclick="moveStoryParagraph(${index}, 1)" ${index === storyParagraphsData.length - 1 ? 'disabled class="opacity-30 p-1 text-slate-400 cursor-not-allowed"' : 'class="p-1 text-slate-600 hover:text-[#2A5A8A] hover:bg-slate-100 rounded transition-colors cursor-pointer"'} title="Move Down">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        {{-- Delete Button --}}
+                        <button type="button" onclick="removeStoryParagraph(${index})" class="text-slate-400 hover:text-red-500 p-1 rounded transition-colors ml-1 cursor-pointer" title="Delete paragraph">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 <textarea rows="3" oninput="updateStoryParagraphText(${index}, this.value)" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded text-xs text-slate-800 focus:outline-none focus:bg-white focus:border-[#2A5A8A] leading-relaxed">${escapeHtml(para)}</textarea>
             `;
@@ -690,7 +871,20 @@
     }
 
     function removeStoryParagraph(index) {
+        if (storyParagraphsData.length <= 1) {
+            showToast('Story section should have at least 1 paragraph', 'warning');
+            return;
+        }
         storyParagraphsData.splice(index, 1);
+        renderStoryParagraphsInputs();
+    }
+
+    function moveStoryParagraph(index, direction) {
+        const newIndex = index + direction;
+        if (newIndex < 0 || newIndex >= storyParagraphsData.length) return;
+        const temp = storyParagraphsData[index];
+        storyParagraphsData[index] = storyParagraphsData[newIndex];
+        storyParagraphsData[newIndex] = temp;
         renderStoryParagraphsInputs();
     }
 
@@ -714,7 +908,7 @@
 
     function syncStoryLivePreview() {
         const tagline = document.getElementById('story-tagline-input')?.value || 'Our Story';
-        const headline = document.getElementById('story-headline-input')?.value || 'Building Trust';
+        const headline = document.getElementById('story-headline-input')?.value || 'Building Trust Through Commitment';
 
         const liveTagline = document.getElementById('live-story-tagline');
         const liveHeadline = document.getElementById('live-story-headline');
@@ -723,21 +917,8 @@
         if (liveTagline) liveTagline.innerText = tagline;
         if (liveHeadline) liveHeadline.innerText = headline;
         if (liveParagraphs) {
-            liveParagraphs.innerHTML = storyParagraphsData.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+            liveParagraphs.innerHTML = storyParagraphsData.map(p => `<p class="leading-relaxed">${escapeHtml(p)}</p>`).join('');
         }
-
-        // Sync text URL input to previews if no file is selected
-        ['left', 'top', 'bottom'].forEach(type => {
-            const inputVal = document.getElementById('story-input-img-' + type)?.value;
-            const fileInput = document.getElementById('story-file-' + type);
-            if (inputVal && (!fileInput || !fileInput.files || fileInput.files.length === 0)) {
-                const previewEl = document.getElementById('story-preview-img-' + type);
-                const liveEl = document.getElementById('live-story-img-' + type);
-                const fullSrc = inputVal.startsWith('http') || inputVal.startsWith('/') || inputVal.startsWith('storage/') ? inputVal : '/' + inputVal;
-                if (previewEl) previewEl.src = fullSrc;
-                if (liveEl) liveEl.src = fullSrc;
-            }
-        });
     }
 
     async function fetchOurStorySection() {
@@ -750,19 +931,19 @@
                 if (d.headline) document.getElementById('story-headline-input').value = d.headline;
 
                 if (d.image_left) {
-                    document.getElementById('story-input-img-left').value = d.image_left;
+                    currentStoryData.image_left = d.image_left;
                     const src = '/' + d.image_left.replace(/^\//, '');
                     document.getElementById('story-preview-img-left').src = src;
                     document.getElementById('live-story-img-left').src = src;
                 }
                 if (d.image_top_right) {
-                    document.getElementById('story-input-img-top').value = d.image_top_right;
+                    currentStoryData.image_top_right = d.image_top_right;
                     const src = '/' + d.image_top_right.replace(/^\//, '');
                     document.getElementById('story-preview-img-top').src = src;
                     document.getElementById('live-story-img-top').src = src;
                 }
                 if (d.image_bottom_right) {
-                    document.getElementById('story-input-img-bottom').value = d.image_bottom_right;
+                    currentStoryData.image_bottom_right = d.image_bottom_right;
                     const src = '/' + d.image_bottom_right.replace(/^\//, '');
                     document.getElementById('story-preview-img-bottom').src = src;
                     document.getElementById('live-story-img-bottom').src = src;
@@ -793,9 +974,9 @@
             formData.append('headline', document.getElementById('story-headline-input').value);
             formData.append('paragraphs', JSON.stringify(storyParagraphsData));
 
-            formData.append('image_left', document.getElementById('story-input-img-left').value);
-            formData.append('image_top_right', document.getElementById('story-input-img-top').value);
-            formData.append('image_bottom_right', document.getElementById('story-input-img-bottom').value);
+            formData.append('image_left', currentStoryData.image_left || 'about_us/our_story/longest.png');
+            formData.append('image_top_right', currentStoryData.image_top_right || 'about_us/our_story/top_one.png');
+            formData.append('image_bottom_right', currentStoryData.image_bottom_right || 'about_us/our_story/bottom_one.png');
 
             const fileLeft = document.getElementById('story-file-left').files[0];
             if (fileLeft) formData.append('image_left_file', fileLeft);
@@ -817,13 +998,12 @@
 
             const data = await res.json();
             if (res.ok && data.success) {
-                showToast('Our Story section & 3 images saved successfully!');
+                showToast('Our Story section saved successfully!');
                 fetchOurStorySection();
             } else {
                 showToast(data.message || 'Error saving Our Story section', 'error');
             }
         } catch (err) {
-            console.error('Error saving Our Story:', err);
             showToast('Failed to save to database', 'error');
         } finally {
             if (submitBtn) {
@@ -833,9 +1013,188 @@
         }
     }
 
+    // ==========================================
+    // VISION, MISSION & CORE VALUES SCRIPTS
+    // ==========================================
+    let valuesData = [
+        {
+            title: 'Vision',
+            icon: 'about_us/icons/vision.svg',
+            subtitle: 'Contributing to Cambodia\'s Growing Property & Hospitality Industry',
+            description: 'To become one of Cambodia\'s most trusted property management and hospitality companies by delivering professional services, creating long-term value for property owners, and supporting the sustainable growth of Cambodia\'s real estate sector.',
+            button_text: 'See More'
+        },
+        {
+            title: 'Mission',
+            icon: 'about_us/icons/mission.svg',
+            subtitle: '',
+            description: 'Our mission is to provide professional property management, leasing, and hospitality solutions that benefit both property owners and guests.',
+            button_text: 'See More'
+        },
+        {
+            title: 'Core Values',
+            icon: 'about_us/icons/core_value.svg',
+            subtitle: 'Integrity',
+            description: 'We conduct every business relationship with honesty, transparency, and professionalism.',
+            button_text: 'See More'
+        }
+    ];
+
+    function previewValIcon(index, input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('val-icon-preview-' + index);
+                const livePreview = document.getElementById('live-val-icon-' + index);
+                if (preview) preview.src = e.target.result;
+                if (livePreview) livePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+        function toggleValSubtitle(index) {
+        const toggle = document.getElementById('val-show-sub-' + index);
+        const label = document.getElementById('val-sub-label-' + index);
+        const textarea = document.getElementById('val-subtitle-' + index);
+        const isShown = toggle ? toggle.checked : true;
+
+        if (label) label.innerText = isShown ? 'Show' : 'Hide';
+        if (textarea) {
+            if (isShown) {
+                textarea.classList.remove('opacity-40', 'bg-slate-100');
+                textarea.classList.add('bg-white');
+            } else {
+                textarea.classList.add('opacity-40', 'bg-slate-100');
+                textarea.classList.remove('bg-white');
+            }
+        }
+        syncValuesLivePreview();
+    }
+
+    function syncValuesLivePreview() {
+        for (let i = 0; i < 3; i++) {
+            const title = document.getElementById('val-title-' + i)?.value || '';
+            const subtitle = document.getElementById('val-subtitle-' + i)?.value || '';
+            const desc = document.getElementById('val-desc-' + i)?.value || '';
+
+            const liveTitle = document.getElementById('live-val-title-' + i);
+            const liveSub = document.getElementById('live-val-subtitle-' + i);
+            const liveDesc = document.getElementById('live-val-desc-' + i);
+
+            if (liveTitle) liveTitle.innerText = title;
+            if (liveDesc) liveDesc.innerText = desc;
+            const showSub = document.getElementById('val-show-sub-' + i)?.checked ?? true;
+            if (liveSub) {
+                liveSub.innerText = subtitle;
+                if (showSub && subtitle.trim()) {
+                    liveSub.classList.remove('hidden');
+                } else {
+                    liveSub.classList.add('hidden');
+                }
+            }
+        }
+    }
+
+    async function fetchValuesSection() {
+        try {
+            const res = await fetch('/api/about-values/about-us');
+            const result = await res.json();
+            if (result.success && result.data && Array.isArray(result.data.cards)) {
+                valuesData = result.data.cards;
+                valuesData.forEach((c, idx) => {
+                    if (idx < 3) {
+                        const titleEl = document.getElementById('val-title-' + idx);
+                        const subEl = document.getElementById('val-subtitle-' + idx);
+                        const descEl = document.getElementById('val-desc-' + idx);
+                        const btnEl = document.getElementById('val-btn-' + idx);
+                        const iconPreview = document.getElementById('val-icon-preview-' + idx);
+                        const liveIcon = document.getElementById('live-val-icon-' + idx);
+
+                        if (titleEl) titleEl.value = c.title || '';
+                        if (subEl) subEl.value = c.subtitle || '';
+                        const showSubToggle = document.getElementById('val-show-sub-' + idx);
+                        const isSubShown = typeof c.show_subtitle !== 'undefined' ? !!c.show_subtitle : (idx !== 1 || !!c.subtitle);
+                        if (showSubToggle) {
+                            showSubToggle.checked = isSubShown;
+                            toggleValSubtitle(idx);
+                        }
+                        if (descEl) descEl.value = c.description || '';
+                        
+                        if (c.icon) {
+                            const src = '/' + c.icon.replace(/^\//, '');
+                            if (iconPreview) iconPreview.src = src;
+                            if (liveIcon) liveIcon.src = src;
+                        }
+                    }
+                });
+                syncValuesLivePreview();
+            }
+        } catch (err) {
+            console.error('Error fetching Values section:', err);
+        }
+    }
+
+    async function handleValuesSubmit(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('values-submit-btn');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Saving...';
+        }
+
+        try {
+            const cardsPayload = [];
+            for (let i = 0; i < 3; i++) {
+                cardsPayload.push({
+                    title: document.getElementById('val-title-' + i).value,
+                    subtitle: document.getElementById('val-subtitle-' + i).value,
+                    show_subtitle: document.getElementById('val-show-sub-' + i)?.checked ?? true,
+                    description: document.getElementById('val-desc-' + i).value,
+                    button_text: 'See More',
+                    icon: valuesData[i]?.icon || (i === 0 ? 'about_us/icons/vision.svg' : (i === 1 ? 'about_us/icons/mission.svg' : 'about_us/icons/core_value.svg'))
+                });
+            }
+
+            const formData = new FormData();
+            formData.append('page', 'about-us');
+            formData.append('cards', JSON.stringify(cardsPayload));
+
+            for (let i = 0; i < 3; i++) {
+                const file = document.getElementById('val-file-' + i).files[0];
+                if (file) formData.append('icon_file_' + i, file);
+            }
+
+            const res = await fetch('/api/about-values/about-us', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
+                },
+                body: formData
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+                showToast('Vision, Mission & Core Values saved successfully!');
+                fetchValuesSection();
+            } else {
+                showToast(data.message || 'Error saving Values section', 'error');
+            }
+        } catch (err) {
+            showToast('Failed to save to database', 'error');
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Save Vision, Mission & Values';
+            }
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         fetchHeroSection();
         fetchOurStorySection();
+        fetchValuesSection();
     });
 
     function escapeHtml(text) {
