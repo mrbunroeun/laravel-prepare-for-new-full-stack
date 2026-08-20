@@ -11,28 +11,43 @@
     <section class="relative z-[200] lg:mt-[-5rem] lg:mb-[10rem] text-[#2f6ba7] pointer-events-none">
         <div class="pt-[20rem] max-[1240px]:pt-[15rem] max-[940px]:pt-[10rem] max-w-[1400px] mx-auto px-6">
             {{-- Gold accent bar --}}
-            <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
-            <div class="max-w-[720px] bg-[#163049]/85 mix-blend-multiply">
+            <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
+            <div class="max-w-[720px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                 <div class="px-0 py-10">
+                    @if(!isset($heroSection) || $heroSection->show_tagline !== false)
                     <h2 class="flex items-center gap-4 text-[clamp(20px,2.5vw,28px)] font-bold mb-6">
-                        <span class="h-[2px] w-12 sm:w-16 bg-[#F4DEAC]"></span>
-                        <span class="text-[#F4DEAC] font-normal">Hospitality <span class="font-bold">Services</span></span>
+                        <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
+                        @if(($heroSection->tagline_box1_style ?? 'light-gold') !== 'hidden' && !empty($heroSection->tagline_box1 ?? 'Hospitality'))
+                            <span class="text-[#F4DEAC] {{ ($heroSection->tagline_box1_style ?? 'light-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }}">{{ $heroSection->tagline_box1 ?? 'Hospitality' }}</span>
+                        @endif
+                        @if(($heroSection->tagline_box2_style ?? 'bold-gold') !== 'hidden' && !empty($heroSection->tagline_box2 ?? 'Services'))
+                            <span class="text-[#F4DEAC] {{ ($heroSection->tagline_box2_style ?? 'bold-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }}">{{ $heroSection->tagline_box2 ?? 'Services' }}</span>
+                        @endif
                     </h2>
+                    @endif
 
                     <h1 class="text-white px-6 sm:px-10 text-[clamp(22px,3.2vw,34px)] font-medium leading-snug mb-10">
-                        Comfortable Stays, Convenient Services,<br>
-                        Personalized Support
+                        {{ $heroSection->headline ?? 'Exceptional Hospitality & Accommodation Services in Cambodia' }}
                     </h1>
 
-                    <div class="grid grid-cols-2 sm:flex sm:flex-row sm:items-center px-2 sm:px-10 gap-2 sm:gap-4 pointer-events-auto w-full sm:w-auto">
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[1.5px] sm:border-[2px] border-[#F4DEAC] text-white text-[11.5px] min-[390px]:text-[12.5px] sm:text-[15px] font-medium px-2 min-[390px]:px-3 sm:px-6 py-2.5 sm:py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors text-center flex items-center justify-center h-full sm:h-auto min-h-[48px] sm:min-h-0 sm:w-auto leading-tight">
-                            Request Hospitality Service
-                        </a>
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[1.5px] sm:border-[2px] border-[#F4DEAC] text-white text-[11.5px] min-[390px]:text-[12.5px] sm:text-[15px] font-medium px-2 min-[390px]:px-3 sm:px-6 py-2.5 sm:py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors text-center flex items-center justify-center h-full sm:h-auto min-h-[48px] sm:min-h-0 sm:w-auto leading-tight">
-                            Contact Us
-                        </a>
+                    <div class="flex items-center px-6 sm:px-10 gap-4 pointer-events-auto flex-wrap">
+                        @if(isset($heroSection->buttons) && is_array($heroSection->buttons) && count($heroSection->buttons) > 0)
+                            @foreach($heroSection->buttons as $btn)
+                                <a href="{{ url($btn['url'] ?? '#') }}"
+                                    class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                    {{ $btn['text'] ?? 'Learn More' }}
+                                </a>
+                            @endforeach
+                        @else
+                            <a href="{{ url('/contact-us') }}"
+                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                Request Hospitality Service
+                            </a>
+                            <a href="{{ url('/contact-us') }}"
+                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                Contact Us
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

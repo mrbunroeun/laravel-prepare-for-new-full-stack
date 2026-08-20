@@ -18,11 +18,11 @@
     </div>
 
     {{-- Tabs Navigation with Left/Right Arrow Scroll Buttons --}}
-    <div class="relative flex items-center border-b border-slate-200 group">
+    <div class="relative flex items-center border-b border-slate-200 group py-1">
         {{-- Left Scroll Button --}}
-        <button type="button" onclick="scrollTabsBar(-1)" id="tabs-scroll-prev" aria-label="Scroll tabs left" class="shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-[#163049] hover:bg-slate-100 transition-colors mr-1 cursor-pointer">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        <button type="button" onclick="scrollTabsBar(-1)" id="tabs-scroll-prev" aria-label="Scroll tabs left" class="shrink-0 w-8 h-8 rounded-full bg-white border border-slate-300 shadow-sm text-[#2A5A8A] hover:bg-[#2A5A8A] hover:text-white hover:border-[#2A5A8A] flex items-center justify-center transition-all mr-2 cursor-pointer z-10">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
             </svg>
         </button>
 
@@ -72,9 +72,9 @@
         </div>
 
         {{-- Right Scroll Button --}}
-        <button type="button" onclick="scrollTabsBar(1)" id="tabs-scroll-next" aria-label="Scroll tabs right" class="shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-[#163049] hover:bg-slate-100 transition-colors ml-1 cursor-pointer">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        <button type="button" onclick="scrollTabsBar(1)" id="tabs-scroll-next" aria-label="Scroll tabs right" class="shrink-0 w-8 h-8 rounded-full bg-white border border-slate-300 shadow-sm text-[#2A5A8A] hover:bg-[#2A5A8A] hover:text-white hover:border-[#2A5A8A] flex items-center justify-center transition-all ml-2 cursor-pointer z-10">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
             </svg>
         </button>
     </div>

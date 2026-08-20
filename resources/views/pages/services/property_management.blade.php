@@ -13,27 +13,40 @@
             <div class="h-[15px] max-w-[30rem] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]" data-scroll-reveal="left"></div>
             <div class="max-w-[650px] bg-[#163049]/85 mix-blend-multiply" data-scroll-reveal="left" data-scroll-delay="100">
                 <div class="px-0 py-10">
-                    <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)]  font-bold mb-6">
-                        <span class="h-[3px] w-15 bg-[rgb(244,222,172)]"></span>
-                        <span class="text-[#F4DEAC] font-normal">Property<br> <span
-                                class="text-[#F4DEAC] font-bold">Management</span></span>
-
+                    @if(!isset($heroSection) || $heroSection->show_tagline !== false)
+                    <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)] font-bold mb-6">
+                        <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
+                        @if(($heroSection->tagline_box1_style ?? 'light-gold') !== 'hidden' && !empty($heroSection->tagline_box1 ?? 'Property'))
+                            <span class="text-[#F4DEAC] {{ ($heroSection->tagline_box1_style ?? 'light-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }}">{{ $heroSection->tagline_box1 ?? 'Property' }}</span>
+                        @endif
+                        @if(($heroSection->tagline_box2_style ?? 'bold-gold') !== 'hidden' && !empty($heroSection->tagline_box2 ?? 'Management'))
+                            <span class="text-[#F4DEAC] {{ ($heroSection->tagline_box2_style ?? 'bold-gold') === 'bold-gold' ? 'font-bold' : 'font-normal' }}">{{ $heroSection->tagline_box2 ?? 'Management' }}</span>
+                        @endif
                     </h2>
+                    @endif
 
                     <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-10">
-                        Professional Property Management
-                        Services in Cambodia
+                        {{ $heroSection->headline ?? 'Professional Property Management Services in Cambodia' }}
                     </h1>
 
-                    <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
-                        <a href="{{ url('/properties') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                            Browse Properties
-                        </a>
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                            Contact Us
-                        </a>
+                    <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto flex-wrap">
+                        @if(isset($heroSection->buttons) && is_array($heroSection->buttons) && count($heroSection->buttons) > 0)
+                            @foreach($heroSection->buttons as $btn)
+                                <a href="{{ url($btn['url'] ?? '#') }}"
+                                    class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                    {{ $btn['text'] ?? 'Learn More' }}
+                                </a>
+                            @endforeach
+                        @else
+                            <a href="{{ url('/properties') }}"
+                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                Browse Properties
+                            </a>
+                            <a href="{{ url('/contact-us') }}"
+                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                Contact Us
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

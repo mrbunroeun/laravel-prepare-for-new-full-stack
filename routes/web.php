@@ -227,19 +227,79 @@ Route::get('/partner', function () {
 });
 
 Route::get('/services/property-management', function () {
-    return view('pages.services.property_management');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'property-management'],
+        [
+            'tagline_box1' => 'Property',
+            'tagline_box1_style' => 'light-gold',
+            'tagline_box2' => 'Management',
+            'tagline_box2_style' => 'bold-gold',
+            'headline' => 'Professional Property Management Services in Cambodia',
+            'show_bullets' => false,
+            'buttons' => [
+                ['text' => 'Browse Properties', 'url' => '/properties'],
+                ['text' => 'Contact Us', 'url' => '/contact-us']
+            ]
+        ]
+    );
+    return view('pages.services.property_management', compact('heroSection'));
 });
 
 Route::get('/services/property-sales', function () {
-    return view('pages.services.property_sales');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'property-sales'],
+        [
+            'tagline_box1' => 'Property',
+            'tagline_box1_style' => 'light-gold',
+            'tagline_box2' => 'Sales',
+            'tagline_box2_style' => 'bold-gold',
+            'headline' => 'Prime Real Estate Investments & Condominium Sales in Cambodia',
+            'show_bullets' => false,
+            'buttons' => [
+                ['text' => 'Browse Properties', 'url' => '/properties'],
+                ['text' => 'Contact Us', 'url' => '/contact-us']
+            ]
+        ]
+    );
+    return view('pages.services.property_sales', compact('heroSection'));
 });
 
 Route::get('/services/property-leasing', function () {
-    return view('pages.services.property_leasing');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'property-leasing'],
+        [
+            'tagline_box1' => 'Property',
+            'tagline_box1_style' => 'light-gold',
+            'tagline_box2' => 'Leasing',
+            'tagline_box2_style' => 'bold-gold',
+            'headline' => 'Quality Condominium Rentals & Flexible Leasing Solutions',
+            'show_bullets' => false,
+            'buttons' => [
+                ['text' => 'Browse Properties', 'url' => '/properties'],
+                ['text' => 'Contact Us', 'url' => '/contact-us']
+            ]
+        ]
+    );
+    return view('pages.services.property_leasing', compact('heroSection'));
 });
 
 Route::get('/services/hospitality-services', function () {
-    return view('pages.services.hospitality_services');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'hospitality-services'],
+        [
+            'tagline_box1' => 'Hospitality',
+            'tagline_box1_style' => 'light-gold',
+            'tagline_box2' => 'Services',
+            'tagline_box2_style' => 'bold-gold',
+            'headline' => 'Exceptional Hospitality & Accommodation Services in Cambodia',
+            'show_bullets' => false,
+            'buttons' => [
+                ['text' => 'Browse Properties', 'url' => '/properties'],
+                ['text' => 'Contact Us', 'url' => '/contact-us']
+            ]
+        ]
+    );
+    return view('pages.services.hospitality_services', compact('heroSection'));
 });
 
 Route::get('/services/properties/wealth-mansion', function () {
@@ -352,6 +412,38 @@ Route::get('/dashboard/pages/about-us', function () {
     return view('dashboard.pages.about_us', [
         'pageTitle' => 'About Us Page',
         'pageSlug' => 'about-us'
+    ]);
+});
+
+Route::get('/dashboard/pages/services/property-management', function () {
+    return view('dashboard.pages.services.service_hero', [
+        'pageSlug' => 'property-management',
+        'pageTitle' => 'Property Management',
+        'frontendUrl' => '/services/property-management'
+    ]);
+});
+
+Route::get('/dashboard/pages/services/property-leasing', function () {
+    return view('dashboard.pages.services.service_hero', [
+        'pageSlug' => 'property-leasing',
+        'pageTitle' => 'Property Leasing',
+        'frontendUrl' => '/services/property-leasing'
+    ]);
+});
+
+Route::get('/dashboard/pages/services/property-sales', function () {
+    return view('dashboard.pages.services.service_hero', [
+        'pageSlug' => 'property-sales',
+        'pageTitle' => 'Property Sales',
+        'frontendUrl' => '/services/property-sales'
+    ]);
+});
+
+Route::get('/dashboard/pages/services/hospitality-services', function () {
+    return view('dashboard.pages.services.service_hero', [
+        'pageSlug' => 'hospitality-services',
+        'pageTitle' => 'Hospitality Services',
+        'frontendUrl' => '/services/hospitality-services'
     ]);
 });
 Route::get('/dashboard/pages/{slug}', function ($slug) {

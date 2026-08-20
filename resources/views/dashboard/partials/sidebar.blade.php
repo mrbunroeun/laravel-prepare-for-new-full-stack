@@ -10,7 +10,7 @@
                 <span class="text-[10px] tracking-wider uppercase font-semibold text-[#F4DEAC] block -mt-0.5">Admin Dashboard</span>
             </div>
         </a>
-        <button onclick="toggleSidebar()" class="lg:hidden text-white/70 hover:text-white p-1">
+        <button onclick="toggleSidebar()" class="lg:hidden text-white/70 hover:text-white p-1 cursor-pointer">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -38,9 +38,9 @@
         <div>
             <div class="px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-[#F4DEAC]/70">Pages Content</div>
             <nav class="space-y-1">
-                {{-- Home Page (Active Focus) --}}
+                {{-- Home Page --}}
                 <a href="{{ url('/dashboard/pages/home') }}" 
-                   class="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group {{ request()->is('dashboard/pages/home*') || request()->is('dashboard') ? 'bg-[#1479B9] text-white shadow-md' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                   class="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group {{ request()->is('dashboard/pages/home*') ? 'bg-[#1479B9] text-white shadow-md' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
                     <div class="flex items-center gap-3">
                         <svg class="w-5 h-5 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
@@ -50,11 +50,86 @@
                     <span class="text-[10px] uppercase font-bold bg-[#F4DEAC] text-[#163049] px-2 py-0.5 rounded">Active</span>
                 </a>
 
+                {{-- About Us Page --}}
+                <a href="{{ url('/dashboard/pages/about-us') }}" 
+                   class="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group {{ request()->is('dashboard/pages/about-us*') ? 'bg-[#1479B9] text-white shadow-md' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span class="font-semibold">About Us</span>
+                    </div>
+                    <span class="text-[10px] uppercase font-bold bg-[#F4DEAC] text-[#163049] px-2 py-0.5 rounded">Active</span>
+                </a>
+
+                {{-- Services & Properties Dropdown --}}
+                @php
+                    $isServicesActive = request()->is('dashboard/pages/services*') || request()->is('dashboard/pages/property-*') || request()->is('dashboard/pages/hospitality-*');
+                @endphp
+                <div class="space-y-1">
+                    <button type="button" onclick="toggleSidebarServicesDropdown()" 
+                        class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group {{ $isServicesActive ? 'bg-[#2A5A8A] text-white shadow-sm' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }} cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                            <span class="font-semibold">Services & Properties</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[10px] font-bold bg-[#F4DEAC]/20 text-[#F4DEAC] px-1.5 py-0.5 rounded">4</span>
+                            <svg id="services-dropdown-chevron" class="w-3.5 h-3.5 text-slate-300 transition-transform duration-200 {{ $isServicesActive ? 'rotate-180 text-white' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </button>
+
+                    {{-- Dropdown Sub-Items --}}
+                    <div id="services-dropdown-menu" class="pl-4 space-y-1 transition-all duration-200 {{ $isServicesActive ? '' : 'hidden' }}">
+                        {{-- 1. Property Management --}}
+                        <a href="{{ url('/dashboard/pages/services/property-management') }}" 
+                            class="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/services/property-management*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/services/property-management*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                <span>Property Management</span>
+                            </div>
+                            <span class="text-[9px] text-[#F4DEAC] uppercase font-bold">Hero</span>
+                        </a>
+
+                        {{-- 2. Property Leasing --}}
+                        <a href="{{ url('/dashboard/pages/services/property-leasing') }}" 
+                            class="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/services/property-leasing*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/services/property-leasing*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                <span>Property Leasing</span>
+                            </div>
+                            <span class="text-[9px] text-[#F4DEAC] uppercase font-bold">Hero</span>
+                        </a>
+
+                        {{-- 3. Property Sales --}}
+                        <a href="{{ url('/dashboard/pages/services/property-sales') }}" 
+                            class="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/services/property-sales*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/services/property-sales*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                <span>Property Sales</span>
+                            </div>
+                            <span class="text-[9px] text-[#F4DEAC] uppercase font-bold">Hero</span>
+                        </a>
+
+                        {{-- 4. Hospitality Services --}}
+                        <a href="{{ url('/dashboard/pages/services/hospitality-services') }}" 
+                            class="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/services/hospitality-services*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/services/hospitality-services*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                <span>Hospitality Services</span>
+                            </div>
+                            <span class="text-[9px] text-[#F4DEAC] uppercase font-bold">Hero</span>
+                        </a>
+                    </div>
+                </div>
+
                 {{-- Other Pages List --}}
                 @php
                     $navPages = [
-                        ['title' => 'About Us', 'slug' => 'about-us', 'icon' => 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
-                        ['title' => 'Services', 'slug' => 'services', 'icon' => 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'],
                         ['title' => 'Properties', 'slug' => 'properties', 'icon' => 'M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z'],
                         ['title' => 'Insights & News', 'slug' => 'insights', 'icon' => 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z'],
                         ['title' => 'Events', 'slug' => 'events', 'icon' => 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'],
@@ -105,3 +180,16 @@
         </div>
     </div>
 </aside>
+
+<script>
+    function toggleSidebarServicesDropdown() {
+        const menu = document.getElementById('services-dropdown-menu');
+        const chevron = document.getElementById('services-dropdown-chevron');
+        if (menu) {
+            menu.classList.toggle('hidden');
+        }
+        if (chevron) {
+            chevron.classList.toggle('rotate-180');
+        }
+    }
+</script>

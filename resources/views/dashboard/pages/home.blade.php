@@ -4,30 +4,16 @@
 
 @section('content')
 <div class="space-y-8" id="home-dashboard-app">
-    {{-- Page Header --}}
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 pb-6">
+    {{-- Header Banner with Page Actions --}}
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-slate-200/90 rounded-xl p-5 sm:p-6 shadow-xs">
         <div>
-            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">
+            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-1">
                 <span>Pages Management</span>
                 <span class="text-slate-400">/</span>
                 <span class="text-[#1479B9]">Home Page</span>
             </div>
             <h1 class="text-2xl sm:text-3xl font-extrabold text-[#163049] tracking-tight">Home Page Content & Sections</h1>
             <p class="text-sm text-slate-500 mt-1">Manage FAQs, Hero Section, Services, Features, and Highlights for the main landing page.</p>
-        </div>
-        <div class="flex items-center gap-3">
-            <button onclick="fetchFaqs()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-sm shadow-xs transition-all cursor-pointer">
-                <svg class="w-4 h-4 text-[#2A5A8A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                </svg>
-                <span>Reload from DB</span>
-            </button>
-            <a href="{{ url('/') }}" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-sm shadow-md transition-all cursor-pointer">
-                <svg class="w-4 h-4 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-                <span>View Live Site</span>
-            </a>
         </div>
     </div>
 
@@ -94,11 +80,11 @@
     </div>
 
     {{-- Tabs for Home page sections with Left/Right Arrow Scroll Buttons --}}
-    <div class="relative flex items-center border-b border-slate-200 group">
+    <div class="relative flex items-center border-b border-slate-200 group py-1">
         {{-- Left Scroll Button --}}
-        <button type="button" onclick="scrollTabsBar(-1)" id="tabs-scroll-prev" aria-label="Scroll tabs left" class="shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-[#163049] hover:bg-slate-100 transition-colors mr-1 cursor-pointer">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        <button type="button" onclick="scrollTabsBar(-1)" id="tabs-scroll-prev" aria-label="Scroll tabs left" class="shrink-0 w-8 h-8 rounded-full bg-white border border-slate-300 shadow-sm text-[#2A5A8A] hover:bg-[#2A5A8A] hover:text-white hover:border-[#2A5A8A] flex items-center justify-center transition-all mr-2 cursor-pointer z-10">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
             </svg>
         </button>
 
@@ -157,9 +143,9 @@
         </div>
 
         {{-- Right Scroll Button --}}
-        <button type="button" onclick="scrollTabsBar(1)" id="tabs-scroll-next" aria-label="Scroll tabs right" class="shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-[#163049] hover:bg-slate-100 transition-colors ml-1 cursor-pointer">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        <button type="button" onclick="scrollTabsBar(1)" id="tabs-scroll-next" aria-label="Scroll tabs right" class="shrink-0 w-8 h-8 rounded-full bg-white border border-slate-300 shadow-sm text-[#2A5A8A] hover:bg-[#2A5A8A] hover:text-white hover:border-[#2A5A8A] flex items-center justify-center transition-all ml-2 cursor-pointer z-10">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
             </svg>
         </button>
     </div>
