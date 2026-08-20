@@ -173,7 +173,21 @@ Route::get('/about-us', function () {
         ]
     );
 
-    return view('pages.about_us', compact('heroSection', 'aboutStory', 'aboutValues', 'aboutShowcase'));
+    $faqLeft = \App\Models\Faq::where('page', 'about-us')
+        ->where('column', 'left')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+
+    $faqRight = \App\Models\Faq::where('page', 'about-us')
+        ->where('column', 'right')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+
+    return view('pages.about_us', compact('heroSection', 'aboutStory', 'aboutValues', 'aboutShowcase', 'faqLeft', 'faqRight'));
 });
 
 Route::get('/latest-activities', function () {

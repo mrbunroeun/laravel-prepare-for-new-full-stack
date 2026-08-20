@@ -10,9 +10,16 @@ class FaqController extends Controller
     /**
      * Display a listing of FAQs (JSON API for Dashboard & Live updates)
      */
-    public function index()
+    public function index(Request $request)
     {
-        $faqs = Faq::orderBy('sort_order', 'asc')->orderBy('id', 'asc')->get();
+        $query = Faq::query();
+        
+        if ($request->filled('page')) {
+            $query->where('page', $request->input('page'));
+        }
+
+        $faqs = $query->orderBy('sort_order', 'asc')->orderBy('id', 'asc')->get();
+
         return response()->json([
             'success' => true,
             'data' => $faqs
@@ -25,6 +32,7 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'page' => 'nullable|string|max:100',
             'question' => 'required|string|max:500',
             'answer' => 'required|string',
             'column' => 'required|in:left,right',
@@ -32,8 +40,12 @@ class FaqController extends Controller
             'sort_order' => 'nullable|integer',
         ]);
 
+        if (empty($validated['page'])) {
+            $validated['page'] = 'home';
+        }
+
         if (!isset($validated['sort_order'])) {
-            $maxOrder = Faq::max('sort_order') ?? 0;
+            $maxOrder = Faq::where('page', $validated['page'])->max('sort_order') ?? 0;
             $validated['sort_order'] = $maxOrder + 1;
         }
 
@@ -52,6 +64,7 @@ class FaqController extends Controller
     public function update(Request $request, Faq $faq)
     {
         $validated = $request->validate([
+            'page' => 'nullable|string|max:100',
             'question' => 'required|string|max:500',
             'answer' => 'required|string',
             'column' => 'required|in:left,right',

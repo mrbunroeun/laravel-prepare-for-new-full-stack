@@ -520,11 +520,10 @@
 
     {{-- Frequently Asked Questions --}}
     @php
-        $faqLeft = [
+        $faqLeft = !empty($faqLeft) && count($faqLeft) > 0 ? $faqLeft : [
             [
                 'question' => 'What services does CWD Realty & Hospitality provide?',
-                'answer' =>
-                    'We provide property management, residential leasing, property sales, daily and long-term rentals, and hospitality services for property owners, investors, and guests.',
+                'answer' => 'We provide property management, residential leasing, property sales, daily and long-term rentals, and hospitality services for property owners, investors, and guests.',
             ],
             [
                 'question' => 'Who are your typical clients?',
@@ -532,7 +531,7 @@
             ],
         ];
 
-        $faqRight = [
+        $faqRight = !empty($faqRight) && count($faqRight) > 0 ? $faqRight : [
             [
                 'question' => 'Why choose CWD Realty & Hospitality?',
                 'answer' => 'ComingSoon',

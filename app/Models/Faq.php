@@ -10,6 +10,7 @@ class Faq extends Model
     use HasFactory;
 
     protected $fillable = [
+        'page',
         'question',
         'answer',
         'column',
