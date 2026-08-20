@@ -131,7 +131,7 @@
 
                     {{-- sticky tall single block --}}
                     <img src="{{ asset($aboutStory->image_left ?? 'about_us/our_story/longest.png') }}"
-                        class="sticky top-10 self-start w-full max-h-[580px] object-cover"></img>
+                        class="sticky top-10 self-start w-full h-[580px] object-cover"></img>
 
                     {{-- two stacked blocks with gap --}}
                     <div class="flex flex-col gap-y-3 lg:gap-y-4">
