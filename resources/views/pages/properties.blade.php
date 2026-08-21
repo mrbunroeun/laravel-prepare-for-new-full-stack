@@ -438,7 +438,7 @@
 
     {{-- Frequently Asked Questions --}}
     @php
-        $faqLeft = [
+        $defaultFaqLeft = [
             [
                 'question' => 'What types of properties do you manage?',
                 'answer' =>
@@ -450,15 +450,18 @@
             ],
         ];
 
-        $faqRight = [
+        $defaultFaqRight = [
             [
                 'question' => 'How do property owners receive rental income?',
                 'answer' => 'ComingSoon',
             ],
         ];
+
+        $faqLeftItems = (isset($faqLeft) && count($faqLeft) > 0) ? $faqLeft : $defaultFaqLeft;
+        $faqRightItems = (isset($faqRight) && count($faqRight) > 0) ? $faqRight : $defaultFaqRight;
     @endphp
 
-    <x-faqs :faq-left="$faqLeft" :faq-right="$faqRight" />
+    <x-faqs :faq-left="$faqLeftItems" :faq-right="$faqRightItems" />
 
 
 

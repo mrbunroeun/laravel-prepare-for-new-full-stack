@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $faqs = \App\Models\Faq::where('status', 'published')
+    $faqs = \App\Models\Faq::where('page', 'home')
+        ->where('status', 'published')
         ->orderBy('sort_order', 'asc')
         ->orderBy('id', 'asc')
         ->get();
@@ -244,7 +245,16 @@ Route::get('/properties', function () {
             ->orderBy('id', 'asc')
             ->get();
     }
-    return view('pages.properties', compact('heroSection', 'featuredProperties'));
+
+    $faqs = \App\Models\Faq::where('page', 'properties')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    $faqLeft = $faqs->where('column', 'left')->values()->toArray();
+    $faqRight = $faqs->where('column', 'right')->values()->toArray();
+
+    return view('pages.properties', compact('heroSection', 'featuredProperties', 'faqLeft', 'faqRight'));
 });
 
 Route::get('/partners', function () {
