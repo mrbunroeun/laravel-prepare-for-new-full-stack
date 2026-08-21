@@ -215,55 +215,80 @@
 
                     {{-- Dropdown Sub-Items (Choose Building/Room) --}}
                     <div id="daily-weekly-dropdown-menu" class="pl-4 space-y-1 transition-all duration-200 {{ $isDailyWeeklyActive ? '' : 'hidden' }}">
-                        {{-- 1. All Rental Units Overview / Wealth Mansion --}}
+                        {{-- 1. Wealth Mansion Units --}}
                         <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals') }}" 
-                            class="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/services/properties-leasing-list/daily-weekly-rentals*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
+                            class="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/services/properties-leasing-list/daily-weekly-rentals*') && !request()->has('room') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
                             <div class="flex items-center gap-2.5">
-                                <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/services/properties-leasing-list/daily-weekly-rentals*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/services/properties-leasing-list/daily-weekly-rentals*') && !request()->has('room') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
                                 <span>Wealth Mansion Units</span>
                             </div>
                             <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Manage &rarr;</span>
                         </a>
 
-                        {{-- 2. Studio Room --}}
-                        <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=studio') }}" 
-                            class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
-                            <div class="flex items-center gap-2.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
-                                <span>Studio Room</span>
-                            </div>
-                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
-                        </a>
+                        {{-- 2. Rooms Dropdown (Below Wealth Mansion Units) --}}
+                        @php
+                            $isRoomsActive = request()->has('room') || request()->is('dashboard/pages/services/properties-leasing-list/daily-weekly-rentals*');
+                        @endphp
+                        <div class="space-y-1 pt-1">
+                            <button type="button" onclick="toggleSidebarRoomsSubDropdown(event)" 
+                                class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white cursor-pointer">
+                                <div class="flex items-center gap-2.5">
+                                    <svg class="w-3.5 h-3.5 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                    </svg>
+                                    <span class="font-semibold">Rooms</span>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <span class="text-[9px] font-bold bg-[#F4DEAC]/20 text-[#F4DEAC] px-1 py-0.2 rounded">4</span>
+                                    <svg id="rooms-subdropdown-chevron" class="w-3 h-3 text-slate-300 transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                            </button>
 
-                        {{-- 3. 1 Bedroom --}}
-                        <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=1bed') }}" 
-                            class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
-                            <div class="flex items-center gap-2.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
-                                <span>1-Bedroom</span>
-                            </div>
-                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
-                        </a>
+                            {{-- Sub-menu for the 4 Rooms --}}
+                            <div id="rooms-subdropdown-menu" class="pl-3.5 space-y-1 border-l-2 border-[#1479B9]/50 ml-3 transition-all duration-200">
+                                {{-- Studio Room --}}
+                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=studio') }}" 
+                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->get('room') === 'studio' ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-1 h-1 rounded-full {{ request()->get('room') === 'studio' ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                        <span>Studio Room</span>
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
+                                </a>
 
-                        {{-- 4. 2-Bedroom with Balcony --}}
-                        <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=2bed') }}" 
-                            class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
-                            <div class="flex items-center gap-2.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
-                                <span>2-Bedroom Balcony</span>
-                            </div>
-                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
-                        </a>
+                                {{-- 1-Bedroom --}}
+                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=1bed') }}" 
+                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->get('room') === '1bed' ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-1 h-1 rounded-full {{ request()->get('room') === '1bed' ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                        <span>1-Bedroom</span>
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
+                                </a>
 
-                        {{-- 5. 3-Bedroom --}}
-                        <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=3bed') }}" 
-                            class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
-                            <div class="flex items-center gap-2.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
-                                <span>3-Bedroom Suite</span>
+                                {{-- 2-Bedroom Balcony --}}
+                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=2bed') }}" 
+                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->get('room') === '2bed' ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-1 h-1 rounded-full {{ request()->get('room') === '2bed' ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                        <span>2-Bedroom Balcony</span>
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
+                                </a>
+
+                                {{-- 3-Bedroom Suite --}}
+                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=3bed') }}" 
+                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->get('room') === '3bed' ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-1 h-1 rounded-full {{ request()->get('room') === '3bed' ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                        <span>3-Bedroom Suite</span>
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
+                                </a>
                             </div>
-                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -310,6 +335,21 @@
     function toggleSidebarDailyWeeklyDropdown() {
         const menu = document.getElementById('daily-weekly-dropdown-menu');
         const chevron = document.getElementById('daily-weekly-dropdown-chevron');
+        if (menu) {
+            menu.classList.toggle('hidden');
+        }
+        if (chevron) {
+            chevron.classList.toggle('rotate-180');
+        }
+    }
+
+    function toggleSidebarRoomsSubDropdown(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        const menu = document.getElementById('rooms-subdropdown-menu');
+        const chevron = document.getElementById('rooms-subdropdown-chevron');
         if (menu) {
             menu.classList.toggle('hidden');
         }

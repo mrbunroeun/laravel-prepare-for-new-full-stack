@@ -44,7 +44,7 @@
                 <span class="whitespace-nowrap">Hero &amp; Header Banner</span>
             </button>
 
-            {{-- Tab 2: Rooms / Available Rental Units (CRUD with Photo Uploads, Pricing, Suitability) --}}
+            {{-- Tab 2: Rooms / Available Rental Units (CRUD with Photo Upload, Pricing, Suitability) --}}
             <button type="button" onclick="switchRentalTab('rooms', event)" id="rental-tab-btn-rooms" class="rental-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
@@ -53,16 +53,7 @@
                 <span id="tab-badge-rooms-count" class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">4</span>
             </button>
 
-            {{-- Tab 3: Room Gallery & Photos (Discover Carousel) --}}
-            <button type="button" onclick="switchRentalTab('discover', event)" id="rental-tab-btn-discover" class="rental-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                <span class="whitespace-nowrap">Room Gallery &amp; Photos</span>
-                <span id="tab-badge-gallery-count" class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">...</span>
-            </button>
-
-            {{-- Tab 4: Frequently Asked Questions --}}
+            {{-- Tab 3: Frequently Asked Questions --}}
             <button type="button" onclick="switchRentalTab('faqs', event)" id="rental-tab-btn-faqs" class="rental-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -270,50 +261,19 @@
     </div>
 
     {{-- ========================================================================= --}}
-    {{-- TAB 3: ROOM GALLERY & PHOTOS (DISCOVER WEALTH MANSION CAROUSEL)            --}}
-    {{-- ========================================================================= --}}
-    <div id="rental-tab-content-discover" class="rental-tab-content hidden space-y-6">
-        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
-                <div>
-                    <h2 class="text-lg font-bold text-[#163049] flex items-center gap-2">
-                        <span>Room Showcase Gallery Photos</span>
-                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#2A5A8A]/10 text-[#2A5A8A] font-semibold">Carousel Photos</span>
-                    </h2>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Upload photos for the interactive full-width room discovery carousel on the room detail pages.</p>
-                </div>
-                <div class="flex items-center gap-3">
-                    <button type="button" onclick="openCreateGalleryModal('discover')" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
-                        <svg class="w-4 h-4 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        <span>Upload Gallery Photo</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="mt-6">
-                <div id="gallery-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
-                <div id="gallery-empty-state" class="hidden py-12 text-center">
-                    <p class="text-sm font-semibold text-slate-800">No gallery images uploaded</p>
-                    <p class="text-xs text-slate-500 mt-1">Click "Upload Gallery Photo" to add images.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- ========================================================================= --}}
-    {{-- TAB 4: FREQUENTLY ASKED QUESTIONS                                         --}}
+    {{-- TAB 3: FREQUENTLY ASKED QUESTIONS (FAQS - SAME UX/UI AS ABOUT US)         --}}
     {{-- ========================================================================= --}}
     <div id="rental-tab-content-faqs" class="rental-tab-content hidden space-y-6">
+        {{-- Database FAQs Management Table --}}
         <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            {{-- Toolbar --}}
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
                 <div>
                     <h2 class="text-lg font-bold text-[#163049] flex items-center gap-2">
                         <span>Frequently Asked Questions</span>
-                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#2A5A8A]/10 text-[#2A5A8A] font-semibold">Database Management</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#2A5A8A]/10 text-[#2A5A8A] font-semibold">Daily &amp; Weekly Rentals FAQs</span>
                     </h2>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Add, edit, or delete FAQ questions and answers for Daily & Weekly Rentals.</p>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Add, edit, or delete FAQ questions and answers for Daily &amp; Weekly Rentals.</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <button type="button" onclick="openCreateFaqModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
@@ -325,6 +285,7 @@
                 </div>
             </div>
 
+            {{-- FAQs Table --}}
             <div class="mt-6">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
@@ -344,6 +305,42 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                {{-- Empty state --}}
+                <div id="faq-empty-state" class="hidden py-12 text-center">
+                    <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-sm font-semibold text-slate-800">No FAQs in database</h3>
+                    <p class="text-xs text-slate-500 mt-1">Get started by creating your first FAQ item.</p>
+                </div>
+            </div>
+        </div>
+
+        {{-- Live Frontend Preview Card for FAQs (Exact Match to About Us UI) --}}
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-[#1479B9]"></span>
+                    <h3 class="text-sm font-bold text-[#163049] uppercase tracking-wider">Live Frontend Preview</h3>
+                </div>
+                <span class="text-xs text-slate-500">Interactive live simulation with real styling</span>
+            </div>
+            
+            <div class="mt-6 bg-[#e5e4e4] rounded-xl px-4 sm:px-10 py-10 sm:py-14 text-slate-900 shadow-inner">
+                <div class="max-w-[1400px] mx-auto">
+                    <h2 class="text-[clamp(24px,3vw,36px)] leading-tight mb-8 sm:mb-10">
+                        <span class="text-[#2A5A8A] font-normal block">Frequently</span>
+                        <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
+                    </h2>
+
+                    {{-- Two-column accordion grid --}}
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start" id="faq-live-preview-grid">
+                        {{-- Populated dynamically via renderFaqLivePreview() --}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -478,108 +475,75 @@
     </div>
 </div>
 
-{{-- MODAL: GALLERY UPLOAD --}}
-<div id="gallery-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center p-4 transition-all duration-200 opacity-0">
-    <div id="gallery-modal-card" class="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform scale-95 transition-all duration-200">
-        <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-            <div>
-                <h3 class="text-base font-bold text-[#163049]" id="gallery-modal-title">Upload Gallery Photo</h3>
-                <p class="text-xs text-slate-500 mt-0.5">Add photo to room showcase.</p>
-            </div>
-            <button type="button" onclick="closeGalleryModal()" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200 flex items-center justify-center transition-colors cursor-pointer">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
 
-        <form onsubmit="handleGalleryFormSubmit(event)" id="gallery-form" class="p-6 space-y-4">
-            <input type="hidden" id="gallery-edit-id" value="">
 
-            <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Image File</label>
-                <div class="flex items-center gap-4">
-                    <div class="w-24 h-24 rounded-lg bg-slate-100 border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center">
-                        <img id="modal-img-preview" src="{{ asset('services/propertis_leasing/all part.png') }}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <input type="file" id="gallery-file-input" accept="image/*" onchange="previewGalleryModalFile(this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
-                        <p class="text-[11px] text-slate-400 mt-1">Recommended: JPG, PNG, WebP up to 10MB.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Title / Caption</label>
-                <input type="text" id="gallery-title-input" required placeholder="e.g. Studio Room Interior" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
-            </div>
-
-            <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
-                <button type="button" onclick="closeGalleryModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer">
-                    Cancel
-                </button>
-                <button type="submit" id="gallery-save-btn" class="px-5 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
-                    Save Photo
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
-
-{{-- MODAL: CREATE / EDIT FAQ --}}
-<div id="faq-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#163049]/60 backdrop-blur-xs p-4 hidden opacity-0 transition-opacity duration-200">
-    <div class="bg-white border border-slate-200 w-full max-w-lg rounded-xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-200" id="faq-modal-card">
-        <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-[#163049] text-white">
-            <h3 class="text-base font-bold text-white flex items-center gap-2" id="faq-modal-title">
+{{-- FAQ Create / Edit Modal (Exact match to About Us) --}}
+<div id="faq-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs hidden opacity-0 transition-opacity duration-200">
+    <div id="faq-modal-card" class="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 shadow-2xl transform scale-95 transition-transform duration-200 space-y-5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h3 id="faq-modal-title" class="text-base font-bold text-[#163049] flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span>
                 Add New FAQ
             </h3>
-            <button onclick="closeFaqModal()" class="text-white/70 hover:text-white p-1 rounded hover:bg-white/10 transition-colors cursor-pointer">
+            <button type="button" onclick="closeFaqModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
         </div>
 
-        <form id="faq-form" onsubmit="handleFaqSubmit(event)" class="p-6 space-y-4">
-            <input type="hidden" id="faq-id" value="">
+        <form onsubmit="handleFaqSubmit(event)" class="space-y-4">
+            <input type="hidden" id="faq-id">
 
             <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Question <span class="text-rose-500">*</span></label>
-                <input type="text" id="faq-question" required placeholder="e.g. What is the minimum rental period?" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Question <span class="text-red-500">*</span></label>
+                <input type="text" id="faq-question" required placeholder="e.g. Why should I choose a CWD-managed property?" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:bg-white focus:border-[#2A5A8A] focus:outline-none transition-colors">
             </div>
 
             <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Answer <span class="text-rose-500">*</span></label>
-                <textarea id="faq-answer" required rows="4" placeholder="Enter detailed answer..." class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A] leading-relaxed"></textarea>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Answer <span class="text-red-500">*</span></label>
+                <textarea id="faq-answer" required rows="4" placeholder="Enter detailed answer here..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:bg-white focus:border-[#2A5A8A] focus:outline-none transition-colors"></textarea>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Display Column</label>
-                    <select id="faq-column" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Display Column</label>
+                    <select id="faq-column" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 focus:bg-white focus:border-[#2A5A8A] focus:outline-none transition-colors">
                         <option value="left">Left Column</option>
                         <option value="right">Right Column</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Status</label>
-                    <select id="faq-status" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Status</label>
+                    <select id="faq-status" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 focus:bg-white focus:border-[#2A5A8A] focus:outline-none transition-colors">
                         <option value="published">Published</option>
-                        <option value="draft">Draft</option>
+                        <option value="draft">Draft (Hidden)</option>
                     </select>
                 </div>
             </div>
 
-            <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
-                <button type="button" onclick="closeFaqModal()" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer">
-                    Cancel
-                </button>
-                <button type="submit" id="faq-submit-btn" class="px-5 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
-                    Save FAQ
-                </button>
+            <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
+                <button type="button" onclick="closeFaqModal()" class="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer">Cancel</button>
+                <button type="submit" id="faq-submit-btn" class="px-5 py-2 bg-[#2A5A8A] hover:bg-[#163049] text-white text-xs font-bold rounded-lg shadow-sm transition-all cursor-pointer">Save FAQ</button>
             </div>
         </form>
+    </div>
+</div>
+
+{{-- Delete FAQ Confirmation Modal (Exact match to About Us) --}}
+<div id="faq-delete-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs hidden opacity-0 transition-opacity duration-200">
+    <div id="faq-delete-card" class="bg-white border border-slate-200 rounded-2xl max-w-sm w-full p-6 shadow-2xl transform scale-95 transition-transform duration-200 text-center space-y-4">
+        <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+        </div>
+        <h3 class="text-base font-bold text-[#163049]">Delete this FAQ?</h3>
+        <p class="text-xs text-slate-500">Are you sure you want to permanently remove this question from your Daily &amp; Weekly Rentals page?</p>
+        <div class="flex items-center justify-center gap-3 pt-2">
+            <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer">Cancel</button>
+            <button type="button" onclick="confirmDeleteFaq()" class="px-5 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-lg shadow-sm transition-all cursor-pointer">Delete</button>
+        </div>
     </div>
 </div>
 
@@ -1174,7 +1138,7 @@
     }
 
     // ==========================================
-    // FAQS MANAGEMENT
+    // FAQS MANAGEMENT (MATCHING ABOUT US UX/UI)
     // ==========================================
     let faqsData = [];
 
@@ -1185,6 +1149,7 @@
             if (result.success && Array.isArray(result.data)) {
                 faqsData = result.data;
                 renderFaqTable();
+                renderFaqLivePreview();
             }
         } catch (err) {
             console.error('Error fetching faqs:', err);
@@ -1193,62 +1158,192 @@
 
     function renderFaqTable() {
         const tbody = document.getElementById('faq-table-body');
+        const emptyState = document.getElementById('faq-empty-state');
         const badge = document.getElementById('tab-badge-faqs-count');
         if (badge) badge.innerText = faqsData.length;
 
         if (!faqsData.length) {
-            tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-slate-400">No FAQs found. Click "Add New FAQ".</td></tr>';
+            if (tbody) tbody.innerHTML = '';
+            if (emptyState) emptyState.classList.remove('hidden');
             return;
         }
 
-        tbody.innerHTML = faqsData.map((faq, idx) => `
-            <tr class="hover:bg-slate-50 transition-colors">
-                <td class="py-3 px-4 text-center font-bold text-[#2A5A8A]">${idx + 1}</td>
-                <td class="py-3 px-4 font-semibold text-[#163049]">${escapeHtml(faq.question)}</td>
-                <td class="py-3 px-4 text-slate-600 text-xs">${escapeHtml(faq.answer)}</td>
-                <td class="py-3 px-4 text-center text-xs uppercase">${faq.column || 'left'}</td>
-                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${faq.status === 'published' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}">${faq.status || 'published'}</span></td>
-                <td class="py-3 px-4 text-right">
-                    <button type="button" onclick="openEditFaqModal(${faq.id})" class="text-xs text-[#2A5A8A] font-bold mr-3">Edit</button>
-                    <button type="button" onclick="deleteFaq(${faq.id})" class="text-xs text-rose-500 font-bold">Delete</button>
-                </td>
-            </tr>
-        `).join('');
+        if (emptyState) emptyState.classList.add('hidden');
+        if (tbody) {
+            tbody.innerHTML = faqsData.map((item, index) => `
+                <tr class="hover:bg-slate-50/80 transition-colors group">
+                    <td class="py-3 px-4 text-center text-slate-400 font-mono text-xs">${index + 1}</td>
+                    <td class="py-3 px-4">
+                        <div class="font-semibold text-[#163049] group-hover:text-[#1479B9] transition-colors">${escapeHtml(item.question)}</div>
+                    </td>
+                    <td class="py-3 px-4">
+                        <div class="text-xs text-slate-600 line-clamp-1">${escapeHtml(item.answer)}</div>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded text-[11px] font-semibold ${item.column === 'left' ? 'bg-[#2A5A8A]/10 text-[#2A5A8A]' : 'bg-[#1479B9]/10 text-[#1479B9]'}">
+                            ${item.column === 'left' ? 'Left Col' : 'Right Col'}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold ${item.status === 'published' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-600'}">
+                            ${item.status === 'published' ? 'Published' : 'Draft'}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <button type="button" onclick="openEditFaqModal(${item.id})" class="p-1.5 rounded-lg bg-slate-100 hover:bg-[#2A5A8A] text-slate-600 hover:text-white transition-colors cursor-pointer" title="Edit FAQ">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                </svg>
+                            </button>
+                            <button type="button" onclick="promptDeleteFaq(${item.id})" class="p-1.5 rounded-lg bg-slate-100 hover:bg-rose-600 text-slate-600 hover:text-white transition-colors cursor-pointer" title="Delete FAQ">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+    }
+
+    function renderFaqLivePreview() {
+        const grid = document.getElementById('faq-live-preview-grid');
+        if (!grid) return;
+
+        const leftFaqs = faqsData.filter(f => f.column === 'left' && f.status === 'published');
+        const rightFaqs = faqsData.filter(f => f.column === 'right' && f.status === 'published');
+
+        if (!leftFaqs.length && !rightFaqs.length) {
+            grid.innerHTML = '<div class="col-span-full py-12 text-center text-slate-400">No published FAQs to preview</div>';
+            return;
+        }
+
+        function renderColumn(items, isLeft) {
+            return `
+                <div class="faq-column flex flex-col gap-2 w-full">
+                    ${items.map((f, i) => {
+                        const isOpen = isLeft && i === 0;
+                        return `
+                            <div class="faq-item bg-[#f3f3f3] shadow-xs">
+                                <button type="button"
+                                    class="preview-faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer select-none"
+                                    aria-expanded="${isOpen ? 'true' : 'false'}"
+                                    onclick="togglePreviewFaq(this)">
+                                    <span class="text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium leading-snug">
+                                        ${escapeHtml(f.question)}
+                                    </span>
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="preview-faq-arrow w-6 h-6 shrink-0 text-[#2A5A8A] transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M6 4l8 6-8 6V4z" />
+                                    </svg>
+                                </button>
+                                <div class="preview-faq-panel overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-[400px]' : 'max-h-0'}">
+                                    <div class="${isOpen ? 'bg-[#1479B9] text-white' : 'bg-white text-black/70'} px-5 py-4 sm:px-6 sm:py-5 transition-colors duration-200">
+                                        <p class="text-[13px] sm:text-[13.5px] leading-relaxed">
+                                            ${escapeHtml(f.answer)}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        grid.innerHTML = `
+            ${renderColumn(leftFaqs, true)}
+            ${renderColumn(rightFaqs, false)}
+        `;
+    }
+
+    function togglePreviewFaq(btn) {
+        const item = btn.closest('.faq-item');
+        if (!item) return;
+        const panel = item.querySelector('.preview-faq-panel');
+        const answerBox = panel ? panel.querySelector('div') : null;
+        const arrow = btn.querySelector('.preview-faq-arrow');
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        if (isOpen) {
+            if (panel) panel.style.maxHeight = '0px';
+            btn.setAttribute('aria-expanded', 'false');
+            if (arrow) arrow.classList.remove('rotate-90');
+            if (answerBox) {
+                answerBox.classList.remove('bg-[#1479B9]', 'text-white');
+                answerBox.classList.add('bg-white', 'text-black/70');
+            }
+        } else {
+            if (panel) panel.style.maxHeight = panel.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+            if (arrow) arrow.classList.add('rotate-90');
+            if (answerBox) {
+                answerBox.classList.remove('bg-white', 'text-black/70');
+                answerBox.classList.add('bg-[#1479B9]', 'text-white');
+            }
+        }
     }
 
     function openCreateFaqModal() {
+        document.getElementById('faq-modal-title').innerText = 'Add New FAQ';
         document.getElementById('faq-id').value = '';
         document.getElementById('faq-question').value = '';
         document.getElementById('faq-answer').value = '';
+        document.getElementById('faq-column').value = 'left';
+        document.getElementById('faq-status').value = 'published';
+
         const modal = document.getElementById('faq-modal');
+        const card = document.getElementById('faq-modal-card');
         modal.classList.remove('hidden');
-        setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            if (card) card.classList.remove('scale-95');
+        }, 10);
     }
 
     function openEditFaqModal(id) {
-        const faq = faqsData.find(f => f.id === id);
+        const faq = faqsData.find(f => Number(f.id) === Number(id));
         if (!faq) return;
+        document.getElementById('faq-modal-title').innerText = `Edit FAQ #${faq.id}`;
         document.getElementById('faq-id').value = faq.id;
         document.getElementById('faq-question').value = faq.question;
         document.getElementById('faq-answer').value = faq.answer;
+        document.getElementById('faq-column').value = faq.column || 'left';
+        document.getElementById('faq-status').value = faq.status || 'published';
+
         const modal = document.getElementById('faq-modal');
+        const card = document.getElementById('faq-modal-card');
         modal.classList.remove('hidden');
-        setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            if (card) card.classList.remove('scale-95');
+        }, 10);
     }
 
     function closeFaqModal() {
         const modal = document.getElementById('faq-modal');
+        const card = document.getElementById('faq-modal-card');
         modal.classList.add('opacity-0');
+        if (card) card.classList.add('scale-95');
         setTimeout(() => modal.classList.add('hidden'), 200);
     }
 
     async function handleFaqSubmit(e) {
         e.preventDefault();
         const id = document.getElementById('faq-id').value;
+        const btn = document.getElementById('faq-submit-btn');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerText = 'Saving...';
+        }
+
         const payload = {
             page: faqPageSlug,
-            question: document.getElementById('faq-question').value,
-            answer: document.getElementById('faq-answer').value,
+            question: document.getElementById('faq-question').value.trim(),
+            answer: document.getElementById('faq-answer').value.trim(),
             column: document.getElementById('faq-column').value,
             status: document.getElementById('faq-status').value
         };
@@ -1266,26 +1361,63 @@
             });
             const data = await res.json();
             if (res.ok && data.success) {
-                if (typeof showToast === 'function') showToast('FAQ saved!');
+                if (typeof showToast === 'function') showToast(data.message || 'FAQ saved successfully!');
                 closeFaqModal();
                 fetchFaqs();
+            } else {
+                if (typeof showToast === 'function') showToast(data.message || 'Error saving FAQ', 'error');
             }
         } catch (err) {
-            if (typeof showToast === 'function') showToast('Error saving FAQ', 'error');
+            if (typeof showToast === 'function') showToast('Failed to save FAQ', 'error');
+        } finally {
+            if (btn) {
+                btn.disabled = false;
+                btn.innerText = 'Save FAQ';
+            }
         }
     }
 
-    async function deleteFaq(id) {
-        if (!confirm('Are you sure you want to delete this FAQ?')) return;
+    let faqToDeleteId = null;
+
+    function promptDeleteFaq(id) {
+        faqToDeleteId = id;
+        const modal = document.getElementById('faq-delete-modal');
+        const card = document.getElementById('faq-delete-card');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            if (card) card.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function closeDeleteModal() {
+        faqToDeleteId = null;
+        const modal = document.getElementById('faq-delete-modal');
+        const card = document.getElementById('faq-delete-card');
+        modal.classList.add('opacity-0');
+        if (card) card.classList.add('scale-95');
+        setTimeout(() => modal.classList.add('hidden'), 200);
+    }
+
+    async function confirmDeleteFaq() {
+        if (!faqToDeleteId) return;
+        const id = faqToDeleteId;
+
         try {
             const res = await fetch(`/api/faqs/${id}`, {
                 method: 'DELETE',
-                headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' }
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
+                }
             });
             const data = await res.json();
             if (res.ok && data.success) {
-                if (typeof showToast === 'function') showToast('FAQ deleted!');
+                closeDeleteModal();
                 fetchFaqs();
+                if (typeof showToast === 'function') showToast(data.message || 'FAQ deleted successfully!');
+            } else {
+                if (typeof showToast === 'function') showToast(data.message || 'Error deleting FAQ', 'error');
             }
         } catch (err) {
             if (typeof showToast === 'function') showToast('Error deleting FAQ', 'error');

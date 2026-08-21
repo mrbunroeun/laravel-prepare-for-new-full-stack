@@ -942,40 +942,68 @@
 
     {{-- Frequently Asked Questions --}}
     @php
-        $faqLeft = [
-            [
-                'question' => 'Why should I choose a CWD-managed property to stay?',
-                'answer' =>
-                    'CWD Realty & Hospitality provides professionally managed residential accommodation with flexible rental options and guest support. Selected properties offer facilities such as swimming pools and panoramic river views, while additional services such as airport pick-up and city tours can be arranged upon request.',
-            ],
-            [
-                'question' => 'What is the difference between smoking and non-smoking accommodation?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'What facilities are available?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Do you provide airport pick-up and city tours?',
-                'answer' => 'ComingSoon',
-            ],
-        ];
+        $dbFaqs = \App\Models\Faq::where('page', 'daily-weekly-rentals')
+            ->where('status', 'published')
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('id', 'asc')
+            ->get();
 
-        $faqRight = [
-            [
-                'question' => 'How much does it cost to rent a property?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Is breakfast included?',
-                'answer' => 'ComingSoon',
-            ],
-            [
-                'question' => 'Are pets allowed?',
-                'answer' => 'ComingSoon',
-            ],
-        ];
+        if ($dbFaqs->isNotEmpty()) {
+            $faqLeft = $dbFaqs->where('column', 'left')->map(fn($f) => [
+                'question' => $f->question,
+                'answer' => $f->answer
+            ])->values()->toArray();
+
+            $faqRight = $dbFaqs->where('column', 'right')->map(fn($f) => [
+                'question' => $f->question,
+                'answer' => $f->answer
+            ])->values()->toArray();
+
+            if (empty($faqLeft) && !empty($faqRight)) {
+                $half = ceil(count($faqRight) / 2);
+                $faqLeft = array_slice($faqRight, 0, $half);
+                $faqRight = array_slice($faqRight, $half);
+            } elseif (!empty($faqLeft) && empty($faqRight)) {
+                $half = ceil(count($faqLeft) / 2);
+                $faqRight = array_slice($faqLeft, $half);
+                $faqLeft = array_slice($faqLeft, 0, $half);
+            }
+        } else {
+            $faqLeft = [
+                [
+                    'question' => 'Why should I choose a CWD-managed property to stay?',
+                    'answer' =>
+                        'CWD Realty & Hospitality provides professionally managed residential accommodation with flexible rental options and guest support. Selected properties offer facilities such as swimming pools and panoramic river views, while additional services such as airport pick-up and city tours can be arranged upon request.',
+                ],
+                [
+                    'question' => 'What is the difference between smoking and non-smoking accommodation?',
+                    'answer' => 'Smoking is only permitted in designated outdoor areas and balconies of selected units. Non-smoking accommodation ensures a fresh and clean environment for all residents and guests.',
+                ],
+                [
+                    'question' => 'What facilities are available?',
+                    'answer' => 'Selected properties offer swimming pools, panoramic river views, fully equipped kitchens, high-speed Wi-Fi, air conditioning, and 24/7 building security. Facilities vary by unit type.',
+                ],
+                [
+                    'question' => 'Do you provide airport pick-up and city tours?',
+                    'answer' => 'Yes, CWD Realty & Hospitality can arrange airport pick-up and drop-off transfers, as well as customized Phnom Penh city tours upon request for an additional fee.',
+                ],
+            ];
+
+            $faqRight = [
+                [
+                    'question' => 'How much does it cost to rent a property?',
+                    'answer' => 'Rental rates start from $35/day for Studio units, $45/day for 1-Bedroom units, $70/day for 2-Bedroom with Balcony, and $110/day for 3-Bedroom Suites. Discounted weekly and monthly packages are also available.',
+                ],
+                [
+                    'question' => 'Is breakfast included?',
+                    'answer' => 'Our serviced residences come with full kitchen and dining amenities for self-catering. Breakfast catering packages can be requested depending on the property and length of stay.',
+                ],
+                [
+                    'question' => 'Are pets allowed?',
+                    'answer' => 'Pet policies depend on the specific condominium building guidelines. Please contact our leasing team prior to booking to confirm pet-friendly unit availability.',
+                ],
+            ];
+        }
     @endphp
 
     <x-faqs :faq-left="$faqLeft" :faq-right="$faqRight" />
