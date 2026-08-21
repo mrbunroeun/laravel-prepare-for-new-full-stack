@@ -229,16 +229,116 @@ Route::get('/insights', function () {
         ->orderBy('id', 'asc')
         ->get();
 
-    return view('pages.insights', compact('heroSection', 'insightCards'));
+    // Query FAQs for Insights
+    $faqLeft = \App\Models\Faq::where('page', 'insights')
+        ->where('column', 'left')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+
+    $faqRight = \App\Models\Faq::where('page', 'insights')
+        ->where('column', 'right')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+
+    return view('pages.insights', compact('heroSection', 'insightCards', 'faqLeft', 'faqRight'));
 });
 
 
-Route::get('/insights/view-full-insight', function () {
-    return view('pages.insights_detail.view_full_insight');
+Route::get('/insights/view-full-insight/{id?}', function ($id = null) {
+    // Query FAQs for Insights Detail
+    $faqLeft = \App\Models\Faq::where('page', 'insights')
+        ->where('column', 'left')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+
+    $faqRight = \App\Models\Faq::where('page', 'insights')
+        ->where('column', 'right')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+
+    if ($id && $id !== 'all') {
+        $card = \App\Models\InsightCard::find($id);
+        if ($card) {
+            $defaultDetail = \App\Models\InsightDetailSection::where('page', 'insights')->first();
+            $detail = (object) [
+                'banner_title'       => $card->banner_title ?: ($card->title ?: ($defaultDetail->banner_title ?? "Your Trusted Property\nManagement & Hospitality\nPartner in Cambodia")),
+                'image_left'         => $card->image_left ?: ($card->image ?: ($defaultDetail->image_left ?? 'home/latest_activities/3img.png')),
+                'image_right'        => $card->image_right ?: ($defaultDetail->image_right ?? 'home/latest_activities/3img.png'),
+                'body_paragraphs'    => (!empty($card->body_paragraphs) && is_array($card->body_paragraphs)) ? $card->body_paragraphs : ($defaultDetail->body_paragraphs ?? [
+                    'CWD Realty & Hospitality was founded with a clear vision—to create a professional property management and hospitality company built on trust, integrity, and long-term partnerships.',
+                    'Our journey began with founders who were committed to expanding business opportunities beyond Cambodia. Through frequent international travel, face-to-face meetings, business presentations, and contract negotiations, they established valuable relationships with overseas partners and property investors.',
+                    'Today, that same commitment continues to shape how we serve every property owner, tenant, investor, and guest. We believe that lasting business relationships are built through professionalism, transparency, and consistently delivering value.',
+                    'As Cambodia\'s real estate and hospitality industries continue to grow, CWD Realty & Hospitality remains dedicated to providing dependable property management, flexible leasing solutions, and exceptional hospitality services.',
+                ]),
+                'feature_image'      => $card->feature_image ?: ($defaultDetail->feature_image ?? 'about_us/our_story/top_one.png'),
+                'feature_paragraphs' => (!empty($card->feature_paragraphs) && is_array($card->feature_paragraphs)) ? $card->feature_paragraphs : ($defaultDetail->feature_paragraphs ?? [
+                    'CWD Realty & Hospitality was founded with a clear vision—to create a professional property management and hospitality company built on trust, integrity, and long-term partnerships.',
+                    'Our journey began with founders who were committed to expanding business opportunities beyond Cambodia.',
+                    'Today, that same commitment continues to shape how we serve every property owner, tenant, investor, and guest.',
+                    'As Cambodia\'s real estate and hospitality industries continue to grow, CWD Realty & Hospitality remains dedicated to providing dependable property management, flexible leasing solutions, and exceptional hospitality services.',
+                ]),
+            ];
+            return view('pages.insights_detail.view_full_insight', compact('detail', 'card', 'faqLeft', 'faqRight'));
+        }
+    }
+
+    $detail = \App\Models\InsightDetailSection::firstOrCreate(
+        ['page' => 'insights'],
+        [
+            'banner_title'       => "Your Trusted Property\nManagement & Hospitality\nPartner in Cambodia",
+            'image_left'         => 'home/latest_activities/3img.png',
+            'image_right'        => 'home/latest_activities/3img.png',
+            'body_paragraphs'    => [
+                'CWD Realty & Hospitality was founded with a clear vision—to create a professional property management and hospitality company built on trust, integrity, and long-term partnerships.',
+                'Our journey began with founders who were committed to expanding business opportunities beyond Cambodia. Through frequent international travel, face-to-face meetings, business presentations, and contract negotiations, they established valuable relationships with overseas partners and property investors.',
+                'Today, that same commitment continues to shape how we serve every property owner, tenant, investor, and guest. We believe that lasting business relationships are built through professionalism, transparency, and consistently delivering value.',
+                'As Cambodia\'s real estate and hospitality industries continue to grow, CWD Realty & Hospitality remains dedicated to providing dependable property management, flexible leasing solutions, and exceptional hospitality services.',
+            ],
+            'feature_image'      => 'about_us/our_story/top_one.png',
+            'feature_paragraphs' => [
+                'CWD Realty & Hospitality was founded with a clear vision—to create a professional property management and hospitality company built on trust, integrity, and long-term partnerships.',
+                'Our journey began with founders who were committed to expanding business opportunities beyond Cambodia.',
+                'Today, that same commitment continues to shape how we serve every property owner, tenant, investor, and guest.',
+                'As Cambodia\'s real estate and hospitality industries continue to grow, CWD Realty & Hospitality remains dedicated to providing dependable property management, flexible leasing solutions, and exceptional hospitality services.',
+            ],
+        ]
+    );
+    return view('pages.insights_detail.view_full_insight', compact('detail', 'faqLeft', 'faqRight'));
 });
 
 Route::get('/events', function () {
-    return view('pages.events');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'events'],
+        [
+            'tagline_html' => 'Events',
+            'headline'     => "Your Trusted Property\nManagement & Hospitality\nPartner in Cambodia",
+            'show_bullets' => false,
+            'bullets'      => [],
+            'buttons'      => [
+                ['text' => 'Browse Properties', 'url' => '/properties'],
+                ['text' => 'Contact Us', 'url' => '/contact-us']
+            ]
+        ]
+    );
+
+    if (\App\Models\EventItem::count() === 0) {
+        app(\App\Http\Controllers\EventItemController::class)->index();
+    }
+
+    $eventItems = \App\Models\EventItem::where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+
+    return view('pages.events', compact('heroSection', 'eventItems'));
 });
 
 Route::get('/contact-us', function () {
@@ -743,6 +843,16 @@ Route::post('/api/insight-cards', [\App\Http\Controllers\InsightCardController::
 Route::post('/api/insight-cards/{id}', [\App\Http\Controllers\InsightCardController::class, 'update']);
 Route::delete('/api/insight-cards/{id}', [\App\Http\Controllers\InsightCardController::class, 'destroy']);
 
+// Event Items (Events page under hero section)
+Route::get('/api/event-items', [\App\Http\Controllers\EventItemController::class, 'index']);
+Route::post('/api/event-items', [\App\Http\Controllers\EventItemController::class, 'store']);
+Route::post('/api/event-items/{id}', [\App\Http\Controllers\EventItemController::class, 'update']);
+Route::delete('/api/event-items/{id}', [\App\Http\Controllers\EventItemController::class, 'destroy']);
+
+// Insight Detail Section (view-full-insight page content)
+Route::get('/api/insight-detail/{page?}', [\App\Http\Controllers\InsightDetailSectionController::class, 'show']);
+Route::post('/api/insight-detail/{page?}', [\App\Http\Controllers\InsightDetailSectionController::class, 'update']);
+
 
 // Project Galleries (e.g. Discover Wealth Mansion)
 Route::get('/api/project-galleries/{page?}', [\App\Http\Controllers\ProjectGalleryController::class, 'index']);
@@ -824,6 +934,14 @@ Route::get('/dashboard/pages/insights', function () {
         'pageSlug'   => 'insights',
         'pageTitle'  => 'Insights & News',
         'frontendUrl' => '/insights'
+    ]);
+});
+
+Route::get('/dashboard/pages/events', function () {
+    return view('dashboard.pages.events', [
+        'pageSlug'   => 'events',
+        'pageTitle'  => 'Events Page',
+        'frontendUrl' => '/events'
     ]);
 });
 

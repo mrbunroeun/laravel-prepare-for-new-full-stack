@@ -42,68 +42,83 @@
 
     {{-- Events List Section --}}
     @php
-        $eventItems = [
-            [
-                'image' => asset('home/latest_activities/1img.png'),
-                'title' => 'Your Trusted Property Management & Hospitality Partner in Cambodia',
-                'description' => 'Property management is the professional administration of residential properties on behalf of owners.',
-                'link' => url('/insights/view-full-insight'),
-            ],
-            [
-                'image' => asset('home/latest_activities/2img.png'),
-                'title' => 'Your Trusted Property Management & Hospitality Partner in Cambodia',
-                'description' => 'Property management is the professional administration of residential properties on behalf of owners.',
-                'link' => url('/insights/view-full-insight'),
-            ],
-            [
-                'image' => asset('home/latest_activities/3img.png'),
-                'title' => 'Your Trusted Property Management & Hospitality Partner in Cambodia',
-                'description' => 'Property management is the professional administration of residential properties on behalf of owners.',
-                'link' => url('/insights/view-full-insight'),
-            ],
-        ];
+        $eventsList = $eventItems ?? [];
     @endphp
 
-    <section class="relative bg-[#ffffff] z-[200]  pt-15 sm:pt-25 pb-16 sm:pb-24">
+    <section class="relative bg-[#ffffff] z-[200] pt-15 sm:pt-25 pb-16 sm:pb-24">
         <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col gap-10 sm:gap-14">
-                @foreach ($eventItems as $event)
+                @forelse ($eventsList as $event)
+                    @php
+                        $rawImg = is_array($event) ? ($event['image'] ?? '') : ($event->image ?? '');
+                        if (empty($rawImg)) {
+                            $rawImg = 'home/latest_activities/1img.png';
+                        }
+                        if (str_starts_with($rawImg, 'http') || str_starts_with($rawImg, '//')) {
+                            $eventImg = $rawImg;
+                        } elseif (str_starts_with($rawImg, 'storage/')) {
+                            $eventImg = asset($rawImg);
+                        } else {
+                            $eventImg = asset(ltrim($rawImg, '/'));
+                        }
+
+                        $title = is_array($event) ? ($event['title'] ?? '') : ($event->title ?? '');
+                        $description = is_array($event) ? ($event['description'] ?? '') : ($event->description ?? '');
+                        $link = is_array($event) ? ($event['link'] ?? '/insights/view-full-insight') : ($event->link ?? '/insights/view-full-insight');
+                        $linkText = is_array($event) ? ($event['link_text'] ?? 'Link') : ($event->link_text ?? 'Link');
+                        $linkUrl = str_starts_with($link, 'http') ? $link : url($link);
+
+                        $fbUrl = is_array($event) ? ($event['facebook_url'] ?? '') : ($event->facebook_url ?? '');
+                        if (empty($fbUrl)) {
+                            $fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($linkUrl);
+                        }
+
+                        $waUrl = is_array($event) ? ($event['whatsapp_url'] ?? '') : ($event->whatsapp_url ?? '');
+                        if (empty($waUrl)) {
+                            $waUrl = 'https://api.whatsapp.com/send?text=' . urlencode($title . ' ' . $linkUrl);
+                        }
+
+                        $tgUrl = is_array($event) ? ($event['telegram_url'] ?? '') : ($event->telegram_url ?? '');
+                        if (empty($tgUrl)) {
+                            $tgUrl = 'https://t.me/share/url?url=' . urlencode($linkUrl) . '&text=' . urlencode($title);
+                        }
+                    @endphp
                     <div class="flex flex-col min-[860px]:flex-row gap-6 sm:gap-8 min-[860px]:gap-10 items-start">
 
                         {{-- Event Image Box (max-w 535px, h 240px) --}}
                         <div class="w-full min-[860px]:w-[535px] min-[860px]:max-w-[535px] h-[240px] shrink-0 overflow-hidden shadow-sm" data-scroll-reveal="left">
-                            <img src="{{ $event['image'] }}" alt="{{ $event['title'] }}" class="w-full h-full block" style="width: 100%; height: 100%; object-fit: fill;">
+                            <img src="{{ $eventImg }}" alt="{{ $title }}" class="w-full h-full block" style="width: 100%; height: 100%; object-fit: fill;">
                         </div>
 
                         {{-- Event Info Content --}}
                         <div class="flex-1 flex flex-col justify-between self-stretch py-1" data-scroll-reveal="right">
                             <div>
                                 <h3 class="text-[#2A5A8A] text-[17px] sm:text-[18.5px] font-bold leading-snug mb-3">
-                                    {{ $event['title'] }}
+                                    {{ $title }}
                                 </h3>
                                 <p class="text-gray-600 text-[13px] sm:text-[14px] leading-relaxed mb-4">
-                                    {{ $event['description'] }}
+                                    {{ $description }}
                                 </p>
-                                <a href="{{ url('/insights/view-full-insight') }}" onclick="event.preventDefault();" class="text-[#2A5A8A] text-[14px] hover:underline inline-block mb-5 font-normal cursor-pointer">
-                                    Link
+                                <a href="{{ $linkUrl }}" class="text-[#2A5A8A] text-[14px] hover:underline inline-block mb-5 font-normal cursor-pointer">
+                                    {{ $linkText }}
                                 </a>
                             </div>
 
                             {{-- Social Share Icons --}}
                             <div class="flex items-center gap-2.5 mt-auto">
-                                <a href="#" aria-label="Facebook"
+                                <a href="{{ $fbUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
                                     class="w-7 h-7 rounded-full bg-[#1877F2] flex items-center justify-center hover:opacity-90 transition">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="currentColor">
                                         <path d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06c0 5 3.66 9.14 8.44 9.94v-7.03H7.9v-2.91h2.54V9.86c0-2.51 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.8 8.44-4.94 8.44-9.94z" />
                                     </svg>
                                 </a>
-                                <a href="#" aria-label="WhatsApp"
+                                <a href="{{ $waUrl }}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
                                     class="w-7 h-7 rounded-full bg-[#25D366] flex items-center justify-center hover:opacity-90 transition">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="currentColor">
                                         <path d="M12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.77.46 3.45 1.28 4.9L2 22l5.25-1.28A9.96 9.96 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm5.85 14.24c-.25.71-1.24 1.3-2.03 1.47-.55.12-1.26.21-3.65-.78-2.99-1.24-4.92-4.26-5.07-4.46-.15-.2-1.2-1.6-1.2-3.05 0-1.45.75-2.16 1.02-2.46.27-.3.58-.37.78-.37.2 0 .39 0 .56.01.18.01.42-.07.65.5.25.6.85 2.07.92 2.22.07.15.12.33.02.53-.1.2-.15.33-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.3.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.44.29.15.46.13.63-.08.17-.2.71-.83.9-1.11.19-.29.38-.24.63-.15.25.1 1.62.77 1.9.91.28.14.46.21.53.33.08.13.08.72-.17 1.43z" />
                                     </svg>
                                 </a>
-                                <a href="#" aria-label="Telegram"
+                                <a href="{{ $tgUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Telegram"
                                     class="w-7 h-7 rounded-full bg-[#26A5E4] flex items-center justify-center hover:opacity-90 transition">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-3.5 h-3.5 text-white" fill="currentColor">
                                         <path d="M21.9 4.3c.28-1.17-.42-1.63-1.18-1.35L2.6 10.36c-1.13.45-1.11 1.08-.19 1.36l4.6 1.44 1.79 5.44c.22.6.4.83.8.83.4 0 .58-.18.8-.4l1.9-1.85 4.02 2.96c.72.4 1.24.2 1.42-.68l2.15-15.16zM8.86 13.4l9.3-5.86c.44-.27.84-.13.51.17l-7.9 7.13-.3 3.24-1.61-4.68z" />
@@ -113,7 +128,11 @@
                         </div>
 
                     </div>
-                @endforeach
+                @empty
+                    <div class="py-12 text-center text-slate-400">
+                        <p>No events found.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>

@@ -12,10 +12,28 @@ class FaqController extends Controller
      */
     public function index(Request $request)
     {
+        $page = $request->input('page', 'home');
+
+        if ($request->filled('page') && Faq::where('page', $page)->count() === 0) {
+            $defaults = [
+                ['page' => $page, 'question' => 'Why should I stay at a property managed by CWD Realty & Hospitality?', 'answer' => 'We professionally manage quality condominium properties, offering clean accommodations, responsive support, flexible rental options, and convenient locations suitable for business travelers, expatriates, and tourists.', 'column' => 'left', 'status' => 'published', 'sort_order' => 1],
+                ['page' => $page, 'question' => 'How much does a room cost?', 'answer' => 'ComingSoon', 'column' => 'left', 'status' => 'published', 'sort_order' => 2],
+                ['page' => $page, 'question' => 'Are smoking and non-smoking rooms available?', 'answer' => 'ComingSoon', 'column' => 'left', 'status' => 'published', 'sort_order' => 3],
+                ['page' => $page, 'question' => 'Is breakfast included?', 'answer' => 'ComingSoon', 'column' => 'left', 'status' => 'published', 'sort_order' => 4],
+                ['page' => $page, 'question' => 'Are pets allowed?', 'answer' => 'ComingSoon', 'column' => 'right', 'status' => 'published', 'sort_order' => 5],
+                ['page' => $page, 'question' => 'What facilities are available?', 'answer' => 'ComingSoon', 'column' => 'right', 'status' => 'published', 'sort_order' => 6],
+                ['page' => $page, 'question' => 'Do you provide airport transportation?', 'answer' => 'ComingSoon', 'column' => 'right', 'status' => 'published', 'sort_order' => 7],
+                ['page' => $page, 'question' => 'Are there discounts for weekly or monthly stays?', 'answer' => 'ComingSoon', 'column' => 'right', 'status' => 'published', 'sort_order' => 8],
+            ];
+            foreach ($defaults as $d) {
+                Faq::create($d);
+            }
+        }
+
         $query = Faq::query();
         
         if ($request->filled('page')) {
-            $query->where('page', $request->input('page'));
+            $query->where('page', $page);
         }
 
         $faqs = $query->orderBy('sort_order', 'asc')->orderBy('id', 'asc')->get();

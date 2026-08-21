@@ -76,7 +76,9 @@
                                 $cardImg = $card->image
                                     ? (str_starts_with($card->image, 'storage/') ? '/' . $card->image : '/' . $card->image)
                                     : asset('home/latest_activities/3img.png');
-                                $cardLink = $card->link ?? '/insights/view-full-insight';
+                                $cardLink = (!empty($card->link) && $card->link !== '/insights/view-full-insight')
+                                    ? $card->link
+                                    : '/insights/view-full-insight/' . $card->id;
                                 $cardLinkText = $card->link_text ?? 'View Full Insights';
                             @endphp
                             <div
@@ -289,7 +291,7 @@
         </div>
     </section>
     {{-- Frequently Asked Questions --}}
-    <x-faqs />
+    <x-faqs :faqLeft="$faqLeft" :faqRight="$faqRight" />
 
     {{-- Latest Activities --}}
     <x-latest_activities />

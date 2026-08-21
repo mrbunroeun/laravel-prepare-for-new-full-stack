@@ -4,16 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class InsightCard extends Model
+class InsightDetailSection extends Model
 {
     protected $fillable = [
-        'title',
-        'description',
-        'image',
-        'link',
-        'link_text',
-        'sort_order',
-        'status',
+        'page',
         'banner_title',
         'image_left',
         'image_right',
