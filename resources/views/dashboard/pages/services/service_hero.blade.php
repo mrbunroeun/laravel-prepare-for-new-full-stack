@@ -852,29 +852,7 @@
 
         <form id="service-property-form" onsubmit="handleServicePropertySubmit(event)" class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
             <input type="hidden" id="sprop-id" value="">
-
-            @if($pageSlug !== 'property-leasing')
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Target Grade <span class="text-rose-500">*</span></label>
-                    <select id="sprop-grade" required class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 font-bold focus:outline-none focus:border-[#2A5A8A]">
-                        <option value="A">Grade A</option>
-                        <option value="B">Grade B</option>
-                        <option value="C">Grade C</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Status Badge <span class="text-rose-500">*</span></label>
-                    <input type="text" id="sprop-status" required placeholder="e.g. 30% Available or Coming Soon" value="30% Available" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
-                </div>
-            </div>
-            @else
             <input type="hidden" id="sprop-grade" value="A">
-            <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Status Badge <span class="text-rose-500">*</span></label>
-                <input type="text" id="sprop-status" required placeholder="e.g. 30% Available or Coming Soon" value="30% Available" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
-            </div>
-            @endif
 
             <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Property Title <span class="text-rose-500">*</span></label>
@@ -888,8 +866,30 @@
 
             <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Description <span class="text-rose-500">*</span></label>
-                <textarea id="sprop-description" required rows="3" placeholder="Enter concise property highlights..." class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]"></textarea>
+                <textarea id="sprop-description" required rows="3" placeholder="Enter concise property highlights..." class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A] leading-relaxed"></textarea>
             </div>
+
+            @if($pageSlug !== 'property-leasing')
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Target Grade <span class="text-rose-500">*</span></label>
+                    <select id="sprop-grade-select" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 font-bold focus:outline-none focus:border-[#2A5A8A]" onchange="document.getElementById('sprop-grade').value = this.value">
+                        <option value="A">Grade A</option>
+                        <option value="B">Grade B</option>
+                        <option value="C">Grade C</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Status Badge <span class="text-rose-500">*</span></label>
+                    <input type="text" id="sprop-status" required placeholder="e.g. 30% Available or Coming Soon" value="30% Available" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+            </div>
+            @else
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Status Badge <span class="text-rose-500">*</span></label>
+                <input type="text" id="sprop-status" required placeholder="e.g. 30% Available or Coming Soon" value="30% Available" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+            </div>
+            @endif
 
             <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Property Image</label>
@@ -1827,6 +1827,10 @@
             const result = await res.json();
             if (result.success && Array.isArray(result.data)) {
                 faqsData = result.data;
+                if (!faqsData.length) {
+                    await seedDefaultServiceFaqs();
+                    return;
+                }
                 renderFaqsTable();
                 renderLivePreview();
                 const countBadge = document.getElementById('tab-badge-faq-count');
@@ -1835,6 +1839,60 @@
         } catch (err) {
             console.error('Error fetching faqs:', err);
             if (typeof showToast === 'function') showToast('Error loading FAQs from database', 'error');
+        }
+    }
+
+    async function seedDefaultServiceFaqs() {
+        let defaults = [];
+        if (pageSlug === 'property-leasing') {
+            defaults = [
+                { question: 'Why should I choose a CWD-managed property to stay?', answer: 'CWD Realty & Hospitality provides professionally managed residential accommodation with flexible rental options and guest support. Selected properties offer facilities such as swimming pools and panoramic river views, while additional services such as airport pick-up and city tours can be arranged upon request.', column: 'left', sort_order: 1 },
+                { question: 'What is the difference between smoking and non-smoking accommodation?', answer: 'We offer dedicated non-smoking and smoking units to ensure maximum comfort for all residents and guests.', column: 'left', sort_order: 2 },
+                { question: 'What facilities are available?', answer: 'Selected properties offer premium amenities including swimming pools, modern fitness gyms, sky lounges, and 24/7 security.', column: 'left', sort_order: 3 },
+                { question: 'How much does it cost to rent a property?', answer: 'Rental rates vary depending on unit size, floor level, and lease duration. Contact our leasing consultants for custom packages.', column: 'right', sort_order: 1 },
+                { question: 'Do you provide airport pick-up and city tours?', answer: 'Yes, our dedicated hospitality team can coordinate airport transfers and private city transport upon request.', column: 'right', sort_order: 2 }
+            ];
+        } else if (pageSlug === 'property-sales') {
+            defaults = [
+                { question: 'Can foreigners buy property in Cambodia?', answer: 'Yes, foreigners can own condominium units and strata-titled properties from the 1st floor up, in accordance with Cambodian real estate laws.', column: 'left', sort_order: 1 },
+                { question: 'What documents are required to purchase a condominium?', answer: 'Typically, a valid passport, proof of identification, and standard purchase agreements facilitated by our legal advisory team.', column: 'left', sort_order: 2 },
+                { question: 'What is the expected rental yield in Phnom Penh?', answer: 'Prime developments in Phnom Penh generally offer rental yields ranging between 6% to 9% per annum depending on location and quality.', column: 'right', sort_order: 1 },
+                { question: 'Does CWD assist with resale and leasing after purchase?', answer: 'Yes, we provide complete post-purchase asset management, resale services, and full tenant placement.', column: 'right', sort_order: 2 }
+            ];
+        } else {
+            defaults = [
+                { question: 'What services does CWD Realty provide?', answer: 'We provide full property management, leasing, sales consultation, and tailored hospitality services.', column: 'left', sort_order: 1 },
+                { question: 'How can I get in touch with a representative?', answer: 'You can reach out through our contact page or speak directly with our consultation hotline.', column: 'right', sort_order: 1 }
+            ];
+        }
+
+        for (const item of defaults) {
+            await fetch('/api/faqs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    page: pageSlug,
+                    question: item.question,
+                    answer: item.answer,
+                    column: item.column,
+                    status: 'published',
+                    sort_order: item.sort_order
+                })
+            });
+        }
+
+        const res = await fetch(`/api/faqs?page=${pageSlug}`);
+        const result = await res.json();
+        if (result.success && Array.isArray(result.data)) {
+            faqsData = result.data;
+            renderFaqsTable();
+            renderLivePreview();
+            const countBadge = document.getElementById('tab-badge-faq-count');
+            if (countBadge) countBadge.innerText = faqsData.length;
         }
     }
 
