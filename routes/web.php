@@ -258,11 +258,59 @@ Route::get('/properties', function () {
 });
 
 Route::get('/partners', function () {
-    return view('pages.partner');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'partners'],
+        [
+            'tagline_box1' => 'Partners',
+            'tagline_box1_style' => 'light-gold',
+            'tagline_box2' => '',
+            'tagline_box2_style' => 'bold-gold',
+            'headline' => "Build Your Career in Real Estate\nwith CWD Real Estate Agent &\nDeveloper",
+            'show_bullets' => true,
+            'bullets' => ['Flexible income', 'Strong brand', 'Real projects', 'Full sales support'],
+            'buttons' => [
+                ['text' => 'Apply As Sale Agent', 'url' => '#application-form-section']
+            ]
+        ]
+    );
+
+    $faqs = \App\Models\Faq::where('page', 'partners')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    $faqLeft = $faqs->where('column', 'left')->values()->toArray();
+    $faqRight = $faqs->where('column', 'right')->values()->toArray();
+
+    return view('pages.partner', compact('heroSection', 'faqLeft', 'faqRight'));
 });
 
 Route::get('/partner', function () {
-    return view('pages.partner');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'partners'],
+        [
+            'tagline_box1' => 'Partners',
+            'tagline_box1_style' => 'light-gold',
+            'tagline_box2' => '',
+            'tagline_box2_style' => 'bold-gold',
+            'headline' => "Build Your Career in Real Estate\nwith CWD Real Estate Agent &\nDeveloper",
+            'show_bullets' => true,
+            'bullets' => ['Flexible income', 'Strong brand', 'Real projects', 'Full sales support'],
+            'buttons' => [
+                ['text' => 'Apply As Sale Agent', 'url' => '#application-form-section']
+            ]
+        ]
+    );
+
+    $faqs = \App\Models\Faq::where('page', 'partners')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    $faqLeft = $faqs->where('column', 'left')->values()->toArray();
+    $faqRight = $faqs->where('column', 'right')->values()->toArray();
+
+    return view('pages.partner', compact('heroSection', 'faqLeft', 'faqRight'));
 });
 
 Route::get('/services/property-management', function () {
@@ -723,6 +771,14 @@ Route::get('/dashboard/pages/properties', function () {
         'pageSlug' => 'properties',
         'pageTitle' => 'Properties & Listings',
         'frontendUrl' => '/properties'
+    ]);
+});
+
+Route::get('/dashboard/pages/partners', function () {
+    return view('dashboard.pages.partners', [
+        'pageSlug' => 'partners',
+        'pageTitle' => 'Partners',
+        'frontendUrl' => '/partners'
     ]);
 });
 

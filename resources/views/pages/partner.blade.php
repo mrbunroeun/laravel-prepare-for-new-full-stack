@@ -18,26 +18,41 @@
                 <div class="bg-[#163049]/85 mix-blend-multiply py-10">
                     <h2 class="flex items-center gap-4 text-[clamp(20px,2.5vw,28px)] font-normal mb-6">
                         <span class="h-[2px] w-12 sm:w-16 bg-[#F4DEAC]"></span>
-                        <span class="text-[#F4DEAC] text-[clamp(22px,2.8vw,32px)] font-normal">Partners</span>
+                        <span class="text-[#F4DEAC] text-[clamp(22px,2.8vw,32px)] font-normal">{{ $heroSection->tagline_box1 ?? 'Partners' }}</span>
                     </h2>
 
                     <h1 class="text-white px-6 sm:px-10 text-[clamp(19px,3vw,34px)] font-medium leading-snug mb-6 max-w-[90%] sm:max-w-none">
-                        Build Your Career in Real Estate<br>
-                        with <strong class="font-bold text-white">CWD</strong> Real Estate Agent &amp;<br>
-                        Developer
+                        {!! nl2br(e($heroSection->headline ?? "Build Your Career in Real Estate\nwith CWD Real Estate Agent &\nDeveloper")) !!}
                     </h1>
 
-                    <p class="text-[#EBD4A4] text-[13px] sm:text-[14.5px] px-6 sm:px-10 mb-8 font-light tracking-wide leading-relaxed">
-                        <span class="block lg:inline">• Flexible income • Strong brand</span>
-                        <span class="block lg:inline lg:ml-2">• Real projects • Full sales support</span>
-                    </p>
+                    @php
+                        $partnerBullets = $heroSection->bullets ?? ['Flexible income', 'Strong brand', 'Real projects', 'Full sales support'];
+                        $showBullets = $heroSection->show_bullets ?? true;
+                    @endphp
+
+                    @if($showBullets && !empty($partnerBullets))
+                        <p class="text-[#EBD4A4] text-[13px] sm:text-[14.5px] px-6 sm:px-10 mb-8 font-light tracking-wide leading-relaxed">
+                            @foreach($partnerBullets as $bullet)
+                                <span class="inline-block mr-2">• {{ $bullet }}</span>
+                            @endforeach
+                        </p>
+                    @endif
 
                     <div class="flex items-center px-6 sm:px-10 gap-4 pointer-events-auto">
-                        <a href="#application-form-section"
-                            onclick="event.preventDefault(); document.getElementById('application-form-section')?.scrollIntoView({behavior: 'smooth'});"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-medium px-6 sm:px-8 py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors cursor-pointer">
-                            Apply As Sale Agent
-                        </a>
+                        @php
+                            $heroBtns = $heroSection->buttons ?? [['text' => 'Apply As Sale Agent', 'url' => '#application-form-section']];
+                        @endphp
+                        @foreach($heroBtns as $btn)
+                            @php
+                                $btnUrl = $btn['url'] ?? '#application-form-section';
+                                $isAnchor = str_starts_with($btnUrl, '#');
+                            @endphp
+                            <a href="{{ $btnUrl }}"
+                                @if($isAnchor) onclick="event.preventDefault(); document.getElementById('{{ ltrim($btnUrl, '#') }}')?.scrollIntoView({behavior: 'smooth'});" @endif
+                                class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-medium px-6 sm:px-8 py-3 hover:bg-[#ffffff] hover:text-[#163049] transition-colors cursor-pointer">
+                                {{ $btn['text'] ?? 'Apply As Sale Agent' }}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -762,7 +777,7 @@ Email: ${email}`;
 
     {{-- Frequently Asked Questions --}}
     @php
-        $partnerFaqLeft = [
+        $partnerFaqLeft = $faqLeft ?? [
             [
                 'question' => 'What types of properties do you manage?',
                 'answer' =>
@@ -774,7 +789,7 @@ Email: ${email}`;
             ],
         ];
 
-        $partnerFaqRight = [
+        $partnerFaqRight = $faqRight ?? [
             [
                 'question' => 'How do property owners receive rental income?',
                 'answer' => 'ComingSoon',
