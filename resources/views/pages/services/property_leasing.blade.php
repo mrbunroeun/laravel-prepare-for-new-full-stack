@@ -131,48 +131,63 @@
 
     {{-- Choose the Rental Option That Fits Your Stay --}}
     @php
-        $rentalProperties = [
-            [
-                'image' => asset('home/latest_activities/1img.png'),
-                'title' => 'Wealth Mansion',
-                'subtitle' => 'Premium Condominium Residences',
-                'description' => 'Our daily and weekly rental options provide flexibility for guests who need comfortable accommodation without committing to a long-term lease..',
-                'status' => '30% Available',
-                'link' => url('/services/property-leasing/daily-weekly-rentals'),
-            ],
-            [
-                'image' => asset('home/latest_activities/2img.png'),
-                'title' => 'Condo Name 2',
-                'subtitle' => 'Exclusive Residential Development',
-                'description' => 'A private residential project featuring approximately 100 units, including penthouse residences.',
-                'status' => 'Coming Soon',
-                'link' => url('/services/property-leasing/daily-weekly-rentals'),
-            ],
-            [
-                'image' => asset('home/latest_activities/3img.png'),
-                'title' => 'Condo Name 3',
-                'subtitle' => 'Residential Property Project',
-                'description' => 'Explore the UC88 project and available residential opportunities through CWD Realty & Hospitality.',
-                'status' => '30% Available',
-                'link' => url('/services/property-leasing/daily-weekly-rentals'),
-            ],
-            [
-                'image' => asset('home/latest_activities/4img.png'),
-                'title' => 'Condo Name 4',
-                'subtitle' => 'Modern Urban Living',
-                'description' => 'Comfortable, fully serviced apartment residences designed for short-term visits and extended monthly stays.',
-                'status' => '30% Available',
-                'link' => url('/services/property-leasing/daily-weekly-rentals'),
-            ],
-            [
-                'image' => asset('home/latest_activities/5img.png'),
-                'title' => 'Condo Name 5',
-                'subtitle' => 'Luxury Riverside Suites',
-                'description' => 'Spacious units offering panoramic river views, premier amenities, and dedicated hospitality management.',
-                'status' => 'Coming Soon',
-                'link' => url('/services/property-leasing/daily-weekly-rentals'),
-            ],
-        ];
+        if (isset($featuredProperties) && $featuredProperties->count() > 0) {
+            $rentalProperties = $featuredProperties->map(function($prop) {
+                $img = $prop->image;
+                $imgUrl = (str_starts_with($img, 'http') || str_starts_with($img, 'storage/')) ? asset($img) : asset($img);
+                return [
+                    'image' => $imgUrl,
+                    'title' => $prop->title,
+                    'subtitle' => $prop->subtitle ?? 'Premium Residences',
+                    'description' => $prop->description ?? '',
+                    'status' => $prop->status ?? '30% Available',
+                    'link' => url($prop->link ?? '/services/property-leasing'),
+                ];
+            })->toArray();
+        } else {
+            $rentalProperties = [
+                [
+                    'image' => asset('home/latest_activities/1img.png'),
+                    'title' => 'Wealth Mansion',
+                    'subtitle' => 'Premium Condominium Residences',
+                    'description' => 'Our daily and weekly rental options provide flexibility for guests who need comfortable accommodation without committing to a long-term lease..',
+                    'status' => '30% Available',
+                    'link' => url('/services/property-leasing/daily-weekly-rentals'),
+                ],
+                [
+                    'image' => asset('home/latest_activities/2img.png'),
+                    'title' => 'Condo Name 2',
+                    'subtitle' => 'Exclusive Residential Development',
+                    'description' => 'A private residential project featuring approximately 100 units, including penthouse residences.',
+                    'status' => 'Coming Soon',
+                    'link' => url('/services/property-leasing/daily-weekly-rentals'),
+                ],
+                [
+                    'image' => asset('home/latest_activities/3img.png'),
+                    'title' => 'Condo Name 3',
+                    'subtitle' => 'Residential Property Project',
+                    'description' => 'Explore the UC88 project and available residential opportunities through CWD Realty & Hospitality.',
+                    'status' => '30% Available',
+                    'link' => url('/services/property-leasing/daily-weekly-rentals'),
+                ],
+                [
+                    'image' => asset('home/latest_activities/4img.png'),
+                    'title' => 'Condo Name 4',
+                    'subtitle' => 'Modern Urban Living',
+                    'description' => 'Comfortable, fully serviced apartment residences designed for short-term visits and extended monthly stays.',
+                    'status' => '30% Available',
+                    'link' => url('/services/property-leasing/daily-weekly-rentals'),
+                ],
+                [
+                    'image' => asset('home/latest_activities/5img.png'),
+                    'title' => 'Condo Name 5',
+                    'subtitle' => 'Luxury Riverside Suites',
+                    'description' => 'Spacious units offering panoramic river views, premier amenities, and dedicated hospitality management.',
+                    'status' => 'Coming Soon',
+                    'link' => url('/services/property-leasing/daily-weekly-rentals'),
+                ],
+            ];
+        }
     @endphp
 
     <section class="relative w-full overflow-hidden z-[300] my-10 sm:my-16 py-12 lg:py-20">

@@ -72,7 +72,7 @@
             </button>
             @endif
 
-            @if($pageSlug === 'property-sales')
+            @if($pageSlug === 'property-sales' || $pageSlug === 'property-leasing')
             <button type="button" onclick="switchServiceTab('properties', event)" id="service-tab-btn-properties" class="service-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
@@ -560,7 +560,7 @@
     </div>
     @endif
 
-    @if($pageSlug === 'property-sales')
+    @if($pageSlug === 'property-sales' || $pageSlug === 'property-leasing')
     {{-- ========================================================================= --}}
     {{-- TAB: FEATURED PROPERTIES (GRADE A, B, C MANAGEMENT)                       --}}
     {{-- ========================================================================= --}}
@@ -570,10 +570,10 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
                 <div>
                     <h2 class="text-lg font-bold text-[#163049] flex items-center gap-2">
-                        <span>Featured Properties</span>
-                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#1479B9]/10 text-[#1479B9] font-semibold">Grade A, B, C Management</span>
+                        <span>{{ $pageSlug === 'property-leasing' ? 'Daily & Weekly Rentals' : 'Featured Properties' }}</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#1479B9]/10 text-[#1479B9] font-semibold">{{ $pageSlug === 'property-leasing' ? 'Rental Properties List' : 'Grade A, B, C Management' }}</span>
                     </h2>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Manage property cards for each Grade. If all properties in a grade are deleted, frontend automatically displays a clean <strong>"Coming Soon"</strong> box.</p>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">{{ $pageSlug === 'property-leasing' ? 'Manage condominium rental cards displayed in the Daily & Weekly Rentals slider.' : 'Manage property cards for each Grade. If all properties in a grade are deleted, frontend automatically displays a clean Coming Soon box.' }}</p>
                 </div>
                 <button onclick="openServicePropertyModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white text-xs sm:text-sm font-bold shadow-sm transition-all cursor-pointer">
                     <svg class="w-4 h-4 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -583,6 +583,7 @@
                 </button>
             </div>
 
+            @if($pageSlug !== 'property-leasing')
             {{-- Grade Sub-Filter Tabs --}}
             <div class="flex items-center gap-2 my-4 border-b border-slate-100 pb-3">
                 <span class="text-xs font-bold uppercase tracking-wider text-slate-400 mr-2">Filter Grade:</span>
@@ -596,9 +597,10 @@
                     Grade C <span id="count-badge-grade-C" class="ml-1 px-1.5 py-0.2 rounded-full bg-slate-200 text-slate-700 text-[10px]">0</span>
                 </button>
             </div>
+            @endif
 
             {{-- Table --}}
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto {{ $pageSlug === 'property-leasing' ? 'mt-4' : '' }}">
                 <table class="w-full text-left text-sm text-slate-600">
                     <thead class="bg-slate-50 text-[11px] uppercase tracking-wider text-[#2A5A8A] font-bold border-b border-slate-200">
                         <tr>
@@ -606,7 +608,9 @@
                             <th class="py-3.5 px-4 w-20 text-center">Image</th>
                             <th class="py-3.5 px-4">Title & Subtitle</th>
                             <th class="py-3.5 px-4">Description</th>
+                            @if($pageSlug !== 'property-leasing')
                             <th class="py-3.5 px-4 text-center">Grade</th>
+                            @endif
                             <th class="py-3.5 px-4 text-center">Status</th>
                             <th class="py-3.5 px-4 text-right">Actions</th>
                         </tr>
@@ -633,7 +637,9 @@
             <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
                 <div class="flex items-center gap-2">
                     <span class="w-3 h-3 rounded-full bg-[#8a6a3a]"></span>
-                    <h3 class="text-sm font-bold text-[#163049] uppercase tracking-wider">Live Section Preview (<span id="preview-active-grade-label">Grade A</span>)</h3>
+                    <h3 class="text-sm font-bold text-[#163049] uppercase tracking-wider">
+                        Live Section Preview @if($pageSlug !== 'property-leasing')(<span id="preview-active-grade-label">Grade A</span>)@endif
+                    </h3>
                 </div>
                 <span class="text-xs text-slate-500">Live preview matching exact frontend slider layout</span>
             </div>
@@ -642,8 +648,13 @@
                 <div class="absolute inset-0 bg-cover bg-right opacity-30" style="background-image: url('{{ asset('home/feature_properties/feature_properties.png') }}');"></div>
                 <div class="relative z-10">
                     <h2 class="text-[#F4DEAC] text-xl sm:text-2xl font-bold mb-6">
-                        <span class="font-normal block">Featured</span>
-                        <span class="block">Properties (<span id="preview-active-grade-title">Grade A</span>)</span>
+                        @if($pageSlug === 'property-leasing')
+                            <span class="font-normal block">Daily &amp; Weekly</span>
+                            <span class="block">Rentals</span>
+                        @else
+                            <span class="font-normal block">Featured</span>
+                            <span class="block">Properties (<span id="preview-active-grade-title">Grade A</span>)</span>
+                        @endif
                     </h2>
 
                     {{-- Horizontal scroll container --}}
@@ -1015,7 +1026,7 @@
             fetchOverviewSection();
             fetchManagementModels();
         }
-        if (pageSlug === 'property-sales') {
+        if (pageSlug === 'property-sales' || pageSlug === 'property-leasing') {
             fetchServiceProperties();
         }
     });
@@ -2145,7 +2156,7 @@
         if (!tbody) return;
 
         let filtered = servicePropertiesData;
-        if (activePropertyGrade !== 'all') {
+        if (pageSlug !== 'property-leasing' && activePropertyGrade !== 'all') {
             filtered = servicePropertiesData.filter(p => p.grade === activePropertyGrade);
         }
 
@@ -2179,11 +2190,13 @@
                     <td class="py-3 px-4 text-xs text-slate-600 max-w-[280px]">
                         <p class="line-clamp-2">${escapeHtml(item.description || '')}</p>
                     </td>
+                    ${pageSlug !== 'property-leasing' ? `
                     <td class="py-3 px-4 text-center">
                         <span class="px-2.5 py-1 rounded-full text-xs font-bold ${item.grade === 'A' ? 'bg-amber-100 text-amber-800' : (item.grade === 'B' ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800')}">
                             Grade ${escapeHtml(item.grade)}
                         </span>
                     </td>
+                    ` : ''}
                     <td class="py-3 px-4 text-center">
                         <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${isPublished ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-600'}">
                             ${isPublished ? 'Published' : 'Draft'}

@@ -229,6 +229,67 @@ class ServiceFeaturedPropertyController extends Controller
             return;
         }
 
+        if ($page === 'property-leasing') {
+            $leasingDefaults = [
+                [
+                    'page' => 'property-leasing',
+                    'grade' => 'A',
+                    'title' => 'Wealth Mansion',
+                    'subtitle' => 'Premium Condominium Residences',
+                    'description' => 'Studio, 1-bedroom, 2-bedroom, and 3-bedroom residences with selected units available.',
+                    'status' => '30% Available',
+                    'image' => 'home/latest_activities/1img.png',
+                    'link' => 'services/properties/wealth-mansion',
+                    'link_text' => 'View Project',
+                    'sort_order' => 1,
+                    'publish_status' => 'published',
+                ],
+                [
+                    'page' => 'property-leasing',
+                    'grade' => 'A',
+                    'title' => 'Wealth Mansion',
+                    'subtitle' => 'Premium Condominium Residences',
+                    'description' => 'Studio, 1-bedroom, 2-bedroom, and 3-bedroom residences with selected units available.',
+                    'status' => '30% Available',
+                    'image' => 'home/latest_activities/1img.png',
+                    'link' => 'services/properties/wealth-mansion',
+                    'link_text' => 'View Project',
+                    'sort_order' => 2,
+                    'publish_status' => 'published',
+                ],
+                [
+                    'page' => 'property-leasing',
+                    'grade' => 'A',
+                    'title' => 'Wealth Mansion',
+                    'subtitle' => 'Premium Condominium Residences',
+                    'description' => 'Studio, 1-bedroom, 2-bedroom, and 3-bedroom residences with selected units available.',
+                    'status' => '30% Available',
+                    'image' => 'home/latest_activities/1img.png',
+                    'link' => 'services/properties/wealth-mansion',
+                    'link_text' => 'View Project',
+                    'sort_order' => 3,
+                    'publish_status' => 'published',
+                ],
+                [
+                    'page' => 'property-leasing',
+                    'grade' => 'A',
+                    'title' => 'Private Residential',
+                    'subtitle' => 'Exclusive Residential Development',
+                    'description' => 'A private residential project featuring approximately 100 units, including penthouse residences.',
+                    'status' => 'Coming Soon',
+                    'image' => 'home/latest_activities/2img.png',
+                    'link' => 'services/properties/private-residential',
+                    'link_text' => 'View Project',
+                    'sort_order' => 4,
+                    'publish_status' => 'published',
+                ],
+            ];
+            foreach ($leasingDefaults as $item) {
+                ServiceFeaturedProperty::create($item);
+            }
+            return;
+        }
+
         $defaults = [
             // Grade A
             [

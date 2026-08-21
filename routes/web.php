@@ -396,7 +396,12 @@ Route::get('/services/property-leasing', function () {
         ->orderBy('sort_order', 'asc')
         ->orderBy('id', 'asc')
         ->get();
-    return view('pages.services.property_leasing', compact('heroSection', 'propertyMaximize', 'faqs'));
+    $featuredProperties = \App\Models\ServiceFeaturedProperty::where('page', 'property-leasing')
+        ->where('publish_status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    return view('pages.services.property_leasing', compact('heroSection', 'propertyMaximize', 'faqs', 'featuredProperties'));
 });
 
 Route::get('/services/hospitality-services', function () {
