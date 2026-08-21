@@ -435,10 +435,52 @@ Route::get('/services/hospitality-services', function () {
 });
 
 Route::get('/services/properties/wealth-mansion', function () {
-    return view('components.detail_service_featured_project.wealth_mansion');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'properties-wealth-mansion'],
+        [
+            'tagline_box1' => 'Wealth Mansion',
+            'tagline_box1_style' => 'bold-gold',
+            'tagline_box2' => '',
+            'tagline_box2_style' => 'light-gold',
+            'headline' => 'Premium Condominiums for Sale in Phnom Penh',
+            'show_bullets' => true,
+            'bullets' => ['30% available'],
+            'buttons' => [
+                ['text' => 'Browse Properties', 'url' => '/properties'],
+                ['text' => 'Contact Us', 'url' => '/contact-us']
+            ]
+        ]
+    );
+    $discoverGallery = \App\Models\ProjectGallery::where('page', 'wealth-mansion')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    return view('components.detail_service_featured_project.wealth_mansion', compact('heroSection', 'discoverGallery'));
 });
 Route::get('/properties/wealth-mansion', function () {
-    return view('components.detail_service_featured_project.wealth_mansion');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'properties-wealth-mansion'],
+        [
+            'tagline_box1' => 'Wealth Mansion',
+            'tagline_box1_style' => 'bold-gold',
+            'tagline_box2' => '',
+            'tagline_box2_style' => 'light-gold',
+            'headline' => 'Premium Condominiums for Sale in Phnom Penh',
+            'show_bullets' => true,
+            'bullets' => ['30% available'],
+            'buttons' => [
+                ['text' => 'Browse Properties', 'url' => '/properties'],
+                ['text' => 'Contact Us', 'url' => '/contact-us']
+            ]
+        ]
+    );
+    $discoverGallery = \App\Models\ProjectGallery::where('page', 'wealth-mansion')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    return view('components.detail_service_featured_project.wealth_mansion', compact('heroSection', 'discoverGallery'));
 });
 
 Route::get('/services/properties/uc88', function () {
@@ -551,6 +593,12 @@ Route::post('/api/latest-activities', [\App\Http\Controllers\LatestActivityContr
 Route::post('/api/latest-activities/{latestActivity}', [\App\Http\Controllers\LatestActivityController::class, 'update']);
 Route::delete('/api/latest-activities/{latestActivity}', [\App\Http\Controllers\LatestActivityController::class, 'destroy']);
 
+// Project Galleries (e.g. Discover Wealth Mansion)
+Route::get('/api/project-galleries/{page?}', [\App\Http\Controllers\ProjectGalleryController::class, 'index']);
+Route::post('/api/project-galleries/{page?}', [\App\Http\Controllers\ProjectGalleryController::class, 'store']);
+Route::post('/api/project-galleries/update/{projectGallery}', [\App\Http\Controllers\ProjectGalleryController::class, 'update']);
+Route::delete('/api/project-galleries/{projectGallery}', [\App\Http\Controllers\ProjectGalleryController::class, 'destroy']);
+
 // Comments & Approval Routes
 Route::get('/api/public-comments', [\App\Http\Controllers\CommentController::class, 'publicComments']);
 Route::post('/api/comments/submit', [\App\Http\Controllers\CommentController::class, 'submit']);
@@ -607,7 +655,7 @@ Route::get('/dashboard/pages/properties', function () {
 });
 
 Route::get('/dashboard/pages/properties/wealth-mansion', function () {
-    return view('dashboard.pages.generic', [
+    return view('dashboard.pages.properties.wealth_mansion', [
         'pageTitle' => 'Wealth Mansion Project',
         'pageSlug' => 'properties-wealth-mansion',
         'frontendUrl' => '/properties/wealth-mansion'

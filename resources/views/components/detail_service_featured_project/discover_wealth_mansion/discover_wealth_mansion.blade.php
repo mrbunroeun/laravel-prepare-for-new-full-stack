@@ -1,13 +1,22 @@
+@props(['discoverGallery' => null])
+
 @php
-    $discoverImages = [
-        asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
-        asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png'),
-        asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
-        asset('services/wealth_mansion/compare_wealth_mainsion/for_weatch_mansion.png'),
-        asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
-        asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png'),
-        asset('services/wealth_mansion/compare_wealth_mainsion/for_weatch_mansion.png'),
-    ];
+    if (isset($discoverGallery) && $discoverGallery->count() > 0) {
+        $discoverImages = $discoverGallery->map(function($item) {
+            $img = $item->image;
+            return (str_starts_with($img, 'http') || str_starts_with($img, 'storage/')) ? asset($img) : asset($img);
+        })->toArray();
+    } else {
+        $discoverImages = [
+            asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
+            asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png'),
+            asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
+            asset('services/wealth_mansion/compare_wealth_mainsion/for_weatch_mansion.png'),
+            asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
+            asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png'),
+            asset('services/wealth_mansion/compare_wealth_mainsion/for_weatch_mansion.png'),
+        ];
+    }
 @endphp
 
 {{-- "Discover Wealth Mansion" carousel. --}}
@@ -66,7 +75,7 @@
                             data-index="{{ $index }}" aria-label="Show image {{ $index + 1 }} as active"
                             aria-current="{{ $index === 0 ? 'true' : 'false' }}">
                             <img src="{{ $image }}" alt="Wealth Mansion view {{ $index + 1 }}"
-                                class="w-full h-full object-cover object-top transition-transform duration-500 ease-in-out">
+                                class="w-full h-full min-w-full min-h-full object-fill transition-transform duration-500 ease-in-out">
                         </button>
                     @endforeach
                 </div>
