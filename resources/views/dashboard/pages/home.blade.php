@@ -131,15 +131,6 @@
                 <span class="whitespace-nowrap">FAQs Section</span>
                 <span class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full" id="tab-badge-faq-count">8</span>
             </button>
-
-            {{-- 6. Latest Activities --}}
-            <button type="button" onclick="switchTab('activities', event)" id="tab-btn-activities" class="tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
-                </svg>
-                <span class="whitespace-nowrap">Latest Activities</span>
-                <span class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full" id="tab-badge-activity-count">6</span>
-            </button>
         </div>
 
         {{-- Right Scroll Button --}}
@@ -933,159 +924,6 @@
         </div>
     </div>
 
-    {{-- ======================================================== --}}
-    {{-- TAB 6: LATEST ACTIVITIES MANAGER                         --}}
-    {{-- ======================================================== --}}
-    <div id="tab-content-activities" class="tab-content hidden space-y-6">
-        {{-- Database Activities Table --}}
-        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
-                <div>
-                    <h2 class="text-lg font-bold text-[#163049] flex items-center gap-2">
-                        <span>Latest Activities</span>
-                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#2A5A8A]/10 text-[#2A5A8A] font-semibold">Grid & Hover Effects</span>
-                    </h2>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Customize images, titles, and descriptions that appear when users hover over the activity cards.</p>
-                </div>
-                <button onclick="openActivityModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white text-xs sm:text-sm font-bold shadow-sm transition-all cursor-pointer">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                    <span>Add New Activity</span>
-                </button>
-            </div>
-
-            {{-- Table --}}
-            <div class="overflow-x-auto mt-4">
-                <table class="w-full text-left text-sm text-slate-600">
-                    <thead class="bg-slate-50 text-[11px] uppercase tracking-wider text-[#2A5A8A] font-bold border-b border-slate-200">
-                        <tr>
-                            <th class="py-3.5 px-4 w-12 text-center">#</th>
-                            <th class="py-3.5 px-4 w-20 text-center">Image</th>
-                            <th class="py-3.5 px-4">Title</th>
-                            <th class="py-3.5 px-4">Hover Description</th>
-                            <th class="py-3.5 px-4 text-center">Status</th>
-                            <th class="py-3.5 px-4 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="activity-table-body" class="divide-y divide-slate-100">
-                        {{-- Populated by JS --}}
-                    </tbody>
-                </table>
-
-                <div id="activity-empty-state" class="hidden py-12 text-center">
-                    <p class="text-sm text-slate-400">No activities found. Click "Add New Activity" to create one.</p>
-                </div>
-            </div>
-        </div>
-
-        {{-- Live Hover Simulation Grid --}}
-        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
-                <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-[#2A5A8A]"></span>
-                    <h3 class="text-sm font-bold text-[#163049] uppercase tracking-wider">Live Homepage Hover Grid Simulation</h3>
-                </div>
-                <span class="text-xs text-slate-500">Hover over any card below to test the live title & description animation</span>
-            </div>
-
-            <div class="bg-slate-900/5 p-6 rounded-xl border border-slate-200">
-                <h2 class="text-2xl font-normal text-[#2A5A8A] mb-6">
-                    <span>Latest</span> <strong>Activities</strong>
-                </h2>
-
-                <div id="live-activities-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {{-- Rendered dynamically via JS with hover effect --}}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- MODAL: CREATE / EDIT ACTIVITY --}}
-    <div id="activity-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#163049]/60 backdrop-blur-xs p-4 hidden opacity-0 transition-opacity duration-200">
-        <div class="bg-white border border-slate-200 w-full max-w-lg rounded-xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-200" id="activity-modal-card">
-            <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-[#163049] text-white">
-                <h3 class="text-base font-bold text-white flex items-center gap-2" id="activity-modal-title">
-                    <span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span>
-                    Add New Activity
-                </h3>
-                <button onclick="closeActivityModal()" class="text-white/70 hover:text-white p-1 rounded hover:bg-white/10 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <form id="activity-form" onsubmit="handleActivitySubmit(event)" class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
-                <input type="hidden" id="act-id" value="">
-
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Activity Title <span class="text-rose-500">*</span></label>
-                    <input type="text" id="act-title" required placeholder="e.g. Wealth Mansion or Golden Tower" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Hover Description <span class="text-rose-500">*</span></label>
-                    <textarea id="act-desc" required rows="3" placeholder="Enter description that appears on hover..." class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]"></textarea>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Activity Image</label>
-                    <input type="file" id="act-image-file" accept="image/*" class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
-                    <input type="hidden" id="act-image-url" value="home/latest_activities/1img.png">
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Status</label>
-                        <select id="act-status" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
-                            <option value="published">Published</option>
-                            <option value="draft">Draft</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Sort Order</label>
-                        <input type="number" id="act-sort-order" value="1" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
-                    </div>
-                </div>
-
-                <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
-                    <button type="button" onclick="closeActivityModal()" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-                        Cancel
-                    </button>
-                    <button type="submit" id="act-submit-btn" class="px-5 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
-                        Save Activity
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    {{-- DELETE ACTIVITY MODAL --}}
-    <div id="delete-act-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#163049]/60 backdrop-blur-xs p-4 hidden opacity-0 transition-opacity duration-200">
-        <div class="bg-white border border-slate-200 w-full max-w-sm rounded-xl shadow-2xl p-6 text-center transform scale-95 transition-transform duration-200" id="delete-act-modal-card">
-            <div class="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mx-auto mb-4">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                </svg>
-            </div>
-            <h3 class="text-base font-bold text-[#163049] mb-1">Delete Activity?</h3>
-            <p class="text-xs text-slate-500 mb-6">Are you sure you want to delete this activity from the homepage grid?</p>
-
-            <input type="hidden" id="delete-act-id">
-
-            <div class="flex items-center justify-center gap-3">
-                <button type="button" onclick="closeDeleteActModal()" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-                    Cancel
-                </button>
-                <button type="button" onclick="confirmDeleteActivity()" class="px-5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all">
-                    Yes, Delete
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 {{-- MODAL: CREATE / EDIT FAQ --}}
 <div id="faq-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#163049]/60 backdrop-blur-xs p-4 hidden opacity-0 transition-opacity duration-200">
     <div class="bg-white border border-slate-200 w-full max-w-lg rounded-xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-200" id="faq-modal-card">
@@ -1230,13 +1068,13 @@
 
     async function fetchFaqs() {
         try {
-            const res = await fetch('/api/faqs');
+            const res = await fetch('/api/faqs?page=home');
             const data = await res.json();
             if (data.success) {
                 faqsData = data.data;
                 renderFaqsTable();
                 renderLivePreview();
-                showToast('Loaded ' + faqsData.length + ' FAQs from database');
+                showToast('Loaded ' + faqsData.length + ' Home FAQs from database');
             }
         } catch (err) {
             console.error('Failed to load FAQs:', err);
@@ -1441,7 +1279,7 @@
                     'X-CSRF-TOKEN': csrfToken,
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify({ question, answer, column, status })
+                body: JSON.stringify({ page: 'home', question, answer, column, status })
             });
 
             const data = await res.json();
@@ -2382,245 +2220,9 @@
         }
     }
 
-    // ==========================================
-    // LATEST ACTIVITIES CRUD & LIVE PREVIEW
-    // ==========================================
-    let activitiesData = [];
-
-    async function fetchLatestActivities() {
-        try {
-            const res = await fetch('/api/latest-activities');
-            const data = await res.json();
-            if (data.success) {
-                activitiesData = data.data;
-                renderActivitiesTable();
-                renderLiveActivitiesGrid();
-                const badge = document.getElementById('tab-badge-activity-count');
-                if (badge) badge.innerText = activitiesData.length;
-            }
-        } catch (err) {
-            console.error('Failed to load latest activities:', err);
-        }
-    }
-
-    function renderActivitiesTable() {
-        const tbody = document.getElementById('activity-table-body');
-        const emptyState = document.getElementById('activity-empty-state');
-        if (!tbody) return;
-
-        if (activitiesData.length === 0) {
-            tbody.innerHTML = '';
-            if (emptyState) emptyState.classList.remove('hidden');
-            return;
-        }
-
-        if (emptyState) emptyState.classList.add('hidden');
-        tbody.innerHTML = activitiesData.map((item, index) => {
-            let img = item.image || 'home/latest_activities/1img.png';
-            if (!img.startsWith('http') && !img.startsWith('/')) img = '/' + img;
-
-            return `
-                <tr class="hover:bg-slate-50/80 transition-colors group">
-                    <td class="py-3 px-4 text-center text-slate-400 font-mono text-xs">${index + 1}</td>
-                    <td class="py-3 px-4 text-center">
-                        <img src="${img}" alt="${escapeHtml(item.title)}" class="w-12 h-9 object-cover rounded shadow-xs mx-auto border border-slate-200">
-                    </td>
-                    <td class="py-3 px-4">
-                        <div class="font-bold text-[#163049] group-hover:text-[#2A5A8A] transition-colors">${escapeHtml(item.title)}</div>
-                    </td>
-                    <td class="py-3 px-4">
-                        <div class="text-xs text-slate-600 line-clamp-2 max-w-sm">${escapeHtml(item.description)}</div>
-                    </td>
-                    <td class="py-3 px-4 text-center">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold ${item.status === 'published' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-600'}">
-                            ${item.status === 'published' ? 'Published' : 'Draft'}
-                        </span>
-                    </td>
-                    <td class="py-3 px-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <button onclick="editActivity(${item.id})" class="p-1.5 rounded-lg bg-slate-100 hover:bg-[#2A5A8A] text-slate-600 hover:text-white transition-colors cursor-pointer" title="Edit Activity">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                </svg>
-                            </button>
-                            <button onclick="promptDeleteActivity(${item.id})" class="p-1.5 rounded-lg bg-slate-100 hover:bg-rose-600 text-slate-600 hover:text-white transition-colors cursor-pointer" title="Delete Activity">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            `;
-        }).join('');
-    }
-
-    function renderLiveActivitiesGrid() {
-        const grid = document.getElementById('live-activities-grid');
-        if (!grid) return;
-
-        grid.innerHTML = activitiesData.map(item => {
-            let img = item.image || 'home/latest_activities/1img.png';
-            if (!img.startsWith('http') && !img.startsWith('/')) img = '/' + img;
-
-            return `
-                <div class="relative overflow-hidden group h-[160px] rounded-lg shadow-sm border border-slate-200 cursor-pointer">
-                    <img src="${img}" alt="${escapeHtml(item.title)}" class="block w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-[#2A5A8A]/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-4 backdrop-blur-[2px]">
-                        <h4 class="text-[#F4DEAC] text-sm font-bold mb-1 leading-snug translate-y-2 group-hover:translate-y-0 transition-transform duration-300">${escapeHtml(item.title)}</h4>
-                        <p class="text-white/90 text-xs leading-relaxed line-clamp-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">${escapeHtml(item.description)}</p>
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
-
-    function openActivityModal(id = null) {
-        const modal = document.getElementById('activity-modal');
-        const card = document.getElementById('activity-modal-card');
-        const titleEl = document.getElementById('activity-modal-title');
-        const form = document.getElementById('activity-form');
-
-        form.reset();
-        document.getElementById('act-id').value = '';
-
-        if (id) {
-            const item = activitiesData.find(a => a.id === id);
-            if (item) {
-                titleEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span> Edit Activity`;
-                document.getElementById('act-id').value = item.id;
-                document.getElementById('act-title').value = item.title || '';
-                document.getElementById('act-desc').value = item.description || '';
-                document.getElementById('act-image-url').value = item.image || '';
-                document.getElementById('act-status').value = item.status || 'published';
-                document.getElementById('act-sort-order').value = item.sort_order || 1;
-            }
-        } else {
-            titleEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span> Add New Activity`;
-            document.getElementById('act-sort-order').value = activitiesData.length + 1;
-        }
-
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            modal.classList.remove('opacity-0');
-            card.classList.remove('scale-95');
-        }, 10);
-    }
-
-    function closeActivityModal() {
-        const modal = document.getElementById('activity-modal');
-        const card = document.getElementById('activity-modal-card');
-        modal.classList.add('opacity-0');
-        card.classList.add('scale-95');
-        setTimeout(() => modal.classList.add('hidden'), 200);
-    }
-
-    function editActivity(id) {
-        openActivityModal(id);
-    }
-
-    async function handleActivitySubmit(e) {
-        e.preventDefault();
-        const id = document.getElementById('act-id').value;
-        const submitBtn = document.getElementById('act-submit-btn');
-
-        if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'Saving...';
-        }
-
-        const formData = new FormData();
-        formData.append('title', document.getElementById('act-title').value);
-        formData.append('description', document.getElementById('act-desc').value);
-        formData.append('status', document.getElementById('act-status').value);
-        formData.append('sort_order', document.getElementById('act-sort-order').value);
-
-        const file = document.getElementById('act-image-file').files[0];
-        if (file) {
-            formData.append('image_file', file);
-        } else {
-            formData.append('image', document.getElementById('act-image-url').value);
-        }
-
-        const url = id ? `/api/latest-activities/${id}` : '/api/latest-activities';
-
-        try {
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken,
-                    'Accept': 'application/json'
-                },
-                body: formData
-            });
-
-            const data = await res.json();
-            if (res.ok && data.success) {
-                showToast(data.message || 'Activity saved successfully!');
-                closeActivityModal();
-                fetchLatestActivities();
-            } else {
-                showToast(data.message || 'Error saving activity');
-            }
-        } catch (err) {
-            console.error('Error saving activity:', err);
-            showToast('Failed to connect to database');
-        } finally {
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'Save Activity';
-            }
-        }
-    }
-
-    function promptDeleteActivity(id) {
-        document.getElementById('delete-act-id').value = id;
-        const modal = document.getElementById('delete-act-modal');
-        const card = document.getElementById('delete-act-modal-card');
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            modal.classList.remove('opacity-0');
-            card.classList.remove('scale-95');
-        }, 10);
-    }
-
-    function closeDeleteActModal() {
-        const modal = document.getElementById('delete-act-modal');
-        const card = document.getElementById('delete-act-modal-card');
-        modal.classList.add('opacity-0');
-        card.classList.add('scale-95');
-        setTimeout(() => modal.classList.add('hidden'), 200);
-    }
-
-    async function confirmDeleteActivity() {
-        const id = document.getElementById('delete-act-id').value;
-        try {
-            const res = await fetch(`/api/latest-activities/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken,
-                    'Accept': 'application/json'
-                }
-            });
-
-            const data = await res.json();
-            if (res.ok && data.success) {
-                showToast('Activity deleted from database!');
-                closeDeleteActModal();
-                fetchLatestActivities();
-            } else {
-                showToast('Error deleting activity');
-            }
-        } catch (err) {
-            console.error('Error deleting activity:', err);
-            showToast('Failed to delete activity');
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
         fetchFeaturedProperties();
         fetchWhyChooseUsSection();
-        fetchLatestActivities();
     });
 
     function escapeHtml(text) {

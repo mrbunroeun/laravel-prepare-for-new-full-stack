@@ -661,7 +661,13 @@ Route::post('/api/comments/submit', [\App\Http\Controllers\CommentController::cl
 Route::get('/api/comments', [\App\Http\Controllers\CommentController::class, 'index']);
 Route::post('/api/comments/{comment}/approve', [\App\Http\Controllers\CommentController::class, 'approve']);
 Route::post('/api/comments/{comment}/reject', [\App\Http\Controllers\CommentController::class, 'reject']);
-Route::delete('/api/comments/{comment}', [\App\Http\Controllers\CommentController::class, 'destroy']);
+Route::get('/dashboard/pages/latest-activities', function () {
+    return view('dashboard.pages.latest_activities', [
+        'pageTitle' => 'Latest Activities',
+        'pageSlug' => 'latest-activities',
+        'frontendUrl' => '/'
+    ]);
+});
 
 Route::get('/dashboard/pages/about-us', function () {
     return view('dashboard.pages.about_us', [

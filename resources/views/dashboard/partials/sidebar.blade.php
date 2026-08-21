@@ -117,12 +117,12 @@
                     <span class="text-[10px] uppercase font-bold bg-[#F4DEAC] text-[#163049] px-2 py-0.5 rounded">Active</span>
                 </a>
 
-                {{-- Other Pages List --}}
+                {{-- Other Pages List (Matching Navbar Order: Partners, Insights & News, Events, Contact Inquiries) --}}
                 @php
                     $navPages = [
+                        ['title' => 'Partners', 'slug' => 'partners', 'active' => false, 'icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'],
                         ['title' => 'Insights & News', 'slug' => 'insights', 'active' => false, 'icon' => 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z'],
                         ['title' => 'Events', 'slug' => 'events', 'active' => false, 'icon' => 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'],
-                        ['title' => 'Partners', 'slug' => 'partners', 'active' => false, 'icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'],
                         ['title' => 'Contact Inquiries', 'slug' => 'contact', 'active' => false, 'icon' => 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'],
                     ];
                 @endphp
@@ -143,6 +143,20 @@
                         @endif
                     </a>
                 @endforeach
+
+                {{-- Latest Activities / Events (Moved outside Home Page, below all nav items with extra top spacing) --}}
+                <div class="pt-3 mt-3 border-t border-[#2A5A8A]/30">
+                    <a href="{{ url('/dashboard/pages/latest-activities') }}" 
+                       class="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group {{ request()->is('dashboard/pages/latest-activities*') ? 'bg-[#1479B9] text-white shadow-md' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                            </svg>
+                            <span class="font-semibold">Latest Activities</span>
+                        </div>
+                        <span class="text-[10px] uppercase font-bold bg-[#F4DEAC] text-[#163049] px-2 py-0.5 rounded">Active</span>
+                    </a>
+                </div>
 
                 {{-- Featured Properties Dropdown (Positioned at bottom with mt & divider) --}}
                 @php
