@@ -1684,21 +1684,18 @@
         }
     }
 
-    // Auto-open room modal if url params specified (e.g. ?tab=rooms&room=studio)
+    // Auto-switch tabs & open room modal if url params specified (e.g. ?tab=hero or ?tab=rooms&room=studio)
     document.addEventListener('DOMContentLoaded', () => {
         fetchHeroSection();
         fetchRooms();
-        fetchGalleryItems();
         fetchFaqs();
 
         const urlParams = new URLSearchParams(window.location.search);
-        const tabParam = urlParams.get('tab');
-        if (tabParam) {
-            switchRentalTab(tabParam);
-        }
+        const tabParam = urlParams.get('tab') || 'hero';
+        switchRentalTab(tabParam);
 
         const roomParam = urlParams.get('room');
-        if (roomParam) {
+        if (roomParam && tabParam === 'rooms') {
             setTimeout(() => {
                 const matched = roomsData.find(r => r.title.toLowerCase().includes(roomParam.toLowerCase()));
                 if (matched) openEditRoomModal(matched.id);

@@ -723,6 +723,63 @@ Route::get('/dashboard/pages/services/properties-leasing-list/daily-weekly-renta
     ]);
 });
 
+Route::get('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals/rooms/{room}', function ($room) {
+    $roomMap = [
+        'studio' => [
+            'title' => 'Studio Room',
+            'slug' => 'daily-weekly-rentals-studio-room',
+            'frontendUrl' => '/services/property-leasing/daily-weekly-rentals/studio-room'
+        ],
+        'studio-room' => [
+            'title' => 'Studio Room',
+            'slug' => 'daily-weekly-rentals-studio-room',
+            'frontendUrl' => '/services/property-leasing/daily-weekly-rentals/studio-room'
+        ],
+        '1bed' => [
+            'title' => '1-Bedroom',
+            'slug' => 'daily-weekly-rentals-1-bedroom',
+            'frontendUrl' => '/services/property-leasing/daily-weekly-rentals/1-bedroom'
+        ],
+        '1-bedroom' => [
+            'title' => '1-Bedroom',
+            'slug' => 'daily-weekly-rentals-1-bedroom',
+            'frontendUrl' => '/services/property-leasing/daily-weekly-rentals/1-bedroom'
+        ],
+        '2bed' => [
+            'title' => '2-Bedroom Balcony',
+            'slug' => 'daily-weekly-rentals-2-bedroom-with-balcony',
+            'frontendUrl' => '/services/property-leasing/daily-weekly-rentals/2-bedroom-with-balcony'
+        ],
+        '2-bedroom-with-balcony' => [
+            'title' => '2-Bedroom Balcony',
+            'slug' => 'daily-weekly-rentals-2-bedroom-with-balcony',
+            'frontendUrl' => '/services/property-leasing/daily-weekly-rentals/2-bedroom-with-balcony'
+        ],
+        '3bed' => [
+            'title' => '3-Bedroom Suite',
+            'slug' => 'daily-weekly-rentals-3-bedroom',
+            'frontendUrl' => '/services/property-leasing/daily-weekly-rentals/3-bedroom'
+        ],
+        '3-bedroom' => [
+            'title' => '3-Bedroom Suite',
+            'slug' => 'daily-weekly-rentals-3-bedroom',
+            'frontendUrl' => '/services/property-leasing/daily-weekly-rentals/3-bedroom'
+        ],
+    ];
+
+    $data = $roomMap[$room] ?? [
+        'title' => ucwords(str_replace('-', ' ', $room)),
+        'slug' => 'daily-weekly-rentals-' . $room,
+        'frontendUrl' => '/services/property-leasing/daily-weekly-rentals/' . $room
+    ];
+
+    return view('dashboard.pages.properties.rooms.room_detail', [
+        'pageTitle' => $data['title'],
+        'pageSlug' => $data['slug'],
+        'frontendUrl' => $data['frontendUrl']
+    ]);
+});
+
 Route::get('/dashboard/pages/{slug}', function ($slug) {
     $titles = [
         'about-us' => 'About Us Page',

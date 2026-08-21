@@ -64,12 +64,23 @@ class HeroSectionController extends Controller
             'tagline_box2' => 'nullable|string|max:255',
             'tagline_box2_style' => 'nullable|in:bold-gold,light-gold,hidden',
             'headline' => 'required|string|max:1000',
+            'image' => 'nullable|string|max:1000',
+            'image_file' => 'nullable|image|mimes:jpeg,png,jpg,webp,svg|max:10240',
             'show_bullets' => 'required|boolean',
             'bullets' => 'nullable|array',
             'buttons' => 'nullable|array|max:3',
             'buttons.*.text' => 'required|string|max:255',
             'buttons.*.url' => 'required|string|max:255',
         ]);
+
+        if ($request->hasFile('image_file')) {
+            $file = $request->file('image_file');
+            $filename = 'hero_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('uploads/hero', $filename, 'public');
+            $validated['image'] = 'storage/' . $path;
+        }
+
+        unset($validated['image_file']);
 
         $hero = HeroSection::updateOrCreate(
             ['page' => $page],

@@ -15,6 +15,7 @@ class HeroSection extends Model
         'tagline_box2',
         'tagline_box2_style',
         'headline',
+        'image',
         'show_bullets',
         'bullets',
         'buttons',

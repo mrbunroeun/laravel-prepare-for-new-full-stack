@@ -1,12 +1,22 @@
 @extends('layouts.app')
 @section('content')
+    @php
+        $heroData = \App\Models\HeroSection::where('page', 'daily-weekly-rentals-studio-room')->first();
+        $heroTaglineHtml = $heroData?->tagline_html ?: ($heroData?->tagline_box1 ?: 'Daily &amp; Weekly Rentals');
+        $heroHeadline = $heroData?->headline ?: 'Studio Room';
+        $heroSubtext = (!empty($heroData?->bullets) && is_array($heroData->bullets) && count($heroData->bullets) > 0) ? $heroData->bullets[0] : "Flexible Condominium Rentals at\nWealth Mansion";
+        $heroImage = $heroData?->image 
+            ? (str_starts_with($heroData->image, 'http') || str_starts_with($heroData->image, '/') ? $heroData->image : asset($heroData->image))
+            : asset('services/propertis_leasing/available rental units/detail_img/hero_section.png');
+    @endphp
+
     {{-- Hero image & content wrapper --}}
     <div class="relative w-full pt-[112px] min-[1161px]:pt-[120px]">
         {{-- Hero container: dynamic responsive height that shrinks on resize and caps max height --}}
         <div class="relative w-full h-[420px] sm:h-[460px] md:h-[500px] lg:h-[540px] xl:h-[580px] max-h-[600px] overflow-hidden">
             <img class="w-full h-full object-cover object-center"
-                src="{{ asset('services/propertis_leasing/available rental units/detail_img/hero_section.png') }}" 
-                alt="Studio Room - Wealth Mansion">
+                src="{{ $heroImage }}" 
+                alt="{{ $heroHeadline }} - Wealth Mansion">
 
             {{-- Floating Hero Card Overlay --}}
             <div class="absolute inset-0 flex items-center z-10 pointer-events-none">
@@ -17,16 +27,15 @@
                         <div class="px-0 py-6 sm:py-8 lg:py-10">
                             <h2 class="flex flex-row items-center gap-3 sm:gap-4 text-[clamp(16px,2.2vw,24px)] font-normal mb-3 sm:mb-4">
                                 <span class="h-[2px] w-10 sm:w-14 bg-[#F4DEAC]"></span>
-                                <span class="text-[#F4DEAC] font-normal">Daily &amp; Weekly Rentals</span>
+                                <span class="text-[#F4DEAC] font-normal">{!! $heroTaglineHtml !!}</span>
                             </h2>
 
                             <h1 class="text-white px-7 sm:px-10 text-[clamp(28px,3.8vw,46px)] font-bold leading-tight mb-3 sm:mb-4">
-                                Studio Room
+                                {{ $heroHeadline }}
                             </h1>
 
-                            <div class="text-white/95 px-7 sm:px-10 text-[clamp(14px,1.8vw,16px)] font-normal leading-relaxed">
-                                Flexible Condominium Rentals at<br>
-                                Wealth Mansion
+                            <div class="text-white/95 px-7 sm:px-10 text-[clamp(14px,1.8vw,16px)] font-normal leading-relaxed whitespace-pre-line">
+                                {!! nl2br(e($heroSubtext)) !!}
                             </div>
                         </div>
                     </div>
@@ -40,15 +49,46 @@
     </section>
 
     @php
-        $discoverImages = [
-            asset('services/propertis_leasing/available rental units/detail_img/hero_section.png'),
-            asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
-            asset('services/propertis_leasing/bedroom.png'),
-            asset('services/propertis_leasing/all part.png'),
-            asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png'),
-            asset('services/propertis_leasing/available rental units/detail_img/hero_section.png'),
-            asset('services/propertis_leasing/bedroom.png'),
-        ];
+        // Fetch dynamic showcase text from ServiceMaximizeSection
+        $showcaseData = \App\Models\ServiceMaximizeSection::where('page', 'daily-weekly-rentals-studio-room')->first();
+        $showcaseTitle = $showcaseData?->title ?: 'Flexible Condominium Rentals at Wealth Mansion';
+        $showcaseParagraphs = (!empty($showcaseData?->paragraphs) && is_array($showcaseData->paragraphs) && count($showcaseData->paragraphs) > 0) 
+            ? $showcaseData->paragraphs 
+            : ['Whether you are looking for a compact studio or a spacious three-bedroom residence, guests can choose from different unit types based on their space requirements and length of stay.'];
+
+        // Fetch dynamic gallery photos from ProjectGallery
+        $dbGallery = \App\Models\ProjectGallery::where('page', 'daily-weekly-rentals-studio-room')
+            ->where('status', 'published')
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('id', 'asc')
+            ->get();
+
+        $discoverItems = [];
+        if ($dbGallery->count() > 0) {
+            foreach ($dbGallery as $g) {
+                $imgUrl = str_starts_with($g->image, 'http') || str_starts_with($g->image, '/') ? $g->image : asset($g->image);
+                $discoverItems[] = [
+                    'image' => $imgUrl,
+                    'title' => $g->title ?: ($g->alt_text ?: 'Studio Room view')
+                ];
+            }
+        } else {
+            $rawImages = [
+                asset('services/propertis_leasing/available rental units/detail_img/hero_section.png'),
+                asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png'),
+                asset('services/propertis_leasing/bedroom.png'),
+                asset('services/propertis_leasing/all part.png'),
+                asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png'),
+                asset('services/propertis_leasing/available rental units/detail_img/hero_section.png'),
+                asset('services/propertis_leasing/bedroom.png'),
+            ];
+            foreach ($rawImages as $idx => $raw) {
+                $discoverItems[] = [
+                    'image' => $raw,
+                    'title' => 'Studio Room view ' . ($idx + 1)
+                ];
+            }
+        }
     @endphp
 
     {{-- Flexible Condominium Rentals at Wealth Mansion Section --}}
@@ -66,7 +106,7 @@
                     {{-- Image Track: scrollable with hidden scrollbars, aligned to top so hover scales down and pushes neighbors smoothly --}}
                     <div id="studio-carousel-track"
                         class="flex flex-row flex-nowrap items-start justify-start gap-4 sm:gap-5 lg:gap-6 min-w-0 w-full h-full overflow-x-auto scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pt-2 pb-4">
-                        @foreach ($discoverImages as $index => $image)
+                        @foreach ($discoverItems as $index => $item)
                             <button type="button"
                                 data-base="w-[200px] sm:w-[220px] lg:w-[200px] xl:w-[210px] h-[200px] sm:h-[240px] lg:h-[250px] shrink-0 min-w-0 self-start bg-[#d9d9d9]"
                                 data-active-classes="w-[300px] sm:w-[360px] lg:w-[380px] xl:w-[400px] h-[320px] sm:h-[400px] lg:h-[450px] shrink-0 min-w-0 self-start bg-[#d9d9d9] shadow-2xl z-10"
@@ -75,10 +115,10 @@
                                 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2
                                 w-[200px] sm:w-[220px] lg:w-[200px] xl:w-[210px] h-[200px] sm:h-[240px] lg:h-[250px] shrink-0 min-w-0 self-start bg-[#d9d9d9]"
                                 data-index="{{ $index }}"
-                                data-src="{{ $image }}"
-                                aria-label="View image {{ $index + 1 }}"
+                                data-src="{{ $item['image'] }}"
+                                aria-label="{{ $item['title'] }}"
                                 aria-current="false">
-                                <img src="{{ $image }}" alt="Wealth Mansion Studio view {{ $index + 1 }}"
+                                <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}"
                                     class="w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] transform-gpu">
                             </button>
                         @endforeach
@@ -129,9 +169,11 @@
 
             {{-- Bottom Subtext on the Left --}}
             <div class="max-w-[460px] mt-8 sm:mt-10" data-scroll-reveal="left">
-                <p class="text-black/80 text-[13.5px] sm:text-[14.5px] leading-relaxed">
-                    Whether you are looking for a compact studio or a spacious three-bedroom residence, guests can choose from different unit types based on their space requirements and length of stay.
-                </p>
+                @foreach ($showcaseParagraphs as $p)
+                    <p class="text-black/80 text-[13.5px] sm:text-[14.5px] leading-relaxed mb-3">
+                        {{ $p }}
+                    </p>
+                @endforeach
             </div>
 
         </div>

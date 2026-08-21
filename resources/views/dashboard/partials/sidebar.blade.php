@@ -21,7 +21,7 @@
     <div class="h-[3px] w-full bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
 
     {{-- Navigation Links --}}
-    <div class="flex-1 overflow-y-auto px-4 py-6 space-y-6">
+    <div id="sidebar-nav-container" class="flex-1 overflow-y-auto px-4 py-6 space-y-6">
         <div>
             <div class="px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-[#F4DEAC]/70">Pages Content</div>
             <nav class="space-y-1">
@@ -249,40 +249,40 @@
                             {{-- Sub-menu for the 4 Rooms --}}
                             <div id="rooms-subdropdown-menu" class="pl-3.5 space-y-1 border-l-2 border-[#1479B9]/50 ml-3 transition-all duration-200">
                                 {{-- Studio Room --}}
-                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=studio') }}" 
-                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->get('room') === 'studio' ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals/rooms/studio') }}" 
+                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->is('*rooms/studio*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
                                     <div class="flex items-center gap-2">
-                                        <span class="w-1 h-1 rounded-full {{ request()->get('room') === 'studio' ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                        <span class="w-1 h-1 rounded-full {{ request()->is('*rooms/studio*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
                                         <span>Studio Room</span>
                                     </div>
                                     <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
                                 </a>
 
                                 {{-- 1-Bedroom --}}
-                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=1bed') }}" 
-                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->get('room') === '1bed' ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals/rooms/1bed') }}" 
+                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->is('*rooms/1bed*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
                                     <div class="flex items-center gap-2">
-                                        <span class="w-1 h-1 rounded-full {{ request()->get('room') === '1bed' ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                        <span class="w-1 h-1 rounded-full {{ request()->is('*rooms/1bed*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
                                         <span>1-Bedroom</span>
                                     </div>
                                     <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
                                 </a>
 
                                 {{-- 2-Bedroom Balcony --}}
-                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=2bed') }}" 
-                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->get('room') === '2bed' ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals/rooms/2bed') }}" 
+                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->is('*rooms/2bed*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
                                     <div class="flex items-center gap-2">
-                                        <span class="w-1 h-1 rounded-full {{ request()->get('room') === '2bed' ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                        <span class="w-1 h-1 rounded-full {{ request()->is('*rooms/2bed*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
                                         <span>2-Bedroom Balcony</span>
                                     </div>
                                     <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
                                 </a>
 
                                 {{-- 3-Bedroom Suite --}}
-                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=3bed') }}" 
-                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->get('room') === '3bed' ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
+                                <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals/rooms/3bed') }}" 
+                                    class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium transition-all group {{ request()->is('*rooms/3bed*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }}">
                                     <div class="flex items-center gap-2">
-                                        <span class="w-1 h-1 rounded-full {{ request()->get('room') === '3bed' ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
+                                        <span class="w-1 h-1 rounded-full {{ request()->is('*rooms/3bed*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
                                         <span>3-Bedroom Suite</span>
                                     </div>
                                     <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
@@ -357,4 +357,27 @@
             chevron.classList.toggle('rotate-180');
         }
     }
+
+    // Preserve Sidebar Scroll Position on Page Navigation
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebarNav = document.getElementById('sidebar-nav-container');
+        if (!sidebarNav) return;
+
+        // Restore saved scroll position if available
+        const savedScroll = sessionStorage.getItem('sidebar_scroll_pos');
+        if (savedScroll !== null) {
+            sidebarNav.scrollTop = parseInt(savedScroll, 10);
+        }
+
+        // Save scroll position when user scrolls
+        sidebarNav.addEventListener('scroll', () => {
+            sessionStorage.setItem('sidebar_scroll_pos', sidebarNav.scrollTop);
+        }, { passive: true });
+
+        // Ensure active item is always smoothly visible if not in view
+        const activeLink = sidebarNav.querySelector('.bg-\\[\\#1479B9\\]');
+        if (activeLink && savedScroll === null) {
+            activeLink.scrollIntoView({ block: 'center', behavior: 'instant' });
+        }
+    });
 </script>
