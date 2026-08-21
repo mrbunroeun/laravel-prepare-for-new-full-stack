@@ -62,6 +62,29 @@
             return $text;
         }
 
+        // Helper: parse inline [Label](url) links (internal/relative URLs only for safety)
+        $parseInlineLinks = function($raw) {
+            // Allow relative paths or absolute http(s) URLs
+            return preg_replace_callback(
+                '/\[(.*?)\]\(((?:\/|https?:\/\/)[^\)]*)\)/',
+                function($m) {
+                    $label = htmlspecialchars($m[1], ENT_QUOTES, 'UTF-8');
+                    $url   = htmlspecialchars($m[2], ENT_QUOTES, 'UTF-8');
+                    return '<a href="' . $url . '" class="text-white font-bold underline" target="_self">' . $label . '</a>';
+                },
+                $raw
+            );
+        };
+        // Helper: parse **bold** markdown (e.g., **text** => <strong>)
+        $parseBold = function($raw) {
+            return preg_replace('/\*\*(.*?)\*\*/', '<strong class="font-bold">$1</strong>', $raw);
+        };
+        // Apply both inline link parsing and bold parsing when rendering
+// Apply both inline link parsing and bold parsing when rendering
+$applyFormatting = function($text) use ($parseBold, $parseInlineLinks) {
+    return $parseBold($parseInlineLinks($text));
+};
+
         $lines = explode("\n", str_replace(["\r\n", "\r"], "\n", $text));
         $output = [];
         $inList = false;
@@ -73,7 +96,7 @@
                     $inList = true;
                     $output[] = '<ul class="list-disc pl-5 my-1.5 space-y-1">';
                 }
-                $output[] = '<li class="leading-relaxed">' . e($matches[1]) . '</li>';
+                $output[] = '<li class="leading-relaxed">' . $applyFormatting($matches[1]) . '</li>';
             } else {
                 if ($inList) {
                     $output[] = '</ul>';
@@ -82,7 +105,7 @@
                 if ($trimmed === '') {
                     $output[] = '<div class="h-1.5"></div>';
                 } else {
-                    $output[] = '<p class="leading-relaxed">' . e($trimmed) . '</p>';
+                    $output[] = '<p class="leading-relaxed">' . $applyFormatting($trimmed) . '</p>';
                 }
             }
         }
