@@ -461,7 +461,18 @@ Route::get('/services/properties/wealth-mansion', function () {
         ->orderBy('sort_order', 'asc')
         ->orderBy('id', 'asc')
         ->get();
-    return view('components.detail_service_featured_project.wealth_mansion', compact('heroSection', 'discoverGallery', 'unitProperties'));
+    $facilitiesGallery = \App\Models\ProjectGallery::where('page', 'wealth-mansion-facilities')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    $availabilityItem = \App\Models\ProjectGallery::where('page', 'wealth-mansion-availability')->first();
+    $faqs = \App\Models\Faq::where('page', 'wealth-mansion')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    return view('components.detail_service_featured_project.wealth_mansion', compact('heroSection', 'discoverGallery', 'unitProperties', 'facilitiesGallery', 'availabilityItem', 'faqs'));
 });
 Route::get('/properties/wealth-mansion', function () {
     $heroSection = \App\Models\HeroSection::firstOrCreate(
@@ -490,7 +501,18 @@ Route::get('/properties/wealth-mansion', function () {
         ->orderBy('sort_order', 'asc')
         ->orderBy('id', 'asc')
         ->get();
-    return view('components.detail_service_featured_project.wealth_mansion', compact('heroSection', 'discoverGallery', 'unitProperties'));
+    $facilitiesGallery = \App\Models\ProjectGallery::where('page', 'wealth-mansion-facilities')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    $availabilityItem = \App\Models\ProjectGallery::where('page', 'wealth-mansion-availability')->first();
+    $faqs = \App\Models\Faq::where('page', 'wealth-mansion')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    return view('components.detail_service_featured_project.wealth_mansion', compact('heroSection', 'discoverGallery', 'unitProperties', 'facilitiesGallery', 'availabilityItem', 'faqs'));
 });
 
 Route::get('/services/properties/uc88', function () {

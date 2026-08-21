@@ -332,14 +332,21 @@
                         {{-- LEFT: 3x2 photo grid with NO GAP and NO TEXT --}}
                         <div class="lg:col-span-7 grid grid-cols-3 gap-0 overflow-hidden shadow-2xl" data-scroll-reveal="left">
                             @php
-                                $facilityPhotos = [
-                                    asset('home/latest_activities/1img.png'),
-                                    asset('home/latest_activities/2img.png'),
-                                    asset('home/latest_activities/3img.png'),
-                                    asset('home/latest_activities/4img.png'),
-                                    asset('home/latest_activities/5img.png'),
-                                    asset('home/latest_activities/6img.png'),
-                                ];
+                                if (isset($facilitiesGallery) && $facilitiesGallery->count() > 0) {
+                                    $facilityPhotos = $facilitiesGallery->map(function($item) {
+                                        $img = $item->image;
+                                        return (str_starts_with($img, 'http') || str_starts_with($img, 'storage/')) ? asset($img) : asset($img);
+                                    })->toArray();
+                                } else {
+                                    $facilityPhotos = [
+                                        asset('home/latest_activities/1img.png'),
+                                        asset('home/latest_activities/2img.png'),
+                                        asset('home/latest_activities/3img.png'),
+                                        asset('home/latest_activities/4img.png'),
+                                        asset('home/latest_activities/5img.png'),
+                                        asset('home/latest_activities/6img.png'),
+                                    ];
+                                }
                             @endphp
                             @foreach ($facilityPhotos as $photo)
                                 <div class="relative w-full aspect-square overflow-hidden group bg-[#163049]">
@@ -468,7 +475,13 @@
                 <div class="lg:col-span-7" data-scroll-reveal="left">
                     <div class="h-[8px] sm:h-[10px] w-1/2 ml-auto bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a]"></div>
                     <div class="relative w-full aspect-[16/10] overflow-hidden shadow-xl bg-[#163049]">
-                        <img src="{{ asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png') }}" 
+                        @php
+                            $availImg = asset('services/wealth_mansion/discovered/wealth-mainson-recovered4.png');
+                            if (isset($availabilityItem) && !empty($availabilityItem->image)) {
+                                $availImg = (str_starts_with($availabilityItem->image, 'http') || str_starts_with($availabilityItem->image, 'storage/')) ? asset($availabilityItem->image) : asset($availabilityItem->image);
+                            }
+                        @endphp
+                        <img src="{{ $availImg }}" 
                              alt="Wealth Mansion Property Availability" 
                              class="w-full h-full object-cover">
                     </div>
@@ -569,27 +582,38 @@
 
     {{-- Frequently Asked Questions --}}
     @php
-        $faqLeft = [
-            [
-                'question' => 'What unit types are available at Wealth Mansion?',
-                'answer' => 'The project offers studio, 1-bedroom, 2-bedroom with balcony, and 3-bedroom layouts.',
-            ],
-            [
-                'question' => 'Is Wealth Mansion suitable for investment?',
-                'answer' => 'CommingSoon',
-            ],
-        ];
+        $dbFaqs = isset($faqs) ? $faqs : collect();
+        if ($dbFaqs->count() > 0) {
+            $faqLeft = $dbFaqs->where('column', 'left')->values()->toArray();
+            $faqRight = $dbFaqs->where('column', 'right')->values()->toArray();
+            if (empty($faqLeft) && empty($faqRight)) {
+                $half = ceil($dbFaqs->count() / 2);
+                $faqLeft = $dbFaqs->slice(0, $half)->values()->toArray();
+                $faqRight = $dbFaqs->slice($half)->values()->toArray();
+            }
+        } else {
+            $faqLeft = [
+                [
+                    'question' => 'What unit types are available at Wealth Mansion?',
+                    'answer' => 'The project offers studio, 1-bedroom, 2-bedroom with balcony, and 3-bedroom layouts.',
+                ],
+                [
+                    'question' => 'Is Wealth Mansion suitable for investment?',
+                    'answer' => 'CommingSoon',
+                ],
+            ];
 
-        $faqRight = [
-            [
-                'question' => 'Can CWD help manage my unit after purchase?',
-                'answer' => 'CommingSoon',
-            ],
-            [
-                'question' => 'Can I view the property before purchasing?',
-                'answer' => 'CommingSoon',
-            ],
-        ];
+            $faqRight = [
+                [
+                    'question' => 'Can CWD help manage my unit after purchase?',
+                    'answer' => 'CommingSoon',
+                ],
+                [
+                    'question' => 'Can I view the property before purchasing?',
+                    'answer' => 'CommingSoon',
+                ],
+            ];
+        }
     @endphp
 
     <section class="relative bg-[#f4f4f4] py-16 sm:py-24">
