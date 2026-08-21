@@ -16,66 +16,41 @@
                 <div class="w-full bg-[#163049]/90 py-8 sm:py-10 px-6 sm:px-10" data-scroll-reveal="left" data-scroll-delay="100">
                     <h2 class="flex items-center gap-4 text-[clamp(24px,3.5vw,36px)] font-bold mb-6">
                         <span class="h-[2.5px] w-12 sm:w-16 bg-[#F4DEAC]"></span>
-                        <span class="text-[#F4DEAC]">Insights</span>
+                        <span class="text-[#F4DEAC]">{!! $heroSection->tagline_html ?? ($heroSection->tagline_box1 ?? 'Insights') !!}</span>
                     </h2>
 
                     <h1 class="text-white text-[clamp(20px,2.8vw,32px)] font-medium leading-[1.3] mb-8">
-                        Your Trusted Property<br>
-                        Management &amp; Hospitality<br>
-                        Partner in Cambodia
+                        {!! nl2br(e($heroSection->headline ?? "Your Trusted Property\nManagement & Hospitality\nPartner in Cambodia")) !!}
                     </h1>
 
+                    @if(!empty($heroSection->show_bullets) && !empty($heroSection->bullets))
+                        <div class="text-[#EBD4A4] text-[13px] sm:text-[14px] mb-6 flex flex-wrap items-center gap-x-3 gap-y-1 pointer-events-none">
+                            @foreach($heroSection->bullets as $bullet)
+                                <span>• {{ $bullet }}</span>
+                            @endforeach
+                        </div>
+                    @endif
+
                     <div class="flex items-center gap-4 sm:gap-6 pointer-events-auto">
-                        <a href="{{ url('/properties') }}"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-normal px-6 sm:px-8 py-2.5 hover:bg-white hover:text-[#163049] transition-colors">
-                            Browse Properties
-                        </a>
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-normal px-6 sm:px-8 py-2.5 hover:bg-white hover:text-[#163049] transition-colors">
-                            Contact Us
-                        </a>
+                        @foreach(($heroSection->buttons ?? [['text'=>'Browse Properties','url'=>'/properties'],['text'=>'Contact Us','url'=>'/contact-us']]) as $btn)
+                            @php
+                                $btnUrl = $btn['url'] ?? '#';
+                                $isAnchor = str_starts_with($btnUrl, '#');
+                            @endphp
+                            <a href="{{ $btnUrl }}"
+                                @if($isAnchor) onclick="event.preventDefault(); document.querySelector('{{ $btnUrl }}')?.scrollIntoView({behavior: 'smooth'});" @endif
+                                class="border-[1.5px] border-[#F4DEAC] text-white text-[13px] sm:text-[14.5px] font-normal px-6 sm:px-8 py-2.5 hover:bg-white hover:text-[#163049] transition-colors">
+                                {{ $btn['text'] ?? 'Learn More' }}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- Blue Background Section with Insights Carousel --}}
-    @php
-        $insightsCards = [
-            [
-                'image' => asset('home/latest_activities/3img.png'),
-                'title' => 'Discover Wealth Mansion',
-                'description' => 'Property management is the professional administration of residential properties on behalf of owners.',
-                'link' => url('/insights/view-full-insight'),
-            ],
-            [
-                'image' => asset('home/latest_activities/3img.png'),
-                'title' => 'Discover Wealth Mansion',
-                'description' => 'Property management is the professional administration of residential properties on behalf of owners.',
-                'link' => url('/insights/view-full-insight'),
-            ],
-            [
-                'image' => asset('home/latest_activities/3img.png'),
-                'title' => 'Discover Wealth Mansion',
-                'description' => 'Property management is the professional administration of residential properties on behalf of owners.',
-                'link' => url('/insights/view-full-insight'),
-            ],
-            [
-                'image' => asset('home/latest_activities/3img.png'),
-                'title' => 'Discover Wealth Mansion',
-                'description' => 'Property management is the professional administration of residential properties on behalf of owners.',
-                'link' => url('/insights/view-full-insight'),
-            ],
-            [
-                'image' => asset('home/latest_activities/3img.png'),
-                'title' => 'Discover Wealth Mansion',
-                'description' => 'Property management is the professional administration of residential properties on behalf of owners.',
-                'link' => url('/insights/view-full-insight'),
-            ],
-        ];
-    @endphp
 
+    {{-- Blue Background Section with Insights Carousel --}}
     <section
         class="relative z-[300] mt-[1rem] sm:mt-[2rem] md:mt-[2.3rem] lg:mt-[4rem] py-6 sm:py-10">
         {{-- Top Blue Background (Back Layer) --}}
@@ -84,7 +59,7 @@
         {{-- Carousel in Front Layer --}}
         <div class="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center gap-3 sm:gap-5 lg:gap-6">
-                
+
                 {{-- Prev Button --}}
                 <button id="insights-prev" type="button" aria-label="Previous"
                     class="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-[1.5px] border-[#2A5A8A] bg-white text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-[#2A5A8A] hover:text-white shrink-0">
@@ -96,17 +71,24 @@
                 {{-- Carousel Track Container --}}
                 <div class="overflow-hidden flex-1 py-2">
                     <div id="insights-track" class="flex gap-4 sm:gap-5 transition-transform duration-500 ease-out">
-                        @foreach ($insightsCards as $index => $card)
+                        @foreach ($insightCards as $index => $card)
+                            @php
+                                $cardImg = $card->image
+                                    ? (str_starts_with($card->image, 'storage/') ? '/' . $card->image : '/' . $card->image)
+                                    : asset('home/latest_activities/3img.png');
+                                $cardLink = $card->link ?? '/insights/view-full-insight';
+                                $cardLinkText = $card->link_text ?? 'View Full Insights';
+                            @endphp
                             <div
                                 @if ($index < 3)
                                     data-scroll-reveal="fade-up"
                                     data-scroll-delay="{{ $index * 150 }}"
                                 @endif
-                                onclick="window.location='{{ $card['link'] }}'"
+                                onclick="window.location='{{ $cardLink }}'"
                                 class="insight-slide flex-shrink-0 w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.3333%-14px)] flex flex-col bg-[#2A5A8A] overflow-hidden cursor-pointer group">
                                 {{-- Card Image with Single Bottom Gold Accent Bar --}}
                                 <div class="relative w-full h-[190px] sm:h-[210px] lg:h-[230px] overflow-hidden">
-                                    <img src="{{ $card['image'] }}" alt="{{ $card['title'] }}"
+                                    <img src="{{ $cardImg }}" alt="{{ $card->title }}"
                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                                     {{-- Gold Accent Bar (Bottom Left 60% width) --}}
                                     <div class="absolute bottom-0 left-0 h-[5px] w-[60%] bg-gradient-to-r from-[#8a6a3a] via-[#e8d4a8] to-[#8a6a3a] z-10"></div>
@@ -116,15 +98,15 @@
                                 <div class="p-5 sm:p-6 flex flex-col flex-1 bg-[#2A5A8A] justify-between">
                                     <div>
                                         <h3 class="text-[#F4DEAC] text-[16px] sm:text-[17.5px] font-bold leading-snug mb-2.5">
-                                            {{ $card['title'] }}
+                                            {{ $card->title }}
                                         </h3>
                                         <p class="text-white/90 text-[12.5px] sm:text-[13px] leading-relaxed mb-5 font-normal">
-                                            {{ $card['description'] }}
+                                            {{ $card->description }}
                                         </p>
                                     </div>
-                                    <a href="{{ $card['link'] }}"
+                                    <a href="{{ $cardLink }}"
                                         class="text-[#F4DEAC] text-[12.5px] sm:text-[13px] font-medium hover:underline inline-flex items-center gap-1.5 mt-auto">
-                                        View Full Insights &rarr;
+                                        {{ $cardLinkText }} &rarr;
                                     </a>
                                 </div>
                             </div>
@@ -143,6 +125,9 @@
             </div>
         </div>
     </section>
+
+
+
 
     @once
         <script>

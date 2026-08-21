@@ -200,8 +200,38 @@ Route::get('/products', function () {
 });
 
 Route::get('/insights', function () {
-    return view('pages.insights');
+    $heroSection = \App\Models\HeroSection::firstOrCreate(
+        ['page' => 'insights'],
+        [
+            'tagline_html'  => 'Insights',
+            'headline'      => "Your Trusted Property\nManagement & Hospitality\nPartner in Cambodia",
+            'show_bullets'  => false,
+            'bullets'       => [],
+            'buttons'       => [
+                ['text' => 'Browse Properties', 'url' => '/properties'],
+                ['text' => 'Contact Us', 'url' => '/contact-us']
+            ]
+        ]
+    );
+
+    // Seed defaults if empty
+    if (\App\Models\InsightCard::count() === 0) {
+        $defaults = [
+            ['title' => 'Discover Wealth Mansion', 'description' => 'Property management is the professional administration of residential properties on behalf of owners.', 'image' => 'home/latest_activities/3img.png', 'link' => '/insights/view-full-insight', 'link_text' => 'View Full Insights', 'sort_order' => 1, 'status' => 'published'],
+            ['title' => 'Cambodia Real Estate Market 2025', 'description' => 'An in-depth look at the latest trends, investment opportunities, and growth sectors in Cambodia\'s real estate industry.', 'image' => 'home/latest_activities/3img.png', 'link' => '/insights/view-full-insight', 'link_text' => 'View Full Insights', 'sort_order' => 2, 'status' => 'published'],
+            ['title' => 'Maximizing Your Rental Yield', 'description' => 'Expert strategies to help property owners improve occupancy rates and maximise their rental income.', 'image' => 'home/latest_activities/3img.png', 'link' => '/insights/view-full-insight', 'link_text' => 'View Full Insights', 'sort_order' => 3, 'status' => 'published'],
+        ];
+        foreach ($defaults as $d) \App\Models\InsightCard::create($d);
+    }
+
+    $insightCards = \App\Models\InsightCard::where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+
+    return view('pages.insights', compact('heroSection', 'insightCards'));
 });
+
 
 Route::get('/insights/view-full-insight', function () {
     return view('pages.insights_detail.view_full_insight');
@@ -707,6 +737,13 @@ Route::post('/api/latest-activities', [\App\Http\Controllers\LatestActivityContr
 Route::post('/api/latest-activities/{latestActivity}', [\App\Http\Controllers\LatestActivityController::class, 'update']);
 Route::delete('/api/latest-activities/{latestActivity}', [\App\Http\Controllers\LatestActivityController::class, 'destroy']);
 
+// Insight Cards (Insights & News detail cards)
+Route::get('/api/insight-cards', [\App\Http\Controllers\InsightCardController::class, 'index']);
+Route::post('/api/insight-cards', [\App\Http\Controllers\InsightCardController::class, 'store']);
+Route::post('/api/insight-cards/{id}', [\App\Http\Controllers\InsightCardController::class, 'update']);
+Route::delete('/api/insight-cards/{id}', [\App\Http\Controllers\InsightCardController::class, 'destroy']);
+
+
 // Project Galleries (e.g. Discover Wealth Mansion)
 Route::get('/api/project-galleries/{page?}', [\App\Http\Controllers\ProjectGalleryController::class, 'index']);
 Route::post('/api/project-galleries/{page?}', [\App\Http\Controllers\ProjectGalleryController::class, 'store']);
@@ -779,6 +816,14 @@ Route::get('/dashboard/pages/partners', function () {
         'pageSlug' => 'partners',
         'pageTitle' => 'Partners',
         'frontendUrl' => '/partners'
+    ]);
+});
+
+Route::get('/dashboard/pages/insights', function () {
+    return view('dashboard.pages.insights', [
+        'pageSlug'   => 'insights',
+        'pageTitle'  => 'Insights & News',
+        'frontendUrl' => '/insights'
     ]);
 });
 
