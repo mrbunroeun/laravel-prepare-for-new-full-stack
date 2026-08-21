@@ -225,7 +225,7 @@
                         <span>Available Rental Rooms (Units)</span>
                         <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#2A5A8A]/10 text-[#2A5A8A] font-semibold">Live Database CRUD</span>
                     </h2>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Manage Studio, 1-Bedroom, 2-Bedroom Balcony, and 3-Bedroom Suite cards, photos (up to 5 each), and pricing tiers.</p>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Manage Studio, 1-Bedroom, 2-Bedroom Balcony, and 3-Bedroom Suite cards, photos, and pricing tiers.</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <button type="button" onclick="openCreateRoomModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
@@ -669,14 +669,11 @@
         if (empty) empty.classList.add('hidden');
         if (grid) {
             grid.innerHTML = roomsData.map((room) => {
-                const images = (Array.isArray(room.detail_images) && room.detail_images.length) ? room.detail_images : [room.image || 'services/propertis_leasing/all part.png'];
+                const img = room.image || (Array.isArray(room.detail_images) && room.detail_images.length ? room.detail_images[0] : 'services/propertis_leasing/all part.png');
                 return `
                     <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs flex flex-col justify-between group hover:shadow-md transition-all">
                         <div class="relative w-full aspect-[16/10] bg-slate-900 overflow-hidden">
-                            <img src="${formatImageUrl(images[0])}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div class="absolute bottom-2 left-2 flex items-center gap-1.5 bg-black/70 px-2 py-1 rounded">
-                                <span class="text-[10px] text-[#F4DEAC] font-bold">${images.length} Photos</span>
-                            </div>
+                            <img src="${formatImageUrl(img)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                         </div>
 
                         <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
@@ -688,7 +685,7 @@
 
                             <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
                                 <button type="button" onclick="openEditRoomModal(${room.id})" class="px-3 py-1.5 bg-[#2A5A8A] hover:bg-[#163049] text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer">
-                                    Edit Details &amp; Photos
+                                    Edit Details &amp; Photo
                                 </button>
                                 <button type="button" onclick="deleteRoomItem(${room.id})" class="text-xs text-rose-500 hover:text-rose-700 font-semibold cursor-pointer">
                                     Delete
@@ -705,20 +702,40 @@
         const previewGrid = document.getElementById('rooms-live-preview-grid');
         if (!previewGrid) return;
         previewGrid.innerHTML = roomsData.map((room) => {
-            const images = (Array.isArray(room.detail_images) && room.detail_images.length) ? room.detail_images : [room.image || 'services/propertis_leasing/all part.png'];
+            const img = room.image || (Array.isArray(room.detail_images) && room.detail_images.length ? room.detail_images[0] : 'services/propertis_leasing/all part.png');
+            const parsed = parseDescriptionAndSuitable(room.description);
+            const pricing = parseRoomPricing(room.status);
             return `
-                <div class="bg-white rounded-lg overflow-hidden text-slate-900 shadow-sm flex flex-col">
-                    <div class="h-36 w-full bg-slate-100 overflow-hidden">
-                        <img src="${formatImageUrl(images[0])}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-4 flex flex-col justify-between flex-1">
-                        <div>
-                            <h3 class="text-[#2A5A8A] font-bold text-sm">${escapeHtml(room.title)}</h3>
-                            <p class="text-xs text-slate-600 mt-1 line-clamp-2">${escapeHtml(room.description || '')}</p>
-                            <p class="text-xs text-[#2A5A8A] font-bold mt-2">${escapeHtml(room.status || '')}</p>
+                <div class="bg-white rounded-xl overflow-hidden text-slate-900 shadow-md flex flex-col justify-between border border-slate-100">
+                    <div>
+                        <div class="h-44 w-full bg-slate-100 overflow-hidden">
+                            <img src="${formatImageUrl(img)}" class="w-full h-full object-cover">
                         </div>
-                        <a href="/${room.link ? room.link.replace(/^\//, '') : '#'}" target="_blank" class="text-xs font-bold text-[#2A5A8A] mt-3 inline-flex items-center gap-1 hover:underline">
-                            <span>View Details</span> &rarr;
+                        <div class="p-5 space-y-3">
+                            <div>
+                                <h3 class="text-[#2A5A8A] font-bold text-base">${escapeHtml(room.title)}</h3>
+                                <p class="text-xs text-slate-600 mt-1 leading-relaxed">${escapeHtml(parsed.desc || room.subtitle || '')}</p>
+                            </div>
+
+                            ${parsed.suitable && parsed.suitable.length ? `
+                            <div>
+                                <p class="text-xs font-bold text-slate-800 mb-1">Ideal for:</p>
+                                <ul class="text-xs text-slate-600 space-y-0.5 list-disc pl-4">
+                                    ${parsed.suitable.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
+                                </ul>
+                            </div>
+                            ` : ''}
+
+                            <div class="pt-2 border-t border-slate-100">
+                                <span class="text-xs font-bold text-[#2A5A8A]">${escapeHtml(pricing.dailyPrice)}</span>
+                                <span class="text-[11px] text-slate-400 block">${escapeHtml(pricing.weeklyPrice)} &bull; ${escapeHtml(pricing.monthlyPrice)}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-5 pt-0">
+                        <a href="/${room.link ? room.link.replace(/^\//, '') : '#'}" target="_blank" class="text-xs font-bold text-[#2A5A8A] inline-flex items-center gap-1 hover:underline">
+                            <span>View Photos</span> &rarr;
                         </a>
                     </div>
                 </div>

@@ -126,27 +126,18 @@ class ServiceFeaturedPropertyController extends Controller
         if ($request->hasFile('image_file')) {
             $path = $request->file('image_file')->store('services/properties', 'public');
             $validated['image'] = 'storage/' . $path;
+            $validated['detail_images'] = ['storage/' . $path];
         }
 
         unset($validated['image_file']);
 
         // Handle detail images (max 5)
-        $detailImages = $property->detail_images ?? [];
-        if ($request->has('detail_images')) {
+        if ($request->has('detail_images') && empty($validated['detail_images'])) {
             $raw = $request->input('detail_images');
             $detailImages = is_string($raw) ? (json_decode($raw, true) ?? []) : (array) $raw;
-        }
-
-        if ($request->hasFile('detail_image_files')) {
-            foreach ($request->file('detail_image_files') as $file) {
-                if (count($detailImages) >= 5) break;
-                $path = $file->store('services/properties', 'public');
-                $detailImages[] = 'storage/' . $path;
+            if (!empty($detailImages)) {
+                $validated['detail_images'] = array_slice($detailImages, 0, 5);
             }
-        }
-
-        if (!empty($detailImages)) {
-            $validated['detail_images'] = array_slice($detailImages, 0, 5);
         }
 
         $property->update($validated);

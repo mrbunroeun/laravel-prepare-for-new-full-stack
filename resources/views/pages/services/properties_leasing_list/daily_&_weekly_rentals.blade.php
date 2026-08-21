@@ -88,16 +88,18 @@
                         continue;
                     }
                     if ($foundIdeal && $trimmed) {
-                        $idealFor[] = preg_replace('/^[-•*]\s*/', '', $trimmed);
+                        // Strip any bullets, hyphens, and corrupted unicode replacement marks
+                        $cleaned = preg_replace('/^[\s\x{FFFD}\x{0080}-\x{00FF}•\-\*\?]+/u', '', $trimmed);
+                        $cleaned = trim($cleaned);
+                        if ($cleaned !== '') {
+                            $idealFor[] = $cleaned;
+                        }
                     } elseif (!$foundIdeal && $trimmed) {
                         $descLines[] = $trimmed;
                     }
                 }
 
-                $imgSrc = $item->image;
-                if (!empty($item->detail_images) && is_array($item->detail_images) && count($item->detail_images) > 0) {
-                    $imgSrc = $item->detail_images[0];
-                }
+                $imgSrc = $item->image ?: ((!empty($item->detail_images) && is_array($item->detail_images) && count($item->detail_images) > 0) ? $item->detail_images[0] : null);
                 if ($imgSrc && !str_starts_with($imgSrc, 'http://') && !str_starts_with($imgSrc, 'https://')) {
                     $imgSrc = str_starts_with($imgSrc, 'storage/') ? asset($imgSrc) : asset(ltrim($imgSrc, '/'));
                 }
