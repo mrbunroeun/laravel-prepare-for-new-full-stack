@@ -108,125 +108,158 @@
                 'units' => 'XX Units Available',
                 'link' => url('/contact-us'),
             ],
+            [
+                'image' => $allPartImg,
+                'images' => $allPartFirst,
+                'title' => '3-Bedroom Suite',
+                'subtitle' => 'Spacious Luxury Living',
+                'description' =>
+                    'The 3-bedroom residence provides generous living space designed for large families, executive relocations, and luxury comfort.',
+                'suitableFor' => [
+                    'Large families',
+                    'Executive relocations',
+                    'Young professionals',
+                    'Rental investment',
+                ],
+                'units' => 'XX Units Available',
+                'link' => url('/contact-us'),
+            ],
         ];
     }
 @endphp
 
 {{--
     LAYOUT:
-      Section is full-bleed (w-full, no outer max-width/mx-auto) so the
-      white background runs edge-to-edge across the viewport. The card
-      grid itself is capped at a max-width and pushed to the right via
-      ml-auto, matching the reference: empty space on the left, cards
-      hugging the right side.
-
-    CARD DESIGN (unit-type cards):
-      Light-gray card body, top image with a centered dot-indicator strip
-      (same ● ○ pattern) tracking which of the detail images is showing,
-      title + prev/next mini carousel controls on one row, subtitle, full
-      description, a "Suitable for:" bullet list, a bold "XX Units Available"
-      line, and a "Contact Us" link.
+      Single row horizontal slider with navigation arrow buttons on the left
+      and smooth horizontal scrolling track on the right, matching the property leasing slider.
 --}}
-<section class="relative w-full bg-white">
-    <div class="w-full px-4 sm:px-8 lg:pl-0 lg:pr-14 py-10 sm:py-14">
-        <div class="flex flex-wrap justify-end gap-6 lg:gap-8 ml-auto w-full lg:w-[80%]">
+<section class="relative w-full bg-white overflow-hidden pt-4 pb-12 sm:pt-6 sm:pb-14">
+    <div class="w-full max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div class="flex flex-col lg:flex-row items-start gap-4 lg:gap-8 xl:gap-10">
 
-            @foreach ($properties as $index => $property)
-                @php
-                    $dir = ($index === 0) ? 'left' : (($index === 1) ? 'fade-up' : 'right');
-                @endphp
-                <article
-                    data-scroll-reveal="{{ $dir }}"
-                    data-scroll-delay="{{ $index * 100 }}"
-                    class="cwd-featured-card group flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]
-                        bg-[#F3F3F1] rounded-none overflow-hidden cursor-pointer
-                        transition-all duration-300 ease-out
-                        hover:-translate-y-1
-                        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2"
-                    data-images="{{ json_encode($property['images']) }}" data-link="{{ $property['link'] }}"
-                    tabindex="0" role="link" aria-label="View details for {{ $property['title'] }}">
+            {{-- Left Column: Navigation Arrow Controls (Top-Left on Desktop, Top-Right on Small View) --}}
+            <div class="flex items-center justify-end lg:justify-start w-full lg:w-auto shrink-0 pt-0 lg:pt-3" data-scroll-reveal="left">
+                <div class="flex items-center gap-3">
+                    <button id="wealth-units-prev" type="button" aria-label="Previous unit type"
+                        class="w-11 h-11 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] bg-white flex items-center justify-center cursor-pointer
+                            transition-all duration-300 hover:bg-[#2A5A8A] hover:text-white hover:scale-105
+                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2
+                            disabled:cursor-not-allowed shadow-xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button id="wealth-units-next" type="button" aria-label="Next unit type"
+                        class="w-11 h-11 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] bg-white flex items-center justify-center cursor-pointer
+                            transition-all duration-300 hover:bg-[#2A5A8A] hover:text-white hover:scale-105
+                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2
+                            disabled:cursor-not-allowed shadow-xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
 
-                    <div class="relative w-full aspect-[16/10] overflow-hidden shrink-0">
-                        <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
-                            class="cwd-featured-card-img w-full h-full object-cover transition-all duration-500 ease-out">
+            {{-- Right Column: Single Row Horizontal Track (Scrollable) --}}
+            <div class="relative min-w-0 flex-1 w-full -mr-4 sm:-mr-6 lg:-mr-8 xl:-mr-12 overflow-hidden" data-scroll-reveal="right">
+                <div id="wealth-units-track"
+                    class="wealth-units-fade-mask pointer-events-auto flex gap-6 overflow-x-auto scroll-smooth items-stretch pb-6
+                        snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pr-6 sm:pr-10 lg:pr-[120px]">
 
-                        {{-- Image position indicator --}}
-                        <div class="cwd-featured-card-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2"
-                            aria-hidden="true">
-                            @foreach ($property['images'] as $i => $img)
-                                <span class="cwd-featured-card-dot rounded-full transition-all duration-300 h-2 w-2"
-                                    style="background:{{ $i === 0 ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
-                            @endforeach
-                        </div>
-                    </div>
+                    @foreach ($properties as $index => $property)
+                        <article
+                            class="cwd-featured-card group shrink-0 snap-start flex flex-col
+                                w-[84vw] max-w-[320px] sm:w-[300px] lg:w-[320px] xl:w-[335px]
+                                bg-[#F3F3F1] rounded-none overflow-hidden cursor-pointer shadow-sm
+                                transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-md
+                                focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2"
+                            data-images="{{ json_encode($property['images']) }}" data-link="{{ $property['link'] }}"
+                            tabindex="0" role="link" aria-label="View details for {{ $property['title'] }}">
 
-                    <div class="p-5 sm:p-6 flex flex-col grow">
-                        <div class="flex items-start justify-between gap-3 mb-3">
-                            <h3 class="text-[#2A5A8A] text-[18px] sm:text-[19px] font-bold leading-snug">
-                                {{ $property['title'] }}
-                            </h3>
+                            <div class="relative w-full aspect-[16/10] overflow-hidden shrink-0">
+                                <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
+                                    class="cwd-featured-card-img w-full h-full object-cover transition-all duration-500 ease-out">
 
-                            {{-- Prev/next mini-carousel controls: live in the content
-                                 row next to the title, not over the photo. --}}
-                            <div class="flex items-center gap-2 shrink-0 pt-0.5">
-                                <button type="button" aria-label="Previous image"
-                                    class="cwd-featured-card-prev w-8 h-8 sm:w-[34px] sm:h-[34px] rounded-full bg-white border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-[#2A5A8A] hover:text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5"
-                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                        stroke-width="2.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15 19l-7-7 7-7" />
-                                    </svg>
-                                </button>
-                                <button type="button" aria-label="Next image"
-                                    class="cwd-featured-card-next w-8 h-8 sm:w-[34px] sm:h-[34px] rounded-full bg-white border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-[#2A5A8A] hover:text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5"
-                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                        stroke-width="2.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </button>
+                                {{-- Image position indicator --}}
+                                <div class="cwd-featured-card-dots absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2"
+                                    aria-hidden="true">
+                                    @foreach ($property['images'] as $i => $img)
+                                        <span class="cwd-featured-card-dot rounded-full transition-all duration-300 h-2 w-2"
+                                            style="background:{{ $i === 0 ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
 
-                        <p class="text-black text-[14.5px] sm:text-[15px] font-bold leading-snug mb-2">
-                            {{ $property['subtitle'] }}
-                        </p>
+                            <div class="p-5 sm:p-6 flex flex-col grow">
+                                <div class="flex items-start justify-between gap-3 mb-3">
+                                    <h3 class="text-[#2A5A8A] text-[18px] sm:text-[19px] font-bold leading-snug">
+                                        {{ $property['title'] }}
+                                    </h3>
 
-                        <p class="text-black/70 text-[13.5px] sm:text-[14px] leading-relaxed mb-4">
-                            {{ $property['description'] }}
-                        </p>
+                                    {{-- Prev/next mini-carousel controls: live in the content row next to the title --}}
+                                    <div class="flex items-center gap-2 shrink-0 pt-0.5">
+                                        <button type="button" aria-label="Previous image"
+                                            class="cwd-featured-card-prev w-8 h-8 sm:w-[32px] sm:h-[32px] rounded-full bg-white border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-[#2A5A8A] hover:text-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                stroke-width="2.5">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" aria-label="Next image"
+                                            class="cwd-featured-card-next w-8 h-8 sm:w-[32px] sm:h-[32px] rounded-full bg-white border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-[#2A5A8A] hover:text-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                stroke-width="2.5">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
 
-                        <p class="text-black text-[14px] font-bold mb-2">Suitable for:</p>
-                        <ul class="mb-4 space-y-1.5">
-                            @foreach ($property['suitableFor'] as $item)
-                                <li class="flex items-start gap-2 text-black/80 text-[13.5px] sm:text-[14px] leading-relaxed">
-                                    <span class="mt-[8px] w-1.5 h-1.5 rounded-full bg-black/60 shrink-0"></span>
-                                    <span>{{ $item }}</span>
-                                </li>
-                            @endforeach
-                        </ul>
+                                <p class="text-black text-[14px] sm:text-[14.5px] font-bold leading-snug mb-2">
+                                    {{ $property['subtitle'] }}
+                                </p>
 
-                        <p class="text-[#2A5A8A] text-[14px] font-bold mb-4">
-                            {{ $property['units'] }}
-                        </p>
+                                <p class="text-black/70 text-[13px] sm:text-[13.5px] leading-relaxed mb-4">
+                                    {{ $property['description'] }}
+                                </p>
 
-                        {{-- mt-auto keeps the CTA pinned to the bottom so cards
-                             with shorter/longer content still align. --}}
-                        <a href="{{ url('/contact-us') }}"
-                            class="cwd-featured-card-link relative z-10 mt-auto text-[#2A5A8A] text-[14px] font-semibold
-                                inline-flex items-center gap-1 w-max
-                                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2 rounded-sm">
-                            <span
-                                class="border-b border-transparent group-hover:border-[#2A5A8A] transition-colors duration-300">Contact
-                                Us</span>
-                            <span aria-hidden="true"
-                                class="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-                        </a>
-                    </div>
-                </article>
-            @endforeach
+                                <p class="text-black text-[13.5px] font-bold mb-2">Suitable for:</p>
+                                <ul class="mb-4 space-y-1.5">
+                                    @foreach ($property['suitableFor'] as $item)
+                                        <li class="flex items-start gap-2 text-black/80 text-[13px] sm:text-[13.5px] leading-relaxed">
+                                            <span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-black/60 shrink-0"></span>
+                                            <span>{{ $item }}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                                <p class="text-[#2A5A8A] text-[14px] font-bold mb-4">
+                                    {{ $property['units'] }}
+                                </p>
+
+                                <a href="{{ url('/contact-us') }}"
+                                    class="cwd-featured-card-link relative z-10 mt-auto text-[#2A5A8A] text-[13.5px] font-semibold
+                                        inline-flex items-center gap-1 w-max
+                                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2 rounded-sm">
+                                    <span
+                                        class="border-b border-transparent group-hover:border-[#2A5A8A] transition-colors duration-300">Contact
+                                        Us</span>
+                                    <span aria-hidden="true"
+                                        class="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                                </a>
+                            </div>
+                        </article>
+                    @endforeach
+
+                </div>
+            </div>
 
         </div>
     </div>
@@ -244,10 +277,100 @@
         transform: scale(1.1);
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
     }
+
+    @media (min-width: 1024px) {
+        .wealth-units-fade-mask {
+            -webkit-mask-image: linear-gradient(to right,
+                    black 0%,
+                    black calc(100% - 100px),
+                    transparent 100%);
+            mask-image: linear-gradient(to right,
+                    black 0%,
+                    black calc(100% - 100px),
+                    transparent 100%);
+            transition: -webkit-mask-image 0.2s ease, mask-image 0.2s ease;
+        }
+    }
 </style>
 
 <script>
     (function() {
+        // ---- Horizontal Main Slider for Wealth Units Track ----
+        const track = document.getElementById("wealth-units-track");
+        const prevBtn = document.getElementById("wealth-units-prev");
+        const nextBtn = document.getElementById("wealth-units-next");
+
+        if (track) {
+            const cards = Array.from(track.querySelectorAll(".cwd-featured-card"));
+
+            function getCardOffset(idx) {
+                if (!cards[idx]) return 0;
+                return cards[idx].offsetLeft - track.offsetLeft;
+            }
+
+            function scrollToCard(idx) {
+                if (idx < 0) idx = 0;
+                if (idx >= cards.length) idx = cards.length - 1;
+                track.scrollTo({
+                    left: getCardOffset(idx),
+                    behavior: "smooth"
+                });
+            }
+
+            function setButtons(atStart, atEnd) {
+                if (prevBtn) {
+                    prevBtn.disabled = atStart;
+                    prevBtn.style.opacity = atStart ? "0.35" : "1";
+                    prevBtn.style.pointerEvents = atStart ? "none" : "auto";
+                }
+                if (nextBtn) {
+                    nextBtn.disabled = atEnd;
+                    nextBtn.style.opacity = atEnd ? "0.35" : "1";
+                    nextBtn.style.pointerEvents = atEnd ? "none" : "auto";
+                }
+            }
+
+            function updateSliderNavState() {
+                const sl = track.scrollLeft;
+                const max = track.scrollWidth - track.clientWidth - 10;
+                setButtons(sl <= 10, sl >= max);
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener("click", () => {
+                    const currentScroll = track.scrollLeft;
+                    let targetIdx = 0;
+                    for (let i = cards.length - 1; i >= 0; i--) {
+                        if (getCardOffset(i) < currentScroll - 20) {
+                            targetIdx = i;
+                            break;
+                        }
+                    }
+                    scrollToCard(targetIdx);
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener("click", () => {
+                    const currentScroll = track.scrollLeft;
+                    let targetIdx = cards.length - 1;
+                    for (let i = 0; i < cards.length; i++) {
+                        if (getCardOffset(i) > currentScroll + 20) {
+                            targetIdx = i;
+                            break;
+                        }
+                    }
+                    scrollToCard(targetIdx);
+                });
+            }
+
+            track.addEventListener("scroll", () => {
+                updateSliderNavState();
+            }, { passive: true });
+
+            updateSliderNavState();
+        }
+
         // ---- Per-card mini image carousel (image + dots) ----
         function initCardCarousel(card) {
             const imgEl = card.querySelector(".cwd-featured-card-img");
@@ -284,7 +407,7 @@
 
             prevBtn.addEventListener("click", (e) => {
                 e.preventDefault();
-                e.stopPropagation(); // don't trigger the card's own navigation
+                e.stopPropagation();
                 showImage(index - 1);
             });
 
@@ -296,9 +419,6 @@
         }
 
         // ---- Whole-card navigation ----
-        // Clicking anywhere on the card (including the image) goes to the
-        // property page. Only the mini-carousel buttons opt out via
-        // stopPropagation above; the "Contact Us" link navigates itself.
         function initCardNavigation(card) {
             const link = card.dataset.link;
             if (!link) return;
