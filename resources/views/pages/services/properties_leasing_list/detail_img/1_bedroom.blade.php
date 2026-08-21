@@ -40,13 +40,14 @@
                             </div>
 
                             @php
-                                $heroButtons = (!empty($heroData?->buttons) && is_array($heroData->buttons) && count($heroData->buttons) > 0)
+                                $heroButtons = (isset($heroData?->buttons) && is_array($heroData->buttons))
                                     ? $heroData->buttons
                                     : [
                                         ['text' => 'Browse Properties', 'url' => '/properties'],
                                         ['text' => 'Contact Us', 'url' => '/contact-us']
                                     ];
                             @endphp
+                            @if(count($heroButtons) > 0)
                             <div class="flex flex-wrap items-center gap-3 pt-4 px-7 sm:px-10 pointer-events-auto">
                                 @foreach ($heroButtons as $btn)
                                     <a href="{{ url($btn['url'] ?? '#') }}" class="border-[2px] border-[#F4DEAC] text-white text-[13px] font-medium px-4 py-2 hover:bg-white hover:text-black transition-colors">
@@ -54,6 +55,7 @@
                                     </a>
                                 @endforeach
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>

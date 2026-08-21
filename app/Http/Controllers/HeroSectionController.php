@@ -71,7 +71,13 @@ class HeroSectionController extends Controller
             'buttons' => 'nullable|array|max:3',
             'buttons.*.text' => 'required|string|max:255',
             'buttons.*.url' => 'required|string|max:255',
+            'buttons_empty' => 'nullable|string',
         ]);
+
+        if ($request->has('buttons_empty') || !$request->has('buttons')) {
+            $validated['buttons'] = [];
+        }
+        unset($validated['buttons_empty']);
 
         if ($request->hasFile('image_file')) {
             $file = $request->file('image_file');

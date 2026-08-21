@@ -115,36 +115,11 @@
                     </div>
                 </div>
 
-                {{-- Bullet Highlights List --}}
-                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">5. Bullet Highlights List</h3>
-                            <p class="text-xs text-slate-500">Add, edit, or remove highlights (e.g. • Flexible Daily Rates • Prime Location)</p>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <button type="button" onclick="addHeroBulletPoint()" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#2A5A8A] text-white text-xs font-semibold hover:bg-[#163049] transition-colors cursor-pointer">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                </svg>
-                                <span>Add Bullet Item</span>
-                            </button>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" id="hero-bullets-toggle" onchange="updateHeroPreview()" class="sr-only peer">
-                                <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#2A5A8A]"></div>
-                                <span class="ml-2 text-xs font-semibold text-slate-700">Show Bullets</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div id="dynamic-bullets-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
-                </div>
-
-                {{-- Action Buttons --}}
+                {{-- Action Buttons (Maximum 3 Buttons) --}}
                 <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">6. Action Buttons (Maximum 3 Buttons)</h3>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">5. Action Buttons (Maximum 3 Buttons)</h3>
                             <p class="text-xs text-slate-500">Pick destination routes directly from the route dropdown menu.</p>
                         </div>
                         <button type="button" onclick="addHeroButton()" id="add-btn-trigger" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2A5A8A] text-white text-xs font-semibold hover:bg-[#163049] transition-colors cursor-pointer">
@@ -198,8 +173,6 @@
                         <div id="preview-hero-subtext" class="text-white/90 text-[14px] sm:text-[15px] font-normal leading-relaxed mb-4">
                             Flexible Condominium Rentals at<br>Wealth Mansion
                         </div>
-
-                        <div id="preview-hero-bullets" class="text-[#EBD4A4] text-[13px] sm:text-[14px] mb-4 flex flex-wrap items-center gap-x-3 gap-y-1"></div>
 
                         <div id="preview-hero-buttons" class="flex flex-wrap items-center gap-3 pt-2">
                             <a href="/properties" class="border-[2px] border-[#F4DEAC] text-white text-[13px] font-medium px-4 py-2.5 hover:bg-white hover:text-black transition-colors">
@@ -406,35 +379,6 @@
         updateHeroPreview();
     }
 
-    function renderHeroBulletsInputs() {
-        const container = document.getElementById('dynamic-bullets-container');
-        if (!container) return;
-        container.innerHTML = heroBulletsData.map((bullet, idx) => `
-            <div class="flex items-center gap-2 bg-white p-2.5 rounded-lg border border-slate-300">
-                <span class="text-xs font-bold text-[#2A5A8A]">•</span>
-                <input type="text" value="${escapeHtml(bullet)}" oninput="updateHeroBullet(${idx}, this.value)" class="flex-1 text-xs text-slate-800 bg-transparent focus:outline-none" placeholder="Bullet text">
-                <button type="button" onclick="removeHeroBullet(${idx})" class="text-slate-400 hover:text-rose-600 p-1">✕</button>
-            </div>
-        `).join('');
-    }
-
-    function addHeroBulletPoint() {
-        heroBulletsData.push('New highlight point');
-        renderHeroBulletsInputs();
-        updateHeroPreview();
-    }
-
-    function removeHeroBullet(index) {
-        heroBulletsData.splice(index, 1);
-        renderHeroBulletsInputs();
-        updateHeroPreview();
-    }
-
-    function updateHeroBullet(index, val) {
-        heroBulletsData[index] = val;
-        updateHeroPreview();
-    }
-
     const availableAppRoutes = [
         { label: 'Browse Properties (/properties)', url: '/properties' },
         { label: 'Contact Us (/contact-us)', url: '/contact-us' },
@@ -456,6 +400,16 @@
         const trigger = document.getElementById('add-btn-trigger');
         if (!container) return;
         if (trigger) trigger.style.display = heroButtonsData.length >= 3 ? 'none' : 'inline-flex';
+
+        if (!heroButtonsData || heroButtonsData.length === 0) {
+            container.innerHTML = `
+                <div class="p-4 bg-slate-100 rounded-lg border border-dashed border-slate-300 text-center text-slate-500 text-xs">
+                    No buttons added. Click "+ Add Button" above if you want to add action buttons to the hero banner.
+                </div>
+            `;
+            updateHeroPreview();
+            return;
+        }
 
         container.innerHTML = heroButtonsData.map((btn, index) => {
             const isCustom = !availableAppRoutes.some(r => r.url === btn.url);
@@ -500,15 +454,11 @@
             if (typeof showToast === 'function') showToast('Maximum 3 buttons allowed');
             return;
         }
-        heroButtonsData.push({ text: 'Contact Us', url: '/contact-us' });
+        heroButtonsData.push({ text: 'Browse Properties', url: '/properties' });
         renderHeroButtonsInputs();
     }
 
     function removeHeroButton(index) {
-        if (heroButtonsData.length <= 1) {
-            if (typeof showToast === 'function') showToast('Hero section should have at least 1 button');
-            return;
-        }
         heroButtonsData.splice(index, 1);
         renderHeroButtonsInputs();
     }
@@ -539,13 +489,6 @@
         const subtext = document.getElementById('hero-subtext-input')?.value || '';
         const previewSubtext = document.getElementById('preview-hero-subtext');
         if (previewSubtext) previewSubtext.innerText = subtext;
-
-        const showBullets = document.getElementById('hero-bullets-toggle')?.checked ?? false;
-        const previewBullets = document.getElementById('preview-hero-bullets');
-        if (previewBullets) {
-            previewBullets.style.display = (showBullets && heroBulletsData.length > 0) ? 'flex' : 'none';
-            previewBullets.innerHTML = heroBulletsData.map(b => `<span>• ${escapeHtml(b)}</span>`).join('');
-        }
 
         const previewButtons = document.getElementById('preview-hero-buttons');
         if (previewButtons) {
@@ -593,7 +536,6 @@
                 }
 
                 if (data.headline) document.getElementById('hero-headline-input').value = data.headline;
-                if (typeof data.show_bullets !== 'undefined') document.getElementById('hero-bullets-toggle').checked = !!data.show_bullets;
                 if (Array.isArray(data.bullets) && data.bullets.length > 0) {
                     heroBulletsData = data.bullets;
                     const subtextInput = document.getElementById('hero-subtext-input');
@@ -601,9 +543,8 @@
                         subtextInput.value = data.bullets[0];
                     }
                 }
-                if (Array.isArray(data.buttons) && data.buttons.length > 0) heroButtonsData = data.buttons;
+                if (Array.isArray(data.buttons)) heroButtonsData = data.buttons;
                 
-                renderHeroBulletsInputs();
                 renderHeroButtonsInputs();
                 updateHeroPreview();
             }
@@ -625,27 +566,26 @@
             const rawTagline = editor ? editor.innerHTML.trim() : '';
             const subtext = document.getElementById('hero-subtext-input')?.value || '';
 
-            let updatedBullets = [...heroBulletsData];
-            if (subtext) {
-                updatedBullets[0] = subtext;
-            }
-
             const formData = new FormData();
             formData.append('page', pageSlug);
             formData.append('tagline_html', rawTagline);
             formData.append('tagline_box1', editor ? editor.innerText.trim() : '');
             formData.append('show_tagline', '1');
             formData.append('headline', document.getElementById('hero-headline-input').value);
-            formData.append('show_bullets', document.getElementById('hero-bullets-toggle').checked ? '1' : '0');
+            formData.append('show_bullets', '0');
 
-            updatedBullets.forEach((bullet, idx) => {
-                formData.append(`bullets[${idx}]`, bullet);
-            });
+            if (subtext) {
+                formData.append('bullets[0]', subtext);
+            }
 
-            heroButtonsData.forEach((btn, idx) => {
-                formData.append(`buttons[${idx}][text]`, btn.text || btn.label || '');
-                formData.append(`buttons[${idx}][url]`, btn.url || '');
-            });
+            if (heroButtonsData.length === 0) {
+                formData.append('buttons_empty', '1');
+            } else {
+                heroButtonsData.forEach((btn, idx) => {
+                    formData.append(`buttons[${idx}][text]`, btn.text || btn.label || '');
+                    formData.append(`buttons[${idx}][url]`, btn.url || '');
+                });
+            }
 
             const fileInput = document.getElementById('hero-file-input');
             if (fileInput && fileInput.files[0]) {
