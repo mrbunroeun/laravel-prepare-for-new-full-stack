@@ -107,24 +107,44 @@
                     $targetLink = url(ltrim($targetLink, '/'));
                 }
 
+                $pricing = [
+                    'daily' => [
+                        'price' => 'From $35/day',
+                        'desc' => 'Suitable for short-term stays, business trips, and visitors to Phnom Penh.',
+                    ],
+                    'weekly' => [
+                        'price' => 'From $210/week',
+                        'desc' => 'Flexible weekly rates including housekeeping and high-speed internet access.',
+                    ],
+                    'monthly' => [
+                        'price' => 'From $650/month',
+                        'desc' => 'Best value for professionals and expatriates with flexible lease terms.',
+                    ],
+                ];
+
+                if (!empty($item->status)) {
+                    try {
+                        if (str_starts_with(trim($item->status), '{')) {
+                            $parsedStatus = json_decode($item->status, true);
+                            if (is_array($parsedStatus)) {
+                                if (isset($parsedStatus['daily'])) $pricing['daily'] = $parsedStatus['daily'];
+                                if (isset($parsedStatus['weekly'])) $pricing['weekly'] = $parsedStatus['weekly'];
+                                if (isset($parsedStatus['monthly'])) $pricing['monthly'] = $parsedStatus['monthly'];
+                            }
+                        } else {
+                            $parts = explode('|', $item->status);
+                            if (isset($parts[0])) $pricing['daily']['price'] = trim($parts[0]);
+                            if (isset($parts[1])) $pricing['weekly']['price'] = trim($parts[1]);
+                            if (isset($parts[2])) $pricing['monthly']['price'] = trim($parts[2]);
+                        }
+                    } catch (\Exception $e) {}
+                }
+
                 return [
                     'title' => $item->title,
                     'description' => implode(' ', $descLines) ?: ($item->subtitle ?? ''),
                     'ideal_for' => !empty($idealFor) ? $idealFor : ['Business travelers', 'Couples', 'Solo travelers', 'Short-term residents'],
-                    'pricing' => [
-                        'daily' => [
-                            'price' => 'From $35/day',
-                            'desc' => 'Suitable for short-term stays, business trips, and visitors to Phnom Penh.',
-                        ],
-                        'weekly' => [
-                            'price' => 'From $210/week',
-                            'desc' => 'Flexible weekly rates including housekeeping and high-speed internet access.',
-                        ],
-                        'monthly' => [
-                            'price' => 'From $650/month',
-                            'desc' => 'Best value for professionals and expatriates with flexible lease terms.',
-                        ],
-                    ],
+                    'pricing' => $pricing,
                     'link' => $targetLink,
                     'image' => $imgSrc ?: asset('services/propertis_leasing/all part.png'),
                 ];

@@ -51,7 +51,10 @@
 
                 {{-- Services & Properties Dropdown --}}
                 @php
-                    $isServicesActive = request()->is('dashboard/pages/services*') || request()->is('dashboard/pages/property-*') || request()->is('dashboard/pages/hospitality-*');
+                    $isServicesActive = request()->is('dashboard/pages/services/property-management*') 
+                        || request()->is('dashboard/pages/services/property-sales*') 
+                        || request()->is('dashboard/pages/services/property-leasing') 
+                        || request()->is('dashboard/pages/services/hospitality-services*');
                 @endphp
                 <div class="space-y-1">
                     <button type="button" onclick="toggleSidebarServicesDropdown()" 

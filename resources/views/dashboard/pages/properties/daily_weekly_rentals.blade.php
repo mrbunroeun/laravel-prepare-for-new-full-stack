@@ -370,19 +370,17 @@
         <form onsubmit="handleRoomFormSubmit(event)" id="room-form" class="p-6 space-y-5 overflow-y-auto grow">
             <input type="hidden" id="room-edit-id" value="">
 
-            {{-- Multi-Images Uploader (Up to 5) --}}
+            {{-- Single Room Photo Uploader --}}
             <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                <div class="flex items-center justify-between">
-                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Room Photos (Max 5 Images for Gallery)</label>
-                    <span id="room-img-count-badge" class="text-[11px] font-semibold text-slate-500">0 / 5</span>
-                </div>
-
-                <div id="room-images-preview-strip" class="grid grid-cols-5 gap-2.5"></div>
-
-                <div>
-                    <label class="block text-[11px] font-semibold text-slate-600 mb-1">Add Image File</label>
-                    <input type="file" id="room-multi-file-input" accept="image/*" onchange="addRoomFileToQueue(this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
-                    <p class="text-[10px] text-slate-400 mt-1">Upload up to 5 photos for this room type.</p>
+                <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Room Image</label>
+                <div class="flex items-center gap-4">
+                    <div class="w-28 h-20 rounded-lg bg-slate-100 border border-slate-200 overflow-hidden shrink-0 flex items-center justify-center">
+                        <img id="room-img-preview-single" src="{{ asset('services/propertis_leasing/all part.png') }}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <input type="file" id="room-single-file-input" accept="image/*" onchange="previewRoomSingleFile(this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                        <p class="text-[11px] text-slate-400 mt-1">Recommended: JPG, PNG, WebP up to 10MB.</p>
+                    </div>
                 </div>
             </div>
 
@@ -413,11 +411,51 @@
                 <div id="room-suitable-container" class="space-y-2"></div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Pricing / Availability Tag</label>
-                    <input type="text" id="room-status-input" value="From $35/day | $210/week | $650/month" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+            {{-- Dedicated Pricing Tabs CRUD (Daily, Weekly, Monthly) matching Frontend Accordion --}}
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Rental Pricing Tiers (Daily / Weekly / Monthly)</label>
+                    <span class="text-[10px] text-slate-500 font-semibold">Powers the frontend "See Price" accordion</span>
                 </div>
+
+                {{-- Daily Pricing --}}
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1">Daily Price Tag</label>
+                        <input type="text" id="room-price-daily" placeholder="From $35/day" value="From $35/day" class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-[11px] font-semibold text-slate-600 mb-1">Daily Description</label>
+                        <input type="text" id="room-desc-daily" placeholder="Suitable for short-term stays, business trips..." value="Suitable for short-term stays, business trips, and visitors to Phnom Penh." class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                    </div>
+                </div>
+
+                {{-- Weekly Pricing --}}
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1">Weekly Price Tag</label>
+                        <input type="text" id="room-price-weekly" placeholder="From $210/week" value="From $210/week" class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-[11px] font-semibold text-slate-600 mb-1">Weekly Description</label>
+                        <input type="text" id="room-desc-weekly" placeholder="Flexible weekly rates including housekeeping..." value="Flexible weekly rates including housekeeping and high-speed internet access." class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                    </div>
+                </div>
+
+                {{-- Monthly Pricing --}}
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-700 mb-1">Monthly Price Tag</label>
+                        <input type="text" id="room-price-monthly" placeholder="From $650/month" value="From $650/month" class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-[11px] font-semibold text-slate-600 mb-1">Monthly Description</label>
+                        <input type="text" id="room-desc-monthly" placeholder="Best value for professionals and expatriates..." value="Best value for professionals and expatriates with flexible lease terms." class="w-full px-3 py-1.5 bg-white border border-slate-300 rounded text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Link Destination</label>
                     <input type="text" id="room-link-input" value="services/property-leasing/daily-weekly-rentals/studio-room" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
@@ -645,7 +683,7 @@
                             <div>
                                 <h4 class="text-sm font-bold text-[#163049]">${escapeHtml(room.title)}</h4>
                                 <p class="text-xs font-semibold text-slate-600 mt-0.5 line-clamp-1">${escapeHtml(room.subtitle || '')}</p>
-                                <p class="text-xs text-[#2A5A8A] font-bold mt-2">${escapeHtml(room.status || '')}</p>
+                                <p class="text-xs text-[#2A5A8A] font-bold mt-2">${escapeHtml(parseRoomPricing(room.status).dailyPrice)}</p>
                             </div>
 
                             <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
@@ -742,23 +780,77 @@
         };
     }
 
+    function parseRoomPricing(rawStatus) {
+        const defaultPricing = {
+            dailyPrice: 'From $35/day',
+            dailyDesc: 'Suitable for short-term stays, business trips, and visitors to Phnom Penh.',
+            weeklyPrice: 'From $210/week',
+            weeklyDesc: 'Flexible weekly rates including housekeeping and high-speed internet access.',
+            monthlyPrice: 'From $650/month',
+            monthlyDesc: 'Best value for professionals and expatriates with flexible lease terms.'
+        };
+        if (!rawStatus) return defaultPricing;
+        try {
+            if (rawStatus.startsWith('{') && rawStatus.endsWith('}')) {
+                const parsed = JSON.parse(rawStatus);
+                return {
+                    dailyPrice: parsed.daily?.price || defaultPricing.dailyPrice,
+                    dailyDesc: parsed.daily?.desc || defaultPricing.dailyDesc,
+                    weeklyPrice: parsed.weekly?.price || defaultPricing.weeklyPrice,
+                    weeklyDesc: parsed.weekly?.desc || defaultPricing.weeklyDesc,
+                    monthlyPrice: parsed.monthly?.price || defaultPricing.monthlyPrice,
+                    monthlyDesc: parsed.monthly?.desc || defaultPricing.monthlyDesc
+                };
+            }
+        } catch (e) {}
+
+        // Fallback for string format e.g. "From $35/day | $210/week | $650/month"
+        const parts = rawStatus.split('|').map(s => s.trim());
+        if (parts[0]) defaultPricing.dailyPrice = parts[0];
+        if (parts[1]) defaultPricing.weeklyPrice = parts[1];
+        if (parts[2]) defaultPricing.monthlyPrice = parts[2];
+        return defaultPricing;
+    }
+
+    let currentRoomImageSrc = 'services/propertis_leasing/all part.png';
+    let currentRoomImageFile = null;
+
+    function previewRoomSingleFile(input) {
+        if (input.files && input.files[0]) {
+            currentRoomImageFile = input.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('room-img-preview-single').src = e.target.result;
+            };
+            reader.readAsDataURL(currentRoomImageFile);
+        }
+    }
+
     function openCreateRoomModal() {
         document.getElementById('room-modal-title').innerText = 'Add Rental Room Type';
         document.getElementById('room-edit-id').value = '';
         document.getElementById('room-title-input').value = '';
         document.getElementById('room-subtitle-input').value = '';
         document.getElementById('room-desc-input').value = 'A practical choice for individuals and short-term stays.';
-        document.getElementById('room-status-input').value = 'From $35/day | $210/week | $650/month';
+        
+        document.getElementById('room-price-daily').value = 'From $35/day';
+        document.getElementById('room-desc-daily').value = 'Suitable for short-term stays, business trips, and visitors to Phnom Penh.';
+        document.getElementById('room-price-weekly').value = 'From $210/week';
+        document.getElementById('room-desc-weekly').value = 'Flexible weekly rates including housekeeping and high-speed internet access.';
+        document.getElementById('room-price-monthly').value = 'From $650/month';
+        document.getElementById('room-desc-monthly').value = 'Best value for professionals and expatriates with flexible lease terms.';
+
         document.getElementById('room-link-input').value = 'services/property-leasing/daily-weekly-rentals/studio-room';
         document.getElementById('room-sort-input').value = (roomsData.length + 1);
         
         roomSuitableItemsData = ['Business travelers', 'Solo travelers', 'Couples', 'Short-term residents'];
         renderRoomSuitableItems();
 
-        roomModalImagesQueue = [
-            { type: 'url', src: 'services/propertis_leasing/all part.png' }
-        ];
-        renderRoomModalImages();
+        currentRoomImageSrc = 'services/propertis_leasing/all part.png';
+        currentRoomImageFile = null;
+        document.getElementById('room-img-preview-single').src = formatImageUrl(currentRoomImageSrc);
+        const fileInput = document.getElementById('room-single-file-input');
+        if (fileInput) fileInput.value = '';
 
         const modal = document.getElementById('room-modal');
         const card = document.getElementById('room-modal-card');
@@ -784,13 +876,22 @@
         roomSuitableItemsData = parsed.suitable;
         renderRoomSuitableItems();
 
-        document.getElementById('room-status-input').value = room.status || 'From $35/day | $210/week | $650/month';
+        const pricing = parseRoomPricing(room.status);
+        document.getElementById('room-price-daily').value = pricing.dailyPrice;
+        document.getElementById('room-desc-daily').value = pricing.dailyDesc;
+        document.getElementById('room-price-weekly').value = pricing.weeklyPrice;
+        document.getElementById('room-desc-weekly').value = pricing.weeklyDesc;
+        document.getElementById('room-price-monthly').value = pricing.monthlyPrice;
+        document.getElementById('room-desc-monthly').value = pricing.monthlyDesc;
+
         document.getElementById('room-link-input').value = room.link || 'services/property-leasing/daily-weekly-rentals/studio-room';
         document.getElementById('room-sort-input').value = room.sort_order || 1;
 
-        const imgs = (Array.isArray(room.detail_images) && room.detail_images.length) ? room.detail_images : [room.image || 'services/propertis_leasing/all part.png'];
-        roomModalImagesQueue = imgs.slice(0, 5).map(src => ({ type: 'url', src: src }));
-        renderRoomModalImages();
+        currentRoomImageSrc = room.image || (Array.isArray(room.detail_images) && room.detail_images.length ? room.detail_images[0] : 'services/propertis_leasing/all part.png');
+        currentRoomImageFile = null;
+        document.getElementById('room-img-preview-single').src = formatImageUrl(currentRoomImageSrc);
+        const fileInput = document.getElementById('room-single-file-input');
+        if (fileInput) fileInput.value = '';
 
         const modal = document.getElementById('room-modal');
         const card = document.getElementById('room-modal-card');
@@ -811,57 +912,6 @@
             modal.classList.remove('flex');
             modal.classList.add('hidden');
         }, 200);
-    }
-
-    function renderRoomModalImages() {
-        const container = document.getElementById('room-images-preview-strip');
-        const badge = document.getElementById('room-img-count-badge');
-        if (badge) badge.innerText = `${roomModalImagesQueue.length} / 5`;
-
-        if (!container) return;
-        container.innerHTML = roomModalImagesQueue.map((item, idx) => {
-            const previewSrc = item.type === 'url' ? formatImageUrl(item.src) : item.preview;
-            return `
-                <div class="relative aspect-[4/3] bg-slate-900 rounded-lg overflow-hidden border border-slate-300 group shadow-xs">
-                    <img src="${previewSrc}" class="w-full h-full object-cover">
-                    <button type="button" onclick="removeRoomImageFromQueue(${idx})" class="absolute top-1 right-1 w-5 h-5 bg-rose-600 hover:bg-rose-700 text-white rounded-full flex items-center justify-center text-[10px] shadow cursor-pointer" title="Remove Photo">
-                        ✕
-                    </button>
-                    <span class="absolute bottom-1 left-1 bg-black/70 text-white text-[9px] font-bold px-1 rounded">#${idx + 1}</span>
-                </div>
-            `;
-        }).join('');
-    }
-
-    function addRoomFileToQueue(input) {
-        if (input.files && input.files[0]) {
-            if (roomModalImagesQueue.length >= 5) {
-                if (typeof showToast === 'function') showToast('Maximum 5 images allowed per room', 'warning');
-                input.value = '';
-                return;
-            }
-            const file = input.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                roomModalImagesQueue.push({
-                    type: 'file',
-                    file: file,
-                    preview: e.target.result
-                });
-                renderRoomModalImages();
-                input.value = '';
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    function removeRoomImageFromQueue(idx) {
-        if (roomModalImagesQueue.length <= 1) {
-            if (typeof showToast === 'function') showToast('Room must have at least 1 image', 'warning');
-            return;
-        }
-        roomModalImagesQueue.splice(idx, 1);
-        renderRoomModalImages();
     }
 
     async function handleRoomFormSubmit(e) {
@@ -888,18 +938,32 @@
             }
             formData.append('description', combinedDesc);
             
-            formData.append('status', document.getElementById('room-status-input').value);
+            // Build structured pricing JSON
+            const pricingObj = {
+                daily: {
+                    price: document.getElementById('room-price-daily').value.trim() || 'From $35/day',
+                    desc: document.getElementById('room-desc-daily').value.trim() || ''
+                },
+                weekly: {
+                    price: document.getElementById('room-price-weekly').value.trim() || 'From $210/week',
+                    desc: document.getElementById('room-desc-weekly').value.trim() || ''
+                },
+                monthly: {
+                    price: document.getElementById('room-price-monthly').value.trim() || 'From $650/month',
+                    desc: document.getElementById('room-desc-monthly').value.trim() || ''
+                }
+            };
+            formData.append('status', JSON.stringify(pricingObj));
+
             formData.append('link', document.getElementById('room-link-input').value);
             formData.append('sort_order', document.getElementById('room-sort-input').value);
             formData.append('publish_status', 'published');
 
-            const existingUrls = roomModalImagesQueue.filter(i => i.type === 'url').map(i => i.src);
-            formData.append('detail_images', JSON.stringify(existingUrls));
-
-            const newFiles = roomModalImagesQueue.filter(i => i.type === 'file');
-            newFiles.forEach((item) => {
-                formData.append('detail_image_files[]', item.file);
-            });
+            if (currentRoomImageFile) {
+                formData.append('image_file', currentRoomImageFile);
+            } else if (currentRoomImageSrc) {
+                formData.append('image', currentRoomImageSrc);
+            }
 
             let endpoint = `/api/service-featured-properties/${roomsPageSlug}`;
             if (editId) endpoint = `/api/service-featured-properties/update/${editId}`;
@@ -915,7 +979,7 @@
 
             const data = await res.json();
             if (res.ok && data.success) {
-                if (typeof showToast === 'function') showToast('Room details saved successfully!');
+                if (typeof showToast === 'function') showToast('Room details & photo saved successfully!');
                 closeRoomModal();
                 fetchRooms();
             } else {
