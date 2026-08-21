@@ -197,21 +197,24 @@
             const allCountEl = document.getElementById('notif-dropdown-all-count');
             const emptyState = document.getElementById('notif-empty-state');
 
-            if (!list) return;
-
             const pendingList = allCommentsData.filter(c => c.status === 'pending');
 
             if (countBadge) {
                 if (pendingList.length > 0) {
                     countBadge.innerText = pendingList.length;
                     countBadge.classList.remove('hidden');
+                    countBadge.classList.add('flex');
                 } else {
+                    countBadge.innerText = '0';
+                    countBadge.classList.remove('flex');
                     countBadge.classList.add('hidden');
                 }
             }
 
             if (pendingCountEl) pendingCountEl.innerText = pendingList.length;
             if (allCountEl) allCountEl.innerText = allCommentsData.length;
+
+            if (!list) return;
 
             const displayList = currentCommentFilter === 'pending' ? pendingList : allCommentsData;
 
@@ -403,7 +406,10 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            fetchPendingComments();
+            fetchAllComments();
+            // Polling every 15 seconds to check for new pending comments automatically
+            setInterval(fetchAllComments, 15000);
+
             // Close notification dropdown when clicked outside
             document.addEventListener('click', (e) => {
                 const dropdown = document.getElementById('navbar-notif-dropdown');

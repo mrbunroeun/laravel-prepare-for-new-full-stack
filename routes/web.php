@@ -399,6 +399,16 @@ Route::get('/properties', function () {
         ->orderBy('sort_order', 'asc')
         ->orderBy('id', 'asc')
         ->get();
+
+    if ($faqs->count() === 0) {
+        app(\App\Http\Controllers\FaqController::class)->index(request()->merge(['page' => 'properties']));
+        $faqs = \App\Models\Faq::where('page', 'properties')
+            ->where('status', 'published')
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('id', 'asc')
+            ->get();
+    }
+
     $faqLeft = $faqs->where('column', 'left')->values()->toArray();
     $faqRight = $faqs->where('column', 'right')->values()->toArray();
 
@@ -884,6 +894,7 @@ Route::post('/api/comments/submit', [\App\Http\Controllers\CommentController::cl
 Route::get('/api/comments', [\App\Http\Controllers\CommentController::class, 'index']);
 Route::post('/api/comments/{comment}/approve', [\App\Http\Controllers\CommentController::class, 'approve']);
 Route::post('/api/comments/{comment}/reject', [\App\Http\Controllers\CommentController::class, 'reject']);
+Route::delete('/api/comments/{comment}', [\App\Http\Controllers\CommentController::class, 'destroy']);
 Route::get('/dashboard/pages/latest-activities', function () {
     return view('dashboard.pages.latest_activities', [
         'pageTitle' => 'Latest Activities',

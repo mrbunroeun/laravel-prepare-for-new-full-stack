@@ -46,5 +46,11 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
         }
+
+        // Share pending comments count with dashboard views for instant SSR render
+        \Illuminate\Support\Facades\View::composer(['dashboard.layout', 'dashboard.partials.navbar'], function ($view) {
+            $pendingCount = \App\Models\Comment::where('status', 'pending')->count();
+            $view->with('initialPendingCommentsCount', $pendingCount);
+        });
     }
 }
