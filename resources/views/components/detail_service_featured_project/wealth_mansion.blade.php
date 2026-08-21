@@ -1,11 +1,17 @@
 @extends('layouts.app')
 @section('content')
+    @php
+        $heroImage = !empty($heroSection?->image)
+            ? (str_starts_with($heroSection->image, 'http') || str_starts_with($heroSection->image, '/') ? $heroSection->image : asset($heroSection->image))
+            : asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png');
+    @endphp
+
     {{-- Hero image & content wrapper --}}
     <div class="relative w-full pt-[112px] min-[1161px]:pt-[120px]">
         {{-- Hero container: dynamic responsive height that shrinks on resize and caps max height --}}
         <div class="relative w-full h-[420px] sm:h-[460px] md:h-[500px] lg:h-[540px] xl:h-[580px] max-h-[600px] overflow-hidden">
             <img class="w-full h-full object-cover object-center"
-                src="{{ asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png') }}" 
+                src="{{ $heroImage }}" 
                 alt="Wealth Mansion">
 
             {{-- Floating Hero Card Overlay --}}

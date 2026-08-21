@@ -719,18 +719,22 @@ Route::get('/dashboard/pages/properties/wealth-mansion', function () {
 });
 
 Route::get('/dashboard/pages/properties/private-residential', function () {
-    return view('dashboard.pages.generic', [
-        'pageTitle' => 'Private Residential Collection',
+    return view('dashboard.pages.properties.property_hero', [
+        'pageTitle' => 'Private Residential',
         'pageSlug' => 'properties-private-residential',
-        'frontendUrl' => '/properties/private-residential'
+        'frontendUrl' => '/properties/private-residential',
+        'defaultHeadline' => "Exclusive Residential\nDevelopment",
+        'defaultImage' => asset('services/private residential/Private Residential.png')
     ]);
 });
 
 Route::get('/dashboard/pages/properties/uc88', function () {
-    return view('dashboard.pages.generic', [
-        'pageTitle' => 'UC88 Residence Project',
+    return view('dashboard.pages.properties.property_hero', [
+        'pageTitle' => 'UC88 Residence',
         'pageSlug' => 'properties-uc88',
-        'frontendUrl' => '/properties/uc88'
+        'frontendUrl' => '/properties/uc88',
+        'defaultHeadline' => "Residential Property\nProject",
+        'defaultImage' => asset('services/uc88/uc88.png')
     ]);
 });
 

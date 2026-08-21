@@ -561,6 +561,21 @@
     </section>
 
     {{-- Additional Charges (Blue Bar with Overlapping Left Image Formula) --}}
+    @php
+        $chargesData = \App\Models\ServiceMaximizeSection::where('page', 'hospitality-charges')->first();
+        $chargesTitle = $chargesData?->title ?: 'Additional Charges';
+        $chargesImage = $chargesData?->image 
+            ? (str_starts_with($chargesData->image, 'http') || str_starts_with($chargesData->image, '/') ? $chargesData->image : asset($chargesData->image))
+            : asset('home/latest_activities/3img.png');
+        $chargesAlt = $chargesData?->alt_text ?: 'Golden Tower 322 - Additional Charges';
+        $chargesParagraphs = (!empty($chargesData?->paragraphs) && is_array($chargesData->paragraphs) && count($chargesData->paragraphs) > 0)
+            ? $chargesData->paragraphs
+            : [
+                'Airport pick-up and city tour services are additional services and are not included in the standard accommodation rental rate.',
+                'The applicable charge depends on the requested service and arrangement.',
+                'For the latest pricing and availability, please contact our team before your arrival.'
+            ];
+    @endphp
     <section class="relative z-[300] bg-[#2A5A8A] mt-0 mb-28 sm:mb-36 lg:mb-44">
         <div class="max-w-[1500px] mx-auto px-6 sm:px-10 lg:px-12 py-10 sm:py-14 lg:py-16">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-center">
@@ -568,8 +583,8 @@
                 {{-- Left: Golden Tower 322 Image (Shifted further to the bottom) --}}
                 <div class="lg:col-span-6 flex justify-center lg:justify-start" data-scroll-reveal="left">
                     <div class="relative w-full max-w-[560px] mt-0 lg:mt-[-3rem] lg:mb-[-13rem] shadow-2xl z-20 overflow-hidden">
-                        <img src="{{ asset('home/latest_activities/3img.png') }}"
-                            alt="Golden Tower 322 - Additional Charges"
+                        <img src="{{ $chargesImage }}"
+                            alt="{{ $chargesAlt }}"
                             class="w-full h-auto object-cover">
                     </div>
                 </div>
@@ -577,21 +592,22 @@
                 {{-- Right: Content inside Blue Bar --}}
                 <div class="lg:col-span-6 flex flex-col justify-start py-4 lg:py-0" data-scroll-reveal="right">
                     <h2 class="text-[#F4DEAC] text-[clamp(30px,3.8vw,48px)] font-normal leading-tight mb-5 sm:mb-6">
-                        Additional <span class="text-[#F4DEAC] font-bold">Charges</span>
+                        @php
+                            $words = explode(' ', $chargesTitle);
+                            $lastWord = array_pop($words);
+                            $firstWords = implode(' ', $words);
+                        @endphp
+                        @if(!empty($firstWords))
+                            {{ $firstWords }} <span class="text-[#F4DEAC] font-bold">{{ $lastWord }}</span>
+                        @else
+                            <span class="text-[#F4DEAC] font-bold">{{ $chargesTitle }}</span>
+                        @endif
                     </h2>
 
                     <div class="flex flex-col gap-4 text-white text-[14.5px] sm:text-[15px] leading-relaxed font-normal max-w-[540px]">
-                        <p>
-                            Airport pick-up and city tour services are additional services and are not included in the standard accommodation rental rate.
-                        </p>
-
-                        <p>
-                            The applicable charge depends on the requested service and arrangement.
-                        </p>
-
-                        <p>
-                            For the latest pricing and availability, please contact our team before your arrival.
-                        </p>
+                        @foreach($chargesParagraphs as $cp)
+                            <p>{{ $cp }}</p>
+                        @endforeach
                     </div>
                 </div>
 

@@ -1,12 +1,28 @@
 @extends('layouts.app')
 @section('content')
+    @php
+        $heroData = \App\Models\HeroSection::where('page', 'properties-private-residential')->first();
+        $heroTaglineHtml = $heroData?->tagline_html ?: ($heroData?->tagline_box1 ?: 'Private Residential');
+        $heroHeadline = $heroData?->headline ?: "Exclusive Residential\nDevelopment";
+        $heroSubtext = (!empty($heroData?->bullets) && is_array($heroData->bullets) && count($heroData->bullets) > 0) ? $heroData->bullets[0] : 'Coming Soon';
+        $heroImage = $heroData?->image 
+            ? (str_starts_with($heroData->image, 'http') || str_starts_with($heroData->image, '/') ? $heroData->image : asset($heroData->image))
+            : asset('services/private residential/Private Residential.png');
+        $heroButtons = (isset($heroData?->buttons) && is_array($heroData->buttons))
+            ? $heroData->buttons
+            : [
+                ['text' => 'Browse Properties', 'url' => '/properties'],
+                ['text' => 'Contact Us', 'url' => '/contact-us']
+            ];
+    @endphp
+
     {{-- Hero image & content wrapper --}}
     <div class="relative w-full pt-[112px] min-[1161px]:pt-[120px]">
         {{-- Hero container: dynamic responsive height that shrinks on resize and caps max height --}}
         <div class="relative w-full h-[420px] sm:h-[460px] md:h-[500px] lg:h-[540px] xl:h-[580px] max-h-[600px] overflow-hidden">
             <img class="w-full h-full object-cover object-center"
-                src="{{ asset('services/private residential/Private Residential.png') }}" 
-                alt="Private Residential">
+                src="{{ $heroImage }}" 
+                alt="{{ $heroHeadline }}">
 
             {{-- Floating Hero Card Overlay --}}
             <div class="absolute inset-0 flex items-center z-10 pointer-events-none">
@@ -17,27 +33,27 @@
                         <div class="px-0 py-5 sm:py-7 lg:py-8">
                             <h2 class="flex flex-row items-center gap-3 sm:gap-4 text-[clamp(16px,2.2vw,26px)] font-bold mb-3 sm:mb-4">
                                 <span class="h-[3px] w-10 sm:w-14 bg-[#F4DEAC]"></span>
-                                <span class="text-[#F4DEAC] font-bold">Private Residential</span>
+                                <span class="text-[#F4DEAC] font-bold">{!! $heroTaglineHtml !!}</span>
                             </h2>
 
-                            <h1 class="text-white px-7 sm:px-10 text-[clamp(18px,2.4vw,28px)] font-semibold leading-tight mb-3 sm:mb-5">
-                                Exclusive Residential<br>Development
+                            <h1 class="text-white px-7 sm:px-10 text-[clamp(18px,2.4vw,28px)] font-semibold leading-tight mb-3 sm:mb-5 whitespace-pre-line">
+                                {{ $heroHeadline }}
                             </h1>
 
-                            <div class="text-[#F4DEAC] px-7 sm:px-10 text-[clamp(24px,3.5vw,42px)] font-light leading-tight mb-5 sm:mb-7 tracking-wide">
-                                Coming Soon
+                            <div class="text-[#F4DEAC] px-7 sm:px-10 text-[clamp(24px,3.5vw,42px)] font-light leading-tight mb-5 sm:mb-7 tracking-wide whitespace-pre-line">
+                                {{ $heroSubtext }}
                             </div>
 
-                            <div class="flex items-center px-7 sm:px-10 gap-3 sm:gap-4 pointer-events-auto">
-                                <a href="{{ url('/properties') }}"
-                                    class="border-[2px] border-[#F4DEAC] text-white text-[12px] sm:text-[14px] font-medium px-3.5 sm:px-5 py-2 sm:py-2.5 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                                    Browse Properties
-                                </a>
-                                <a href="{{ url('/contact-us') }}"
-                                    class="border-[2px] border-[#F4DEAC] text-white text-[12px] sm:text-[14px] font-medium px-3.5 sm:px-5 py-2 sm:py-2.5 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                                    Contact Us
-                                </a>
+                            @if(count($heroButtons) > 0)
+                            <div class="flex items-center px-7 sm:px-10 gap-3 sm:gap-4 pointer-events-auto flex-wrap">
+                                @foreach($heroButtons as $btn)
+                                    <a href="{{ url($btn['url'] ?? '#') }}"
+                                        class="border-[2px] border-[#F4DEAC] text-white text-[12px] sm:text-[14px] font-medium px-3.5 sm:px-5 py-2 sm:py-2.5 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                        {{ $btn['text'] ?? ($btn['label'] ?? 'Learn More') }}
+                                    </a>
+                                @endforeach
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>

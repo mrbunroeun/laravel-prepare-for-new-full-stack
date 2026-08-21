@@ -80,6 +80,13 @@
                 <span class="whitespace-nowrap">{{ $pageSlug === 'property-leasing' ? 'Daily & Weekly Rentals' : 'Featured Properties' }}</span>
                 <span class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full" id="tab-badge-properties-count">...</span>
             </button>
+            @if($pageSlug === 'hospitality-services')
+            <button type="button" onclick="switchServiceTab('charges', event)" id="service-tab-btn-charges" class="service-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span class="whitespace-nowrap">Additional Charges</span>
+            </button>
             @endif
 
             <button type="button" onclick="switchServiceTab('faqs', event)" id="service-tab-btn-faqs" class="service-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
@@ -660,6 +667,122 @@
                     {{-- Horizontal scroll container --}}
                     <div id="service-live-property-track" class="flex gap-4 overflow-x-auto pb-4 pt-1 [scrollbar-width:thin]">
                         {{-- Rendered dynamically via JS --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    @if($pageSlug === 'hospitality-services')
+    {{-- ========================================================================= --}}
+    {{-- TAB: ADDITIONAL CHARGES SECTION                                           --}}
+    {{-- ========================================================================= --}}
+    <div id="service-tab-content-charges" class="service-tab-content hidden space-y-6">
+        <form onsubmit="handleChargesSubmit(event)" class="space-y-6" id="charges-form">
+            <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
+                <div class="border-b border-slate-200 pb-4">
+                    <h2 class="text-lg font-bold text-[#163049]">Additional Charges Section Configuration</h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Customize the heading title, overlapping image, and descriptive paragraphs.</p>
+                </div>
+
+                {{-- 1. Section Title --}}
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">1. Section Title (H2)</h3>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Heading Title</label>
+                        <input type="text" id="charges-title-input" oninput="updateChargesPreview()" class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 font-semibold focus:outline-none focus:border-[#2A5A8A]" value="Additional Charges">
+                    </div>
+                </div>
+
+                {{-- 2. Overlapping Left Image --}}
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">2. Overlapping Left Image</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start max-w-[850px]">
+                        {{-- Image Card --}}
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between">
+                            <div class="w-full h-[220px] bg-slate-900 rounded-lg overflow-hidden relative border border-slate-200 mb-3 group">
+                                <img id="charges-image-preview-thumb" src="{{ asset('home/latest_activities/3img.png') }}" class="w-full h-full object-cover object-center">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-600 mb-1.5">Upload New Image</label>
+                                <input type="file" id="charges-image-file" accept="image/*" onchange="previewChargesLocalImage(this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3.5 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                            </div>
+                        </div>
+
+                        {{-- Alt Text & SEO --}}
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs space-y-3">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600">Image Details & SEO</label>
+                            <div>
+                                <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Alt Text (Accessibility & SEO)</label>
+                                <input type="text" id="charges-alt-input" oninput="updateChargesPreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]" value="Golden Tower 322 - Additional Charges">
+                            </div>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Upload an image for the left side of the blue banner section.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- 3. Body Paragraphs --}}
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">3. Body Paragraphs</h3>
+                            <p class="text-xs text-slate-500">Add, edit, or reorder paragraphs inside the blue Additional Charges banner.</p>
+                        </div>
+                        <button type="button" onclick="addChargesParagraph()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2A5A8A] text-white text-xs font-semibold hover:bg-[#163049] transition-colors cursor-pointer">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span>Add Paragraph</span>
+                        </button>
+                    </div>
+
+                    <div id="charges-paragraphs-container" class="space-y-4">
+                        {{-- Populated via JS --}}
+                    </div>
+                </div>
+
+                {{-- Single Save Button at Bottom --}}
+                <div class="pt-4 border-t border-slate-200 flex justify-end gap-3">
+                    <button type="submit" id="charges-submit-btn" class="px-6 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
+                        Save Additional Charges Section
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        {{-- Live Frontend Preview Card for Additional Charges --}}
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-[#1479B9]"></span>
+                    <h3 class="text-sm font-bold text-[#163049] uppercase tracking-wider">Live Preview Simulation</h3>
+                </div>
+                <span class="text-xs text-slate-500">Matches exact frontend blue banner & image layout</span>
+            </div>
+
+            <div class="mt-6 bg-[#2A5A8A] rounded-xl p-6 sm:p-10 shadow-lg text-white">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    {{-- Left Image --}}
+                    <div class="lg:col-span-6 flex justify-center">
+                        <div class="relative w-full max-w-[450px] shadow-2xl rounded-lg overflow-hidden border border-white/20">
+                            <img id="charges-live-image" src="{{ asset('home/latest_activities/3img.png') }}" class="w-full h-auto object-cover">
+                        </div>
+                    </div>
+
+                    {{-- Right Content --}}
+                    <div class="lg:col-span-6 flex flex-col justify-start">
+                        <h2 id="charges-live-title" class="text-[#F4DEAC] text-2xl sm:text-3xl font-bold mb-4">
+                            Additional Charges
+                        </h2>
+                        <div id="charges-live-paragraphs" class="flex flex-col gap-3 text-white/95 text-xs sm:text-sm leading-relaxed">
+                            <p>Airport pick-up and city tour services are additional services and are not included in the standard accommodation rental rate.</p>
+                            <p>The applicable charge depends on the requested service and arrangement.</p>
+                            <p>For the latest pricing and availability, please contact our team before your arrival.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2499,6 +2622,199 @@
             if (typeof showToast === 'function') showToast('Server error deleting property', 'error');
         }
     }
+
+    // ==========================================
+    // ADDITIONAL CHARGES SECTION LOGIC (HOSPITALITY SERVICES)
+    // ==========================================
+    let chargesParagraphsData = [
+        'Airport pick-up and city tour services are additional services and are not included in the standard accommodation rental rate.',
+        'The applicable charge depends on the requested service and arrangement.',
+        'For the latest pricing and availability, please contact our team before your arrival.'
+    ];
+    let chargesSelectedFile = null;
+
+    async function fetchChargesSection() {
+        if (pageSlug !== 'hospitality-services') return;
+        try {
+            const res = await fetch(`/api/service-maximize/hospitality-charges`);
+            const result = await res.json();
+            if (result.success && result.data) {
+                const data = result.data;
+                const titleInput = document.getElementById('charges-title-input');
+                if (titleInput && data.title) titleInput.value = data.title;
+                const altInput = document.getElementById('charges-alt-input');
+                if (altInput && data.alt_text) altInput.value = data.alt_text;
+
+                if (Array.isArray(data.paragraphs) && data.paragraphs.length > 0) {
+                    chargesParagraphsData = data.paragraphs;
+                }
+
+                if (data.image) {
+                    let imgPath = data.image;
+                    if (!imgPath.startsWith('http') && !imgPath.startsWith('/')) {
+                        imgPath = '/' + imgPath;
+                    }
+                    const thumb = document.getElementById('charges-image-preview-thumb');
+                    if (thumb) thumb.src = imgPath;
+                    const liveImg = document.getElementById('charges-live-image');
+                    if (liveImg) liveImg.src = imgPath;
+                }
+
+                renderChargesParagraphs();
+                updateChargesPreview();
+            }
+        } catch (err) {
+            console.error('Error fetching charges section:', err);
+        }
+    }
+
+    function renderChargesParagraphs() {
+        const container = document.getElementById('charges-paragraphs-container');
+        if (!container) return;
+
+        container.innerHTML = chargesParagraphsData.map((p, idx) => `
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-start gap-3">
+                <span class="w-6 h-6 rounded-full bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold text-xs flex items-center justify-center shrink-0 mt-2">
+                    ${idx + 1}
+                </span>
+
+                <div class="flex-1">
+                    <textarea rows="2" oninput="updateChargesParagraphText(${idx}, this.value)" class="w-full px-3 py-2 bg-[#f8fafc] border border-slate-300 rounded-md text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">${escapeHtml(p)}</textarea>
+                </div>
+
+                <div class="flex flex-col gap-1 shrink-0 pt-1">
+                    <button type="button" onclick="moveChargesParagraph(${idx}, -1)" ${idx === 0 ? 'disabled class="p-1 text-slate-300"' : 'class="p-1 hover:bg-slate-100 rounded text-slate-600"'} title="Move Up">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+                    </button>
+                    <button type="button" onclick="moveChargesParagraph(${idx}, 1)" ${idx === chargesParagraphsData.length - 1 ? 'disabled class="p-1 text-slate-300"' : 'class="p-1 hover:bg-slate-100 rounded text-slate-600"'} title="Move Down">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <button type="button" onclick="removeChargesParagraph(${idx})" class="p-1 hover:bg-rose-50 text-slate-400 hover:text-rose-600 rounded" title="Remove">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+
+        updateChargesPreview();
+    }
+
+    function addChargesParagraph() {
+        chargesParagraphsData.push('New additional charges detail paragraph.');
+        renderChargesParagraphs();
+    }
+
+    function removeChargesParagraph(idx) {
+        if (chargesParagraphsData.length <= 1) return;
+        chargesParagraphsData.splice(idx, 1);
+        renderChargesParagraphs();
+    }
+
+    function moveChargesParagraph(idx, dir) {
+        const newIdx = idx + dir;
+        if (newIdx < 0 || newIdx >= chargesParagraphsData.length) return;
+        const temp = chargesParagraphsData[idx];
+        chargesParagraphsData[idx] = chargesParagraphsData[newIdx];
+        chargesParagraphsData[newIdx] = temp;
+        renderChargesParagraphs();
+    }
+
+    function updateChargesParagraphText(idx, val) {
+        chargesParagraphsData[idx] = val;
+        updateChargesPreview();
+    }
+
+    function previewChargesLocalImage(input) {
+        if (!input.files || !input.files[0]) return;
+        const file = input.files[0];
+        chargesSelectedFile = file;
+
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            const dataUrl = evt.target.result;
+            const thumb = document.getElementById('charges-image-preview-thumb');
+            if (thumb) thumb.src = dataUrl;
+            const liveImg = document.getElementById('charges-live-image');
+            if (liveImg) liveImg.src = dataUrl;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function updateChargesPreview() {
+        const title = document.getElementById('charges-title-input')?.value || 'Additional Charges';
+        const liveTitle = document.getElementById('charges-live-title');
+        if (liveTitle) liveTitle.innerText = title;
+
+        const liveParas = document.getElementById('charges-live-paragraphs');
+        if (liveParas) {
+            liveParas.innerHTML = chargesParagraphsData.map(p => `
+                <p>${escapeHtml(p)}</p>
+            `).join('');
+        }
+    }
+
+    async function handleChargesSubmit(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('charges-submit-btn');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Saving...';
+        }
+
+        try {
+            const formData = new FormData();
+            formData.append('title', document.getElementById('charges-title-input').value);
+            formData.append('alt_text', document.getElementById('charges-alt-input').value);
+            chargesParagraphsData.forEach((p, idx) => {
+                formData.append(`paragraphs[${idx}]`, p);
+            });
+
+            if (chargesSelectedFile) {
+                formData.append('image_file', chargesSelectedFile);
+            }
+
+            const res = await fetch(`/api/service-maximize/hospitality-charges`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
+                },
+                body: formData
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+                if (typeof showToast === 'function') showToast('Additional Charges section saved live!');
+                if (data.data && data.data.image) {
+                    let fullImg = data.data.image;
+                    if (!fullImg.startsWith('http') && !fullImg.startsWith('/')) {
+                        fullImg = `/${fullImg}`;
+                    }
+                    const thumb = document.getElementById('charges-image-preview-thumb');
+                    if (thumb) thumb.src = fullImg;
+                    const liveImg = document.getElementById('charges-live-image');
+                    if (liveImg) liveImg.src = fullImg;
+                }
+                updateChargesPreview();
+            } else {
+                if (typeof showToast === 'function') showToast(data.message || 'Error saving charges section', 'error');
+            }
+        } catch (err) {
+            console.error('Save failed:', err);
+            if (typeof showToast === 'function') showToast('Server error while saving charges section', 'error');
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Save Additional Charges Section';
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (pageSlug === 'hospitality-services') {
+            fetchChargesSection();
+        }
+    });
 
     function escapeHtml(str) {
         if (!str) return '';

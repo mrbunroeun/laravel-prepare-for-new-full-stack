@@ -106,13 +106,27 @@
             <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
                 <div class="border-b border-slate-200 pb-4">
                     <h2 class="text-lg font-bold text-[#163049]">Hero Section Configuration</h2>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Customize tagline color schemes, headline text, bullet highlights, and action buttons.</p>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Customize hero background image, tagline color schemes, headline text, bullet highlights, and action buttons.</p>
+                </div>
+
+                {{-- 1. Hero Background Image Upload --}}
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">1. Hero Background Image</label>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                        <div class="w-40 h-24 rounded-lg bg-slate-900 overflow-hidden border border-slate-300 shrink-0">
+                            <img id="hero-img-preview" src="{{ asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png') }}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 space-y-2">
+                            <input type="file" id="hero-file-input" accept="image/*" onchange="previewHeroFileInput(this)" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                            <p class="text-xs text-slate-500">Recommended: High-resolution image (JPG, PNG, WebP) up to 10MB.</p>
+                        </div>
+                    </div>
                 </div>
 
                 {{-- Tagline & Accent Line --}}
                 <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
                     <div class="flex items-center justify-between">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Tagline Text</label>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">2. Tagline Text</label>
                         <div class="flex items-center gap-1.5">
                             <button type="button" onmousedown="event.preventDefault(); formatHeroTagline('bold');" class="px-3 py-1 bg-white border border-slate-300 hover:bg-[#2A5A8A] hover:text-white text-slate-800 rounded font-bold text-xs shadow-xs transition-colors flex items-center gap-1 cursor-pointer" title="Select text and click Bold">
                                 <span class="font-black text-sm">B</span>
@@ -129,7 +143,7 @@
 
                 {{-- Main Headline --}}
                 <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">2. Main Headline (H1)</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">3. Main Headline (H1)</h3>
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Headline Title</label>
                         <textarea id="hero-headline-input" rows="2" oninput="updateHeroPreview()" class="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">Premium Condominiums for Sale in Phnom Penh</textarea>
@@ -140,7 +154,7 @@
                 <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">3. Bullet Highlights / Availability Tag</h3>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">4. Bullet Highlights / Availability Tag</h3>
                             <p class="text-xs text-slate-500">Add, edit, or remove highlights (e.g. • 30% available • Prime Riverfront • Freehold Title)</p>
                         </div>
                         <div class="flex items-center gap-3">
@@ -165,7 +179,7 @@
                 <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">4. Action Buttons (Maximum 3 Buttons)</h3>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">5. Action Buttons (Maximum 3 Buttons)</h3>
                             <p class="text-xs text-slate-500">Pick destination routes directly from the route dropdown menu.</p>
                         </div>
                         <button type="button" onclick="addHeroButton()" id="add-btn-trigger" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#2A5A8A] text-white text-xs font-semibold hover:bg-[#163049] transition-colors cursor-pointer">
@@ -199,7 +213,7 @@
             </div>
 
             <div class="mt-6 relative bg-slate-900 rounded-xl overflow-hidden shadow-xl min-h-[360px] flex items-center p-6 sm:p-10 border border-slate-800">
-                <div class="absolute inset-0 bg-cover bg-center opacity-50 mix-blend-luminosity" style="background-image: url('{{ asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png') }}');"></div>
+                <div id="live-preview-hero-bg" class="absolute inset-0 bg-cover bg-center opacity-50 mix-blend-luminosity" style="background-image: url('{{ asset('services/wealth_mansion/hero_img/wealth-mainson-recovered.png') }}');"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-[#163049] via-[#163049]/80 to-transparent"></div>
 
                 <div class="relative z-10 max-w-[650px] w-full">
@@ -921,6 +935,19 @@
         }
     }
 
+    function previewHeroFileInput(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const previewImg = document.getElementById('hero-img-preview');
+                if (previewImg) previewImg.src = e.target.result;
+                const livePreviewBg = document.getElementById('live-preview-hero-bg');
+                if (livePreviewBg) livePreviewBg.style.backgroundImage = `url('${e.target.result}')`;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     async function fetchHeroSection() {
         try {
             const res = await fetch(`/api/hero-section/${pageSlug}`);
@@ -940,12 +967,22 @@
                         editor.innerHTML = `${b1} ${b2}`.trim();
                     }
                 }
+
+                if (data.image) {
+                    const heroUrl = formatImageUrl(data.image);
+                    const heroPreview = document.getElementById('hero-img-preview');
+                    if (heroPreview) heroPreview.src = heroUrl;
+                    const livePreviewBg = document.getElementById('live-preview-hero-bg');
+                    if (livePreviewBg) livePreviewBg.style.backgroundImage = `url('${heroUrl}')`;
+                }
+
                 if (data.headline) document.getElementById('hero-headline-input').value = data.headline;
                 if (typeof data.show_bullets !== 'undefined') document.getElementById('hero-bullets-toggle').checked = !!data.show_bullets;
                 if (Array.isArray(data.bullets) && data.bullets.length > 0) heroBulletsData = data.bullets;
-                if (Array.isArray(data.buttons) && data.buttons.length > 0) heroButtonsData = data.buttons;
+                if (Array.isArray(data.buttons)) heroButtonsData = data.buttons;
                 renderHeroBulletsInputs();
                 renderHeroButtonsInputs();
+                updateHeroPreview();
             }
         } catch (err) {
             console.error('Error fetching hero section:', err);
@@ -964,29 +1001,50 @@
             const editor = document.getElementById('hero-tagline-editor');
             const rawTagline = editor ? editor.innerHTML.trim() : '';
 
-            const payload = {
-                page: pageSlug,
-                tagline_html: rawTagline,
-                show_tagline: true,
-                headline: document.getElementById('hero-headline-input').value,
-                show_bullets: document.getElementById('hero-bullets-toggle').checked,
-                bullets: heroBulletsData,
-                buttons: heroButtonsData
-            };
+            const formData = new FormData();
+            formData.append('page', pageSlug);
+            formData.append('tagline_html', rawTagline);
+            formData.append('show_tagline', '1');
+            formData.append('headline', document.getElementById('hero-headline-input').value);
+            formData.append('show_bullets', document.getElementById('hero-bullets-toggle').checked ? '1' : '0');
+
+            heroBulletsData.forEach((bullet, idx) => {
+                formData.append(`bullets[${idx}]`, bullet);
+            });
+
+            if (heroButtonsData.length === 0) {
+                formData.append('buttons_empty', '1');
+            } else {
+                heroButtonsData.forEach((btn, idx) => {
+                    formData.append(`buttons[${idx}][text]`, btn.text || btn.label || '');
+                    formData.append(`buttons[${idx}][url]`, btn.url || '');
+                });
+            }
+
+            const fileInput = document.getElementById('hero-file-input');
+            if (fileInput && fileInput.files[0]) {
+                formData.append('image_file', fileInput.files[0]);
+            }
 
             const res = await fetch(`/api/hero-section/${pageSlug}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': csrfToken,
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(payload)
+                body: formData
             });
 
             const data = await res.json();
             if (res.ok && data.success) {
                 if (typeof showToast === 'function') showToast('Wealth Mansion Hero Section saved live!');
+                if (data.data && data.data.image) {
+                    const heroUrl = formatImageUrl(data.data.image);
+                    const heroPreview = document.getElementById('hero-img-preview');
+                    if (heroPreview) heroPreview.src = heroUrl;
+                    const livePreviewBg = document.getElementById('live-preview-hero-bg');
+                    if (livePreviewBg) livePreviewBg.style.backgroundImage = `url('${heroUrl}')`;
+                }
                 updateHeroPreview();
             } else {
                 if (typeof showToast === 'function') showToast(data.message || 'Error saving hero section', 'error');
