@@ -129,7 +129,7 @@
 --}}
 <section class="relative w-full bg-white">
     <div class="w-full px-4 sm:px-8 lg:pl-0 lg:pr-14 py-10 sm:py-14">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 ml-auto w-full lg:w-[80%]">
+        <div class="flex flex-wrap justify-end gap-6 lg:gap-8 ml-auto w-full lg:w-[80%]">
 
             @foreach ($properties as $index => $property)
                 @php
@@ -138,7 +138,7 @@
                 <article
                     data-scroll-reveal="{{ $dir }}"
                     data-scroll-delay="{{ $index * 100 }}"
-                    class="cwd-featured-card group flex flex-col
+                    class="cwd-featured-card group flex flex-col w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]
                         bg-[#F3F3F1] rounded-none overflow-hidden cursor-pointer
                         transition-all duration-300 ease-out
                         hover:-translate-y-1

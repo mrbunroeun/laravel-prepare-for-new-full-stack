@@ -395,14 +395,29 @@
             </div>
 
             <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Description & Suitable for List</label>
-                <textarea id="unit-desc-input" rows="4" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-xs text-slate-900 leading-relaxed focus:outline-none focus:border-[#2A5A8A]" placeholder="Layout description...&#10;Suitable for:&#10;Individual residents&#10;Business travelers"></textarea>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Paragraph Description</label>
+                <textarea id="unit-desc-input" rows="3" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-xs text-slate-900 leading-relaxed focus:outline-none focus:border-[#2A5A8A]" placeholder="The studio layout is suitable for individuals, couples, business professionals, and investors seeking a compact residential property."></textarea>
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
+            {{-- Suitable For List Editor --}}
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                <div class="flex items-center justify-between">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">"Suitable For:" Bullet List</label>
+                    <button type="button" onclick="addUnitSuitableItem()" class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#2A5A8A] text-white text-[11px] font-semibold hover:bg-[#163049] transition-colors cursor-pointer">
+                        + Add Item
+                    </button>
+                </div>
+                <div id="unit-suitable-container" class="space-y-2"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Availability Tag</label>
-                    <input type="text" id="unit-status-input" value="XX Units Available" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                    <input type="text" id="unit-status-input" value="30% Available" placeholder="e.g. 30% Available or XX Units" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Button / Link Destination</label>
+                    <input type="text" id="unit-link-input" value="/contact-us" placeholder="e.g. /contact-us" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
                 </div>
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Sort Order</label>
@@ -1058,14 +1073,77 @@
         }
     }
 
+    let unitSuitableItemsData = [];
+
+    function renderUnitSuitableItems() {
+        const container = document.getElementById('unit-suitable-container');
+        if (!container) return;
+        if (!unitSuitableItemsData.length) {
+            container.innerHTML = '<p class="text-[11px] text-slate-400 italic">No bullet items yet. Click "+ Add Item" above.</p>';
+            return;
+        }
+        container.innerHTML = unitSuitableItemsData.map((item, idx) => `
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-[#2A5A8A]">•</span>
+                <input type="text" value="${escapeHtml(item)}" oninput="updateUnitSuitableItem(${idx}, this.value)" placeholder="e.g. Individual residents" class="flex-1 px-3 py-1.5 bg-white border border-slate-300 rounded text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                <button type="button" onclick="removeUnitSuitableItem(${idx})" class="p-1 text-slate-400 hover:text-rose-600 rounded transition-colors" title="Remove bullet">
+                    ✕
+                </button>
+            </div>
+        `).join('');
+    }
+
+    function addUnitSuitableItem() {
+        unitSuitableItemsData.push('New resident profile');
+        renderUnitSuitableItems();
+    }
+
+    function removeUnitSuitableItem(idx) {
+        unitSuitableItemsData.splice(idx, 1);
+        renderUnitSuitableItems();
+    }
+
+    function updateUnitSuitableItem(idx, val) {
+        unitSuitableItemsData[idx] = val;
+    }
+
+    function parseDescriptionAndSuitable(rawDesc) {
+        if (!rawDesc) return { desc: '', suitable: ['Individual residents', 'Business travelers', 'Young professionals', 'Rental investment'] };
+        const lines = rawDesc.split('\n');
+        let suitableFound = false;
+        const descArr = [];
+        const suitableArr = [];
+        for (const l of lines) {
+            const trimmed = l.trim();
+            if (trimmed.toLowerCase().includes('suitable for:')) {
+                suitableFound = true;
+                continue;
+            }
+            if (suitableFound && trimmed) {
+                suitableArr.push(trimmed.replace(/^[-•*]\s*/, ''));
+            } else if (!suitableFound && trimmed) {
+                descArr.push(trimmed);
+            }
+        }
+        return {
+            desc: descArr.join('\n'),
+            suitable: suitableArr.length ? suitableArr : ['Individual residents', 'Business travelers', 'Young professionals', 'Rental investment']
+        };
+    }
+
     function openCreateUnitModal() {
         document.getElementById('unit-modal-title').innerText = 'Add Unit Type';
         document.getElementById('unit-edit-id').value = '';
         document.getElementById('unit-title-input').value = '';
         document.getElementById('unit-subtitle-input').value = '';
-        document.getElementById('unit-desc-input').value = "The layout description...\n\nSuitable for:\nIndividual residents\nBusiness travelers";
-        document.getElementById('unit-status-input').value = 'XX Units Available';
+        document.getElementById('unit-desc-input').value = 'The studio layout is suitable for individuals, couples, business professionals, and investors seeking a compact residential property.';
+        document.getElementById('unit-status-input').value = '30% Available';
+        document.getElementById('unit-link-input').value = '/contact-us';
         document.getElementById('unit-sort-input').value = (unitItemsData.length + 1);
+        
+        unitSuitableItemsData = ['Individual residents', 'Business travelers', 'Young professionals', 'Rental investment'];
+        renderUnitSuitableItems();
+
         unitModalImagesQueue = [
             { type: 'url', src: 'services/propertis_leasing/bedroom.png' }
         ];
@@ -1089,8 +1167,14 @@
         document.getElementById('unit-edit-id').value = unit.id;
         document.getElementById('unit-title-input').value = unit.title || '';
         document.getElementById('unit-subtitle-input').value = unit.subtitle || '';
-        document.getElementById('unit-desc-input').value = unit.description || '';
-        document.getElementById('unit-status-input').value = unit.status || 'XX Units Available';
+        
+        const parsed = parseDescriptionAndSuitable(unit.description);
+        document.getElementById('unit-desc-input').value = parsed.desc;
+        unitSuitableItemsData = parsed.suitable;
+        renderUnitSuitableItems();
+
+        document.getElementById('unit-status-input').value = unit.status || '30% Available';
+        document.getElementById('unit-link-input').value = unit.link || '/contact-us';
         document.getElementById('unit-sort-input').value = unit.sort_order || 1;
 
         const imgs = (Array.isArray(unit.detail_images) && unit.detail_images.length) ? unit.detail_images : [unit.image || 'services/propertis_leasing/bedroom.png'];
@@ -1184,8 +1268,18 @@
             formData.append('grade', 'A');
             formData.append('title', document.getElementById('unit-title-input').value);
             formData.append('subtitle', document.getElementById('unit-subtitle-input').value);
-            formData.append('description', document.getElementById('unit-desc-input').value);
+            
+            // Combine description and suitable for list
+            const desc = document.getElementById('unit-desc-input').value.trim();
+            const suitableList = unitSuitableItemsData.filter(s => s.trim().length > 0);
+            let combinedDesc = desc;
+            if (suitableList.length > 0) {
+                combinedDesc += "\n\nSuitable for:\n" + suitableList.map(s => `• ${s}`).join("\n");
+            }
+            formData.append('description', combinedDesc);
+            
             formData.append('status', document.getElementById('unit-status-input').value);
+            formData.append('link', document.getElementById('unit-link-input').value);
             formData.append('sort_order', document.getElementById('unit-sort-input').value);
             formData.append('publish_status', 'published');
 
