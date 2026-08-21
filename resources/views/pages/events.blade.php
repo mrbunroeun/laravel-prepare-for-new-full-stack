@@ -138,7 +138,7 @@
     </section>
 
     {{-- Frequently Asked Questions --}}
-    <x-faqs />
+    <x-faqs :faqLeft="$faqLeft" :faqRight="$faqRight" />
 
  
 

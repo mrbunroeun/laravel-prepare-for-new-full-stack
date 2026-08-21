@@ -13,7 +13,7 @@
                 <span class="text-[#1479B9]">Events</span>
             </div>
             <h1 class="text-2xl sm:text-3xl font-extrabold text-[#163049] tracking-tight">Events Page Content</h1>
-            <p class="text-sm text-slate-500 mt-1">Manage the hero banner and the event cards list displayed under the hero section.</p>
+            <p class="text-sm text-slate-500 mt-1">Manage the hero banner, events list under the hero section, and FAQs.</p>
         </div>
         <div class="flex items-center gap-3">
             <a href="{{ url('/events') }}" target="_blank" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-[#2A5A8A] hover:text-white text-xs font-bold transition-all shadow-xs">
@@ -26,6 +26,7 @@
     {{-- Tabs Navigation --}}
     <div class="relative flex items-center border-b border-slate-200 py-1">
         <div class="flex items-center gap-2 overflow-x-auto pb-px">
+            {{-- Tab 1: Hero --}}
             <button type="button" onclick="switchEventsTab('hero', event)" id="tab-btn-hero"
                 class="events-tab-btn px-5 py-3 text-sm font-bold border-b-2 border-[#2A5A8A] text-[#2A5A8A] flex items-center gap-2 transition-all cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,6 +34,8 @@
                 </svg>
                 <span>Hero &amp; Banner</span>
             </button>
+
+            {{-- Tab 2: Events List --}}
             <button type="button" onclick="switchEventsTab('events-list', event)" id="tab-btn-events-list"
                 class="events-tab-btn px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -40,6 +43,16 @@
                 </svg>
                 <span>Events List (Under Hero Section)</span>
                 <span id="events-count-badge" class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">0</span>
+            </button>
+
+            {{-- Tab 3: FAQs --}}
+            <button type="button" onclick="switchEventsTab('faqs', event)" id="tab-btn-faqs"
+                class="events-tab-btn px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>Frequently Asked Questions (FAQs)</span>
+                <span id="tab-badge-faq-count" class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">0</span>
             </button>
         </div>
     </div>
@@ -252,6 +265,92 @@
             </div>
         </div>
     </div>
+
+    {{-- ========================================================================= --}}
+    {{-- TAB 3: FREQUENTLY ASKED QUESTIONS (FAQS)                                 --}}
+    {{-- ========================================================================= --}}
+    <div id="tab-content-faqs" class="events-tab-content hidden space-y-6">
+        {{-- Database FAQs Management Table --}}
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            {{-- Toolbar --}}
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+                <div>
+                    <h2 class="text-lg font-bold text-[#163049] flex items-center gap-2">
+                        <span>Frequently Asked Questions</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#2A5A8A]/10 text-[#2A5A8A] font-semibold">Events FAQs</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Add, edit, or delete FAQ questions and answers for the Events page.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button type="button" onclick="openCreateFaqModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
+                        <svg class="w-4 h-4 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        <span>Add New FAQ</span>
+                    </button>
+                </div>
+            </div>
+
+            {{-- FAQs Table --}}
+            <div class="mt-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-[#2A5A8A] bg-slate-50">
+                                <th class="py-3.5 px-4 w-12 text-center rounded-l-lg">#</th>
+                                <th class="py-3.5 px-4">Question</th>
+                                <th class="py-3.5 px-4 w-1/3">Answer</th>
+                                <th class="py-3.5 px-4 w-28 text-center">Column</th>
+                                <th class="py-3.5 px-4 w-24 text-center">Status</th>
+                                <th class="py-3.5 px-4 w-36 text-right rounded-r-lg">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="faq-table-body" class="divide-y divide-slate-100 text-sm">
+                            <tr>
+                                <td colspan="6" class="py-8 text-center text-slate-400">Loading FAQs from database...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                {{-- Empty state --}}
+                <div id="faq-empty-state" class="hidden py-12 text-center">
+                    <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-sm font-semibold text-slate-800">No FAQs in database</h3>
+                    <p class="text-xs text-slate-500 mt-1">Get started by creating your first Events FAQ item.</p>
+                </div>
+            </div>
+        </div>
+
+        {{-- Live Frontend Preview Card for FAQs --}}
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-[#1479B9]"></span>
+                    <h3 class="text-sm font-bold text-[#163049] uppercase tracking-wider">Live Events FAQs Preview</h3>
+                </div>
+                <span class="text-xs text-slate-500">Preview with real frontend accordion styling</span>
+            </div>
+            
+            <div class="mt-6 bg-[#e5e4e4] rounded-xl px-4 sm:px-10 py-10 sm:py-14 text-slate-900 shadow-inner">
+                <div class="max-w-[1400px] mx-auto">
+                    <h2 class="text-[clamp(24px,3vw,36px)] leading-tight mb-8 sm:mb-10">
+                        <span class="text-[#2A5A8A] font-normal block">Frequently</span>
+                        <span class="text-[#2A5A8A] font-bold block">Asked Questions</span>
+                    </h2>
+
+                    {{-- Two-column accordion grid --}}
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-start" id="faq-live-preview-grid">
+                        {{-- Populated dynamically via renderFaqLivePreview() --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {{-- ========================================================================= --}}
@@ -368,7 +467,7 @@
 </div>
 
 {{-- ========================================================================= --}}
-{{-- MODAL: DELETE CONFIRMATION                                                --}}
+{{-- MODAL: DELETE EVENT CONFIRMATION                                          --}}
 {{-- ========================================================================= --}}
 <div id="delete-event-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#163049]/60 backdrop-blur-xs p-4 hidden opacity-0 transition-opacity duration-200">
     <div class="bg-white border border-slate-200 w-full max-w-sm rounded-2xl shadow-2xl p-6 text-center transform scale-95 transition-transform duration-200" id="delete-event-modal-card">
@@ -393,6 +492,91 @@
     </div>
 </div>
 
+{{-- ========================================================================= --}}
+{{-- MODAL: CREATE / EDIT FAQ                                                  --}}
+{{-- ========================================================================= --}}
+<div id="faq-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs hidden opacity-0 transition-opacity duration-200">
+    <div id="faq-modal-card" class="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 shadow-2xl transform scale-95 transition-transform duration-200 space-y-5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h3 id="faq-modal-title" class="text-base font-bold text-[#163049] flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span>
+                Add New FAQ
+            </h3>
+            <button type="button" onclick="closeFaqModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <form onsubmit="handleFaqSubmit(event)" class="space-y-4">
+            <input type="hidden" id="faq-id">
+
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Question <span class="text-red-500">*</span></label>
+                <input type="text" id="faq-question" required placeholder="e.g. What services does CWD provide?" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:bg-white focus:border-[#2A5A8A] focus:outline-none transition-colors">
+            </div>
+
+            <div>
+                <div class="flex items-center justify-between mb-1.5">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600">Answer <span class="text-red-500">*</span></label>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" onclick="insertEventFaqBullet()" class="px-2 py-0.5 bg-slate-100 hover:bg-[#2A5A8A] hover:text-white text-slate-700 rounded text-[11px] font-semibold transition-colors flex items-center gap-1 cursor-pointer" title="Add a bullet point item">
+                            <span>• Bullet Point</span>
+                        </button>
+                        <button type="button" onclick="insertEventFaqFacilitiesTemplate()" class="px-2 py-0.5 bg-slate-100 hover:bg-[#2A5A8A] hover:text-white text-slate-700 rounded text-[11px] font-semibold transition-colors cursor-pointer" title="Insert facilities template">
+                            <span>Facilities Template</span>
+                        </button>
+                    </div>
+                </div>
+                <textarea id="faq-answer" required rows="6" placeholder="Facilities vary by property and may include:&#10;&#10;• Swimming Pool&#10;• Fitness Center&#10;• Panoramic River View&#10;• Parking&#10;• Security&#10;• Elevator Access&#10;• Wi-Fi" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-800 focus:bg-white focus:border-[#2A5A8A] focus:outline-none transition-colors font-sans leading-relaxed"></textarea>
+                <p class="text-[11px] text-slate-400 mt-1">Tip: Use bullet items (lines starting with <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-600 font-mono">•</code> or <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-600 font-mono">-</code>) or multiple paragraphs.</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Display Column</label>
+                    <select id="faq-column" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 focus:bg-white focus:border-[#2A5A8A] focus:outline-none transition-colors">
+                        <option value="left">Left Column</option>
+                        <option value="right">Right Column</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Status</label>
+                    <select id="faq-status" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 focus:bg-white focus:border-[#2A5A8A] focus:outline-none transition-colors">
+                        <option value="published">Published</option>
+                        <option value="draft">Draft (Hidden)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
+                <button type="button" onclick="closeFaqModal()" class="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">Cancel</button>
+                <button type="submit" id="faq-submit-btn" class="px-5 py-2 bg-[#2A5A8A] hover:bg-[#163049] text-white text-xs font-bold rounded-lg shadow-sm transition-all cursor-pointer">Save FAQ</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{-- ========================================================================= --}}
+{{-- MODAL: DELETE FAQ CONFIRMATION                                            --}}
+{{-- ========================================================================= --}}
+<div id="faq-delete-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs hidden opacity-0 transition-opacity duration-200">
+    <div id="faq-delete-card" class="bg-white border border-slate-200 rounded-2xl max-w-sm w-full p-6 shadow-2xl transform scale-95 transition-transform duration-200 text-center space-y-4">
+        <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+        </div>
+        <h3 class="text-base font-bold text-[#163049]">Delete this FAQ?</h3>
+        <p class="text-xs text-slate-500">Are you sure you want to permanently remove this question from your Events page?</p>
+        <div class="flex items-center justify-center gap-3 pt-2">
+            <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">Cancel</button>
+            <button type="button" onclick="confirmDeleteFaq()" class="px-5 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-lg shadow-sm transition-all cursor-pointer">Delete Now</button>
+        </div>
+    </div>
+</div>
+
 <script>
     const pageSlug = 'events';
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '{{ csrf_token() }}';
@@ -404,6 +588,8 @@
         { text: 'Contact Us', url: '/contact-us' }
     ];
     let eventsData = [];
+    let faqsData = [];
+    let faqToDeleteId = null;
 
     const availableRoutes = [
         { label: 'Browse Properties (/properties)', url: '/properties' },
@@ -422,10 +608,11 @@
         fetchHeroSection();
         renderHeroButtonsInputs();
         fetchEvents();
+        fetchFaqs();
     });
 
     // ==========================================
-    // TAB SWITCHING
+    // TAB SWITCHING (Hero vs Events List vs FAQs)
     // ==========================================
     function switchEventsTab(tabId, ev) {
         if (ev) ev.preventDefault();
@@ -442,6 +629,12 @@
         if (targetBtn) {
             targetBtn.classList.remove('border-transparent', 'text-slate-500', 'font-medium');
             targetBtn.classList.add('border-[#2A5A8A]', 'text-[#2A5A8A]', 'font-bold');
+        }
+
+        if (tabId === 'faqs') {
+            fetchFaqs();
+        } else if (tabId === 'events-list') {
+            fetchEvents();
         }
     }
 
@@ -752,7 +945,7 @@
         }).join('');
     }
 
-    // Modal Handlers
+    // Event Modal Handlers
     function openEventModal(isEdit = false) {
         const modal = document.getElementById('event-modal');
         const card = document.getElementById('event-modal-card');
@@ -899,7 +1092,7 @@
         }
     }
 
-    // Delete Handlers
+    // Delete Event Handlers
     function openDeleteEventModal(id) {
         document.getElementById('delete-event-id').value = id;
         const modal = document.getElementById('delete-event-modal');
@@ -950,6 +1143,354 @@
         } catch (err) {
             console.error(err);
             showToast('Failed to delete event', 'error');
+        }
+    }
+
+    // ==========================================
+    // FAQS SECTION JS (EVENTS PAGE)
+    // ==========================================
+    async function fetchFaqs() {
+        try {
+            const res = await fetch('/api/faqs?page=events');
+            const data = await res.json();
+            if (data.success) {
+                faqsData = data.data;
+                renderFaqsTable();
+                renderFaqLivePreview();
+            }
+        } catch (err) {
+            console.error('Failed to load FAQs:', err);
+            if (typeof showToast === 'function') showToast('Error loading FAQs from database', 'error');
+        }
+    }
+
+    function renderFaqsTable() {
+        const tbody = document.getElementById('faq-table-body');
+        const emptyState = document.getElementById('faq-empty-state');
+        const countBadge = document.getElementById('tab-badge-faq-count');
+
+        if (countBadge) countBadge.innerText = faqsData.length;
+        if (!tbody) return;
+
+        if (faqsData.length === 0) {
+            tbody.innerHTML = '';
+            if (emptyState) emptyState.classList.remove('hidden');
+            return;
+        }
+
+        if (emptyState) emptyState.classList.add('hidden');
+        tbody.innerHTML = faqsData.map((item, index) => `
+            <tr class="hover:bg-slate-50/80 transition-colors group">
+                <td class="py-3 px-4 text-center text-slate-400 font-mono text-xs">${index + 1}</td>
+                <td class="py-3 px-4">
+                    <div class="font-semibold text-[#163049] group-hover:text-[#1479B9] transition-colors">${escapeHtml(item.question)}</div>
+                </td>
+                <td class="py-3 px-4">
+                    <div class="text-xs text-slate-600 line-clamp-1">${escapeHtml(item.answer)}</div>
+                </td>
+                <td class="py-3 px-4 text-center">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded text-[11px] font-semibold ${item.column === 'left' ? 'bg-[#2A5A8A]/10 text-[#2A5A8A]' : 'bg-[#1479B9]/10 text-[#1479B9]'}">
+                        ${item.column === 'left' ? 'Left Col' : 'Right Col'}
+                    </span>
+                </td>
+                <td class="py-3 px-4 text-center">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold ${item.status === 'published' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-600'}">
+                        ${item.status === 'published' ? 'Published' : 'Draft'}
+                    </span>
+                </td>
+                <td class="py-3 px-4 text-right">
+                    <div class="flex items-center justify-end gap-2">
+                        <button type="button" onclick="editFaq(${item.id})" class="p-1.5 rounded-lg bg-slate-100 hover:bg-[#2A5A8A] text-slate-600 hover:text-white transition-colors cursor-pointer" title="Edit FAQ">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                            </svg>
+                        </button>
+                        <button type="button" onclick="promptDeleteFaq(${item.id})" class="p-1.5 rounded-lg bg-slate-100 hover:bg-rose-600 text-slate-600 hover:text-white transition-colors cursor-pointer" title="Delete FAQ">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function renderFaqLivePreview() {
+        const grid = document.getElementById('faq-live-preview-grid');
+        if (!grid) return;
+
+        const leftFaqs = faqsData.filter(f => f.column === 'left' && f.status === 'published');
+        const rightFaqs = faqsData.filter(f => f.column === 'right' && f.status === 'published');
+
+        function formatFaqAnswerHtml(text) {
+            if (!text) return '';
+            if (/<[a-z][\s\S]*>/i.test(text)) {
+                return text;
+            }
+            const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+            let html = '';
+            let inList = false;
+
+            for (let line of lines) {
+                const trimmed = line.trim();
+                const bulletMatch = trimmed.match(/^[\u2022\-\*]\s*(.+)$/);
+                if (bulletMatch) {
+                    if (!inList) {
+                        inList = true;
+                        html += '<ul class="list-disc pl-5 my-1.5 space-y-1">';
+                    }
+                    html += `<li class="leading-relaxed">${escapeHtml(bulletMatch[1])}</li>`;
+                } else {
+                    if (inList) {
+                        html += '</ul>';
+                        inList = false;
+                    }
+                    if (trimmed === '') {
+                        html += '<div class="h-1.5"></div>';
+                    } else {
+                        html += `<p class="leading-relaxed">${escapeHtml(trimmed)}</p>`;
+                    }
+                }
+            }
+            if (inList) {
+                html += '</ul>';
+            }
+            return html;
+        }
+
+        function renderColumn(items, isLeft) {
+            return `
+                <div class="faq-column flex flex-col gap-2 w-full">
+                    ${items.map((f, i) => {
+                        const isOpen = isLeft && i === 0;
+                        return `
+                            <div class="faq-item bg-[#f3f3f3] shadow-xs">
+                                <button type="button"
+                                    class="preview-faq-toggle w-full flex items-center justify-between gap-4 text-left px-5 py-4 sm:px-6 sm:py-5 cursor-pointer select-none"
+                                    aria-expanded="${isOpen ? 'true' : 'false'}"
+                                    onclick="togglePreviewFaq(this)">
+                                    <span class="text-[#2A5A8A] text-[14px] sm:text-[15px] font-medium leading-snug">
+                                        ${escapeHtml(f.question)}
+                                    </span>
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="preview-faq-arrow w-6 h-6 shrink-0 text-[#2A5A8A] transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M6 4l8 6-8 6V4z" />
+                                    </svg>
+                                </button>
+                                <div class="preview-faq-panel overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-[600px]' : 'max-h-0'}">
+                                    <div class="${isOpen ? 'bg-[#1479B9] text-white' : 'bg-white text-black/70'} px-5 py-4 sm:px-6 sm:py-5 transition-colors duration-200">
+                                        <div class="text-[13px] sm:text-[13.5px] leading-relaxed">
+                                            ${formatFaqAnswerHtml(f.answer)}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        grid.innerHTML = `
+            ${renderColumn(leftFaqs, true)}
+            ${renderColumn(rightFaqs, false)}
+        `;
+    }
+
+    function insertEventFaqBullet() {
+        const textarea = document.getElementById('faq-answer');
+        if (!textarea) return;
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const val = textarea.value;
+        const prefix = (start === 0 || val[start - 1] === '\n') ? '• ' : '\n• ';
+        textarea.value = val.substring(0, start) + prefix + val.substring(end);
+        textarea.focus();
+        textarea.selectionStart = textarea.selectionEnd = start + prefix.length;
+    }
+
+    function insertEventFaqFacilitiesTemplate() {
+        const textarea = document.getElementById('faq-answer');
+        if (!textarea) return;
+        const template = "Facilities vary by property and may include:\n\n• Swimming Pool\n• Fitness Center\n• Panoramic River View\n• Parking\n• Security\n• Elevator Access\n• Wi-Fi";
+        if (textarea.value.trim().length > 0) {
+            textarea.value = textarea.value + "\n\n" + template;
+        } else {
+            textarea.value = template;
+        }
+        textarea.focus();
+    }
+
+    function togglePreviewFaq(btn) {
+        const item = btn.closest('.faq-item');
+        if (!item) return;
+        const panel = item.querySelector('.preview-faq-panel');
+        const answerBox = panel ? panel.querySelector('div') : null;
+        const arrow = btn.querySelector('.preview-faq-arrow');
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        if (isOpen) {
+            if (panel) panel.style.maxHeight = '0px';
+            btn.setAttribute('aria-expanded', 'false');
+            if (arrow) arrow.classList.remove('rotate-90');
+            if (answerBox) {
+                answerBox.classList.remove('bg-[#1479B9]', 'text-white');
+                answerBox.classList.add('bg-white', 'text-black/70');
+            }
+        } else {
+            if (panel) panel.style.maxHeight = panel.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+            if (arrow) arrow.classList.add('rotate-90');
+            if (answerBox) {
+                answerBox.classList.remove('bg-white', 'text-black/70');
+                answerBox.classList.add('bg-[#1479B9]', 'text-white');
+            }
+        }
+    }
+
+    function openCreateFaqModal() {
+        document.getElementById('faq-modal-title').innerHTML = '<span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span> Add New Events FAQ';
+        document.getElementById('faq-id').value = '';
+        document.getElementById('faq-question').value = '';
+        document.getElementById('faq-answer').value = '';
+        document.getElementById('faq-column').value = 'left';
+        document.getElementById('faq-status').value = 'published';
+
+        const modal = document.getElementById('faq-modal');
+        const card = document.getElementById('faq-modal-card');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            card.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function editFaq(id) {
+        const item = faqsData.find(f => Number(f.id) === Number(id));
+        if (!item) return;
+
+        document.getElementById('faq-modal-title').innerHTML = '<span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span> Edit FAQ #' + item.id;
+        document.getElementById('faq-id').value = item.id;
+        document.getElementById('faq-question').value = item.question;
+        document.getElementById('faq-answer').value = item.answer;
+        document.getElementById('faq-column').value = item.column;
+        document.getElementById('faq-status').value = item.status;
+
+        const modal = document.getElementById('faq-modal');
+        const card = document.getElementById('faq-modal-card');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            card.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function closeFaqModal() {
+        const modal = document.getElementById('faq-modal');
+        const card = document.getElementById('faq-modal-card');
+        modal.classList.add('opacity-0');
+        card.classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 200);
+    }
+
+    async function handleFaqSubmit(e) {
+        e.preventDefault();
+        const id = document.getElementById('faq-id').value;
+        const question = document.getElementById('faq-question').value.trim();
+        const answer = document.getElementById('faq-answer').value.trim();
+        const column = document.getElementById('faq-column').value;
+        const status = document.getElementById('faq-status').value;
+        const btn = document.getElementById('faq-submit-btn');
+
+        btn.disabled = true;
+        btn.innerText = 'Saving...';
+
+        try {
+            const url = id ? `/api/faqs/${id}` : '/api/faqs';
+            const method = id ? 'PUT' : 'POST';
+
+            const res = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    page: 'events',
+                    question: question,
+                    answer: answer,
+                    column: column,
+                    status: status,
+                })
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+                showToast(id ? 'FAQ updated successfully!' : 'FAQ created successfully!');
+                closeFaqModal();
+                await fetchFaqs();
+            } else {
+                showToast(data.message || 'Failed to save FAQ', 'error');
+            }
+        } catch (err) {
+            console.error('Error saving FAQ:', err);
+            showToast('An error occurred while saving FAQ', 'error');
+        } finally {
+            btn.disabled = false;
+            btn.innerText = 'Save FAQ';
+        }
+    }
+
+    function promptDeleteFaq(id) {
+        faqToDeleteId = id;
+        const modal = document.getElementById('faq-delete-modal');
+        const card = document.getElementById('faq-delete-card');
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            card.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function closeDeleteModal() {
+        faqToDeleteId = null;
+        const modal = document.getElementById('faq-delete-modal');
+        const card = document.getElementById('faq-delete-card');
+        modal.classList.add('opacity-0');
+        card.classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 200);
+    }
+
+    async function confirmDeleteFaq() {
+        if (!faqToDeleteId) return;
+
+        try {
+            const res = await fetch(`/api/faqs/${faqToDeleteId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json'
+                }
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+                showToast('FAQ deleted successfully!');
+                closeDeleteModal();
+                await fetchFaqs();
+            } else {
+                showToast(data.message || 'Failed to delete FAQ', 'error');
+            }
+        } catch (err) {
+            console.error('Error deleting FAQ:', err);
+            showToast('An error occurred while deleting FAQ', 'error');
         }
     }
 </script>

@@ -338,7 +338,25 @@ Route::get('/events', function () {
         ->orderBy('id', 'asc')
         ->get();
 
-    return view('pages.events', compact('heroSection', 'eventItems'));
+    $faqs = \App\Models\Faq::where('page', 'events')
+        ->where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+
+    if ($faqs->count() === 0) {
+        app(\App\Http\Controllers\FaqController::class)->index(request()->merge(['page' => 'events']));
+        $faqs = \App\Models\Faq::where('page', 'events')
+            ->where('status', 'published')
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('id', 'asc')
+            ->get();
+    }
+
+    $faqLeft = $faqs->where('column', 'left')->values()->toArray();
+    $faqRight = $faqs->where('column', 'right')->values()->toArray();
+
+    return view('pages.events', compact('heroSection', 'eventItems', 'faqLeft', 'faqRight'));
 });
 
 Route::get('/contact-us', function () {

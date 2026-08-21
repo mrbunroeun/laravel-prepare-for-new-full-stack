@@ -948,8 +948,19 @@
             </div>
 
             <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-2">Answer <span class="text-rose-500">*</span></label>
-                <textarea id="faq-answer" required rows="4" placeholder="Enter detailed answer..." class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#2A5A8A]"></textarea>
+                <div class="flex items-center justify-between mb-1.5">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Answer <span class="text-rose-500">*</span></label>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" onclick="insertFaqBullet()" class="px-2 py-0.5 bg-slate-100 hover:bg-[#2A5A8A] hover:text-white text-slate-700 rounded text-[11px] font-semibold transition-colors flex items-center gap-1 cursor-pointer" title="Add a bullet point item">
+                            <span>• Bullet Point</span>
+                        </button>
+                        <button type="button" onclick="insertFaqFacilitiesTemplate()" class="px-2 py-0.5 bg-slate-100 hover:bg-[#2A5A8A] hover:text-white text-slate-700 rounded text-[11px] font-semibold transition-colors cursor-pointer" title="Insert facilities template">
+                            <span>Facilities Template</span>
+                        </button>
+                    </div>
+                </div>
+                <textarea id="faq-answer" required rows="6" placeholder="Facilities vary by property and may include:&#10;&#10;• Swimming Pool&#10;• Fitness Center&#10;• Panoramic River View&#10;• Parking&#10;• Security&#10;• Elevator Access&#10;• Wi-Fi" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#2A5A8A] font-sans leading-relaxed"></textarea>
+                <p class="text-[11px] text-slate-400 mt-1">Tip: Use bullet items (lines starting with <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-600 font-mono">•</code> or <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-600 font-mono">-</code>) or multiple paragraphs.</p>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
@@ -1142,6 +1153,42 @@
         const leftFaqs = faqsData.filter(f => f.column === 'left' && f.status === 'published');
         const rightFaqs = faqsData.filter(f => f.column === 'right' && f.status === 'published');
 
+        function formatFaqAnswerHtml(text) {
+            if (!text) return '';
+            if (/<[a-z][\s\S]*>/i.test(text)) {
+                return text;
+            }
+            const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+            let html = '';
+            let inList = false;
+
+            for (let line of lines) {
+                const trimmed = line.trim();
+                const bulletMatch = trimmed.match(/^[\u2022\-\*]\s*(.+)$/);
+                if (bulletMatch) {
+                    if (!inList) {
+                        inList = true;
+                        html += '<ul class="list-disc pl-5 my-1.5 space-y-1">';
+                    }
+                    html += `<li class="leading-relaxed">${escapeHtml(bulletMatch[1])}</li>`;
+                } else {
+                    if (inList) {
+                        html += '</ul>';
+                        inList = false;
+                    }
+                    if (trimmed === '') {
+                        html += '<div class="h-1.5"></div>';
+                    } else {
+                        html += `<p class="leading-relaxed">${escapeHtml(trimmed)}</p>`;
+                    }
+                }
+            }
+            if (inList) {
+                html += '</ul>';
+            }
+            return html;
+        }
+
         function renderColumn(items, isLeft) {
             return `
                 <div class="faq-column flex flex-col gap-2 w-full">
@@ -1162,11 +1209,11 @@
                                         <path d="M6 4l8 6-8 6V4z" />
                                     </svg>
                                 </button>
-                                <div class="preview-faq-panel overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-[400px]' : 'max-h-0'}">
+                                <div class="preview-faq-panel overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-[600px]' : 'max-h-0'}">
                                     <div class="${isOpen ? 'bg-[#1479B9] text-white' : 'bg-white text-black/70'} px-5 py-4 sm:px-6 sm:py-5 transition-colors duration-200">
-                                        <p class="text-[13px] sm:text-[13.5px] leading-relaxed">
-                                            ${escapeHtml(f.answer)}
-                                        </p>
+                                        <div class="text-[13px] sm:text-[13.5px] leading-relaxed">
+                                            ${formatFaqAnswerHtml(f.answer)}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1180,6 +1227,30 @@
             ${renderColumn(leftFaqs, true)}
             ${renderColumn(rightFaqs, false)}
         `;
+    }
+
+    function insertFaqBullet() {
+        const textarea = document.getElementById('faq-answer');
+        if (!textarea) return;
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const val = textarea.value;
+        const prefix = (start === 0 || val[start - 1] === '\n') ? '• ' : '\n• ';
+        textarea.value = val.substring(0, start) + prefix + val.substring(end);
+        textarea.focus();
+        textarea.selectionStart = textarea.selectionEnd = start + prefix.length;
+    }
+
+    function insertFaqFacilitiesTemplate() {
+        const textarea = document.getElementById('faq-answer');
+        if (!textarea) return;
+        const template = "Facilities vary by property and may include:\n\n• Swimming Pool\n• Fitness Center\n• Panoramic River View\n• Parking\n• Security\n• Elevator Access\n• Wi-Fi";
+        if (textarea.value.trim().length > 0) {
+            textarea.value = textarea.value + "\n\n" + template;
+        } else {
+            textarea.value = template;
+        }
+        textarea.focus();
     }
 
     function togglePreviewFaq(btn) {
