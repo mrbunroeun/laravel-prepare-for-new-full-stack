@@ -13,7 +13,7 @@
                 ['label' => 'Hospitality Services', 'url' => url('/services/hospitality-services'), 'pattern' => 'services/hospitality-services*'],
             ],
         ],
-        ['label' => 'Properties', 'url' => url('/properties'), 'pattern' => 'properties*'],
+        ['label' => 'Properties', 'url' => url('/properties'), 'pattern' => 'properties*', 'exclude' => 'properties/wealth-mansion*'],
         ['label' => 'Partners', 'url' => url('/partners'), 'pattern' => 'partners*'],
         ['label' => 'Insights', 'url' => url('/insights'), 'pattern' => 'insights*'],
         ['label' => 'Events', 'url' => url('/events'), 'pattern' => 'events*'],
@@ -44,6 +44,12 @@
                     @php
                         $pattern = is_array($item['pattern']) ? $item['pattern'] : [$item['pattern']];
                         $isActive = request()->is(...$pattern);
+                        if (!empty($item['exclude'])) {
+                            $excludePattern = is_array($item['exclude']) ? $item['exclude'] : [$item['exclude']];
+                            if (request()->is(...$excludePattern)) {
+                                $isActive = false;
+                            }
+                        }
                         $hasSubmenu = isset($item['submenu']);
                         if ($hasSubmenu && !$isActive) {
                             $isActive = collect($item['submenu'])->contains(function($sub) {
@@ -130,6 +136,12 @@
                 @php
                     $pattern = is_array($item['pattern']) ? $item['pattern'] : [$item['pattern']];
                     $isActive = request()->is(...$pattern);
+                    if (!empty($item['exclude'])) {
+                        $excludePattern = is_array($item['exclude']) ? $item['exclude'] : [$item['exclude']];
+                        if (request()->is(...$excludePattern)) {
+                            $isActive = false;
+                        }
+                    }
                     $hasSubmenu = isset($item['submenu']);
                 @endphp
                 <li class="w-full text-left">
