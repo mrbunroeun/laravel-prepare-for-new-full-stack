@@ -895,6 +895,12 @@ Route::get('/api/comments', [\App\Http\Controllers\CommentController::class, 'in
 Route::post('/api/comments/{comment}/approve', [\App\Http\Controllers\CommentController::class, 'approve']);
 Route::post('/api/comments/{comment}/reject', [\App\Http\Controllers\CommentController::class, 'reject']);
 Route::delete('/api/comments/{comment}', [\App\Http\Controllers\CommentController::class, 'destroy']);
+
+// Authentication Routes
+Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
+Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
 Route::get('/dashboard/pages/latest-activities', function () {
     return view('dashboard.pages.latest_activities', [
         'pageTitle' => 'Latest Activities',
