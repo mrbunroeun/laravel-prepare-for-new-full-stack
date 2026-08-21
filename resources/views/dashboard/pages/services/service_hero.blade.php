@@ -80,6 +80,8 @@
                 <span class="whitespace-nowrap">{{ $pageSlug === 'property-leasing' ? 'Daily & Weekly Rentals' : 'Featured Properties' }}</span>
                 <span class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full" id="tab-badge-properties-count">...</span>
             </button>
+            @endif
+
             @if($pageSlug === 'hospitality-services')
             <button type="button" onclick="switchServiceTab('charges', event)" id="service-tab-btn-charges" class="service-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
