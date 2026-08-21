@@ -448,53 +448,82 @@
         updateHeroPreview();
     }
 
+    const availableAppRoutes = [
+        { label: 'Browse Properties (/properties)', url: '/properties' },
+        { label: 'Contact Us (/contact-us)', url: '/contact-us' },
+        { label: 'Apply As Sale Agent (/partners#application-form-section)', url: '/partners#application-form-section' },
+        { label: 'About Us (/about-us)', url: '/about-us' },
+        { label: 'Services Overview (/service)', url: '/service' },
+        { label: 'Property Management (/services/property-management)', url: '/services/property-management' },
+        { label: 'Property Sales (/services/property-sales)', url: '/services/property-sales' },
+        { label: 'Property Leasing (/services/property-leasing)', url: '/services/property-leasing' },
+        { label: 'Hospitality Services (/services/hospitality-services)', url: '/services/hospitality-services' },
+        { label: 'Daily & Weekly Rentals (/services/property-leasing/daily-weekly-rentals)', url: '/services/property-leasing/daily-weekly-rentals' },
+        { label: 'Wealth Mansion (/properties/wealth-mansion)', url: '/properties/wealth-mansion' },
+        { label: 'Insights & News (/insights)', url: '/insights' },
+        { label: 'Events (/events)', url: '/events' }
+    ];
+
     function renderHeroButtonsInputs() {
         const container = document.getElementById('hero-buttons-container');
         const trigger = document.getElementById('add-btn-trigger');
         if (!container) return;
         if (trigger) trigger.style.display = heroButtonsData.length >= 3 ? 'none' : 'inline-flex';
 
-        container.innerHTML = heroButtonsData.map((btn, idx) => {
+        container.innerHTML = heroButtonsData.map((btn, index) => {
             const isCustom = !availableAppRoutes.some(r => r.url === btn.url);
             return `
-                <div class="p-4 bg-white rounded-lg border border-slate-300 flex flex-col md:flex-row gap-3 items-start md:items-center justify-between">
-                    <div class="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-600 mb-1">Button #${idx + 1} Text</label>
-                            <input type="text" value="${escapeHtml(btn.text || btn.label || '')}" oninput="updateHeroBtnText(${idx}, this.value)" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-300 rounded text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-600 mb-1">Destination Route</label>
-                            <select onchange="updateHeroBtnRoute(${idx}, this.value)" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-300 rounded text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
-                                ${availableAppRoutes.map(r => `
-                                    <option value="${r.url}" ${(!isCustom && btn.url === r.url) || (isCustom && r.url === 'custom') ? 'selected' : ''}>${r.label}</option>
-                                `).join('')}
-                            </select>
-                        </div>
+                <div class="p-3.5 bg-white border border-slate-200 rounded-lg shadow-xs flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <span class="w-6 h-6 rounded-full bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold text-xs flex items-center justify-center shrink-0">
+                        ${index + 1}
+                    </span>
+
+                    <div class="flex-1 min-w-0">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Button Label</label>
+                        <input type="text" value="${escapeHtml(btn.text || btn.label || '')}" oninput="updateHeroBtnText(${index}, this.value)" placeholder="e.g. Browse Properties" class="w-full px-3 py-2 bg-[#f8fafc] border border-slate-300 rounded-md text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
                     </div>
-                    ${isCustom ? `
-                    <div class="w-full md:w-auto">
-                        <label class="block text-[11px] font-bold text-slate-600 mb-1">Custom Link</label>
-                        <input type="text" value="${escapeHtml(btn.url || '')}" oninput="updateHeroBtnCustomUrl(${idx}, this.value)" class="px-3 py-1.5 bg-slate-50 border border-slate-300 rounded text-xs text-slate-900 focus:outline-none">
+
+                    <div class="flex-1 min-w-0">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">Target Route Page</label>
+                        <select onchange="updateHeroBtnRoute(${index}, this.value)" class="w-full px-3 py-2 bg-[#f8fafc] border border-slate-300 rounded-md text-xs text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                            ${availableAppRoutes.map(route => `
+                                <option value="${route.url}" ${(btn.url === route.url) ? 'selected' : ''}>
+                                    ${route.label}
+                                </option>
+                            `).join('')}
+                        </select>
                     </div>
-                    ` : ''}
-                    <button type="button" onclick="removeHeroButton(${idx})" class="self-end md:self-center p-2 text-slate-400 hover:text-rose-600 transition-colors">✕</button>
+
+                    <div class="sm:pt-4 flex items-center justify-end">
+                        <button type="button" onclick="removeHeroButton(${index})" class="p-2 rounded-md hover:bg-rose-50 text-slate-400 hover:text-rose-600 transition-colors cursor-pointer" title="Remove Button">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             `;
         }).join('');
+
+        updateHeroPreview();
     }
 
     function addHeroButton() {
-        if (heroButtonsData.length >= 3) return;
-        heroButtonsData.push({ text: 'New Button', url: '/properties' });
+        if (heroButtonsData.length >= 3) {
+            if (typeof showToast === 'function') showToast('Maximum 3 buttons allowed');
+            return;
+        }
+        heroButtonsData.push({ text: 'Contact Us', url: '/contact-us' });
         renderHeroButtonsInputs();
-        updateHeroPreview();
     }
 
     function removeHeroButton(index) {
+        if (heroButtonsData.length <= 1) {
+            if (typeof showToast === 'function') showToast('Hero section should have at least 1 button');
+            return;
+        }
         heroButtonsData.splice(index, 1);
-        renderHeroBulletsInputs();
-        updateHeroPreview();
+        renderHeroButtonsInputs();
     }
 
     function updateHeroBtnText(index, val) {
@@ -503,16 +532,6 @@
     }
 
     function updateHeroBtnRoute(index, val) {
-        if (val === 'custom') {
-            heroButtonsData[index].url = '/custom-link';
-        } else {
-            heroButtonsData[index].url = val;
-        }
-        renderHeroButtonsInputs();
-        updateHeroPreview();
-    }
-
-    function updateHeroBtnCustomUrl(index, val) {
         heroButtonsData[index].url = val;
         updateHeroPreview();
     }

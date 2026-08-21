@@ -547,28 +547,47 @@ Route::get('/services/properties-leasing-list/daily-weekly-rentals', function ()
     return view('pages.services.properties_leasing_list.daily_&_weekly_rentals');
 });
 Route::get('/services/property-leasing/daily-weekly-rentals/studio-room', function () {
-    return view('pages.services.properties_leasing_list.detail_img.studio_room');
+    return view('pages.services.properties_leasing_list.detail_img.studio_room', [
+        'roomSlug' => 'daily-weekly-rentals-studio-room'
+    ]);
 });
 Route::get('/services/properties-leasing-list/detail-img/studio-room', function () {
-    return view('pages.services.properties_leasing_list.detail_img.studio_room');
+    return view('pages.services.properties_leasing_list.detail_img.studio_room', [
+        'roomSlug' => 'daily-weekly-rentals-studio-room'
+    ]);
 });
 
 Route::get('/services/property-leasing/daily-weekly-rentals/1-bedroom', function () {
-    return view('pages.services.properties_leasing_list.detail_img.studio_room');
+    return view('pages.services.properties_leasing_list.detail_img.1_bedroom', [
+        'roomSlug' => 'daily-weekly-rentals-1-bedroom'
+    ]);
 });
 Route::get('/services/properties-leasing-list/detail-img/1-bedroom', function () {
-    return view('pages.services.properties_leasing_list.detail_img.studio_room');
+    return view('pages.services.properties_leasing_list.detail_img.1_bedroom', [
+        'roomSlug' => 'daily-weekly-rentals-1-bedroom'
+    ]);
 });
 
 Route::get('/services/property-leasing/daily-weekly-rentals/2-bedroom-with-balcony', function () {
-    return view('pages.services.properties_leasing_list.detail_img.studio_room');
+    return view('pages.services.properties_leasing_list.detail_img.2_bedroom_with_balcony', [
+        'roomSlug' => 'daily-weekly-rentals-2-bedroom-with-balcony'
+    ]);
 });
 Route::get('/services/properties-leasing-list/detail-img/2-bedroom-with-balcony', function () {
-    return view('pages.services.properties_leasing_list.detail_img.studio_room');
+    return view('pages.services.properties_leasing_list.detail_img.2_bedroom_with_balcony', [
+        'roomSlug' => 'daily-weekly-rentals-2-bedroom-with-balcony'
+    ]);
 });
 
 Route::get('/services/property-leasing/daily-weekly-rentals/3-bedroom', function () {
-    return view('pages.services.properties_leasing_list.detail_img.studio_room');
+    return view('pages.services.properties_leasing_list.detail_img.3_bedroom', [
+        'roomSlug' => 'daily-weekly-rentals-3-bedroom'
+    ]);
+});
+Route::get('/services/properties-leasing-list/detail-img/3-bedroom', function () {
+    return view('pages.services.properties_leasing_list.detail_img.3_bedroom', [
+        'roomSlug' => 'daily-weekly-rentals-3-bedroom'
+    ]);
 });
 // ==========================================
 // Dashboard Routes (Frontend UI Preview & Backend)
