@@ -392,19 +392,6 @@
         { text: 'Contact Us', url: '/contact-us' }
     ];
 
-    const availableAppRoutes = [
-        { label: 'Browse Properties', url: '/properties' },
-        { label: 'Contact Us', url: '/contact-us' },
-        { label: 'About Us', url: '/about-us' },
-        { label: 'Services - Property Management', url: '/services/property-management' },
-        { label: 'Services - Property Sales', url: '/services/property-sales' },
-        { label: 'Services - Property Leasing', url: '/services/property-leasing' },
-        { label: 'Services - Hospitality Services', url: '/services/hospitality-services' },
-        { label: 'Properties - Wealth Mansion', url: '/properties/wealth-mansion' },
-        { label: 'Daily & Weekly Rentals', url: '/services/property-leasing/daily-weekly-rentals' },
-        { label: 'Custom URL...', url: 'custom' }
-    ];
-
     function formatHeroTagline(style) {
         const selection = window.getSelection();
         if (!selection || !selection.rangeCount) return;
