@@ -229,6 +229,90 @@ class ServiceFeaturedPropertyController extends Controller
             return;
         }
 
+        if ($page === 'daily-weekly-rentals') {
+            $rentalDefaults = [
+                [
+                    'page' => 'daily-weekly-rentals',
+                    'grade' => 'A',
+                    'title' => 'Studio Room',
+                    'subtitle' => 'Compact & Practical Living',
+                    'description' => "A practical choice for individuals and short-term stays.\n\nSuitable for:\n• Business travelers\n• Solo travelers\n• Couples\n• Short-term residents",
+                    'status' => 'From $35/day | $210/week | $650/month',
+                    'image' => 'services/propertis_leasing/all part.png',
+                    'detail_images' => [
+                        'services/propertis_leasing/available rental units/detail_img/hero_section.png',
+                        'services/wealth_mansion/discovered/wealth-mainson-recovered4.png',
+                        'services/propertis_leasing/bedroom.png',
+                        'services/propertis_leasing/all part.png',
+                        'services/wealth_mansion/hero_img/wealth-mainson-recovered.png'
+                    ],
+                    'link' => 'services/property-leasing/daily-weekly-rentals/studio-room',
+                    'link_text' => 'View Details',
+                    'sort_order' => 1,
+                    'publish_status' => 'published',
+                ],
+                [
+                    'page' => 'daily-weekly-rentals',
+                    'grade' => 'A',
+                    'title' => '1-Bedroom',
+                    'subtitle' => 'Comfortable One-Bedroom Residence',
+                    'description' => "Comfortable private living for individuals and couples.\n\nSuitable for:\n• Business professionals\n• Couples\n• Expatriates\n• Longer stays",
+                    'status' => 'From $45/day | $270/week | $850/month',
+                    'image' => 'services/propertis_leasing/all part.png',
+                    'detail_images' => [
+                        'services/propertis_leasing/available rental units/detail_img/hero_section.png',
+                        'services/wealth_mansion/discovered/wealth-mainson-recovered4.png',
+                        'services/propertis_leasing/bedroom.png',
+                        'services/propertis_leasing/all part.png'
+                    ],
+                    'link' => 'services/property-leasing/daily-weekly-rentals/1-bedroom',
+                    'link_text' => 'View Details',
+                    'sort_order' => 2,
+                    'publish_status' => 'published',
+                ],
+                [
+                    'page' => 'daily-weekly-rentals',
+                    'grade' => 'A',
+                    'title' => '2-Bedroom Balcony',
+                    'subtitle' => 'More Space with a Private Balcony',
+                    'description' => "More space for families, colleagues, or guests requiring an additional bedroom.\n\nSuitable for:\n• Small families\n• Business colleagues\n• Long-term residents\n• Seeking additional living space",
+                    'status' => 'From $70/day | $420/week | $1,300/month',
+                    'image' => 'services/propertis_leasing/all part.png',
+                    'detail_images' => [
+                        'services/propertis_leasing/all part.png',
+                        'services/propertis_leasing/bedroom.png',
+                        'services/wealth_mansion/discovered/wealth-mainson-recovered4.png'
+                    ],
+                    'link' => 'services/property-leasing/daily-weekly-rentals/2-bedroom-with-balcony',
+                    'link_text' => 'View Details',
+                    'sort_order' => 3,
+                    'publish_status' => 'published',
+                ],
+                [
+                    'page' => 'daily-weekly-rentals',
+                    'grade' => 'A',
+                    'title' => '3-Bedroom Suite',
+                    'subtitle' => 'Expansive Luxury Living Spaces',
+                    'description' => "Expansive living spaces designed for large families, executive relocations, and luxury comfort.\n\nSuitable for:\n• Large families\n• Executive relocations\n• Corporate leaders\n• Long-term luxury stays",
+                    'status' => 'From $110/day | $660/week | $2,100/month',
+                    'image' => 'services/propertis_leasing/all part.png',
+                    'detail_images' => [
+                        'services/propertis_leasing/all part.png',
+                        'services/wealth_mansion/hero_img/wealth-mainson-recovered.png',
+                        'services/wealth_mansion/discovered/wealth-mainson-recovered4.png'
+                    ],
+                    'link' => 'services/property-leasing/daily-weekly-rentals/3-bedroom',
+                    'link_text' => 'View Details',
+                    'sort_order' => 4,
+                    'publish_status' => 'published',
+                ],
+            ];
+            foreach ($rentalDefaults as $item) {
+                ServiceFeaturedProperty::create($item);
+            }
+            return;
+        }
+
         if ($page === 'property-leasing') {
             $leasingDefaults = [
                 [

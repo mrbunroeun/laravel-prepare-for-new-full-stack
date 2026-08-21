@@ -213,53 +213,53 @@
                     {{-- Dropdown Sub-Items (Choose Building/Room) --}}
                     <div id="daily-weekly-dropdown-menu" class="pl-4 space-y-1 transition-all duration-200 {{ $isDailyWeeklyActive ? '' : 'hidden' }}">
                         {{-- 1. All Rental Units Overview / Wealth Mansion --}}
-                        <a href="{{ url('/services/property-leasing/daily-weekly-rentals') }}" target="_blank"
-                            class="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
+                        <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals') }}" 
+                            class="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group {{ request()->is('dashboard/pages/services/properties-leasing-list/daily-weekly-rentals*') ? 'bg-[#1479B9] text-white font-bold' : 'text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white' }}">
                             <div class="flex items-center gap-2.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#F4DEAC]"></span>
+                                <span class="w-1.5 h-1.5 rounded-full {{ request()->is('dashboard/pages/services/properties-leasing-list/daily-weekly-rentals*') ? 'bg-[#F4DEAC]' : 'bg-slate-400' }}"></span>
                                 <span>Wealth Mansion Units</span>
                             </div>
-                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">View &rarr;</span>
+                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Manage &rarr;</span>
                         </a>
 
                         {{-- 2. Studio Room --}}
-                        <a href="{{ url('/services/property-leasing/daily-weekly-rentals/studio-room') }}" target="_blank"
+                        <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=studio') }}" 
                             class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
                             <div class="flex items-center gap-2.5">
                                 <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
                                 <span>Studio Room</span>
                             </div>
-                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">View &rarr;</span>
+                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
                         </a>
 
                         {{-- 3. 1 Bedroom --}}
-                        <a href="{{ url('/services/property-leasing/daily-weekly-rentals/1-bedroom') }}" target="_blank"
+                        <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=1bed') }}" 
                             class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
                             <div class="flex items-center gap-2.5">
                                 <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
                                 <span>1-Bedroom</span>
                             </div>
-                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">View &rarr;</span>
+                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
                         </a>
 
                         {{-- 4. 2-Bedroom with Balcony --}}
-                        <a href="{{ url('/services/property-leasing/daily-weekly-rentals/2-bedroom-with-balcony') }}" target="_blank"
+                        <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=2bed') }}" 
                             class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
                             <div class="flex items-center gap-2.5">
                                 <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
                                 <span>2-Bedroom Balcony</span>
                             </div>
-                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">View &rarr;</span>
+                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
                         </a>
 
                         {{-- 5. 3-Bedroom --}}
-                        <a href="{{ url('/services/property-leasing/daily-weekly-rentals/3-bedroom') }}" target="_blank"
+                        <a href="{{ url('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals?tab=rooms&room=3bed') }}" 
                             class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
                             <div class="flex items-center gap-2.5">
                                 <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
                                 <span>3-Bedroom Suite</span>
                             </div>
-                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">View &rarr;</span>
+                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">Edit &rarr;</span>
                         </a>
                     </div>
                 </div>

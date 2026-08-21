@@ -12,16 +12,32 @@ class HeroSectionController extends Controller
      */
     public function show(string $page = 'home')
     {
+        $defaultHeadline = 'Your Trusted Property Management & Hospitality Partner in Cambodia';
+        $defaultTagline1 = 'CWD';
+        $defaultTagline2 = 'Real Estate Agent & Developer';
+        $defaultHtml = null;
+        $defaultBullets = ['Flexible income', 'Strong brand', 'Real projects', 'Full sales support'];
+
+        if ($page === 'daily-weekly-rentals') {
+            $defaultHeadline = "Choose the Rental\nOption That Fits Your Stay";
+            $defaultTagline1 = 'Wealth';
+            $defaultTagline2 = 'Mansion';
+            $defaultHtml = 'Wealth <b>Mansion</b>';
+            $defaultBullets = ['Flexible Daily & Weekly Rates', 'Serviced Amenities', 'Prime City Location', 'VIP Hospitality Support'];
+        }
+
         $hero = HeroSection::firstOrCreate(
             ['page' => $page],
             [
-                'tagline_box1' => 'CWD',
-                'tagline_box1_style' => 'bold-gold',
-                'tagline_box2' => 'Real Estate Agent & Developer',
-                'tagline_box2_style' => 'light-gold',
-                'headline' => 'Your Trusted Property Management & Hospitality Partner in Cambodia',
+                'tagline_html' => $defaultHtml,
+                'show_tagline' => true,
+                'tagline_box1' => $defaultTagline1,
+                'tagline_box1_style' => 'light-gold',
+                'tagline_box2' => $defaultTagline2,
+                'tagline_box2_style' => 'bold-gold',
+                'headline' => $defaultHeadline,
                 'show_bullets' => false,
-                'bullets' => ['Flexible income', 'Strong brand', 'Real projects', 'Full sales support'],
+                'bullets' => $defaultBullets,
                 'buttons' => [
                     ['text' => 'Browse Properties', 'url' => '/properties'],
                     ['text' => 'Contact Us', 'url' => '/contact-us']

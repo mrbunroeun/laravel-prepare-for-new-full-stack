@@ -715,6 +715,14 @@ Route::get('/dashboard/pages/properties/uc88', function () {
     ]);
 });
 
+Route::get('/dashboard/pages/services/properties-leasing-list/daily-weekly-rentals', function () {
+    return view('dashboard.pages.properties.daily_weekly_rentals', [
+        'pageTitle' => 'Daily & Weekly Rentals',
+        'pageSlug' => 'daily-weekly-rentals',
+        'frontendUrl' => '/services/property-leasing/daily-weekly-rentals'
+    ]);
+});
+
 Route::get('/dashboard/pages/{slug}', function ($slug) {
     $titles = [
         'about-us' => 'About Us Page',

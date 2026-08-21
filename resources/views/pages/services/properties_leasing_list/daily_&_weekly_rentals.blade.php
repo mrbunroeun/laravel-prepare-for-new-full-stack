@@ -1,5 +1,19 @@
 @extends('layouts.app')
 @section('content')
+    @php
+        $heroData = \App\Models\HeroSection::where('page', 'daily-weekly-rentals')->first();
+        
+        $heroTaglineHtml = $heroData?->tagline_html ?: 'Wealth <b>Mansion</b>';
+        $heroHeadline = $heroData?->headline ?: "Choose the Rental\nOption That Fits Your Stay";
+        $heroShowBullets = $heroData?->show_bullets ?? false;
+        $heroBullets = (is_array($heroData?->bullets) && count($heroData->bullets) > 0) ? $heroData->bullets : ['Flexible Daily Rates', 'Serviced Amenities', 'Prime Location', 'VIP Support'];
+        
+        $heroButtons = (is_array($heroData?->buttons) && count($heroData->buttons) > 0) ? $heroData->buttons : [
+            ['text' => 'Browse Properties', 'url' => '/properties'],
+            ['text' => 'Contact Us', 'url' => '/contact-us']
+        ];
+    @endphp
+
     {{-- Hero image section --}}
     <section
         class="absolute top-0 left-0 w-full z-[100] h-[2000px] text-[3rem] text-[#2f6ba7] pointer-events-none overflow-hidden">
@@ -17,23 +31,28 @@
                 <div class="px-0 py-10">
                     <h2 class="flex items-center gap-4 text-[clamp(20px,3vw,30px)] font-bold mb-6">
                         <span class="h-[3px] w-15 bg-[#F4DEAC]"></span>
-                        <span class="text-[#F4DEAC] font-normal">Wealth <strong class="font-bold">Mansion</strong></span>
+                        <span class="text-[#F4DEAC] font-normal">{!! $heroTaglineHtml !!}</span>
                     </h2>
 
-                    <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-10">
-                        Choose the Rental<br>
-                        Option That Fits Your Stay
+                    <h1 class="text-white px-10 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold leading-tight mb-8 whitespace-pre-line">
+                        {{ $heroHeadline }}
                     </h1>
 
-                    <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto">
-                        <a href="{{ url('/properties') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                            Browse Properties
-                        </a>
-                        <a href="{{ url('/contact-us') }}"
-                            class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
-                            Contact Us
-                        </a>
+                    @if($heroShowBullets && count($heroBullets) > 0)
+                        <div class="text-[#EBD4A4] text-[13px] sm:text-[14px] px-10 sm:px-10 mb-8 flex flex-wrap items-center gap-x-3 gap-y-1">
+                            @foreach($heroBullets as $bullet)
+                                <span>• {{ $bullet }}</span>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    <div class="flex items-center px-10 sm:px-10 gap-4 pointer-events-auto flex-wrap">
+                        @foreach($heroButtons as $btn)
+                            <a href="{{ url($btn['url'] ?? '#') }}"
+                                class="border-[2px] border-[#F4DEAC] text-white text-[13px] sm:text-[15px] font-medium px-3 sm:px-6 py-3 hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+                                {{ $btn['text'] ?? $btn['label'] ?? 'Learn More' }}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -45,116 +64,179 @@
 
 
 
-    {{-- Featured Properties (Inline directly matching screenshot) --}}
+    {{-- Featured Properties (Inline directly matching screenshot with dynamic database loading) --}}
     @php
         $cardImage = asset('services/propertis_leasing/all part.png');
 
-        $featuredProjects = [
-            [
-                'title' => 'Studio',
-                'description' => 'A practical choice for individuals and short-term stays.',
-                'ideal_for' => [
-                    'Business travelers',
-                    'Solo travelers',
-                    'Couples',
-                    'Short-term residents',
+        $dbRentalUnits = \App\Models\ServiceFeaturedProperty::where('page', 'daily-weekly-rentals')
+            ->where('publish_status', 'published')
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('id', 'asc')
+            ->get();
+
+        if ($dbRentalUnits->isNotEmpty()) {
+            $featuredProjects = $dbRentalUnits->map(function ($item) {
+                // Parse description and ideal_for bullets
+                $lines = explode("\n", $item->description ?? '');
+                $descLines = [];
+                $idealFor = [];
+                $foundIdeal = false;
+                foreach ($lines as $line) {
+                    $trimmed = trim($line);
+                    if (stripos($trimmed, 'suitable for:') !== false || stripos($trimmed, 'ideal for:') !== false) {
+                        $foundIdeal = true;
+                        continue;
+                    }
+                    if ($foundIdeal && $trimmed) {
+                        $idealFor[] = preg_replace('/^[-•*]\s*/', '', $trimmed);
+                    } elseif (!$foundIdeal && $trimmed) {
+                        $descLines[] = $trimmed;
+                    }
+                }
+
+                $imgSrc = $item->image;
+                if (!empty($item->detail_images) && is_array($item->detail_images) && count($item->detail_images) > 0) {
+                    $imgSrc = $item->detail_images[0];
+                }
+                if ($imgSrc && !str_starts_with($imgSrc, 'http://') && !str_starts_with($imgSrc, 'https://')) {
+                    $imgSrc = str_starts_with($imgSrc, 'storage/') ? asset($imgSrc) : asset(ltrim($imgSrc, '/'));
+                }
+
+                $targetLink = $item->link ?? 'services/property-leasing/daily-weekly-rentals/studio-room';
+                if (!str_starts_with($targetLink, 'http://') && !str_starts_with($targetLink, 'https://')) {
+                    $targetLink = url(ltrim($targetLink, '/'));
+                }
+
+                return [
+                    'title' => $item->title,
+                    'description' => implode(' ', $descLines) ?: ($item->subtitle ?? ''),
+                    'ideal_for' => !empty($idealFor) ? $idealFor : ['Business travelers', 'Couples', 'Solo travelers', 'Short-term residents'],
+                    'pricing' => [
+                        'daily' => [
+                            'price' => 'From $35/day',
+                            'desc' => 'Suitable for short-term stays, business trips, and visitors to Phnom Penh.',
+                        ],
+                        'weekly' => [
+                            'price' => 'From $210/week',
+                            'desc' => 'Flexible weekly rates including housekeeping and high-speed internet access.',
+                        ],
+                        'monthly' => [
+                            'price' => 'From $650/month',
+                            'desc' => 'Best value for professionals and expatriates with flexible lease terms.',
+                        ],
+                    ],
+                    'link' => $targetLink,
+                    'image' => $imgSrc ?: asset('services/propertis_leasing/all part.png'),
+                ];
+            })->toArray();
+        } else {
+            $featuredProjects = [
+                [
+                    'title' => 'Studio',
+                    'description' => 'A practical choice for individuals and short-term stays.',
+                    'ideal_for' => [
+                        'Business travelers',
+                        'Solo travelers',
+                        'Couples',
+                        'Short-term residents',
+                    ],
+                    'pricing' => [
+                        'daily' => [
+                            'price' => 'From $35/day',
+                            'desc' => 'Suitable for short-term stays, business trips, and visitors to Phnom Penh.',
+                        ],
+                        'weekly' => [
+                            'price' => 'From $210/week',
+                            'desc' => 'Flexible weekly rates including housekeeping and high-speed internet access.',
+                        ],
+                        'monthly' => [
+                            'price' => 'From $650/month',
+                            'desc' => 'Best value for professionals and expatriates with flexible lease terms.',
+                        ],
+                    ],
+                    'link' => url('/services/property-leasing/daily-weekly-rentals/studio-room'),
+                    'image' => $cardImage,
                 ],
-                'pricing' => [
-                    'daily' => [
-                        'price' => 'From $35/day',
-                        'desc' => 'Suitable for short-term stays, business trips, and visitors to Phnom Penh.',
+                [
+                    'title' => '1 Bedroom',
+                    'description' => 'Comfortable private living for individuals and couples.',
+                    'ideal_for' => [
+                        'Business professionals',
+                        'Couples',
+                        'Expatriates',
+                        'Longer stays',
                     ],
-                    'weekly' => [
-                        'price' => 'From $210/week',
-                        'desc' => 'Flexible weekly rates including housekeeping and high-speed internet access.',
+                    'pricing' => [
+                        'daily' => [
+                            'price' => 'From $45/day',
+                            'desc' => 'Comfortable private residence designed for short leisure or business visits.',
+                        ],
+                        'weekly' => [
+                            'price' => 'From $270/week',
+                            'desc' => 'Spacious one-bedroom living with full amenities and weekly linen service.',
+                        ],
+                        'monthly' => [
+                            'price' => 'From $850/month',
+                            'desc' => 'All-inclusive monthly living package with premium residential facilities.',
+                        ],
                     ],
-                    'monthly' => [
-                        'price' => 'From $650/month',
-                        'desc' => 'Best value for professionals and expatriates with flexible lease terms.',
-                    ],
+                    'link' => url('/services/property-leasing/daily-weekly-rentals/1-bedroom'),
+                    'image' => $cardImage,
                 ],
-                'link' => url('/services/property-leasing/daily-weekly-rentals/studio-room'),
-                'image' => $cardImage,
-            ],
-            [
-                'title' => '1 Bedroom',
-                'description' => 'Comfortable private living for individuals and couples.',
-                'ideal_for' => [
-                    'Business professionals',
-                    'Couples',
-                    'Expatriates',
-                    'Longer stays',
+                [
+                    'title' => '2-Bedroom with Balcony',
+                    'description' => 'More space for families, colleagues, or guests requiring an additional bedroom.',
+                    'ideal_for' => [
+                        'Small families',
+                        'Business colleagues',
+                        'Long-term residents',
+                        'Seeking additional living space',
+                    ],
+                    'pricing' => [
+                        'daily' => [
+                            'price' => 'From $70/day',
+                            'desc' => 'Generous 2-bedroom space with private balcony for families and groups.',
+                        ],
+                        'weekly' => [
+                            'price' => 'From $420/week',
+                            'desc' => 'Ideal for extended family stays and team projects with weekly servicing.',
+                        ],
+                        'monthly' => [
+                            'price' => 'From $1,300/month',
+                            'desc' => 'Premium corner residences with panoramic city views and dedicated management.',
+                        ],
+                    ],
+                    'link' => url('/services/property-leasing/daily-weekly-rentals/2-bedroom-with-balcony'),
+                    'image' => $cardImage,
                 ],
-                'pricing' => [
-                    'daily' => [
-                        'price' => 'From $45/day',
-                        'desc' => 'Comfortable private residence designed for short leisure or business visits.',
+                [
+                    'title' => '3-Bedroom',
+                    'description' => 'Expansive living spaces designed for large families, executive relocations, and luxury comfort.',
+                    'ideal_for' => [
+                        'Large families',
+                        'Executive relocations',
+                        'Corporate leaders',
+                        'Long-term luxury stays',
                     ],
-                    'weekly' => [
-                        'price' => 'From $270/week',
-                        'desc' => 'Spacious one-bedroom living with full amenities and weekly linen service.',
+                    'pricing' => [
+                        'daily' => [
+                            'price' => 'From $110/day',
+                            'desc' => 'Luxurious three-bedroom living designed for executive relocations and families.',
+                        ],
+                        'weekly' => [
+                            'price' => 'From $660/week',
+                            'desc' => 'Spacious suite accommodations with comprehensive housekeeping and concierge service.',
+                        ],
+                        'monthly' => [
+                            'price' => 'From $2,100/month',
+                            'desc' => 'Expansive residences with VIP hospitality support and priority facility access.',
+                        ],
                     ],
-                    'monthly' => [
-                        'price' => 'From $850/month',
-                        'desc' => 'All-inclusive monthly living package with premium residential facilities.',
-                    ],
+                    'link' => url('/services/property-leasing/daily-weekly-rentals/3-bedroom'),
+                    'image' => $cardImage,
                 ],
-                'link' => url('/services/property-leasing/daily-weekly-rentals/1-bedroom'),
-                'image' => $cardImage,
-            ],
-            [
-                'title' => '2-Bedroom with Balcony',
-                'description' => 'More space for families, colleagues, or guests requiring an additional bedroom.',
-                'ideal_for' => [
-                    'Small families',
-                    'Business colleagues',
-                    'Long-term residents',
-                    'Seeking additional living space',
-                ],
-                'pricing' => [
-                    'daily' => [
-                        'price' => 'From $70/day',
-                        'desc' => 'Generous 2-bedroom space with private balcony for families and groups.',
-                    ],
-                    'weekly' => [
-                        'price' => 'From $420/week',
-                        'desc' => 'Ideal for extended family stays and team projects with weekly servicing.',
-                    ],
-                    'monthly' => [
-                        'price' => 'From $1,300/month',
-                        'desc' => 'Premium corner residences with panoramic city views and dedicated management.',
-                    ],
-                ],
-                'link' => url('/services/property-leasing/daily-weekly-rentals/2-bedroom-with-balcony'),
-                'image' => $cardImage,
-            ],
-            [
-                'title' => '3-Bedroom',
-                'description' => 'Expansive living spaces designed for large families, executive relocations, and luxury comfort.',
-                'ideal_for' => [
-                    'Large families',
-                    'Executive relocations',
-                    'Corporate leaders',
-                    'Long-term luxury stays',
-                ],
-                'pricing' => [
-                    'daily' => [
-                        'price' => 'From $110/day',
-                        'desc' => 'Luxurious three-bedroom living designed for executive relocations and families.',
-                    ],
-                    'weekly' => [
-                        'price' => 'From $660/week',
-                        'desc' => 'Spacious suite accommodations with comprehensive housekeeping and concierge service.',
-                    ],
-                    'monthly' => [
-                        'price' => 'From $2,100/month',
-                        'desc' => 'Expansive residences with VIP hospitality support and priority facility access.',
-                    ],
-                ],
-                'link' => url('/services/property-leasing/daily-weekly-rentals/3-bedroom'),
-                'image' => $cardImage,
-            ],
-        ];
+            ];
+        }
     @endphp
 
     <section id="featured-properties-section" class="relative w-full bg-[#2A5A8A] z-[300] mt-0 pt-20 sm:pt-24 lg:pt-32 pb-16 sm:pb-20 scroll-mt-6 overflow-x-clip">
