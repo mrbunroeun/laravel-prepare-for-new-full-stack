@@ -209,10 +209,10 @@
                     @endforeach
                 </div>
 
-                {{-- Row 2: 3 cards centered with the exact same width as row 1 --}}
-                <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+                {{-- Row 2: 3 columns --}}
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     @foreach ($whyChooseRowTwo as $feature)
-                        <div class="why-choose-card relative border-[2px] border-[#2A5A8A] bg-white p-6 sm:p-8 flex flex-col justify-start w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]"
+                        <div class="why-choose-card relative border-[2px] border-[#2A5A8A] bg-white p-6 sm:p-8 flex flex-col justify-start"
                             data-scroll-reveal="fade">
                             <span class="text-[20px] sm:text-[22px] font-bold text-[#2A5A8A] mb-3 leading-none">
                                 {{ $feature['number'] }}

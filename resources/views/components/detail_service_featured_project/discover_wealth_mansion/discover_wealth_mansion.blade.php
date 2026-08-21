@@ -24,18 +24,17 @@
 <section class="relative bg-white px-6 sm:px-10 lg:px-14 py-14 lg:py-20 overflow-x-clip">
     <div class="max-w-[1400px] mx-auto">
 
-        {{-- Heading --}}
-        <div class="mb-8 lg:mb-10" data-scroll-reveal="left">
-            <h2 class="text-[#2A5A8A] text-[clamp(22px,3vw,30px)] leading-tight">
-                <span class="font-normal block">Discover</span>
-                <span class="font-bold block">Wealth Mansion</span>
-            </h2>
-        </div>
+        {{-- Heading and Navigation Arrows Header --}}
+        <div class="flex items-center justify-between gap-4 mb-8 lg:mb-10">
+            <div data-scroll-reveal="left">
+                <h2 class="text-[#2A5A8A] text-[clamp(22px,3vw,30px)] leading-tight">
+                    <span class="font-normal block">Discover</span>
+                    <span class="font-bold block">Wealth Mansion</span>
+                </h2>
+            </div>
 
-        <div class="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-10">
-
-            {{-- Navigation arrows: order-1 puts them above the track on mobile/tablet; lg:order-2 moves them to the right on desktop. --}}
-            <div class="flex items-center justify-center gap-3 shrink-0 order-1 lg:order-2" data-scroll-reveal="fade-up">
+            {{-- Navigation arrows: aligned on the right side of the heading --}}
+            <div class="flex items-center gap-3 shrink-0" data-scroll-reveal="fade-up">
                 <button id="discover-carousel-prev" type="button" aria-label="Previous image"
                     class="w-11 h-11 rounded-full border-[1.5px] border-[#2A5A8A] text-[#2A5A8A] flex items-center justify-center cursor-pointer
                     transition-all duration-300 hover:bg-[#2A5A8A] hover:text-white hover:scale-105
@@ -55,11 +54,13 @@
                     </svg>
                 </button>
             </div>
+        </div>
 
+        <div>
             {{-- Height wrapper --}}
             <div id="discover-carousel-height-wrapper"
                 data-scroll-reveal="right"
-                class="w-full lg:flex-1 lg:w-[80%] mx-auto overflow-hidden transition-[height] duration-500 ease-in-out order-2 lg:order-1">
+                class="w-full mx-auto overflow-hidden transition-[height] duration-500 ease-in-out">
 
                 {{-- Image track: scrollable with hidden scrollbars, showing 4 items in view --}}
                 <div id="discover-carousel-track"
@@ -75,7 +76,7 @@
                             data-index="{{ $index }}" aria-label="Show image {{ $index + 1 }} as active"
                             aria-current="{{ $index === 0 ? 'true' : 'false' }}">
                             <img src="{{ $image }}" alt="Wealth Mansion view {{ $index + 1 }}"
-                                class="w-full h-full min-w-full min-h-full object-fill transition-transform duration-500 ease-in-out">
+                                class="w-full h-full min-w-full min-h-full object-fill block transition-transform duration-500 ease-in-out">
                         </button>
                     @endforeach
                 </div>
