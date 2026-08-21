@@ -241,13 +241,20 @@
                             snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pr-6 sm:pr-10 lg:pr-[120px]">
 
                         @foreach ($rentalProperties as $property)
+                            @php
+                                $targetUrl = $property['link'];
+                                if (!str_starts_with($targetUrl, 'http://') && !str_starts_with($targetUrl, 'https://')) {
+                                    $targetUrl = url(ltrim($targetUrl, '/'));
+                                }
+                            @endphp
                             <article
                                 class="rental-option-card group shrink-0 snap-start flex flex-col
                                     w-[82vw] max-w-[310px] sm:w-[280px] lg:w-[285px] xl:w-[300px]
                                     bg-white rounded-none overflow-hidden cursor-pointer shadow-md
                                     transition-all duration-300 ease-out hover:-translate-y-1
                                     focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2"
-                                data-link="{{ $property['link'] }}"
+                                data-link="{{ $targetUrl }}"
+                                onclick="window.location.href='{{ $targetUrl }}'"
                                 tabindex="0" role="link" aria-label="View details for {{ $property['title'] }}">
 
                                 <div class="relative h-[180px] sm:h-[190px] w-full overflow-hidden shrink-0">
@@ -256,7 +263,7 @@
                                 </div>
 
                                 <div class="px-5 py-5 sm:px-6 sm:py-6 flex flex-col grow">
-                                    <h3 class="text-[#2A5A8A] text-[17px] xl:text-[18px] font-bold leading-snug mb-1.5">
+                                    <h3 class="text-[#2A5A8A] text-[17px] xl:text-[18px] font-bold leading-snug mb-1.5 group-hover:text-[#1479B9] transition-colors">
                                         {{ $property['title'] }}
                                     </h3>
 
@@ -272,7 +279,7 @@
                                         {{ $property['status'] }}
                                     </p>
 
-                                    <a href="{{ $property['link'] }}"
+                                    <a href="{{ $targetUrl }}"
                                         class="rental-card-link relative z-10 mt-auto text-[#2A5A8A] text-[13px] xl:text-[13.5px] font-semibold
                                             inline-flex items-center gap-1.5 w-max
                                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2A5A8A] focus-visible:ring-offset-2">

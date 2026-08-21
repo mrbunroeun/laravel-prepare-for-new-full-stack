@@ -187,6 +187,82 @@
                         </a>
                     </div>
                 </div>
+
+                {{-- Daily & Weekly Rentals Dropdown (Positioned cleanly BELOW Featured Properties) --}}
+                @php
+                    $isDailyWeeklyActive = request()->is('dashboard/pages/properties/daily-weekly-rentals*') || request()->is('dashboard/pages/services/properties-leasing-list*');
+                @endphp
+                <div class="mt-3 pt-3 border-t border-[#2A5A8A]/40 space-y-1">
+                    <div class="px-3 mb-1 text-[10px] font-bold uppercase tracking-wider text-[#F4DEAC]/60">Rental Units</div>
+                    <button type="button" onclick="toggleSidebarDailyWeeklyDropdown()" 
+                        class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all group {{ $isDailyWeeklyActive ? 'bg-[#2A5A8A] text-white shadow-sm' : 'text-slate-300 hover:bg-[#2A5A8A]/40 hover:text-white' }} cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
+                            </svg>
+                            <span class="font-semibold text-xs sm:text-sm">Daily &amp; Weekly Rentals</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[10px] font-bold bg-[#F4DEAC]/20 text-[#F4DEAC] px-1.5 py-0.5 rounded">4</span>
+                            <svg id="daily-weekly-dropdown-chevron" class="w-3.5 h-3.5 text-slate-300 transition-transform duration-200 {{ $isDailyWeeklyActive ? 'rotate-180 text-white' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </button>
+
+                    {{-- Dropdown Sub-Items (Choose Building/Room) --}}
+                    <div id="daily-weekly-dropdown-menu" class="pl-4 space-y-1 transition-all duration-200 {{ $isDailyWeeklyActive ? '' : 'hidden' }}">
+                        {{-- 1. All Rental Units Overview / Wealth Mansion --}}
+                        <a href="{{ url('/services/property-leasing/daily-weekly-rentals') }}" target="_blank"
+                            class="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#F4DEAC]"></span>
+                                <span>Wealth Mansion Units</span>
+                            </div>
+                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">View &rarr;</span>
+                        </a>
+
+                        {{-- 2. Studio Room --}}
+                        <a href="{{ url('/services/property-leasing/daily-weekly-rentals/studio-room') }}" target="_blank"
+                            class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                <span>Studio Room</span>
+                            </div>
+                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">View &rarr;</span>
+                        </a>
+
+                        {{-- 3. 1 Bedroom --}}
+                        <a href="{{ url('/services/property-leasing/daily-weekly-rentals/1-bedroom') }}" target="_blank"
+                            class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                <span>1-Bedroom</span>
+                            </div>
+                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">View &rarr;</span>
+                        </a>
+
+                        {{-- 4. 2-Bedroom with Balcony --}}
+                        <a href="{{ url('/services/property-leasing/daily-weekly-rentals/2-bedroom-with-balcony') }}" target="_blank"
+                            class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                <span>2-Bedroom Balcony</span>
+                            </div>
+                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">View &rarr;</span>
+                        </a>
+
+                        {{-- 5. 3-Bedroom --}}
+                        <a href="{{ url('/services/property-leasing/daily-weekly-rentals/3-bedroom') }}" target="_blank"
+                            class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-all group text-slate-300 hover:bg-[#2A5A8A]/30 hover:text-white">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                <span>3-Bedroom Suite</span>
+                            </div>
+                            <span class="text-[10px] text-slate-400 group-hover:text-[#F4DEAC]">View &rarr;</span>
+                        </a>
+                    </div>
+                </div>
             </nav>
         </div>
     </div>
@@ -220,6 +296,17 @@
     function toggleSidebarFeaturedPropsDropdown() {
         const menu = document.getElementById('featured-props-dropdown-menu');
         const chevron = document.getElementById('featured-props-dropdown-chevron');
+        if (menu) {
+            menu.classList.toggle('hidden');
+        }
+        if (chevron) {
+            chevron.classList.toggle('rotate-180');
+        }
+    }
+
+    function toggleSidebarDailyWeeklyDropdown() {
+        const menu = document.getElementById('daily-weekly-dropdown-menu');
+        const chevron = document.getElementById('daily-weekly-dropdown-chevron');
         if (menu) {
             menu.classList.toggle('hidden');
         }
