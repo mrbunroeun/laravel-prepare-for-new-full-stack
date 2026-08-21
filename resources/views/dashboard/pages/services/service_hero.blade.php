@@ -853,6 +853,7 @@
         <form id="service-property-form" onsubmit="handleServicePropertySubmit(event)" class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
             <input type="hidden" id="sprop-id" value="">
 
+            @if($pageSlug !== 'property-leasing')
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Target Grade <span class="text-rose-500">*</span></label>
@@ -867,6 +868,13 @@
                     <input type="text" id="sprop-status" required placeholder="e.g. 30% Available or Coming Soon" value="30% Available" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
                 </div>
             </div>
+            @else
+            <input type="hidden" id="sprop-grade" value="A">
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Status Badge <span class="text-rose-500">*</span></label>
+                <input type="text" id="sprop-status" required placeholder="e.g. 30% Available or Coming Soon" value="30% Available" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+            </div>
+            @endif
 
             <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Property Title <span class="text-rose-500">*</span></label>
@@ -892,7 +900,7 @@
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Page Link URL <span class="text-rose-500">*</span></label>
-                    <input type="text" id="sprop-link" required value="/services/properties/wealth-mansion" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                    <input type="text" id="sprop-link" required value="/services/property-leasing/daily-weekly-rentals" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
                 </div>
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A] mb-1">Button Text</label>
@@ -2258,7 +2266,7 @@
                     <div class="p-4 flex flex-col grow">
                         <div class="flex items-center justify-between gap-2 mb-1">
                             <h4 class="text-[#2A5A8A] font-bold text-sm leading-snug truncate">${escapeHtml(item.title)}</h4>
-                            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-[#2A5A8A] shrink-0">Grade ${escapeHtml(item.grade)}</span>
+                            ${pageSlug !== 'property-leasing' ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-[#2A5A8A] shrink-0">Grade ${escapeHtml(item.grade)}</span>` : ''}
                         </div>
                         <p class="text-slate-700 text-xs font-semibold mb-1 truncate">${escapeHtml(item.subtitle || '')}</p>
                         <p class="text-slate-500 text-[11px] leading-relaxed line-clamp-2 mb-3">${escapeHtml(item.description || '')}</p>
@@ -2278,29 +2286,33 @@
         const form = document.getElementById('service-property-form');
         form.reset();
 
+        const defaultLink = pageSlug === 'property-leasing' ? '/services/property-leasing/daily-weekly-rentals' : '/services/properties/wealth-mansion';
+
         if (property) {
-            document.getElementById('service-property-modal-title').innerHTML = '<span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span> Edit Featured Property';
+            document.getElementById('service-property-modal-title').innerHTML = '<span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span> ' + (pageSlug === 'property-leasing' ? 'Edit Rental Property' : 'Edit Featured Property');
             document.getElementById('sprop-id').value = property.id;
-            document.getElementById('sprop-grade').value = property.grade || 'A';
+            const gradeEl = document.getElementById('sprop-grade');
+            if (gradeEl) gradeEl.value = property.grade || 'A';
             document.getElementById('sprop-status').value = property.status || '30% Available';
             document.getElementById('sprop-title').value = property.title || '';
             document.getElementById('sprop-subtitle').value = property.subtitle || '';
             document.getElementById('sprop-description').value = property.description || '';
             document.getElementById('sprop-image-url').value = property.image || 'home/latest_activities/1img.png';
-            document.getElementById('sprop-link').value = property.link || '/services/properties/wealth-mansion';
+            document.getElementById('sprop-link').value = property.link || defaultLink;
             document.getElementById('sprop-link-text').value = property.link_text || 'View Project';
             document.getElementById('sprop-publish-status').value = property.publish_status || 'published';
             document.getElementById('sprop-sort-order').value = property.sort_order || 1;
         } else {
-            document.getElementById('service-property-modal-title').innerHTML = '<span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span> Add New Property';
+            document.getElementById('service-property-modal-title').innerHTML = '<span class="w-2 h-2 rounded-full bg-[#F4DEAC]"></span> ' + (pageSlug === 'property-leasing' ? 'Add New Rental Property' : 'Add New Property');
             document.getElementById('sprop-id').value = '';
-            document.getElementById('sprop-grade').value = (activePropertyGrade !== 'all' ? activePropertyGrade : 'A');
+            const gradeEl = document.getElementById('sprop-grade');
+            if (gradeEl) gradeEl.value = (activePropertyGrade !== 'all' ? activePropertyGrade : 'A');
             document.getElementById('sprop-status').value = '30% Available';
             document.getElementById('sprop-title').value = '';
             document.getElementById('sprop-subtitle').value = 'Premium Condominium Residences';
             document.getElementById('sprop-description').value = '';
             document.getElementById('sprop-image-url').value = 'home/latest_activities/1img.png';
-            document.getElementById('sprop-link').value = '/services/properties/wealth-mansion';
+            document.getElementById('sprop-link').value = defaultLink;
             document.getElementById('sprop-link-text').value = 'View Project';
             document.getElementById('sprop-publish-status').value = 'published';
             document.getElementById('sprop-sort-order').value = (servicePropertiesData.length + 1);
