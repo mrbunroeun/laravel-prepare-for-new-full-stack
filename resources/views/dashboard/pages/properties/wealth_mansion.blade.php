@@ -15,7 +15,7 @@
                 <span class="text-[#1479B9]">Wealth Mansion</span>
             </div>
             <h1 class="text-2xl sm:text-3xl font-extrabold text-[#163049] tracking-tight">Wealth Mansion Content Management</h1>
-            <p class="text-sm text-slate-500 mt-1">Manage hero banner, discover carousel images upload, text assets, and live previews.</p>
+            <p class="text-sm text-slate-500 mt-1">Manage hero banner, discover carousel gallery, unit types with multi-image scrolling (up to 5 photos), and live previews.</p>
         </div>
         <div class="flex items-center gap-3">
             <a href="{{ url('/properties/wealth-mansion') }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-300 text-slate-700 hover:text-[#2A5A8A] hover:border-[#2A5A8A] text-xs sm:text-sm font-semibold shadow-xs transition-all">
@@ -52,6 +52,15 @@
                 </svg>
                 <span class="whitespace-nowrap">Discover Wealth Mansion</span>
                 <span id="tab-badge-gallery-count" class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">...</span>
+            </button>
+
+            {{-- Tab 3: Unit Types (Multi-Image Click & Scroll) --}}
+            <button type="button" onclick="switchWealthTab('units', event)" id="wealth-tab-btn-units" class="wealth-tab-btn shrink-0 px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+                <span class="whitespace-nowrap">Unit Types (Multi-Images)</span>
+                <span id="tab-badge-units-count" class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">...</span>
             </button>
         </div>
 
@@ -203,7 +212,6 @@
     {{-- TAB 2: DISCOVER WEALTH MANSION (GALLERY CAROUSEL UPLOADER)                --}}
     {{-- ========================================================================= --}}
     <div id="wealth-tab-content-discover" class="wealth-tab-content hidden space-y-6">
-        {{-- Gallery Management Table & Toolbar --}}
         <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
                 <div>
@@ -223,13 +231,8 @@
                 </div>
             </div>
 
-            {{-- Grid of Gallery Items --}}
             <div class="mt-6">
-                <div id="gallery-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                    {{-- Dynamically populated --}}
-                </div>
-
-                {{-- Empty state --}}
+                <div id="gallery-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
                 <div id="gallery-empty-state" class="hidden py-12 text-center">
                     <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -241,29 +244,37 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        {{-- Live Frontend Preview Card for Discover Carousel --}}
+    {{-- ========================================================================= --}}
+    {{-- TAB 3: UNIT TYPES (STUDIO, 1-BED, 2-BED WITH UP TO 5 IMAGES PER CARD)     --}}
+    {{-- ========================================================================= --}}
+    <div id="wealth-tab-content-units" class="wealth-tab-content hidden space-y-6">
         <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
-                <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-[#1479B9]"></span>
-                    <h3 class="text-sm font-bold text-[#163049] uppercase tracking-wider">Live Discover Carousel Preview</h3>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+                <div>
+                    <h2 class="text-lg font-bold text-[#163049] flex items-center gap-2">
+                        <span>Wealth Mansion Unit Types</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#2A5A8A]/10 text-[#2A5A8A] font-semibold">Max 5 Images Each</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Manage Studio, 1-Bedroom, and 2-Bedroom unit cards. Upload up to 5 photos per unit for the interactive click & scroll carousel.</p>
                 </div>
-                <span class="text-xs text-slate-500">Exact representation of the frontend carousel</span>
+                <div class="flex items-center gap-3">
+                    <button type="button" onclick="openCreateUnitModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
+                        <svg class="w-4 h-4 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        <span>Add Unit Type</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="mt-6 bg-[#f8fafc] rounded-xl p-6 sm:p-10 border border-slate-200">
-                <div class="max-w-[1400px] mx-auto">
-                    <div class="mb-6">
-                        <h2 class="text-[#2A5A8A] text-2xl font-bold">
-                            <span class="font-normal block text-xl">Discover</span>
-                            <span>Wealth Mansion</span>
-                        </h2>
-                    </div>
-
-                    <div id="live-carousel-track" class="flex flex-row flex-nowrap items-start gap-4 overflow-x-auto pb-4 scroll-smooth [scrollbar-width:none]">
-                        {{-- Populated in real-time --}}
-                    </div>
+            {{-- Grid of Unit Cards --}}
+            <div class="mt-6">
+                <div id="units-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                <div id="units-empty-state" class="hidden py-12 text-center">
+                    <p class="text-sm font-semibold text-slate-700">No unit types found.</p>
+                    <button type="button" onclick="seedDefaultUnits()" class="mt-3 px-4 py-2 bg-[#2A5A8A] text-white text-xs font-semibold rounded-lg">Load Default Unit Types</button>
                 </div>
             </div>
         </div>
@@ -288,7 +299,6 @@
         <form onsubmit="handleGalleryFormSubmit(event)" id="gallery-form" class="p-6 space-y-4">
             <input type="hidden" id="gallery-edit-id" value="">
 
-            {{-- Image Preview & Upload --}}
             <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Image File</label>
                 <div class="flex items-center gap-4">
@@ -302,26 +312,22 @@
                 </div>
             </div>
 
-            {{-- Title / Caption --}}
             <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Title / Caption</label>
                 <input type="text" id="gallery-title-input" required placeholder="e.g. Wealth Mansion Skyline View" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
             </div>
 
-            {{-- Alt Text --}}
             <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Alt Text (SEO)</label>
                 <input type="text" id="gallery-alt-input" placeholder="e.g. Wealth Mansion luxury residential tower" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
             </div>
 
             <div class="grid grid-cols-2 gap-4">
-                {{-- Sort Order --}}
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Sort Order</label>
                     <input type="number" id="gallery-order-input" value="1" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
                 </div>
 
-                {{-- Status --}}
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Status</label>
                     <select id="gallery-status-input" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
@@ -343,24 +349,76 @@
     </div>
 </div>
 
-{{-- MODAL: Delete Gallery Image Confirmation --}}
-<div id="gallery-delete-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center p-4 transition-all duration-200 opacity-0">
-    <div id="gallery-delete-card" class="bg-white w-full max-w-sm rounded-2xl shadow-2xl border border-slate-100 p-6 text-center transform scale-95 transition-all duration-200">
-        <div class="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mx-auto mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-            </svg>
-        </div>
-        <h3 class="text-base font-bold text-[#163049] mb-1">Delete Gallery Image?</h3>
-        <p class="text-xs text-slate-500 mb-6">Are you sure you want to delete this image from the carousel? This action cannot be undone.</p>
-        <div class="flex items-center justify-center gap-3">
-            <button type="button" onclick="closeDeleteGalleryModal()" class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-                Cancel
-            </button>
-            <button type="button" onclick="confirmDeleteGalleryItem()" class="px-5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-sm transition-all">
-                Yes, Delete
+{{-- MODAL: Create / Edit Unit Type with Multi-Images (Max 5) --}}
+<div id="unit-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center p-4 transition-all duration-200 opacity-0">
+    <div id="unit-modal-card" class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform scale-95 transition-all duration-200 max-h-[90vh] flex flex-col">
+        <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50 shrink-0">
+            <div>
+                <h3 class="text-base font-bold text-[#163049]" id="unit-modal-title">Edit Unit Type</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Manage unit details and up to 5 clickable scroll images.</p>
+            </div>
+            <button type="button" onclick="closeUnitModal()" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200 flex items-center justify-center transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
             </button>
         </div>
+
+        <form onsubmit="handleUnitFormSubmit(event)" id="unit-form" class="p-6 space-y-5 overflow-y-auto grow">
+            <input type="hidden" id="unit-edit-id" value="">
+
+            {{-- Multi-Images Uploader (Up to 5) --}}
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                <div class="flex items-center justify-between">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Unit Photos (Max 5 Images for Scroll)</label>
+                    <span id="unit-img-count-badge" class="text-[11px] font-semibold text-slate-500">0 / 5</span>
+                </div>
+
+                <div id="unit-images-preview-strip" class="grid grid-cols-5 gap-2.5"></div>
+
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-600 mb-1">Add Image File</label>
+                    <input type="file" id="unit-multi-file-input" accept="image/*" onchange="addUnitFileToQueue(this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                    <p class="text-[10px] text-slate-400 mt-1">Upload up to 5 photos. The user can click left/right arrows to scroll through them.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Title (e.g. Studio Room)</label>
+                    <input type="text" id="unit-title-input" required class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Subtitle</label>
+                    <input type="text" id="unit-subtitle-input" placeholder="e.g. Compact & Practical Living" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Description & Suitable for List</label>
+                <textarea id="unit-desc-input" rows="4" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-xs text-slate-900 leading-relaxed focus:outline-none focus:border-[#2A5A8A]" placeholder="Layout description...&#10;Suitable for:&#10;Individual residents&#10;Business travelers"></textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Availability Tag</label>
+                    <input type="text" id="unit-status-input" value="XX Units Available" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Sort Order</label>
+                    <input type="number" id="unit-sort-input" value="1" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3 shrink-0">
+                <button type="button" onclick="closeUnitModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors">
+                    Cancel
+                </button>
+                <button type="submit" id="unit-save-btn" class="px-5 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all">
+                    Save Unit Type
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 @endsection
@@ -370,6 +428,7 @@
     const csrfToken = '{{ csrf_token() }}';
     const pageSlug = 'properties-wealth-mansion';
     const galleryPageSlug = 'wealth-mansion';
+    const unitsPageSlug = 'wealth-mansion-units';
 
     const availableRoutes = [
         { label: 'Browse Properties (/properties)', url: '/properties' },
@@ -417,7 +476,7 @@
     }
 
     // ==========================================
-    // HERO SECTION SCRIPTS (100% SAME AS ABOUT US)
+    // HERO SECTION SCRIPTS
     // ==========================================
     function formatHeroTagline(type) {
         const editor = document.getElementById('hero-tagline-editor');
@@ -445,10 +504,7 @@
         updateHeroPreview();
     }
 
-    let heroBulletsData = [
-        '30% available'
-    ];
-
+    let heroBulletsData = ['30% available'];
     let heroButtonsData = [
         { text: 'Browse Properties', url: '/properties' },
         { text: 'Contact Us', url: '/contact-us' }
@@ -668,10 +724,9 @@
     }
 
     // ==========================================
-    // DISCOVER WEALTH MANSION (GALLERY UPLOAD)
+    // DISCOVER WEALTH MANSION
     // ==========================================
     let galleryItemsData = [];
-    let galleryItemToDeleteId = null;
 
     function formatImageUrl(path) {
         if (!path) return '';
@@ -686,7 +741,6 @@
             if (result.success && Array.isArray(result.data)) {
                 galleryItemsData = result.data;
                 renderGalleryCards();
-                renderLiveCarousel();
             }
         } catch (err) {
             console.error('Error fetching gallery items:', err);
@@ -742,25 +796,6 @@
                 </div>
             `).join('');
         }
-    }
-
-    function renderLiveCarousel() {
-        const track = document.getElementById('live-carousel-track');
-        if (!track) return;
-
-        if (!galleryItemsData.length) {
-            track.innerHTML = '<p class="text-xs text-slate-400 py-4">No images in carousel.</p>';
-            return;
-        }
-
-        track.innerHTML = galleryItemsData.map((item, idx) => `
-            <div class="${idx === 0 ? 'w-[280px] h-[240px]' : 'w-[180px] h-[180px]'} shrink-0 bg-slate-900 rounded-none overflow-hidden relative border border-slate-300 shadow-sm transition-all">
-                <img src="${formatImageUrl(item.image)}" class="w-full h-full min-w-full min-h-full object-fill">
-                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-2 text-[10px] text-white font-medium line-clamp-1">
-                    ${escapeHtml(item.title || 'Wealth Mansion')}
-                </div>
-            </div>
-        `).join('');
     }
 
     function openCreateGalleryModal() {
@@ -850,9 +885,7 @@
             }
 
             let endpoint = `/api/project-galleries/${galleryPageSlug}`;
-            if (editId) {
-                endpoint = `/api/project-galleries/update/${editId}`;
-            }
+            if (editId) endpoint = `/api/project-galleries/update/${editId}`;
 
             const res = await fetch(endpoint, {
                 method: 'POST',
@@ -881,10 +914,165 @@
         }
     }
 
-    function promptDeleteGalleryItem(id) {
-        galleryItemToDeleteId = id;
-        const modal = document.getElementById('gallery-delete-modal');
-        const card = document.getElementById('gallery-delete-card');
+    // ==========================================
+    // UNIT TYPES (MULTI-IMAGE CLICK SCROLL)
+    // ==========================================
+    let unitItemsData = [];
+    let unitModalImagesQueue = []; // array of strings (existing urls) or files
+
+    async function fetchUnitItems() {
+        try {
+            const res = await fetch(`/api/service-featured-properties/${unitsPageSlug}`);
+            const result = await res.json();
+            if (result.success && Array.isArray(result.data)) {
+                unitItemsData = result.data;
+                if (!unitItemsData.length) {
+                    await seedDefaultUnits();
+                    return;
+                }
+                renderUnitCards();
+            }
+        } catch (err) {
+            console.error('Error fetching units:', err);
+        }
+    }
+
+    async function seedDefaultUnits() {
+        const defaults = [
+            {
+                grade: 'A',
+                title: 'Studio Room',
+                subtitle: 'Compact & Practical Living',
+                description: "The studio layout is suitable for individuals, couples, business professionals, and investors seeking a compact residential property.\n\nSuitable for:\nIndividual residents\nBusiness travelers\nYoung professionals\nRental investment",
+                status: 'XX Units Available',
+                image: 'services/propertis_leasing/bedroom.png',
+                detail_images: [
+                    'services/propertis_leasing/bedroom.png',
+                    'services/propertis_leasing/all part.png'
+                ],
+                sort_order: 1,
+                publish_status: 'published'
+            },
+            {
+                grade: 'A',
+                title: '1-bedroom',
+                subtitle: 'Comfortable One-Bedroom Residence',
+                description: "The 1-bedroom layout provides additional living space and privacy compared with a studio, making it suitable for both personal residence and rental investment.\n\nSuitable for:\nCouples\nProfessionals\nLong-term residents\nProperty investors",
+                status: 'XX Units Available',
+                image: 'services/propertis_leasing/bedroom.png',
+                detail_images: [
+                    'services/propertis_leasing/bedroom.png',
+                    'services/propertis_leasing/all part.png'
+                ],
+                sort_order: 2,
+                publish_status: 'published'
+            },
+            {
+                grade: 'A',
+                title: '2-Bedroom with Balcony',
+                subtitle: 'More Space with a Private Balcony',
+                description: "The 2-bedroom residence provides additional space for families or buyers seeking a larger condominium with outdoor balcony space.\n\nSuitable for:\nSmall families\nShared living\nLong-term residents\nInvestment purposes",
+                status: 'XX Units Available',
+                image: 'services/propertis_leasing/all part.png',
+                detail_images: [
+                    'services/propertis_leasing/all part.png',
+                    'services/propertis_leasing/bedroom.png'
+                ],
+                sort_order: 3,
+                publish_status: 'published'
+            }
+        ];
+
+        for (const d of defaults) {
+            const formData = new FormData();
+            formData.append('page', unitsPageSlug);
+            formData.append('grade', d.grade);
+            formData.append('title', d.title);
+            formData.append('subtitle', d.subtitle);
+            formData.append('description', d.description);
+            formData.append('status', d.status);
+            formData.append('image', d.image);
+            formData.append('detail_images', JSON.stringify(d.detail_images));
+            formData.append('sort_order', d.sort_order);
+            formData.append('publish_status', d.publish_status);
+
+            await fetch(`/api/service-featured-properties/${unitsPageSlug}`, {
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+                body: formData
+            });
+        }
+
+        const res = await fetch(`/api/service-featured-properties/${unitsPageSlug}`);
+        const result = await res.json();
+        if (result.success && Array.isArray(result.data)) {
+            unitItemsData = result.data;
+            renderUnitCards();
+        }
+    }
+
+    function renderUnitCards() {
+        const grid = document.getElementById('units-cards-grid');
+        const empty = document.getElementById('units-empty-state');
+        const badge = document.getElementById('tab-badge-units-count');
+        if (badge) badge.innerText = unitItemsData.length;
+
+        if (!unitItemsData.length) {
+            if (grid) grid.innerHTML = '';
+            if (empty) empty.classList.remove('hidden');
+            return;
+        }
+
+        if (empty) empty.classList.add('hidden');
+        if (grid) {
+            grid.innerHTML = unitItemsData.map((unit, idx) => {
+                const images = (Array.isArray(unit.detail_images) && unit.detail_images.length) ? unit.detail_images : [unit.image || 'services/propertis_leasing/bedroom.png'];
+                return `
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs flex flex-col justify-between group hover:shadow-md transition-all">
+                        <div class="relative w-full aspect-[16/10] bg-slate-900 overflow-hidden">
+                            <img src="${formatImageUrl(images[0])}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute bottom-2 left-2 flex items-center gap-1.5 bg-black/60 px-2 py-1 rounded">
+                                <span class="text-[10px] text-white font-semibold">${images.length} Photos</span>
+                            </div>
+                        </div>
+
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+                            <div>
+                                <h4 class="text-sm font-bold text-[#163049]">${escapeHtml(unit.title)}</h4>
+                                <p class="text-xs font-semibold text-slate-700 mt-0.5">${escapeHtml(unit.subtitle || '')}</p>
+                                <p class="text-xs text-[#2A5A8A] font-bold mt-2">${escapeHtml(unit.status || 'XX Units Available')}</p>
+                            </div>
+
+                            <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+                                <button type="button" onclick="openEditUnitModal(${unit.id})" class="px-3 py-1.5 bg-[#2A5A8A] hover:bg-[#163049] text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer">
+                                    Edit Photos (${images.length}/5) & Details
+                                </button>
+                                <button type="button" onclick="deleteUnitItem(${unit.id})" class="text-xs text-rose-500 hover:text-rose-700 font-semibold cursor-pointer">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+    }
+
+    function openCreateUnitModal() {
+        document.getElementById('unit-modal-title').innerText = 'Add Unit Type';
+        document.getElementById('unit-edit-id').value = '';
+        document.getElementById('unit-title-input').value = '';
+        document.getElementById('unit-subtitle-input').value = '';
+        document.getElementById('unit-desc-input').value = "The layout description...\n\nSuitable for:\nIndividual residents\nBusiness travelers";
+        document.getElementById('unit-status-input').value = 'XX Units Available';
+        document.getElementById('unit-sort-input').value = (unitItemsData.length + 1);
+        unitModalImagesQueue = [
+            { type: 'url', src: 'services/propertis_leasing/bedroom.png' }
+        ];
+        renderUnitModalImages();
+
+        const modal = document.getElementById('unit-modal');
+        const card = document.getElementById('unit-modal-card');
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         setTimeout(() => {
@@ -893,10 +1081,35 @@
         }, 10);
     }
 
-    function closeDeleteGalleryModal() {
-        galleryItemToDeleteId = null;
-        const modal = document.getElementById('gallery-delete-modal');
-        const card = document.getElementById('gallery-delete-card');
+    function openEditUnitModal(id) {
+        const unit = unitItemsData.find(u => u.id === id);
+        if (!unit) return;
+
+        document.getElementById('unit-modal-title').innerText = `Edit: ${unit.title}`;
+        document.getElementById('unit-edit-id').value = unit.id;
+        document.getElementById('unit-title-input').value = unit.title || '';
+        document.getElementById('unit-subtitle-input').value = unit.subtitle || '';
+        document.getElementById('unit-desc-input').value = unit.description || '';
+        document.getElementById('unit-status-input').value = unit.status || 'XX Units Available';
+        document.getElementById('unit-sort-input').value = unit.sort_order || 1;
+
+        const imgs = (Array.isArray(unit.detail_images) && unit.detail_images.length) ? unit.detail_images : [unit.image || 'services/propertis_leasing/bedroom.png'];
+        unitModalImagesQueue = imgs.slice(0, 5).map(src => ({ type: 'url', src: src }));
+        renderUnitModalImages();
+
+        const modal = document.getElementById('unit-modal');
+        const card = document.getElementById('unit-modal-card');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            card.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function closeUnitModal() {
+        const modal = document.getElementById('unit-modal');
+        const card = document.getElementById('unit-modal-card');
         modal.classList.add('opacity-0');
         card.classList.add('scale-95');
         setTimeout(() => {
@@ -905,29 +1118,131 @@
         }, 200);
     }
 
-    async function confirmDeleteGalleryItem() {
-        if (!galleryItemToDeleteId) return;
-        const id = galleryItemToDeleteId;
+    function renderUnitModalImages() {
+        const container = document.getElementById('unit-images-preview-strip');
+        const badge = document.getElementById('unit-img-count-badge');
+        if (badge) badge.innerText = `${unitModalImagesQueue.length} / 5`;
+
+        if (!container) return;
+        container.innerHTML = unitModalImagesQueue.map((item, idx) => {
+            const previewSrc = item.type === 'url' ? formatImageUrl(item.src) : item.preview;
+            return `
+                <div class="relative aspect-[4/3] bg-slate-900 rounded-lg overflow-hidden border border-slate-300 group shadow-xs">
+                    <img src="${previewSrc}" class="w-full h-full object-cover">
+                    <button type="button" onclick="removeUnitImageFromQueue(${idx})" class="absolute top-1 right-1 w-5 h-5 bg-rose-600 hover:bg-rose-700 text-white rounded-full flex items-center justify-center text-[10px] shadow cursor-pointer" title="Remove Photo">
+                        ✕
+                    </button>
+                    <span class="absolute bottom-1 left-1 bg-black/70 text-white text-[9px] font-bold px-1 rounded">#${idx + 1}</span>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function addUnitFileToQueue(input) {
+        if (input.files && input.files[0]) {
+            if (unitModalImagesQueue.length >= 5) {
+                if (typeof showToast === 'function') showToast('Maximum 5 images allowed per unit', 'warning');
+                input.value = '';
+                return;
+            }
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                unitModalImagesQueue.push({
+                    type: 'file',
+                    file: file,
+                    preview: e.target.result
+                });
+                renderUnitModalImages();
+                input.value = '';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function removeUnitImageFromQueue(idx) {
+        if (unitModalImagesQueue.length <= 1) {
+            if (typeof showToast === 'function') showToast('Unit should have at least 1 image', 'warning');
+            return;
+        }
+        unitModalImagesQueue.splice(idx, 1);
+        renderUnitModalImages();
+    }
+
+    async function handleUnitFormSubmit(e) {
+        e.preventDefault();
+        const editId = document.getElementById('unit-edit-id').value;
+        const saveBtn = document.getElementById('unit-save-btn');
+        if (saveBtn) {
+            saveBtn.disabled = true;
+            saveBtn.innerText = 'Saving...';
+        }
 
         try {
-            const res = await fetch(`/api/project-galleries/${id}`, {
-                method: 'DELETE',
+            const formData = new FormData();
+            formData.append('page', unitsPageSlug);
+            formData.append('grade', 'A');
+            formData.append('title', document.getElementById('unit-title-input').value);
+            formData.append('subtitle', document.getElementById('unit-subtitle-input').value);
+            formData.append('description', document.getElementById('unit-desc-input').value);
+            formData.append('status', document.getElementById('unit-status-input').value);
+            formData.append('sort_order', document.getElementById('unit-sort-input').value);
+            formData.append('publish_status', 'published');
+
+            // Collect existing URL images
+            const existingUrls = unitModalImagesQueue.filter(i => i.type === 'url').map(i => i.src);
+            formData.append('detail_images', JSON.stringify(existingUrls));
+
+            // Append new uploaded image files
+            const newFiles = unitModalImagesQueue.filter(i => i.type === 'file');
+            newFiles.forEach((item) => {
+                formData.append('detail_image_files[]', item.file);
+            });
+
+            let endpoint = `/api/service-featured-properties/${unitsPageSlug}`;
+            if (editId) endpoint = `/api/service-featured-properties/update/${editId}`;
+
+            const res = await fetch(endpoint, {
+                method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrfToken,
                     'Accept': 'application/json'
-                }
+                },
+                body: formData
             });
 
             const data = await res.json();
             if (res.ok && data.success) {
-                if (typeof showToast === 'function') showToast('Gallery image removed successfully!');
-                closeDeleteGalleryModal();
-                fetchGalleryItems();
+                if (typeof showToast === 'function') showToast('Unit photos & details saved live!');
+                closeUnitModal();
+                fetchUnitItems();
             } else {
-                if (typeof showToast === 'function') showToast(data.message || 'Error deleting image', 'error');
+                if (typeof showToast === 'function') showToast(data.message || 'Error saving unit', 'error');
             }
         } catch (err) {
-            if (typeof showToast === 'function') showToast('Failed to delete image', 'error');
+            if (typeof showToast === 'function') showToast('Failed to save to database', 'error');
+        } finally {
+            if (saveBtn) {
+                saveBtn.disabled = false;
+                saveBtn.innerText = 'Save Unit Type';
+            }
+        }
+    }
+
+    async function deleteUnitItem(id) {
+        if (!confirm('Are you sure you want to delete this unit type?')) return;
+        try {
+            const res = await fetch(`/api/service-featured-properties/${id}`, {
+                method: 'DELETE',
+                headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' }
+            });
+            const data = await res.json();
+            if (res.ok && data.success) {
+                if (typeof showToast === 'function') showToast('Unit removed successfully!');
+                fetchUnitItems();
+            }
+        } catch (err) {
+            if (typeof showToast === 'function') showToast('Failed to delete unit', 'error');
         }
     }
 
@@ -939,6 +1254,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         fetchHeroSection();
         fetchGalleryItems();
+        fetchUnitItems();
     });
 </script>
 @endpush

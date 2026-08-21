@@ -62,6 +62,7 @@ class ServiceFeaturedPropertyController extends Controller
         $validated['page'] = $page;
         $validated['grade'] = str_replace('Grade ', '', $validated['grade']); // normalize to A, B, C
 
+        // Handle single main image file
         if ($request->hasFile('image_file')) {
             $path = $request->file('image_file')->store('services/properties', 'public');
             $validated['image'] = 'storage/' . $path;
@@ -69,13 +70,26 @@ class ServiceFeaturedPropertyController extends Controller
 
         unset($validated['image_file']);
 
-        if (!isset($validated['detail_images']) || empty($validated['detail_images'])) {
-            $validated['detail_images'] = [
-                $validated['image'] ?? 'home/latest_activities/1img.png',
-                'home/latest_activities/2img.png',
-                'home/latest_activities/3img.png',
-            ];
+        // Handle detail images (max 5)
+        $detailImages = [];
+        if ($request->has('detail_images')) {
+            $raw = $request->input('detail_images');
+            $detailImages = is_string($raw) ? (json_decode($raw, true) ?? []) : (array) $raw;
         }
+
+        if ($request->hasFile('detail_image_files')) {
+            foreach ($request->file('detail_image_files') as $file) {
+                if (count($detailImages) >= 5) break;
+                $path = $file->store('services/properties', 'public');
+                $detailImages[] = 'storage/' . $path;
+            }
+        }
+
+        if (empty($detailImages) && !empty($validated['image'])) {
+            $detailImages = [$validated['image']];
+        }
+
+        $validated['detail_images'] = array_slice($detailImages, 0, 5);
 
         $property = ServiceFeaturedProperty::create($validated);
 
@@ -115,6 +129,25 @@ class ServiceFeaturedPropertyController extends Controller
         }
 
         unset($validated['image_file']);
+
+        // Handle detail images (max 5)
+        $detailImages = $property->detail_images ?? [];
+        if ($request->has('detail_images')) {
+            $raw = $request->input('detail_images');
+            $detailImages = is_string($raw) ? (json_decode($raw, true) ?? []) : (array) $raw;
+        }
+
+        if ($request->hasFile('detail_image_files')) {
+            foreach ($request->file('detail_image_files') as $file) {
+                if (count($detailImages) >= 5) break;
+                $path = $file->store('services/properties', 'public');
+                $detailImages[] = 'storage/' . $path;
+            }
+        }
+
+        if (!empty($detailImages)) {
+            $validated['detail_images'] = array_slice($detailImages, 0, 5);
+        }
 
         $property->update($validated);
 

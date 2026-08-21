@@ -456,7 +456,12 @@ Route::get('/services/properties/wealth-mansion', function () {
         ->orderBy('sort_order', 'asc')
         ->orderBy('id', 'asc')
         ->get();
-    return view('components.detail_service_featured_project.wealth_mansion', compact('heroSection', 'discoverGallery'));
+    $unitProperties = \App\Models\ServiceFeaturedProperty::where('page', 'wealth-mansion-units')
+        ->where('publish_status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    return view('components.detail_service_featured_project.wealth_mansion', compact('heroSection', 'discoverGallery', 'unitProperties'));
 });
 Route::get('/properties/wealth-mansion', function () {
     $heroSection = \App\Models\HeroSection::firstOrCreate(
@@ -480,7 +485,12 @@ Route::get('/properties/wealth-mansion', function () {
         ->orderBy('sort_order', 'asc')
         ->orderBy('id', 'asc')
         ->get();
-    return view('components.detail_service_featured_project.wealth_mansion', compact('heroSection', 'discoverGallery'));
+    $unitProperties = \App\Models\ServiceFeaturedProperty::where('page', 'wealth-mansion-units')
+        ->where('publish_status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->get();
+    return view('components.detail_service_featured_project.wealth_mansion', compact('heroSection', 'discoverGallery', 'unitProperties'));
 });
 
 Route::get('/services/properties/uc88', function () {

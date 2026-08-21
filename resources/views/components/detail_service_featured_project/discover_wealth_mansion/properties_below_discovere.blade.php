@@ -1,61 +1,115 @@
+@props(['unitProperties' => null])
+
 @php
     $bedroomImg = asset('services/propertis_leasing/bedroom.png');
     $allPartImg = asset('services/propertis_leasing/all part.png');
 
-    $bedroomFirst = [$bedroomImg, $allPartImg];
-    $allPartFirst = [$allPartImg, $bedroomImg];
+    if (isset($unitProperties) && $unitProperties->count() > 0) {
+        $properties = $unitProperties->map(function($item) use ($bedroomImg) {
+            $images = [];
+            if (!empty($item->detail_images) && is_array($item->detail_images)) {
+                $images = array_map(function($img) {
+                    return (str_starts_with($img, 'http') || str_starts_with($img, 'storage/')) ? asset($img) : asset($img);
+                }, array_slice($item->detail_images, 0, 5));
+            }
+            if (empty($images)) {
+                $main = $item->image ? ((str_starts_with($item->image, 'http') || str_starts_with($item->image, 'storage/')) ? asset($item->image) : asset($item->image)) : $bedroomImg;
+                $images = [$main];
+            }
 
-    // The three unit-type cards: both on left use bedroom.png, right one uses all part.png
-    $properties = [
-        [
-            'image' => $bedroomImg,
-            'images' => $bedroomFirst,
-            'title' => 'Studio Room',
-            'subtitle' => 'Compact & Practical Living',
-            'description' =>
-                'The studio layout is suitable for individuals, couples, business professionals, and investors seeking a compact residential property.',
-            'suitableFor' => [
-                'Individual residents',
-                'Business travelers',
-                'Young professionals',
-                'Rental investment',
+            $suitableFor = [];
+            if (!empty($item->description)) {
+                $lines = explode("\n", $item->description);
+                $suitableSection = false;
+                $descLines = [];
+                foreach ($lines as $line) {
+                    $trim = trim($line);
+                    if (stripos($trim, 'Suitable for:') !== false) {
+                        $suitableSection = true;
+                        continue;
+                    }
+                    if ($suitableSection && !empty($trim)) {
+                        $suitableFor[] = ltrim($trim, '-•* ');
+                    } elseif (!$suitableSection && !empty($trim)) {
+                        $descLines[] = $trim;
+                    }
+                }
+                $cleanDesc = implode(" ", $descLines);
+            } else {
+                $cleanDesc = '';
+            }
+
+            if (empty($suitableFor)) {
+                $suitableFor = ['Individual residents', 'Business travelers', 'Young professionals', 'Rental investment'];
+            }
+
+            return [
+                'id' => $item->id,
+                'image' => $images[0],
+                'images' => $images,
+                'title' => $item->title ?? 'Unit Type',
+                'subtitle' => $item->subtitle ?? 'Modern Living Space',
+                'description' => $cleanDesc ?: ($item->subtitle ?? 'Comfortable layout designed for modern living.'),
+                'suitableFor' => $suitableFor,
+                'units' => $item->status ?? 'XX Units Available',
+                'link' => $item->link ? url($item->link) : url('/contact-us'),
+            ];
+        })->toArray();
+    } else {
+        $bedroomFirst = [$bedroomImg, $allPartImg];
+        $allPartFirst = [$allPartImg, $bedroomImg];
+
+        $properties = [
+            [
+                'image' => $bedroomImg,
+                'images' => $bedroomFirst,
+                'title' => 'Studio Room',
+                'subtitle' => 'Compact & Practical Living',
+                'description' =>
+                    'The studio layout is suitable for individuals, couples, business professionals, and investors seeking a compact residential property.',
+                'suitableFor' => [
+                    'Individual residents',
+                    'Business travelers',
+                    'Young professionals',
+                    'Rental investment',
+                ],
+                'units' => 'XX Units Available',
+                'link' => url('/contact-us'),
             ],
-            'units' => 'XX Units Available',
-            'link' => url('services/property-leasing/daily-weekly-rentals/studio-room'),
-        ],
-        [
-            'image' => $bedroomImg,
-            'images' => $bedroomFirst,
-            'title' => '1-bedroom',
-            'subtitle' => 'Comfortable One-Bedroom Residence',
-            'description' =>
-                'The 1-bedroom layout provides additional living space and privacy compared with a studio, making it suitable for both personal residence and rental investment.',
-            'suitableFor' => [
-                'Couples',
-                'Professionals',
-                'Long-term residents',
-                'Property investors',
+            [
+                'image' => $bedroomImg,
+                'images' => $bedroomFirst,
+                'title' => '1-bedroom',
+                'subtitle' => 'Comfortable One-Bedroom Residence',
+                'description' =>
+                    'The 1-bedroom layout provides additional living space and privacy compared with a studio, making it suitable for both personal residence and rental investment.',
+                'suitableFor' => [
+                    'Couples',
+                    'Professionals',
+                    'Long-term residents',
+                    'Property investors',
+                ],
+                'units' => 'XX Units Available',
+                'link' => url('/contact-us'),
             ],
-            'units' => 'XX Units Available',
-            'link' => url('services/property-leasing/daily-weekly-rentals/studio-room'),
-        ],
-        [
-            'image' => $allPartImg,
-            'images' => $allPartFirst,
-            'title' => '2-Bedroom with Balcony',
-            'subtitle' => 'More Space with a Private Balcony',
-            'description' =>
-                'The 2-bedroom residence provides additional space for families or buyers seeking a larger condominium with outdoor balcony space.',
-            'suitableFor' => [
-                'Small families',
-                'Shared living',
-                'Long-term residents',
-                'Investment purposes',
+            [
+                'image' => $allPartImg,
+                'images' => $allPartFirst,
+                'title' => '2-Bedroom with Balcony',
+                'subtitle' => 'More Space with a Private Balcony',
+                'description' =>
+                    'The 2-bedroom residence provides additional space for families or buyers seeking a larger condominium with outdoor balcony space.',
+                'suitableFor' => [
+                    'Small families',
+                    'Shared living',
+                    'Long-term residents',
+                    'Investment purposes',
+                ],
+                'units' => 'XX Units Available',
+                'link' => url('/contact-us'),
             ],
-            'units' => 'XX Units Available',
-            'link' => url('services/property-leasing/daily-weekly-rentals/studio-room'),
-        ],
-    ];
+        ];
+    }
 @endphp
 
 {{--

@@ -167,7 +167,7 @@
 
 
      {{-- below discover section --}}
-    <x-detail_service_featured_project.discover_wealth_mansion.properties_below_discovere/>
+    <x-detail_service_featured_project.discover_wealth_mansion.properties_below_discovere :unit-properties="$unitProperties ?? null" />
 
 
     {{-- auto move logo --}}
