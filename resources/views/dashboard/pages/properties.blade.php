@@ -38,7 +38,16 @@
                 <span class="whitespace-nowrap">Hero & Banner</span>
             </button>
 
-            {{-- Tab 2: Frequently Asked Questions (FAQs) --}}
+            {{-- Tab 2: Featured Properties --}}
+            <button type="button" onclick="switchPropertiesTab('featured', event)" id="tab-btn-featured" class="properties-tab-btn px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                <span class="whitespace-nowrap">Featured Properties</span>
+                <span id="tab-badge-featured-count" class="text-[11px] bg-[#2A5A8A]/10 text-[#2A5A8A] font-bold px-2 py-0.5 rounded-full">0</span>
+            </button>
+
+            {{-- Tab 3: Frequently Asked Questions (FAQs) --}}
             <button type="button" onclick="switchPropertiesTab('faqs', event)" id="tab-btn-faqs" class="properties-tab-btn px-4 sm:px-5 py-3 text-sm font-medium text-slate-500 hover:text-[#163049] border-b-2 border-transparent flex items-center gap-2 transition-all cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -142,7 +151,40 @@
     </div>
 
     {{-- ========================================================================= --}}
-    {{-- TAB 2: FREQUENTLY ASKED QUESTIONS (FAQS)                                 --}}
+    {{-- TAB 2: FEATURED PROPERTIES (MULTI-IMAGE CRUD)                            --}}
+    {{-- ========================================================================= --}}
+    <div id="tab-content-featured" class="properties-tab-content hidden space-y-6">
+        <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+                <div>
+                    <h2 class="text-lg font-bold text-[#163049] flex items-center gap-2">
+                        <span>Featured Properties Cards</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#2A5A8A]/10 text-[#2A5A8A] font-semibold">Multi-Images</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Add, edit or delete Featured Property cards shown on the Properties page. Upload up to 5 photos per card for the interactive left/right carousel.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button type="button" onclick="openCreateFeaturedModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer">
+                        <svg class="w-4 h-4 text-[#F4DEAC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        <span>Add Featured Property</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <div id="featured-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                <div id="featured-empty-state" class="hidden py-12 text-center">
+                    <p class="text-sm font-semibold text-slate-700">No featured properties found.</p>
+                    <p class="text-xs text-slate-400 mt-1">Click "Add Featured Property" to create the first card.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- ========================================================================= --}}
+    {{-- TAB 3: FREQUENTLY ASKED QUESTIONS (FAQS)                                 --}}
     {{-- ========================================================================= --}}
     <div id="tab-content-faqs" class="properties-tab-content hidden space-y-6">
         {{-- Database FAQs Management Table --}}
@@ -296,6 +338,108 @@
             </div>
         </div>
     </div>
+
+{{-- MODAL: Create / Edit Featured Property (Multi-Images up to 5) --}}
+<div id="featured-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center p-4 transition-all duration-200 opacity-0">
+    <div id="featured-modal-card" class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform scale-95 transition-all duration-200 max-h-[90vh] flex flex-col">
+        <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50 shrink-0">
+            <div>
+                <h3 class="text-base font-bold text-[#163049]" id="featured-modal-title">Add Featured Property</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Manage property details and up to 5 clickable scroll images.</p>
+            </div>
+            <button type="button" onclick="closeFeaturedModal()" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200 flex items-center justify-center transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <form onsubmit="handleFeaturedFormSubmit(event)" id="featured-form" class="p-6 space-y-5 overflow-y-auto grow">
+            <input type="hidden" id="featured-edit-id" value="">
+
+            {{-- Multi-Images Uploader (Up to 5) --}}
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                <div class="flex items-center justify-between">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-[#2A5A8A]">Property Photos (Max 5 Images for Carousel)</label>
+                    <span id="featured-img-count-badge" class="text-[11px] font-semibold text-slate-500">0 / 5</span>
+                </div>
+                <div id="featured-images-preview-strip" class="grid grid-cols-5 gap-2.5"></div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-600 mb-1">Add Image File</label>
+                    <input type="file" id="featured-multi-file-input" accept="image/*" onchange="addFeaturedFileToQueue(this)" class="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-[#2A5A8A] file:text-white hover:file:bg-[#163049] cursor-pointer">
+                    <p class="text-[10px] text-slate-400 mt-1">Upload up to 5 photos. First image is shown as the card thumbnail. Users can click left/right arrows to scroll through them.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Title <span class="text-rose-500">*</span></label>
+                    <input type="text" id="featured-title-input" required placeholder="e.g. Wealth Mansion" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Subtitle</label>
+                    <input type="text" id="featured-subtitle-input" placeholder="e.g. Premium Condominium Residences" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Description</label>
+                <textarea id="featured-desc-input" rows="3" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-xs text-slate-900 leading-relaxed focus:outline-none focus:border-[#2A5A8A]" placeholder="Brief property description shown on the card."></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Availability Tag</label>
+                    <input type="text" id="featured-status-input" value="30% Available" placeholder="e.g. 30% Available or Coming Soon" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Button / Link Destination</label>
+                    <input type="text" id="featured-link-input" value="/properties/wealth-mansion" placeholder="e.g. /properties/wealth-mansion" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Link Button Text</label>
+                    <input type="text" id="featured-linktext-input" value="View Property" placeholder="e.g. View Property" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Sort Order</label>
+                    <input type="number" id="featured-sort-input" value="1" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Publish Status</label>
+                    <select id="featured-publish-input" class="w-full px-4 py-2.5 bg-[#f8fafc] border border-slate-300 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-[#2A5A8A]">
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3 shrink-0">
+                <button type="button" onclick="closeFeaturedModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors">Cancel</button>
+                <button type="submit" id="featured-save-btn" class="px-5 py-2.5 rounded-lg bg-[#2A5A8A] hover:bg-[#163049] text-white font-bold text-xs sm:text-sm shadow-sm transition-all">Save Property</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{-- MODAL: Delete Confirmation for Featured Property --}}
+<div id="featured-delete-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center p-4 transition-all duration-200 opacity-0">
+    <div id="featured-delete-card" class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-sm text-center transform scale-95 transition-all duration-200">
+        <div class="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+        </div>
+        <h3 class="text-base font-bold text-[#163049] mb-1">Delete Property?</h3>
+        <p class="text-xs text-slate-500 mb-6">This will permanently remove the featured property card from the page.</p>
+        <input type="hidden" id="featured-delete-id">
+        <div class="flex items-center justify-center gap-3">
+            <button type="button" onclick="closeFeaturedDeleteModal()" class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-colors">Cancel</button>
+            <button type="button" onclick="confirmDeleteFeatured()" class="px-5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer">Yes, Delete</button>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -350,6 +494,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         fetchHeroSection();
+        fetchFeaturedItems();
         fetchFaqs();
     });
 
@@ -794,6 +939,282 @@
     function escapeHtml(str) {
         if (!str) return '';
         return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // ==========================================
+    // FEATURED PROPERTIES CRUD
+    // ==========================================
+    const featuredPageSlug = 'properties';
+    let featuredItemsData = [];
+    let featuredModalImagesQueue = [];
+    let featuredDeleteId = null;
+
+    function formatImageUrl(src) {
+        if (!src) return '';
+        if (src.startsWith('http') || src.startsWith('/')) return src;
+        return '/' + src;
+    }
+
+    async function fetchFeaturedItems() {
+        try {
+            const res = await fetch(`/api/service-featured-properties/${featuredPageSlug}`);
+            const data = await res.json();
+            if (data.success) {
+                featuredItemsData = data.data || [];
+                renderFeaturedGrid();
+                const badge = document.getElementById('tab-badge-featured-count');
+                if (badge) badge.innerText = featuredItemsData.length;
+            }
+        } catch (err) {
+            console.error('Error fetching featured properties:', err);
+        }
+    }
+
+    function renderFeaturedGrid() {
+        const grid = document.getElementById('featured-cards-grid');
+        const empty = document.getElementById('featured-empty-state');
+        if (!grid) return;
+
+        if (!featuredItemsData.length) {
+            grid.innerHTML = '';
+            if (empty) { empty.classList.remove('hidden'); }
+            return;
+        }
+        if (empty) { empty.classList.add('hidden'); }
+
+        grid.innerHTML = featuredItemsData.map(item => {
+            const images = (Array.isArray(item.detail_images) && item.detail_images.length)
+                ? item.detail_images
+                : (item.image ? [item.image] : []);
+            const thumbSrc = images.length ? formatImageUrl(images[0]) : '';
+            const thumbHtml = thumbSrc
+                ? `<img src="${escapeHtml(thumbSrc)}" class="w-full h-full object-cover">`
+                : `<div class="w-full h-full flex items-center justify-center text-slate-400"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>`;
+
+            const statusBadge = item.publish_status === 'published'
+                ? `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Published</span>`
+                : `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>Draft</span>`;
+
+            return `
+            <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden flex flex-col">
+                <div class="relative w-full aspect-video bg-slate-100 shrink-0">
+                    ${thumbHtml}
+                    <span class="absolute top-2 right-2">${statusBadge}</span>
+                    ${images.length > 1 ? `<span class="absolute bottom-2 left-2 bg-black/60 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">${images.length} photos</span>` : ''}
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+                    <div>
+                        <h4 class="text-sm font-bold text-[#163049]">${escapeHtml(item.title)}</h4>
+                        <p class="text-xs font-semibold text-slate-700 mt-0.5">${escapeHtml(item.subtitle || '')}</p>
+                        <p class="text-xs text-[#2A5A8A] font-bold mt-2">${escapeHtml(item.status || '30% Available')}</p>
+                    </div>
+                    <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+                        <button type="button" onclick="openEditFeaturedModal(${item.id})" class="px-3 py-1.5 bg-[#2A5A8A] hover:bg-[#163049] text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer">
+                            Edit Photos (${images.length}/5) &amp; Details
+                        </button>
+                        <button type="button" onclick="promptDeleteFeatured(${item.id})" class="text-xs text-rose-500 hover:text-rose-700 font-semibold cursor-pointer">Delete</button>
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function renderFeaturedModalImages() {
+        const container = document.getElementById('featured-images-preview-strip');
+        const badge = document.getElementById('featured-img-count-badge');
+        if (badge) badge.innerText = `${featuredModalImagesQueue.length} / 5`;
+        if (!container) return;
+        container.innerHTML = featuredModalImagesQueue.map((item, idx) => {
+            const previewSrc = item.type === 'url' ? formatImageUrl(item.src) : item.preview;
+            return `
+            <div class="relative aspect-[4/3] bg-slate-900 rounded-lg overflow-hidden border border-slate-300 shadow-xs">
+                <img src="${escapeHtml(previewSrc)}" class="w-full h-full object-cover">
+                <button type="button" onclick="removeFeaturedImageFromQueue(${idx})" class="absolute top-1 right-1 w-5 h-5 bg-rose-600 hover:bg-rose-700 text-white rounded-full flex items-center justify-center text-[10px] shadow cursor-pointer" title="Remove">✕</button>
+                <span class="absolute bottom-1 left-1 bg-black/70 text-white text-[9px] font-bold px-1 rounded">#${idx + 1}</span>
+            </div>`;
+        }).join('');
+    }
+
+    function addFeaturedFileToQueue(input) {
+        if (input.files && input.files[0]) {
+            if (featuredModalImagesQueue.length >= 5) {
+                if (typeof showToast === 'function') showToast('Maximum 5 images allowed', 'warning');
+                input.value = '';
+                return;
+            }
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                featuredModalImagesQueue.push({ type: 'file', file: file, preview: e.target.result });
+                renderFeaturedModalImages();
+                input.value = '';
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function removeFeaturedImageFromQueue(idx) {
+        if (featuredModalImagesQueue.length <= 1) {
+            if (typeof showToast === 'function') showToast('At least 1 image is required', 'warning');
+            return;
+        }
+        featuredModalImagesQueue.splice(idx, 1);
+        renderFeaturedModalImages();
+    }
+
+    function openCreateFeaturedModal() {
+        document.getElementById('featured-modal-title').innerText = 'Add Featured Property';
+        document.getElementById('featured-edit-id').value = '';
+        document.getElementById('featured-title-input').value = '';
+        document.getElementById('featured-subtitle-input').value = '';
+        document.getElementById('featured-desc-input').value = '';
+        document.getElementById('featured-status-input').value = '30% Available';
+        document.getElementById('featured-link-input').value = '/properties/wealth-mansion';
+        document.getElementById('featured-linktext-input').value = 'View Property';
+        document.getElementById('featured-sort-input').value = featuredItemsData.length + 1;
+        document.getElementById('featured-publish-input').value = 'published';
+        featuredModalImagesQueue = [];
+        renderFeaturedModalImages();
+        const modal = document.getElementById('featured-modal');
+        const card = document.getElementById('featured-modal-card');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            card.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function openEditFeaturedModal(id) {
+        const item = featuredItemsData.find(i => i.id == id);
+        if (!item) { console.error('Featured item not found:', id); return; }
+        document.getElementById('featured-modal-title').innerText = 'Edit: ' + item.title;
+        document.getElementById('featured-edit-id').value = item.id;
+        document.getElementById('featured-title-input').value = item.title || '';
+        document.getElementById('featured-subtitle-input').value = item.subtitle || '';
+        document.getElementById('featured-desc-input').value = item.description || '';
+        document.getElementById('featured-status-input').value = item.status || '30% Available';
+        document.getElementById('featured-link-input').value = item.link || '/properties/wealth-mansion';
+        document.getElementById('featured-linktext-input').value = item.link_text || 'View Property';
+        document.getElementById('featured-sort-input').value = item.sort_order || 1;
+        document.getElementById('featured-publish-input').value = item.publish_status || 'published';
+        const imgs = (Array.isArray(item.detail_images) && item.detail_images.length) ? item.detail_images : (item.image ? [item.image] : []);
+        featuredModalImagesQueue = imgs.slice(0, 5).map(src => ({ type: 'url', src: src }));
+        renderFeaturedModalImages();
+        const modal = document.getElementById('featured-modal');
+        const card = document.getElementById('featured-modal-card');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            card.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function closeFeaturedModal() {
+        const modal = document.getElementById('featured-modal');
+        const card = document.getElementById('featured-modal-card');
+        modal.classList.add('opacity-0');
+        card.classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }, 200);
+    }
+
+    async function handleFeaturedFormSubmit(e) {
+        e.preventDefault();
+        const editId = document.getElementById('featured-edit-id').value;
+        const saveBtn = document.getElementById('featured-save-btn');
+        if (saveBtn) { saveBtn.disabled = true; saveBtn.innerText = 'Saving...'; }
+
+        try {
+            const formData = new FormData();
+            formData.append('page', featuredPageSlug);
+            formData.append('grade', 'A');
+            formData.append('title', document.getElementById('featured-title-input').value);
+            formData.append('subtitle', document.getElementById('featured-subtitle-input').value);
+            formData.append('description', document.getElementById('featured-desc-input').value);
+            formData.append('status', document.getElementById('featured-status-input').value);
+            formData.append('link', document.getElementById('featured-link-input').value);
+            formData.append('link_text', document.getElementById('featured-linktext-input').value);
+            formData.append('sort_order', document.getElementById('featured-sort-input').value);
+            formData.append('publish_status', document.getElementById('featured-publish-input').value);
+
+            const existingUrls = featuredModalImagesQueue.filter(i => i.type === 'url').map(i => i.src);
+            formData.append('detail_images', JSON.stringify(existingUrls));
+
+            featuredModalImagesQueue.filter(i => i.type === 'file').forEach(item => {
+                formData.append('detail_image_files[]', item.file);
+            });
+
+            let endpoint = `/api/service-featured-properties/${featuredPageSlug}`;
+            if (editId) endpoint = `/api/service-featured-properties/update/${editId}`;
+
+            const res = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+                body: formData
+            });
+            const data = await res.json();
+            if (res.ok && data.success) {
+                if (typeof showToast === 'function') showToast('Featured property saved!');
+                closeFeaturedModal();
+                fetchFeaturedItems();
+            } else {
+                if (typeof showToast === 'function') showToast(data.message || 'Error saving property', 'error');
+            }
+        } catch (err) {
+            if (typeof showToast === 'function') showToast('Failed to save to database', 'error');
+        } finally {
+            if (saveBtn) { saveBtn.disabled = false; saveBtn.innerText = 'Save Property'; }
+        }
+    }
+
+    function promptDeleteFeatured(id) {
+        featuredDeleteId = id;
+        document.getElementById('featured-delete-id').value = id;
+        const modal = document.getElementById('featured-delete-modal');
+        const card = document.getElementById('featured-delete-card');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            card.classList.remove('scale-95');
+        }, 10);
+    }
+
+    function closeFeaturedDeleteModal() {
+        featuredDeleteId = null;
+        const modal = document.getElementById('featured-delete-modal');
+        const card = document.getElementById('featured-delete-card');
+        modal.classList.add('opacity-0');
+        card.classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }, 200);
+    }
+
+    async function confirmDeleteFeatured() {
+        if (!featuredDeleteId) return;
+        const id = featuredDeleteId;
+        try {
+            const res = await fetch(`/api/service-featured-properties/${id}`, {
+                method: 'DELETE',
+                headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' }
+            });
+            const data = await res.json();
+            if (data.success) {
+                closeFeaturedDeleteModal();
+                fetchFeaturedItems();
+                if (typeof showToast === 'function') showToast(data.message || 'Property deleted!');
+            } else {
+                if (typeof showToast === 'function') showToast(data.message || 'Error deleting property', 'error');
+            }
+        } catch (err) {
+            if (typeof showToast === 'function') showToast('Error deleting property', 'error');
+        }
     }
 </script>
 @endpush

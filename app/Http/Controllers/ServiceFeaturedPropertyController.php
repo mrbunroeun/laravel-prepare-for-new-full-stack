@@ -70,26 +70,39 @@ class ServiceFeaturedPropertyController extends Controller
 
         unset($validated['image_file']);
 
-        // Handle detail images (max 5)
-        $detailImages = [];
-        if ($request->has('detail_images')) {
-            $raw = $request->input('detail_images');
-            $detailImages = is_string($raw) ? (json_decode($raw, true) ?? []) : (array) $raw;
-        }
-
+        // Handle detail images (max 5) — new uploads first, then existing URL images
+        $newUploads = [];
         if ($request->hasFile('detail_image_files')) {
             foreach ($request->file('detail_image_files') as $file) {
-                if (count($detailImages) >= 5) break;
                 $path = $file->store('services/properties', 'public');
-                $detailImages[] = 'storage/' . $path;
+                $newUploads[] = 'storage/' . $path;
             }
         }
+
+        $existingUrls = [];
+        if ($request->has('detail_images')) {
+            $raw = $request->input('detail_images');
+            $existingUrls = is_string($raw) ? (json_decode($raw, true) ?? []) : (array) $raw;
+            // Strip out placeholder/default images if new uploads exist
+            if (!empty($newUploads)) {
+                $existingUrls = array_values(array_filter($existingUrls, function($img) {
+                    return !str_contains($img, 'home/latest_activities') &&
+                           !str_contains($img, 'services/propertis_leasing');
+                }));
+            }
+        }
+
+        // New uploads first, then existing keeper URLs
+        $detailImages = array_values(array_slice(array_merge($newUploads, $existingUrls), 0, 5));
 
         if (empty($detailImages) && !empty($validated['image'])) {
             $detailImages = [$validated['image']];
         }
 
-        $validated['detail_images'] = array_slice($detailImages, 0, 5);
+        $validated['detail_images'] = $detailImages;
+        if (!empty($detailImages)) {
+            $validated['image'] = $detailImages[0];
+        }
 
         $property = ServiceFeaturedProperty::create($validated);
 
@@ -131,24 +144,34 @@ class ServiceFeaturedPropertyController extends Controller
 
         unset($validated['image_file']);
 
-        // Handle detail images (max 5)
-        $detailImages = [];
-        if ($request->has('detail_images')) {
-            $raw = $request->input('detail_images');
-            $detailImages = is_string($raw) ? (json_decode($raw, true) ?? []) : (array) $raw;
-        }
-
+        // Handle detail images (max 5) — new uploads first, then existing URL images
+        $newUploads = [];
         if ($request->hasFile('detail_image_files')) {
             foreach ($request->file('detail_image_files') as $file) {
-                if (count($detailImages) >= 5) break;
                 $path = $file->store('services/properties', 'public');
-                $detailImages[] = 'storage/' . $path;
+                $newUploads[] = 'storage/' . $path;
             }
         }
 
+        $existingUrls = [];
+        if ($request->has('detail_images')) {
+            $raw = $request->input('detail_images');
+            $existingUrls = is_string($raw) ? (json_decode($raw, true) ?? []) : (array) $raw;
+            // Strip placeholder images when real uploads come in
+            if (!empty($newUploads)) {
+                $existingUrls = array_values(array_filter($existingUrls, function($img) {
+                    return !str_contains($img, 'home/latest_activities') &&
+                           !str_contains($img, 'services/propertis_leasing');
+                }));
+            }
+        }
+
+        // New uploads first, then kept URLs
+        $detailImages = array_values(array_slice(array_merge($newUploads, $existingUrls), 0, 5));
+
         if (!empty($detailImages)) {
-            $validated['detail_images'] = array_slice($detailImages, 0, 5);
-            $validated['image'] = $validated['detail_images'][0];
+            $validated['detail_images'] = $detailImages;
+            $validated['image'] = $detailImages[0];
         }
 
         $property->update($validated);
