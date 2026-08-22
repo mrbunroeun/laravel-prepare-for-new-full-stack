@@ -630,7 +630,7 @@
     // ==========================================
     async function fetchShowcaseText() {
         try {
-            const res = await fetch(`/api/services-maximize/${pageSlug}`);
+            const res = await fetch(`/api/service-maximize/${pageSlug}`);
             const result = await res.json();
             if (result.success && result.data) {
                 const d = result.data;
@@ -662,7 +662,7 @@
                 paragraphs: paragraphs.length > 0 ? paragraphs : [rawSubtext]
             };
 
-            const res = await fetch(`/api/services-maximize/${pageSlug}`, {
+            const res = await fetch(`/api/service-maximize/${pageSlug}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

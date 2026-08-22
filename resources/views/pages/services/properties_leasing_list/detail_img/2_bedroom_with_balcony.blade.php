@@ -174,11 +174,9 @@
                     <div class="mt-2 sm:mt-4 lg:mt-4 w-full">
                         <h2 class="text-[#2A5A8A] text-[clamp(24px,2.8vw,36px)] font-bold leading-[1.2]">
                             <span class="flex items-center gap-3">
-                                Flexible Condominium
+                                {!! nl2br(e($showcaseTitle)) !!}
                                 <span class="h-[2px] w-12 sm:w-16 bg-[#c9a463] inline-block shrink-0"></span>
                             </span>
-                            Rentals at Wealth<br>
-                            Mansion
                         </h2>
                     </div>
                 </div>
