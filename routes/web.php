@@ -806,16 +806,8 @@ Route::get('/services/properties-leasing-list/detail-img/3-bedroom', function ()
     ]);
 });
 // ==========================================
-// Dashboard Routes (Frontend UI Preview & Backend)
+// API & Backend Endpoints
 // ==========================================
-Route::get('/dashboard', function () {
-    return view('dashboard.pages.home');
-});
-
-Route::get('/dashboard/pages/home', function () {
-    return view('dashboard.pages.home');
-});
-
 Route::get('/api/faqs', [\App\Http\Controllers\FaqController::class, 'index']);
 Route::post('/api/faqs', [\App\Http\Controllers\FaqController::class, 'store']);
 Route::put('/api/faqs/{faq}', [\App\Http\Controllers\FaqController::class, 'update']);
@@ -838,11 +830,6 @@ Route::post('/api/service-overview/{page?}', [\App\Http\Controllers\ServiceOverv
 
 Route::get('/api/service-management-models/{page?}', [\App\Http\Controllers\ServiceManagementModelController::class, 'show']);
 Route::post('/api/service-management-models/{page?}', [\App\Http\Controllers\ServiceManagementModelController::class, 'update']);
-
-Route::get('/api/faqs', [\App\Http\Controllers\FaqController::class, 'index']);
-Route::post('/api/faqs', [\App\Http\Controllers\FaqController::class, 'store']);
-Route::post('/api/faqs/{faq}', [\App\Http\Controllers\FaqController::class, 'update']);
-Route::delete('/api/faqs/{faq}', [\App\Http\Controllers\FaqController::class, 'destroy']);
 
 Route::get('/api/services-section/{page?}', [\App\Http\Controllers\ServicesSectionController::class, 'show']);
 Route::post('/api/services-section/{page?}', [\App\Http\Controllers\ServicesSectionController::class, 'update']);
@@ -881,7 +868,6 @@ Route::delete('/api/event-items/{id}', [\App\Http\Controllers\EventItemControlle
 Route::get('/api/insight-detail/{page?}', [\App\Http\Controllers\InsightDetailSectionController::class, 'show']);
 Route::post('/api/insight-detail/{page?}', [\App\Http\Controllers\InsightDetailSectionController::class, 'update']);
 
-
 // Project Galleries (e.g. Discover Wealth Mansion)
 Route::get('/api/project-galleries/{page?}', [\App\Http\Controllers\ProjectGalleryController::class, 'index']);
 Route::post('/api/project-galleries/{page?}', [\App\Http\Controllers\ProjectGalleryController::class, 'store']);
@@ -901,13 +887,26 @@ Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'showLo
 Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
 Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard/pages/latest-activities', function () {
-    return view('dashboard.pages.latest_activities', [
-        'pageTitle' => 'Latest Activities',
-        'pageSlug' => 'latest-activities',
-        'frontendUrl' => '/'
-    ]);
-});
+// ==========================================
+// Dashboard Protected Routes (Requires Auth)
+// ==========================================
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard.pages.home');
+    });
+
+    Route::get('/dashboard/pages/home', function () {
+        return view('dashboard.pages.home');
+    });
+
+    Route::get('/dashboard/pages/latest-activities', function () {
+        return view('dashboard.pages.latest_activities', [
+            'pageTitle' => 'Latest Activities',
+            'pageSlug' => 'latest-activities',
+            'frontendUrl' => '/'
+        ]);
+    });
+
 
 Route::get('/dashboard/pages/about-us', function () {
     return view('dashboard.pages.about_us', [
@@ -1095,6 +1094,7 @@ Route::get('/dashboard/settings', function () {
         'pageTitle' => 'General Settings',
         'pageSlug' => 'settings'
     ]);
+});
 });
 
 

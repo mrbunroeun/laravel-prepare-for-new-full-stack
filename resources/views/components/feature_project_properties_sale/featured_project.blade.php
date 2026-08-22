@@ -223,47 +223,14 @@
                                 <div style="position:relative; height:190px; width:100%; overflow:hidden; flex-shrink:0;">
                                     <img src="{{ $property['image'] }}" alt="{{ $property['title'] }}"
                                         class="cwd-featured-card-img"
-                                        style="width:100%; height:100%; object-fit:fill; transition:opacity .5s ease-out, transform .5s ease-out;">
-
-                                    {{-- Image position indicator dots --}}
-                                    <div class="cwd-featured-card-dots"
-                                        style="position:absolute; bottom:12px; left:50%; transform:translateX(-50%); z-index:10; display:flex; align-items:center; gap:8px;"
-                                        aria-hidden="true">
-                                        @foreach ($cardDetailImages as $i => $img)
-                                            <span class="cwd-featured-card-dot"
-                                                style="border-radius:9999px; transition:all .3s; height:8px; width:8px; background:{{ $i === 0 ? '#fff' : 'rgba(255,255,255,0.55)' }};"></span>
-                                        @endforeach
-                                    </div>
+                                        style="width:100%; height:100%; object-fit:fill; transition:transform .5s ease-out;">
                                 </div>
 
                                 <div class="px-6 py-6 flex flex-col grow">
-                                    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;"
-                                        class="mb-3">
+                                    <div class="mb-3">
                                         <h3 class="text-[#2A5A8A] text-[clamp(18px,1.4vw,19px)] font-bold leading-snug">
                                             {{ $property['title'] }}
                                         </h3>
-
-                                        <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
-                                            <button type="button" aria-label="Previous image"
-                                                class="cwd-featured-card-prev"
-                                                style="width:34px; height:34px; border-radius:9999px; background:#fff; border:1.5px solid #2A5A8A; color:#2A5A8A; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                    stroke-width="2.5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M15 19l-7-7 7-7" />
-                                                </svg>
-                                            </button>
-                                            <button type="button" aria-label="Next image" class="cwd-featured-card-next"
-                                                style="width:34px; height:34px; border-radius:9999px; background:#fff; border:1.5px solid #2A5A8A; color:#2A5A8A; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                    stroke-width="2.5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </button>
-                                        </div>
                                     </div>
 
                                     <p class="text-black text-[15px] font-semibold leading-snug mb-2">
@@ -577,30 +544,13 @@
                 <div style="position:relative; height:190px; width:100%; overflow:hidden; flex-shrink:0;">
                     <img src="${escapeHtml(property.image)}" alt="${escapeHtml(property.title)}"
                         class="cwd-featured-card-img"
-                        style="width:100%; height:100%; object-fit:fill; transition:opacity .5s ease-out, transform .5s ease-out;">
-                    <div class="cwd-featured-card-dots" style="position:absolute; bottom:12px; left:50%; transform:translateX(-50%); z-index:10; display:flex; align-items:center; gap:8px;" aria-hidden="true">
-                        ${dotsHtml}
-                    </div>
+                        style="width:100%; height:100%; object-fit:fill; transition:transform .5s ease-out;">
                 </div>
                 <div class="px-6 py-6 flex flex-col grow">
-                    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;" class="mb-3">
+                    <div class="mb-3">
                         <h3 class="text-[#2A5A8A] text-[clamp(18px,1.4vw,19px)] font-bold leading-snug">
                             ${escapeHtml(property.title)}
                         </h3>
-                        <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
-                            <button type="button" aria-label="Previous image" class="cwd-featured-card-prev"
-                                style="width:34px; height:34px; border-radius:9999px; background:#fff; border:1.5px solid #2A5A8A; color:#2A5A8A; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s;">
-                                <svg xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
-                            <button type="button" aria-label="Next image" class="cwd-featured-card-next"
-                                style="width:34px; height:34px; border-radius:9999px; background:#fff; border:1.5px solid #2A5A8A; color:#2A5A8A; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s;">
-                                <svg xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
-                        </div>
                     </div>
                     <p class="text-black text-[15px] font-semibold leading-snug mb-2">${escapeHtml(property.subtitle || '')}</p>
                     <p class="text-black/70 text-[14px] leading-relaxed mb-4 line-clamp-2">${escapeHtml(property.description || '')}</p>

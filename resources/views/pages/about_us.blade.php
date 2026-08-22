@@ -123,23 +123,36 @@
 
 
     {{-- Two-column image grid + Hero content --}}
+    @php
+        $storyImg1 = !empty($aboutStory->image_left) ? asset($aboutStory->image_left) : asset('about_us/our_story/longest.png');
+        $storyImg2 = !empty($aboutStory->image_top_right) ? asset($aboutStory->image_top_right) : asset('about_us/our_story/top_one.png');
+        $storyImg3 = !empty($aboutStory->image_bottom_right) ? asset($aboutStory->image_bottom_right) : asset('about_us/our_story/bottom_one.png');
+        $storyTagline = $aboutStory->tagline ?? 'Our Story';
+        $storyHeadline = $aboutStory->headline ?? 'Building Trust Through Commitment and Personal Relationships';
+        $storyParagraphs = (!empty($aboutStory->paragraphs) && is_array($aboutStory->paragraphs)) ? $aboutStory->paragraphs : [
+            'CWD Realty & Hospitality was founded with a clear vision—to create a professional property management and hospitality company built on trust, integrity, and long-term partnerships.',
+            'Our journey began with founders who were committed to expanding business opportunities beyond Cambodia. Through frequent international travel, face-to-face meetings, business presentations, and contract negotiations, they established valuable relationships with overseas partners and property investors. Their willingness to meet clients personally, understand their expectations, and deliver on every commitment became the foundation of the company\'s reputation.',
+            'Today, that same commitment continues to shape how we serve every property owner, tenant, investor, and guest. We believe that lasting business relationships are built through professionalism, transparency, and consistently delivering value.',
+            'As Cambodia\'s real estate and hospitality industries continue to grow, CWD Realty & Hospitality remains dedicated to providing dependable property management, flexible leasing solutions, and exceptional hospitality services that create value for both property owners and residents.'
+        ];
+    @endphp
     <section class="relative z-[300] bg-white">
         <div class="max-w-[1500px] mx-auto px-6 py-16">
 
             <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-4 lg:min-h-[800px]">
 
                 {{-- LEFT: image grid --}}
-                <div class="grid grid-cols-2 items-end gap-x-3 lg:gap-x-4 w-full lg:w-2/5 shrink-0 lg:mt-auto" data-scroll-reveal="left">
+                <div class="grid grid-cols-2 items-end gap-x-3 lg:gap-x-4 w-full lg:w-2/5 shrink-0 lg:mt-auto -mt-5 sm:-mt-8 lg:-mt-10" data-scroll-reveal="left">
 
                     {{-- sticky tall single block --}}
-                    <img src="{{ asset('about_us/our_story/longest.png') }}"
-                        class="sticky top-10 self-start w-full max-h-[580px] object-cover"></img>
+                    <img src="{{ $storyImg1 }}"
+                        class="sticky top-10 self-start w-full max-h-[600px] object-cover"></img>
 
                     {{-- two stacked blocks with gap --}}
                     <div class="flex flex-col gap-y-3 lg:gap-y-4">
-                        <img src="{{ asset('about_us/our_story/top_one.png') }}" class="w-full max-h-[400px] object-cover"></img>
-                        <img src="{{ asset('about_us/our_story/bottom_one.png') }}"
-                            class="w-full max-h-[400px] object-cover"></img>
+                        <img src="{{ $storyImg2 }}" class="w-full h-[310px] sm:h-[340px] lg:h-[360px] object-fill"></img>
+                        <img src="{{ $storyImg3 }}"
+                            class="w-full h-[310px] sm:h-[340px] lg:h-[360px] object-fill"></img>
                     </div>
 
                 </div>
@@ -160,40 +173,14 @@
                                     <span class="text-[#F4DEAC]">Story</span>
                                 </h2>
                                 <h1 class="text-white px-3 sm:px-10 text-[clamp(20px,3vw,30px)] font-semibold  mb-10">
-                                    Building Trust Through Commitment and Personal Relationships
+                                    {{ $storyHeadline }}
                                 </h1>
                                 <div class="px-3 flex flex-col gap-5 sm:px-10 text-[clamp(15px,3vw,15px)] mb-10">
-                                    <p class="text-white  ">
-                                        CWD Realty & Hospitality was founded with a clear vision—to create a professional
-                                        property management and hospitality company built on trust, integrity, and long-term
-                                        partnerships.
-                                    </p>
-                                    <p class="text-white  ">
-                                        Our journey began with founders who were committed to expanding business
-                                        opportunities
-                                        beyond Cambodia. Through frequent international travel, face-to-face meetings,
-                                        business
-                                        presentations, and contract negotiations, they established valuable relationships
-                                        with
-                                        overseas partners and property investors. Their willingness to meet clients
-                                        personally,
-                                        understand their expectations, and deliver on every commitment became the foundation
-                                        of
-                                        the company's reputation.
-                                    </p>
-                                    <p class="text-white  ">
-
-                                        Today, that same commitment continues to shape how we serve every property owner,
-                                        tenant, investor, and guest. We believe that lasting business relationships are
-                                        built
-                                        through professionalism, transparency, and consistently delivering value.
-                                    </p>
-                                    <p class="text-white  ">
-                                        As Cambodia's real estate and hospitality industries continue to grow, CWD Realty &
-                                        Hospitality remains dedicated to providing dependable property management, flexible
-                                        leasing solutions, and exceptional hospitality services that create value for both
-                                        property owners and residents.
-                                    </p>
+                                    @foreach($storyParagraphs as $p)
+                                        <p class="text-white  ">
+                                            {{ $p }}
+                                        </p>
+                                    @endforeach
                                 </div>
 
 
@@ -207,6 +194,7 @@
 
         </div>
     </section>
+
 
 
     {{-- auto move logo --}}
